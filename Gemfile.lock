@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    jekyll-theme (0.1.0)
-      jekyll (~> 3.6)
+    jekyll-theme-type (1.1)
+      jekyll (~> 3.4)
+      jekyll-paginate (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -23,6 +24,7 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 3)
       safe_yaml (~> 1.0)
+    jekyll-paginate (1.1.0)
     jekyll-sass-converter (1.5.0)
       sass (~> 3.4)
     jekyll-watch (1.5.0)
@@ -53,7 +55,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.12)
-  jekyll-theme!
+  jekyll-theme-type!
   rake (~> 10.0)
 
 BUNDLED WITH
