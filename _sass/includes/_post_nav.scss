@@ -1,0 +1,21 @@
+#post-nav {
+  width:100%;
+  border-bottom: 1px solid $border-color;
+  float: left;
+  text-align: center;
+  @extend %padding-small;
+  i {
+    vertical-align: middle;
+  }
+  a {
+    width: 100%;
+    display: inline-block;
+    padding: 0;
+  }
+  p {
+    @extend .meta;
+  }
+  .post-nav-post + .post-nav-post {
+    margin-top: 1em;
+  }
+}
