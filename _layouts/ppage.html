@@ -1,25 +1,20 @@
----
+--- 
 layout: default
 ---
 
-<article {% if page.feature-img %}class="feature-image"{% endif %}>
-  <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
-    <h1 class="title">{{ page.title }}</h1>
-    {% if page.subtitle %}<h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
-  </header>
-  <section class="post-content">
-  <div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            {{ content }}
+<article {% if page.feature-img %}class="feature-image" {% endif %}>
+    <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
+        <h1 class="title">{{ page.title }}</h1> {% if page.subtitle %}
+        <h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {{ content }}
+                <br>
+            </div>
         </div>
     </div>
-</div>
-  
-  </section>
+    
 </article>
-
-
-
-
-

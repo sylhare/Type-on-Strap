@@ -1,92 +1,93 @@
----
-layout: ppage
-title : Portfolio
-feature-img: "assets/img/sample_feature_img.png"
-subtitle: "Programmer Wannabe"
+--- 
+layout: ppage 
+title : Portfolio 
+feature-img: "assets/img/sample_feature_img.png" 
+subtitle: "Lorem ipsum" 
 ---
 
+<div class="container">
 <!-- About Content -->
 <section id="about">
-	<div>
-		<p>
-			Here is the part where I am supposed to describe myself !
-			After 2 hours of intense staring competition with my laptop, this is what I came up with.
-		</p>
-		<p>
-			Hi, I am an undergrad student at I.I.T. Kanpur majoring in physics who believes in the philosophy of open source and will be happy to collaborate with you on any interesting project. When not staring at some code you could find me in the chess club solving chess puzzles or at the basketball field. If there is an exam tomorrow you might find me sleeping in the library.
-		</p>
-	</div>
+    <div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+        <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+            <br>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+        </p>
+    </div>
 </section>
 
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
-<div class = "container">
-	<div class="row">
-		<div class="text-center">
-			<h2>Here's the stuff I've yet to disavow.</h2>
+    
+        <div class="row">
+            <div class="text-center">
+                <h2>Here's the stuff I've yet to disavow.</h2>
 
-			<hr>
-		</div>
-	</div>
+                <hr>
+            </div>
+        </div>
 
-	<div class="row">
-		{% for item in site.portfolios %} test
-		<div class="col-sm-3 portfolio-item">
-			<a href="#{{ item.anchor }}" class="portfolio-link" data-keyboard="true" data-toggle="modal">
-				<div class="caption" >
-					<div class="caption-content" >
-						{{ item.title }}<p></p>
-						<i class="fa fa-search-plus"></i><p></p>
-						Category: {{ item.category }}
-					</div>
-				</div>
-				<img src="{{ site.baseurl }}/{{ item.image }}" class="img-responsive" alt="">
-			</a>
-		</div>
-		{% endfor %}
+        <div class="row">
+            {% for item in site.portfolios %}
+            <div class="col-sm-4 portfolio-item">
+                <a href="#{{ item.anchor }}" class="portfolio-link" data-keyboard="true" data-toggle="modal">
+                    <div class="caption">
+                        <div class="caption-content">
+                            {{ item.title }}
+                            <p></p>
+                            <i class="fa fa-search-plus"></i>
+                            <p></p>
+                            Category: {{ item.category }}
+                        </div>
+                    </div>
+                    <img src="{{ site.baseurl }}/{{ item.image }}" class="img-responsive" alt="">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    
+</section>
+
+<!-- Portfolio Modals -->
+<section id="portfolio modals">
+    {% for item in site.portfolio %}
+    <div class="portfolio-modal modal fade" id="{{ item.anchor }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>{{ item.title }}</h2>
+                            <hr class="star-primary">
+                            <img src="{{ site.baseurl }}/{{ item.image }}" class="img-responsive img-centered" alt="">
+                            <p>{{ item.description }}</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>{{ item.team }}</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>{{ item.date | date: '%B %Y' }}</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>{{ item.category }}</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
 </div>
-</div>
-	</section>
-
-	<!-- Portfolio Modals -->
-	<section id="portfolio modals">
-		{% for item in site.portfolio %}
-		<div class="portfolio-modal modal fade" id="{{ item.anchor }}" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-content">
-				<div class="close-modal" data-dismiss="modal">
-					<div class="lr">
-						<div class="rl">
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 col-lg-offset-2">
-							<div class="modal-body">
-								<h2>{{ item.title }}</h2>
-								<hr class="star-primary">
-								<img src="{{ site.baseurl }}/{{ item.image }}" class="img-responsive img-centered" alt="">
-								<p>{{ item.description }}</p>
-								<ul class="list-inline item-details">
-									<li>Team:
-										<strong>{{ item.team }}
-										</strong>
-									</li>
-									<li>Date:
-										<strong>{{ item.date | date: '%B %Y' }}
-										</strong>
-									</li>
-									<li>Category:
-										<strong>{{ item.category }}
-										</strong>
-									</li>
-								</ul>
-								<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		{% endfor %}
-	</section>
