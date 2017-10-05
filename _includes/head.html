@@ -10,8 +10,8 @@
     <!-- portoflio CSS -->
     <link rel="stylesheet" href="{{ " /assets/css/portfolio.css " | prepend: site.baseurl }}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ "/assets/css/glyphicons.css " | prepend: site.baseurl }}">
+    <!-- Bootstrap isolation CSS -->
+    <link rel="stylesheet" href="{{ "/assets/css/bootstrap-iso.css " | prepend: site.baseurl }}">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
@@ -34,6 +34,14 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
     {% endif %}
+
+<!-- JQuery -->
+  <script src="{{ "/assets/js/jquery-3.2.1.min.js " | prepend: site.baseurl }}"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="{{ "/assets/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
+
+  
 
     <!-- Google Analytics -->
     {% if site.theme_settings.google_analytics %}

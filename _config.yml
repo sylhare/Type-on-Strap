@@ -73,7 +73,6 @@ paginate_path: "blog/page:num"
 # used for portfolio on home page
 collections:
 - portfolios
-- images
 
 # BUILD SETTINGS
 markdown: kramdown
