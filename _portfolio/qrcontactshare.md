@@ -1,9 +1,12 @@
 ---
+layout: post
 anchor: qrcontactshare
-title: QR Contact Share
-image: assets/img/portfolio/qrcontactshare.png
-description: Gone are the days of typing phone number on dial pad while looking at a friends phone. With QR Contact Share this will become a memory of the past. No Bluetooth. No WiFi. Share a contact with Display. Select a contact to generate its QR code and scan it from another Phone to automatically add it to contact list. The source code can be found <a href="https://github.com/ShikherVerma/QRContactShare">here</a>. This project uses ZBar Library. Update [May 2016] - This was my first app that I published on google play. Not available anymore.
-team: Single
-date: March 2015
-category: Android
+title: QR Contact
+feature-img: "assets/img/portfolio/qrcontactshare.png"
+img: "assets/img/portfolio/qrcontactshare.png"
+date: September 2014
+tags: [Lorem, Ipsum]
 ---
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+

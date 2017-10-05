@@ -1,9 +1,12 @@
 ---
+layout: post
 anchor: projectant
-title: Antaragni
-image: assets/img/portfolio/projectant.png
-description: Antaragni is the Annual Cultural Festival of IIT Kanpur. This is the official android app of antaragni. The app includes complete performance information, including any schedule changes that may happen during the Festival program. It also lists the locations of each of the venues where event will be held. You can schedule what you want to see during festival by creating reminder for performance and receive notification alerts about the festival performance. Also included is an contact details of coordinators of each event. This is mine and Aditya's first major contribution to <a href="https://github.com/Navya">Navya</a>. The FLOSS group of IIT Kanpur. The source code can be found at <a href="https://github.com/Navya/Project-Ant">here</a>. Its also available on <a href="https://play.google.com/store/apps/details?id=in.antaragni.ant">play store</a>.
-team: Along with Aditya Gajbhiye
-date: December 2015
-category: Android
+title: Projectant
+feature-img: "assets/img/portfolio/projectant.png"
+img: "assets/img/portfolio/projectant.png"
+date: September 2014
+tags: [Lorem, Ipsum]
 ---
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+

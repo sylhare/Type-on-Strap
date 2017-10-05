@@ -1,9 +1,13 @@
 ---
+layout: post
 anchor: nagmail
-title: Nag Mail
-image: assets/img/portfolio/nagmail.png
-description: Fork of K9 mail, configured for iitk community. IITK student community follows a general convention of declaring venue, time and date of a new event. This app automatically detects it and asks to add a new event to the google calendar.  Additionally you won't have to enter the imap settings of iitk mail server for it and it automatically accepts the ironport certificate which iitk network uses. You can find the source code <a href="https://github.com/ShikherVerma/NagMail">here</a>.
-team: Along with Aditya Gajbhiye
-date: October 2015
-category: Android
+title: Mail
+img: "assets/img/portfolio/nagmail.png"
+date: September 2014
+tags: [Lorem, Ipsum]
 ---
+
+![image]({{ site.baseurl }}/{{ page.img }})
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+

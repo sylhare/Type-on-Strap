@@ -73,7 +73,9 @@ paginate_path: "blog/page:num"
 
 # used for portfolio on home page
 collections:
-- portfolio
+  portfolio:
+    output: true
+    permalink: /:collection/:name
 
 # BUILD SETTINGS
 markdown: kramdown

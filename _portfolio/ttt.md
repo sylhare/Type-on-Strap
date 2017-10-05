@@ -1,9 +1,12 @@
 ---
+layout: post
 anchor: ttt
-title: Tic Tac Toe
-image: assets/img/portfolio/ttt.png
-description: Unbeatable tic tac toe player. Try your skills against it.  You can find the source code <a href="https://github.com/ShikherVerma/tic-tac-toe">here</a>. It is python program which implements min max algorithm to play tic tac toe. Min Max algorithm is a popular algorithm for turn based games to calculate best move by assigning a score to each posible move.
-team: Along with Aditya Gajbhiye
-date: December 2014
-category: Python
+title: Tic tac toe
+feature-img: "assets/img/portfolio/ttt.png"
+img: "assets/img/portfolio/ttt.png"
+date: September 2014
+tags: [Lorem, Ipsum]
 ---
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+

@@ -1,9 +1,12 @@
 ---
+layout: post
 anchor: gdgiitk
-title: GDG IITK
-image: assets/img/portfolio/gdgiitk.png
-description: I have been the coordinator of Google Developer Group IIT Kanpur since December 2015. During which I have organized a number of events. Other than one off events (like Google Summer of Code, Women Tech Makers Meetup, IO Extended) I have also organized 2 courses; Android Study Jam and CS for Android which spanned for about 8 weeks. During which we had weekly meetups. You can visit the  <a href="http://gplus.to/gdgiitk">g+ page</a> for photos of all these events.
-team: GDG-IITK
-date: December 2015
-category: Events
+title: AUV
+feature-img: "assets/img/portfolio/gdgiitk.png"
+img: "assets/img/portfolio/gdgiitk.png"
+date: September 2014
+tags: [Lorem, Ipsum]
 ---
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+

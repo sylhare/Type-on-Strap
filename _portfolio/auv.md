@@ -1,9 +1,13 @@
 ---
+layout: post
 anchor: auv
-title: AUV
-image: "assets/img/portfolio/submarine.png"
-description: VARUN is the name of the autonomous underwater vehicle being developed by a team of undergraduate students under Robotics Club IIT Kanpur. I have spend more time on this that all the other projects (other that huracan) combined. Headover to <a href="https://auv-iitk.github.io">auv-iitk.github.io</a> for more details. We are using ROS and OpenCV for making the robot runs autonomously. All source code is open source and can be accessed at <a href="https://github.com/auv-iitk">github.com/auv-iitk</a>.
-team: AUV team
+title: Lorem Ipsum
+feature-img: "assets/img/portfolio/submarine.png"
+img: "assets/img/portfolio/submarine.png"
 date: September 2014
-category: Robotics
+tags: [Lorem, Ipsum]
 ---
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+
+
