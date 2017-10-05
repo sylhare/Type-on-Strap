@@ -12,8 +12,16 @@
     <!-- portoflio CSS -->
     <link rel="stylesheet" href=" /assets/css/portfolio.css ">
 
-    <!-- Bootstrap isolation CSS -->
-    <link rel="stylesheet" href="/assets/css/bootstrap-iso.css ">
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+    
+    <link rel="stylesheet" href="/assets/css/bootstrap-iso.min.css ">
+
+    <!-- JQuery -->
+    <script src="/assets/js/jquery-3.2.1.min.js "></script>
+
+    <!-- Bootstrap JS -->
+    <script src="/assets/js/bootstrap.min.js "></script>
+    
 
     <!--Favicon-->
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
@@ -35,15 +43,8 @@
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
-    
-
-<!-- JQuery -->
-  <script src="/assets/js/jquery-3.2.1.min.js "></script>
-
-  <!-- Bootstrap JS -->
-  <script src="/assets/js/bootstrap.min.js "></script>
-
-  
+    <script src="/assets/css/bootstrap-iso.css "></script>
+      
 
     <!-- Google Analytics -->
     
@@ -153,38 +154,21 @@
       <article class="feature-image" >
     <header style="background-image: url('/assets/img/sample_feature_img.png')">
         <h1 class="title">Portfolio</h1> 
-        <h2 class="subtitle">Lorem ipsum</h3>
+        <h2 class="subtitle">Projects I am working on</h3>
     </header>
+ 
+    
 
     <!-- Bootstrap will work within this div -->
+    <section>
+    <h2 style="text-align: center">  </h2>
     <div class="container bootstrap-iso">
         <div class="row">
                 <div class="container">
-<!-- About Content -->
-<section id="content" class="post-content">
-    <div>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-            <br>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </p>
-    </div>
-</section>
-
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
-    
-        <div class="row">
-            <div class="text-center">
-                <h1>My projects</h1>
-
-                <hr>
-            </div>
-        </div>
 
         <div class="row">
             
@@ -375,13 +359,433 @@
 <!-- Portfolio Modals -->
 <section id="portfolio modals">
     
+    <div class="portfolio-modal modal fade" id="auv" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>AUV</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
+                            <p>VARUN is the name of the autonomous underwater vehicle being developed by a team of undergraduate students under Robotics Club IIT Kanpur. I have spend more time on this that all the other projects (other that huracan) combined. Headover to <a href="https://auv-iitk.github.io">auv-iitk.github.io</a> for more details. We are using ROS and OpenCV for making the robot runs autonomously. All source code is open source and can be accessed at <a href="https://github.com/auv-iitk">github.com/auv-iitk</a>.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>AUV team</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>September 2014</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Robotics</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="ttt" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Tic Tac Toe</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/ttt.png" class="img-responsive img-centered" alt="">
+                            <p>Unbeatable tic tac toe player. Try your skills against it.  You can find the source code <a href="https://github.com/ShikherVerma/tic-tac-toe">here</a>. It is python program which implements min max algorithm to play tic tac toe. Min Max algorithm is a popular algorithm for turn based games to calculate best move by assigning a score to each posible move.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Along with Aditya Gajbhiye</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>December 2014</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Python</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="toh" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Tower of Hanoi</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/toh.png" class="img-responsive img-centered" alt="">
+                            <p>Tower of hanoi is a classic puzzle game of moving tiles from one tower to another, without placing larger tile on smaller tile. I have used AndEngine , which is a 2D android game engine to create this game.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Single</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>February 2015</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Android</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="qrcontactshare" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>QR Contact Share</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/qrcontactshare.png" class="img-responsive img-centered" alt="">
+                            <p>Gone are the days of typing phone number on dial pad while looking at a friends phone. With QR Contact Share this will become a memory of the past. No Bluetooth. No WiFi. Share a contact with Display. Select a contact to generate its QR code and scan it from another Phone to automatically add it to contact list. The source code can be found <a href="https://github.com/ShikherVerma/QRContactShare">here</a>. This project uses ZBar Library. Update [May 2016] - This was my first app that I published on google play. Not available anymore.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Single</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>March 2015</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Android</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="c" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>ESC101 TutorDroid</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/c.png" class="img-responsive img-centered" alt="">
+                            <p>TutorDroid is an android IDE for C language. The source code can be found <a href="https://github.com/ShikherVerma/TutorDroid">here</a>. ESC101 uses Tiny C Compiler and TED Text editor. It also contains tutorial code to help learn programming.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Single</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>April 2015</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Android</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="nagmail" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Nag Mail</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/nagmail.png" class="img-responsive img-centered" alt="">
+                            <p>Fork of K9 mail, configured for iitk community. IITK student community follows a general convention of declaring venue, time and date of a new event. This app automatically detects it and asks to add a new event to the google calendar.  Additionally you won't have to enter the imap settings of iitk mail server for it and it automatically accepts the ironport certificate which iitk network uses. You can find the source code <a href="https://github.com/ShikherVerma/NagMail">here</a>.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Along with Aditya Gajbhiye</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>October 2015</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Android</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="gdgiitk" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>GDG IITK</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/gdgiitk.png" class="img-responsive img-centered" alt="">
+                            <p>I have been the coordinator of Google Developer Group IIT Kanpur since December 2015. During which I have organized a number of events. Other than one off events (like Google Summer of Code, Women Tech Makers Meetup, IO Extended) I have also organized 2 courses; Android Study Jam and CS for Android which spanned for about 8 weeks. During which we had weekly meetups. You can visit the  <a href="http://gplus.to/gdgiitk">g+ page</a> for photos of all these events.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>GDG-IITK</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>December 2015</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Events</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="projectant" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Antaragni</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/projectant.png" class="img-responsive img-centered" alt="">
+                            <p>Antaragni is the Annual Cultural Festival of IIT Kanpur. This is the official android app of antaragni. The app includes complete performance information, including any schedule changes that may happen during the Festival program. It also lists the locations of each of the venues where event will be held. You can schedule what you want to see during festival by creating reminder for performance and receive notification alerts about the festival performance. Also included is an contact details of coordinators of each event. This is mine and Aditya's first major contribution to <a href="https://github.com/Navya">Navya</a>. The FLOSS group of IIT Kanpur. The source code can be found at <a href="https://github.com/Navya/Project-Ant">here</a>. Its also available on <a href="https://play.google.com/store/apps/details?id=in.antaragni.ant">play store</a>.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Along with Aditya Gajbhiye</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>December 2015</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Android</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="jekyllblog1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>CleanBlogEnhanced</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/jekyllblog1.png" class="img-responsive img-centered" alt="">
+                            <p>Yet another theme for jekyll. Actually this is the current website itself. You can find the source code <a href="https://github.com/ShikherVerma/shikherverma.github.io">here</a>. This theme contains some major enhancements which are usually not present in other themes. You have blog post categories, blog is not the default landing page but a sub directory, google analytics, disque comments, read time estimation, jekyll collection for portfolio items, search, travis integration. I was earlier using Freelancer theme before I added blog to my website.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Single</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>February 2016</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>WebDev</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="gitlecture" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Git Lecture</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/github.png" class="img-responsive img-centered" alt="">
+                            <p>I took a lecture on using git and github. Which was a part of SnT summer workshops of IIT Kanpur. This was the largest lecture I have taken till now. About 100+ people attended this lecture. <a href="https://www.facebook.com/media/set/?set=a.542618692591305.1073741854.234540613399116">Photos of the lecture.</a></p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Single</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>May 2016</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>Events</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="jekyllblog2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>StellarEnhanced</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/jekyllblog2.png" class="img-responsive img-centered" alt="">
+                            <p>Yet another theme for jekyll. This is the website I build for AUV. You can find the source code <a href="https://github.com/AUV-IITK/AUV-IITK.github.io">here</a>. This theme contains some major enhancements which are usually not present in other themes. You have blog post tags, blog is not the default landing page but a sub directory, read time estimation, jekyll collection for team, vehicles, search, travis integration.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Single</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>July 2016</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>WebDev</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portfolio-modal modal fade" id="ninja" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Keyboard Ninja</h2>
+                            <hr class="star-primary">
+                            <img src="/assets/img/portfolio/ninja.png" class="img-responsive img-centered" alt="">
+                            <p>KeyboardNinja Ruby is an online multiplayer typing game build on Rails Game October 2016. The game is live at keyboardninja.herokuapp.com. Developed using RESTful APIs for creating, joining games, getting result and updating players current position. Built using Rails, Coffeescript, MySql, Postgres, AJAX, jQuery and Heroku. Licensed under MIT License.</p>
+                            <ul class="list-inline item-details">
+                                <li>Team:
+                                    <strong>Along with Aditya Gajbhiye</strong>
+                                </li>
+                                <li>Date:
+                                    <strong>October 2016</strong>
+                                </li>
+                                <li>Category:
+                                    <strong>WebDev</strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </section>
 </div>
 </div>
 
-                <br>
         </div>
     </div>
+    </section>
     
 </article>
 

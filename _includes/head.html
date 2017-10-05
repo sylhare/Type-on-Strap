@@ -10,8 +10,16 @@
     <!-- portoflio CSS -->
     <link rel="stylesheet" href="{{ " /assets/css/portfolio.css " | prepend: site.baseurl }}">
 
-    <!-- Bootstrap isolation CSS -->
-    <link rel="stylesheet" href="{{ "/assets/css/bootstrap-iso.css " | prepend: site.baseurl }}">
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+    {% if site.theme_settings.bootstrap %}
+    <link rel="stylesheet" href="{{ "/assets/css/bootstrap-iso.min.css " | prepend: site.baseurl }}">
+
+    <!-- JQuery -->
+    <script src="{{ "/assets/js/jquery-3.2.1.min.js " | prepend: site.baseurl }}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ "/assets/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
+    {% endif %}
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
@@ -33,15 +41,8 @@
     {% if site.theme_settings.katex %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
-    {% endif %}
-
-<!-- JQuery -->
-  <script src="{{ "/assets/js/jquery-3.2.1.min.js " | prepend: site.baseurl }}"></script>
-
-  <!-- Bootstrap JS -->
-  <script src="{{ "/assets/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
-
-  
+    <script src="{{ "/assets/css/bootstrap-iso.css " | prepend: site.baseurl }}"></script>
+    {% endif %}  
 
     <!-- Google Analytics -->
     {% if site.theme_settings.google_analytics %}

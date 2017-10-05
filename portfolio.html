@@ -2,38 +2,17 @@
 layout: bootstrap 
 title : Portfolio 
 feature-img: "assets/img/sample_feature_img.png" 
-subtitle: "Lorem ipsum" 
+subtitle: "Projects I am working on" 
 ---
 
 <div class="container">
-<!-- About Content -->
-<section id="content" class="post-content">
-    <div>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-            <br>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-        </p>
-    </div>
-</section>
-
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
-    
-        <div class="row">
-            <div class="text-center">
-                <h1>My projects</h1>
-
-                <hr>
-            </div>
-        </div>
 
         <div class="row">
-            {% for item in site.portfolios %}
+            {% for item in site.portfolio %}
             <div class="col-sm-4 portfolio-item">
                 <a href="#{{ item.anchor }}" class="portfolio-link" data-keyboard="true" data-toggle="modal">
                     <div class="caption">

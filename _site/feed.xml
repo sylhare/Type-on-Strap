@@ -5,7 +5,7 @@
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 05 Oct 2017 11:45:18 -0400</pubDate>
+    <pubDate>Thu, 05 Oct 2017 14:10:43 -0400</pubDate>
     
       <item>
         <title>Sample post</title>

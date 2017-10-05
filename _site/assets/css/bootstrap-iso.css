@@ -3,19 +3,20 @@
  * Bootstrap v3.3.4 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- *
+ * 
+ * normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css 
  *
  * Isolate bootstrap
  * https://formden.com/blog/isolate-bootstrap
  *
  */
 
-.bootstrap-iso html {
+.bootstrap-iso {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-.bootstrap-iso body {
+.bootstrap-iso {
   margin: 0;
 }
 .bootstrap-iso article,
@@ -131,14 +132,14 @@
   text-transform: none;
 }
 .bootstrap-iso button,
-.bootstrap-iso html input[type="button"],
+.bootstrap-iso input[type="button"],
 .bootstrap-iso input[type="reset"],
 .bootstrap-iso input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
 }
 .bootstrap-iso button[disabled],
-.bootstrap-iso html input[disabled] {
+.bootstrap-iso input[disabled] {
   cursor: default;
 }
 .bootstrap-iso button::-moz-focus-inner,
@@ -1081,11 +1082,11 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-.bootstrap-iso html {
+.bootstrap-iso {
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.bootstrap-iso body {
+.bootstrap-iso {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;

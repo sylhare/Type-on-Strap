@@ -7,13 +7,21 @@ layout: default
         <h1 class="title">{{ page.title }}</h1> {% if page.subtitle %}
         <h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
     </header>
+ 
+    {% if page.description %}
+    <section class="post-content">
+       {{ page.description }}
+   </section>
+   {% endif %}
 
     <!-- Bootstrap will work within this div -->
+    <section>
+    <h2 style="text-align: center"> {{ page.section }} </h2>
     <div class="container bootstrap-iso">
         <div class="row">
                 {{ content }}
-                <br>
         </div>
     </div>
+    </section>
     
 </article>

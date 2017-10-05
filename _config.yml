@@ -47,6 +47,7 @@ theme_settings:
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
   katex: true # Enable if using math markup
+  bootstrap: true # Enable bootstrap on bootstrap layout
 
   # Localization strings
   str_follow_on: "Follow on"
@@ -72,7 +73,7 @@ paginate_path: "blog/page:num"
 
 # used for portfolio on home page
 collections:
-- portfolios
+- portfolio
 
 # BUILD SETTINGS
 markdown: kramdown
