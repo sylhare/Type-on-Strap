@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>Tic tac toe | Type Theme</title>
-    <meta name="description" content="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore verita...">
+    <title>Search2 | Type Theme</title>
+    <meta name="description" content="A website with blog posts and pages">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
@@ -24,7 +24,7 @@
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
     <!-- Canonical -->
-    <link rel="canonical" href="http://localhost:4000/portfolio/ttt">
+    <link rel="canonical" href="http://localhost:4000/search2.html">
 
     <!-- RSS -->
     <link rel="alternate" type="application/atom+xml" title="Type Theme" href="http://localhost:4000 /feed.xml " />
@@ -167,37 +167,50 @@
 </header>
 
     <div class="content">
-      <article class="feature-image">
-  <header style="background-image: url('/assets/img/portfolio/ttt.png')">
-    <h1 class="title">Tic tac toe</h1>
+      <article class="feature-image" >
+    <header style="background-image: url('/assets/img/search-bg.jpg')">
+        <h1 class="title">Search2</h1> 
+        <h2 class="subtitle">What are you looking for?</h3>
+    </header>
+ 
     
-    <p class="meta">
-      September 1, 2014
-      
-    </p>
-  </header>
-  <section class="post-content"><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
 
-</section>
-  
-<footer>
-  <div class="tags">
-    
-    <a class="tag" href="/tags#Lorem">#Lorem</a>
-    
-    <a class="tag" href="/tags#Ipsum">#Ipsum</a>
-    
-  </div>
-</footer>
+    <!-- Bootstrap will work within this div -->
+    <section>
+    <h2 style="text-align: center">  </h2>
+    <div class="container bootstrap-iso">
+        <div class="row">
+	<div class="container">
+	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Html Elements for Search -->
+<input type="text" id="search-input" placeholder="Enter keywords..." class="form-control input-lg">
+<br>
+<br>
+<ul id="results-container" ></ul>    
 
+<!-- Script pointing to jekyll-search.js -->
+<script src="/assets/js/jekyll-search.js" type="text/javascript"></script>
 
+    <script type="text/javascript">
+      SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview"><a href="{url}"><h3 class="post-subtitle" style="color: #1ABC9C">{title}</h3></a><p class="post-meta">{date}  <i class="fa fa-tag"></i> {tags}</p></div><hr>',
+        noResultsText: 'No results found',
+        limit: 10,
+        fuzzy: true,
+        exclude: ['Welcome', 'Blog']
+      })
+    </script>
+
+	</div>
+	</div>
+        </div>
+    </div>
+    </section>
+    
 </article>
-
-<!-- Disqus -->
-
-
-<!-- Post navigation -->
-
 
     </div>
     
