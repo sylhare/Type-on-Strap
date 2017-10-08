@@ -1,5 +1,5 @@
 --- 
-layout: default
+layout: default 
 ---
 
 <article {% if page.feature-img %}class="feature-image" {% endif %}>
@@ -7,25 +7,25 @@ layout: default
         <h1 class="title">{{ page.title }}</h1> {% if page.subtitle %}
         <h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
     </header>
- 
+
     {% if page.description %}
     <section class="post-content">
-       {{ page.description }}
-   </section>
-   {% endif %}
+        {{ page.description }}
+    </section>
+    {% endif %}
 
     <!-- Bootstrap will work within this div -->
     <section>
-    <h2 style="text-align: center"> {{ page.section }} </h2>
-    <div class="container bootstrap-iso">
-        <div class="row">
-	<div class="container">
-	<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                {{ content }}
-	</div>
-	</div>
+        <h2 class="text-center"> {{ page.section }} </h2>
+        <div class="container bootstrap-iso">
+            <div class="row">
+                <div class="container">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        {{ content }}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </section>
-    
+
 </article>
