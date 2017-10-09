@@ -413,31 +413,23 @@
   width: 2em;
 }
 .katex .llap,
-.katex .rlap,
-.katex .clap {
+.katex .rlap {
   width: 0;
   position: relative;
 }
 .katex .llap > .inner,
-.katex .rlap > .inner,
-.katex .clap > .inner {
+.katex .rlap > .inner {
   position: absolute;
 }
 .katex .llap > .fix,
-.katex .rlap > .fix,
-.katex .clap > .fix {
+.katex .rlap > .fix {
   display: inline-block;
 }
 .katex .llap > .inner {
   right: 0;
 }
-.katex .rlap > .inner,
-.katex .clap > .inner {
+.katex .rlap > .inner {
   left: 0;
-}
-.katex .clap > .inner > span {
-  margin-left: -50%;
-  margin-right: 50%;
 }
 .katex .katex-logo .a {
   font-size: 0.75em;
@@ -1049,11 +1041,6 @@
 .katex .stretchy:after {
   content: "";
 }
-.katex .hide-tail {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
 .katex .x-arrow-pad {
   padding: 0 0.5em;
 }
@@ -1068,10 +1055,6 @@
 .katex .fbox {
   box-sizing: border-box;
   border: 0.04em solid black;
-}
-.katex .fcolorbox {
-  box-sizing: border-box;
-  border: 0.04em solid;
 }
 .katex .cancel-pad {
   padding: 0 0.2em 0 0.2em;

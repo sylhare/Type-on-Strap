@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: gdgiitk
 title: AUV
 feature-img: "assets/img/portfolio/gdgiitk.png"
 img: "assets/img/portfolio/gdgiitk.png"

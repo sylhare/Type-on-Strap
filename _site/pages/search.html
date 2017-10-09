@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href=" /assets/css/main.css ">
 
     <!-- Bootstrap-3.3.7 isolation CSS -->
     
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-iso.min.css">
+    <link rel="stylesheet" type="text/css" href=" /assets/css/bootstrap-iso.min.css ">
 
     <!-- JQuery -->
-    <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    <script src=" /assets/js/jquery-3.2.1.min.js "></script>
 
     <!-- Bootstrap JS -->
-    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src=" /assets/js/bootstrap.min.js "></script>
     
 
     <!--Favicon-->
@@ -39,10 +39,11 @@
 
     <!-- KaTeX -->
     
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
-    <script src="/assets/js/katex.min.js"></script>
-      
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href=" /assets/css/katex.min.css ">
+    <script src=" /assets/js/katex.min.js "></script>
+    
 
     <!-- Google Analytics -->
     
@@ -181,7 +182,7 @@
         searchInput: document.getElementById('search-input'),
         resultsContainer: document.getElementById('results-container'),
         json: '/search.json',
-        searchResultTemplate: '<div class="post-preview"><a href="{url}"><h3 class="post-subtitle">{title}</h3></a><p class="post-meta">{date} <i class="fa fa-tag"></i> {tags}</p><p>{category}</p></div><hr> ',
+        searchResultTemplate: '<div class="post-preview"><a href="{url}"><h3 class="post-subtitle">{title}</h3></a><div class="meta">{date} <div class="right"><i class="fa fa-tag"></i> {tags}</div></div><p>{category}</p></div><hr> ',
         noResultsText: 'No results found',
         limit: 10,
         fuzzy: true,

@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: ttt
 title: Tic tac toe
 feature-img: "assets/img/portfolio/ttt.png"
 img: "assets/img/portfolio/ttt.png"

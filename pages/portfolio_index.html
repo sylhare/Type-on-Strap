@@ -1,7 +1,6 @@
 --- 
 layout: bootstrap 
 title : Portfolio 
-feature-img: "assets/img/sample_feature_img.png" 
 subtitle: "Projects I am working on" 
 ---
 
@@ -10,25 +9,29 @@ subtitle: "Projects I am working on"
 
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
-
-        <div class="row">
-            {% for item in site.portfolio %}
-            <div class="col-sm-4 portfolio-item">
-                <a href="/portfolio/{{ item.anchor }}" class="portfolio-link" data-keyboard="true">
-                    <div class="caption">
-                        <div class="caption-content">
-                            {{ item.title }}
-                            <p></p>
-                            <i class="fa fa-search-plus"></i>
-                            <p></p>
-                            Category: {{ item.category }}
-                        </div>
+    <div class="row">
+        <div class="space"></div>
+    </div>
+    <div class="row">
+        {% for item in site.portfolio %}
+        <div class="col-sm-4 portfolio-item">
+            <a href="{{ item.url }}" class="portfolio-link" data-keyboard="true">
+                <div class="caption">
+                    <div class="caption-content">
+                        {{ item.title }}
+                        <p></p>
+                        <i class="fa fa-search-plus"></i>
+                        <p></p>
+                        Category: {{ item.category }}
                     </div>
-                    <img src="{{ site.baseurl }}/{{ item.img }}" class="img-responsive" alt="">
-                </a>
-            </div>
-            {% endfor %}
+                </div>
+                <img src="{{ site.baseurl }}/{{ item.img }}" class="img-responsive" alt="">
+            </a>
         </div>
-    
-</section>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="space"></div>
+    </div>
 
+</section>

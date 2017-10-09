@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: ninja
 title: Ninja
 img: "assets/img/portfolio/ninja.png"
 date: September 2014

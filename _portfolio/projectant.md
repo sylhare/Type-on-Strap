@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: projectant
 title: Projectant
 feature-img: "assets/img/portfolio/projectant.png"
 img: "assets/img/portfolio/projectant.png"

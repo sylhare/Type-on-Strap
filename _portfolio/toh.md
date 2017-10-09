@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: toh
 title: Tower of Hanoi
 img: "assets/img/portfolio/toh.png"
 date: September 2014

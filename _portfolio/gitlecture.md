@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: gitlecture
 title: Github
 img: "assets/img/portfolio/github.png"
 date: September 2014

@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: c
 title: Creative
 feature-img: "assets/img/portfolio/c.png"
 img: "assets/img/portfolio/c.png"

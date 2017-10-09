@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: qrcontactshare
 title: QR Contact
 feature-img: "assets/img/portfolio/qrcontactshare.png"
 img: "assets/img/portfolio/qrcontactshare.png"

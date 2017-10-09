@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: nagmail
 title: Mail
 img: "assets/img/portfolio/nagmail.png"
 date: September 2014

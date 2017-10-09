@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: auv
 title: Lorem Ipsum
 feature-img: "assets/img/portfolio/submarine.png"
 img: "assets/img/portfolio/submarine.png"

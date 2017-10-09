@@ -46,6 +46,11 @@
 #portfolio * {
     z-index: 2;
 }
+
+.space {
+    padding-top: 12%;
+}
+
 @media(min-width:767px) {
     #portfolio .portfolio-item {
         margin: 0 0 30px;

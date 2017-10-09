@@ -1,6 +1,5 @@
 ---
 layout: post
-anchor: jekyllblog2
 title: Jekyll
 feature-img: "assets/img/portfolio/jekyllblog2.png"
 img: "assets/img/portfolio/jekyllblog2.png"
