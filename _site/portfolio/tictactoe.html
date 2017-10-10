@@ -6,11 +6,7 @@
     <meta name="description" content="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore verita...">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href=" /assets/css/main.css ">
-
     <!-- Bootstrap-3.3.7 isolation CSS -->
-    
     <link rel="stylesheet" type="text/css" href=" /assets/css/bootstrap-iso.min.css ">
 
     <!-- JQuery -->
@@ -19,6 +15,8 @@
     <!-- Bootstrap JS -->
     <script src=" /assets/js/bootstrap.min.js "></script>
     
+    <!-- CSS -->
+    <link rel="stylesheet" href=" /assets/css/main.css ">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
@@ -36,8 +34,9 @@
     <!-- Google Fonts -->
     
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
 
-    <!-- KaTeX -->
+    <!-- KaTeX 0.8.3 -->
     
     <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
@@ -50,25 +49,41 @@
 </head>
 
   <body>
-    <header class="site-header">
-	<div class="branding">
+    <header class="bootstrap-iso site-header">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top" style="box-shadow: none;">
+    
+    <div class="container-fluid">
+        <div class="branding">
 		
 		<a href="/">
-			<img class="avatar" src="/assets/img/avatar.png" alt=""/>
+			<img class="navbar-left navimg" src="/assets/img/avatar.png" alt=""/>
 		</a>
 		
 		<h1 class="site-title">
 			<a href="/">Type Theme</a>
 		</h1>
 	</div>
-	<nav class="site-nav">
-		<ul>
-			
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+            
 			
 			
 			
 			<li>
-				<a class="page-link" href="/about/">
+				<a class="page-link title" href="/about/">
 					About
 				</a>
 			</li>
@@ -82,7 +97,7 @@
 			
 			
 			<li>
-				<a class="page-link" href="/pages/portfolio_index.html">
+				<a class="page-link title" href="/pages/portfolio_index.html">
 					Portfolio
 				</a>
 			</li>
@@ -90,7 +105,7 @@
 			
 			
 			<li>
-				<a class="page-link" href="/pages/search.html">
+				<a class="page-link title" href="/pages/search.html">
 					Search
 				</a>
 			</li>
@@ -99,17 +114,26 @@
 			
 			
 			
+			<li>
+				<a class="page-link title" href="/pages/tags.html">
+					Tags
+				</a>
+			</li>
+			
 			
             <!--
             <li>
                 <a href="/page/search/" class="bootstrap-iso nav-search-link" title="search">
                         <i class="fa fa-search fa-fw fa-lg nav-search-icon" style="vertical-align: text-top;"> </i>
                     </a>
-            </li>-->
-		</ul>
-	</nav>
+            </li>--> 
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 </header>
-
     <div class="content">
       <article class="feature-image">
   <header style="background-image: url('/assets/img/portfolio/ttt.png')">
@@ -153,13 +177,13 @@
     <p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
 </p>
 	
-    <div class="container">
+    <div class="bootstrap-iso container">
         <div class="row">
             
         </div>    
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
+                <ul class="list-inline text-center type">
                 <!-- Social icons from Font Awesome, if enabled -->
                 
 
@@ -208,7 +232,7 @@
 
 
 <li>
-	<a href="https://twitter.com/twitter" title="Follow on Twitter">
+	<a href="https://twitter.com/twitter" title="Follow on Twitter" class="type">
         <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>

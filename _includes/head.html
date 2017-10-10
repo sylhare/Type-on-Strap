@@ -4,11 +4,7 @@
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ " /assets/css/main.css " | prepend: site.baseurl }}">
-
     <!-- Bootstrap-3.3.7 isolation CSS -->
-    {% if site.theme_settings.bootstrap %}
     <link rel="stylesheet" type="text/css" href="{{ " /assets/css/bootstrap-iso.min.css " | prepend: site.baseurl }}">
 
     <!-- JQuery -->
@@ -16,7 +12,9 @@
 
     <!-- Bootstrap JS -->
     <script src="{{ " /assets/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
-    {% endif %}
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ " /assets/css/main.css " | prepend: site.baseurl }}">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
@@ -33,9 +31,10 @@
 
     <!-- Google Fonts -->
     {% if site.theme_settings.google_fonts %}
-    <link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css"> {% endif %}
+    <link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css"> 
+    {% endif %}
 
-    <!-- KaTeX -->
+    <!-- KaTeX 0.8.3 -->
     {% if site.theme_settings.katex %}
     <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->

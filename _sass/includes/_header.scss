@@ -14,9 +14,9 @@
     height: 2em;
     width: 2em;
     float: left;
-    margin-top: -3px;
-    border-radius: 0.2em;
-    margin-right: 1em;
+    //margin-top: -3px;
+    //border-radius: 0.2em;
+    //margin-right: 1em;
   }
 
   .site-title {
@@ -50,4 +50,26 @@
       }
     }
   }
+    
+}
+
+.navbar.navbar-default {
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.navbar.navbar-default .navbar-collapse {
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.navimg {
+  float: left;
+  margin-left: -15px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 60px;
 }
