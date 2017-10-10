@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Mail
-img: "assets/img/portfolio/nagmail.png"
+title: Circus
+img: "assets/img/portfolio/circus.png"
 date: September 2014
 tags: [Lorem, Ipsum]
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Jekyll
-feature-img: "assets/img/portfolio/jekyllblog2.png"
-img: "assets/img/portfolio/jekyllblog2.png"
+feature-img: "assets/img/portfolio/cabin.png"
+img: "assets/img/portfolio/cabin.png"
 date: September 2014
 tags: [Lorem, Ipsum]
 ---
