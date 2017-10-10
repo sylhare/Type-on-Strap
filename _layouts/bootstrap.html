@@ -14,17 +14,20 @@ layout: default
     </section>
     {% endif %}
 
+</article>
+
     <!-- Bootstrap will work within this div -->
     <section>
         <div class="container bootstrap-iso">
             <div class="row">
-                <div class="container">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+		<div class="container col-md-1"></div>
+                <div class="container col-md-10 centered">
                         {{ content }}
-                    </div>
+                    
                 </div>
+		<div class="container col-md-1"></div>
             </div>
         </div>
     </section>
 
-</article>
+
