@@ -6,18 +6,18 @@
         <div class="branding">
 		{% if site.theme_settings.gravatar %}
 		<a href="{{ site.baseurl }}/">
-			<img class="avatar" src="https://secure.gravatar.com/avatar/{{ site.theme_settings.gravatar }}?s=100" alt=""/>
+			<img class="navbar-img" src="https://secure.gravatar.com/avatar/{{ site.theme_settings.gravatar }}?s=100" alt=""/>
 		</a>
 		{% elsif site.theme_settings.avatar %}
 		<a href="{{ site.baseurl }}/">
 			<img class="navbar-img" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
 		</a>
 		{% endif %}
-		<h1 class="site-title type">
+		<h1 class="site-title">
 			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
 		</h1>
 	</div>
-        <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- links get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="toggle" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
