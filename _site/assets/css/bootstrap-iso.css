@@ -1101,16 +1101,16 @@
   font-size: inherit;
   line-height: inherit;
 }
-.bootstrap-iso a {
+.bootstrap-iso-link a {
   color: #337ab7;
   text-decoration: none;
 }
-.bootstrap-iso a:hover,
-.bootstrap-iso a:focus {
+.bootstrap-iso-link a:hover,
+.bootstrap-iso-link a:focus {
   color: #23527c;
   text-decoration: underline;
 }
-.bootstrap-iso a:focus {
+.bootstrap-iso-link a:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;

@@ -1,7 +1,7 @@
 .site-header {
   @extend %padding-small;
   background: $brand-color;
-  border-bottom: 1px solid $border-color;
+  //border-bottom: 1px solid $border-color;
   display: inline-block;
   float: left;
   width: 100%;
@@ -23,7 +23,7 @@
     float: left;
     font-weight: bold;
     font-size: 1em;
-    line-height: 1.5;
+    line-height: 0.8;
   }
 
   .site-nav {
@@ -31,7 +31,7 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      line-height: 1.5;
+      line-height: 0.5;
       float: right;
       text-align: right;
     }
@@ -51,25 +51,4 @@
     }
   }
     
-}
-
-.navbar.navbar-default {
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-.navbar.navbar-default .navbar-collapse {
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-.navimg {
-  float: left;
-  margin-left: -15px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
-  height: 60px;
 }

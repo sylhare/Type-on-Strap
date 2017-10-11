@@ -1,6 +1,6 @@
 <header class="bootstrap-iso site-header">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top" style="box-shadow: none;">
+<nav class="navbar-default navbar-custom navbar-fixed-top" style="box-shadow: none;">
     
     <div class="container-fluid">
         <div class="branding">
@@ -10,31 +10,30 @@
 		</a>
 		{% elsif site.theme_settings.avatar %}
 		<a href="{{ site.baseurl }}/">
-			<img class="navbar-left navimg" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
+			<img class="navbar-img" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
 		</a>
 		{% endif %}
-		<h1 class="site-title">
+		<h1 class="site-title type">
 			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
 		</h1>
 	</div>
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+        <div class="navbar-header">
+            <button type="button" class="toggle" data-toggle="collapse" data-target="#navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{ site.title }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="navi">
             {% for page in site.pages %}
 			{% if page.title and page.hide != true %}
 			<li>
-				<a class="page-link title" href="{{ page.url | prepend: site.baseurl }}">
+				<a href="{{ page.url | prepend: site.baseurl }}">
 					{{ page.title }}
 				</a>
 			</li>
