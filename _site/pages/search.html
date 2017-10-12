@@ -140,9 +140,7 @@
     <h2 class="subtitle">What are you looking for?</h3>
   </header>
   <section class="post-content"><!-- Html Elements for Search -->
-<div class="bootstrap-iso">
-<input type="text" id="search-input" placeholder="Enter keywords..." class="form-control input-lg">
-</div>
+<input type="text" id="search-input" placeholder="Enter keywords..." class="form input-bar">
 <br>
 <br>
 <ul id="results-container" ></ul>  
@@ -156,7 +154,7 @@
         searchInput: document.getElementById('search-input'),
         resultsContainer: document.getElementById('results-container'),
         json: '/search.json',
-        searchResultTemplate: '<div class="post-preview"><a href="{url}"><h3 class="post-subtitle">{title}</h3></a><div class="meta">{date} <div class="right"><i class="fa fa-tag"></i> {tags}</div></div><p>{category}</p></div><hr> ',
+        searchResultTemplate: '<div class="search-title"><a href="{url}"><h3> {title}</h3></a><div class="meta">{date} <div class="right"><i class="fa fa-tag"></i> {tags}</div></div><p>{category}</p></div><hr> ',
         noResultsText: 'No results found',
         limit: 10,
         fuzzy: true,
