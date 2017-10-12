@@ -1,15 +1,34 @@
-.navbar-default {
+.navi-default {
     border: 0;
     background: $brand-color;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
 
-    .navbar-collapse {
-        border: 0;
-        background: $brand-color;
-        -webkit-box-shadow: none;
-        box-shadow: none;
+.navibar-collapse{
+    @extend .navi-default;
+}
+
+.fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 1030;
+
+  @media (min-width: 768px) {
+    border-radius: 0;
+  }
+  
+  .navibar-collapse {
+    padding-left: 0;
+    padding-right: 0;
+    max-height: 340px;
+    
+    @media (max-device-width: 480px) and (orientation: landscape) {
+      max-height: 200px;
     }
+  }
 }
 
 // img
@@ -74,7 +93,7 @@
     a {
         display: inline-block;
         padding-right: 14px;;
-        line-height: 1.2;
+        line-height: 1.3;
         padding-top: 15px;
         &:hover {
                 color: $selection-color;  

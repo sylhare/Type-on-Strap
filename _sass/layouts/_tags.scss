@@ -1,10 +1,8 @@
 .tag-list {
   font-size: 0.9em;
   a.button {
-    margin-left: 1em;
-  }
-  a.button:first-child {
-    margin-left: 0;
+    margin: 0.1em;
+    padding: 0.2em 0.4em;
   }
 }
 .tag-title {

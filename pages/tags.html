@@ -17,12 +17,26 @@ title: Tags
       {% endunless %}
     {% endfor %}
   </div>
+    
+  <!-- circle through collection    
+  {% assign tags =  site.portfolio | map: 'tags' | join: ','  | split: ',' | uniq %}
+  {% for tag in tags %}
+  <h3>{{ tag }}</h3>
+  <ul>
+  {% for note in site.portfolio %}
+    {% if note.tags contains tag %}
+    <li><a href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endfor %}
+    -->
 
   <!-- cycles through tag list and creates subheader for each tag name -->
   {% for item in (0..site.tags.size) %}
     {% unless forloop.last %}
       {% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-      <h1 id="{{ this_word | cgi_escape }}" class="tag-title"><a href="#{{ this_word | cgi_escape }}">{{ this_word }} <i class="fa fa-tag fa-fw"></i> </a></h1>
+      <h1 id="{{ this_word | cgi_escape }}" class="tag-title"><a href="#{{ this_word | cgi_escape }}">{{ this_word }} <i class="fa fa-tag fa-fw"></i></a></h1>
       <!-- lists all posts corresponding to specific tag -->
       {% for post in site.tags[this_word] %}
         {% if post.title != null %}
