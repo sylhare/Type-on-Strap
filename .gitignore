@@ -1,6 +1,8 @@
-# No need of this files in the master branch
-.sass_cache/*
+# Byte-compiled / optimized / DLL files
+*.manifest
+*.spec
+
+
+_site/*
 _development_tool/*
-_site/
-
-
+.sass-cache/*
