@@ -9,6 +9,82 @@
     @extend .navi-default;
 }
 
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  .navbar-header {
+    float: left;
+  }
+}
+
+.container-fluid:before,
+.container-fluid:after,
+.navbar-header:before,
+.navbar-header:after,
+.navbar-collapse:before,
+.navbar-collapse:after, {
+  content: " ";
+  display: table;
+}
+
+
+.container-fluid:after,
+.navbar-header:after,
+.navbar-collapse:after, {
+  clear: both;
+}
+
+
+.navbar-collapse {
+  overflow-x: visible;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-top: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-overflow-scrolling: touch;
+}
+.navbar-collapse.in {
+  overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+
+}
+
+.container-fluid > .navbar-header,
+.container-fluid > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  .container-fluid > .navbar-header,
+  .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+
 .fixed-top {
   position: fixed;
   right: 0;
@@ -20,7 +96,7 @@
     border-radius: 0;
   }
   
-  .navibar-collapse {
+  .navbar-collapse {
     padding-left: 0;
     padding-right: 0;
     max-height: 340px;
@@ -92,9 +168,9 @@
     }
     a {
         display: inline-block;
-        padding-right: 14px;;
+        padding: 5px 15px;
+        margin-top: 0px;
         line-height: 1.3;
-        padding-top: 15px;
         &:hover {
                 color: $selection-color;  
             }
@@ -109,7 +185,7 @@
         float: left;
     
         a {
-            
+            margin-top: 9px;
             
 
         }
