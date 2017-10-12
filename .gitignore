@@ -1,0 +1,6 @@
+# No need of this files in the master branch
+.sass_cache/*
+_development_tool/*
+_site/
+
+
