@@ -1,6 +1,21 @@
+.tag-list {
+  font-size: 0.9em;
+  a.button {
+    margin-left: 1em;
+  }
+  a.button:first-child {
+    margin-left: 0;
+  }
+}
 .tag-title {
-  color: $tags-color;
   margin-bottom: 0;
+  a {
+    color: $link-color;
+    
+      &:hover {
+          text-decoration: none;
+      }
+  }
 }
 .tagged-post {
   .title {

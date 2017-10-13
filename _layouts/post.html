@@ -4,15 +4,52 @@ layout: default
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
   <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
     <h1 class="title">{{ page.title }}</h1>
-    {% if page.subtitle %}<h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
     <p class="meta">
-      {{ page.date | date: "%B %-d, %Y" }}
-      {% if page.author %} - {{ page.author }}{% endif %}
+    {{ page.date | date: "%B %-d, %Y" }}
+    {% if page.author %} - {{ page.author }}{% endif %}
     </p>
   </header>
   <section class="post-content">{{ content }}</section>
-  {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
+    
+  <!-- Post tags -->
+  {% assign val = page.tags | size %}
+  {% if val > 0 %}
+    <footer>
+      {% if val == 1 %}
+        <div class="meta">Tag</div>
+      {% elsif val > 1 %}
+        <div class="meta">Tags</div>
+      {% endif %}
+      {% for tag in page.tags %}
+        <a class="button" href="{{site.baseurl}}/tags#{{tag}}">
+          <i class="fa fa-tag fa-fw"></i> {{ tag }}
+        </a>
+      {% endfor %}
+    </footer>
+  {% endif %}
 </article>
+
+<!-- Post navigation -->
+{% if site.theme_settings.post_navigation %}
+<div id="post-nav">
+    {% if page.previous.url %}
+    <a id="prev-post" href="{{ site.baseurl }}{{ page.previous.url }}">
+      <span class="page-title">{{ page.previous.title }}</span>
+      <span class="nav-label">
+        <i class="fa fa-chevron-left"></i> {{ site.theme_settings.str_prev }}
+      </span>
+    </a>
+    {% endif %}
+    {% if page.next.url %}
+    <a id="next-post" href="{{ site.baseurl }}{{ page.next.url }}">
+       <span class="page-title">{{ page.next.title }}</span>
+       <span class="nav-label">
+        {{ site.theme_settings.str_next }} <i class="fa fa-chevron-right"></i>
+       </span>
+     </a>
+    {% endif %}
+</div>
+{% endif %}
 
 <!-- Disqus -->
 {% if site.theme_settings.disqus_shortname %}
@@ -21,7 +58,9 @@ layout: default
 </div>
 {% endif %}
 
-<!-- Post navigation -->
-{% if site.theme_settings.post_navigation %}
-  {% include post_nav.html %}
+<!-- Muut -->
+{% if site.theme_settings.muut_community_name %}
+<div class="comments">
+  {% include muut.html %}
+</div>
 {% endif %}
