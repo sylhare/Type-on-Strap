@@ -14,7 +14,7 @@
     height: 100%;
     text-align: center;
     opacity: 0;
-    background: rgba(0, 133, 161, .7);
+    background: rgba(24,188,156,.9);
     -webkit-transition: all ease .5s;
     -moz-transition: all ease .5s;
     transition: all ease .5s;
@@ -48,7 +48,7 @@
 }
 
 .space {
-    padding-top: 12%;
+    padding-top: 8%;
 }
 
 @media(min-width:767px) {

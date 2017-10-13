@@ -5,13 +5,9 @@
     <title>404 Page not found | Type Theme</title>
     <meta name="description" content="A website with blog posts and pages">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href=" /assets/css/main.css ">
-
-    <!-- Bootstrap-3.3.7 isolation CSS -->
     
-    <link rel="stylesheet" type="text/css" href=" /assets/css/bootstrap-iso.min.css ">
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+    <link rel="stylesheet" type="text/css" href=" /assets/css/bootstrap-iso.css ">
 
     <!-- JQuery -->
     <script src=" /assets/js/jquery-3.2.1.min.js "></script>
@@ -19,6 +15,8 @@
     <!-- Bootstrap JS -->
     <script src=" /assets/js/bootstrap.min.js "></script>
     
+    <!-- CSS -->
+    <link rel="stylesheet" href=" /assets/css/main.css ">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
@@ -36,8 +34,9 @@
     <!-- Google Fonts -->
     
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
 
-    <!-- KaTeX -->
+    <!-- KaTeX 0.8.3 -->
     
     <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
@@ -50,25 +49,40 @@
 </head>
 
   <body>
-    <header class="site-header">
-	<div class="branding">
+    <header class="bootstrap-iso site-header">
+<!-- Navigation -->
+<nav class="navbar-default navbar-custom navbar-fixed-top" style="box-shadow: none;">
+    
+    <div class="container-fluid">
+        <div class="branding">
 		
 		<a href="/">
-			<img class="avatar" src="/assets/img/avatar.png" alt=""/>
+			<img class="navbar-img" src="/assets/img/avatar.png" alt=""/>
 		</a>
 		
 		<h1 class="site-title">
 			<a href="/">Type Theme</a>
 		</h1>
 	</div>
-	<nav class="site-nav">
-		<ul>
-			
+        <!-- links get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="navi">
+            
 			
 			
 			
 			<li>
-				<a class="page-link" href="/about/">
+				<a href="/about/">
 					About
 				</a>
 			</li>
@@ -82,7 +96,7 @@
 			
 			
 			<li>
-				<a class="page-link" href="/pages/portfolio_index.html">
+				<a href="/pages/portfolio_index.html">
 					Portfolio
 				</a>
 			</li>
@@ -90,7 +104,7 @@
 			
 			
 			<li>
-				<a class="page-link" href="/pages/search.html">
+				<a href="/pages/search.html">
 					Search
 				</a>
 			</li>
@@ -99,66 +113,26 @@
 			
 			
 			
+			<li>
+				<a href="/pages/tags.html">
+					Tags
+				</a>
+			</li>
 			
-			<!-- Social icons from Font Awesome, if enabled -->
 			
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://github.com/sylhare" title="Follow on GitHub">
-		<i class="fa fa-fw fa-github"></i>
-	</a>
-</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://twitter.com/twitter" title="Follow on Twitter">
-		<i class="fa fa-fw fa-twitter"></i>
-	</a>
-</li>
-
-
-
-
-
-
-		</ul>
-	</nav>
+            <!--
+            <li>
+                <a href="/page/search/" class="bootstrap-iso nav-search-link" title="search">
+                        <i class="fa fa-search fa-fw fa-lg nav-search-icon" style="vertical-align: text-top;"> </i>
+                    </a>
+            </li>--> 
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 </header>
-
     <div class="content">
       <article >
   <header style="background-image: url('/')">
@@ -176,9 +150,84 @@
 
 
 <footer class="site-footer">
-	<p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+    <p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
 </p>
+	
+    <div class="bootstrap-iso container">
+        <div class="row">
+            
+        </div>    
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center type">
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/sylhare" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/twitter" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
 </footer>
+
+
 
 
   </body>
