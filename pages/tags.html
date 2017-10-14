@@ -3,55 +3,73 @@ layout: page
 title: Tags
 ---
 
-{% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
-{% assign tag_words = site_tags | split:',' | sort %}
 <div class="home">
-  <div class="tag-list">
-    <!--  cycles through tag list and creates header row of all tags used in site with accompanying per-tag counts -->
-    {% for item in (0..site.tags.size) %}
-      {% unless forloop.last %}
-        {% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-        <a class="button" href="#{{ this_word | cgi_escape }}">
-          <i class="fa fa-tag fa-fw"></i> {{ this_word }} ({{ site.tags[this_word].size }})
-        </a>
-      {% endunless %}
-    {% endfor %}
-  </div>
-    
-  <!-- circle through collection    
-  {% assign tags =  site.portfolio | map: 'tags' | join: ','  | split: ',' | uniq %}
-  {% for tag in tags %}
-  <h3>{{ tag }}</h3>
-  <ul>
-  {% for note in site.portfolio %}
-    {% if note.tags contains tag %}
-    <li><a href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a></li>
-    {% endif %}
-  {% endfor %}
-  </ul>
-{% endfor %}
-    -->
 
-  <!-- cycles through tag list and creates subheader for each tag name -->
-  {% for item in (0..site.tags.size) %}
-    {% unless forloop.last %}
-      {% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-      <h1 id="{{ this_word | cgi_escape }}" class="tag-title"><a href="#{{ this_word | cgi_escape }}">{{ this_word }} <i class="fa fa-tag fa-fw"></i></a></h1>
-      <!-- lists all posts corresponding to specific tag -->
-      {% for post in site.tags[this_word] %}
-        {% if post.title != null %}
-          <div class="tagged-post">
-            <h2 class="title">
-              <a href="{{ post.url | prepend: site.baseurl }}">
-                {{ post.title }}
-              </a>
-            </h2>
-            <div class="meta">
-              {{ post.date | date: "%B %-d, %Y" }}
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    {% endunless %}
-  {% endfor %}
+<!-- cycles through posts to get tags -->
+{% assign rawtags = "" %}
+{% for post in site.posts %}
+{% assign post_tags = post.tags | join:'|' | append:'|' %}
+{% assign rawtags = rawtags | append:post_tags %}
+{% endfor %}
+
+<!-- cycles through portfolio collection to get tags -->
+{% assign portfolio =  site.portfolio | map: 'tags' | join: ','  | split: ',' | uniq %}
+{% for tag in portfolio %}
+{% assign ttags = tag | join:'|' | append:'|' %}
+{% assign rawtags = rawtags | append:ttags %}
+{% endfor %}
+
+<!-- Displays the list of tags-->
+{% assign tags = rawtags | split:'|' | sort | uniq %}
+    <div class="tag-list">
+        {% for tag in tags %}
+        <a class="button" href="#{{ tag | cgi_escape }}">
+              <i class="fa fa-tag fa-fw"></i> {{ tag }}
+        </a>
+        {% endfor %}
+    </div>
+    <br>
+
+    <!-- Displays the posts and pages that contains the tag-->
+    <div class="posts">
+        {% for tag in tags %}
+        <h1 id="{{ tag | cgi_escape }}" class="tag-title"><a href="#{{ tag | cgi_escape }}">{{ tag }} <i class="fa fa-tag fa-fw"></i></a></h1>
+
+        <div class="tagged-post">
+
+            <!-- Posts -->
+            {% for post in site.posts %} 
+                {% if post.tags contains tag %}
+                <h2 class="title">
+                    <a href="{{ post.url | prepend: site.baseurl }}">
+                        {{ post.title }}
+                      </a>
+                </h2>
+                <div class="meta">
+                    {{ post.date | date: "%B %-d, %Y" }}
+                </div>
+
+                {% endif %} 
+            {% endfor %} 
+            
+            <!-- Portfolio -->
+            {% for note in site.portfolio %} 
+                {% if note.tags contains tag %}
+
+                <div class="tagged-post">
+                    <h2 class="title">
+                        <a href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+                    </h2>
+                    <div class="meta">
+                        {{ note.date | date: "%B %-d, %Y" }}
+                    </div>
+                </div>
+
+            {% endif %} 
+            {% endfor %}
+
+        </div>
+        {% endfor %}
+
+    </div>
 </div>

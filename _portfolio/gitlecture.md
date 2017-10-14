@@ -3,7 +3,7 @@ layout: post
 title: Github
 img: "assets/img/portfolio/github.png"
 date: September 2014
-tags: [Lorem, Ipsum]
+tags: [Lorem, Ipsum, portfolio]
 ---
 
 ![image]({{ site.baseurl }}/{{ page.img }})
