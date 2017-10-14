@@ -12,7 +12,7 @@
     {
       "title"    : "Feature images",
       "category" : "This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the...",
-      "tags"     : "_test, img",
+      "tags"     : "_test, lorem",
       "url"      : "/2014/11/29/feature-images.html",
       "date"     : "November 29, 2014",
       "content"  : "This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages."
