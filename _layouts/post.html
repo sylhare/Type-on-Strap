@@ -4,14 +4,30 @@ layout: default
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
   <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
     <h1 class="title">{{ page.title }}</h1>
-    {% if page.subtitle %}<h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
     <p class="meta">
-      {{ page.date | date: "%B %-d, %Y" }}
-      {% if page.author %} - {{ page.author }}{% endif %}
+    {{ page.date | date: "%B %-d, %Y" }}
+    {% if page.author %} - {{ page.author }}{% endif %}
     </p>
   </header>
   <section class="post-content">{{ content }}</section>
-  {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
+    
+  <!-- Post tags -->
+  {% assign val = page.tags | size %}
+  {% if val > 0 %}
+    <footer>
+      {% if val == 1 %}
+        <div class="meta">Tag</div>
+      {% elsif val > 1 %}
+        <div class="meta">Tags</div>
+      {% endif %}
+      {% for tag in page.tags %}
+        <a class="button" href="{{site.baseurl}}/pages/tags#{{tag}}">
+          <i class="fa fa-tag fa-fw"></i> {{ tag }}
+        </a>
+      {% endfor %}
+    </footer>
+  {% endif %}
+    {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
 </article>
 
 <!-- Disqus -->

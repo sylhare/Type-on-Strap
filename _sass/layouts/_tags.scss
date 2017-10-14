@@ -1,6 +1,19 @@
+.tag-list {
+  font-size: 0.9em;
+  a.button {
+    margin: 0.1em;
+    padding: 0.2em 0.4em;
+  }
+}
 .tag-title {
-  color: $tags-color;
   margin-bottom: 0;
+  a {
+    color: $link-color;
+    
+      &:hover {
+          text-decoration: none;
+      }
+  }
 }
 .tagged-post {
   .title {

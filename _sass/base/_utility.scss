@@ -22,9 +22,11 @@
   margin: 1em 0;
   padding: 0.5em 0.75em;
 }
+
 a.button {
   @extend .button-link;
 }
+
 .button-link {
   &:hover {
     background: $link-color;
@@ -45,6 +47,10 @@ a.button {
 }
 
 // Custom
+.text-center {
+  text-align: center;
+}
+
 .right {
   float: right;
 }
