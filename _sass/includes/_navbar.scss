@@ -103,21 +103,20 @@
 //nav bar
 .navi {
     list-style: none;
+    
 
-    ul {
-        float: right;
-        text-align: right;
-    }
     a {
         display: inline-block;
-        padding: 5px 10px;
+        padding: 7px 10px;
         margin-top: 0px;
         line-height: 1.3;
+        
         &:hover {
             color: $selection-color;
         }
     }
 
+    //When not collapse
     @media (min-width: $break) {
         float: right;
         margin: 0;
@@ -128,8 +127,6 @@
 
             a {
                 margin-top: 9px;
-
-
             }
         }
     }
