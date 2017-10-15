@@ -36,6 +36,11 @@
     background: $brand-color;
 }
 
+.scrollbar {
+    padding-top: 20px;
+
+}
+
 // toggled navbar
 .site-navi {
     @extend %padding-small;

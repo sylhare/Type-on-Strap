@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html>
   <head>
     <meta charset="utf-8">
     <title>Search | Type Theme</title>
@@ -15,6 +15,9 @@
     <!-- Bootstrap JS -->
     <script src=" /assets/js/bootstrap.min.js "></script>
     
+    <!-- Navbar JS -->
+    <script src=" /assets/js/navbar.js "></script>
+    
     <!-- CSS -->
     <link rel="stylesheet" href=" /assets/css/main.css ">
 
@@ -22,7 +25,7 @@
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
     <!-- Canonical -->
-    <link rel="canonical" href="http://localhost:4000/pages/search.html">
+    <link rel="canonical" href="http://localhost:4000/search/">
 
     <!-- RSS -->
     <link rel="alternate" type="application/atom+xml" title="Type Theme" href="http://localhost:4000 /feed.xml " />
@@ -51,7 +54,7 @@
   <body>
     <header class="bootstrap-iso site-navi">
 <!-- Navigation -->
-<nav class="navi-default fixed-top">
+<nav class="navi-default fixed-top scrollbar">
     
     <div class="container-fluid">
         <div class="branding">
@@ -96,7 +99,7 @@
 			
 			
 			<li>
-				<a href="/pages/portfolio_index.html">
+				<a href="/portfolio/">
 					Portfolio
 				</a>
 			</li>
@@ -104,7 +107,7 @@
 			
 			
 			<li>
-				<a href="/pages/search.html">
+				<a href="/search/">
 					Search
 				</a>
 			</li>
@@ -114,7 +117,7 @@
 			
 			
 			<li>
-				<a href="/pages/tags.html">
+				<a href="/tags/">
 					Tags
 				</a>
 			</li>
@@ -137,7 +140,7 @@
       <article class="feature-image">
   <header style="background-image: url('/assets/img/search-bg.jpg')">
     <h1 class="title">Search</h1>
-    <h2 class="subtitle">What are you looking for?</h3>
+    <h2 class="subtitle">What are you looking for?</h2>
   </header>
   <section class="post-content"><!-- Html Elements for Search -->
 <input type="text" id="search-input" placeholder="Enter keywords..." class="form input-bar">
@@ -153,7 +156,7 @@
       SimpleJekyllSearch({
         searchInput: document.getElementById('search-input'),
         resultsContainer: document.getElementById('results-container'),
-        json: '/search.json',
+        json: '/pages/search.json',
         searchResultTemplate: '<div class="search-title"><a href="{url}"><h3> {title}</h3></a><div class="meta">{date} <div class="right"><i class="fa fa-tag"></i> {tags}</div></div><p>{category}</p></div><hr> ',
         noResultsText: 'No results found',
         limit: 10,
