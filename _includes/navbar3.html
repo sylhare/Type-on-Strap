@@ -1,6 +1,6 @@
 <header>
 
-<nav class="navbar">
+<nav class="navbar wrap">
     
     <!-- Branding, image + title -->
     <div class="navbar-branding">
@@ -20,11 +20,11 @@
 	</div>
     
     <!-- Navigation links -->
-    <div id="navbar-links">
-        <ul class="navi">
+    <div id="menu">
+        <ul class="active">
             {% for page in site.pages %}
             {% if page.title and page.hide != true %}
-            <li>
+            <li class="item">
                 <a href="{{ page.url | prepend: site.baseurl }}">
                     {{ page.title }}
                 </a>
@@ -38,17 +38,9 @@
             </li>--> 
         </ul>
         
-        <!-- Responsive group icon -->
-        <i class="fa fa-bars"></i>
-        
-        <div class="navbar-button">
-            <button type="button" class="icon" onclick="toggle()">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-
-            </button>
-        </div>
+        <a class="toggle-nav" href="#">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+        </a>
         
     </div>
 
