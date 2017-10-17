@@ -7,7 +7,7 @@ theme_settings:
   # Meta
   title: Type Theme
   avatar: assets/img/avatar.png
-  favicon: "assets/favicon.ico"
+  favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
   description: "A website with blog posts and pages" # used by search engines
 
