@@ -1,0 +1,106 @@
+.navbar {
+    overflow: hidden;
+    background: $brand-color;
+    display: inline-block;
+    float: left;
+    width: 100%;
+    padding-top: 20px;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
+    a {
+        color: $header-link-color;
+        text-align: center;
+        text-decoration: none;
+        padding: 14px 16px;
+        line-height: 1.3;
+    }
+
+    @media screen and (max-width: $break) {
+        a {
+            display: none;
+        }
+        .icon {
+            float: right;
+            display: block;
+        }
+    }
+
+    .responsive {
+        @media screen and (max-width: $break) {
+            position: relative;
+
+            .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+        }
+    }
+}
+
+/* Branding */
+.navbar-branding {
+    .site-title {
+        float: left;
+        font-weight: bold;
+        font-size: 1em;
+        line-height: 0.8;
+    }
+
+    .navbar-img {
+        float: left; //margin-left: -15px;
+        padding: 10px 15px;
+        font-size: 18px;
+        line-height: 0.8;
+        height: 60px;
+    }
+}
+
+/* Toggle button */
+.navbar-button {
+    .icon {
+        display: none;
+        
+        .icon-bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background-color: #888888;
+
+            + .icon-bar {
+                margin-top: 4px;
+            }
+        }
+    }
+}
+
+/* Navigation links */
+
+.navi {
+    list-style: none;
+    
+    a{
+                &:hover {
+            color: $selection-color;
+        }
+    }
+
+    @media (min-width: $break) {
+        float: right;
+        margin: 0;
+
+        li {
+            display: inline;
+            float: left;
+        }
+    }
+}
