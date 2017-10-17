@@ -15,10 +15,6 @@
         text-decoration: none;
         padding: 14px 16px;
         line-height: 1.3;
-
-        &:hover {
-            color: $selection-color;
-        }
     }
 
     @media screen and (max-width: $break) {
@@ -91,6 +87,12 @@
 
 .navi {
     list-style: none;
+    
+    a{
+                &:hover {
+            color: $selection-color;
+        }
+    }
 
     @media (min-width: $break) {
         float: right;
