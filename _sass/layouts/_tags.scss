@@ -1,8 +1,14 @@
 .tag-list {
+  width: 100%;
   font-size: 0.9em;
   a.button {
     margin: 0.1em;
     padding: 0.2em 0.4em;
+  }
+    
+.tag {
+    margin-right: 0.5em;
+    color: $tags-color;
   }
 }
 .tag-title {

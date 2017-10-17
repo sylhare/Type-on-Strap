@@ -10,24 +10,9 @@ layout: default
     </p>
   </header>
   <section class="post-content">{{ content }}</section>
-    
-  <!-- Post tags -->
-  {% assign val = page.tags | size %}
-  {% if val > 0 %}
-    <footer>
-      {% if val == 1 %}
-        <div class="meta">Tag</div>
-      {% elsif val > 1 %}
-        <div class="meta">Tags</div>
-      {% endif %}
-      {% for tag in page.tags %}
-        <a class="button" href="{{site.baseurl}}/pages/tags#{{tag}}">
-          <i class="fa fa-tag fa-fw"></i> {{ tag }}
-        </a>
-      {% endfor %}
-    </footer>
-  {% endif %}
-    {% include tags_list.html tags=page.tags tag_count=page.tags.size %}
+   
+   <!-- Tag list -->
+   {% include tags_list.html tag_count=page.tags.size %}
 </article>
 
 <!-- Disqus -->
