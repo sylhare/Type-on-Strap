@@ -1,9 +1,14 @@
-{% if include.tag_count > 0 %}
-<footer>
-  <div class="tags">
-    {% for tag in include.tags %}
-    <a class="tag" href="{{site.baseurl}}/tags#{{tag}}">#{{tag}}</a>
-    {% endfor %}
-  </div>
-</footer>
-{% endif %}
+  {% if include.tag_count > 0 %}
+    <footer>
+      {% if include.tag_count == 1 %}
+        <div class="meta">Tag</div>
+      {% elsif include.tag_count > 1 %}
+        <div class="meta">Tags</div>
+      {% endif %}
+      {% for tag in page.tags %}
+        <a class="button" href="{{site.baseurl}}/pages/tags#{{tag}}">
+          <i class="fa fa-tag fa-fw"></i> {{ tag }}
+        </a>
+      {% endfor %}
+    </footer>
+  {% endif %}

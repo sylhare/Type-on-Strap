@@ -4,14 +4,16 @@
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <!-- JQuery (used for bootstrap and jekyll search -->
+    <script src="{{ " /assets/js/jquery-3.2.1.min.js " | prepend: site.baseurl }}"></script>
+    
+    {% if page.bootstrap %}
     <!-- Bootstrap-3.3.7 isolation CSS -->
     <link rel="stylesheet" type="text/css" href="{{ " /assets/css/bootstrap-iso.css " | prepend: site.baseurl }}">
-
-    <!-- JQuery -->
-    <script src="{{ " /assets/js/jquery-3.2.1.min.js " | prepend: site.baseurl }}"></script>
-
+    
     <!-- Bootstrap JS -->
     <script src="{{ " /assets/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
+    {% endif %}
     
     <!-- Navbar JS -->
     <script src="{{ " /assets/js/navbar.js " | prepend: site.baseurl }}"></script>
