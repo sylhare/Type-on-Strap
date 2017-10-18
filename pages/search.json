@@ -5,7 +5,7 @@
     {
       "title"    : "{{ post.title | escape }}",
       "category" : "{{ post.content | strip_html | strip_newlines | truncatewords: 25 }}",
-      "tags"     : "{{ post.tags | join: ', ' | prepend: "_" }}",
+      "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
       "url"      : "{{ site.baseurl }}{{ post.url }}",
       "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
       "content"  : "{{ post.content | strip_html | strip_newlines }}"
@@ -16,7 +16,7 @@
      {% if page.title != nil %}
         "title"    : "{{ page.title | escape }}",
         "category" : "{{ page.content | strip_html | strip_newlines | truncatewords: 25 }}",
-        "tags"     : "{{ page.tags | join: ', ' | prepend: "_" }}",
+        "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
         "url"      : "{{ site.baseurl }}{{ page.url }}",
         "date"     : "{{ page.date | date: "%B %-d, %Y" }}",
         "content"  : "{{ page.content | strip_html | strip_newlines }}"

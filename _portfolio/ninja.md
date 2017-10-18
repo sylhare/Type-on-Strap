@@ -2,8 +2,8 @@
 layout: post
 title: Ninja
 img: "assets/img/portfolio/ninja.png"
-date: September 2014
-tags: [Lorem, Ipsum]
+date: April, 08 2014
+tags: [Lorem]
 ---
 
 ![image]({{ site.baseurl }}/{{ page.img }})

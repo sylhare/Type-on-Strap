@@ -25,13 +25,20 @@
 }
 
 .tag-posts {
-    display: inline;
+    display: inline-block;
+    width: 100%;
   .title {
     margin-top: 0;
     margin-bottom: 0;
+      a {
+          margin-left: $padding-x-small;
+      }
   }
     
 .meta {
-    font-size: 0.5em;
+    display: inline;
+    float: right;
+    font-size: 0.7em;
+    line-height: normal;
     }
 }
