@@ -5,4 +5,14 @@
   width: 100%;
   color: lighten($text-color, 30%);
   font-size: 0.9em;
+    
+  .footer-icons {
+      ul {
+        list-style: none;
+        li {
+          display: inline;
+          }
+      }
+   }
 }
+
