@@ -1,0 +1,33 @@
+--- 
+layout: default 
+bootstrap: true
+---
+
+<article {% if page.feature-img %}class="feature-image" {% endif %}>
+    <header style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
+        <h1 class="title">{{ page.title }}</h1> {% if page.subtitle %}
+        <h2 class="subtitle">{{ page.subtitle }}</h3>{% endif %}
+    </header>
+
+    {% if page.description %}
+    <section class="post-content">
+        {{ page.description }}
+    </section>
+    {% endif %}
+
+
+
+    <!-- Bootstrap will work within this div -->
+    <section>
+        <div class="bootstrap-iso">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 centered">
+            {{ content }}
+            </div>    
+            <div class="col-md-1"></div>
+        </div>
+    </section>
+
+    
+    
+</article>

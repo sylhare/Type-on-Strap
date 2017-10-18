@@ -1,0 +1,52 @@
+navbar{
+    background: $brand-color;
+    width: 100%;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    vertical-align: middle;
+}
+
+.branding {
+
+    .navbar-img {
+        float: left;
+        display: inline;
+        padding: 10px 15px;
+        height: 60px;
+    }
+
+    .site-title a {
+        padding-bottom: 10px;
+        font-weight: bold;
+        font-size: 0.5em;
+    }
+}
+
+
+.menu {
+    float: right;
+    ul{
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        display: inline-block;
+        margin-bottom: 0px;
+    }
+    
+    li {
+        display: inline;
+        list-style: none;
+        
+        a {
+            text-align: center;
+            text-decoration: none;
+        }
+    }
+    a {
+        color: $header-link-color;
+        &:hover {
+            color: $selection-color;
+        }
+    }
+}
