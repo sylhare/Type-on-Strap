@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Search | Type Theme</title>
-    <meta name="description" content="A website with blog posts and pages">
+    <title>Github | Type Theme</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <!-- JQuery (used for bootstrap and jekyll search -->
@@ -21,7 +21,7 @@
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
     <!-- Canonical -->
-    <link rel="canonical" href="http://localhost:4000/search/">
+    <link rel="canonical" href="http://localhost:4000/portfolio/gitlecture">
 
     <!-- RSS -->
     <link rel="alternate" type="application/atom+xml" title="Type Theme" href="http://localhost:4000 /feed.xml " />
@@ -118,39 +118,44 @@
 </header>
 
     <div class="content">
-      <article class="feature-image">
-  <header style="background-image: url('/assets/img/search-bg.jpg')">
-    <h1 class="title">Search</h1>
-    <h2 class="subtitle">What are you looking for?</h2>
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Github</h1>
+    <p class="meta">
+    October 20, 2017
+    
+    </p>
   </header>
-  <section class="post-content"><!-- Html Elements for Search -->
-<input type="text" id="search-input" placeholder="Enter keywords..." class="form input-bar">
-<br>
-<br>
-<ul id="results-container" ></ul>  
+  <section class="post-content"><p><img src="/assets/img/portfolio/github.png" alt="image" /></p>
 
-<section>
-<!-- Script pointing to jekyll-search.js -->
-<script src="/assets/js/jekyll-search.min.js" type="text/javascript"></script>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
 
-    <script type="text/javascript">
-      SimpleJekyllSearch({
-        searchInput: document.getElementById('search-input'),
-        resultsContainer: document.getElementById('results-container'),
-        json: '/pages/search.json',
-        searchResultTemplate: '<div class="search-title"><a href="{url}"><h3> {title}</h3></a><div class="meta">{date} <div class="right"><i class="fa fa-tag"></i> {tags}</div></div><p>{category}</p></div><hr> ',
-        noResultsText: 'No results found',
-        limit: 10,
-        fuzzy: true,
-        exclude: []
-      })
-    </script>
-</section></section>
-    
-  <!-- Tag list -->
-    
+</section>
+   
+   <!-- Tag list -->
+     
+    <footer>
+      
+        <div class="meta">Tags</div>
+      
+      
+        <a class="button" href="/pages/tags#Lorem">
+          <i class="fa fa-tag fa-fw"></i> Lorem
+        </a>
+      
+        <a class="button" href="/pages/tags#portfolio">
+          <i class="fa fa-tag fa-fw"></i> portfolio
+        </a>
+      
+    </footer>
+  
 
 </article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
 
     </div>
     
