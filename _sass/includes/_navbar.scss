@@ -1,6 +1,6 @@
 .site-header {
-  padding: 3% $padding-x-small * 2;
-  padding-top: 2%;
+  padding: $padding-x-small $padding-x-small * 2;
+  padding-top: $padding-x-small;
   background: $brand-color;
   display: inline-block;
   float: left;
@@ -28,7 +28,10 @@
     line-height: 1.5;
   }
 
-  .site-nav {
+  nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     ul {
       margin: 0;
       padding: 0;
@@ -41,6 +44,95 @@
       display: inline;
       float: left;
       margin-right: 0.4em;
+    }
+    a {
+      &:hover {
+          color: $link-color;
+      }
+      &#pull {
+      i {
+          margin-top: 13px; 
+          float: right;
+      }
+          
+     }
+        
+    }  
+  }
+}
+
+    
+// To clear things when we float the element inisde nav and ul 
+.clear {
+    *zoom: 1;
+    
+    &:after {
+        clear: both;
+    }
+
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+}
+
+/* ---- Responsive ---- */
+
+@media (min-width: $break) {
+    a#pull {
+        display: none;
+    }
+}
+
+@media screen and (max-width: $break) {
+  .site-header {
+      img.avatar{
+          margin-top: -7px
+      }
+      .site-title {
+          margin-top: 7px;
+     }
+  }
+    
+  nav { 
+      height: auto;
+    ul {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    li {
+      width: 100%;
+      float: left;
+      position: relative;
+    }
+    a {
+      text-align: left;
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width : 480px) {
+  nav {
+    ul {
+    display: none;
+    height: auto;
+    }
+    
+    a#pull {
+        display: block;
+        width: 100%;
+        position: relative;
+    
+        &:after {
+            content:"";
+            display: inline-block;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+       }
     }
   }
 }

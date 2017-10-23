@@ -1,21 +1,26 @@
-function toggle() {
-    var x = document.getElementById("navbar");
-    if (x.className === "navbar") {
-        x.className += " responsive";
-    } else {
-        x.className = "navbar";
-    }
-}
-
-/* Toggle the active class when clicked on the bar icon */
-jQuery(document).ready(function() {
-    jQuery('.toggle-nav').click(function(e) {
-        jQuery(this).toggleClass('active');
-        jQuery('.menu ul').toggleClass('active');
+/*
+ * Display the menu items on smaller screens
+ */
+$(function() {
+  var pull    = $('#pull');
+    menu    = $('nav ul');
+    menuHeight  = menu.height();
  
-        e.preventDefault();
-    });
+  $(pull).on('click', function(e) {
+    e.preventDefault();
+    menu.slideToggle();
+  });
 });
+
+/*
+ * Display the navbar back to normal after resize
+ */
+$(window).resize(function(){
+  var w = $(window).width();
+  if(w > 320 && menu.is(':hidden')) {
+    menu.removeAttr('style');
+  }
+}); 
 
 $(window).scroll(function(){
     var h = 20;    
