@@ -1,7 +1,7 @@
 <header class="site-header">
+    
+    <!-- Logo and title -->
 	<div class="branding">
-
-
 		<a href="{{ site.baseurl }}/">
 			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
 		</a>
@@ -10,17 +10,25 @@
 			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
 		</h1>
 	</div>
-	<nav class="site-nav">
+    
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+    
+    <!-- Menu -->
 		<ul>
 			{% for page in site.pages %}
 			{% if page.title and page.hide != true %}
 			<li>
-				<a class="page-link" href="{{ page.url | relative_url }}">
+				<a class="clear" href="{{ page.url | relative_url }}">
 					{{ page.title }}
 				</a>
 			</li>
 			{% endif %}
 			{% endfor %}
 		</ul>
+        
 	</nav>
 </header>
