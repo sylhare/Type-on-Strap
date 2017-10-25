@@ -1,44 +1,44 @@
 .tag-list {
-  width: 100%;
-  font-size: 0.9em;
-    
-  a.button {
-    margin: 0.1em;
-    padding: 0.2em 0.4em;
-  }
-    
-  .tag {
-    margin-right: 0.5em;
-    color: $tags-color;
-  }
+    width: 100%;
+    font-size: 0.9em;
+
+    a.button {
+        margin: 0.1em;
+        padding: 0.2em 0.4em;
+    }
+
+    .tag {
+        margin-right: 0.5em;
+        color: $tags-color;
+    }
 }
 
 .tag-anchor {
-  margin-bottom: $padding-x-small;
-  a {
-    color: $link-color;
-    
-      &:hover {
-          text-decoration: none;
-      }
-  }
+    margin-bottom: $padding-x-small;
+    a {
+        color: $link-color;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 .tag-posts {
     display: inline-block;
     width: 100%;
-  .title {
-    margin-top: 0;
-    margin-bottom: 0;
-      a {
-          margin-left: $padding-x-small;
-      }
-  }
-    
-.meta {
-    display: inline;
-    float: right;
-    font-size: 0.7em;
-    line-height: normal;
+    .title {
+        margin-top: 0;
+        margin-bottom: 0;
+        a {
+            margin-left: $padding-x-small;
+        }
+    }
+
+    .meta {
+        display: inline;
+        float: right;
+        font-size: 0.7em;
+        line-height: normal;
     }
 }

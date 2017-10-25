@@ -29,29 +29,30 @@
         opacity: 1;
     }
 
-    &:-ms-input-placeholder, &::-webkit-input-placeholder {
+    &:-ms-input-placeholder,
+    &::-webkit-input-placeholder {
         color: $search-color;
     }
-    
-    input{
-    &[type=text]{
-        height: 46px;
-        padding: 10px 16px;
-        font-size: 18px;
-        line-height: 1.33;
-        border-radius: 6px;
+
+    input {
+        &[type=text] {
+            height: 46px;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.33;
+            border-radius: 6px;
+        }
     }
-  }
 }
 
 .search-title {
 
-    a{
+    a {
         h3 {
             margin: 0;
         }
         &:hover {
             text-decoration: none;
         }
-   }
+    }
 }
