@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <!-- JQuery (used for bootstrap and jekyll search -->
-    <script src="{{ " /assets/js/jquery-3.2.1.min.js " | prepend: site.baseurl }}"></script>
+    <script src="{{ site.baseurl }}/assets/js/jquery-3.2.1.min.js" ></script>
     
     {% if page.bootstrap %}
     <!-- Bootstrap-3.3.7 isolation CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ " /assets/css/bootstrap-iso.css " | prepend: site.baseurl }}">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/bootstrap-iso.css">
     
     <!-- Bootstrap JS -->
-    <script src="{{ " /assets/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
+    <script src="{{ site.baseurl }}/assets/js/bootstrap.min.js"></script>
     {% endif %}
     
     <!-- Navbar JS -->
-    <script src="{{ " /assets/js/navbar.js " | prepend: site.baseurl }}"></script>
+    <script src="{{ site.baseurl }}/assets/js/navbar.js"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ " /assets/css/main.css " | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ site.baseurl }}//assets/css/main.css">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
@@ -32,7 +32,7 @@
 
     <!-- Font Awesome -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="{{ " /assets/css/font-awesome.min.css " | prepend: site.baseurl }}">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/font-awesome.min.css">
 
     <!-- Google Fonts -->
     {% if site.theme_settings.google_fonts %}
@@ -43,8 +43,8 @@
     {% if site.theme_settings.katex %}
     <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="{{ " /assets/css/katex.min.css " | prepend: site.baseurl }}">
-    <script src="{{ " /assets/js/katex.min.js " | prepend: site.baseurl }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/katex.min.css">
+    <script src="{{ site.baseurl }}/assets/js/katex.min.js"></script>
     {% endif %}
 
     <!-- Google Analytics -->

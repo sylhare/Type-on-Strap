@@ -34,14 +34,19 @@ permalink: /tags/
     <!-- Displays the posts and pages that contains the tag-->
     <div class="posts">
         {% for tag in tags %}
-        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor"><a href="#{{ tag | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ tag }}</a></h3>
+        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
+            <a href="#{{ tag | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ tag }}</a>
+            <a href="#tags" style="float: right"><i class="fa fa-chevron-up" aria-hidden="true"> </i> </a>
 
+        </h3>
+
+        <!-- Posts and collection for each tags -->
         <div class="tag-posts">
 
             <!-- Posts -->
             {% for post in site.posts %} 
                 {% if post.tags contains tag %}
-                <h5 class="title">
+                <h5 class="tag-title">
                     <a href="{{ post.url | prepend: site.baseurl }}">
                         <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         {{ post.title }}
@@ -57,7 +62,7 @@ permalink: /tags/
             <!-- Portfolio -->
             {% for note in site.portfolio %} 
                 {% if note.tags contains tag %}
-                <h5 class="title">
+                <h5 class="tag-title">
                     <a href="{{ site.baseurl }}{{ note.url }}">
                         <i class="fa fa-file-o" aria-hidden="true"></i>
                         {{ note.title }}

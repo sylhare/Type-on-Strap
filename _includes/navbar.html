@@ -18,17 +18,17 @@
     </a>
     
     <!-- Menu -->
-		<ul>
-			{% for page in site.pages %}
-			{% if page.title and page.hide != true %}
-			<li>
-				<a class="clear" href="{{ page.url | relative_url }}">
-					{{ page.title }}
-				</a>
-			</li>
-			{% endif %}
-			{% endfor %}
-		</ul>
+    <ul>
+        {% for page in site.pages %}
+        {% if page.title and page.hide != true %}
+        <li>
+            <a class="clear" href="{{ page.url | relative_url }}">
+                {{ page.title }}
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
         
 	</nav>
 </header>
