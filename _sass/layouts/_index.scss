@@ -26,6 +26,13 @@
         p a {
             @extend .body-link;
         }
+        img {
+            width: 30%;
+            vertical-align: middle;
+            float: left;
+            padding: 12px 15px 0px 0px;
+            border-radius: 28px 20px 19px 20px;
+        }
     }
     .excerpt {
         margin-top: 1em;
