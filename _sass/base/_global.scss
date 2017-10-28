@@ -50,6 +50,7 @@ h4 {
 blockquote {
     border-left: 2px solid;
     padding: 1em 1em;
+    //background-color: darken($background-color, 5%);
 }
 blockquote p:last-child,
 footer p:last-child {

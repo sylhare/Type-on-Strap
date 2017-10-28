@@ -45,6 +45,13 @@ a.button {
     }
 }
 
+.post-link {
+    &:hover {
+        text-decoration: none;
+        color: lighten($link-color, 10%);
+    }
+}
+
 // States
 .disabled {
     opacity: 0.7;
