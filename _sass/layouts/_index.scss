@@ -8,6 +8,9 @@
     font-size: 1.2em;
     text-align: center;
     color: $header-desc-text-color;
+    background-position: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 .call-out p:last-child {
