@@ -6,7 +6,7 @@ url: "http://localhost:4000"
 theme_settings:
   # Meta
   title: Type Theme
-  avatar: assets/img/avatar.png
+  avatar: assets/img/triangle.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
   description: "A website with blog posts and pages" # used by search engines

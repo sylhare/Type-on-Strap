@@ -22,14 +22,10 @@ $(window).resize(function () {
     }
 });
 
-
 /*
-$('.call-out').scroll(function () {
-    var x = $(this).scrollTop();
-    $(this).css('background-position', '0% ' + parseInt(-x / 10) + 'px');
-});
-*/
-$(window).scroll(function() {
+ * Make the header images move on scroll
+ */
+$(window).scroll(function () {
     var x = $(this).scrollTop();
     $('#main').css('background-position', '100% ' + parseInt(-x / 1) + 'px' + ', 0% ' + parseInt(-x / 2) + 'px, center top');
 });
