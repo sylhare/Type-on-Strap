@@ -15,14 +15,14 @@ $border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
 
 // Typography colours
 $text-color: #383838;
-$link-color: #1ABC9C;
+$link-color: #507492;//#1ABC9C;
 $selection-color: #D4D4D4; // visible when highlighting text
 
 // Tags color
 $tags-color: #b0b0b0;
 
 //Search color
-$link-shadow: rgba(26, 188, 156, 0.6);
+$link-shadow: transparentize($link-color, .6);//rgba(26, 188, 156, 0.6);
 $text-shadow: #3f3f3f;
 $search-color: #999;
 
@@ -34,7 +34,7 @@ $feature-image-text-color: #fff;
 $feature-image-size: cover; // options include "cover", "contain", "auto"
 
 // Header description box
-$header-desc-background-color: #1ABC9C;
+$header-desc-background-color: #507492;
 $header-desc-text-color: #FFF;
 
 // Mobile display
