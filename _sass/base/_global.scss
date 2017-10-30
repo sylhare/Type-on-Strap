@@ -48,8 +48,10 @@ h4 {
   font-size: 1.15em;
 }
 blockquote {
-    border-left: 2px solid;
+    border-left: 2px solid darken($background-color, 60%);
+    margin: 1em 1em;
     padding: 1em 1em;
+    background-color: darken($background-color, 2%);
 }
 blockquote p:last-child,
 footer p:last-child {
@@ -72,7 +74,6 @@ th {
 }
 table,
 dl,
-blockquote,
 code,
 kbd,
 pre,

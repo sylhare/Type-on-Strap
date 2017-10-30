@@ -4,7 +4,7 @@ layout: default
 
 <div class="home">
   {% if site.theme_settings.header_text %}
-  <div class="call-out"
+  <div id="main" class="call-out"
   style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
     {{ site.theme_settings.header_text }}
   </div>
@@ -13,22 +13,29 @@ layout: default
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
-      <header>
-        <h1>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-            {{ post.title }}
-          </a>
-        </h1>
-        <p class="meta">
-          {{ post.date | date: "%B %-d, %Y" }}
-        </p>
-      </header>
-      <div class="excerpt">
-        {{ post.excerpt }}
-        <a class="button" href="{{ post.url | prepend: site.baseurl }}">
-          {{ site.theme_settings.str_continue_reading }}
-        </a>
+      {% if post.feature-img %} 
+      <div class="post-img">
+         <img src="{{ site.baseurl }}/{{ post.feature-img }}">
       </div>
+      {% endif %}
+      <span>
+          <header>
+            <h1>
+              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+                {{ post.title }}
+              </a>
+            </h1>
+            <p class="meta">
+              {{ post.date | date: "%B %-d, %Y" }}
+            </p>
+          </header>
+          <div class="excerpt">
+            {{ post.excerpt }}
+            <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
+              {{ site.theme_settings.str_continue_reading }}
+            </a>-->
+          </div>
+      </span>
     </div>
     {% endfor %}
   </div>

@@ -15,7 +15,7 @@ Content Cell  | Content Cell
 
 Here's an example of an image, which is included using Markdown:
 
-![Geometric pattern with fading gradient]({{ site.baseurl }}/assets/img/sample_feature_img_2.png)
+![Geometric pattern with fading gradient]({{ site.baseurl }}/assets/img/sample2.png)
 
 Highlighting for code in Jekyll is done using Pygments or Rouge. This theme makes use of Rouge by default.
 

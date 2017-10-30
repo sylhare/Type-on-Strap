@@ -8,6 +8,9 @@
     font-size: 1.2em;
     text-align: center;
     color: $header-desc-text-color;
+    background-position: 100%;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 .call-out p:last-child {
@@ -25,6 +28,41 @@
         border-bottom: 1px solid $border-color;
         p a {
             @extend .body-link;
+        }
+        img {
+            padding: 0;
+            vertical-align: middle;
+
+        }
+
+        .post-img {
+            overflow: hidden;
+            width: 35%;
+            vertical-align: middle;
+            float: left;
+            margin: 12px 15px;
+            border-radius: 25px;
+        }
+
+        .post-img img {
+            max-width: 100%;
+            -moz-transform: scale(1);
+            -webkit-transform: scale(1);
+            transform: scale(1);
+
+            -moz-transition-timing-function: ease-out;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+
+            -moz-transition: all 5s;
+            -webkit-transition: all 5s;
+            transition: all 5s;
+
+            &:hover {
+                -moz-transform: scale(1.3);
+                -webkit-transform: scale(1.3);
+                transform: scale(1.3);
+            }
         }
     }
     .excerpt {
