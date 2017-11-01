@@ -1,8 +1,8 @@
 # coding: utf-8
 
 Gem::Specification.new do |spec|
-  spec.name          = "jekyll-theme-type-strap"
-  spec.version       = "1.1"
+  spec.name          = "type-on-strap"
+  spec.version       = "1.0"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["", "hellorohan@outlook.com"]
 
@@ -10,7 +10,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(assets|_layouts|_includes|_sass|LICENSE|README)}i) }
+  spec.files         = `git ls-files -z`.split("\x0").select do |f|
+    f.match(%r{^(_(assets|pages|_portfolio|_layouts|_includes|_sass)/(LICENSE|README)((\.(txt|md|markdown)|$)))}i)
+  end
 
   spec.add_runtime_dependency "jekyll", "~> 3.4"
   spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"

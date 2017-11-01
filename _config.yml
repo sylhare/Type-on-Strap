@@ -84,7 +84,7 @@ sass:
   sass_dir: _sass
   style: :compressed
 plugins: [jekyll-paginate]
-theme: jekyll-theme-type-strap
+theme: type-on-strap
 exclude:
   - Gemfile
   - Gemfile.lock

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-theme-type-strap (1.1)
+    type-on-strap (1.0)
       jekyll (~> 3.4)
       jekyll-paginate (~> 1.1)
 
@@ -55,8 +55,8 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.12)
-  jekyll-theme-type-strap!
   rake (~> 10.0)
+  type-on-strap!
 
 BUNDLED WITH
    1.15.4

@@ -1,7 +1,7 @@
 # coding: utf-8
 
 Gem::Specification.new do |spec|
-  spec.name          = "jekyll-theme-type-strap"
+  spec.name          = "type-on-strap"
   spec.version       = "1.1"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["", "hellorohan@outlook.com"]
