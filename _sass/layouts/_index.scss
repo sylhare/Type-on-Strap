@@ -1,16 +1,24 @@
 // Header text feature
 .call-out {
     @extend %padding-regular;
+    object-fit: cover;
     display: inline-block;
     width: 100%;
+    height: 100%;
     background-color: $header-desc-background-color;
-    background-size: cover;
     font-size: 1.2em;
     text-align: center;
     color: $header-desc-text-color;
-    background-position: 100%;
     background-repeat: no-repeat;
-    height: 100%;
+    
+    @media (min-width: $break) {
+        background-size: $feature-image-size;
+    }
+    
+    @media screen and (max-width: $break) {
+        background-size: auto 150%;
+    }
+    
 }
 
 .call-out p:last-child {

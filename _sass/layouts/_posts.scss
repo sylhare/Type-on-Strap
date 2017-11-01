@@ -51,6 +51,7 @@ header {
     text-transform: uppercase;
 }
 
+/* --- Feature image --- */
 .feature-image {
     padding: 0%;
     .post-link {
@@ -75,7 +76,18 @@ header {
     }
 }
 
-// Post navigation
+// Responsive scrolling
+.feature-image header {
+    @media (min-width: $break) {
+        background-size: $feature-image-size;
+    }
+    
+    @media screen and (max-width: $break) {
+        background-size: auto 170%;
+    }
+}
+
+/* --- Post navigation --- */
 #post-nav {
     width: 100%;
     border-bottom: 1px solid $border-color;
