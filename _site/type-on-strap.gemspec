@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "1.1"
+  spec.version       = "0.9"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["", "hellorohan@outlook.com"]
 
@@ -10,7 +10,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(assets|_layouts|_includes|_sass|LICENSE|README)}i) }
+  spec.files         = Dir.glob("**/{*,.*}").select do |f|
+    f.match(%r{^(assets|pages|_(portfolio|includes|layouts|sass)/|(LICENSE|Gemfile|_config.yml|index.html)((\.(txt|md|markdown)|$)))}i)
+  end
 
   spec.add_runtime_dependency "jekyll", "~> 3.4"
   spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"
