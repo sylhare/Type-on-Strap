@@ -1,6 +1,6 @@
 # Type on Strap
 
-![Default Type on Strap blog](https://user-images.githubusercontent.com/816965/30518919-d5978024-9bcd-11e7-81b3-3dd07e99a1f9.png)
+![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)
 
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
 
@@ -38,7 +38,7 @@ jekyll-theme-basically-basic
 ├── _sass                      # Sass partials 
 ├── assets
 |  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
-|  ├── css                # isolated Bootstrap, font-awesome, katex and main css
+|  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
 |  ├── fonts		       # Font-Awesome, Glyphicon, and other fonts
 |  └── img		       # Images used for the template
 ├── pages
@@ -112,7 +112,6 @@ English text used in the theme has been grouped  so you can quickly translate th
 
 ```yml
   theme_settings:
-     # Localization strings
      str_follow_on: "Follow on"
      str_rss_follow: "Follow RSS feed"
      str_email: "Email"
@@ -131,12 +130,12 @@ English text used in the theme has been grouped  so you can quickly translate th
 
 Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) in the footer. All icon variables should be your username enclosed in quotes (e.g. "username") in `_config.yml`, except for the following variables:
 
-```yaml
+```yml
   theme_settings:
      rss: true
      email_address: type@example.com
      linkedin: ttps://www.linkedin.com/in/FirstLast
-	 stack_exchange: https://stackoverflow.com/users/0000/first-last
+     stack_exchange: https://stackoverflow.com/users/0000/first-last
 ```
 
 ### Comments (via Disqus)
@@ -146,7 +145,7 @@ comments section below each post.
 
 To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) to your project's `_config.yml` file:
 
-```yaml
+```yml
   theme_settings:
      disqus_shortname: my_disqus_shortname
 ```
@@ -156,7 +155,7 @@ To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/c
 To enable Google Analytics, add your [tracking ID](https://support.google.com/analytics/answer/1032385) 
 to `_config.yml` like so:
 
-```yaml
+```yml
   theme_settings:
      google_analytics: UA-NNNNNNNN-N
 ```
@@ -165,7 +164,7 @@ to `_config.yml` like so:
 
 When KateX is set in `_config.yml`:
 
-```yaml
+```yml
   theme_settings:
      katex: true # to Enable it
 ```
@@ -174,13 +173,13 @@ You can then wrap math expressions with `$$` signs in your posts and make sure y
 
 For inline math typesetting, type your math expression on the *same line* as your content. For example:
 
-```
+```latex
 Type math within a sentence $$2x^2 + x + c$$ to display inline
 ```
 
 For display math typesetting, type your math expression on a *new line*. For example:
 
-```
+```latex
 $$
   \bar{y} = {1 \over n} \sum_{i = 1}^{n}y_i
 $$
@@ -225,9 +224,11 @@ feature-img: "assets/img/sample.png"
 
 tags: [sample, markdown, html]
 
-permalink: /about.html  # Set a permalink your your page
+# Set a permalink your your page
+permalink: /about.html  
 
-hide: true  # to prevent the page from showing up in the header's navigation bar (visitors can still visit the URL through other means).
+# to prevent the page from showing up in the header's navigation bar (visitors can still visit the URL through other means).
+hide: true  
 ---
 ```
 
@@ -262,7 +263,6 @@ All feature pages are stored in the `page` folder, they will appear in the navig
 
 Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
 
-
 ### Search
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
@@ -279,7 +279,6 @@ For example:
 ---
 layout: post
 title: Markdown and HTML
-# Post tags should be placed between `[]` in your post metadata.
 tags: [sample, markdown, html]
 ---
 ```
