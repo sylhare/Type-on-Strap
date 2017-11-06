@@ -40,31 +40,21 @@
         }
         img {
             padding: 0;
-            vertical-align: middle;
-                        
-            @media (min-width: $break) {
-                min-width: $break;
-                margin: -75% 0 0 -100%;
-            }
-            
-            //Smaller screen
-            @media screen and (max-width: $break) {
-                max-width: none;
-                margin: -100% 0 0 -100%;
-            }
-
+            vertical-align: middle;          
         }
 
         .post-img {
-            height: 240px;
             vertical-align: middle;
             border-radius: 25px;
             overflow: hidden;
             
             @media (min-width: $break) {
-                margin: 12px 15px;
-                width: 35%;
-                float: left;
+                height: 250px;
+            }
+            
+            //Smaller screen
+            @media screen and (max-width: $break) {
+                height: 150px;
             }
         }
 
@@ -83,9 +73,9 @@
             transition: all 5s;
 
             &:hover {
-                -moz-transform: scale(0.7);
-                -webkit-transform: scale(0.7);
-                transform: scale(0.7);
+                -moz-transform: scale(1.3);
+                -webkit-transform: scale(1.3);
+                transform: scale(1.3);
             }
         }
     }

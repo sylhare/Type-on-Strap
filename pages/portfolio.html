@@ -9,9 +9,6 @@ feature-img: "assets/img/pexels/computer.jpeg"
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
     <div class="row">
-        <div class="space"></div>
-    </div>
-    <div class="row">
         {% for item in site.portfolio %}
         <div class="col-sm-4 col-xs-4 portfolio-item">
             <a href="{{ site.baseurl }}//{{ item.url }}" class="portfolio-link" data-keyboard="true">
@@ -24,8 +21,5 @@ feature-img: "assets/img/pexels/computer.jpeg"
             </a>
         </div>
         {% endfor %}
-    </div>
-    <div class="row">
-        <div class="space"></div>
     </div>
 </section>
