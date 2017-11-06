@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "0.9"
+  spec.version       = "0.0.1"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["", "hellorohan@outlook.com"]
 
@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.files         = Dir.glob("**/{*,.*}").select do |f|
-    f.match(%r{^(assets|pages|_(portfolio|includes|layouts|sass)/|(LICENSE|Gemfile|_config.yml|index.html)((\.(txt|md|markdown)|$)))}i)
+    f.match(%r{^(assets|_(includes|layouts|sass)/|(LICENSE|README.md)((\.(txt|md|markdown)|$)))}i)
   end
 
   spec.add_runtime_dependency "jekyll", "~> 3.4"
@@ -19,4 +19,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
+
 end

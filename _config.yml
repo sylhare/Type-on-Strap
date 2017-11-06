@@ -85,6 +85,4 @@ sass:
   style: :compressed
 plugins: [jekyll-paginate]
 theme: type-on-strap
-exclude:
-  - Gemfile
-  - Gemfile.lock
+exclude: ["Gemfile", "Gemfile.lock", "LICENSE", "README.md", "screenshot.png"]
