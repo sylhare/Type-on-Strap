@@ -242,15 +242,6 @@ layout: bootstrap
 ---
 ```
 
-To use bootstrap from scratch on a normal webpage, you can use
-
-```yml
---- 
-layout: default
-bootstrap: true
----
-```
-
 ### Layout: Default
 
 This layout includes the head, navigation bar and footer around your content.

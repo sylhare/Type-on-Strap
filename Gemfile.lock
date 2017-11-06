@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    type-on-strap (0.9)
+    type-on-strap (0.0.1)
       jekyll (~> 3.4)
       jekyll-paginate (~> 1.1)
 
@@ -59,4 +59,4 @@ DEPENDENCIES
   type-on-strap!
 
 BUNDLED WITH
-   1.15.4
+   1.16.0

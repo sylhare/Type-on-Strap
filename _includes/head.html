@@ -4,19 +4,11 @@
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <!-- JQuery (used for bootstrap and jekyll search -->
+    <!-- JQuery (used for bootstrap and jekyll search) -->
     <script src="{{ site.baseurl }}/assets/js/jquery-3.2.1.min.js" ></script>
     
-    {% if site.theme_settings.katex %}
-    <!-- Bootstrap-3.3.7 isolation CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/bootstrap-iso.min.css">
-    
-    <!-- Bootstrap JS -->
-    <script src="{{ site.baseurl }}/assets/js/bootstrap.min.js"></script>
-    {% endif %}
-    
-    <!-- Navbar JS -->
-    <script src="{{ site.baseurl }}/assets/js/navbar.js"></script>
+    <!-- Main JS (navbar.js and katex_init.js)-->
+    <script src="{{ site.baseurl }}/assets/js/main.min.js"></script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="{{ site.baseurl }}//assets/css/main.css">
@@ -28,7 +20,7 @@
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
     <!-- RSS -->
-    <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ " /feed.xml " | prepend: site.baseurl | prepend: site.url }}" />
+    <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ site.url }}//{{ site.baseurl }}//feed.xml"/>
 
     <!-- Font Awesome -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
@@ -44,7 +36,8 @@
     <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/katex.min.css">
-    <script src="{{ site.baseurl }}/assets/js/katex.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/katex.min.js">
+    </script>
     {% endif %}
 
     <!-- Google Analytics -->
