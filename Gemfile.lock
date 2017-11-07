@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    type-on-strap (0.0.1)
+    type-on-strap (0.0.2)
       jekyll (~> 3.3)
       jekyll-paginate (~> 1.1)
 
