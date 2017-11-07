@@ -1,6 +1,6 @@
 {% if site.theme_settings.rss %}
 <li>
-	<a href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" title="{{ site.theme_settings.str_rss_follow }}">
+	<a href="{{ site.url }}//{{ site.baseurl }}//feed.xml" title="{{ site.theme_settings.str_rss_follow }}">
 		<span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -14,7 +14,7 @@
 	<a href="mailto:{{ site.theme_settings.email_address }}" title="{{ site.theme_settings.str_email }}">
 		<span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-enveloppe fa-stack-1x fa-inverse"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
         </span>
 	</a>
 </li>
@@ -47,7 +47,7 @@
 	<a href="https://dribbble.com/{{ site.theme_settings.dribbble }}" title="{{ site.theme_settings.str_follow_on }} Dribbble">
 		<span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-dribble fa-stack-1x fa-inverse"></i>
+            <i class="fa fa-dribbble fa-stack-1x fa-inverse"></i>
         </span>
 	</a>
 </li>
@@ -69,7 +69,7 @@
 	<a href="https://www.flickr.com/photos/{{ site.theme_settings.flickr }}" title="{{ site.theme_settings.str_follow_on }} Flickr">
 		<span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-filcker fa-stack-1x fa-inverse"></i>
+            <i class="fa fa-flickr fa-stack-1x fa-inverse"></i>
         </span>
 	</a>
 </li>

@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-baseurl: "/jekyll"
-url: "http://localhost:4000"
+baseurl: "/Type-on-Strap"
+url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
@@ -18,7 +18,7 @@ theme_settings:
      <p>Remove all header text in <code>_config.yml</code> to disable this feature.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a> a custom <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
   rss: false
@@ -47,7 +47,6 @@ theme_settings:
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
   katex: true # Enable if using math markup
-  bootstrap: true # Enable bootstrap, in bootstrap layout
   
   # Localization strings
   str_follow_on: "Follow on"
@@ -71,7 +70,7 @@ theme_settings:
 paginate: 5
 paginate_path: "blog/page:num"
 
-# used for portfolio on home page
+# PORTFOLIO
 collections:
   portfolio:
     output: true
@@ -84,5 +83,5 @@ sass:
   sass_dir: _sass
   style: :compressed
 plugins: [jekyll-paginate]
-theme: type-on-strap
-exclude: ["Gemfile", "Gemfile.lock", "LICENSE", "README.md", "screenshot.png"]
+# theme: type-on-strap
+exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "LICENSE", "README.md", "screenshot.png"]

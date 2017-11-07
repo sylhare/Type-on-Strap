@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Type on Strap</title>
-    <atom:link href="http://localhost:4000/jekyll/feed.xml" rel="self" type="application/rss+xml"/>
-    <link>http://localhost:4000/jekyll/</link>
+    <atom:link href="http://localhost:4000/Type-on-Strap/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>http://localhost:4000/Type-on-Strap/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 06 Nov 2017 17:18:05 -0500</pubDate>
+    <pubDate>Tue, 07 Nov 2017 15:15:21 -0500</pubDate>
     
       <item>
         <title>Sample post</title>
-        <link>http://localhost:4000/jekyll/2014/11/30/sample-post.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/2014/11/30/sample-post.html</guid>
+        <link>http://localhost:4000/Type-on-Strap/2014/11/30/sample-post.html</link>
+        <guid isPermaLink="true">http://localhost:4000/Type-on-Strap/2014/11/30/sample-post.html</guid>
         <description>&lt;p&gt;Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -38,8 +38,8 @@
     
       <item>
         <title>Feature images</title>
-        <link>http://localhost:4000/jekyll/2014/11/29/feature-images.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/2014/11/29/feature-images.html</guid>
+        <link>http://localhost:4000/Type-on-Strap/2014/11/29/feature-images.html</link>
+        <guid isPermaLink="true">http://localhost:4000/Type-on-Strap/2014/11/29/feature-images.html</guid>
         <description>&lt;p&gt;This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages.&lt;/p&gt;
 </description>
         <pubDate>Sat, 29 Nov 2014 00:00:00 -0500</pubDate>
@@ -47,8 +47,8 @@
     
       <item>
         <title>Markdown and HTML</title>
-        <link>http://localhost:4000/jekyll/2014/11/28/markdown-and-html.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/2014/11/28/markdown-and-html.html</guid>
+        <link>http://localhost:4000/Type-on-Strap/2014/11/28/markdown-and-html.html</link>
+        <guid isPermaLink="true">http://localhost:4000/Type-on-Strap/2014/11/28/markdown-and-html.html</guid>
         <description>&lt;p&gt;Jekyll supports the use of &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;Markdown&lt;/a&gt; with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.&lt;/p&gt;
 
 &lt;p&gt;Tables have also been extended from Markdown:&lt;/p&gt;
@@ -74,7 +74,7 @@
 
 &lt;p&gt;Here’s an example of an image, which is included using Markdown:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/jekyll/assets/img/sample2.png&quot; alt=&quot;Geometric pattern with fading gradient&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/Type-on-Strap/assets/img/sample2.png&quot; alt=&quot;Geometric pattern with fading gradient&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Highlighting for code in Jekyll is done using Pygments or Rouge. This theme makes use of Rouge by default.&lt;/p&gt;
 
