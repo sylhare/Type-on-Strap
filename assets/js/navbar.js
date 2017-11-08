@@ -7,7 +7,6 @@ $(function () {
     menuHeight = menu.height();
 
     $(pull).on('click', function (e) {
-        e.preventDefault();
         menu.slideToggle();
     });
 });
@@ -22,10 +21,11 @@ $(window).resize(function () {
     }
 });
 
+
 /*
  * Make the header images move on scroll
  */
 $(window).scroll(function () {
-    var x = $(this).scrollTop();
-    $('#main').css('background-position', '100% ' + parseInt(-x / 1) + 'px' + ', 0% ' + parseInt(-x / 2) + 'px, center top');
+    var x = $(this).scrollTop();   
+    $('#main').css('background-position', '100% ' + parseInt(-x/3) + 'px' + ', 0%, center top');
 });
