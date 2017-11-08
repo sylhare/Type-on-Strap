@@ -83,5 +83,5 @@ sass:
   sass_dir: _sass
   style: :compressed
 plugins: [jekyll-paginate]
-# theme: type-on-strap
-exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png"]
+theme: type-on-strap # If using the theme as a jekyll theme gem
+exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", ".travis.yml", "LICENSE", "README.md", "screenshot.png"]
