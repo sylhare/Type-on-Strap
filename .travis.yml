@@ -1,9 +1,7 @@
 language: ruby
 rvm:
 - 2.3.3
-script: 
-  - "bundle install"
-  - "bundle exec jekyll build"
+script: "bundle install & bundle exec jekyll build"
 
 notifications:
   email: false
@@ -11,7 +9,6 @@ notifications:
 # branch whitelist, only for GitHub Pages
 branches:
   only:
-  - master     # test the master branch
   - gh-pages
 
 env:
