@@ -1,4 +1,4 @@
-#portfolio * {
+.portfolio * {
     z-index: 2;
     margin: 8% 5%;
     img {
@@ -68,7 +68,7 @@
 /* --- Responsive --- */
 
 @media screen and (max-width: $sm-break) {
-    #portfolio {
+    .portfolio {
         .caption-content {
             font-size: 7px;
         }
