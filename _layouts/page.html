@@ -1,15 +1,20 @@
 ---
 layout: default
 ---
+
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
   <header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
-    <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+    <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title">
+        {{ page.title }}
+    </h1>
+    
     {% if page.subtitle %}
-      <h2 class="subtitle">{{ page.subtitle }}</h2>
+    <h2 class="subtitle">{{ page.subtitle }}</h2>
     {% endif %}
+      
   </header>
   <section class="post-content">{{ content }}</section>
     
   <!-- Tag list -->
-  {% include tags_list.html tag_count=page.tags.size %}
+  {% include tags_list.html tag_count=nil %}
 </article>
