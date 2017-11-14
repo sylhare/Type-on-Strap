@@ -9,6 +9,12 @@ layout: default
     {{ site.theme_settings.header_text }}
   </div>
   {% endif %}
+  
+  {% if site.theme_settings.main_text %}
+  <div class="main-text">
+  {{ site.theme_settings.main_text }}
+  </div>
+  {% endif %}
 
   <div class="posts">
     {% for post in paginator.posts %}
@@ -39,6 +45,7 @@ layout: default
     </div>
     {% endfor %}
   </div>
+
 
   {% if paginator.total_pages > 1 %}
   <div class="pagination">

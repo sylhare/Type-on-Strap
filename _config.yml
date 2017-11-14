@@ -17,6 +17,7 @@ theme_settings:
      respect for everyone's human rights so that no one is either advantaged or disadvantaged on account of their beliefs.</p>
 
   header_text_feature_image: assets/img/pexels/triangular.jpeg
+  main_text: Can I write multiparagrah things here? <p> Yest? </p> <p> No?</p>
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
@@ -46,7 +47,7 @@ theme_settings:
   # Scripts
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
-  katex: true # Enable if using math markup
+  katex: false # Enable if using math markup
   
   # Localization strings
   str_follow_on: "Follow on"
@@ -73,7 +74,7 @@ paginate_path: "blog/page:num"
 # PORTFOLIO
 collections:
   portfolio:
-    output: true
+    output: false
     permalink: /:collection/:name
 
 # BUILD SETTINGS
