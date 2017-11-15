@@ -1,7 +1,5 @@
 <head>
     <meta charset="utf-8">
-    <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
-    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <!-- JQuery (used for bootstrap and jekyll search) -->
@@ -11,7 +9,7 @@
     <script src="{{ site.baseurl }}/assets/js/main.min.js"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ site.baseurl }}//assets/css/main.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
@@ -20,7 +18,7 @@
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
     <!-- RSS -->
-    <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ site.url }}//{{ site.baseurl }}//feed.xml"/>
+    <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ site.url }}/{{ site.baseurl }}//feed.xml"/>
 
     <!-- Font Awesome -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
@@ -60,4 +58,12 @@
 
     </script>
     {% endif %}
+    
+    <!-- seo tags -->
+    {% seo %}
+        <!-- Manual seo tags -->
+        <!--
+        <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
+        <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
+        -->
 </head>

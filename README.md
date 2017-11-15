@@ -7,6 +7,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 - Responsive design
 - Include bootstrap and Jekyll search
 - Portfolio, tags, search page layout
+- Automatic generation of seo tag (for search engines)
 - Free of rights images from [pexels](https://www.pexels.com/)
 
 ## Table of Contents
