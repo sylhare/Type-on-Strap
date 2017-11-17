@@ -133,9 +133,11 @@ English text used in the theme has been grouped  so you can quickly translate th
 
 Jekyll works with liquid tags usually represented by:
 
+```
 {{ liquid.tag | filter }}
 ```
 
+These are useful to render your jekyll files. You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
 ### Footer's icons
 
