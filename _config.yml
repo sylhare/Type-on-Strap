@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/nutbrown.io"
+baseurl: ""
 url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
@@ -8,44 +8,44 @@ theme_settings:
   title: Nutbrown.io
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
+  gravatar: "adfbe6d61be40c206a78d553b848bb16"
   description: "Personal tech-themed blog for Stephen Nutbrown. Mostly featuring AWS cloud projects written in Java, Javascript, Python, Ruby, Groovy and whatever else is necessary (php is never necessary)." # used by search engines
 
   # Header and footer text
   header_text: >
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+     <p>A personal tech-themed blog, mostly featuring AWS cloud projects written in Java, Javascript, Python, Ruby, Groovy and whatever else is necessary <br/>(php is never necessary).</p>
 
-     <p>Remove all header text in <code>_config.yml</code> to disable this feature.</p>
+     <p>Got an idea or improvement? Pull requests or bug reports are welcome <a href="https://github.com/NutterzUK/nutbrown">here</a>.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+   Gratefully powered by <a href="https://jekyllrb.com/">Jekyll</a>, using <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
   rss: false
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: "stephen@nutbrown.io"
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "NutterzUK/nutbrown"
   google_plus:
   instagram:
-  linkedin:  # Full URL
+  linkedin: "https://www.linkedin.com/in/stephen-nutbrown-59a94838/"
   pinterest:
   reddit:
   soundcloud:
   stack_exchange:  # Full URL
-  steam:
+  steam: "NutterzUK"
   tumblr:
-  twitter: "twitter"
+  twitter: "nutterzuk"
   wordpress:
   youtube:
 
   # Scripts
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
+  disqus_shortname: "nutbrown.io"
   katex: true # Enable if using math markup
   
   # Localization strings
