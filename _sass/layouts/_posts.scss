@@ -78,12 +78,8 @@ header {
 
 // Responsive scrolling
 .feature-image header {
-    @media (min-width: $break) {
-        background-size: $feature-image-size;
-    }
-    
     @media screen and (max-width: $break) {
-        background-size: auto 170%;
+        padding: $padding-small $padding-small;
     }
 }
 

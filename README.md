@@ -1,14 +1,17 @@
 # Type on Strap
 
-![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)
-
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
 
-- Responsive design
-- Include bootstrap and Jekyll search
-- Portfolio, tags, search page layout
-- Automatic generation of seo tag (for search engines)
-- Free of rights images from [pexels](https://www.pexels.com/)
+* Responsive design
+* Portfolio page for your projects
+* Tags compability
+* Bootstrap : [Get Bootstrap](http://getbootstrap.com/)
+* Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
+* Math Rendering : [KateX](https://github.com/Khan/KaTeX)
+* Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
+* Free of rights images from [pexels](https://www.pexels.com/)
+
+![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)
 
 ## Table of Contents
 
@@ -22,9 +25,10 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 ## Usage
 
 1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/Sylhare/Type-on-Strap.git`
-2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll` check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
+2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
 3. Install the theme's dependencies: `bundle install`
-4. Customize the theme (see below)
+4. Customize the theme
+	- Github Page: [update `_config.yml`](https://github.com/Sylhare/Type-on-Strap#site-configuration)
 5. Run the Jekyll server: `jekyll serve`
 
 ## Structure
@@ -126,6 +130,14 @@ English text used in the theme has been grouped  so you can quickly translate th
 
 
 ### Other features
+
+Jekyll works with liquid tags usually represented by:
+
+```
+{{ liquid.tag | filter }}
+```
+
+These are useful to render your jekyll files. You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
 ### Footer's icons
 
