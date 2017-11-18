@@ -19,6 +19,11 @@
     
     <!-- Menu -->
     <ul>
+	    <li>
+            <a class="clear" href="{{ site.baseurl }}/">
+                Home
+            </a>
+        </li>
         {% for page in site.pages %}
         {% if page.title and page.hide != true %}
         <li>
