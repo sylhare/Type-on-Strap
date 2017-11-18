@@ -1,15 +1,15 @@
 # SITE CONFIGURATION
-baseurl: "/"
+baseurl: ""
 url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap
+  title: Nutbrown.io
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-  description: "A website with blog posts and pages" # used by search engines
+  description: "Personal tech-themed blog for Stephen Nutbrown. Mostly featuring AWS cloud projects written in Java, Javascript, Python, Ruby, Groovy and whatever else is necessary (php is never necessary)." # used by search engines
 
   # Header and footer text
   header_text: >
