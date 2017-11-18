@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: ""
+baseurl: "/nutbrown.io"
 url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
