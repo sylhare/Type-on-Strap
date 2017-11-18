@@ -63,7 +63,7 @@ permalink: /tags.html
             {% for note in site.portfolio %} 
                 {% if note.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ site.baseurl }}{{ note.url }}">
+                    <a href="{{ site.baseurl }}{{ note.url }}.html">
                         <i class="fa fa-file-o" aria-hidden="true"></i>
                         {{ note.title }}
                     </a>
