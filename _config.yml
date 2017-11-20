@@ -46,7 +46,7 @@ theme_settings:
   # Scripts
   google_analytics: "UA-55663428-6"
   disqus_shortname: "nutbrown-io"
-  katex: true # Enable if using math markup
+  katex: false # Enable if using math markup
   
   # Localization strings
   str_follow_on: "Follow on"
