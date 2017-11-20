@@ -307,7 +307,6 @@ The tags page can be enable/disable through the `_config.yml` via:
   tags: true
 ```
 
-
 ## License
 
 [The MIT License (MIT)](https://github.com/rohanchandra/type-theme/blob/master/LICENSE)
