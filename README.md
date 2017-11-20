@@ -267,11 +267,23 @@ All feature pages are stored in the `page` folder, they will appear in the navig
 
 Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
 
+The portfolio page can be enable/disable through the `_config.yml` via:
+```yml
+# Scripts / Feature
+  portfolio: true
+```
 ### Search
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
 
 Then there's a `search.js` displaying the formated results entered in the `search.html` page. 
+
+
+The search page can be enable/disable through the `_config.yml` via:
+```yml
+# Scripts / Feature
+  search: true
+```
 
 ### Tags
 
@@ -288,6 +300,12 @@ tags: [sample, markdown, html]
 ```
 
 All the tags will be listed in `tags.html` with a link toward the pages or posts.
+The tags page can be enable/disable through the `_config.yml` via:
+
+```yml
+# Scripts / Feature
+  tags: true
+```
 
 
 ## License
