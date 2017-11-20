@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <!-- JQuery (used for bootstrap and jekyll search) -->
-    <script async src="{{ site.baseurl }}/assets/js/jquery-3.2.1.min.js" ></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
     
     <!-- Main JS (navbar.js and katex_init.js)-->
     <script async src="{{ site.baseurl }}/assets/js/main.min.js"></script>
@@ -21,12 +21,11 @@
     <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ site.url }}/{{ site.baseurl }}//feed.xml"/>
 
     <!-- Font Awesome -->
-    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Google Fonts -->
     {% if site.theme_settings.google_fonts %}
-    <link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css"> 
+    <link href="https://fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css"> 
     {% endif %}
 
     <!-- KaTeX 0.8.3 -->
