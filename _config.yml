@@ -6,7 +6,7 @@ url: "https://nutbrown.io"
 theme_settings:
   # Meta
   title: Nutbrown.io
-  avatar: assets/img/triangle.svg
+  avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
   gravatar: "adfbe6d61be40c206a78d553b848bb16"
   description: "Personal tech-themed blog for Stephen Nutbrown. Mostly featuring AWS cloud projects written in Java, Javascript, Python, Ruby, Groovy and whatever else is necessary (php is never necessary)." # used by search engines
