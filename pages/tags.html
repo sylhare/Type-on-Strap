@@ -17,20 +17,18 @@ hide: true
 <!-- cycles through portfolio collection to get tags -->
 {% assign portfolio =  site.portfolio | map: 'tags' | join: ','  | split: ',' | uniq %}
 {% for tag in portfolio %}
-{% assign ttags = tag | join:'|' | append:'|' %}
-{% assign rawtags = rawtags | append:ttags %}
+{% assign portfolio_tags = tag | join:'|' | append:'|' %}
+{% assign rawtags = rawtags | append:portfolio_tags %}
 {% endfor %}
 
+<!-- cycles through pages to get tags -->
+{% for page in site.pages %}
+{% assign page_tags = page.tags | join:'|'  %}
+{% assign rawtags = rawtags | append:page_tags %}
+{% endfor %}    
+    
 <!-- Displays the list of tags-->
-{% assign tags = rawtags | split:'|' | sort | uniq %}
-    <div class="tag-list">
-        {% for tag in tags %}
-        <a class="button" href="#{{ tag | cgi_escape }}">
-              <i class="fa fa-tag fa-fw"></i> {{ tag }}
-        </a>
-        {% endfor %}
-    </div>
-    <br>
+{% include tags_list.html tags=rawtags %}
 
     <!-- Displays the posts and pages that contains the tag-->
     <div class="posts">
@@ -44,6 +42,22 @@ hide: true
         <!-- Posts and collection for each tags -->
         <div class="tag-posts">
 
+            <!-- Pages -->
+            {% for page in site.pages %} 
+                {% if page.tags contains tag %}
+                <h5 class="tag-title">
+                    <a href="{{ page.url | prepend: site.baseurl }}">
+                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                        {{ page.title }}
+                    </a>
+                    
+                    <div class="meta">
+                        {{ "today" | date: "%B %-d, %Y" }}
+                    </div>
+                </h5>
+                {% endif %} 
+            {% endfor %} 
+            
             <!-- Posts -->
             {% for post in site.posts %} 
                 {% if post.tags contains tag %}

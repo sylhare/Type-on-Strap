@@ -11,7 +11,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
-> [Demo Type on Strap](https://sylhare.github.io/Type-on-Strap/)
+> [Demo](https://sylhare.github.io/Type-on-Strap/)
  
 [![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)](https://sylhare.github.io/Type-on-Strap/)
 
@@ -135,7 +135,7 @@ English text used in the theme has been grouped  so you can quickly translate th
 
 ### Other features
 
-Jekyll works with liquid tags usually represented by:
+Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually represented by:
 
 ```
 {{ liquid.tag | filter }}
@@ -278,13 +278,13 @@ Then there's a `search.js` displaying the formated results entered in the `searc
 
 The search page can be enable/disable through the `_config.yml` via:
 ```yml
-  # Scripts / Feature
+# Scripts / Feature
   search: true
 ```
 
 ### Tags
 
-Post tags should be placed between `[]` in your post metadata. Seperate each tag with a comma.
+Tags should be placed between `[]` in your post metadata. Seperate each tag with a comma. Tags are recommended for posts and portfolio items.
 
 For example:
 
@@ -295,6 +295,8 @@ title: Markdown and HTML
 tags: [sample, markdown, html]
 ---
 ```
+
+> Tags are case sensitive `Tag_nAme` ≠ `tag_name`
 
 All the tags will be listed in `tags.html` with a link toward the pages or posts.
 The tags page can be enable/disable through the `_config.yml` via:
