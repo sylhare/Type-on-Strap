@@ -11,7 +11,9 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
-![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)
+> [Demo Type on Strap](https://sylhare.github.io/Type-on-Strap/)
+ 
+[![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)](https://sylhare.github.io/Type-on-Strap/)
 
 ## Table of Contents
 
@@ -38,9 +40,10 @@ Here are the main files of the template
 ```bash
 jekyll-theme-basically-basic
 ├── _draft	               # To store your drafts, they won't be published on your site
-├── _portofolio	               # collection of article to be populated in the portfolio page
 ├── _includes	               # theme includes
 ├── _layouts                   # theme layouts (see below for details)
+├── _portofolio	               # collection of article to be populated in the portfolio page
+├── _posts                     # Blog posts
 ├── _sass                      # Sass partials 
 ├── assets
 |  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
@@ -74,7 +77,7 @@ Jekyll website *without* a subpath (such as a GitHub Pages website for a given u
   url: "https://username.github.io"
 ```
 
-Jekyll website *with* subpath (like the Type Theme demo page):
+Jekyll website *with* subpath (like the Type on Strap [demo](https://sylhare.github.io/Type-on-Strap/) page):
 
 ```yml
   baseurl: "/sub-directory"
@@ -209,19 +212,10 @@ This are the basic features you can use with the  `post` layout.
 ```yml
 ---
 layout: post
-
-# Title of the page
-title: Hello World
-
-# A subtitle can be displayed below your title
-subtitle: "This is a subtitle"
-
-# Add a feature-image to the post
-feature-img: "assets/img/sample.png"
-
-# Adds a thumbnail image on the blog index page
-thumbnail: "assets/img/thumbnail/sample-th.png"
-
+title: Hello World                                # Title of the page
+subtitle: "This is a subtitle"                    # A subtitle can be displayed below your title
+feature-img: "assets/img/sample.png"              # Add a feature-image to the post
+thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
 tags: [sample, markdown, html]
 ---
 ```
@@ -237,19 +231,14 @@ The page layout have a bit more features explained here.
 layout: page
 title: "About" 
 subtitle: "This is a subtitle"   
-
-# Add a feature-image to the post
-feature-img: "assets/img/sample.png"
-
+feature-img: "assets/img/sample.png" 
+permalink: /about.html               # Set a permalink your your page
+hide: true                           # Prevent the page title to appear in the navbar
 tags: [sample, markdown, html]
-
-# Set a permalink your your page
-permalink: /about.html  
-
-# to prevent the page from showing up in the header's navigation bar (visitors can still visit the URL through other means).
-hide: true  
 ---
 ```
+
+The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. Use the `_draft` folder to keep files from being generated on your site.
 
 ### Layout: Bootstrap
 
@@ -289,7 +278,7 @@ Then there's a `search.js` displaying the formated results entered in the `searc
 
 The search page can be enable/disable through the `_config.yml` via:
 ```yml
-# Scripts / Feature
+  # Scripts / Feature
   search: true
 ```
 
@@ -317,4 +306,4 @@ The tags page can be enable/disable through the `_config.yml` via:
 
 ## License
 
-[The MIT License (MIT)](https://github.com/rohanchandra/type-theme/blob/master/LICENSE)
+[The MIT License (MIT)](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/master/LICENSE)
