@@ -13,9 +13,9 @@ layout: default
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
-      {% if post.feature-img %} 
+      {% if post.thumbnail %} 
       <div class="post-img">
-         <img src="{{ site.baseurl }}/{{ post.feature-img }}">
+         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
       </div>
       {% endif %}
       <span>
