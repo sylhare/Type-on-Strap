@@ -37,6 +37,7 @@ Here are the main files of the template
 
 ```bash
 jekyll-theme-basically-basic
+├── _draft	               # To store your drafts, they won't be published on your site
 ├── _portofolio	               # collection of article to be populated in the portfolio page
 ├── _includes	               # theme includes
 ├── _layouts                   # theme layouts (see below for details)
