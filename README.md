@@ -219,9 +219,14 @@ subtitle: "This is a subtitle"
 # Add a feature-image to the post
 feature-img: "assets/img/sample.png"
 
+# Adds a thumbnail image on the blog index page
+thumbnail: "assets/img/thumbnail/sample-th.png"
+
 tags: [sample, markdown, html]
 ---
 ```
+
+With `thumbnail`, you can add a smaller image than the `feature-img`. If you don't want/have a thumbnail you can still use the same image as the feature one.
 
 ### Layout: Page
 
@@ -262,7 +267,9 @@ This layout includes the head, navigation bar and footer around your content.
 
 ## Feature pages
 
-All feature pages are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter.
+All feature pages are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
+
+Here are the documentation for the other feature pages that can be added through `_config.yml`.
 
 ### Portfolio
 
