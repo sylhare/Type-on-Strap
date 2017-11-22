@@ -1,9 +1,10 @@
 ---
 layout: post
-title: Ninja
-img: "assets/img/portfolio/ninja.png"
-date: April, 08 2014
-tags: [Lorem]
+title: Circus
+img: "assets/img/portfolio/nutbrown-io.png"
+date: September 2014
+tags: [Ipsum]
+order: 4
 ---
 
 ![image]({{ site.baseurl }}/{{ page.img }})

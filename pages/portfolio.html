@@ -2,14 +2,15 @@
 layout: bootstrap 
 title : Portfolio 
 permalink: /portfolio.html
-subtitle: "Projects I am working on" 
+subtitle: "Projects I have worked on" 
 feature-img: "assets/img/pexels/computer.jpeg"
 ---
 
 <!-- Portfolio Grid Section -->
 <section class="portfolio">
     <div class="row">
-        {% for item in site.portfolio %}
+		{% assign sorted_pages = site.portfolio | sort:"order" %}
+        {% for item in sorted_pages %}
         <div class="col-sm-4 col-xs-4 portfolio-item">
             <a href="{{ item.url }}.html" class="portfolio-link" data-keyboard="true">
                 <div class="caption" title="{{ item.title }}">
