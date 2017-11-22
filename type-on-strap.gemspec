@@ -2,17 +2,18 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "1.1"
+  spec.version       = "0.1.0"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["", "hellorohan@outlook.com"]
 
-  spec.summary       = %q{A custom type-theme template (a free and open-source Jekyll theme. Great for blogs and easy to customize.)}
+  spec.summary       = %q{A custom Type Theme template (a free and open-source Jekyll theme. Great for blogs and easy to customize.)}
   spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
   spec.license       = "MIT"
 
-  spec.files         = Dir.glob("**/{*,.*}").select do |f|
-    f.match(%r{^(assets|pages|_(portfolio|includes|layouts|sass)/|(LICENSE|Gemfile|_config.yml|index.html)((\.(txt|md|markdown)|$)))}i)
-   end
+  spec.files         = Dir.glob("**/pages/*.{html,json}") +
+                       Dir.glob("**/{*,.*}").select do |f|
+    f.match(%r{^(assets|_(includes|layouts|sass)/|(LICENSE|README)((\.(txt|md|markdown)|$)))}i)
+  end
 
   spec.add_runtime_dependency "jekyll", "~> 3.4"
   spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"

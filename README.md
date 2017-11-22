@@ -11,7 +11,9 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
-![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)
+> [Demo](https://sylhare.github.io/Type-on-Strap/)
+ 
+[![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)](https://sylhare.github.io/Type-on-Strap/)
 
 ## Table of Contents
 
@@ -37,9 +39,11 @@ Here are the main files of the template
 
 ```bash
 jekyll-theme-basically-basic
-├── _portofolio	               # collection of article to be populated in the portfolio page
+├── _draft	               # To store your drafts, they won't be published on your site
 ├── _includes	               # theme includes
 ├── _layouts                   # theme layouts (see below for details)
+├── _portofolio	               # collection of article to be populated in the portfolio page
+├── _posts                     # Blog posts
 ├── _sass                      # Sass partials 
 ├── assets
 |  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
@@ -73,7 +77,7 @@ Jekyll website *without* a subpath (such as a GitHub Pages website for a given u
   url: "https://username.github.io"
 ```
 
-Jekyll website *with* subpath (like the Type Theme demo page):
+Jekyll website *with* subpath (like the Type on Strap [demo](https://sylhare.github.io/Type-on-Strap/) page):
 
 ```yml
   baseurl: "/sub-directory"
@@ -131,7 +135,7 @@ English text used in the theme has been grouped  so you can quickly translate th
 
 ### Other features
 
-Jekyll works with liquid tags usually represented by:
+Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually represented by:
 
 ```
 {{ liquid.tag | filter }}
@@ -208,19 +212,15 @@ This are the basic features you can use with the  `post` layout.
 ```yml
 ---
 layout: post
-
-# Title of the page
-title: Hello World
-
-# A subtitle can be displayed below your title
-subtitle: "This is a subtitle"
-
-# Add a feature-image to the post
-feature-img: "assets/img/sample.png"
-
+title: Hello World                                # Title of the page
+subtitle: "This is a subtitle"                    # A subtitle can be displayed below your title
+feature-img: "assets/img/sample.png"              # Add a feature-image to the post
+thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
 tags: [sample, markdown, html]
 ---
 ```
+
+With `thumbnail`, you can add a smaller image than the `feature-img`. If you don't want/have a thumbnail you can still use the same image as the feature one.
 
 ### Layout: Page
 
@@ -231,19 +231,14 @@ The page layout have a bit more features explained here.
 layout: page
 title: "About" 
 subtitle: "This is a subtitle"   
-
-# Add a feature-image to the post
-feature-img: "assets/img/sample.png"
-
+feature-img: "assets/img/sample.png" 
+permalink: /about.html               # Set a permalink your your page
+hide: true                           # Prevent the page title to appear in the navbar
 tags: [sample, markdown, html]
-
-# Set a permalink your your page
-permalink: /about.html  
-
-# to prevent the page from showing up in the header's navigation bar (visitors can still visit the URL through other means).
-hide: true  
 ---
 ```
+
+The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. Use the `_draft` folder to keep files from being generated on your site.
 
 ### Layout: Bootstrap
 
@@ -261,21 +256,35 @@ This layout includes the head, navigation bar and footer around your content.
 
 ## Feature pages
 
-All feature pages are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter.
+All feature pages are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
+
+Here are the documentation for the other feature pages that can be added through `_config.yml`.
 
 ### Portfolio
 
 Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
 
+The portfolio page can be enable/disable through the `_config.yml` via:
+```yml
+# Scripts / Feature
+  portfolio: true
+```
 ### Search
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
 
 Then there's a `search.js` displaying the formated results entered in the `search.html` page. 
 
+
+The search page can be enable/disable through the `_config.yml` via:
+```yml
+# Scripts / Feature
+  search: true
+```
+
 ### Tags
 
-Post tags should be placed between `[]` in your post metadata. Seperate each tag with a comma.
+Tags should be placed between `[]` in your post metadata. Seperate each tag with a comma. Tags are recommended for posts and portfolio items.
 
 For example:
 
@@ -287,9 +296,16 @@ tags: [sample, markdown, html]
 ---
 ```
 
-All the tags will be listed in `tags.html` with a link toward the pages or posts.
+> Tags are case sensitive `Tag_nAme` ≠ `tag_name`
 
+All the tags will be listed in `tags.html` with a link toward the pages or posts.
+The tags page can be enable/disable through the `_config.yml` via:
+
+```yml
+# Scripts / Feature
+  tags: true
+```
 
 ## License
 
-[The MIT License (MIT)](https://github.com/rohanchandra/type-theme/blob/master/LICENSE)
+[The MIT License (MIT)](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/master/LICENSE)

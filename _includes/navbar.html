@@ -27,7 +27,29 @@
             </a>
         </li>
         {% endif %}
-        {% endfor %}
+        {% endfor %} 
+        {% if site.theme_settings.portfolio %}
+        <li>
+            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/portfolio">
+                Portfolio
+            </a>
+        </li>
+        {% endif %}
+        {% if site.theme_settings.portfolio %}
+        <li>
+            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/search">
+                Search
+            </a>
+        </li>
+        {% endif %}
+        {% if site.theme_settings.portfolio %}
+        <li>
+            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/tags">
+                Tags
+            </a>
+        </li>
+        {% endif %}
+        
     </ul>
         
 	</nav>

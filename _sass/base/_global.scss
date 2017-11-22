@@ -48,10 +48,11 @@ h4 {
   font-size: 1.15em;
 }
 blockquote {
-    border-left: 2px solid darken($background-color, 60%);
+    border-left: 2px solid darken($blockquote-color, 20%);
     margin: 1em 1em;
-    padding: 1em 1em;
-    background-color: darken($background-color, 2%);
+    padding: 0.75em 1em;
+    background-color: $blockquote-color;
+    box-shadow: 0 2px 2px $border-color;
 }
 blockquote p:last-child,
 footer p:last-child {
@@ -140,7 +141,7 @@ img[align=right] {
     h4 {
       font-size: 0.75em;
     }
-    p {
+    p, li {
       font-size: 0.75em;
     }
 }

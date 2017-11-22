@@ -12,7 +12,9 @@ layout: default
   <section class="post-content">{{ content }}</section>
    
    <!-- Tag list -->
-   {% include tags_list.html tag_count=page.tags.size %}
+  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+  {% include tags_list.html tags=tag_list %}
+    
 </article>
 
 <!-- Disqus -->
