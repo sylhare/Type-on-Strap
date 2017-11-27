@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tic tac toe
+title: The Marker's Apprentice (TMA)
 feature-img: "assets/img/portfolio/tma.png"
 img: "assets/img/portfolio/tma.png"
 date: September 2014
