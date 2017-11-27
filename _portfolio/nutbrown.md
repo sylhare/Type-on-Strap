@@ -4,7 +4,7 @@ title: Nutbrown.io
 img: "assets/img/portfolio/nutbrown-io.png"
 date: September 2014
 tags: [Nutbrown, Stephen Nutbrown, Blog]
-order: 4
+order: 6
 ---
 
 ![image]({{ site.baseurl }}/{{ page.img }})
