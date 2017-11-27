@@ -1,13 +1,19 @@
 ---
 layout: post
-title: Circus
+title: Nutbrown.io
 img: "assets/img/portfolio/nutbrown-io.png"
 date: September 2014
-tags: [Ipsum]
+tags: [Nutbrown, Stephen Nutbrown, Blog]
 order: 4
 ---
 
 ![image]({{ site.baseurl }}/{{ page.img }})
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem <a>quia voluptas sit aspernatur</a> aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius <a>modi tempora incidunt</a> ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+This is my blog! You can read a bit more about the technical decisions for how it is hosted [here](https://nutbrown.io/2017/11/19/static-website.html).
+Tech stack:
+- S3 bucket for static content
+- Codebuild for building static content from Jekyll
+- Cloudfront distribution for performance and SSL.
+- Route53 used for domain with Alias records to cloudfront
+- [Github for the codebase](https://github.com/NutterzUK/nutbrown) (Feel free to make a PR!).
 
