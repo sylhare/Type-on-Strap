@@ -2,15 +2,16 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "0.1.0"
+  spec.version       = "0.1.1"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["", "hellorohan@outlook.com"]
 
-  spec.summary       = %q{A custom Type Theme template (a free and open-source Jekyll theme. Great for blogs and easy to customize.)}
+  spec.summary       =  "A simple and responsive jekyll theme template"
+  spec.description   = %q{A custom Type Theme template (a free and open-source Jekyll theme. Great for blogs, easy to customize and responsive.}
   spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
   spec.license       = "MIT"
 
-  spec.files         = Dir.glob("**/pages/*.{html,json}") +
+  spec.files         = Dir.glob("pages/*.{html,json}") +
                        Dir.glob("**/{*,.*}").select do |f|
     f.match(%r{^(assets|_(includes|layouts|sass)/|(LICENSE|README)((\.(txt|md|markdown)|$)))}i)
   end
