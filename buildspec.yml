@@ -14,7 +14,7 @@ phases:
       - bundle exec jekyll build
       - echo "******** Uploading to S3 ********"
       - echo "******** Assets with cache control first ********"
-      - aws s3 sync _site/ s3://nutbrown.io --exclude "*" --include "*.css" --include "*.png" --include "*.jpeg" --include "*.js" --include "*.PNG" --cache-control max-age=86400
+      - aws s3 sync _site/ s3://nutbrown.io --exclude "*" --include "*.css" --include "*.png" --include "*.jpeg" --include "*.js" --include "*.PNG" --cache-control max-age=604800
       - echo "******** Everything Else ********"
       - aws s3 sync --delete _site/ s3://nutbrown.io
       
