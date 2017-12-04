@@ -13,7 +13,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 > [Demo](https://sylhare.github.io/Type-on-Strap/)
  
-[![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)](https://sylhare.github.io/Type-on-Strap/)
+[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/feature-page/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
 ## Table of Contents
 
