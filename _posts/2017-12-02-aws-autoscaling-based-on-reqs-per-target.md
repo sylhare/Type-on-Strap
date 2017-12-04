@@ -91,7 +91,7 @@ echo "</html>" >> index.html
 - Here you can type in the name of the security group you attached to the load balancer. If you followed the example, it will be "ApacheLoadBalancerSecurityGroup". 
 - Select review. It will look like this:
 
-![image]({{ site.baseurl }}/assets/img/posts/autoscaling/launch-config-review.png)
+![image]({{ site.baseurl }}/assets/img/posts/autoscaling/launch-config-review.PNG)
 
 - Proceed without a key pair, since we don't need to remotely log in to any of the individual servers (And we shouldn't, as any servers we create should be the same so we should not have to manually tinker with them).
 
@@ -108,7 +108,7 @@ Lets create the auto scaling group - from the review page from the launch config
 - Press next, configure any notifications you want and press next again to configure tags.
 - Press "review", it should look like this:
 
-![image]({{ site.baseurl }}/assets/img/posts/autoscaling/asg-review.png)
+![image]({{ site.baseurl }}/assets/img/posts/autoscaling/asg-review.PNG)
 
 #### Testing
 
@@ -117,14 +117,14 @@ We can verify that everything is working by sending requests to our load balance
 - Click on Load Balancers and copy the DNS name for your load balancer, it should look like this: "ApacheLoadBalancer-282713871.eu-west-1.elb.amazonaws.com".
 - Enter this into your browser and you should see your page:
 
-![image]({{ site.baseurl }}/assets/img/posts/autoscaling/hello-world.png)
+![image]({{ site.baseurl }}/assets/img/posts/autoscaling/hello-world.PNG)
 
 You can monitor the request count per target by selecting "Target Groups", then selecting "Monitoring". 
 
-![image]({{ site.baseurl }}/assets/img/posts/autoscaling/request-per-target.png)
+![image]({{ site.baseurl }}/assets/img/posts/autoscaling/request-per-target.PNG)
 
 Finally, send some traffic to your instance to cause the "Request Count Per Target" to increase; then watch as EC2 instances are started in the "Instances" section. You can send a lot of traffic for free by using https://loadimpact.com/ and entering in the address of your load balancer. It may take a few minutes for servers to begin spinning up.
-![image]({{ site.baseurl }}/assets/img/posts/autoscaling/auto-scaling.png)
+![image]({{ site.baseurl }}/assets/img/posts/autoscaling/auto-scaling.PNG)
 
 #### Clean-up
 
