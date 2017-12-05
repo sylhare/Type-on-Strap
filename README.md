@@ -1,4 +1,4 @@
-# Type on Strap
+# Type on Strap [![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=gh-pages)](https://travis-ci.org/Sylhare/Type-on-Strap)
 
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
 
@@ -13,7 +13,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 > [Demo](https://sylhare.github.io/Type-on-Strap/)
  
-[![Default Type on Strap blog](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/dev/screenshot.png)](https://sylhare.github.io/Type-on-Strap/)
+[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
 ## Table of Contents
 
@@ -22,7 +22,8 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 3. [Configure Type on Strap](https://github.com/Sylhare/Type-on-Strap#configure-type-on-strap)
 4. [Layout](https://github.com/Sylhare/Type-on-Strap#layout)
 5. [Feature pages](https://github.com/Sylhare/Type-on-Strap#feature-pages)
-6. [License](https://github.com/Sylhare/Type-on-Strap#license)
+6. [Template as a Gem](https://github.com/Sylhare/Type-on-Strap#Template-as-a-Gem)
+7. [License](https://github.com/Sylhare/Type-on-Strap#license)
 
 ## Usage
 
@@ -256,19 +257,25 @@ This layout includes the head, navigation bar and footer around your content.
 
 ## Feature pages
 
-All feature pages are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
+All feature pages besides the "home" one are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
 
 Here are the documentation for the other feature pages that can be added through `_config.yml`.
+
+### Home
+
+This page is the used as the home page of the template (in the `index.html`). It displays the list of article in `_posts`.
+You can use this layout in another page (adding a title to it will make it appear in the navigation bar).
 
 ### Portfolio
 
 Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
 
-The portfolio page can be enable/disable through the `_config.yml` via:
+The portfolio page can be enable/disable in the navigation bar through the `_config.yml` via:
 ```yml
 # Scripts / Feature
   portfolio: true
 ```
+
 ### Search
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
@@ -276,7 +283,7 @@ The search feature is based on [Simple-Jekyll-search](https://github.com/christi
 Then there's a `search.js` displaying the formated results entered in the `search.html` page. 
 
 
-The search page can be enable/disable through the `_config.yml` via:
+The search page can be enable/disable in the navigation bar through the `_config.yml` via:
 ```yml
 # Scripts / Feature
   search: true
@@ -299,12 +306,23 @@ tags: [sample, markdown, html]
 > Tags are case sensitive `Tag_nAme` ≠ `tag_name`
 
 All the tags will be listed in `tags.html` with a link toward the pages or posts.
-The tags page can be enable/disable through the `_config.yml` via:
+The tags page can be enable/disable in the navigation bar through the `_config.yml` via:
 
 ```yml
 # Scripts / Feature
   tags: true
 ```
+
+## Template as a Gem
+
+You can use Type-on-strap as a gem. Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
+To make the feature pages available in from the gem I created them as layouts that can be invoked in the pages folder.
+
+So if you're using the template as a theme:
+  - Make sure you have a `index.html`
+  - The right `_config.yml` with the theme setting such as `theme: type-on-strap` uncommented
+  - You have included the feature page (using layout or include as it is already in `pages`)
+  - You have your content ready in `_posts` and `_portfolio`
 
 ## License
 
