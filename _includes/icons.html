@@ -108,6 +108,17 @@
 </li>
 {% endif %}
 
+{% if site.theme_settings.keybase %}
+<li>
+	<a href="http://keybase.io/{{ site.theme_settings.keybase }}" title="{{ site.theme_settings.str_follow_on }} Keybase">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-key fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+{% endif %}
+
 {% if site.theme_settings.linkedin %}
 <li>
 	<a href="{{ site.theme_settings.linkedin }}" title="{{ site.theme_settings.str_follow_on }} LinkedIn">
