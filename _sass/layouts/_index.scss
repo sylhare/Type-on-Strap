@@ -25,10 +25,13 @@
         @extend .header-txt-shadow;
     }
     
+    p:last-child {
+    margin-bottom: 0;
+    }
 }
 
-.call-out p:last-child {
-    margin-bottom: 0;
+#main {
+    background-position: 100% 0px, 0% center, center top;
 }
 
 // Post listing
