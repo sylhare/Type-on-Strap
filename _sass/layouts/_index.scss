@@ -15,10 +15,10 @@
         background-size: $feature-image-size;
     }
     
-    /* --- Responsive ---*/
+    /* --- Responsive ---
     @media screen and (max-width: 850px) {
-        background-size: auto 150%;
-    }
+        background-size: 150% contain;
+    }*/
     
     //For white images
     p, a, li, h1, h2, h3, h4, h5 {
@@ -26,7 +26,7 @@
     }
     
     p:last-child {
-    margin-bottom: 0;
+        margin-bottom: 0;
     }
 }
 
