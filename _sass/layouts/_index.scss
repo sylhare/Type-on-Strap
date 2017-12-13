@@ -17,8 +17,9 @@
     
     /* --- Responsive ---
     @media screen and (max-width: 850px) {
-        background-size: 150% contain;
-    }*/
+        background-size: auto 150%;
+    }
+    */
     
     //For white images
     p, a, li, h1, h2, h3, h4, h5 {
@@ -26,7 +27,7 @@
     }
     
     p:last-child {
-        margin-bottom: 0;
+    margin-bottom: 0;
     }
 }
 
