@@ -315,14 +315,16 @@ The tags page can be enable/disable in the navigation bar through the `_config.y
 
 ## Template as a Gem
 
-You can use Type-on-strap as a gem. Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
+You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
 To make the feature pages available in from the gem I created them as layouts that can be invoked in the pages folder.
 
-So if you're using the template as a theme:
-  - Make sure you have a `index.html`
+So if you're using the template as a theme, Make sure you have:
+  - A `index.html` file
   - The right `_config.yml` with the theme setting such as `theme: type-on-strap` uncommented
-  - You have included the feature page (using layout or include as it is already in `pages`)
-  - You have your content ready in `_posts` and `_portfolio`
+  - The feature page included. (ex: as it is already in `pages`)
+  - Some content ready in `_posts` and `_portfolio` to be displayed
+
+Now you can use any theme gem with github pages : [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages)
 
 ## License
 
