@@ -12,7 +12,7 @@ theme_settings:
   description: "A website with blog posts and pages" # used by search engines
 
   # Header and footer text
-  header_text: >
+  header_text: > #two or three lines to describe your site
      <p>Change header text in <code>_config.yml</code> to disable this feature.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
