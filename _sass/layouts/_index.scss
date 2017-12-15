@@ -1,7 +1,6 @@
 // Header text feature
 .call-out {
     @extend %padding-regular;
-    object-fit: cover;
     display: inline-block;
     width: 100%;
     height: 100%;
@@ -10,23 +9,20 @@
     text-align: center;
     color: $header-desc-text-color;
     background-repeat: no-repeat;
+    background-size: $feature-image-size;
     
-    @media (min-width: $break) {
-        background-size: $feature-image-size;
-    }
-    
-    /* --- Responsive ---
+    /* --- Responsive --- */
     @media screen and (max-width: 850px) {
-        background-size: auto 150%;
+        background-size: 100% auto;
     }
-    */
+    
     //For white images
     p, a, li, h1, h2, h3, h4, h5 {
         @extend .header-txt-shadow;
     }
     
     p:last-child {
-    margin-bottom: 0;
+        margin-bottom: 0;
     }
 }
 
