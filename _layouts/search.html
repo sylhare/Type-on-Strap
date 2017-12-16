@@ -25,7 +25,7 @@ layout: page
                           "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
                           "url"      : "{{ site.baseurl }}{{ post.url }}",
                           "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
-                          "content"  : "{{ post.content | strip_html | strip_newlines }}"
+                          "content"  : "{{ post.content | strip_html | strip_newlines | replace: '"', '\\"' }}"
                         } {% unless forloop.last %},{% endunless %}
                      {% endfor %},
                      {% for page in site.portfolio %}
@@ -36,7 +36,7 @@ layout: page
                             "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
                             "url"      : "{{ site.baseurl }}{{ page.url }}",
                             "date"     : "{{ page.date | date: "%B %-d, %Y" }}",
-                            "content"  : "{{ page.content | strip_html | strip_newlines }}"
+                            "content"  : "{{ page.content | strip_html | strip_newlines | replace: '"', '\\"' }}"
                          {% endif %}
                        } {% unless forloop.last %},{% endunless %}
                      {% endfor %}
