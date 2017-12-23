@@ -149,8 +149,6 @@ a {
     text-decoration: none;
 }
 
-/* ---- Responsive ---- */
-
 iframe,
 img,
 embed,
@@ -167,6 +165,8 @@ img[align=left] {
 img[align=right] {
     margin-left: 3%;
 }
+
+/* ---- Responsive ---- */
 
 @media screen and (max-width: $sm-break) {
     h1 {
