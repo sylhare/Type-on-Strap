@@ -5,7 +5,7 @@ url: "https://NotTrying.github.io"
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: le blog
+  title: NotTrying
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
@@ -27,7 +27,7 @@ theme_settings:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "nottrying"
   google_plus:
   instagram:
   keybase:
