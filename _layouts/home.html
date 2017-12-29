@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+<script src="{{ site.baseurl }}/_includes/marked.js"></script>
 <div class="home">
   {% if site.theme_settings.header_text %}
   <div id="main" class="call-out"
@@ -30,7 +30,9 @@ layout: default
             </p>
           </header>
           <div class="excerpt">
-            {{ post.content | strip_html | truncate: "250" }}
+            <div id="post_content" class="excerpt">
+              {{ post.content | strip_html | truncate: "250" }}
+            </div>
             <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
               {{ site.theme_settings.str_continue_reading }}
             </a>-->
@@ -57,3 +59,6 @@ layout: default
   </div>
   {% endif %}
 </div>
+<script>
+  document.getElementById('post_content').innerHTML = (marked(document.getElementById("results").innerHTML));
+</script>
