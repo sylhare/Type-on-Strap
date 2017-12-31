@@ -21,7 +21,7 @@ layout: page
                      {% for post in site.posts %}
                         {
                           "title"    : "{{ post.title | escape }}",
-                          "category" : "{{ post.content | strip_html | strip_newlines | truncatewords: 25 }}",
+                          "category" : "{{ post.category }}",
                           "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
                           "url"      : "{{ site.baseurl }}{{ post.url }}",
                           "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
@@ -32,7 +32,7 @@ layout: page
                        {
                          {% if page.title != nil %}
                             "title"    : "{{ page.title | escape }}",
-                            "category" : "{{ page.content | strip_html | strip_newlines | truncatewords: 25 }}",
+                            "category" : "{{ page.category }}",
                             "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
                             "url"      : "{{ site.baseurl }}{{ page.url }}",
                             "date"     : "{{ page.date | date: "%B %-d, %Y" }}",
