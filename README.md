@@ -1,4 +1,4 @@
-# Type on Strap [![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=gh-pages)](https://travis-ci.org/Sylhare/Type-on-Strap)
+# Type on Strap [![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/Sylhare/Type-on-Strap)
 
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
 
