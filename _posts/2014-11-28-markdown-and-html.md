@@ -15,7 +15,7 @@ Content Cell  | Content Cell
 
 Here's an example of an image, which is included using Markdown:
 
-![Geometric pattern with fading gradient]({{ site.baseurl }}/assets/img/sample2.png)
+![Image of a glass on a book]({{ site.baseurl }}/assets/img/pexels/book-glass.jpeg)
 
 Highlighting for code in Jekyll is done using Pygments or Rouge. This theme makes use of Rouge by default.
 
@@ -38,3 +38,9 @@ Type on Strap uses KaTeX to display maths. Equations such as $$S_n = a \times \f
 Alternatively, they can be shown on a new line:
 
 $$ f(x) = \int \frac{2x^2+4x+6}{x-2} $$
+
+Another example of higlighted text:
+
+{% highlight terminal %}
+Init4 = AT+CGDCONT=1,"IP","internetmas","",0,0
+{% endhighlight %}
