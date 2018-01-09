@@ -5,7 +5,7 @@ url: "https://gooLim.github.io"
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Local, 모각코
+  title: gooLim 모여서 각자 코딩하기 
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
@@ -13,8 +13,7 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <h1>모여서 각자 코딩하기(Local)<h1>
-     <p>gooLim of Local group <p>
+     <h1>모여서 각자 코딩하기(gooLim, Local)<h1>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
  
