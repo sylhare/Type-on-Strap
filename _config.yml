@@ -13,7 +13,8 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <h1>모여서 각자 코딩하기(gooLim, Local)<h1>
+     <h1>모여서 각자 코딩하기</h1>
+     <h2>(gooLim, Local)</h2>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
  
