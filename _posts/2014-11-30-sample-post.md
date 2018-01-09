@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sample post
+title: 목표 및 회차별 계획
 ---
 <br>
 <br>
@@ -9,6 +9,7 @@ title: Sample post
 ## 목표
 * '이것이 리눅스다'라는 인프런 강의와 책을 통해 CentOS를 익히고 리눅스 서버와 네트워크 구축해보는 것을 목표로 한다.
 <br>
+
 ### 인프런
 * '이것이 리눅스다' 저자의 Red Hat CentOS7 리눅스 서버&네트워크 강좌
 <br>
