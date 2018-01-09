@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
   spec.version       = "0.3.0"
   spec.authors       = ["Sylhare","Rohan Chandra"]
-  spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
+  spec.email         = ["", "hellorohan@outlook.com"]
 
   spec.summary       =  "A simple and responsive jekyll theme template"
   spec.description   = %q{A custom Type Theme template (a free and open-source Jekyll theme). Great for blogs, easy to customize and responsive.}
@@ -23,5 +23,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
-
 end
