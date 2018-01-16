@@ -7,7 +7,11 @@ $font-family-headings: 'Source Sans Pro',
 Helvetica,
 Arial,
 sans-serif;
+$monospace: Monaco, Consolas, "Lucida Console", monospace !default;
 $font-size: 1.25em;
+
+$type-size-6: 0.75em !default; // ~12px
+$border-radius: 4px !default;
 
 // Padding
 $padding-large: 20%;
@@ -18,6 +22,7 @@ $padding-x-small: 3%;
 $brand-color: #fff;
 $background-color: #fff;
 $border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
+
 // Typography colours
 $text-color: #383838;
 $link-color: #507492; // #1ABC9C;
@@ -42,3 +47,21 @@ $header-desc-text-color: #FFF;
 // Mobile display
 $break: 768px;
 $sm-break: 450px;
+
+// syntax highlighting (base16)
+$base00: #263238 !default;
+$base01: #2e3c43 !default;
+$base02: #314549 !default;
+$base03: #546e7a !default;
+$base04: #b2ccd6 !default;
+$base05: #eeffff !default;
+$base06: #eeffff !default;
+$base07: #ffffff !default;
+$base08: #f07178 !default;
+$base09: #f78c6c !default;
+$base0a: #ffcb6b !default;
+$base0b: #c3e88d !default;
+$base0c: #89ddff !default;
+$base0d: #82aaff !default;
+$base0e: #c792ea !default;
+$base0f: #ff5370 !default;

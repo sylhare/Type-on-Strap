@@ -39,8 +39,12 @@ Alternatively, they can be shown on a new line:
 
 $$ f(x) = \int \frac{2x^2+4x+6}{x-2} $$
 
-Another example of higlighted text:
+Another example of code text:
 
-{% highlight terminal %}
-Init4 = AT+CGDCONT=1,"IP","internetmas","",0,0
-{% endhighlight %}
+```python
+def add(x, y):
+    """ Make an addition """
+    return x + y
+    
+add(2, 3)
+```

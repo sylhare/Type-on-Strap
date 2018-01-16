@@ -14,3 +14,4 @@ _development_tool
 
 Gemfile.lock
 *.gem
+.DS_Store
