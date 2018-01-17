@@ -1,12 +1,6 @@
 // Typography
-$font-family-main: 'Source Sans Pro',
-Helvetica,
-Arial,
-sans-serif;
-$font-family-headings: 'Source Sans Pro',
-Helvetica,
-Arial,
-sans-serif;
+$font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+$font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
 
@@ -49,12 +43,12 @@ $sm-break: 450px;
 /*  Syntax highlighting  */
 // Syntax typography
 $monospace: Monaco, Consolas, "Lucida Console", monospace !default;
-$type-size-6: 0.75em !default; // ~12px
+$font-size-code: 0.75em !default; // ~12px
 $border-radius: 4px !default;
 
-//#f78c6c
 
-// base16 https://github.com/chriskempson/base16/blob/master/styling.md
+
+// base16 Material Theme
 $base00: #263238 !default;  // Default Background
 $base01: #2E3C43 !default;  // Lighter Background (Used for status bars)
 $base02: #314549 !default;  // Selection Background
