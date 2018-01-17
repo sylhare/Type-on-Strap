@@ -7,11 +7,8 @@ $font-family-headings: 'Source Sans Pro',
 Helvetica,
 Arial,
 sans-serif;
-$monospace: Monaco, Consolas, "Lucida Console", monospace !default;
 $font-size: 1.25em;
 
-$type-size-6: 0.75em !default; // ~12px
-$border-radius: 4px !default;
 
 // Padding
 $padding-large: 20%;
@@ -48,20 +45,34 @@ $header-desc-text-color: #FFF;
 $break: 768px;
 $sm-break: 450px;
 
-// syntax highlighting (base16)
-$base00: #263238 !default;
-$base01: #2e3c43 !default;
-$base02: #314549 !default;
-$base03: #546e7a !default;
-$base04: #b2ccd6 !default;
-$base05: #eeffff !default;
-$base06: #eeffff !default;
-$base07: #ffffff !default;
-$base08: #f07178 !default;
-$base09: #f78c6c !default;
-$base0a: #ffcb6b !default;
-$base0b: #c3e88d !default;
-$base0c: #89ddff !default;
-$base0d: #82aaff !default;
-$base0e: #c792ea !default;
-$base0f: #ff5370 !default;
+
+/*  Syntax highlighting  */
+// Syntax typography
+$monospace: Monaco, Consolas, "Lucida Console", monospace !default;
+$type-size-6: 0.75em !default; // ~12px
+$border-radius: 4px !default;
+
+//#f78c6c
+
+// base16 https://github.com/chriskempson/base16/blob/master/styling.md
+$base00: #263238 !default;  // Default Background
+$base01: #2E3C43 !default;  // Lighter Background (Used for status bars)
+$base02: #314549 !default;  // Selection Background
+$base03: #546E7A !default;  // Comments, Invisibles, Line Highlighting
+$base04: #B2CCD6 !default;  // Dark Foreground (Used for status bars)
+$base05: #EEFFFF !default;  // Default Foreground, Caret, Delimiters, Operators
+$base06: #EEFFFF !default;  // Light Foreground (Not often used)
+$base07: #FFFFFF !default;  // Light Background (Not often used)
+$base08: #F07178 !default;  // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+$base09: #F78C6C !default;  // Integers, Boolean, Constants, XML Attributes, Markup Link Url
+$base0a: #FFCB6B !default;  // Classes, Markup Bold, Search Text Background
+$base0b: #98C379 !default;  // Strings, Inherited Class, Markup Code, Diff Inserted
+$base0c: #89DDFF !default;  // Support, Regular Expressions, Escape Characters, Markup Quotes
+$base0d: #82AAFF !default;  // Functions, Methods, Attribute IDs, Headings
+$base0e: #C792EA !default;  // Keywords, Storage, Selector, Markup Italic, Diff Changed
+$base0f: #FF5370 !default;  // Deprecated, Opening/Closing Embedded Language Tags e.g.
+
+
+
+
+
