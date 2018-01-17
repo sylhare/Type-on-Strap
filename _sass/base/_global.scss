@@ -124,10 +124,15 @@ dl,
 }
 
 // Lists within lists
-li > ul,
-li > ol {
-    margin-bottom: 0;
-    margin-left: 1em;
+li {
+    p {
+        display: inline;
+    }
+    & > ul,
+    & > ol {
+        margin-bottom: 0;
+        margin-left: 1em;
+    }
 }
 
 ol,
