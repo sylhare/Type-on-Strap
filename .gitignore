@@ -1,3 +1,6 @@
+# Mac files
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 *.manifest
 *.spec
@@ -14,3 +17,4 @@ _development_tool
 
 Gemfile.lock
 *.gem
+.DS_Store
