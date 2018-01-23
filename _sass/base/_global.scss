@@ -95,9 +95,7 @@ th {
 
 table,
 dl,
-code,
 kbd,
-pre,
 samp {
     margin: 1em 0;
 }
@@ -126,10 +124,15 @@ dl,
 }
 
 // Lists within lists
-li > ul,
-li > ol {
-    margin-bottom: 0;
-    margin-left: 1em;
+li {
+    p {
+        display: inline;
+    }
+    & > ul,
+    & > ol {
+        margin-bottom: 0;
+        margin-left: 1em;
+    }
 }
 
 ol,
@@ -182,8 +185,7 @@ img[align=right] {
         font-size: 0.75em;
     }
     p,
-    li,
-    code {
+    li {
         font-size: 0.75em;
     }
 }
