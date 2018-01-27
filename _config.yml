@@ -9,6 +9,7 @@ theme_settings:
   favicon: 
   gravatar: # Email MD5 hash
   description: "El blog de Talpio" # used by search engines
+  disqus_shortname: my_disqus_shortname
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
