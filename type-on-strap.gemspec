@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       =  "A simple and responsive jekyll theme template"
   spec.description   = %q{A custom Type Theme template (a free and open-source Jekyll theme). Great for blogs, easy to customize and responsive.}
-  spec.homepage      = "https://github.com/talpio/Type-on-Strap"
+  spec.homepage      = "https://github.com/Talpio/talpio.github.io"
   spec.license       = "MIT"
 
   spec.files         = Dir.glob("**/{*,.*}").select do |f|
