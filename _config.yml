@@ -4,7 +4,7 @@ url: "https://talpio.github.io"
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap
+  title: Talpio Blog
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
@@ -26,7 +26,7 @@ theme_settings:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "Talpio"
   google_plus:
   instagram:
   keybase:
@@ -37,7 +37,7 @@ theme_settings:
   stack_exchange:  # Full URL
   steam:
   tumblr:
-  twitter: # "twitter username"
+  twitter: "Talpio"
   vimeo:
   wordpress:
   youtube:
