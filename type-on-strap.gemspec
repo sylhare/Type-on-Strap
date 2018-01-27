@@ -3,12 +3,12 @@
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
   spec.version       = "0.3.0"
-  spec.authors       = ["Sylhare","Rohan Chandra"]
-  spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
+  spec.authors       = ["Talpio","Jesus Delgado"]
+  spec.email         = ["sylhare@outlook.com", "talpio@gmail.com"]
 
   spec.summary       =  "A simple and responsive jekyll theme template"
   spec.description   = %q{A custom Type Theme template (a free and open-source Jekyll theme). Great for blogs, easy to customize and responsive.}
-  spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
+  spec.homepage      = "https://github.com/talpio/Type-on-Strap"
   spec.license       = "MIT"
 
   spec.files         = Dir.glob("**/{*,.*}").select do |f|
