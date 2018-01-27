@@ -2,9 +2,9 @@
     @extend %padding-regular;
     display: inline-block;
     text-align: center;
-    width: 50%;
-    color: lighten($text-color, 30%);
-    font-size: 0.9em;
+    width: 100%;
+    color: lighten($text-color, 50%);
+    font-size: 0.7em;
 
     .footer-icons {
         ul {
