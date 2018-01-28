@@ -3,7 +3,7 @@ layout: page
 title: Acerca
 permalink: /acerca/
 feature-img: "assets/img/pexels/circuit.jpeg"
-tags: [About, Test]
+tags: [Acerca]
 ---
 
 Type on Strap es basado en Type Theme, un tema de código abierto y libre para [Jekyll](http://jekyllrb.com/), bajo la licencia de MIT.
