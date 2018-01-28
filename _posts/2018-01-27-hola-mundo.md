@@ -3,8 +3,7 @@ layout: post
 author: Talpio
 title: ¡Hola, mundo!
 feature-img: "assets/img/pexels/computer2.jpeg"
-thumbnail: "assets/img/thumbnails/desk-messy.jpeg"
+thumbnail: "assets/img/thumbnails/computer2.jpeg"
 tags: [Nuevo]
 ---
-This is an example of a post which includes a feature image specified in the front matter of the post. The feature image spans the full-width of the page, and is shown with the title on permalink pages.
-
+Este es un ejemplo de una publicación que incluye una imagen de función especificada en el material principal de la publicación. La imagen característica abarca el ancho completo de la página, y se muestra con el título en las páginas de enlace permanente.
