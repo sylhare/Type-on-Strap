@@ -1,14 +1,14 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Acerca
+permalink: /acerca/
 feature-img: "assets/img/pexels/circuit.jpeg"
 tags: [About, Test]
 ---
 
-Type on Strap is based on Type Theme, a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
+Type on Strap es basado en Type Theme, un tema de código abierto y libre para [Jekyll](http://jekyllrb.com/), bajo la licencia de MIT.
 
-Head over to the [theme's documentation](https://github.io/sylhare/Type-on-Strap) for much more information about Type on Strap or to install this theme on your own Jekyll site.
+Dirígete a la [documentación del tema](https://github.io/sylhare/Type-on-Strap) para obtener más información sobre Type on Strap o para instalar este tema en tu propio sitio Jekyll.
 
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
+Este archivo es un ejemplo de una página en Jekyll, que aparece automáticamente en la navegación del encabezado, usted puede eliminar o modificar este archivo libremente.
  
