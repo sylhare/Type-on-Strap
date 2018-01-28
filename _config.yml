@@ -49,7 +49,7 @@ theme_settings:
   katex: true # Enable if using math markup
   portfolio: false
   search: true
-  tags: true
+  tags: false
   
   
   # Localization strings
