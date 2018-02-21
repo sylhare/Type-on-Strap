@@ -151,7 +151,7 @@ Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-A
 
 ```yml
   theme_settings:
-     rss: true
+     rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
      email_address: type@example.com
      linkedin: ttps://www.linkedin.com/in/FirstLast
      stack_exchange: https://stackoverflow.com/users/0000/first-last
