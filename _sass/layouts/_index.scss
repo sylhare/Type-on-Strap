@@ -4,11 +4,10 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    background-color: $header-desc-background-color;
     font-size: 1.2em;
     text-align: center;
     color: $header-desc-text-color;
-    background-repeat: no-repeat;
+    background: $header-desc-background-color no-repeat;
     background-size: $feature-image-size;
 
     /* --- Responsive --- */
