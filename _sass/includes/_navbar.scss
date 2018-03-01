@@ -5,6 +5,15 @@
     float: left;
     width: 100%;
 
+    .separator {
+        user-select: none;
+        opacity: $navbar-separator-opacity;
+
+        &:first-child {
+            display: none;
+        }
+    }
+
     a {
         color: $header-link-color;
     }
@@ -96,6 +105,10 @@
 
     nav {
         height: auto;
+
+        .separator {
+            display: none !important;
+        }
 
         ul {
             width: 100%;
