@@ -1,15 +1,15 @@
 # SITE CONFIGURATION
 baseurl: "/Type-on-Strap"
 url: "https://sylhare.github.io"
-
+title: Type on Strap # site's title
+description: "A website with blog posts and pages" # used by search engines
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap
+  title: Type on Strap # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-  description: "A website with blog posts and pages" # used by search engines
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
