@@ -33,7 +33,7 @@ figure.highlight {
         &.gutter,
         &.rouge-gutter {
             padding-right: 1em;
-            width: 1em;
+            width: 2em;
             color: $base04;
             border-right: 1px solid $base04;
             text-align: right
@@ -118,4 +118,9 @@ figure.highlight {
  .vg{ /* Name.Variable.Global */ color:$base08}
  .vi{ /* Name.Variable.Instance */ color:$base08}
  .il{ /* Literal.Number.Integer.Long */ color:$base09}
+}
+
+// Fix Github syntax display
+.gist .blob-num {
+    width: 3.5% !important;
 }
