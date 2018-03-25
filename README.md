@@ -204,6 +204,23 @@ $$
 $$
 ```
 
+### Post excerpt
+
+The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
+```yml
+---
+layout: post
+title: Sample Page
+excerpt_separator: <!--more-->
+---
+
+some text in the excerpt
+<!--more-->
+... rest of the text not shown in the excerpt ...
+```
+
+The html is stripped out of the excerpt so it only display text.
+
 ## Layout
 Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). Non-standard features are documented below.
 

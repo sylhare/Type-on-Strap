@@ -4,11 +4,9 @@ title: "Markup: Syntax Highlighting"
 tags: [code]
 ---
 
-From Michael's Rose Minimal Mistakes. [^2]
-Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. Highlighting does not affect the meaning of the text itself; it is intended only for human readers.[^1]
+From Michael's Rose [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/markup-syntax-highlighting).
+Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. [Highlighting](http://en.wikipedia.org/wiki/Syntax_highlighting) does not affect the meaning of the text itself; it is intended only for human readers.
 
-[^1]: <http://en.wikipedia.org/wiki/Syntax_highlighting>
-[^2]: <https://mmistakes.github.io/minimal-mistakes/markup-syntax-highlighting/>
 
 ### GFM Code Blocks
 
