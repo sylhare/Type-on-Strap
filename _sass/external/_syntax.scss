@@ -124,3 +124,54 @@ figure.highlight {
 .gist .blob-num {
     width: 3.5% !important;
 }
+
+// Fix nbconvert dataframe
+.dataframe tbody {
+    font-size: 0.8em;
+    border-color: white;
+
+    tr{
+        :nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        th {
+            border-top: 0;
+            border-left: 0;
+            border-bottom: 0;
+        }
+
+
+        td {
+            padding: 0;
+            border: 0;
+            text-align: center;
+        }
+    }
+    
+    
+}
+
+.dataframe thead tr {
+    :nth-child(n+2) {
+        color: black;
+        //width: 100px;
+        
+        font-size: 0.75em;
+        text-align: center !important;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+    
+    :first-child {
+        border-top: 0;
+        border-left: 0;
+    }
+    
+}
+
+table.dataframe {
+    border: 0px solid $border-color;
+    border-collapse: collapse;
+}
