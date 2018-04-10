@@ -80,10 +80,8 @@ table {
     table-layout: fixed;
     width: 100%;
     word-wrap: break-word;
-    @media (max-width: 1100px) {
-        overflow-x: scroll;
-        display: inline-block;
-    }
+    overflow-x: scroll;
+    display: inline-block;
 }
 
 td,

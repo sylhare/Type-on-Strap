@@ -1,15 +1,18 @@
-# Type on Strap [![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/Sylhare/Type-on-Strap)
+# Type on Strap 
+
+[![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/Sylhare/Type-on-Strap) 
+[![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
 
 * Responsive design
 * Portfolio page for your projects
-* Tags compability
+* Tags compatibility
 * Bootstrap : [Get Bootstrap](http://getbootstrap.com/)
 * Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
 * Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
-* Syntax Highlighting: Easily customable [Base16](https://github.com/chriskempson/base16)
+* Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
 > [Demo](https://sylhare.github.io/Type-on-Strap/)
@@ -19,7 +22,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 ## Table of Contents
 
 1. [Usage](https://github.com/Sylhare/Type-on-Strap#Usage)
-2. [Struture](https://github.com/Sylhare/Type-on-Strap#structure)
+2. [Structure](https://github.com/Sylhare/Type-on-Strap#structure)
 3. [Configure Type on Strap](https://github.com/Sylhare/Type-on-Strap#configure-type-on-strap)
 4. [Layout](https://github.com/Sylhare/Type-on-Strap#layout)
 5. [Feature pages](https://github.com/Sylhare/Type-on-Strap#feature-pages)
@@ -44,7 +47,7 @@ jekyll-theme-basically-basic
 ├── _draft	               # To store your drafts, they won't be published on your site
 ├── _includes	               # theme includes
 ├── _layouts                   # theme layouts (see below for details)
-├── _portofolio	               # collection of article to be populated in the portfolio page
+├── _portfolio	               # collection of article to be populated in the portfolio page
 ├── _posts                     # Blog posts
 ├── _sass                      # Sass partials 
 ├── assets
@@ -151,9 +154,9 @@ Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-A
 
 ```yml
   theme_settings:
-     rss: true
+     rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
      email_address: type@example.com
-     linkedin: ttps://www.linkedin.com/in/FirstLast
+     linkedin: https://www.linkedin.com/in/FirstLast
      stack_exchange: https://stackoverflow.com/users/0000/first-last
 ```
 
@@ -203,6 +206,23 @@ $$
   \bar{y} = {1 \over n} \sum_{i = 1}^{n}y_i
 $$
 ```
+
+### Post excerpt
+
+The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
+```yml
+---
+layout: post
+title: Sample Page
+excerpt_separator: <!--more-->
+---
+
+some text in the excerpt
+<!--more-->
+... rest of the text not shown in the excerpt ...
+```
+
+The html is stripped out of the excerpt so it only display text.
 
 ## Layout
 Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). Non-standard features are documented below.
