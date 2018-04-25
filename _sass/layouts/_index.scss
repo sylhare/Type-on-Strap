@@ -1,34 +1,39 @@
 // Header text feature
 .call-out {
     @extend %padding-regular;
-    object-fit: cover;
     display: inline-block;
     width: 100%;
     height: 100%;
-    background-color: $header-desc-background-color;
     font-size: 1.2em;
     text-align: center;
     color: $header-desc-text-color;
-    background-repeat: no-repeat;
-    
-    @media (min-width: $break) {
-        background-size: $feature-image-size;
-    }
-    
-    /* --- Responsive ---*/
+    background: $header-desc-background-color no-repeat;
+    background-size: $feature-image-size;
+
+    /* --- Responsive --- */
     @media screen and (max-width: 850px) {
-        background-size: auto 150%;
-    }
+        background-size: 100% auto;
+    } 
     
     //For white images
-    p, a, li, h1, h2, h3, h4, h5 {
+    p,
+    a,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
         @extend .header-txt-shadow;
     }
-    
+
+    p:last-child {
+        margin-bottom: 0;
+    }
 }
 
-.call-out p:last-child {
-    margin-bottom: 0;
+#main {
+    background-position: 100% 0, 0 center, center top;
 }
 
 // Post listing
@@ -45,19 +50,17 @@
         }
         img {
             padding: 0;
-            vertical-align: middle;          
+            vertical-align: middle;
         }
 
         .post-img {
             vertical-align: middle;
             border-radius: 25px;
             overflow: hidden;
-            
+
             @media (min-width: $break) {
                 height: 250px;
-            }
-            
-            //Smaller screen
+            } //Smaller screen
             @media screen and (max-width: $break) {
                 height: 150px;
             }
@@ -90,17 +93,18 @@
 }
 
 // Pagination
-.pagination .button {
-    margin: 0 1.5em;
-    i {
-        vertical-align: middle;
-    }
-}
-
 .pagination {
     padding: $padding-small $padding-large 0 $padding-large;
     text-align: center;
     @media (max-width: 600px) {
         padding: $padding-small;
     }
+
+    .button {
+        margin: 0 1.5em;
+        i {
+            vertical-align: middle;
+        }
+    }
+
 }

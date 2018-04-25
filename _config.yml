@@ -1,27 +1,27 @@
 # SITE CONFIGURATION
 baseurl: "/Type-on-Strap"
 url: "https://sylhare.github.io"
+title: Type on Strap # site's title
+description: "A website with blog posts and pages" # used by search engines
+
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap
+  title: Type on Strap # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-  description: "A website with blog posts and pages" # used by search engines
 
   # Header and footer text
-  header_text: >
-     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-     <p>Remove all header text in <code>_config.yml</code> to disable this feature.</p>
+  header_text: > #two or three lines to describe your site
+     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
-  rss: false
+  rss: true  # Make sure you created a feed.xml with feed.xml layout
   email_address: # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
@@ -32,6 +32,7 @@ theme_settings:
   github: "sylhare"
   google_plus:
   instagram:
+  keybase:
   linkedin:  # Full URL
   pinterest:
   reddit:
@@ -39,7 +40,8 @@ theme_settings:
   stack_exchange:  # Full URL
   steam:
   tumblr:
-  twitter: "twitter"
+  twitter: # "twitter username"
+  vimeo:
   wordpress:
   youtube:
 
@@ -50,7 +52,6 @@ theme_settings:
   portfolio: true
   search: true
   tags: true
-  
   
   # Localization strings
   str_follow_on: "Follow on"
@@ -68,17 +69,20 @@ theme_settings:
   google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
 
   # Post navigation
-  post_navigation: false
+  post_navigation: true
+  
 
 # PAGINATION
 paginate: 5
 paginate_path: "blog/page:num"
+
 
 # PORTFOLIO
 collections:
   portfolio:
     output: true
     permalink: /:collection/:name
+
 
 # BUILD SETTINGS
 markdown: kramdown
@@ -87,5 +91,5 @@ sass:
   sass_dir: _sass
   style: :compressed
 plugins: [jekyll-paginate, jekyll-seo-tag]
-#theme: type-on-strap # If using the theme as a jekyll theme gem
+#theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
 exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png"]
