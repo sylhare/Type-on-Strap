@@ -313,8 +313,10 @@ Then there's a `search.js` displaying the formated results entered in the `searc
 
 The search page can be enable/disable in the navigation bar through the `_config.yml` via:
 ```yml
-# Scripts / Feature
-  search: true
+special_page:
+    search: 
+      icon: "search"
+      enabled: true
 ```
 
 ### Tags
@@ -337,8 +339,10 @@ All the tags will be listed in `tags.html` with a link toward the pages or posts
 The tags page can be enable/disable in the navigation bar through the `_config.yml` via:
 
 ```yml
-# Scripts / Feature
-  tags: true
+special_page:
+    tags: 
+      icon: "search"
+      enabled: true
 ```
 
 ## Template as a Gem
