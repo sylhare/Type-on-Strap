@@ -289,12 +289,19 @@ You can use this layout in another page (adding a title to it will make it appea
 
 ### Portfolio
 
-Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
+Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
 
-The portfolio page can be enable/disable in the navigation bar through the `_config.yml` via:
+To use the portfolio, simply create a `portfolio.md` with this information inside:
 ```yml
-# Scripts / Feature
-  portfolio: true
+--- 
+layout: bootstrap 
+title : Portfolio 
+permalink: /portfolio/
+subtitle: "Projects I am working on" 
+feature-img: "assets/img/pexels/computer.jpeg"
+---
+
+{% include portfolio.html %}
 ```
 
 ### Search
