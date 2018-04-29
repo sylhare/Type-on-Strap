@@ -341,7 +341,7 @@ The tags page can be enable/disable in the navigation bar through the `_config.y
 ```yml
 special_page:
     tags: 
-      icon: "search"
+      icon: "tags"
       enabled: true
 ```
 

@@ -76,7 +76,7 @@ theme_settings:
   # Post navigation
   post_navigation: true
   
-
+  
 # PAGINATION
 paginate: 5
 paginate_path: "blog/page:num"
