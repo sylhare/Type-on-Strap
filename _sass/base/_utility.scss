@@ -16,6 +16,16 @@
     }
 }
 
+%padding-medium {
+    padding: $padding-medium $padding-large;
+    @media (max-width: 1000px) {
+        padding: $padding-medium * 1.5 $padding-large / 1.6;
+    }
+    @media (max-width: 576px) {
+        padding: $padding-medium;
+    }
+}
+
 .header-txt-shadow {
     text-shadow: 1px 1px 2px $text-shadow;
 }
