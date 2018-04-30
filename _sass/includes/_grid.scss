@@ -1,0 +1,50 @@
+/* ---- grid ---- */
+
+.grid {
+    padding-bottom: 6%;
+    padding-top: 1%;
+
+
+    /* clear fix */
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+/* ---- .grid-item within masonry ---- */
+
+.grid-sizer,
+.grid-item {
+    /* state column width */
+    width: 32.6%;
+}
+
+.grid-item {
+    float: left;
+    border-radius: 5px;
+
+
+    img {
+        /* for image formatting in the masonry */
+        display: block;
+        max-width: 100%;
+        min-height: 30%;
+    }
+}
+
+/* --- Masonry gutter size --- */
+
+.gutter-sizer {
+
+    width: 1%;
+}
+
+.grid-item:first-of-type {
+    margin: 0;
+}
+
+.grid-item {
+    margin-bottom: 1%;
+}

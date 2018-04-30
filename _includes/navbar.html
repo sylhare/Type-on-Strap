@@ -19,11 +19,10 @@
     
     <!-- Menu -->
     <ul>
+        <!-- Auto Generation of NORMAL pages in the navbar -->
         {% for page in site.pages %}
         {% if page.title and page.hide != true %}
-        <li class="separator">
-            |
-        </li>
+        <li class="separator"> | </li>
         <li>
             <a class="clear" href="{{ page.url | relative_url }}">
                 {{ page.title }}
@@ -31,36 +30,26 @@
         </li>
         {% endif %}
         {% endfor %} 
-        {% if site.theme_settings.portfolio %}
-        <li class="separator">
-            |
-        </li>
-        <li>
-            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/portfolio">
-                Portfolio
-            </a>
-        </li>
-        {% endif %}
-        {% if site.theme_settings.search %}
-        <li class="separator">
-            |
-        </li>
+        
+        <!-- Auto Generation of SPECIAL pages in the navbar -->
+        {% assign special_page = "" %}
+        
+        {% for item in site.theme_settings.special_page %}
+          {% if item[1] %}
+            {% assign special_page = item[0] | append: "," | append: special_page %}
+          {% endif %}
+        {% endfor %}
+
+        {% assign special_page_array = special_page | split: "," %}
+
+        {% for item in special_page_array %}
+        <li class="separator"> | </li>
         <li>
             <a class="clear" href="{{ site.url }}{{ site.baseurl }}/search">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <i class="fa fa-{{ item }}" aria-hidden="true"></i>
             </a>
         </li>
-        {% endif %}
-        {% if site.theme_settings.tags %}
-        <li class="separator">
-            |
-        </li>
-        <li>
-            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/tags">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-            </a>
-        </li>
-        {% endif %}
+        {% endfor %}
         
     </ul>
         

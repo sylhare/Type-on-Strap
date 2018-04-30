@@ -289,13 +289,32 @@ You can use this layout in another page (adding a title to it will make it appea
 
 ### Portfolio
 
-Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
+Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
 
-The portfolio page can be enable/disable in the navigation bar through the `_config.yml` via:
+To use the portfolio, simply create a `portfolio.md` with this information inside:
 ```yml
-# Scripts / Feature
-  portfolio: true
+--- 
+layout: bootstrap 
+title : Portfolio 
+---
+
+{% include portfolio.html %}
 ```
+
+### Gallery
+
+You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position based on available vertical space. You need to specify the `gallery_path` which will be used to find the pictures to render. It will take all of the picture under that directory. Then use the `include` to add it in your page. 
+
+```
+---
+layout: page
+title: Gallery
+gallery: "assets/img/pexels"
+---
+
+{% include gallery.html gallery_path=page.gallery %}
+```
+
 
 ### Search
 
@@ -306,8 +325,10 @@ Then there's a `search.js` displaying the formated results entered in the `searc
 
 The search page can be enable/disable in the navigation bar through the `_config.yml` via:
 ```yml
-# Scripts / Feature
-  search: true
+special_page:
+    search: 
+      icon: "search"
+      enabled: true
 ```
 
 ### Tags
@@ -330,8 +351,10 @@ All the tags will be listed in `tags.html` with a link toward the pages or posts
 The tags page can be enable/disable in the navigation bar through the `_config.yml` via:
 
 ```yml
-# Scripts / Feature
-  tags: true
+special_page:
+    tags: 
+      icon: "tags"
+      enabled: true
 ```
 
 ## Template as a Gem

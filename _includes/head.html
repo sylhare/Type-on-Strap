@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <!-- JQuery (used for bootstrap and jekyll search) -->
-    <script src="{{ site.baseurl }}/assets/js/jquery-3.2.1.min.js" ></script>
+    <script src="{{ site.baseurl }}/assets/js/vendor/jquery-3.2.1.min.js" ></script>
     
     <!-- Main JS (navbar.js and katex_init.js)-->
     <script defer=true src="{{ site.baseurl }}/assets/js/main.min.js"></script>
@@ -22,7 +22,7 @@
 
     <!-- Font Awesome -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/vendor/font-awesome.min.css">
 
     <!-- Google Fonts -->
     {% if site.theme_settings.google_fonts %}
@@ -31,10 +31,8 @@
 
     <!-- KaTeX 0.8.3 -->
     {% if site.theme_settings.katex %}
-    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/katex.min.css">
-    <script src="{{ site.baseurl }}/assets/js/katex.min.js">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/vendor/katex.min.css">
+    <script src="{{ site.baseurl }}/assets/js/vendor/katex.min.js">
     </script>
     {% endif %}
 
