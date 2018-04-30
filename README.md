@@ -296,13 +296,25 @@ To use the portfolio, simply create a `portfolio.md` with this information insid
 --- 
 layout: bootstrap 
 title : Portfolio 
-permalink: /portfolio/
-subtitle: "Projects I am working on" 
-feature-img: "assets/img/pexels/computer.jpeg"
 ---
 
 {% include portfolio.html %}
 ```
+
+### Gallery
+
+You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position based on available vertical space. You need to specify the `gallery_path` which will be used to find the pictures to render. It will take all of the picture under that directory. Then use the `include` to add it in your page. 
+
+```
+---
+layout: page
+title: Gallery
+gallery: "assets/img/pexels"
+---
+
+{% include gallery.html gallery_path=page.gallery %}
+```
+
 
 ### Search
 
