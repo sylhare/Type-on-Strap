@@ -69,22 +69,19 @@
 
         .post-img img {
             //max-width: 100%;
-            -moz-transform: scale(1);
-            -webkit-transform: scale(1);
-            transform: scale(1);
 
             -moz-transition-timing-function: ease-out;
             -webkit-transition-timing-function: ease-out;
             transition-timing-function: ease-out;
 
-            -moz-transition: all 5s;
-            -webkit-transition: all 5s;
-            transition: all 5s;
+            -moz-transition: all 2s;
+            -webkit-transition: all 2s;
+            transition: all 2s;
 
             &:hover {
-                -moz-transform: scale(1.3);
-                -webkit-transform: scale(1.3);
-                transform: scale(1.3);
+                -moz-transform: scale(1.1);
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
             }
         }
     }
