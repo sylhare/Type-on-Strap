@@ -32,25 +32,16 @@
         {% endfor %} 
         
         <!-- Auto Generation of SPECIAL pages in the navbar -->
-        {% assign special_page = "" %}
-        
         {% for item in site.theme_settings.special_page %}
-          {% if item[1] %}
-            {% assign special_page = item[0] | append: "," | append: special_page %}
+          {% if item[1].enabled %}
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
+                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
           {% endif %}
         {% endfor %}
-
-        {% assign special_page_array = special_page | split: "," %}
-
-        {% for item in special_page_array %}
-        <li class="separator"> | </li>
-        <li>
-            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/search">
-                <i class="fa fa-{{ item }}" aria-hidden="true"></i>
-            </a>
-        </li>
-        {% endfor %}
-        
     </ul>
         
 	</nav>
