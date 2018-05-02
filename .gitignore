@@ -19,3 +19,4 @@ _development_tool/*
 Gemfile.lock
 *.gem
 
+jekyll-theme-type-on-strap.gemspec
