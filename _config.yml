@@ -13,8 +13,7 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-     <p>A personal tech-themed blog, mostly featuring AWS cloud projects written in Java, Javascript, Python, Ruby, Groovy and whatever else is necessary <br/>(php is never necessary).</p>
-
+     <p>Stephen Nutbrown's personal tech-themed blog, mostly featuring AWS cloud projects written in a wide range of languages.</p>
      <p>Got an idea or improvement? Pull requests or bug reports are welcome <a href="https://github.com/NutterzUK/nutbrown">here</a>.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
@@ -47,7 +46,7 @@ theme_settings:
   google_analytics: "UA-55663428-6"
   disqus_shortname: "nutbrown-io"
   katex: false # Enable if using math markup
-  
+
   # Localization strings
   str_follow_on: "Follow on"
   str_rss_follow: "Follow RSS feed"
