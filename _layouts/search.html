@@ -16,34 +16,7 @@ layout: page
         SimpleJekyllSearch({
             searchInput: document.getElementById('search-input'),
             resultsContainer: document.getElementById('results-container'),
-            json: [
-                    {% if site.theme_settings.special_page.search.enabled %}
-                     {% for post in site.posts %}
-                        {
-                          "title"    : "{{ post.title | escape }}",
-                          "category" : "{{ post.category }}",
-                          "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
-                          "url"      : "{{ site.baseurl }}{{ post.url }}",
-                          "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
-                          "excerpt"  : "{{ post.content | strip_html | strip_newlines | escape | truncate: '250' }}",
-                          "content"  : "{{ post.content | strip_html | strip_newlines | escape }}"
-                        } {% unless forloop.last %},{% endunless %}
-                     {% endfor %},
-                     {% for page in site.portfolio %}
-                       {
-                         {% if page.title != nil %}
-                            "title"    : "{{ page.title | escape }}",
-                            "category" : "{{ page.category }}",
-                            "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
-                            "url"      : "{{ site.baseurl }}{{ page.url }}",
-                            "date"     : "{{ page.date | date: "%B %-d, %Y" }}",
-                            "excerpt"  : "{{ post.content | strip_html | strip_newlines | escape | truncate: '250' }}",
-                            "content"  : "{{ page.content | strip_html | strip_newlines | escape | truncate: '250'  }}"
-                         {% endif %}
-                       } {% unless forloop.last %},{% endunless %}
-                     {% endfor %}
-                    {% endif %}
-                  ],
+            json: '{{ site.baseurl }}/assets/data/search.json',
             searchResultTemplate: '<div class="search-title"><a href="{url}"><h3> {title}</h3></a><div class="meta">{date} <div class="right"><i class="fa fa-tag"></i> {tags}</div></div><p>{excerpt}</p></div><hr> ',
             noResultsText: 'No results found',
             limit: 10,
