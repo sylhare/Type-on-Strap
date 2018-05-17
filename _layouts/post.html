@@ -10,6 +10,9 @@ layout: default
     </p>
   </header>
   <section class="post-content">{{ content }}</section>
+  
+  <!-- Social media shares -->
+  {% include share_buttons.html %}
    
    <!-- Tag list -->
   {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
