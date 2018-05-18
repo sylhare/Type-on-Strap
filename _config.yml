@@ -44,6 +44,19 @@ theme_settings:
   vimeo:
   wordpress:
   youtube:
+  
+  # Sharing options
+  share_buttons:
+    facebook: true
+    twitter: true
+    google_plus: true
+    tumblr:
+    pinterest:
+    pocket:
+    reddit: true
+    linkedin:
+    wordpress:
+    email: true
 
   # Scripts / Features 
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
@@ -61,7 +74,11 @@ theme_settings:
   # Localization strings
   str_follow_on: "Follow on"
   str_rss_follow: "Follow RSS feed"
+  str_share_on: "Share on"
+  str_add_to: "Add to"
   str_email: "Email"
+  str_tweet: "Tweet"
+  str_pin_it: "Pin it"
   str_next_post: "Next post"
   str_previous_post: "Previous post"
   str_next_page: "Next"
