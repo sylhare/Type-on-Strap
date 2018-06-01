@@ -3,7 +3,7 @@
         <div class="meta">Share</div>
         {% if site.theme_settings.share_buttons.facebook %}
         <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | prepend: site.baseurl | prepend: site.url }}&quote={{ page.title }}%20%7C%20{{ site.title }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | prepend: site.baseurl | prepend: site.url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Facebook">
 			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">{{ site.theme_settings.str_share_on }} Facebook</span>
 		</a>
