@@ -1,24 +1,24 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://gmun.github.io"
-title: 신입사원:) # site's title
+title: NEW LEAF :) # site's title
 description: "gmun" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: 신입사원 # blog's title
+  title: NEW LEAF # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
+     <p>NEW LEAF :)<br></p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/gmun/Type-on-Strap">Type on Strap</a>
+   #Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/gmun/Type-on-Strap">Type on Strap</a>
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
