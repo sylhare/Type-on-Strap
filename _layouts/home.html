@@ -9,7 +9,7 @@ layout: default
     {{ site.theme_settings.header_text }}
   </div>
   {% endif %}
-
+	
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
@@ -20,14 +20,14 @@ layout: default
       {% endif %}
       <span>
           <header>
+            <p class="meta">
+              {{ post.date | date: "%B %-d, %Y" }}
+            </p>
             <h1>
               <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
                 {{ post.title }}
               </a>
             </h1>
-            <p class="meta">
-              {{ post.date | date: "%B %-d, %Y" }}
-            </p>
           </header>
           <div class="excerpt">
               {{ post.excerpt | strip_html | escape }}
