@@ -9,7 +9,7 @@ description: "gmun" # used by search engines
 theme_settings:
   # Meta
   title: NEW LEAF # blog's title
-  avatar: assets/img/triangle.svg
+  avatar: assets/img/marker.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
