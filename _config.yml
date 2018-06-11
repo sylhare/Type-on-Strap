@@ -1,14 +1,14 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://sylhare.github.io"
-title: :)개발자 # site's title
-description: "신입사원" # used by search engines
+title: 신입사원:) # site's title
+description: "gmun" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
+  title: 신입사원 # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
