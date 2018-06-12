@@ -1,41 +1,11 @@
-SOAP(Simple Object Access Protocol)
-================================
-Create Date : 2018.03.23
-================================
----
-# 목차
-## 1. SOAP란
+### SOAP(Simple Object Access Protocol)란
 
-## 2. SOAP 아키텍처
-
-## 3. SOAP의 특징
-
-## 4. SOAP 메시지의 구조
-
-#### 4.1. SOAP 헤더
-
-#### 4.2. SOAP 바디
-.
-## 5. SOAP의 전송방식
-
-## 6. 그 외 Remote Call
-
-## 7. WSDL to  Java
-#### 6.1. Eclipse Web Service Client
-#### 6.2. SoupUI를 이용한 WSDL Import
-
----
-
-## 1. SOAP란
-
-> **SOAP**(**S**imple **O**bject **A**ccess **P**rotocol)은</br>
-일반적으로 널리 알려진 HTTP, HTTPS, SMTP 등을 통해  XML 기반의 메시지를 </br>
-컴퓨터 네트워크 상에서 교환하는 <U>**프로토콜**</U>이다.</br>
-</br>
-SOAP는  <U>웹 서비스에서 기본적인 메시지를 전달하는 기반</U>이 된다.</br>
+> SOAP는
+일반적으로 널리 알려진 HTTP, HTTPS, SMTP 등을 통해  XML 기반의 메시지를
+컴퓨터 네트워크 상에서 교환하는 **프로토콜**이다.
 </br>
 SOAP에는 몇가지 형태의 메시지 패턴이 있지만,</br>
-보통의 경우 <U>원격 프로시져 호출(Remote Procedure Call:**RPC**) 패턴</U>으로,</br>
+보통의 경우 원격 프로시져 호출(Remote Procedure Call:**RPC**) 패턴으로,</br>
 네트워크 노드(클라이언트)에서 다른 쪽 노드(서버)쪽으로 메시지를 요청 하고,</br>
 서버는 메시지를 즉시 응답하게 된다.</br>
 >
