@@ -4,8 +4,7 @@ layout: default
 
 <div class="home">
   {% if site.theme_settings.header_text %}
-  <div id="main" class="call-out"
-  style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
+  <div id="main" class="call-out" style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
     {{ site.theme_settings.header_text }}
   </div>
   {% endif %}
@@ -35,6 +34,11 @@ layout: default
             <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
               {{ site.theme_settings.str_continue_reading }}
             </a>-->
+          </div>
+          
+          <div>
+          	{% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+  			{% include tags_list.html tags=tag_list %}
           </div>
       </span>
     </div>
