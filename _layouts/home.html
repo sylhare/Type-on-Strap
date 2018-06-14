@@ -36,7 +36,7 @@ layout: default
             </a>-->
           </div>
           
-          <div>
+          <div class="post-tags">
           	{% capture tag_list %}{{ post.tags | join: "|"}}
           	{% endcapture %}
   			{% include tags_list.html tags=tag_list %}
