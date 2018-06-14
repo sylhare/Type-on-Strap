@@ -89,9 +89,13 @@
         margin-top: 1em;
     }
     
-    .post-tags footer .tag-list{
-    	text-align:left;
-    }
+    .post-tags{
+    	margin-top: 20px;
+    	
+    	footer .tag-list{
+	    	text-align:left;
+	    }
+    } 
 }
 
 // Pagination
