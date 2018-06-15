@@ -22,7 +22,7 @@ theme_settings:
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: # Full email address, e.g. "gmun0929@gmail.com"
   behance:
   bitbucket:
   dribbble:
@@ -59,7 +59,7 @@ theme_settings:
     email: true
 
   # Scripts / Features 
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  google_analytics: # Tracking ID, e.g. "UA-120901628-1"
   disqus_shortname: NewLeaf
   katex: true # Enable if using math markup
   
