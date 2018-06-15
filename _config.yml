@@ -59,7 +59,7 @@ theme_settings:
     email: true
 
   # Scripts / Features 
-  google_analytics: # Tracking ID, e.g. "UA-120901628-1"
+  google_analytics: "UA-120901628-1"
   disqus_shortname: NewLeaf
   katex: true # Enable if using math markup
   
