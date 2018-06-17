@@ -13,7 +13,15 @@ layout: default
     {% endif %}
       
   </header>
-  <section class="post-content">{{ content }}</section>
+  <section class="post-content">
+  {% if page.bootstrap %}
+  <div class="bootstrap-iso">
+  {% endif %}
+	{{ content }}
+  {% if page.bootstrap %}
+  </div>
+  {% endif %}
+  </section>
     
     
   <!-- Tag list for portfolio -->
