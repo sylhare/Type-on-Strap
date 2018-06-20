@@ -238,11 +238,14 @@ layout: post
 title: Hello World                                # Title of the page
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
 thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+bootstrap: true                                   # Add bootstrap to the page
 tags: [sample, markdown, html]
 ---
 ```
 
 With `thumbnail`, you can add a smaller image than the `feature-img`. If you don't want/have a thumbnail you can still use the same image as the feature one.
+
+So the **bootstrap** is not mandatory and is only usefull if you want to add bootstrapped content in your page. It will respect the page and theme layout, mind the padding on the sides.
 
 ### Layout: Page
 
@@ -261,16 +264,6 @@ tags: [sample, markdown, html]
 ```
 
 The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. Use the `_draft` folder to keep files from being generated on your site.
-
-### Layout: Bootstrap
-
-This is the page layout modified to have bootstrap activated to format your content accordingly with the theme.
-
-```yml
---- 
-layout: bootstrap
----
-```
 
 ### Layout: Default
 
