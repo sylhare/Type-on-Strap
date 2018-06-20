@@ -1,7 +1,9 @@
 ---
 layout: default
 ---
-
+<style type="text/css">
+	.sub_title{display: none;}
+</style>
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
   <header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
     <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
