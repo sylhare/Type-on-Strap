@@ -1,14 +1,14 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://gmun.github.io"
-title: NEW LEAF :) # site's title
-description: "gmun" # used by search engines
+title: MOONPERMAN :) # site's title
+description: "Development Blog" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: NEW LEAF # blog's title
+  title: MOONPERMAN # blog's title
   avatar: assets/img/marker.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
