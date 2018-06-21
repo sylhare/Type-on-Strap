@@ -9,7 +9,7 @@ description: "Development Blog" # used by search engines
 theme_settings:
   # Meta
   title: 오늘도야근ㅅㅂ # blog's title
-  avatar: assets/img/marker.png
+  avatar: assets/marker.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
