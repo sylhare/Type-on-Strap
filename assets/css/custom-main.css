@@ -1196,6 +1196,7 @@ article em {
 	/* background: #fff; */
 	/* display: inline-block; */
 	position:fixed;
+	opacity: 1;
 	float: left;
 	width: 100%;
 	-webkit-transition:0.2s ease-in-out !important;
