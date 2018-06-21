@@ -29,28 +29,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         c.backgroundPosition = '100% ' + parseInt(-x/3) + 'px' + ', 0%, center top';
         
-        console.log("gddd");
-        
-        var maxHeight = $("#site-header").height();
+        var maxHeight = $(".site-header").height();
 	    var currentScroll = $(window).scrollTop();
 	    
-	    
-	    var menuOpacity = $("#site-header").css("opacity");
+	    var menuOpacity = $(".site-header").css("opacity");
 	    
 	    if (maxHeight <= currentScroll) {
-	    	console.log("크다")
 	    	if(menuOpacity == 1){
-	    		console.log("숨김")
-	    		$("#site-header").css("height","0");
-	    		$("#site-header").css("opacity","0");
-	    		$("#site-header").css("pointer-events","none");
+	    		$(".site-header").css("height","0");
+	    		$(".site-header").css("opacity","0");
+	    		$(".site-header").css("pointer-events","none");
 	    	}
 	    }else{
-	    	console.log("작다")
 	    	if(menuOpacity == 0){
-	    		$("#site-header").css("height","calc(6rem + 72px)");
-	    		$("#site-header").css("opacity","1");
-	    		$("#site-header").css("pointer-events","auto");
+	    		$(".site-header").css("height","calc(6rem + 72px)");
+	    		$(".site-header").css("opacity","1");
+	    		$(".site-header").css("pointer-events","auto");
 	    	}
 	    }
     });
