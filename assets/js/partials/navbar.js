@@ -36,13 +36,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	    
 	    if (maxHeight <= currentScroll) {
 	    	if(menuOpacity == 1){
-	    		$(".site-header").css("height","0");
 	    		$(".site-header").css("opacity","0");
 	    		$(".site-header").css("pointer-events","none");
 	    	}
 	    }else{
 	    	if(menuOpacity == 0){
-	    		$(".site-header").css("height","calc(6rem + 72px)");
 	    		$(".site-header").css("opacity","1");
 	    		$(".site-header").css("pointer-events","auto");
 	    	}
