@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/"
+baseurl: ""
 url: "https://gmun.github.io"
 title: NEW LEAF :) # site's title
 description: "gmun" # used by search engines
