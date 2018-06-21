@@ -29,7 +29,7 @@
         {% else %}
         <li class="separator"> | </li>
         <li>
-            <a class="clear" href="{{ page.url | relative_url }}">
+            <a class="clear" href="{{ page.url | relative_url }}" style="font-size: 30px; font-weight: bold;">
                 {{ page.title }}
             </a>
         </li>
@@ -39,15 +39,16 @@
         {% endfor %} 
         
         
+        
         {% for item in site.theme_settings.special_page %}
           {% if item[1].enabled %}
-            <li class="separator"> | </li>
-            <li>
-                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
-                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
-                </a>
-            </li>
-          {% endif %}
+	            <li class="separator"> | </li>
+	            <li>
+	                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
+	                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
+	                </a>
+	            </li>
+	      {% endif %}
         {% endfor %} 
     </ul>
 	</nav>

@@ -64,12 +64,12 @@ theme_settings:
   katex: true # Enable if using math markup
   
   special_page:
-    search: 
-      icon: "search" # Assuming page link and icon are the same
-      enabled: true
-    tags:
-      icon: "tags"
-      enabled: true
+    #search: 
+     # icon: "search" # Assuming page link and icon are the same
+     # enabled: true
+    # tags:
+      # icon: "tags"
+      # enabled: true
   
   # Localization strings
   str_follow_on: "Follow on"

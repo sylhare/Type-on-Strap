@@ -2,11 +2,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
     <script defer=true src="{{ site.baseurl }}/assets/js/main.min.js"></script>
+    <script defer=true src="{{ site.baseurl }}/assets/js/partials/navbar.js"></script>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom-main.css">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
@@ -57,8 +60,9 @@
     <!-- seo tags -->
     {% seo %}
     <!-- Manual seo tags -->
-    <!--
+    
     <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
-    -->
+    
+    
 </head>

@@ -2,6 +2,11 @@
 layout: page
 ---
 
+<style type="text/css">
+	/* .feature-image header{ padding 10% 20%;} */
+	.feature-image header>.title{    background: white; opacity: 0.565; color: black; display: inline-block;}
+</style>
+
 <div class="home">
 
 <!-- cycles through posts to get tags -->
@@ -30,64 +35,66 @@ layout: page
     <!-- Displays the posts and pages that contains the tag-->
     <div class="posts">
         {% for tag in tags %}
-        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
-            <a href="#{{ tag | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ tag }}</a>
-            <a href="#{{ page.title }}" style="float: right"><i class="fa fa-chevron-up" aria-hidden="true"> </i> </a>
+        <div class="post-area">
+	        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
+	            <a href="#{{ tag | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ tag }}</a>
+	            <a href="#{{ page.title }}" style="float: right"><i class="fa fa-chevron-up" aria-hidden="true"> </i> </a>
+	
+	        </h3>
 
-        </h3>
-
-        <!-- Posts and collection for each tags -->
-        <div class="tag-posts">
-
-            <!-- Pages -->
-            {% for page in site.pages %} 
-                {% if page.tags contains tag %}
-                <h5 class="tag-title">
-                    <a href="{{ page.url | prepend: site.baseurl }}">
-                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                        {{ page.title }}
-                    </a>
-                    
-                    <div class="meta">
-                        {{ "today" | date: "%B %-d, %Y" }}
-                    </div>
-                </h5>
-                {% endif %} 
-            {% endfor %} 
-            
-            <!-- Posts -->
-            {% for post in site.posts %} 
-                {% if post.tags contains tag %}
-                <h5 class="tag-title">
-                    <a href="{{ post.url | prepend: site.baseurl }}">
-                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        {{ post.title }}
-                    </a>
-                    
-                    <div class="meta">
-                        {{ post.date | date: "%B %-d, %Y" }}
-                    </div>
-                </h5>
-                {% endif %} 
-            {% endfor %} 
-            
-            <!-- Portfolio -->
-            {% for note in site.portfolio %} 
-                {% if note.tags contains tag %}
-                <h5 class="tag-title">
-                    <a href="{{ site.baseurl }}{{ note.url }}">
-                        <i class="fa fa-file-o" aria-hidden="true"></i>
-                        {{ note.title }}
-                    </a>
-                
-                    <div class="meta">
-                        {{ note.date | date: "%B %-d, %Y" }}
-                    </div>
-                </h5>
-                {% endif %} 
-            {% endfor %}
-
-        </div>
+	        <!-- Posts and collection for each tags -->
+	        <div class="tag-posts">
+	
+	            <!-- Pages -->
+	            {% for page in site.pages %} 
+	                {% if page.tags contains tag %}
+	                <h5 class="tag-title">
+	                    <a href="{{ page.url | prepend: site.baseurl }}">
+	                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+	                        {{ page.title }}
+	                    </a>
+	                    
+	                    <div class="meta">
+	                        {{ "today" | date: "%B %-d, %Y" }}
+	                    </div>
+	                </h5>
+	                {% endif %} 
+	            {% endfor %} 
+	            
+	            <!-- Posts -->
+	            {% for post in site.posts %} 
+	                {% if post.tags contains tag %}
+	                <h5 class="tag-title">
+	                    <a href="{{ post.url | prepend: site.baseurl }}">
+	                        <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
+	                        {{ post.title }}
+	                    </a>
+	                    
+	                    <div class="meta">
+	                        {{ post.date | date: "%B %-d, %Y" }}
+	                    </div>
+	                </h5>
+	                {% endif %} 
+	            {% endfor %} 
+	            
+	            <!-- Portfolio -->
+	            {% for note in site.portfolio %} 
+	                {% if note.tags contains tag %}
+	                <h5 class="tag-title">
+	                    <a href="{{ site.baseurl }}{{ note.url }}">
+	                        <i class="fa fa-file-o" aria-hidden="true"></i>
+	                        {{ note.title }}
+	                    </a>
+	                
+	                    <div class="meta">
+	                        {{ note.date | date: "%B %-d, %Y" }}
+	                    </div>
+	                </h5>
+	                {% endif %} 
+	            {% endfor %}
+	
+	        </div>
+	    </div>
         {% endfor %}
 
     </div>
