@@ -29,21 +29,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         c.backgroundPosition = '100% ' + parseInt(-x/3) + 'px' + ', 0%, center top';
         
-        var maxHeight = $(".site-header").height();
-	    var currentScroll = $(window).scrollTop();
-	    
-	    var menuOpacity = $(".site-header").css("opacity");
-	    
-	    if (maxHeight <= currentScroll) {
-	    	if(menuOpacity == 1){
-	    		$(".site-header").css("opacity","0");
-	    		$(".site-header").css("pointer-events","none");
-	    	}
-	    }else{
-	    	if(menuOpacity == 0){
-	    		$(".site-header").css("opacity","1");
-	    		$(".site-header").css("pointer-events","auto");
-	    	}
-	    }
     });
 });
