@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         c.backgroundPosition = '100% ' + parseInt(-x/3) + 'px' + ', 0%, center top';
         
+        console.log("gddd");
+        
         var maxHeight = $("#site-header").height();
 	    var currentScroll = $(window).scrollTop();
 	    
