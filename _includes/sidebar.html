@@ -1,0 +1,24 @@
+<!-- cycles through posts to get tags -->
+{% assign rawtags = "" %}
+{% assign test[SOAP] = 1 %}
+{% for post in site.posts %}
+	{% assign post_tags = post.tags | join:'|' | append:'|' %}
+	{% assign rawtags 	= rawtags | append:post_tags %}
+{% endfor %}
+
+{% assign tags = rawtags | split:'|' | sort | uniq %}
+
+<div>
+	<div>
+		<h1>Categories</h1>
+	</div>
+  	{% if tags.size > 0 %}
+   	  <div class="tag-list">
+	  {% for tag in tags %}
+		    <a class="button" href="{{site.baseurl}}/tags#{{tag}}">
+				<span class="name">{{ tag }}</span> 
+		    </a>
+	  {% endfor %}
+      </div>
+  {% endif %}
+</div>

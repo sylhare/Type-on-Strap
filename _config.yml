@@ -4,7 +4,6 @@ url: "https://gmun.github.io"
 title: 여섯시 기술블로그 :) # site's title
 description: "Development Blog" # used by search engines
 
-
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
@@ -104,7 +103,6 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:name
-
 
 # BUILD SETTINGS
 markdown: kramdown

@@ -716,6 +716,10 @@ img[align=right] {
 	}
 }
 
+.postsArea{width: 69%; display: inline-block;}
+.cateArea{width: 30%; display: inline-block; vertical-align: top;}
+
+
 article, .comments, .feature-image .post-content, .feature-image footer,
 	.call-out, .posts .post-teaser, .site-footer {
 	padding: 4% 20%
