@@ -15,7 +15,7 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>늘 배우고 배우자</p>
+     <p>소확행</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    #Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/gmun/Type-on-Strap">Type on Strap</a>
