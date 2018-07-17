@@ -1,21 +1,21 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://gmun.github.io"
-title: 여섯시 :) # site's title
+title: 여섯시 기술블로그 :) # site's title
 description: "Development Blog" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: 오늘도야근:( # blog's title
+  title: 여섯시:) # blog's title
   avatar: assets/marker.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>퇴근하고싶다.</p>
+     <p>늘 배우고 배우자</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    #Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/gmun/Type-on-Strap">Type on Strap</a>

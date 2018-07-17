@@ -4,6 +4,10 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
+    <!-- jQWCloud3.1.js -->
+    <script defer=true src="{{ site.baseurl }}/assets/js/jQWCloud/jQWCloudv3.1.js"></script>
+    <script defer=true src="{{ site.baseurl }}/assets/js/jQWCloud/index.js"></script>
+    
     <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
     <script defer=true src="{{ site.baseurl }}/assets/js/partials/navbar.js"></script>
     <script defer=true src="{{ site.baseurl }}/assets/js/main.min.js"></script>
@@ -64,6 +68,14 @@
     <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
     
+    <!-- tag Cloud -->
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		createWordClud();	
+    	});
+    
+    </script>
+    <!-- nav scroller active -->
     <script type="text/javascript">
     	$(function(){
     		$(document).scroll(function() {

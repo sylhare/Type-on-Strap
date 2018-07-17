@@ -930,10 +930,7 @@ article em {
 	margin-bottom: 0
 }
 
-#main {
-	background-position: 100% 0, 0 center, center top;
-	padding: 15% 0;
-}
+#main { background-position: 100% 0, 0 center, center top; padding: 15% 0; z-index: -1;}
 
 .posts .post-teaser {
 	width: 100%;
