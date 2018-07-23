@@ -12,6 +12,9 @@
             li {
                 display: inline;
             }
+            a:hover {
+                color: darken($link-color, 15%);
+            }
         }
     }
 }

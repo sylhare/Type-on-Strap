@@ -1,76 +1,52 @@
-.portfolio * {
-    z-index: 2;
-    margin: 8% 5%;
-    img {
-        padding: 0 0;
-        margin: 0 0;
-    }
+.portfolio-link {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    max-width: 400px;
 
-    .portfolio-item {
-        right: 0;
-        margin: 0 0 15px;
+    .caption {
+        margin: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        opacity: 0;
+        -webkit-transition: all ease .5s;
+        -moz-transition: all ease .5s;
+        transition: all ease .5s;
 
-        @media(min-width: 767px) {
-            margin: 0 0 30px;
+        &::before {
+            content: ' ';
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
         }
 
-        .portfolio-link {
-            display: block;
-            position: relative;
-            margin: 0 auto;
-            max-width: 400px;
+        &:hover {
+            opacity: 1;
+        }
 
-            .caption {
-                margin: 0;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                opacity: 0;
-                background: $link-shadow;
-                -webkit-transition: all ease .5s;
-                -moz-transition: all ease .5s;
-                transition: all ease .5s;
-                font: 0/0 a;
-                &::before {
-                    content: ' ';
-                    display: inline-block;
-                    vertical-align: middle;
-                    height: 100%;
-                }
+        .caption-content {
+            font-size: 15px;
+            color: white;
+            text-shadow: -1px 0 #ddd, 0 1px #ddd, 1px 0 #ddd, 0 -1px #ddd;
+            display: inline-block;
+            vertical-align: middle;
 
-                &:hover {
-                    opacity: 1;
-                }
-                .caption-content {
-                    font-family: 'Lora', 'Times New Roman', serif;
-                    font-size: 15px;
-                    color: #fff;
-                    margin: auto;
-                    text-align: center;
-                    display: inline-block;
-                    vertical-align: middle;
-
-                    @media screen and (max-width: $sm-break) {
-                        font-size: 7px;
-                    }
-
-                    h3,
-                    h4 {
-                        margin: 0;
-                    }
-                }
+            @media screen and (max-width: $sm-break) {
+                font-size: 7px;
             }
         }
     }
 }
 
-/* --- Responsive --- */
+.portfolio-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-@media screen and (max-width: $sm-break) {
-    .portfolio {
-        .caption-content {
-            font-size: 7px;
-        }
-    }
+}
+.portfolio-cell {
+  flex: 0 0 32%;
+  margin-bottom: 10px;
 }
