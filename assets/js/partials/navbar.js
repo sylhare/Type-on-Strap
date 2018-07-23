@@ -11,16 +11,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     /*
-    * Display the navbar back to normal after resize
-    */
-    window.addEventListener('resize', function() {
-        var w = window.innerWidth;
-        if (w > 320) {
-            menu.removeAttribute('style');
-        }
-    });
-
-    /*
     * Make the header images move on scroll
     */
     window.addEventListener('scroll', function() {
