@@ -1186,13 +1186,14 @@ article em {
 	line-height: 1.5;
 	float: right;
 	text-align: right;
-	display: block
+	display: block;
+	width: max-content;
 }
 
 .site-header nav li {
 	display: inline;
-	float: left;
-	margin-right: 0.4em
+	float: right;
+	margin-right: 0.4em;
 }
 
 .site-header a:hover {
@@ -1391,7 +1392,7 @@ ul.share-buttons .sr-only {
 	nav ul {
 		width: 100%;
 		overflow: hidden;
-		transition: font-size .25s, margin .25s, padding .25s, opacity .5s .25s
+		transition: font-size .25s, margin .25s, padding .25s, opacity .5s .25s;
 	}
 	nav ul.hide {
 		font-size: 0;
@@ -1403,7 +1404,12 @@ ul.share-buttons .sr-only {
 	}
 	nav li {
 		width: 100%;
-		float: left;
+		float: left; 
+		/* 
+		float: right;
+		width: max-content;
+   		background: #0000000d;
+		*/
 		position: relative
 	}
 	nav a {
