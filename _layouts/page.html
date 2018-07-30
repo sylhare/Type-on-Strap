@@ -2,12 +2,23 @@
 layout: default
 ---
 <!-- 
-	header txt, background 수정
+	header txt, background �닔�젙
 -->
+
+<style type="text/css">
+.jqClud{
+	    font: 10px Helvetica,Arial,sans-serif;
+    line-height: normal;
+    overflow: hidden;
+    position: relative;
+
+}
+</style>
+
 <article {% if page.feature-img %}class="feature-image"{% endif %} >
   {% if page.layout == 'tags' %}
   	<div id="main">
-  		<div id="wordCloud">
+  		<div id="wordCloud" class="jqColowe" style="    padding: 45px 15px 15px;">
   		</div>
   	</div>
   {% else %}

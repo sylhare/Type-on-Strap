@@ -688,33 +688,11 @@ img[align=right] {
 	margin-left: 3%
 }
 
-@media screen and (max-width: 768px) {
-	h1 {
-		font-size: 2em
-	}
-	h2 {
-		font-size: 1.5em
-	}
-	h3 {
-		font-size: 1em
-	}
-	h4 {
-		font-size: 0.9em
-	}
-	p, li {
-		font-size: 0.8em
-	}
-}
 
 #post-nav {
 	padding: 3% 6%
 }
 
-@media ( max-width : 1000px) {
-	#post-nav {
-		padding: 3% 3%
-	}
-}
 
 .postsArea{width: 69%; display: inline-block;}
 .cateArea{width: 30%; display: inline-block; vertical-align: top;}
@@ -725,19 +703,7 @@ article, .comments, .feature-image .post-content, .feature-image footer,
 	padding: 4% 20%
 }
 
-@media ( max-width : 1000px) {
-	article, .comments, .feature-image .post-content, .feature-image footer,
-		.call-out, .posts .post-teaser, .site-footer {
-		padding: 6% 12.5%
-	}
-}
 
-@media ( max-width : 576px) {
-	article, .comments, .feature-image .post-content, .feature-image footer,
-		.call-out, .posts .post-teaser, .site-footer {
-		padding: 4%
-	}
-}
 
 .header-txt-shadow, .call-out p, .call-out a, .call-out li, .call-out h1,
 	.call-out h2, .call-out h3, .call-out h4, .call-out h5, h1.title {
@@ -857,12 +823,6 @@ header h1 {
 	padding-top: 0
 }
 
-@media screen and (max-width: 768px) {
-	.feature-image header {
-		padding: 4% 4%
-	}
-}
-
 #post-nav {
 	width: 100%;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -924,12 +884,6 @@ article em {
 	background-size: cover
 }
 
-@media screen and (max-width: 850px) {
-	.call-out {
-		background-size: 100% auto
-	}
-}
-
 .call-out p:last-child {
 	margin-bottom: 0
 }
@@ -956,17 +910,6 @@ article em {
 	overflow: hidden
 }
 
-@media ( min-width : 768px) {
-	.posts .post-teaser .post-img {
-		height: 250px
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.posts .post-teaser .post-img {
-		height: 150px
-	}
-}
 
 .posts .post-teaser .post-img img {
 	-moz-transition-timing-function: ease-out;
@@ -1000,11 +943,6 @@ article em {
 	text-align: center
 }
 
-@media ( max-width : 600px) {
-	.pagination {
-		padding: 4%
-	}
-}
 
 .pagination .button {
 	margin: 0 1.5em
@@ -1285,60 +1223,7 @@ article em {
 	display: table
 }
 
-@media ( min-width : 768px) {
-	a#pull {
-		display: none
-	}
-}
 
-@media screen and (max-width: 768px) {
-	.site-header img.avatar {
-		margin-top: -7px
-	}
-	.site-header .site-title {
-		margin-top: 7px
-	}
-	nav {
-		height: auto
-	}
-	nav .separator {
-		display: none !important
-	}
-	nav ul {
-		width: 100%;
-		overflow: hidden;
-		transition: font-size .25s, margin .25s, padding .25s, opacity .5s .25s
-	}
-	nav ul.hide {
-		font-size: 0;
-		margin: 0;
-		opacity: 0;
-		padding: 0;
-		transition: opacity .25s, font-size .5s .25s, margin .5s .25s, padding
-			.5s .25s
-	}
-	nav li {
-		width: 100%;
-		float: left;
-		position: relative
-	}
-	nav a {
-		text-align: left;
-		width: 100%
-	}
-	nav a#pull {
-		display: block;
-		width: 100%;
-		position: relative
-	}
-	nav a#pull:after {
-		content: "";
-		display: inline-block;
-		position: absolute;
-		right: 15px;
-		top: 10px
-	}
-}
 
 .portfolio-link {
 	display: block;
@@ -1376,12 +1261,6 @@ article em {
 	text-shadow: -1px 0 #ddd, 0 1px #ddd, 1px 0 #ddd, 0 -1px #ddd;
 	display: inline-block;
 	vertical-align: middle
-}
-
-@media screen and (max-width: 450px) {
-	.portfolio-link .caption .caption-content {
-		font-size: 7px
-	}
 }
 
 .portfolio-grid {
@@ -1462,4 +1341,108 @@ ul.share-buttons .sr-only {
 	height: 1px;
 	width: 1px;
 	overflow: hidden
+}
+
+/****************************************/
+
+@media screen and (max-width: 450px) {
+	.portfolio-link .caption .caption-content { font-size: 7px }
+}
+
+
+@media ( max-width : 576px) {
+	article, .comments, .feature-image .post-content, .feature-image footer,
+		.call-out, .posts .post-teaser, .site-footer {
+		padding: 4%
+	}
+	.postsArea{width: 100%;}
+	.cateArea{display:none;}
+}
+
+@media ( max-width : 600px) {
+	.pagination { padding: 4% }
+	.postsArea{width: 100%;}
+	.cateArea{display:none;}
+}
+
+@media ( min-width : 768px) {
+	a#pull { display: none }
+	.posts .post-teaser .post-img { height: 250px }
+	.postsArea{width: 100%;}
+	.cateArea{display:none;}
+}
+
+@media screen and (max-width: 768px) {
+	.postsArea{width: 100%;}
+	.cateArea{display:none;}
+	
+	h1 { font-size: 2em }
+	h2 { font-size: 1.5em }
+	h3 { font-size: 1em }
+	h4 { font-size: 0.9em }
+	p, li { font-size: 0.8em }
+	.feature-image header { padding: 4% 4% }
+	.posts .post-teaser .post-img { height: 150px }
+	
+	.site-header img.avatar { margin-top: -7px }
+	.site-header .site-title { margin-top: 7px }
+	nav { height: auto }
+	nav .separator { display: none !important }
+	nav ul {
+		width: 100%;
+		overflow: hidden;
+		transition: font-size .25s, margin .25s, padding .25s, opacity .5s .25s
+	}
+	nav ul.hide {
+		font-size: 0;
+		margin: 0;
+		opacity: 0;
+		padding: 0;
+		transition: opacity .25s, font-size .5s .25s, margin .5s .25s, padding
+			.5s .25s
+	}
+	nav li {
+		width: 100%;
+		float: left;
+		position: relative
+	}
+	nav a {
+		text-align: left;
+		width: 100%
+	}
+	nav a#pull {
+		display: block;
+		width: 100%;
+		position: relative
+	}
+	nav a#pull:after {
+		content: "";
+		display: inline-block;
+		position: absolute;
+		right: 15px;
+		top: 10px
+	}
+}
+
+
+@media ( min-width : 850px) {
+	a#pull { display: none }
+	.posts .post-teaser .post-img { height: 250px }
+	.postsArea{width: 69%;}
+	.cateArea{display:inline-block; width: 28%;}
+}
+
+
+@media screen and (max-width: 850px) {
+	.call-out { background-size: 100% auto }
+}
+
+
+@media ( max-width : 1000px) {
+	#post-nav { padding: 3% 3% }
+	
+	article, .comments, .feature-image .post-content, .feature-image footer,
+		.call-out, .posts .post-teaser, .site-footer {
+		padding: 6% 12.5%
+	}
 }
