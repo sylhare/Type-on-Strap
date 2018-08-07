@@ -5,7 +5,7 @@ tags: [Cooking, Food, Review, Whisk.com]
 published: false
 ---
 I recently went to a [Coghlans School Indian cookery class]("https://www.cookingexpert.co.uk/collections/daytime-short-cookery-courses") and learnt something that I wasn't expecting to.
-Cooking is really and doesn't have to take very long. For me though, the cooking course was easy as everyone had a step-by-step guide with all the right ingredients in front of them. I don't have this at home, as cooking requires planning, a task which should be, but isn't, at the front of my mind doing the weekly shop (Usually i'm thinking "Just gimme some food, I just want to go home and relax"). Whisk.com tries to fix this problem.
+Cooking doesn't have to take very long if you are well prepared for it. For me, the cooking course was easy as everyone had a step-by-step guide with all the right ingredients in front of them. I don't have this at home, as cooking requires planning, a task which should be, but isn't, at the front of my mind doing the weekly shop (Usually I'm thinking "Just gimme some food, I just want to go home and relax"). Whisk.com tries to fix this problem.
 
 I did consider getting one of those [Hello-Fresh](https://www.hellofresh.co.uk) boxes delivered every week. This would make it easy, but I'd be paying £11.66 for a meal for two, a similar price to getting a take-away delivered directly to my door, which hardly seems worth it.
 
