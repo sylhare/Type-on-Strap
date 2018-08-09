@@ -2,8 +2,10 @@
 {% assign rawtags = "" %}
 {% assign test[SOAP] = 1 %}
 {% for post in site.posts %}
-	{% assign post_tags = post.tags | join:'|' | append:'|' %}
-	{% assign rawtags 	= rawtags | append:post_tags %}
+	{% if post.display != "false" %}
+		{% assign post_tags = post.tags | join:'|' | append:'|' %}
+		{% assign rawtags 	= rawtags | append:post_tags %}
+	{% endif %}
 {% endfor %}
 
 {% assign tags = rawtags | split:'|' | sort | uniq %}
