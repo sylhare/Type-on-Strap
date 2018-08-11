@@ -1,0 +1,9 @@
+  <table class="archive-table">
+    {% for post in site.posts %}
+      <tr>
+       <td> <font size="+2"> <a href="{{ post.url }}">{{ post.title }}</a> </font> </td>
+       <td> <i> <font size="4"> {{post.date || date_to_string }}  </font> </i> </td>
+      </tr>
+      
+    {% endfor %}
+  </table>

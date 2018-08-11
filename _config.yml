@@ -1,35 +1,36 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
-title: Type on Strap # site's title
-description: "A website with blog posts and pages" # used by search engines
+baseurl: "https://www.firststratum.com"
+url: "https://www.firststratum.com"
+title: First Stratum # site's title
+description: "Blogs for Networkers" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
+  title: First Stratum # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
   # Header and footer text
+     # <p> <font color="black"> <This is a website designed by Raymond Shiner for Networker Maxwell Wenger under codename First Stratum.</font> <img align="top"> <br/> </p>
   header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
-  header_text_feature_image: assets/img/pexels/triangular.jpeg
+   <b>Software Engineering, Networking, and Consulting at its finest.</b>
+  header_text_feature_image: assets/img/pexels/hallway.png
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+   Designed, Built, and Maintained by Raymond Shiner - Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: "max@maxwellwenger.com" # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
   dribbble:
-  facebook:
+  facebook: true
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "mwenger"
   google_plus:
   instagram:
   keybase:
@@ -38,7 +39,7 @@ theme_settings:
   reddit:
   soundcloud:
   stack_exchange:  # Full URL
-  steam:
+  steam: 
   tumblr:
   twitter: # "twitter username"
   vimeo:
@@ -49,7 +50,7 @@ theme_settings:
   share_buttons:
     facebook: true
     twitter: true
-    google_plus: true
+    google_plus: 
     tumblr:
     pinterest:
     pocket:
@@ -115,3 +116,12 @@ sass:
 plugins: [jekyll-paginate, jekyll-seo-tag]
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
 exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png", "package.json", "node_modules", "gulpfile.js", ".idea/*"]
+
+
+#Custom Build Settings
+defaults:
+  -
+    scope:
+      path: "pages"
+    values:
+      layout: "page"
