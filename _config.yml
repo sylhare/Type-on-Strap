@@ -27,7 +27,7 @@ theme_settings:
   behance:
   bitbucket:
   dribbble:
-  facebook: true
+  facebook: 
   flickr:
   gitlab:
   github: "mwenger"
