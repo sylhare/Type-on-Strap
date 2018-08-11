@@ -1,8 +1,8 @@
 ---
 title: About
 feature-img: "assets/img/pexels/hallway.png"
-tags: [About, Archive]
 permalink: /about/
+tags: [About, Archive]
 ---
 
 ## Meet Maxwell Wenger
