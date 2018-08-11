@@ -2,9 +2,9 @@
 layout: page
 title : Portfolio 
 permalink: /portfolio/
-subtitle: "Projects I am working on" 
+subtitle: "Completed Projects" 
 feature-img: "assets/img/pexels/computer.jpeg"
-tags: [Archive]
+tags: [Archive, About]
 ---
 
 {% include portfolio.html %}
