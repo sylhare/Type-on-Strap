@@ -1,7 +1,7 @@
 ---
 title: About
-permalink: /about/
 feature-img: "assets/img/pexels/hallway.png"
+permalink: /about/
 tags: [About, Archive]
 ---
 
