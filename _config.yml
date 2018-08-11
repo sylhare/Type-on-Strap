@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-baseurl: "/test-site"
-url: ""
+baseurl: "https://www.firststratum.com"
+url: "https://www.firststratum.com"
 title: First Stratum # site's title
 description: "Blogs for Networkers" # used by search engines
 
@@ -31,7 +31,7 @@ theme_settings:
   flickr:
   gitlab:
   github: "mwenger"
-  google_plus: true
+  google_plus: 
   instagram:
   keybase:
   linkedin:  # Full URL
@@ -50,7 +50,7 @@ theme_settings:
   share_buttons:
     facebook: true
     twitter: true
-    google_plus: true
+    google_plus: 
     tumblr:
     pinterest:
     pocket:
