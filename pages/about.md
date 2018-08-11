@@ -2,6 +2,7 @@
 title: About
 feature-img: "assets/img/pexels/hallway.png"
 tags: [About, Archive]
+permalink: /about/
 ---
 
 ## Meet Maxwell Wenger

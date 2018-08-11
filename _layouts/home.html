@@ -50,7 +50,7 @@ layout: default
     </a>
     {% endif %}
     {% if paginator.next_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button" >
       {{ site.theme_settings.str_next_page }}
       <i class="fa fa-chevron-right"></i>
     </a>
