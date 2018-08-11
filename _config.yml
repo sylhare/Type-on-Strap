@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: "https://www.firststratum.com"
-url: "https://www.firststratum.com"
+url: ""
 title: First Stratum # site's title
 description: "Blogs for Networkers" # used by search engines
 
