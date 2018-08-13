@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Berhan Taye'
 date: 2017-09-28 17:58:00 Z
-post-type: Practitioner Profile
 feature-img: "/uploads/BerhanTaye.jpg"
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 What are the technologies that intervene in war?

@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Jess Kutch'
 date: 2018-05-30 16:10:00 Z
-post-type: Practitioner Profile
 feature-img: 
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 What if there was an online platform that could connect low-wage workers, separated by distance, but who toil for the same global corporations?

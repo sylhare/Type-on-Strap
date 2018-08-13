@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Yeshimabeit Milner'
 date: 2018-05-30 17:00:00 Z
-post-type: Practitioner Profile
 feature-img: 
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 Yeshimabeit Milner, technologist, co-founder and Executive Director of Data for Black Lives, still remembers how it felt when she was suspended from school in sixth grade. She was in a computer class at her middle school in Miami, Florida.

@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Josh Breitbart'
 date: 2018-05-30 16:20:00 Z
-post-type: Practitioner Profile
 feature-img: 
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 Josh Breitbart’s plans for the future are both humble and huge: From his post as the first-ever senior broadband advisor at Mayor de Blasio’s office in New York City, he quietly sets up meetings between government planners and community organizers to wrest ever-evolving technologies of communication (high-speed wireless Internet, for example) away from pure private market control and secure them firmly in the hands of residents in working-class areas such as Red Hook, Mott Haven and Queensbridge.

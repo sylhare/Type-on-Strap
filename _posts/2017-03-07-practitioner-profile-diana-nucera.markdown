@@ -3,8 +3,8 @@ title: 'Practitioner Profile: Diana Nucera'
 date: 2017-03-07 16:39:00 Z
 author: Puck Lo
 feature-img: "/uploads/diana_resized2.png"
-post-type: Practitioner Profile
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 Diana Nucera, Director of the Detroit Community Technology Project, has traveled as far as Brazil and stayed as close as a mile to her home, teaching people how to build low-cost, small-scale, high-speed wireless Internet networks. An autodidact who DJs under the moniker, “Mother Cyborg,” Nucera sometimes incorporates a disco soundtrack into her popular education curriculum.

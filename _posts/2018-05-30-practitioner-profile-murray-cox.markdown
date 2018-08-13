@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Murray Cox'
 date: 2018-05-30 16:40:00 Z
-post-type: Practitioner Profile
 feature-img: 
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 In 2014, Murray Cox moved to the neighborhood of Bedford-Stuyvesant in Brooklyn, New York, and quit his tech job.

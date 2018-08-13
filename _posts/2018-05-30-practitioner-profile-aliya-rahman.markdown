@@ -2,9 +2,9 @@
 title: 'Practitioner Profile: Aliya Rahman'
 date: 2018-05-30 15:50:00 Z
 feature-img: "/uploads/AliyaRahman.jpg"
-post-type: Practitioner Profile
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 Growing up in Bangladesh, technologist and social movement trainer, Aliya Rahman, remembers the “revolutionary energy” of her childhood.

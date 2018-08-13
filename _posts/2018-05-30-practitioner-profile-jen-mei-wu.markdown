@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Jen-Mei Wu'
 date: 2018-05-30 16:00:00 Z
-post-type: Practitioner Profile
 feature-img: "/uploads/jenmei-mask.jpg"
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 [LOL — or, Liberating Ourselves Locally](https://oaklandmakerspace.wordpress.com/) — is the only people-of-color-led, gender-diverse, queer and trans inclusive hacker/ maker space anywhere.

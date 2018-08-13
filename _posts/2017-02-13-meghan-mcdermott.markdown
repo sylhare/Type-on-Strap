@@ -4,6 +4,8 @@ date: 2017-02-13 16:31:00 Z
 published: false
 author: Puck Lo
 feature-img: 
+layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 When New York City rolled out its plan in February to replace decrepit pay phone booths with 7,500 shiny wireless kiosks connected to fiber-optic cables boasting connection speeds 100 times faster than average public WiFi hotspot, the promise of free, no-strings-attached, super fast public WiFi seemed — to some skeptical New Yorkers — too good to be true.

@@ -2,10 +2,10 @@
 title: 'Practitioner Profile: Helyx Chase'
 date: 2017-09-29 19:50:00 Z
 practitioner-photo: "/uploads/helyx.jpg"
-post-type: Practitioner Profile
 feature-img: "/uploads/Helyx%20photo.jpg"
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 On any given day at the office of the Media Mobilizing Project (MMP) in Philadelphia, some dozen young filmmakers and activists taking a several-month course in video production “making media that serves movements” may be found hunched over shared computers, editing videos about local criminal justice reform, immigrant and labor rights. Community members might drop by for trainings on how to livestream meetings to defend public schools, or to make plans for running an emerging media production co-op. In the thick of the activity, Helyx Chase Scearce Horwitz, independent video artist as well as MMP’s Tech Manager, is likely coordinating equipment for loan between different groups of people, detangling wires, fixing a malfunctioning printer, uploading footage from SD cards to the office servers, charging batteries, and maintaining the organization’s open-source database.

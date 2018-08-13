@@ -1,10 +1,10 @@
 ---
 title: 'Practitioner Profile: Josue Guillen'
 date: 2017-09-28 18:55:00 Z
-post-type: Practitioner Profile
 feature-img: "/uploads/JGuillen.png"
 author: Puck Lo
 layout: post
+tags: [Practitioner Profile, profile, practitioner]
 ---
 
 Immediately after the election of Donald Trump, movement technologist, Josue Guillen, was overwhelmed with inquiries from social justice organizers and activist groups suddenly worried about their digital security. Digital security — the protection of an individual’s or organization’s identity, communications and assets via Internet, electronic or cell phone technologies — had been a concern to Josue for the last 14 years, but it was largely ignored outside of activist techie circles. After the presidential election, more progressive groups and activists became concerned about government surveillance, right-wing cyberattacks and doxxing. Josue was jazzed. His role at the Center for Popular Democracy is to provide technical support and training to its 51 member groups, so he recruited an expert and put together a webinar on digital security. He wrote a list of recommendations: Use the free, downloadable encryption app, Signal, for sending text messages. Change your phone password. Change your computer password.
