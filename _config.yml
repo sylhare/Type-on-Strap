@@ -1,14 +1,14 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
-title: Type on Strap # site's title
-description: "A website with blog posts and pages" # used by search engines
+baseurl: "/morethancode"
+url: "https://opentechinstitute.github.io"
+title: MoreThanCode # site's title
+description: "The MoreThanCode Report Website" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
+  title: MoreThanCode # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
@@ -29,7 +29,7 @@ theme_settings:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "opentechinstitute"
   google_plus:
   instagram:
   keybase:
