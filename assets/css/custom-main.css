@@ -1449,6 +1449,7 @@ ul.share-buttons .sr-only {
 	
 	article, .comments, .feature-image .post-content, .feature-image footer,
 		.call-out, .posts .post-teaser, .site-footer {
-		padding: 6% 12.5%
+		/*padding: 6% 12.5%*/
+		padding: 4%
 	}
 }
