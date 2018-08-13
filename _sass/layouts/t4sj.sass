@@ -1,0 +1,398 @@
+---
+---
+
+@import reset
+@import fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700')
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900')
+@import url('https://fonts.googleapis.com/css?family=Inconsolata|Raleway|Space+Mono|Source+Code+Pro')
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+@import quotes
+
+// MQ trigger
+@mixin small
+  @media only screen and (max-width: 300px)
+    @content
+
+//Variables
+
+$secondaryColor: #f8e30d // Super bright accent yellow
+$altColor: #494d79 //bright teal //#9c6dce //bright purple //#72cace // A bright, but friendly and approachable teal-blue
+$primaryColor: darken($altColor, 20%) //#c95e31 // Red-orange: powerful and says we mean business. Could be brighter?
+$altSecondaryColor: #f5743d // brighter red-orange
+$white: #ffffff //#fdfdf1 // A warm off-white:
+$black: #36373c // A cool, dark grey
+$primaryFont: 'Source Sans Pro', 'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+$headerFont: 'Montserrat', 'Space Mono', 'Source Sans Pro', 'Inconsolata', 'Courier', monospace
+$headerHeight: 24em
+$homeHeaderHeight: 400px
+
+/***--------------------------------------------/
+// Typography
+/***--------------------------------------------/
+
+html
+  font-family: $primaryFont
+  color: $black
+
+h1, h2, h3, h4, h5, h6
+  font-family: $primaryFont
+  line-height: 140%
+
+h1
+  font-family: $headerFont
+  font-weight: 500
+  font-size: 1.4em
+  line-height: 2.5
+
+h2
+  font-size: 1.4em
+
+p
+  font-size: 1.2em
+  line-height: 1.8em
+  margin-bottom: 1.8em
+
+b
+  font-weight: bold
+
+a, a:visited
+  color: $primaryColor
+  text-decoration: none
+  &:hover
+    color: $altColor
+    text-decoration: none
+
+/***--------------------------------------------/
+// Global layout
+/***--------------------------------------------/
+
+*
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+
+main
+  //min-height: 100vh
+  position: relative
+  background: $white
+
+.hide
+  display: none !important
+
+.not-home
+  margin-top: $headerHeight
+  @include small
+    margin-top: 20em
+
+.clear
+  clear: both
+
+.content
+  max-width: 1000px
+  margin: 0 auto
+  padding: 2em 2em
+  clear: both
+
+.content-narrow
+  max-width: 740px
+  margin: 0 auto
+  padding: 2em 2em
+  clear: both
+
+.content-wide
+  max-width: 1200px
+  margin: 0 auto
+  padding: 2em 2em
+  clear: both
+
+footer
+  background: #fff
+  color: $black
+  padding: 3em 0
+  display: flex
+  flex-flow: row wrap
+  justify-content: space-around
+  bottom: 0
+  left: 0
+  right: 0
+  z-index: 1
+
+p
+  font-size: 1.2em
+  line-height: 1.4em
+
+a, a:visited
+  color: $altColor
+  text-decoration: none
+  &:hover
+  color: $primaryColor
+  text-decoration: underline
+
+img
+  width: 100%
+  height: auto
+  vertical-align: middle
+  margin-right: 0.5em
+section
+  width: 100%
+  margin: 0
+  text-align: left
+li
+  float: left
+.core-team
+  height: 40%
+.partners
+  height: 60%
+.about
+  height: 80%
+.social
+  height: 20%
+  padding: 1em 0 0 0
+.footer-left,
+.footer-right
+  span, a
+    margin: 0 0.5em
+.footer-right
+  text-align: right
+  padding-left: 3em
+  li
+    padding: 1em 0.5em
+.copyright
+  text-align: center
+.footer-left,
+.footer-right,
+.copyright
+  flex: 1
+  line-height: 2.5
+  @include small
+    padding: 0
+
+.cover
+  vertical-align: middle
+  margin-right: 0.5em
+  display: block
+  float: left
+
+.footer-container
+  display: flex
+  margin-top: -50px
+
+/***--------------------------------------------/
+// Home styles
+/***--------------------------------------------/
+
+.home-orgs
+  background-color: $black
+
+.home-people
+  background-color: $secondaryColor
+
+/***--------------------------------------------/
+// Orglist styles
+/***--------------------------------------------/
+
+.filters-group
+  display: flex
+  .filters
+    flex: 1
+    margin-right: 0.5em
+    &:last-child
+      margin-right: 0
+
+.filters
+  display: flex
+  margin: 0.5em 0
+  button
+    flex: 1
+    border: $white solid
+    padding: 1.2em 0.4em 1em 0.4em
+    min-width: 110px
+    font-size: 1em
+    text-align: center
+    color: #444
+    cursor: pointer
+  i
+    padding: 0 0.5em
+.filters-stars
+  font-size: 0
+  i
+    font-size: .9em
+.filters-all
+  color: #fff
+  button
+    color: $white
+    margin: 0 0.25em 0.5em 0.25em
+    &:hover
+      background: $white
+      color: $primaryColor
+    &.selected
+      background: $white
+      color: $primaryColor
+    &:disabled
+      opacity: 0.5
+  .filters
+    flex-wrap: wrap
+    -webkit-flex-wrap: wrap
+
+.search
+  background-color: lighten($altColor, 10%)
+
+.search-input
+  width: 100%
+  padding: 0.5em 1em 0.5em 2em
+  border: none
+  font-family: $primaryFont
+  font-weight: 300
+  font-size: 1.5em
+  background-color: transparent
+  //border-radius: 2em
+  color: $black
+  &::-webkit-input-placeholder
+    color: $white
+    opacity: 0.7
+  &:-moz-placeholder
+    color: $white
+    opacity: 0.7
+  &::-moz-placeholder
+    color: $white
+    opacity: 0.7
+  &:-ms-input-placeholder
+    color: $white
+    opacity: 0.7
+
+.search-wrapper
+  position: relative
+  margin-left: 2em
+  .toggle-filters
+    position: absolute
+    color: #fff
+    right: 0
+    top: 0
+    padding: 1em
+    font-size: 1.2em
+  &:before
+    font-family: 'FontAwesome'
+    color: $primaryColor
+    position: absolute
+    top: 0.3em
+    //left: 0.5em
+    content: "\f002"
+    font-size: 2em
+
+
+.filters-all-content
+  display: none //this determines whether the filters show by default or not
+  padding: 1em 0
+  max-width: 1200px
+  margin: 0 auto
+  padding: 0 2em
+  clear: both
+  > .filters:first-child
+    margin-top: 1em
+.filters-controls
+  font-size: 1.2em
+  overflow: hidden
+  button, button:hover
+    color: #fff
+    background: none
+    margin: 0
+
+.toggle-filters
+  float: left
+  cursor: pointer
+.clear-filters
+  float: right
+  cursor: pointer
+
+.search-dropdown
+  position: absolute
+  background: #eee
+  color: #111
+  left: 2.8em
+  right: 2em
+  z-index: 10
+  li
+    padding: 1em
+    cursor: pointer
+    &:hover
+      background: #ddd
+
+.filters-state
+  margin: 1em 0
+  text-align: center
+
+/***--------------------------------------------/
+// Blog styles
+/***--------------------------------------------/
+
+.blog
+  padding: 5em 2em
+  max-width: 50em
+
+.post
+  border-bottom: 1px solid $black
+  margin-bottom: 2em
+  &:last-child
+    border-bottom: none
+  .image
+    background-size: cover
+    background-position: center
+    height: 200px
+  h2
+    font-size: 1.1em
+    font-family: $headerFont
+  .text
+    padding-top: 1em
+  p
+    line-height: 1.58
+
+/***--------------------------------------------/
+// Media Queries
+/***--------------------------------------------/
+
+@media screen and (max-width: 490px)
+  .header-bar
+    text-align: center
+      display: block
+      float: none !important
+      text-align: center
+    h1
+      font-size: 2.2em
+  header .content
+    padding: 0
+
+@media screen and (max-width: 828px)
+  .content
+  padding: 2em 0.5em
+
+  .content-narrow
+    padding: 2em 1em
+
+  .content-wide
+    padding: 2em 1em
+
+  .footer-container
+    display: block
+
+  .about-intro, .about-letter, .faq
+    padding: 3em 0.5em
+
+  footer
+    display: block
+    text-align: center
+    .footer-right
+      text-align: center
+
+
+/***--------------------------------------------/
+// Testing testing 123
+/***--------------------------------------------/
+
+
+
+@import headers
+@import result
+@import resource
+@import about
+@import people
