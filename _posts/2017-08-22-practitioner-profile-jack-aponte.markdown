@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Jack Aponte'
 date: 2017-08-22 21:24:00 Z
-feature-img: "/uploads/jack-aponte-header.jpg"
-thumbnail: "/uploads/jack-aponte-header.jpg"
+feature-img: "/uploads/jack-aponte.jpg"
+thumbnail: "/uploads/jack-aponte.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]
