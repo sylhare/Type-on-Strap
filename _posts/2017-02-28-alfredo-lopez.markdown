@@ -3,7 +3,7 @@ title: 'Practitioner Profile: Alfredo Lopez'
 date: 2017-02-28 17:23:00 Z
 practitioner-photo: "/uploads/alfredo3.png"
 post-type: Practitioner Profile
-header-image: "/uploads/alfredo1.jpg"
+feature-img: "/uploads/alfredo1.jpg"
 author: Puck Lo
 layout: post
 ---

@@ -2,8 +2,7 @@
 title: 'Practitioner Profile: Jess Kutch'
 date: 2018-05-30 16:10:00 Z
 post-type: Practitioner Profile
-header-image: 
-practitioner-photo: 
+feature-img: 
 author: Puck Lo
 layout: post
 ---

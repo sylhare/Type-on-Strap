@@ -1,9 +1,8 @@
 ---
 title: 'Practitioner Profile: Josue Guillen'
 date: 2017-09-28 18:55:00 Z
-practitioner-photo: "/uploads/JGuillen.png"
 post-type: Practitioner Profile
-header-image: "/uploads/JGuillen.png"
+feature-img: "/uploads/JGuillen.png"
 author: Puck Lo
 layout: post
 ---

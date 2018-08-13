@@ -1,9 +1,8 @@
 ---
 title: 'Practitioner Profile: Kenyatta Forbes'
 date: 2018-05-30 16:30:00 Z
-practitioner-photo: "/uploads/Forbes-Headshot.jpeg"
 post-type: Practitioner Profile
-header-image: "/uploads/Forbes-Headshot-header.jpeg"
+feature-img: "/uploads/Forbes-Headshot-header.jpeg"
 author: Puck Lo
 layout: post
 ---
