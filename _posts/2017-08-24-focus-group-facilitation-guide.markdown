@@ -2,6 +2,7 @@
 title: Focus Group Facilitation Guide
 date: 2017-08-24 20:39:00 Z
 post-type: Research Instrument
+tags: [Research Instrument, Tools, Resources, Resource]
 ---
 
 This guide was used to run focus groups in a variety of different communities of practice across the space of people who work with technology for social justice. 
