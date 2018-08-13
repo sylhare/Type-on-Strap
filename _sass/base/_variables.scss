@@ -33,7 +33,7 @@ $navbar-separator-opacity: 0;
 
 // Feature image for articles
 $feature-image-text-color: #fff;
-$feature-image-size: auto; // options include "cover", "contain", "auto"
+$feature-image-size: contain; // options include "cover", "contain", "auto"
 // Header description box
 $header-desc-background-color: $theme-color;
 $header-desc-text-color: #FFF;
