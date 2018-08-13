@@ -1,0 +1,257 @@
+// @import reset
+// @import fonts
+// @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700')
+// @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro')
+// @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro')
+// @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+
+// $primaryColor: #c95e31 // Red-orange: powerful and says we mean business. Could be brighter?
+// $secondaryColor: #f8e30d // Super bright accent yellow
+// $altColor: #72cace // A bright, but friendly and approachable teal-blue
+// $altSecondaryColor: #f5743d // brighter red-orange
+// $white: #fdfdf1 // A warm off-white: 
+// $black: #415851 // A cool, dark grey
+// $primaryFont: 'Source Sans Pro', 'Montserrat', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+// $headerFont: 'Souce Code Pro', 'Inconsolata', 'Courier', monospace
+
+// *
+//   -moz-box-sizing: border-box
+//   -webkit-box-sizing: border-box
+//   box-sizing: border-box
+
+// html
+//   font-family: $primaryFont
+
+// h1, h2, h3, h4, h5, h6 
+//   font-family: $headerFont
+
+// main
+//   min-height: 100vh
+//   position: relative
+//   background: $white
+
+// .content
+//   max-width: 960px
+//   margin: 0 auto
+//   clear: both
+//   padding: 0 2em
+
+// b
+//   font-weight: bold
+
+.filters-group
+  display: flex
+  .filters
+    flex: 1
+    margin-right: 0.5em
+    &:last-child
+      margin-right: 0
+
+.filters
+  display: flex
+  margin: 0.5em 0
+  button
+    flex: 1
+    padding: 1.2em 0.4em 1em 0.4em
+    font-size: 0.8em
+    text-align: center
+    color: #444
+    cursor: pointer
+  i
+    padding: 0 0.5em
+.filters-stars
+  font-size: 0
+  i
+    font-size: 12px
+.filters-categories
+  // flex-wrap: wrap
+  // -webkit-flex-wrap: wrap
+  // button
+  //   text-transform: uppercase
+  //   font-size: 0.80em
+  //   padding: 1.2em 0.8em 1em 0.8em
+  //   border-bottom: 2px solid rgba(0,0,0,0)
+  //   white-space: nowrap
+  //   &:hover
+  //     border-bottom: 2px dotted #fff
+  //   &.selected
+  //     border-bottom: 2px solid #fff
+.filters-all
+  background: $primaryColor
+  color: #fff
+  padding: 1em 0
+  button
+    background: #fff
+    color: #343434
+    margin: 0 0.25em 0.5em 0.25em
+    &:hover
+      background: $secondaryColor
+      color: #fff
+    &.selected
+      background: $primaryColor
+      color: #fff
+    &:disabled
+      opacity: 0.6
+  .filters
+    flex-wrap: wrap
+    -webkit-flex-wrap: wrap
+
+.search-input
+  width: 100%
+  padding: 0.5em 1em 0.5em 2.5em
+  border: none
+  font-family: $primaryFont
+  font-size: 1.5em
+  border-radius: 2em
+  color: #a6a6a6
+
+.search-wrapper
+  position: relative
+  margin: 0 0 2em 0
+  &:before
+    font-family: 'FontAwesome'
+    color: $primaryColor
+    position: absolute
+    top: 0.3em
+    left: 0.5em
+    content: "\f002"
+    font-size: 2em
+
+a, a:visited
+  color: #000
+  &:hover
+    color: $primaryColor
+
+// header
+//   color: #444
+//   background: $altColor
+//   //background-image: url('../assets/monicaramos.jpeg')
+//   background-size: cover
+//   background-position: top center
+//   padding: 1em
+//   h1
+//     a, a:visited, a:hover
+//       color: #fff !important
+//       text-decoration: none
+//   .logo
+//     float: left
+//     font-size: 1.8em
+//   .get-involved
+//     float: right
+//     li
+//       float: left
+//       padding: 0.5em 1em
+//       border: 2px solid $white
+//       text-transform: lowercase
+//       a, a:visited
+//         color: #444
+//         text-decoration: none
+//       &:first-child
+//         background: $white
+//   img
+//     width: 32px
+//     margin-right: 0.1em
+//     vertical-align: middle
+//     margin-top: -2px
+
+// .header-bar
+//   font-size: 0.8em
+
+// .title
+//   text-transform: uppercase
+//   font-size: 2.8em
+//   text-align: center
+//   font-weight: bold
+//   margin: 3em 0 0.8em 0
+
+// footer
+//   background: $black
+//   color: #fff
+//   padding: 0.5em 1em
+//   display: flex
+//   position: fixed
+//   bottom: 0
+//   left: 0
+//   right: 0
+//   z-index: 1
+//   a, a:visited
+//     color: #fff
+//     text-decoration: none
+//     &:hover
+//       color: #fff
+//       text-decoration: underline
+//   img
+//     width: 42px
+//     vertical-align: middle
+//     margin-right: 0.5em
+//   .footer-left,
+//   .footer-right
+//     span, a
+//       margin: 0 0.5em
+//   .footer-right
+//     text-align: right
+//   .copyright
+//     text-align: center
+//   .footer-left,
+//   .footer-right,
+//   .copyright
+//     flex: 1
+//     line-height: 2.5
+
+.filters-all-content
+  display: none
+  > .filters:first-child
+    margin-top: 1em
+.filters-controls
+  font-size: 1.2em
+  overflow: hidden
+  button, button:hover
+    color: #fff
+    background: none
+    margin: 0
+
+.toggle-filters
+  float: left
+  cursor: pointer
+.clear-filters
+  float: right
+  cursor: pointer
+
+.search-dropdown
+  position: absolute
+  background: #eee
+  color: #111
+  left: 2.8em
+  right: 2em
+  z-index: 10
+  li
+    padding: 1em
+    cursor: pointer
+    &:hover
+      background: #ddd
+
+.filters-state
+  margin: 1em 0
+  text-align: center
+
+@media screen and (max-width: 490px)
+  // .header-bar
+  //   text-align: center
+  //   > *
+  //     display: block
+  //     float: none !important
+  //     text-align: center
+  //   .get-involved li
+  //     float: none
+  //     display: inline-block
+  //   h1
+  //     margin-bottom: 1em
+  // header .content
+  //   padding: 0
+
+@media screen and (max-width: 820px)
+  // footer
+  //   display: block
+  //   text-align: center
+  //   .footer-right
+  //     text-align: center
