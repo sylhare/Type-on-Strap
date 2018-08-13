@@ -1,4 +1,12 @@
-# Type on Strap 
+---
+layout: page
+title: "Documentation" 
+permalink: /documentation.html               # Set a permalink your your page
+hide: true                           # Prevent the page title to appear in the navbar
+tags: [sample, markdown, html]
+---
+
+# Type on Strap Documentation
 
 [![Build Status](https://travis-ci.org/Sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/Sylhare/Type-on-Strap) 
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
