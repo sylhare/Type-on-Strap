@@ -8,7 +8,7 @@
     text-align: center;
     color: $header-desc-text-color;
     background: $header-desc-background-color no-repeat;
-    background-size: $feature-image-size;
+    background-size: $header-image-size;
 
     /* --- Responsive --- */
     @media screen and (max-width: 850px) {
