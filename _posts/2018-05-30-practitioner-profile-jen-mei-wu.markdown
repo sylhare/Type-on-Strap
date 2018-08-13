@@ -2,6 +2,7 @@
 title: 'Practitioner Profile: Jen-Mei Wu'
 date: 2018-05-30 16:00:00 Z
 feature-img: "/uploads/jenmei-mask.jpg"
+thumbnail: "/uploads/jenmei-mask.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]
