@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Berhan Taye'
 date: 2017-09-28 17:58:00 Z
-feature-img: "/uploads/BerhanTaye.jpg"
-thumbnail: "/uploads/BerhanTaye.jpg"
+feature-img: "/assets/img/photos/BerhanTaye.jpg"
+thumbnail: "/assets/img/photos/BerhanTaye.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]

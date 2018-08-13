@@ -11,4 +11,4 @@ This guide was used to run focus groups in a variety of different communities of
 
 Feel free to use this guide, or a modified version, to run a focus group in your own community. 
 
-[Link to PDF of focus group facilitation guide (12 pages)](/uploads/resources/T4SJ-Focus-Group-Guide.pdf)
+[Link to PDF of focus group facilitation guide (12 pages)](/assets/resources/T4SJ-Focus-Group-Guide.pdf)

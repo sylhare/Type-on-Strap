@@ -2,8 +2,8 @@
 title: 'Practitioner Profile: Diana Nucera'
 date: 2017-03-07 16:39:00 Z
 author: Puck Lo
-feature-img: "/uploads/diana_resized2.png"
-thumbnail: "/uploads/diana_resized2.png"
+feature-img: "/assets/img/photos/diana_resized2.png"
+thumbnail: "/assets/img/photos/diana_resized2.png"
 layout: post
 tags: [Practitioner Profile, profile, practitioner]
 ---

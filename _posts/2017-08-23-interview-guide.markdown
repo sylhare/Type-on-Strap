@@ -10,4 +10,4 @@ This interview guide, which was the basis for all of the interviews conducted wi
 
 <!--break-->
 
-* [Link to PDF version of semi-structured interview guide we used for our interview process in 2017 (6 pages)](/uploads/resources/T4SJ-interview-guide-II.pdf).
+* [Link to PDF version of semi-structured interview guide we used for our interview process in 2017 (6 pages)](/assets/resources/T4SJ-interview-guide-II.pdf).

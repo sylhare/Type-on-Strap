@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Alfredo Lopez'
 date: 2017-02-28 17:23:00 Z
-thumbnail: "/uploads/alfredo3.png"
-feature-img: "/uploads/alfredo1.jpg"
+thumbnail: "/assets/img/photos/alfredo3.png"
+feature-img: "/assets/img/photos/alfredo1.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]

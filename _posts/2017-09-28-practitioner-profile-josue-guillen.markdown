@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Josue Guillen'
 date: 2017-09-28 18:55:00 Z
-feature-img: "/uploads/JGuillen.png"
-thumbnail: "/uploads/JGuillen.png"
+feature-img: "/assets/img/photos/JGuillen.png"
+thumbnail: "/assets/img/photos/JGuillen.png"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]

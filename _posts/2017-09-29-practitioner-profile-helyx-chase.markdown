@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Helyx Chase'
 date: 2017-09-29 19:50:00 Z
-thumbnail: "/uploads/Helyx%20photo.jpg"
-feature-img: "/uploads/Helyx%20photo.jpg"
+thumbnail: "/assets/img/photos/Helyx%20photo.jpg"
+feature-img: "/assets/img/photos/Helyx%20photo.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]
