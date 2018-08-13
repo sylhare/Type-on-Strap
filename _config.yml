@@ -1,21 +1,21 @@
 # SITE CONFIGURATION
 baseurl: "/morethancode"
 url: "https://opentechinstitute.github.io"
-title: MoreThanCode # site's title
+title: '#MoreThanCode' # site's title
 description: "The MoreThanCode Report Website" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: MoreThanCode # blog's title
+  title: '#MoreThanCode' # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
+     <p>#MoreThanCode: Practitioners reimagine the landscape of technology for justice and equity</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
