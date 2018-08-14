@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-baseurl: "/morethancode"
-url: "https://opentechinstitute.github.io"
+baseurl: ""
+url: "morethancode.cc"
 title: '#MoreThanCode' # site's title
 description: "The MoreThanCode Report Website" # used by search engines
 
@@ -29,7 +29,7 @@ theme_settings:
   facebook:
   flickr:
   gitlab:
-  github: "opentechinstitute/MoreThanCode"
+  github: "opentechinstitute/morethancode"
   google_plus:
   instagram:
   keybase:
