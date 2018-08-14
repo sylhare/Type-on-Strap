@@ -27,7 +27,7 @@ function drawToolBox(data) {
     	out += '<li class="quote">'+ v.quote +'</li>'
     	out += '<li><strong>'+ v.interviewee +', '+ v.title +'</strong></li>'
     	out += '<li class="category"><small>'+ category +'</small></li>'
-    	out += '<li><a href="https://t4sj.co/quotes#'+ v.id +'"><small>LINK</small></a></li>'
+    	out += '<li><a href="https://morethancode.cc/quotes#'+ v.id +'"><small>LINK</small></a></li>'
     	out += '</ul></div></div>'
     });
 
