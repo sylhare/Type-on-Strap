@@ -1,0 +1,216 @@
+$borderSize: 4px
+$resultHeight: 16em
+
+.results
+  margin: 3em auto 0em auto
+  padding-bottom: 3em
+  padding-top: 2em
+  max-width: 1200px
+  margin: 0 auto
+  padding: 2em 2em
+  clear: both
+
+.result
+  display: inline-block
+  width: 31.2%
+  //border: $borderSize solid $primaryColor
+  background-color: #fbf5e4 //rgba(0,0,0,0.0625) //#fdf8e8
+  text-align: center
+  padding: 1.5em 1.2em
+  margin: 0.7%
+  position: relative
+  vertical-align: top
+  height: $resultHeight
+  ul
+    display: flex
+    flex-wrap: wrap
+  a, a:visited
+    color: #fff
+    &:hover
+      color: $primaryColor
+  h2
+    font-size: 1.4em
+    letter-spacing: 0.1em
+    padding: 0 0 0.5em 0
+    color: $primaryColor
+    border-bottom: 1px solid $primaryColor
+    line-height: 2.4em
+    hyphens: auto
+    span
+      display: inline-block
+      vertical-align: middle
+      line-height: normal
+  &:hover
+    .result-info
+      display: block
+.result-info
+  display: none
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: $primaryColor
+  color: #fff
+  padding: 1.5em
+  text-align: left
+  h3
+    padding: 0 0 1em 0
+    font-size: 1.1em
+    line-height: 1.4
+    border-bottom: 1px solid white
+    margin-bottom: 1em
+    a
+      font-weight: bold
+      &:hover
+        color: #fff !important
+        text-decoration: underline !important
+      &:first-child
+        text-decoration: none
+
+.tag 
+  background-color: $white
+  color: $black
+
+.result-stats
+  position: absolute
+  bottom: 1.5em
+  left: 1.5em
+  right: 1.5em
+  display: flex
+  li
+    flex: 1
+    margin-right: 0.5em
+    &:last-child
+      margin-right: 0
+    &:first-child
+      flex: 1.5
+  i
+    font-size: 2em
+  h6
+    text-transform: uppercase
+    font-weight: bold
+    font-size: 0.7em
+    margin: 0 0 1em 0
+  .stars i
+    font-size: 1em
+  h1
+    color: #fff
+    display: inline-block
+
+.result-meta
+  border-top: 1px solid $white
+  font-size: 1em
+  line-height: 1.5
+  padding: 1em 0
+.result-meta-lead
+  text-transform: uppercase
+
+.result-description
+  font-size: 1em
+  line-height: 1.5
+  color: $black
+  margin-top: 0.6em
+  margin-bottom: 0
+
+.result-actions
+  font-size: 0.9em
+  text-transform: uppercase
+  position: absolute
+  display: flex
+  //bottom: -$borderSize
+  //left: -$borderSize
+  //right: -$borderSize
+  bottom: 0
+  left: 0
+  right: 0
+  a, a:visited
+    display: block
+    flex: 1
+    text-align: center
+    text-decoration: none
+    padding: 1em
+    background: $secondaryColor
+    color: $black
+    &:hover 
+      background-color: lighten($secondaryColor, 20%)
+
+.result-service
+  font-weight: bold
+  text-decoration: underline
+
+.result-meta-info
+  float: left
+  width: 70%
+.result-meta-share
+  font-size: 1.2em
+  color: $primaryColor
+  float: right
+  width: 30%
+  text-align: right
+  padding-top: 0.2em
+  a, a:visited
+    color: $primaryColor
+  i
+    background: #fff
+    padding: 0.45em 0.5em
+    border-radius: 40em
+    margin-left: 0.5em
+    cursor: pointer
+
+.no-results, .loading
+  text-align: center
+  margin: 3em 0
+  font-size: 2em
+  line-height: 1.4
+
+.result-sharing
+  display: none
+  position: absolute
+  top: -$borderSize
+  left: -$borderSize
+  right: -$borderSize
+  bottom: -$borderSize
+  background: rgba(255,255,255,0.5)
+  text-align: center
+  line-height: $resultHeight
+  li
+    margin-top: -1em
+    display: inline-block
+    vertical-align: middle
+    line-height: normal
+    a, a:visited
+      display: block
+      padding: 1em 1.2em
+      background: $primaryColor
+      color: #fff
+      &:hover
+        background: $secondaryColor
+        color: #fff
+
+.result-state
+  cursor: pointer
+
+.result-preview
+  text-align: left
+
+.dead 
+  //background: darken($white, 1%)
+  //color: lighten(#c39979, 10%)
+  //border-color: lighten(#c39979, 10%)
+  h2, h3, a, a:visited, a:hover, a:visited:hover, .result-description, p
+    //color: #c39979
+  .result-actions a
+    //color: $black
+
+@media screen and (max-width: 990px)
+  .result
+    width: 48%
+  .results
+    padding-bottom: 3em
+
+@media screen and (max-width: 690px)
+  .result
+    width: 100%
+  .results
+    padding-bottom: 3em

@@ -1,5 +1,5 @@
 // T4SJ Base
-@import 'layouts/t4sj';
+@import 'custom/t4sj';
 
 // Variables
 @import 'base/variables';
@@ -18,7 +18,8 @@
 @import 'layouts/page';
 @import 'layouts/tags';
 @import 'layouts/search';
-@import 'layouts/orglist';
+@import 'custom/orglist';
+@import 'custom/result';
 
 // Includes
 @import 'includes/footer';
@@ -31,7 +32,6 @@
 
 // T4SJ
 // @import headers
-// @import result
 // @import resource
 // @import about
 // @import people
