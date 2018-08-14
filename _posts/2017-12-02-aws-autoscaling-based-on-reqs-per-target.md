@@ -5,9 +5,9 @@ tags: [AWS, ASG, Launch Config, Auto Scaling, EC2, ELB]
 published: true
 ---
 
-This is a short tutorial on how to get started with auto scaling on AWS. I created this tutorial after some personal research into scaling a Spring Boot application. It will get you up and running with a load balancer and a variable number of servers, scaling up based on the number of requests your service receieves. The beauty of AWS is you pay for what you use, so being able to scale out and back in means you are ready for large amounts of traffic, but you are also not overpaying for idle servers. This guide goes through how to set this up.
+This is a short tutorial on how to get started with auto scaling on AWS. I created this tutorial after some personal research into scaling a Spring Boot application. It will get you up and running with a load balancer and a variable number of servers, scaling up based on the number of requests your service receives. The beauty of AWS is you pay for what you use, so being able to scale out and back in means you are ready for large amounts of traffic, but you are also not overpaying for idle servers. This guide goes through how to set this up.
 
-### Jargon 
+### Jargon
 
 We will be setting up the following components:
 
@@ -29,22 +29,22 @@ A security group acts as a virtual firewall that controls the traffic for one or
 ##### Key Pair (Free)
 A key pair allows you to remotely log in to your servers via SSH if required. You must save the private key which AWS provide and use this private key for connecting to your instance.
 
-### Launching into AWS 
+### Launching into AWS
 
-This is broken down in to four steps: 
+This is broken down in to four steps:
 - Create a load balancer
-- Create the launch configuration 
+- Create the launch configuration
 - Create an auto scaling group (And scaling policies)
 - Testing
 
 #### Create a load balancer
 
 The load balancer distributes traffic between each of your EC2 instances. To set it up, log in to your AWS console and go to the EC2 service, then:
-- Click "Load Balancers" in the navigation. 
+- Click "Load Balancers" in the navigation.
 - Click "Create Load Balancer" and select "Application Load Balancer".
-- On step 1, give your load balancer a name, e.g "ApacheLoadBalancer". 
+- On step 1, give your load balancer a name, e.g "ApacheLoadBalancer".
 - Within "Availability Zones", tick all of the availability zones in your region. This allows your load balancer to distribute traffic between all of the available availability zones in your region, this is essential for resiliancy. Its always a good planto utilise multiple availability zones as it means if one data center gets flooded, or there is a fire, not all of your servers are there and your service can continue to run.
-- Leave the rest as default, and press "Next: Configure Security Groups". 
+- Leave the rest as default, and press "Next: Configure Security Groups".
 - Create a new security group which allows inbound traffic on port 80. This is the port HTTP traffic uses. If you want to set up SSL and HTTPS, you should allow port 443. However, that isn't necessary for this tutorial.
 - Name your security group (e.g ApacheLoadBalancerSecurityGroup) and press "Next".
 - Create a new taget group and name it (e.g ApacheTargetGroup) and press "Next".
@@ -56,7 +56,7 @@ The load balancer distributes traffic between each of your EC2 instances. To set
 You have now set up a load balancer, but it does not have any instances to route traffic to as the target group is empty. The next step is to create the launch configuration.
 
 
-#### Create the launch configuration 
+#### Create the launch configuration
 
 The launch configuration tells AWS how to create new servers to add to your target group. It has the details about instance size (memory and vCPUs) and how to initialise the server. Follow these steps to set up a simple launch configuration for a server with Apache installed and a simple "Hello World" HTML page.
 
@@ -64,7 +64,7 @@ Still within the "EC2" service on AWS, Select "Launch Configurations", then:
 - Click "Create launch configuration".
 - Select "Amazon Linux AMI"
 - Select the instance since you want. The t2.micros are in the free-tier usage and so I would recommend them for this tutorial. You get up to 750 hours total of free t2.micro use per month. There are about 750 hours in a month so you can use 1 server continually for free, or you could use for example 75 for 10 hours.
-- Select next and give your launch configuration a name, for example "ApacheLaunchConfiguration". 
+- Select next and give your launch configuration a name, for example "ApacheLaunchConfiguration".
 - The apache server doesn't need an IAM role since it does not interract with AWS services, however you do need to specify some user-data, so select "Advanced".
 - The userdata script tells the server what to do when it starts up. We can specify a very simple script which installs apache and sets up a static HTML page saying "Hello World". This can be achieved by entering the following into the userdata:
 
@@ -88,7 +88,7 @@ echo "</html>" >> index.html
 - You may want to edit this to, for example, launch your spring boot application or clone and execute a github repository, but for this example it's just a simple apache server.
 - Press next to add storage, leave the defaults and press next to configure security groups.
 - Create a new security group. Call it something like "ApacheServiceSecurityGroup". Your EC2 instance needs to allow inbound traffic from your load balancer, so select "HTTP" for the type, port 80, and  select "Custom IP".
-- Here you can type in the name of the security group you attached to the load balancer. If you followed the example, it will be "ApacheLoadBalancerSecurityGroup". 
+- Here you can type in the name of the security group you attached to the load balancer. If you followed the example, it will be "ApacheLoadBalancerSecurityGroup".
 - Select review. It will look like this:
 
 ![image]({{ site.baseurl }}/assets/img/posts/autoscaling/launch-config-review.PNG)
@@ -119,7 +119,7 @@ We can verify that everything is working by sending requests to our load balance
 
 ![image]({{ site.baseurl }}/assets/img/posts/autoscaling/hello-world.PNG)
 
-You can monitor the request count per target by selecting "Target Groups", then selecting "Monitoring". 
+You can monitor the request count per target by selecting "Target Groups", then selecting "Monitoring".
 
 ![image]({{ site.baseurl }}/assets/img/posts/autoscaling/request-per-target.PNG)
 
@@ -129,4 +129,3 @@ Finally, send some traffic to your instance to cause the "Request Count Per Targ
 #### Clean-up
 
 You should delete everything you have created to avoid unnecessary charges to your account. You should delete the load balancer first, then delete the auto scaling group which will in turn terminate any EC2 instances. Finally, delete the unnecessary target group, launch configuration and security groups.
-
