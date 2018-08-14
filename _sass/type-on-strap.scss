@@ -1,9 +1,6 @@
 // Variables
 @import 'base/variables';
 
-// T4SJ Base
-@import 'custom/t4sj';
-
 // External
 @import 'external/reset';
 @import 'external/syntax';
@@ -18,6 +15,9 @@
 @import 'layouts/page';
 @import 'layouts/tags';
 @import 'layouts/search';
+
+// T4SJ Base
+@import 'custom/t4sj';
 @import 'custom/result';
 @import 'custom/orglist';
 
