@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Noel Hidalgo'
 date: 2018-05-30 16:50:00 Z
-feature-img: "/assets/img/photos/Hidalgo_Noel_Large_Smile.jpg"
-thumbnail: "/assets/img/photos/Hidalgo_Noel_Large_Smile.jpg"
+feature-img: "assets/img/photos/Hidalgo_Noel_Large_Smile.jpg"
+thumbnail: "assets/img/photos/Hidalgo_Noel_Large_Smile.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]

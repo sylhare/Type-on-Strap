@@ -1,8 +1,8 @@
 ---
 title: 'Practitioner Profile: Aliya Rahman'
 date: 2018-05-30 15:50:00 Z
-feature-img: "/assets/img/photos/AliyaRahman.jpg"
-thumbnail: "/assets/img/photos/AliyaRahman.jpg"
+feature-img: "assets/img/photos/AliyaRahman.jpg"
+thumbnail: "assets/img/photos/AliyaRahman.jpg"
 author: Puck Lo
 layout: post
 tags: [Practitioner Profile, profile, practitioner]

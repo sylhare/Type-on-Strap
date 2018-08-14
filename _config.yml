@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "morethancode.cc"
+url: "https://morethancode.cc"
 title: '#MoreThanCode' # site's title
 description: "The MoreThanCode Report Website" # used by search engines
 
