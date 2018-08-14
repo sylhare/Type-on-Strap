@@ -6,9 +6,5 @@ feature-img: "assets/img/pexels/circuit.jpeg"
 tags: [About, Archive]
 ---
 
-Type on Strap is based on Type Theme, a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
-
-Head over to the [theme's documentation](https://github.io/sylhare/Type-on-Strap) for much more information about Type on Strap or to install this theme on your own Jekyll site.
-
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
+The Technology for Social Justice Field Scan is a participatory action research project intended to better understand the types of work currently being done with technology for social justice (and more broadly, in the public interest), as well as the pathways people take into this work. The goal is to identify people, groups, and networks who work in this space, including those who are not ‘the usual suspects’ in the civic technology world, and to learn from them: what their paths into the work have been; what they see as their greatest constraints; where they see barriers; and what they feel is most needed to grow and diversify the field.
  
