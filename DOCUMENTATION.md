@@ -3,7 +3,6 @@ layout: page
 title: "Documentation" 
 permalink: /documentation.html               # Set a permalink your your page
 hide: true                           # Prevent the page title to appear in the navbar
-tags: [sample, markdown, html]
 ---
 
 # Type on Strap Documentation
