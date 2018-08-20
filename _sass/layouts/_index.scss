@@ -4,11 +4,13 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    font-size: 1.2em;
+    font-size: 2.2em;
+    font-weight: bold;
     text-align: center;
     color: $header-desc-text-color;
     background: $header-desc-background-color no-repeat;
     background-size: $header-image-size;
+
 
     /* --- Responsive --- */
     @media screen and (max-width: 850px) {
