@@ -24,4 +24,4 @@ Key recommendations include:
 
 The project is co-led by [Research Action Design](RAD.cat) and the [Open Technology Institute at New America](newamerica.org/oti), together with research partners Upturn, Media Mobilizing Project, Coworker.org, Hack the Hood, May First/People Link, Palante Technology Cooperative, Vulpine Blue, and The Engine Room.
 
-[Download the Full Report.](T4SJ_fullreport_082018_AY_web.pdf).
+[Download the Full Report.](/T4SJ_fullreport_082018_AY_web.pdf)
