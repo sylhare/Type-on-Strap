@@ -6,9 +6,9 @@ layout: post
 tags: [Executive Summary, Findings, Report, MoreThanCode]
 ---
 
-[<img class="cover" src="/assets/img/IMG_20170325_113030.jpg">](T4SJ_fullreport_082018_AY_web.pdf)
+[<img class="cover" src="/assets/img/IMG_20170325_113030.jpg">](/T4SJ_fullreport_082018_AY_web.pdf)
 
-The Technology for Social Justice Project (T4SJ) is excited to release a new report, **#MoreThanCode: Practioners Reimagine the landscape of technology for justice and equity.** [Download the Full Report.](T4SJ_fullreport_082018_AY_web.pdf).
+The Technology for Social Justice Project (T4SJ) is excited to release a new report, **#MoreThanCode: Practioners Reimagine the landscape of technology for justice and equity.** [Download the Full Report.](/T4SJ_fullreport_082018_AY_web.pdf)
 
 <!--break-->
 
