@@ -9,7 +9,7 @@ description: "The MoreThanCode Report Website" # used by search engines
 theme_settings:
   # Meta
   title: '#MoreThanCode' # blog's title
-  avatar: assets/img/triangle.svg
+  avatar: assets/logos/t4sj-logo-1-cream-03.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
@@ -17,7 +17,7 @@ theme_settings:
   header_text: > #two or three lines to describe your site
      <p>#MoreThanCode: 
      Practitioners reimagine the landscape of technology for justice and equity</p>
-  header_text_feature_image: assets/img/IMG_20170325_113030.jpg
+  header_text_feature_image: assets/img/grey-background-graphic.jpg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 

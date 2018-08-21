@@ -6,9 +6,9 @@ layout: post
 tags: [Executive Summary, findings, report, morethancode]
 ---
 
-[<img class="cover" src="/assets/img/T4SJ_Exec_Summ_final_web_cover.jpg" height="800px">](T4SJ_Exec_Summ_final_web.pdf)
+[<img class="cover" src="/assets/img/T4SJ_Exec_Summ_final_web_cover.jpg" height="800px">](/T4SJ_Exec_Summ_final_web.pdf)
 
-[Download the Executive Summary.](T4SJ_Exec_Summ_final_web.pdf)
+[Download the Executive Summary.](/T4SJ_Exec_Summ_final_web.pdf)
 [Want to be notified about the Full Report? Sign up here.](https://goo.gl/forms/3tUQvTv1vlo6lf6Y2)
 
 <!--break-->
