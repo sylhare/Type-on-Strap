@@ -601,10 +601,10 @@ h4 {
 }
 
 blockquote {
-	border-left: 2px solid #9fd2e3;
+	border-left: 2px solid #00000021;
 	margin: 1em 1em;
 	padding: 0.75em 1em;
-	background-color: #EEF7FA;
+	background-color: rgb(245, 245, 245);
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1)
 }
 
