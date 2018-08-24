@@ -24,22 +24,32 @@ This report was produced by the Tech for Social Justice Project [https://moretha
 
 The following goals, developed by all partners at our first convening, guided our research process:
 
+![Ecosystem](/assets/report/ecosystem.jpg){:height="100px" display="block"}
+
 **I. ECOSYSTEM**
 Define the field(s) and inventory the current ecosystem.
+
+![Demographics](/assets/report/demographics.jpg "Demographics"){:height="100px" display="block"}
 
 **II. DEMOGRAPHICS**
 Expand understanding of who participates in the field(s).
 
+![Practitioner](/assets/report/practitioner.jpg "Practitioner"){:height="100px" display="block"}
+
 **III. PRACTITIONER EXPERIENCES**
 Establish a baseline understanding of practitioner experiences, how individuals came to this work (career path), barriers and opportunities practitioners (and their communities) face, and the support practitioners may need now.
+
+![Vision](/assets/report/vision.jpg "Vision"){:height="100px" display="block"}
 
 **IV. VISIONS & VALUES**
 Capture practitioner visions of what is needed to transform and build the field(s) in ways that are inclusive and aligned with their values (social justice, social good, public interest, etc., as articulated by practitioners themselves), as well as how to mitigate threats.
 
+![Stories](/assets/report/stories.jpg "Stories"){:height="100px" display="block"}
+
 **V. STORIES OF SUCCESS AND FAILURE**
 Document and distinguish models and approaches to carrying out technology for social justice (& etc.) work and projects on the ground. Identify what works, what doesn’t, and why.
 
-Read more about the Funding & Advisory Organizations, Research Team (Coordinating Partners and Research Partner Organziations.) #TODO
+Read more about the [Funding & Advisory Organizations](/about/), [Research Team (Coordinating Partners and Research Partner Organziations)](/about/).
 
 ### ECOSYSTEM
 
@@ -53,7 +63,8 @@ Like a natural ecosystem, the ecosystem of people, organizations, and networks w
 - **People use many different terms and frames to talk about this ecosystem.**
 Study participants identified over 252 terms to describe the work they do (see http://bit.ly/t4sj-terms-shared). We gave 96 participants a terms worksheet and asked them to select or add terms they identified with. The most frequently used terms included “free software” (selected by 40) and “open data” (37); “privacy” (36) or “security” tech (31); “digital literacy” (35); “open web” or “open internet” (30 each); “community technology,” “civic tech,” and “net neutrality” (28 each); “tech policy” and “inclusive design” (27 each). The terms that people found most problematic were “sharing economy” (18) and “smart cities” (14). We also coded all 215 terms into the following top-level categories:
 
-[IMAGE] #TODO
+![Terms Practitioners Identify With](/assets/report/graphs-01.jpg "Terms Practitioners Identify With"){:display="block"}
+
 
 - **Many practitioners feel that differences between terminology and framing are important and should not be erased.** Participants articulated clear differences between “civic tech,” “community technology,” and “public interest technology.” Many identify with one, but not another, of these terms. For example, some see “civic tech” as a field of practice that is predominantly white, male, U.S.-centric, and institutionalist. Several participants, mostly women, LGBTQ folks, and/or PoC who feel excluded or marginalized from other technology related spaces, said that they feel included in “community technology” spaces.
 - **Just one in five (18 out of 96) participants identified with the terms “public interest technology” or “public interest technologist.”** Many think of these terms as primarily relevant to government technology, telecommunications policy, and public interest law.
@@ -62,7 +73,7 @@ Study participants identified over 252 terms to describe the work they do (see h
 - **Funding is unequally distributed among the various subfields in this ecosystem, in ways that replicate structural inequality.** For example,study participants shared that in their experience, national organizations, organizations led by white men, and those with certain frames receive the lion’s share of resources.
 - **There are thousands of organizations working in this ecosystem.** We gathered a database of over 700 organizations and projects, identified over 40,000 nonprofit organizations from IRS form 990 data, and populated a spreadsheet with hundreds of educational programs and networks (both formal and informal) focused on helping people develop skills for this work. In addition to nonprofit organizations, participants said that tech cooperatives and collectives, membership organizations, and independent consultants provide key support for the technology needs of grassroots, movement-building organizations.
 
-[IMAGE] #TODO
+![Organization Counts by Category](/assets/report/graphs-02_alt_AY.jpg "Organization Counts by Category"){:display="block"}
 
 - **A great deal of work is done by volunteers, nonprofessionals, and informal networks.** This indicates the strength, breadth, importance, and attraction of the field. However, some participants feel that reliance on volunteerism has negative implications for inclusivity and sustainability.
 - **Practitioners across this ecosystem are doing transformational work, even in conditions of scarce resources.** This is a diverse, vibrant ecosystem, and we found many powerful stories of success (see the Models that Work section of the full report for examples).
@@ -77,17 +88,17 @@ Our second research goal is to **expand understanding of practitioner demographi
 
 Racism, sexism, classism, ableism, transphobia, and other forms of oppression permeate the broader tech sector. Unfortunately, based on the experiences of study participants, the non-profit, community, and public tech subsectors we looked at are not immune to these problems. A total of **188 individuals participated in our research**, including **79 focus group participants and 109 interviewees.** A total of **121 individuals (64% of participants)** completed the demographic questionnaire. We found:
 
-[IMAGE] #TODO
+![50% mentioned barriers](/assets/report/graphs-11.jpg "50% mentioned barriers"){:display="block"}
 
 - **Many practitioners (about 50%) shared experiences of intersecting racism, sexism, classism, ableism, transphobia, and other forms of structural, institutional, and interpersonal oppression while working in this ecosystem.** Like the broader technology sector, in study participants’ experiences, this ecosystem is disproportionately dominated by elite white cisgender men in leadership and decision-making positions.
 - **This ecosystem lacks public demographic data about race, class, gender identity, sexual orientation, disability, and other important variables.** Key actors in the space, including the biggest players such as Code for America
 and the Knight Foundation, have not historically tracked or publicly shared demographic data about their employees, volunteers, leadership, or grantees, although this is beginning to change. This undermines accountability for equity goals.
 
-[IMAGE] #TODO
+![Participant Race/Ethnicity](/assets/report/graphs-03_ay.jpg "Participant Race/Ethnicity"){:display="block"}
 
 - **There are a number of well-developed strategies for addressing diversity, inclusion, and equity.** Practitioners shared existing strategies and suggested their broader adoption. Suggestions for best practices include: gather and share demographic data about field participants; publicly set equity goals with timelines; and adopt best practices in recruitment, hiring, and mentorship.
 
-[IMAGE] #TODO
+![Participant Gender Identity](/assets/report/graphs-04_ay.jpg "Participant Gender Identity"){:display="block"}
 
 - **Based on study participants’ experiences, this ecosystem is more diverse than the broader tech sector, but it still needs to be more diverse and inclusive.** The ecosystem lacks demographic data, so we cannot make strong statistical claims. However, we trust participants’ statements about their
 lived experiences. We worked hard to include groups of people who are often marginalized in the broader tech sector in this study: of 121 participants who completed our demographic questionnaire, 55% identified as white and 45%
@@ -126,7 +137,7 @@ We asked practitioners about the values and principles that are most vital to th
 - **It is hard, but necessary, to “walk the talk” in our own spaces.** Truly innovative spaces are collaborative, inclusive, and diverse, and creating such spaces takes a lot of work. Power inequality within organizations, as well as competition for scarce resources, are problems for many practitioners.
 - **Free/Libre and Open Source Software** is seen by many practitioners as crucial to growing and sustaining the ecosystem, because its values are consistent with their goals of equity and social justice, and because in practice it enables resource sharing around technology development, rather than competition.
 
-[IMAGE] #TODO
+![Key Threats](/assets/report/graphs-13.jpg "Key Threats"){:display="block"}
 
 - **Practitioners identified the following six key threats to the communities they work with: state violence and surveillance; politically-motivated targeted digital attacks; marginalization based on race, class, gender identity, and sexual orientation; unequal access to digital technology; unaccountable corporate infrastructure; and limited resources.** Additionally, practitioners pointed out that these threats, for the most part, are not new: they are long- standing systemic issues, amplified by new tools and platforms. For example,in the case of surveillance, practitioners noted that well-meaning white technologists have secured most of the available resources with narratives about “new” threats, even though Black, Indigenous, Muslim, Latinx, and Queer/ Trans communities have always faced state surveillance in the United States.
 

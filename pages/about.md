@@ -23,31 +23,49 @@ This report was produced by the Tech for Social Justice Project [https://moretha
 
 The following goals, developed by all partners at our first convening, guided our research process:
 
+![Ecosystem](/assets/report/ecosystem.jpg){:height="100px" display="block"}
+
 **I. ECOSYSTEM**
 Define the field(s) and inventory the current ecosystem.
+
+![Demographics](/assets/report/demographics.jpg "Demographics"){:height="100px" display="block"}
 
 **II. DEMOGRAPHICS**
 Expand understanding of who participates in the field(s).
 
+![Practitioner](/assets/report/practitioner.jpg "Practitioner"){:height="100px" display="block"}
+
 **III. PRACTITIONER EXPERIENCES**
 Establish a baseline understanding of practitioner experiences, how individuals came to this work (career path), barriers and opportunities practitioners (and their communities) face, and the support practitioners may need now.
 
+![Vision](/assets/report/vision.jpg "Vision"){:height="100px" display="block"}
+
 **IV. VISIONS & VALUES**
 Capture practitioner visions of what is needed to transform and build the field(s) in ways that are inclusive and aligned with their values (social justice, social good, public interest, etc., as articulated by practitioners themselves), as well as how to mitigate threats.
+
+![Stories](/assets/report/stories.jpg "Stories"){:height="100px" display="block"}
 
 **V. STORIES OF SUCCESS AND FAILURE**
 Document and distinguish models and approaches to carrying out technology for social justice (& etc.) work and projects on the ground. Identify what works, what doesn’t, and why.
 
 ### FUNDING & ADVISORY ORGANIZATIONS
 
+![NetGain](/assets/logos/netgain.png "NetGain"){:height="50px" display="block"}
+
 **NetGain**
 To address the challenges and opportunities of the Internet age, a group of major foundations has joined forces. Our goal is to strengthen digital society and advance the public interest.
+
+![Code for America](/assets/logos/CfA_logo_lg.png "Code for America"){:height="50px" display="block"}
 
 **Code For America**
 Code for America is working towards a government by the people, for the people, that works in the 21st century.
 
+![OTI](/assets/logos/oti-logo.png "OTI"){:height="50px" display="block"}
+
 **Open Technology Institute**
 OTI works at the intersection of technology and policy to ensure that every commu- nity has equitable access to digital technology and its benefits. We promote universal access to communications technologies that are both open and secure, using a mul- tidisciplinary approach that brings together advocates, researchers, organizers, and innovators.
+
+![Mozilla](/assets/logos/moz-advocacy.png "Mozilla"){:height="50px" display="block"}
 
 **Ford/Mozilla Open Web Fellows Program**
 The Open Web Fellows program – a collaboration between the Ford Foundation and Mozilla – is a 10-month fellowship program that brings together technology talent and civil society organizations from around the world to advance and protect the open internet. Berhan Taye and Maya Wagoner were both supported to work on #MoreThanCode in part by Open Web Fellowships.
@@ -56,9 +74,13 @@ The Open Web Fellows program – a collaboration between the Ford Foundation and
 
 #### Coordinating Organizations
 
+![RAD](/assets/logos/rad-logo.png "RAD"){:height="50px" display="block"}
+
 **Research Action Design**
 _Chris Schweidler, Berhan Taye Gemeda, Bex Hurwitz, Caroline Rivas, Sasha Costanza- Chock, Puck Lo, Jayden Donahue_
 Research Action Design (RAD) uses community-led research, collaborative design of technology and media, and secure digital strategies to build the power of grassroots social movements.
+
+![OTI](/assets/logos/oti-logo.png "OTI"){:height="50px" display="block"}
 
 **Open Technology Institute**
 _Georgia Bullen, Maya Wagoner, Nat Meysenberg, Brooke Hunter, Alison Yost, Joanne Johnson, Chhaya Kapadia_
@@ -67,34 +89,50 @@ policy to ensure that every community has equitable access to digital technology
 
 #### Research Partner Organizations
 
+![Coworker.org](/assets/logos/coworker.jpg "Coworker.org"){:height="50px" display="block"}
+
 **Coworker.org**
 _Jess Kutch, Michelle Miller_
 Coworker.org allows you to start, run, and win campaigns to change your workplace. Have an idea for improving your workplace? Start by creating a Coworker.org petition and talking to your coworkers about your cam- paign. Every day, people are launching and joining campaigns around issues large and small — from improving an office break room to providing paid sick leave to employees. Anything is possible when coworkers join together.
 
+![Engine Room](/assets/logos/engine-room-logo-2.png "Engine Room"){:height="50px" display="block"}
+
 **The Engine Room**
 _Zara Rahman_
 The Engine Room helps activists, organiza- tions, and other social change agents make the most of data and technology to increase their impact. We are a non-profit organiza- tion ourselves, and our international team is made up of experienced and committed practitioners. Since 2011, we have supported more than 200 organizations, big and small, from every corner of the globe.
+
+![Hack the Hood](/assets/logos/hack-the-hood-logo.png "Hack the Hood"){:height="50px" display="block"}
 
 **Hack the Hood**
 _Kim Garcia_
 Hack the Hood is an award-winning non-profit that introduces low-income
 youth of color to careers in tech by hiring and training them to build websites for real small businesses in their own communities. During 6-week “Boot Camps,” young people gain valuable hands-on experience, build a portfolio, and learn about opportunities in the tech industry, as well as building critical technical, leadership, entrepreneurship, and life skills with mentorship from staff and tech professionals working in the field.
 
+![Mayfirst](/assets/logos/mayfirst-logo.png "Mayfirst"){:height="50px" display="block"}
+
 **May First/People Link**
 _Alfredo Lopez, Jamie McClelland, Jaime Villarreal_
 May First/People Link engages in building movements by advancing the strategic use and collective control of technology for local struggles, global transformation, and emancipation without borders.
+
+![MMP](/assets/logos/media-mobilizing-project.jpeg "MMP"){:height="50px" display="block"}
 
 **Media Mobilizing Project**
 _Helyx Chase_
 The Media Mobilizing Project (MMP) builds leaders—leaders who use their stories to make our organizing stronger; and who build the movement for human rights and to end poverty. Since its founding in 2005, MMP has used strategic media, arts, and communications to intervene in critical human rights struggles from public education to healthcare, media reform, and public services.
 
+![Palante](/assets/logos/palante-logo.png "Palante"){:height="50px" display="block"}
+
 **Palante Technology Cooperative**
 _Jack Aponte_
 Palante works to help progressive nonprofit organizations move forward with the aid of technology. We come to this work with technical expertise, a deep understanding of the particular needs of community organizations, and a long-standing commitment to working for social justice.
 
+![Upturn](/assets/logos/upturn-logo.svg "Upturn"){:height="50px" display="block"}
+
 **Upturn**
 _Harlan Yu_
 Upturn works to give people a meaningful voice in how digital technology shapes their lives. We break down barriers between pol- icymakers, technology-builders, and commu- nities, so society can maximize the benefits and avoid the risks of new technology. We produce clear, incisive research and analysis of emerging issues in technology and public policy that guides the public conversation.
+
+![Vulpine Blue](/assets/logos/vulpine-blue-small.png "Vulpine Blue"){:height="50px" display="block"}
 
 **Vulpine Blue**
 _Willow Brugh_
