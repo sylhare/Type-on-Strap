@@ -4,7 +4,7 @@ title: "#MoreThanCode Executive Summary"
 permalink: /report/executivesummary/
 feature-img: "assets/img/IMG_20170325_113030.jpg"
 hide: true
-tags: [Report, Executive Summary, MoreThanCode, practitioners, experiences, stories]
+tags: [Report, Executive Summary, MoreThanCode, Practitioners, Experiences, Stories]
 ---
 
 ## Executive Summary
@@ -102,7 +102,7 @@ and the Knight Foundation, have not historically tracked or publicly shared demo
 
 - **Based on study participants’ experiences, this ecosystem is more diverse than the broader tech sector, but it still needs to be more diverse and inclusive.** The ecosystem lacks demographic data, so we cannot make strong statistical claims. However, we trust participants’ statements about their
 lived experiences. We worked hard to include groups of people who are often marginalized in the broader tech sector in this study: of 121 participants who completed our demographic questionnaire, 55% identified as white and 45%
-as PoC. 48% identified as women, 45% as men, and 14% as genderqueer/ genderfluid, non-binary, trans, or other. 52% work for nonprofits, 25% in a for- profit business or cooperative, 14% in government, 9% in a foundation, and 8% in a university. Participants could choose more than one option, allowing the totals to be greater than 100%. More details are available in the Demographics of Study Participants section of the full report.
+as PoC. 48% identified as women, 45% as men, and 14% as genderqueer/ genderfluid, non-binary, trans, or other. 52% work for nonprofits, 25% in a for-profit business or cooperative, 14% in government, 9% in a foundation, and 8% in a university. Participants could choose more than one option, allowing the totals to be greater than 100%. More details are available in the Demographics of Study Participants section of the full report.
 
 ### PRACTITIONER EXPERIENCES
 
@@ -116,7 +116,7 @@ Practitioner experiences are quite diverse: there is no single pathway into this
 - **There is no standard pathway into careers in this ecosystem, and there are many self-taught techies who play important roles across government, nonprofit, and movement tech work.** A few practitioners described a mismatch between job requirements for Computer Science degrees and the skills that are really needed. To read more about practitioner pathways, see the Pathways/ Education/Career section of the full report.
 - **Many different roles are necessary for the successful integration of technology in social change work.** Successful technology use in government, nonprofits, community-based organizations, and social justice movements does not exclusively, or even primarily, depend on software developers. Designers, project leads, community managers, researchers, communicators, and co-design facilitators are examples of other key tech roles that are important to success. Most crucially, practitioners emphasized that tech projects ought to include and/or be led by people with lived experiences that the projects aim to address.
 - **Supportive individuals (62%); conferences (40%); and fellowships, internships, and mentors (18%) are all key onramps to this work.** The most frequent form of support mentioned by interviewees was supportive individuals (62%), followed by conferences (40%). However, participants also said that conferences are expensive, and that most have a long way to go in order to become inclusive, accessible, and affordable spaces that are welcoming to all.
-- **A small but growing number of formal educational programs are available to train people for careers focused on building, using, or engaging with tech- nology for social justice and/or the public interest.** For example, we gathered this spreadsheet of educational resources: [http://bit.ly/t4sj-ed-programs](http://bit.ly/t4sj-ed-programs). Par- ticipants noted that informal and community-based education is also import- ant. Additionally, 10% of participants mentioned that tech bootcamps, hacker/ makerspaces, and tech meetups are potentially valuable spaces. However, most educational spaces and programs, whether formal or informal, do not yet teach an ethics- or values-driven approach to tech, and tend to replicate the sexist, racist, solutionist culture of the mainstream technology sector.
+- **A small but growing number of formal educational programs are available to train people for careers focused on building, using, or engaging with technology for social justice and/or the public interest.** For example, we gathered this spreadsheet of educational resources: [http://bit.ly/t4sj-ed-programs](http://bit.ly/t4sj-ed-programs). Participants noted that informal and community-based education is also important. Additionally, 10% of participants mentioned that tech bootcamps, hacker/ makerspaces, and tech meetups are potentially valuable spaces. However, most educational spaces and programs, whether formal or informal, do not yet teach an ethics- or values-driven approach to tech, and tend to replicate the sexist, racist, solutionist culture of the mainstream technology sector.
 - **50% of participants mentioned structural, institutional, and interpersonal barriers in this ecosystem.** Participants described racism (33%), sexism (33%), transphobia (10%), ageism against older practitioners in the tech industry and against younger people in civil service (9%), classism (9%), and homophobia (8%). Discrimination based on race, class, gender identity, sexual orientation, disability, and their intersections lead to practitioners feeling unsafe, and make it difficult for some to continue working within this ecosystem. Other barriers include difficulty finding community (29%), a lack of tech integration with core organizational work (22%), difficulty accessing educational programs (14%), and high participation costs.
 - **Many women experience sexism in this work, just as in the broader tech sector.** Ten percent of study participants mentioned transphobia as a barrier. A few described racism, classism, and/or other forms of discrimination.
 
@@ -139,7 +139,7 @@ We asked practitioners about the values and principles that are most vital to th
 
 ![Key Threats](/assets/report/graphs-13.jpg "Key Threats"){:display="block"}
 
-- **Practitioners identified the following six key threats to the communities they work with: state violence and surveillance; politically-motivated targeted digital attacks; marginalization based on race, class, gender identity, and sexual orientation; unequal access to digital technology; unaccountable corporate infrastructure; and limited resources.** Additionally, practitioners pointed out that these threats, for the most part, are not new: they are long- standing systemic issues, amplified by new tools and platforms. For example,in the case of surveillance, practitioners noted that well-meaning white technologists have secured most of the available resources with narratives about “new” threats, even though Black, Indigenous, Muslim, Latinx, and Queer/ Trans communities have always faced state surveillance in the United States.
+- **Practitioners identified the following six key threats to the communities they work with: state violence and surveillance; politically-motivated targeted digital attacks; marginalization based on race, class, gender identity, and sexual orientation; unequal access to digital technology; unaccountable corporate infrastructure; and limited resources.** Additionally, practitioners pointed out that these threats, for the most part, are not new: they are long-standing systemic issues, amplified by new tools and platforms. For example,in the case of surveillance, practitioners noted that well-meaning white technologists have secured most of the available resources with narratives about “new” threats, even though Black, Indigenous, Muslim, Latinx, and Queer/ Trans communities have always faced state surveillance in the United States.
 
 ### STORIES OF SUCCESS & FAILURE
 
@@ -193,11 +193,11 @@ end of each main recommendation in the Recommendations section of the full repor
 
 Tech project design must involve people from the communities the project is meant to serve, early on and throughout the design process. We recommend that practitioners from all sectors:
 
-**i. Adopt co-design methods.** Most crucially, tech projects should be grounded in real- world community needs, and be led by or include organizations with deep domain knowledge. These methods have a growing practitioner base, but could be better documented.
+**i. Adopt co-design methods.** Most crucially, tech projects should be grounded in real-world community needs, and be led by or include organizations with deep domain knowledge. These methods have a growing practitioner base, but could be better documented.
 
-**ii. Develop and adhere to spe- cific, concrete mechanisms for community accountability.** For example, funders and munici- palities might prefer or require tech projects to present a con- crete community accountability plan across all stages of design, testing, and implementation.
+**ii. Develop and adhere to specific, concrete mechanisms for community accountability.** For example, funders and municipalities might prefer or require tech projects to present a concrete community accountability plan across all stages of design, testing, and implementation.
 
-**iii. Invest in education (both formal and informal) that teaches co-design methods to more practitioners.** Support existing efforts in this space, create new ones, and push ex- isting educational programs and institutions to adopt co-design perspective and practices.
+**iii. Invest in education (both formal and informal) that teaches co-design methods to more practitioners.** Support existing efforts in this space, create new ones, and push existing educational programs and institutions to adopt co-design perspective and practices.
 
 **iv. Create tech clinics modeled on legal clinics.** Public interest law and legal services work are client-oriented, and lawyers doing this work are constantly interacting with and learning from people who need to navigate larger systems. Tech can learn from this model.
 
@@ -205,15 +205,15 @@ Tech project design must involve people from the communities the project is mean
 
 **vi. Create fellowships to spread co-design methods across multiple fields,** not only in tech, but in other areas as well, such as legal services.
 
-**vii. Avoid “parachuting” technologists into communities.** Instead, prioritize resourcing people from the community to build their tech skills. This doesn’t mean “no outsiders can help a community,” but projects with outside support work best when they help develop commu- nity capacity to take over, main- tain, and grow the project in the long run.
+**vii. Avoid “parachuting” technologists into communities.** Instead, prioritize resourcing people from the community to build their tech skills. This doesn’t mean “no outsiders can help a community,” but projects with outside support work best when they help develop community capacity to take over, maintain, and grow the project in the long run.
 
-**viii. Stop reinventing the wheel.** Allocate increased resources for capacity building, maintenance, and improved usability of exist- ing proven tech, not just pilots of new tools.
+**viii. Stop reinventing the wheel.** Allocate increased resources for capacity building, maintenance, and improved usability of existing proven tech, not just pilots of new tools.
 
 #### 2. From Silver Bullets to Useful Tools: Change the Narrative, Lead with Values, and Recognize Multiple Frames and Terms Across the Ecosystem.
 
-We found that there is no singular field that contains everyone who is working with technology for social justice, the public interest, and/or the common good. Instead, there is a complex ecosystem. Terminology and framing matter, as does the narrative about what this work is about. Language choices are political and typically will attract some people but alien- ate others. Recommendations in this area include:
+We found that there is no singular field that contains everyone who is working with technology for social justice, the public interest, and/or the common good. Instead, there is a complex ecosystem. Terminology and framing matter, as does the narrative about what this work is about. Language choices are political and typically will attract some people but alienate others. Recommendations in this area include:
 
-**i. Be clear about values and vision.** Regardless of how you or your organization think about the role of technology in social change, it is important to be explicit about your values and vision. For example, for many practitioners we interviewed, so- cial justice is the core value, and technologies are tools to support movements that advance to- wards social justice. For others, such as many of those working in the public sector, accessibility and efficiency are core values, and tech is a tool to make gov- ernment services easier to use.
+**i. Be clear about values and vision.** Regardless of how you or your organization think about the role of technology in social change, it is important to be explicit about your values and vision. For example, for many practitioners we interviewed, social justice is the core value, and technologies are tools to support movements that advance towards social justice. For others, such as many of those working in the public sector, accessibility and efficiency are core values, and tech is a tool to make government services easier to use.
 
 **ii. Shine a light on the amazing diversity of people who already work in this ecosystem.** It is important to lift up diverse practitioners in the public conversation about this work.
 
@@ -244,21 +244,21 @@ Racism, sexism, classism, ableism, transphobia, and other forms of intersectiona
 Tech work is not performed only,or even primarily, by software developers. Across the ecosystem, all actors need to acknowledge the different roles that are necessary to effectively use technology for social justice, the common good, and/or the public interest, in order to build a more inclusive ecosystem that offers opportunities to those who might otherwise be excluded by a narrow definition. Additionally, since many people in the space are “self-taught techies,” organizers turned sysadmins, political campaigners turned web designers, and so on, we must create supports for people who enter tech via alternative paths, such as mentorship programs and fellowship cohorts.
 We recommend:
 
-**i. When hiring tech teams, create positions for roles such as graphic designer, product manager, community manager, co-design facilitator, researcher, communicator, or popular edu- cator, in addition to developer,** regardless of sector (government, nonprofit, for-profit, cooperative).
+**i. When hiring tech teams, create positions for roles such as graphic designer, product manager, community manager, co-design facilitator, researcher, communicator, or popular educator, in addition to developer,** regardless of sector (government, nonprofit, for-profit, cooperative).
 
-**ii. Establish support for mentorship.** Supportive individual relationships (mentorships, in workplace and educational spaces) were mentioned by prac- titioners more frequently than any other support mechanism as critical to their career path. Create a mentorship matching program, especially to connect mentors that share aspects of lived experience with mentees. Increase support, recognition, awards, dedicated community networks, and other mecha- nisms to improve mentorship across the ecosystem.
+**ii. Establish support for mentorship.** Supportive individual relationships (mentorships, in workplace and educational spaces) were mentioned by practitioners more frequently than any other support mechanism as critical to their career path. Create a mentorship matching program, especially to connect mentors that share aspects of lived experience with mentees. Increase support, recognition, awards, dedicated community networks, and other mechanisms to improve mentorship across the ecosystem.
 
-**iii. Create paid fellowships and internships that support people from existing organizations, and from marginalized communities,** rather than just the one- year parachute model. Create paid opportunities for students of color in other fields, such as law, public administration, and public health, to learn about how tech design processes work.
+**iii. Create paid fellowships and internships that support people from existing organizations, and from marginalized communities,** rather than just the one-year parachute model. Create paid opportunities for students of color in other fields, such as law, public administration, and public health, to learn about how tech design processes work.
 
 **iv. Create a program for diverse practitioners to visit schools and universities** and talk about their career path and work.
 
-**v. Demonstrate pathways into tech for social justice, the common good, and/or the public interest.** Make these careers visible in mass media, social me- dia, and popular culture.
+**v. Demonstrate pathways into tech for social justice, the common good, and/or the public interest.** Make these careers visible in mass media, social media, and popular culture.
 
 **vi. Focus on digital equity and popular education to expand the pipeline of people who see themselves as part of the ecosystem.** There is a crucial role for people who are able to work as educators in frontline communities that are most affected by the application of digital technologies.
 
 #### 5. Coops, Collectives, and Networks, Oh My! Support Alternative Models Beyond Startups, Government Offices, and Incorporated Nonprofits.
 
-Interesting tech work is done by groups that do not fall into the stan- dard models of for-profit startups, government offices or agencies, or nonprofits. Tech cooperatives and collectives provide key tech services and infrastructure to thousands of movement groups and nonprofits. Informal networks can rapidly co- alesce during moments of crisis and provide improved information flow, identify priority needs, and organize large numbers of volunteers around tech work with very little resources. Membership organizations also provide tech infrastructure in ways that are accountable to the needs of social movements. All of these are crucial but less visible forms of organizing tech work for social justice; they should be recognized and better supported.
+Interesting tech work is done by groups that do not fall into the standard models of for-profit startups, government offices or agencies, or nonprofits. Tech cooperatives and collectives provide key tech services and infrastructure to thousands of movement groups and nonprofits. Informal networks can rapidly coalesce during moments of crisis and provide improved information flow, identify priority needs, and organize large numbers of volunteers around tech work with very little resources. Membership organizations also provide tech infrastructure in ways that are accountable to the needs of social movements. All of these are crucial but less visible forms of organizing tech work for social justice; they should be recognized and better supported.
 
 **i. Explore how to help non-501(c)3 organizations, such as B Corporations, worker cooperatives, member organizations, and ad-hoc networks** support themselves and provide living-wage jobs for their employees while also doing tech work for social justice.
 
@@ -267,11 +267,11 @@ Interesting tech work is done by groups that do not fall into the stan- dard mod
 **iii. Provide tech coop development support** including incorporation templates, legal incorporation support, operating agreements, and other resources that will help more tech company founders consider coops. These should be standard within tech incubator programs, in university offices that are dedicated to helping create startup spin-off companies, and in municipal initiatives (such as economic development offices) to support new business creation.
 
 **iv. Provide rapid turnaround support for ad-hoc networks.** Often, especially in crisis moments, ad-hoc and informal networks mobilize very quickly to provide tech support. In many cases, they are more effective than traditional
-organizations. Develop mecha- nisms to support such networks.
+organizations. Develop mechanisms to support such networks.
 
-**v. Leverage ICT Infrastructure projects to grow the ecosystem.** These projects can draw together city governments, community- based organizations, policy folks, and technologists. Successful models from Detroit (DCTP), Philadelphia (MMP), and New York City (Red Hook, Rise : NYC, public housing broadband, etc.) should be supported and widely replicated.
+**v. Leverage ICT Infrastructure projects to grow the ecosystem.** These projects can draw together city governments, community-based organizations, policy folks, and technologists. Successful models from Detroit (DCTP), Philadelphia (MMP), and New York City (Red Hook, Rise : NYC, public housing broadband, etc.) should be supported and widely replicated.
 
-**vi. Use government procurement to grow the ecosystem.** This requires focused initiatives that can help smaller organizations and companies, women and PoC- owned firms, coops, and others navigate the procurement process.
+**vi. Use government procurement to grow the ecosystem.** This requires focused initiatives that can help smaller organizations and companies, women and PoC-owned firms, coops, and others navigate the procurement process.
 
 ### SUMMARY OF RESEARCH OUTPUTS
 
@@ -283,8 +283,8 @@ In addition to this written report, our research team produced the following out
 - **Data Visualizations:** A gallery of interactive data visualizations, IRS form 990 data, job data, and more: [https://public.tableau.com/profile/t4sj#!/](https://public.tableau.com/profile/t4sj#!/).
 - Powerful Quotes: An interactive tool of powerful, paragraph-long quotes from interviewees, categorized by our top-level research goals: [https://morethancode.cc/quotes/](https://morethancode.cc/quotes/).
 - **Organizational Database:** Information about 732 organizations and projects, available both as a spreadsheet ([http://bit.ly/t4sj-orglist](http://bit.ly/t4sj-orglist)) and via a searchable web interface: [https://morethancode.cc/orglist/](https://morethancode.cc/orglist/).
-- **Nonprofit Database:** Data about 39,000 nonprofit organizations rel- evant to this ecosystem, according to their tax forms (IRS form 990): [https://public.tableau.com/profile/t4sj#!/vizhome/T4SJIRS990/SummaryTableCountsofOrganizationsbyTypeperCategory](https://public.tableau.com/profile/t4sj#!/vizhome/T4SJIRS990/SummaryTableCountsofOrganizationsbyTypeperCategory).
+- **Nonprofit Database:** Data about 39,000 nonprofit organizations relevant to this ecosystem, according to their tax forms (IRS form 990): [https://public.tableau.com/profile/t4sj#!/vizhome/T4SJIRS990/SummaryTableCountsofOrganizationsbyTypeperCategory](https://public.tableau.com/profile/t4sj#!/vizhome/T4SJIRS990/SummaryTableCountsofOrganizationsbyTypeperCategory).
 - **Educational Programs Spreadsheet:** A publicly editable spreadsheet of educational programs, fellowships, bootcamps, meetups, and other relevant educational resources: [http://bit.ly/t4sj-ed-programs](http://bit.ly/t4sj-ed-programs).
 - **Jobs Database:** A database of relevant jobs to help us understand how employers think about this work: [http://jobs.morethancode.cc](http://jobs.morethancode.cc).
-- **Terms List:** A spreadsheet of all terms mentioned by practitioners to describe the work they do. Includes tabs for the full list, a count of participant identifica- tion with terms, top-level categorization codes, and counts of organizations that use terms in IRS form 990: [http://bit.ly/t4sj-terms-shared](http://bit.ly/t4sj-terms-shared).
+- **Terms List:** A spreadsheet of all terms mentioned by practitioners to describe the work they do. Includes tabs for the full list, a count of participant identification with terms, top-level categorization codes, and counts of organizations that use terms in IRS form 990: [http://bit.ly/t4sj-terms-shared](http://bit.ly/t4sj-terms-shared).
 - **Research Instruments:** Throughout the project, we made all research instruments publicly available, including our final semi-structured interview guide: https://t4sj.co/ uploads/resources/T4SJ-interview-guide-II.pdf and focus group guide: [https://morethancode.cc/assets/resources/T4SJ-Focus-Group-Guide.pdf](/assets/resources/T4SJ-Focus-Group-Guide.pdf).

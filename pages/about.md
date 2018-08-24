@@ -63,7 +63,7 @@ Code for America is working towards a government by the people, for the people, 
 ![OTI](/assets/logos/oti-logo.png "OTI"){:height="50px" display="block"}
 
 **Open Technology Institute**
-OTI works at the intersection of technology and policy to ensure that every commu- nity has equitable access to digital technology and its benefits. We promote universal access to communications technologies that are both open and secure, using a mul- tidisciplinary approach that brings together advocates, researchers, organizers, and innovators.
+OTI works at the intersection of technology and policy to ensure that every community has equitable access to digital technology and its benefits. We promote universal access to communications technologies that are both open and secure, using a multidisciplinary approach that brings together advocates, researchers, organizers, and innovators.
 
 ![Mozilla](/assets/logos/moz-advocacy.png "Mozilla"){:height="50px" display="block"}
 
@@ -77,7 +77,7 @@ The Open Web Fellows program – a collaboration between the Ford Foundation and
 ![RAD](/assets/logos/rad-logo.png "RAD"){:height="50px" display="block"}
 
 **Research Action Design**
-_Chris Schweidler, Berhan Taye Gemeda, Bex Hurwitz, Caroline Rivas, Sasha Costanza- Chock, Puck Lo, Jayden Donahue_
+_Chris Schweidler, Berhan Taye Gemeda, Bex Hurwitz, Caroline Rivas, Sasha Costanza-Chock, Puck Lo, Jayden Donahue_
 Research Action Design (RAD) uses community-led research, collaborative design of technology and media, and secure digital strategies to build the power of grassroots social movements.
 
 ![OTI](/assets/logos/oti-logo.png "OTI"){:height="50px" display="block"}
@@ -93,13 +93,13 @@ policy to ensure that every community has equitable access to digital technology
 
 **Coworker.org**
 _Jess Kutch, Michelle Miller_
-Coworker.org allows you to start, run, and win campaigns to change your workplace. Have an idea for improving your workplace? Start by creating a Coworker.org petition and talking to your coworkers about your cam- paign. Every day, people are launching and joining campaigns around issues large and small — from improving an office break room to providing paid sick leave to employees. Anything is possible when coworkers join together.
+Coworker.org allows you to start, run, and win campaigns to change your workplace. Have an idea for improving your workplace? Start by creating a Coworker.org petition and talking to your coworkers about your campaign. Every day, people are launching and joining campaigns around issues large and small — from improving an office break room to providing paid sick leave to employees. Anything is possible when coworkers join together.
 
 ![Engine Room](/assets/logos/engine-room-logo-2.png "Engine Room"){:height="50px" display="block"}
 
 **The Engine Room**
 _Zara Rahman_
-The Engine Room helps activists, organiza- tions, and other social change agents make the most of data and technology to increase their impact. We are a non-profit organiza- tion ourselves, and our international team is made up of experienced and committed practitioners. Since 2011, we have supported more than 200 organizations, big and small, from every corner of the globe.
+The Engine Room helps activists, organizations, and other social change agents make the most of data and technology to increase their impact. We are a non-profit organization ourselves, and our international team is made up of experienced and committed practitioners. Since 2011, we have supported more than 200 organizations, big and small, from every corner of the globe.
 
 ![Hack the Hood](/assets/logos/hack-the-hood-logo.png "Hack the Hood"){:height="50px" display="block"}
 
@@ -130,7 +130,7 @@ Palante works to help progressive nonprofit organizations move forward with the 
 
 **Upturn**
 _Harlan Yu_
-Upturn works to give people a meaningful voice in how digital technology shapes their lives. We break down barriers between pol- icymakers, technology-builders, and commu- nities, so society can maximize the benefits and avoid the risks of new technology. We produce clear, incisive research and analysis of emerging issues in technology and public policy that guides the public conversation.
+Upturn works to give people a meaningful voice in how digital technology shapes their lives. We break down barriers between policymakers, technology-builders, and communities, so society can maximize the benefits and avoid the risks of new technology. We produce clear, incisive research and analysis of emerging issues in technology and public policy that guides the public conversation.
 
 ![Vulpine Blue](/assets/logos/vulpine-blue-small.png "Vulpine Blue"){:height="50px" display="block"}
 
