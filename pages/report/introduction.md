@@ -20,9 +20,38 @@ process with the Technology for Social Justice Project ([https://morethancode.cc
 
 We hope that our findings and recommendations will be useful to all those who want to use technology to make a more just and equitable world.
 
-## Methods
+### METHODS
 
 **#MoreThanCode** is a Participatory Action Research (PAR) project. All research partner organizations worked together to develop the research questions, study design, data collection and analysis, conclusions, and recommendations. We interviewed 109 people and conducted 11 focus groups with 79 focus group participants. A total of 188 individuals participated in the study. We sought diverse participants in terms of gender identity, sexual orientation, race/ethnicity, educational background, sector (government, nonprofit, tech coop), urban/rural location, and other factors. Our study focused primarily on practitioners in the United States. Detailed study participant demographics can be found in the main body of the report. We also collected and analyzed secondary data, including: a database of 732 organizations and projects; IRS form 990 data for over 40,000 relevant nonprofits; over 14,500 job listings; and over 350 educational programs, networks, and associations. The Appendices include detailed methodological information, links to relevant secondary datasets, and links to interactive tools to further explore study data and findings.
 
 **Limitations**
 Since there is no agreed upon definition of the field boundary, and no widely-accepted universe of participants in the field, it was not possible to conduct a true random selection of individuals or organizations. Therefore, as with any non-random sample, our findings should not be assumed to be representative of the entire field. We especially urge that the reader exercise caution when interpreting the demographics of our interviewees and focus group participants: we specifically sought to include women, People of Color, LGBTQI folks, and others who are not well represented across the broader technology sector. Therefore, the demographics of our study participants do not necessarily represent the demographics of any of the subfields we discuss in the report.
+
+### GOALS
+
+The following goals, developed by all partners at our first convening, guided our research process:
+
+![Ecosystem](/assets/report/ecosystem.jpg){:height="100px" display="block"}
+
+**I. ECOSYSTEM**
+Define the field(s) and inventory the current ecosystem.
+
+![Demographics](/assets/report/demographics.jpg "Demographics"){:height="100px" display="block"}
+
+**II. DEMOGRAPHICS**
+Expand understanding of who participates in the field(s).
+
+![Practitioner](/assets/report/practitioner.jpg "Practitioner"){:height="100px" display="block"}
+
+**III. PRACTITIONER EXPERIENCES**
+Establish a baseline understanding of practitioner experiences, how individuals came to this work (career path), barriers and opportunities practitioners (and their communities) face, and the support practitioners may need now.
+
+![Vision](/assets/report/vision.jpg "Vision"){:height="100px" display="block"}
+
+**IV. VISIONS & VALUES**
+Capture practitioner visions of what is needed to transform and build the field(s) in ways that are inclusive and aligned with their values (social justice, social good, public interest, etc., as articulated by practitioners themselves), as well as how to mitigate threats.
+
+![Stories](/assets/report/stories.jpg "Stories"){:height="100px" display="block"}
+
+**V. STORIES OF SUCCESS AND FAILURE**
+Document and distinguish models and approaches to carrying out technology for social justice (& etc.) work and projects on the ground. Identify what works, what doesn’t, and why.
