@@ -137,4 +137,20 @@ Upturn works to give people a meaningful voice in how digital technology shapes 
 **Vulpine Blue**
 _Willow Brugh_
 Vulpine Blue helps clients hold on to their most valuable asset—the workers. Blue takes their experience cultivating healthy working relationships between disadvantaged and distrusting organizations around the globe in the context of epidemics, disaster, and attack; and focuses this expertise on their client’s primary employee retention fulcrum: internal communication.
+
+### ACKNOWLEDGEMENTS
+
+This research and report was made possible by the contributions of many individuals and organizations.
+
+We thank all of the research partners for sharing their expertise, and for the dedication and commitment that made this project possible: Jack Aponte, Willow Brugh, Georgia Bullen, Helyx Chase, Sasha Costanza-Chock, Jayden Donahue, Kim Garcia, Berhan Taye Gemeda, Brooke Hunter, Bex Hurwitz, Joanne Johnson, Chhaya Kapadia, Jess Kutch, Puck Lo, Alfredo Lopez, Jamie McClelland, Nat Meysenberg, Michelle Miller, Zara Rahman, Caroline Rivas, Chris Schweidler, Maya Wagoner, Alison Yost, and Harlan Yu.
+
+This report was written by Sasha Costanza-Chock, Maya Wagoner, Berhan Taye, Caroline Rivas, Chris Schweidler, Georgia Bullen, and the Tech for Social Justice Project.
+
+We would like to thank Maya Wagoner for graphic design of project convening materials, and Hanna Kim for the graphic design, illustration, and layout of this report.
+
+We would also like to express our thanks to Duncan Wall with Thoughtworks in New York, and Antonio Rowry and Tracy Powell with Blue Lacuna in Chicago, for the use of their spaces to convene our research partners.
+
+Thanks to Diana Nucera for thoughtful feedback at the first research convening.
+
+This project would not have been possible without the generous support of our funders and advisors: NetGain, Code for America, Open Technology Institute, and the Ford/ Mozilla Open Web Fellows Program.
  
