@@ -36,7 +36,12 @@
         {% assign name_page = page.title | append: name_page %}
         {% endif %}
         {% endfor %} 
-        
+        <li>
+            <a class="clear" href="https://jobs.morethancode.cc">
+                Job Board
+            </a>
+        </li>
+
         <!-- Auto Generation of SPECIAL pages in the navbar -->
         {% for item in site.theme_settings.special_page %}
           {% if item[1].enabled %}

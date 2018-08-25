@@ -1,0 +1,259 @@
+a
+  text-decoration: none
+  color: inherit
+  border-bottom: 1px dotted
+  &:hover
+    color: #55b6ff
+    border-color: #55b6ff
+
+.tool-box
+  &.available a:hover, a:hover
+    color: #55b6ff
+    border-color: #55b6ff
+
+small
+  font-weight: 700
+  font-size: .8em
+  letter-spacing: .08em
+
+h1
+  margin: 30px 0px 20px 0px
+
+h4
+  margin: 4px 0px
+
+h5
+  margin: 4px 0px
+  font-weight: lighter
+  color: #0087ff
+  text-transform: uppercase
+
+.container
+  max-width: 90%
+  margin: 0px auto
+  overflow: auto
+  padding: 20px 0px
+
+*:focus
+  outline: 0
+
+.span1
+  max-width: 48%
+  display: inline-block
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  padding-right: 18px
+  vertical-align: top
+  &:last-child
+    padding-right: 0px
+
+#info a img
+  border: 0
+  text-decoration: none
+
+ul.nav
+  list-style: none
+  margin: 0px
+  padding: 0px
+  color: #0087ff
+  li
+    display: inline
+    font-size: 1em
+    letter-spacing: .1em
+    text-transform: uppercase
+    padding-right: 4px
+  a
+    color: #0087ff
+    border-bottom: 1px dotted #0087ff
+    &:hover
+      color: #55b6ff
+      border-color: #55b6ff
+
+#info, header
+  padding-right: 10px
+  padding-left: 10px
+
+#info
+  a
+    color: #55b6ff
+    border-color: #55b6ff
+    &:hover
+      color: #55b6ff
+      border-color: #55b6ff
+    color: #333
+    border-color: #333
+  p
+    font-weight: lighter
+    font-size: 1em
+    line-height: 1.5em
+
+input:not([type=submit]):not([type=file]):not([type=checkbox])
+  float: left
+  margin: 5px 4px
+  border: none
+  border-bottom: 1px solid #0087ff
+  background-color: transparent
+  padding: 0px
+  font-family: Source Sans Pro
+  color: #acacac
+  font-size: 16px
+  height: 25px
+  width: 40%
+
+.sml-button
+  cursor: pointer
+  font-weight: 700
+  font-size: .9em
+  text-transform: uppercase
+  letter-spacing: .1em
+  text-align: center
+  color: #000
+  &:hover
+    opacity: .75
+
+.button-pressed
+  background: #55b6ff
+
+#tools
+  -webkit-column-count: 3
+  -webkit-column-gap: 16px
+  -webkit-column-width: 250px
+  -moz-column-count: 3
+  -moz-column-gap: 16px
+  -moz-column-width: 250px
+  &.show-available .not-available, .filtered
+    display: none
+
+.tool-box
+  background: #E0E0DF
+  color: #5A5A5A
+  padding: 12px
+  margin-bottom: 16px
+  box-sizing: border-box
+  -mox-box-sizing: border-box
+  -webkit-column-break-inside: avoid
+  -moz-column-break-inside: avoid
+  display: table
+  width: 100%
+  a
+    border-color: #9B9A9A
+  &.cat-1
+    background: #ED5D00
+    color: #fff
+  &.cat-2
+    background: #7D81C4
+    color: #fff
+  &.cat-3
+    background: #F68B82
+    color: #fff
+  &.cat-4
+    background: #C9A837
+    color: #fff
+  &.cat-5
+    background: #6BA375
+    color: #fff
+  &.available a
+    border-color: #fff
+  &:nth-child(1)
+    margin-top: 0
+
+
+.quote-heading
+  display: block
+  font-size: 26px
+  padding: 10px 0
+  text-align: center
+  width: 100%
+  cursor: pointer
+  font-weight: 700
+
+.tool-box
+  &:hover
+    opacity: .75
+  ul
+    list-style-type: none
+    margin: 20px 0px 0px 0px
+    padding: 0px
+  li
+    margin: 10px 0px
+
+.tool-box-borrow
+  display: block
+  box-sizing: border-box
+  -mox-box-sizing: border-box
+  position: relative
+  background: #fff
+  color: #0087ff
+  padding: 4px 0px
+  letter-spacing: .08em
+  font-weight: 900
+  text-align: center
+  width: 100%
+  margin: 12px 0px
+  cursor: pointer
+  border: 1px solid transparent
+  &:hover
+    border: 1px solid #55b6ff
+    color: #fff
+    background-color: #55b6ff
+
+.tool-box-borrowed
+  display: block
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  position: relative
+  background-color: #B6B6B6
+  color: #E0E0DF
+  padding: 4px 0px
+  letter-spacing: .08em
+  font-weight: 900
+  text-align: center
+  width: 100%
+  margin: 12px 0px
+  border: 1px solid #B6B6B6
+
+.tool-box-bottom
+  display: none
+  width: 100%
+
+.selected-tool
+  opacity: .75
+
+a.imglink
+  border: none
+
+/*!
+ *Animate.css - http://daneden.me/animate
+ *Licensed under the MIT license */
+
+.animated
+  -webkit-animation-duration: 1s
+  animation-duration: 1s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+
+@-webkit-keyframes flash
+  0%, 50%, 100%
+    opacity: 1
+
+  25%, 75%
+    opacity: 0
+
+
+@keyframes flash
+  0%, 50%, 100%
+    opacity: 1
+
+  25%, 75%
+    opacity: 0
+
+
+.flash
+  -webkit-animation-name: flash
+  animation-name: flash
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) and (max-width: 1024px)
+  #tools
+    -webkit-column-count: 1
+  .span1
+    max-width: 100%

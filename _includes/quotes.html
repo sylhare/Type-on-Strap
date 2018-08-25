@@ -1,0 +1,50 @@
+<div id="filters" class="container">
+	<input id="toolSearch" type="search" placeholder="Search for something...">
+	<form name="catSearchForm">
+		<input list="catSearch" placeholder="Explore a category">
+		<datalist id="catSearch">
+			<option data-value="ecosystem">Ecosystem</option>
+			<option data-value="demographics">Demographics</option>
+			<option data-value="practitioner experiences">Practitioner Experiences</option>
+			<option data-value="Stories of Success and Failure">Stories of Success and Failure</option>
+			<option data-value="Visions and Values">Visions and Values</option>
+			<option data-value="Role of technology in the work">Role of technology in the work</option>
+			<option data-value="Unsung s/heroes">Unsung s/heroes</option>
+			<option data-value="Funding and Resourcing">Funding and Resourcing</option>
+			<option data-value="Pathways, Barriers, and Support">Pathways, Barriers, and Support</option>
+			<option data-value="Community Accountability">Community Accountability</option>
+			<option data-value="Stories of Failure">Stories of Failure</option>
+			<option data-value="Stories of Success">Stories of Success</option>
+		</datalist>
+	</form>
+	<span class="clear sml-button">Clear</span>
+</div>
+<div id="tools" class="container"><span class="flash animated">LOADING...</span></div>
+<script src="{{ "assets/quotes/ICanHaz.js" | relative_url }}"></script>
+<script src="{{ "assets/quotes/jquery.js" | relative_url }}"></script>
+<script src="{{ "assets/quotes/site.js" | relative_url }}"></script>
+<script src="{{ "assets/quotes/tabletop1.3.4.js" | relative_url }}"></script>
+<script id="tools" type="text/html">
+	{{#rows}}
+	<div id="{{rowNumber}}" class="tool-box cat-{{categoryid}}">
+		<span class="quote-heading">{{description}}</span>
+		<div class="tool-box-bottom {{rowNumber}}">
+			<ul>
+				<li class="quote">{{quote}}</li>
+				<li><strong>{{interviewee}}{{#title}}, {{title}}{{/title}}</strong></li>
+				<li class="category"><small>{{category}}{{#category2}}, {{category2}} {{/category2}}</small></li>
+				<li><a href="{{ site.baseurl }}/quotes#{{id}}"><small>LINK</small></a></li>
+			</ul>
+		</div>
+	</div>
+	{{/rows}}
+</script>
+
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() {
+	var URL = "1p3GZXaC51wxG030eQBGC4KRPwSBz20oiPI2lfpL7Azw"
+	Tabletop.init( { key: URL, callback: initialize, simpleSheet: true } )
+	})
+</script>
+
+<div>Powered by <a href="http://jlord.us/lending-library/">@jlord's Lending Library</a></div>

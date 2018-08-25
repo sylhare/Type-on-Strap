@@ -3,9 +3,8 @@ $font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
-
 // Padding
-$padding-large: 20%;
+$padding-large: 10%;
 $padding-medium: 6%;
 $padding-small: 4%;
 $padding-x-small: 3%;
@@ -33,10 +32,11 @@ $navbar-separator-opacity: 0;
 
 // Feature image for articles
 $feature-image-text-color: #fff;
-$feature-image-size: cover; // options include "cover", "contain", "auto"
+$feature-image-size: contain; // options include "cover", "contain", "auto"
+$header-image-size: cover; // options include "cover", "contain", "auto"
 // Header description box
-$header-desc-background-color: $theme-color;
-$header-desc-text-color: #FFF;
+$header-desc-background-color: grey;
+$header-desc-text-color: #fff;
 
 // Mobile display
 $break: 768px;
