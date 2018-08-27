@@ -280,6 +280,8 @@ Here are the documentation for the other feature pages that can be added through
 This page is the used as the home page of the template (in the `index.html`). It displays the list of article in `_posts`.
 You can use this layout in another page (adding a title to it will make it appear in the navigation bar).
 
+The recommended width and height for the home picture is width:`2484px;` and height:`1280px` which are the dimension of the actual picture for it to be rolling down as you scroll the page. 
+
 ### Portfolio
 
 Portfolio is a feature page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
