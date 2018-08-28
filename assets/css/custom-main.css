@@ -5,8 +5,6 @@ html {
 	-webkit-text-size-adjust: 100%
 }
 
-.highlight>code>span{white-space: nowrap;}
-
 body {
 	margin: 0
 }
@@ -183,7 +181,6 @@ optgroup {
 }
 
 table {
-	white-space: nowrap;
 	border-collapse: collapse;
 	border-spacing: 0
 }
@@ -1385,6 +1382,9 @@ ul.share-buttons .sr-only {
 	#main p{font-size: 0.5em;}
 	.feature-image header { padding: 4% 4% }
 	.posts .post-teaser .post-img { height: 150px }
+	
+	table{white-space: nowrap;}
+	.highlight>code>span{white-space: nowrap;}
 	
 	
 	.post-teaser h1{font-size: 1.5em;}
