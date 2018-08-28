@@ -1406,7 +1406,7 @@ ul.share-buttons .sr-only {
 			.5s .25s
 	}
 	nav ul.hide a {
-		cursor: default;
+		height: 0px;
 		pointer-events: none;
 	}
 	nav li {
