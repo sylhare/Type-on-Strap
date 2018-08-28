@@ -1398,6 +1398,8 @@ ul.share-buttons .sr-only {
 		transition: font-size .25s, margin .25s, padding .25s, opacity .5s .25s;
 	}
 	nav ul.hide {
+		width: 0px;
+    	height: 0px;
 		font-size: 0;
 		margin: 0;
 		opacity: 0;
