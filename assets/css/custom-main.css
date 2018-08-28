@@ -1380,6 +1380,7 @@ ul.share-buttons .sr-only {
 	h4 { font-size: 0.9em }
 	p, li { font-size: 0.8em }
 	
+	.posts>.post-area>.tag-posts>.tag-title>.meta{display: none;}
 	#main p{font-size: 0.5em;}
 	.feature-image header { padding: 4% 4% }
 	.posts .post-teaser .post-img { height: 150px }

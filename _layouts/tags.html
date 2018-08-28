@@ -57,6 +57,7 @@ layout: page
 	            {% for page in site.pages %} 
 	            	{% if post.display != "false" %}
 		                {% if page.tags contains tag %}
+		                
 		                <h5 class="tag-title">
 		                    <a href="{{ page.url | prepend: site.baseurl }}">
 		                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
@@ -77,13 +78,12 @@ layout: page
 	                {% if post.tags contains tag %}
 	                	{% if post.display != "false" %}
 			                <h5 class="tag-title">
-			                    <a href="{{ post.url | prepend: site.baseurl }}">
-			                        <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
-			                        {{ post.title }}
-			                    </a>
-			                    
+				                    <a href="{{ post.url | prepend: site.baseurl }}">
+				                        <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
+				                        {{ post.title }}
+				                    </a>
 			                    <div class="meta">
-			                        {{ post.date | date: "%B %-d, %Y" }}
+			                        {{ post.date | date: "%Y-%m-%-d" }}
 			                    </div>
 			                </h5>
 			            {% endif %}
