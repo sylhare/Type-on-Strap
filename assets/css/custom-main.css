@@ -1405,9 +1405,11 @@ ul.share-buttons .sr-only {
 		transition: opacity .25s, font-size .5s .25s, margin .5s .25s, padding
 			.5s .25s
 	}
+	nav ul.hide li {
+		display: none;
+	}
 	nav ul.hide a {
-		height: 0px;
-		pointer-events: none;
+		display: none;
 	}
 	nav li {
 		width: 100%;
