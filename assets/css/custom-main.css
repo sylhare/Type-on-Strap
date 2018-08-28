@@ -1406,10 +1406,12 @@ ul.share-buttons .sr-only {
 			.5s .25s
 	}
 	nav ul.hide li {
-		display: none;
+		width: 0px;
+    	height: 0px;
 	}
 	nav ul.hide a {
-		display: none;
+		width: 0px;
+    	height: 0px;
 	}
 	nav li {
 		width: 100%;
