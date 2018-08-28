@@ -13,7 +13,7 @@ theme_settings:
   gravatar: # Email MD5 hash
 
   # Header and footer text
-  header_text:  <p>Ergate Development Blog</p> #two or three lines to describe your site
+  header_text:  <p>Ergate's Development Blog</p> #two or three lines to describe your site
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    #Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/gmun/Type-on-Strap">Type on Strap</a>
