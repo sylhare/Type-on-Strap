@@ -1384,7 +1384,7 @@ ul.share-buttons .sr-only {
 	.posts .post-teaser .post-img { height: 150px }
 	
 	table{white-space: nowrap;}
-	.highlight>code>span{white-space: nowrap;}
+	pre.highlight>code>span{white-space: nowrap;}
 	
 	
 	.post-teaser h1{font-size: 1.5em;}
