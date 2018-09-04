@@ -27,6 +27,6 @@
     "gulp-less": "^3.5.0",
     "gulp-replace": "^1.0.0",
     "gulp-shell": "^0.6.5",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.1"
   }
 }
