@@ -12,7 +12,8 @@
         "excerpt"  : {{ post.content | truncate: '250' | jsonify }},
         "content"  : {{ post.content | jsonify }}
       } {% unless forloop.last %},{% endunless %}
-   {% endfor %}{% if site.portfolio.size > 0 %},{% endif %}
+   {% endfor %}
+   {% if site.portfolio.size > 0 %},{% endif %}
    {% for page in site.portfolio %}
      {
        {% if page.title != nil %}
@@ -21,8 +22,8 @@
           "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
           "url"      : "{{ site.baseurl }}{{ page.url }}",
           "date"     : "{{ page.date | date: "%B %-d, %Y" }}",
-          "excerpt"  : {{ post.content | truncate: '250' | jsonify }},
-          "content"  : {{ post.content | truncate: '250' | jsonify }}
+          "excerpt"  : {{ page.content | truncate: '250' | jsonify }},
+          "content"  : {{ page.content | truncate: '250' | jsonify }}
        {% endif %}
      } {% unless forloop.last %},{% endunless %}
    {% endfor %}
