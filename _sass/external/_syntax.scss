@@ -21,6 +21,15 @@ figure.highlight {
     }
 }
 
+code.highlighter-rouge {
+    padding: 0.2em 0.4em;
+    font-size: $font-size-code;
+    background-color: transparentize($base00, 0.85);
+    color: rgb(36, 41, 46);
+    border-radius: 2px;
+    font-family: $monospace;
+}
+
 .highlight table {
     margin-bottom: 0;
     font-size: 1em;
@@ -172,6 +181,6 @@ figure.highlight {
 }
 
 table.dataframe {
-    border: 0px solid $border-color;
+    border: 0 solid $border-color;
     border-collapse: collapse;
 }

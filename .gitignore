@@ -18,4 +18,8 @@ _development_tool/*
 # Theme Gem files
 Gemfile.lock
 *.gem
+.gems
+jekyll-theme-type-on-strap.gemspec
 
+# Node js files
+**/node_modules/*

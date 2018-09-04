@@ -58,7 +58,8 @@ jekyll-theme-basically-basic
 ├── pages
 |   ├── 404.md		       # To be displayed when url is wrong
 |   ├── about.md               # About example page
-|   ├── portfolio.html	       # Portfolio bootstrapped page
+|   ├── gallery.md              # Gallery page for your photos
+|   ├── portfolio.md	         # Portfolio page for your projects
 |   ├── search.html	       # Search page
 |   └── search.json            # Specify the search target (page, post, collection)
 ├── _config.yml                # sample configuration
@@ -235,14 +236,16 @@ This are the basic features you can use with the  `post` layout.
 ---
 layout: post
 title: Hello World                                # Title of the page
-subtitle: "This is a subtitle"                    # A subtitle can be displayed below your title
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
 thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+bootstrap: true                                   # Add bootstrap to the page
 tags: [sample, markdown, html]
 ---
 ```
 
 With `thumbnail`, you can add a smaller image than the `feature-img`. If you don't want/have a thumbnail you can still use the same image as the feature one.
+
+So the **bootstrap** is not mandatory and is only usefull if you want to add bootstrapped content in your page. It will respect the page and theme layout, mind the padding on the sides.
 
 ### Layout: Page
 
@@ -262,16 +265,6 @@ tags: [sample, markdown, html]
 
 The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. Use the `_draft` folder to keep files from being generated on your site.
 
-### Layout: Bootstrap
-
-This is the page layout modified to have bootstrap activated to format your content accordingly with the theme.
-
-```yml
---- 
-layout: bootstrap
----
-```
-
 ### Layout: Default
 
 This layout includes the head, navigation bar and footer around your content.
@@ -287,32 +280,55 @@ Here are the documentation for the other feature pages that can be added through
 This page is the used as the home page of the template (in the `index.html`). It displays the list of article in `_posts`.
 You can use this layout in another page (adding a title to it will make it appear in the navigation bar).
 
+The recommended width and height for the home picture is width:`2484px;` and height:`1280px` which are the dimension of the actual picture for it to be rolling down as you scroll the page. 
+
 ### Portfolio
 
-Portfolio is a feature bootstrapped page that will take all the markdown/html files in the `_portfolio` folder to create a 3x3 image portfolio matrix.
+Portfolio is a feature page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
 
-The portfolio page can be enable/disable in the navigation bar through the `_config.yml` via:
+To use the portfolio, simply create a `portfolio.md` with this information inside:
 ```yml
-# Scripts / Feature
-  portfolio: true
+--- 
+layout: page
+title : Portfolio 
+---
+
+{% include portfolio.html %}
 ```
+
+### Gallery
+
+You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position based on available vertical space. You need to specify the `gallery_path` which will be used to find the pictures to render. It will take all of the picture under that directory. Then use the `include` to add it in your page. 
+
+```
+---
+layout: page
+title: Gallery
+gallery: "assets/img/pexels"
+---
+
+{% include gallery.html gallery_path=page.gallery %}
+```
+
 
 ### Search
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
 
-Then there's a `search.js` displaying the formated results entered in the `search.html` page. 
+Then there's a `search.js` displaying the formatted results entered in the `search.html` page.
 
 
 The search page can be enable/disable in the navigation bar through the `_config.yml` via:
 ```yml
-# Scripts / Feature
-  search: true
+special_page:
+    search: 
+      icon: "search"
+      enabled: true
 ```
 
 ### Tags
 
-Tags should be placed between `[]` in your post metadata. Seperate each tag with a comma. Tags are recommended for posts and portfolio items.
+Tags should be placed between `[]` in your post metadata. Separate each tag with a comma. Tags are recommended for posts and portfolio items.
 
 For example:
 
@@ -330,8 +346,10 @@ All the tags will be listed in `tags.html` with a link toward the pages or posts
 The tags page can be enable/disable in the navigation bar through the `_config.yml` via:
 
 ```yml
-# Scripts / Feature
-  tags: true
+special_page:
+    tags: 
+      icon: "tags"
+      enabled: true
 ```
 
 ## Template as a Gem

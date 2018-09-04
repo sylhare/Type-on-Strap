@@ -1,10 +1,30 @@
 ---
 layout: post
-title: Use toc.js for table of content
-tags: [Test, toc.js, Markdown, Customization]
+title: Generate a table of content
+tags: [toc.js, kramdown, Markdown, Customization]
 ---
 
 Test article, get the source on [github](https://github.com/Sylhare/Type-on-Strap/blob/gh-pages/_posts/2013-12-12-toc.js-for-table-of-content.md).
+
+# Using Kramdown GFM
+
+<!-- To be placed at the beginning of the post, it is where the table of content will be generated -->
+* TOC
+{:toc}
+
+## Basic Usage
+
+
+You need to put this at the beginning of the page where you want the table of content to be displayed
+
+```html
+* TOC
+{:toc}
+```
+
+It will then render the markdown and html titles (lines that begins with `#` or using the `<h1></h1>` tages)
+
+# Using toc.js
 
 Demo display of [jekyll-table-of-contents](https://github.com/ghiculescu/jekyll-table-of-contents) by ghiculescu.
 

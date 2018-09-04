@@ -18,50 +18,36 @@
     </a>
     
     <!-- Menu -->
-    <ul>
+    <ul class="hide">
+        <!-- Auto Generation of NORMAL pages in the navbar -->
+        {% assign name_page = "" %}
+        
         {% for page in site.pages %}
         {% if page.title and page.hide != true %}
-        <li class="separator">
-            |
-        </li>
+        {% if name_page contains page.title %}
+        {% else %}
+        <li class="separator"> | </li>
         <li>
             <a class="clear" href="{{ page.url | relative_url }}">
                 {{ page.title }}
             </a>
         </li>
         {% endif %}
+        {% assign name_page = page.title | append: name_page %}
+        {% endif %}
         {% endfor %} 
-        {% if site.theme_settings.portfolio %}
-        <li class="separator">
-            |
-        </li>
-        <li>
-            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/portfolio">
-                Portfolio
-            </a>
-        </li>
-        {% endif %}
-        {% if site.theme_settings.search %}
-        <li class="separator">
-            |
-        </li>
-        <li>
-            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </a>
-        </li>
-        {% endif %}
-        {% if site.theme_settings.tags %}
-        <li class="separator">
-            |
-        </li>
-        <li>
-            <a class="clear" href="{{ site.url }}{{ site.baseurl }}/tags">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-            </a>
-        </li>
-        {% endif %}
         
+        <!-- Auto Generation of SPECIAL pages in the navbar -->
+        {% for item in site.theme_settings.special_page %}
+          {% if item[1].enabled %}
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
+                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
+          {% endif %}
+        {% endfor %}
     </ul>
         
 	</nav>

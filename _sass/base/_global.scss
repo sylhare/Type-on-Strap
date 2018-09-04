@@ -48,11 +48,11 @@ h6 {
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 2.3em;
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 1.75em;
 }
 
 h3 {
@@ -135,7 +135,8 @@ li {
 
 ol,
 ul {
-    list-style-position: inside;
+    list-style-position: outside;
+    margin-left: 1em;
 }
 
 hr {
@@ -169,7 +170,7 @@ img[align=right] {
 
 /* ---- Responsive ---- */
 
-@media screen and (max-width: $sm-break) {
+@media screen and (max-width: $break) {
     h1 {
         font-size: 2em;
     }
@@ -180,10 +181,10 @@ img[align=right] {
         font-size: 1em;
     }
     h4 {
-        font-size: 0.75em;
+        font-size: 0.9em;
     }
     p,
     li {
-        font-size: 0.75em;
+        font-size: 0.8em;
     }
 }

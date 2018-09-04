@@ -1,5 +1,6 @@
 .site-header {
-    padding: $padding-x-small;
+    //padding-bottom: 1%;
+    padding: 2% 2% 1% 2%;
     background: $brand-color;
     display: inline-block;
     float: left;
@@ -47,6 +48,7 @@
             line-height: 1.5;
             float: right;
             text-align: right;
+            display: block;
         }
         li {
             display: inline;
@@ -112,8 +114,25 @@
 
         ul {
             width: 100%;
-            display: none;
-            height: auto;
+            overflow: hidden;
+
+            transition: font-size .25s,
+                margin .25s,
+                padding .25s,
+                opacity .5s .25s;
+        }
+
+        ul.hide {
+            font-size: 0;
+            margin: 0;
+            opacity: 0;
+            padding: 0;
+            
+            /* fade out, then shrink */
+            transition: opacity .25s,
+                        font-size .5s .25s,
+                        margin .5s .25s,
+                        padding .5s .25s;
         }
 
         li {

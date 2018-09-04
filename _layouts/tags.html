@@ -14,16 +14,18 @@ layout: page
 <!-- cycles through portfolio collection to get tags -->
 {% assign portfolio =  site.portfolio | map: 'tags' | join: ','  | split: ',' | uniq %}
 {% for tag in portfolio %}
-{% assign portfolio_tags = tag | join:'|' | append:'|' %}
-{% assign rawtags = rawtags | append:portfolio_tags %}
+{% assign portfolio_tags = tag | join: '|' | append: '|' %}
+{% assign rawtags = rawtags | append: portfolio_tags %}
 {% endfor %}
 
 <!-- cycles through pages to get tags -->
 {% for page in site.pages %}
-{% assign page_tags = page.tags | join:'|'  %}
+{% if page.tags %}
+{% assign page_tags = page.tags | join:'|' | append:'|' %}
 {% assign rawtags = rawtags | append:page_tags %}
-{% endfor %}    
-    
+{% endif %}
+{% endfor %}
+
 <!-- Displays the list of tags-->
 {% include tags_list.html tags=rawtags %}
 
