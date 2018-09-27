@@ -937,6 +937,7 @@ article em {
 	text-align: left
 }
 
+
 .pagination {
 	padding: 4% 20% 0 20%;
 	text-align: center
@@ -1369,6 +1370,12 @@ ul.share-buttons .sr-only {
 }
 
 @media screen and (max-width: 768px) {
+	
+	.posts .post-tags footer .tag-list {
+		height: 40px;
+	    overflow: hidden;
+	}
+    
 	.postsArea{width: 100%;}
 	.cateArea{display:none;}
 	
