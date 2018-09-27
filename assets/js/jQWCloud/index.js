@@ -11,8 +11,8 @@ function createWordClud(){
 				weight 	= weight*100 - weight*3;	// size 조절
 			
 			var obj = new Array();
-			obj.word 	= name;
-			obj.weight  = weight;
+				obj.word 	= name;
+				obj.weight  = weight;
 			//{word: 'Prashant', weight: 40}, {word: 'Ajinkya', weight: 11, color: 'green'}
 			wordData.push(obj);
 		}		
@@ -22,7 +22,7 @@ function createWordClud(){
 			 words		: wordData
 		  //,cloud_color: 'yellow' 	// 전체 적인 font color	
 			,minFont	: 40		// 최소 font size
-			,maxFont	: 100		// 최대 font size
+			,maxFont	: 80		// 최대 font size
 		  //,fontOffset	: 5
 			,cloud_font_family	: "Source Sans Pro"	// font style
 		  //,verticalEnabled	: false		// 수직정렬
@@ -40,6 +40,7 @@ function createWordClud(){
 				var tag = $(this).text().trim();
 				$("#" + tag).animate();
 				window.location.href = "/tags/#" + tag;
+				console.log(tag);
 			}		              
 			,beforeCloudRender: function(){
 			    date1 = new Date();

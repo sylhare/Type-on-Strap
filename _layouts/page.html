@@ -2,7 +2,7 @@
 layout: default
 ---
 <!-- 
-	header txt, background �닔�젙
+	header txt, background
 -->
 
 <style type="text/css">
@@ -13,12 +13,13 @@ layout: default
     position: relative;
 
 }
+#wordCloud>span{cursor: pointer;}
 </style>
 
 <article {% if page.feature-img %}class="feature-image"{% endif %} >
   {% if page.layout == 'tags' %}
-  	<header id="main">
-  		<div id="wordCloud" class="jqColowe" style="    padding: 45px 15px 15px;">
+  	<header id="main" style="padding: 0; width: 100%; height: 500px; margin: 10% 0;">
+  		<div id="wordCloud" class="jqColowe" style="width: 100%; height: 100%;">
   		</div>
   	</header>
   {% else %}
