@@ -15,7 +15,7 @@ priority: 1.0
 
 ---
 
-### SOAP?
+### SOAP
 
 SOAP은 Web Services Interfacesd의 일종으로  컴퓨터 네트워크(HTTP, HTTPS, SMTP 등)상에서 XML 기반의 메시지를 교환하는 통신 프로토콜이다. 
 HTTP 특성상 Proxy와 방화벽에 제약을 받지 않고 쉽게 통신할 수 있다. 보통의 경우 SOAP은 RPC 형태의 메시지 패턴을 사용하여 통신한다.
