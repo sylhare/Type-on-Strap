@@ -41,7 +41,7 @@ HTTP 특성상 Proxy와 방화벽에 제약을 받지 않고 쉽게 통신할 �
 
 첫 번째, 분산된 환경에서 SOAP이다. 'Widow에서 Linux로, JAVA에서 C#으로 통신이 가능할까?'라는 의문에 답은 'SOAP이면 가능하다'이다.
 
-<img src="/md/img/SOAP/SOAP_Communication1.png">
+<img src="/md/img/SOAP/soap-communication.png">
 <em>SOAP의 통신</em>
 
 이처럼 분산된 환경에서 데이터 통신이 가능한 이유는 SOAP은 네트워크(인터넷)상에서 데이터를 교환하기 때문이다.
@@ -76,7 +76,7 @@ SOAP은 복잡한 구조를 띠고 있어 오버헤드가 발생할 확률이 �
 
 ### 동작원리
 
-<img src="/md/img/SOAP/SOAP1.png">
+<img src="/md/img/SOAP/soap-architecture.png">
 <em>SOAP 아키텍처</em>
 
 SOAP의 동작원리는 다음과 같다.
@@ -88,7 +88,7 @@ SOAP의 동작원리는 다음과 같다.
 
 ### XML 메시지
 
-<img src="/md/img/SOAP/SOAP2.png">
+<img src="/md/img/SOAP/soap-message-structural.png">
 <em>SOAP 메시지 구조</em>
 
 SOAP 메시지는 XML을 근간으로 `<Header>`와 `<Body>`를 포함한 `<Envelope>`로 구성된 디자인 패턴으로 설계되어 있다.
@@ -140,7 +140,7 @@ SOAP 메시지는 XML을 근간으로 `<Header>`와 `<Body>`를 포함한 `<Enve
 
 ### 메시지 - Header
 
-<img src="/md/img/SOAP/SOAP3.png">
+<img src="/md/img/SOAP/soap-message-structural-header.png">
 <em>SOAP 메시지 - Header 구조</em>
 
 #### Header - Header-Block
@@ -181,7 +181,7 @@ SOAP 메시지 내부에 같은 메타정보를 포함한 `<Header>`가 여러 �
 
 `<Body>` 요소와 그에 연관된 하위 요소는 요청자와 응답자 간 데이터를 교환하는 데 사용된다.
 
-<img src="/md/img/SOAP/SOAP4.png">
+<img src="/md/img/SOAP/soap-message-structural-body.png">
 <em>SOAP 메시지 - Body 구조</em>
 
 #### Body - Fault
@@ -197,7 +197,7 @@ SOAP은 `<Body>`에 대해 한 개의 하위 요소인 `<Fault>`를 정의하며
 SOAP는 인터넷 애플리케이션 계층에 있는 프로토콜을 전송계층의 프로토콜로 사용할 수 있게 만든다.<br/>
 **SOAP의 반대 여론**들은 프로토콜의 의도된 목적과 역할이 맞지 않아 부정 이용이 된다고 비판하지만, **SOAP의 지지 여론**들은 터널링을 위한 다양한 계층(level)에 쓰이고 있는 다른 프로토콜들과 비슷하다고 말하고 있다. <br/>
 
-<img src="/md/img/SOAP/NetworkLayer.png">
+<img src="/md/img/SOAP/network-layer.png">
 <em>Network Layer</em>
 
 SOAP의 올바른 이용은 SMTP와 HTTP에서 애플리케이션 계층 프로토콜로 트랜스포트 계층의 역할을 대신하는 것이다. 
