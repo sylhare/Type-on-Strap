@@ -17,7 +17,7 @@ priority: 1.0
 
 ### Unit Test
 
-<img src="/md/img/TDD/UnitTest/unittest.png">
+<img src="/md/img/test-keywords/unit-test.png">
 <em>Unit Test</em>
 
  단위 테스트는 코드를 테스트한 다음 자동화된 방식으로 테스트를 실행하는 코드 작성 방법이다.
@@ -40,7 +40,7 @@ TFD 방식으로 생성된 단위 테스트는 개발 중에 재설계가 이루
 
 이러한 효과는 다음의 그래프를 보면 쉽게 이해할 수 있다.
 
-<img src="/md/img/TDD/UnitTest/automatedtest-graph.png">
+<img src="/md/img/test-keywords/automated-test-graph.png">
 <em>자동화 테스트와 수동 테스트의 비용 비교</em>
 
 초기 비용은 수동 테스트보다 자동화 테스트가 높은데 이는 당연한 결과다. 하지만 테스트를 하는 횟수가 증가함에 따라 자동화 테스트 대비 수동 테스트의 비용이 기하급수적으로 증가함을 알 수 있다.
