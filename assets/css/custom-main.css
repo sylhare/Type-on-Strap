@@ -1392,8 +1392,9 @@ ul.share-buttons .sr-only {
 	
 	table{white-space: nowrap;}
 	
-	.highlight>pre {overflow: auto;}
-	.highlight>pre>code{white-space: pre!important;     width: max-content!important;}
+	div.highlight{width: 100%!important;}
+	pre.highlight{overflow: auto;}
+	pre.highlight>code{white-space: pre!important;     width: max-content!important;}
 	/* .highlight>pre>code>span{white-space: pre !important} */
 	
 	
