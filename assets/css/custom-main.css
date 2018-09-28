@@ -1392,10 +1392,9 @@ ul.share-buttons .sr-only {
 	
 	table{white-space: nowrap;}
 	
-	div.highlight{width: 100%!important; overflow: auto!important; overflow: auto;}
-	pre.highlight{white-space: nowrap!important;width: max-content!important;}
-	pre.highlight>code{white-space: pre-wrap!important; width: max-content!important;}
-	.highlight>pre>code>span{white-space: nowrap!important;}
+	/* pre.highlight{white-space: pre-wrap!important;} */
+	pre.highlight>code{/* white-space: pre!important; */ width: max-content!important;}
+	/* .highlight>pre>code>span{white-space: nowrap!important;} */
 	
 	
 	.post-teaser h1{font-size: 1.5em;}
