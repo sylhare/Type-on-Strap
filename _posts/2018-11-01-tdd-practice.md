@@ -33,7 +33,7 @@ TDD를 개발 연습할 때는 유틸성 기능 또는 알고리즘 문제를 �
 
 "테스트 케이스를 어떻게 작성하면 좋을까?"라는 의문이 생긴다. 이러한 문제는 목표설정에 있어 `SMART` 기법을 활용하여 편하게 접근할 수 있다.<br/>
 
-<img src="/md/img/TDD/JUnit/3.png" height="400px">
+<img src="/md/img/tdd-practice/smart-rule.png" height="400px">
 <em>S.M.A.R.T</em>
 
 이후 목표를 정한 후 단위별로 나누어 테스트 케이스를 작성한다.

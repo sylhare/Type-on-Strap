@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TDD : Test Keywords"
+title: "TDD : Test Double"
 tags: [TDD]
 display: "false"
 subtitle: "Test Double"
@@ -15,8 +15,10 @@ priority: 1.0
 # Test Double
 
 ---
-
 ### Test double(Mock, Stub, Fake)
+
+테스트 더블는 영화에서 나오는 스턴트 대역(Stunt double)에서 유례된 말이다. 테스트시에 실제 객체를 대신 할 수 있는 객체를 의미 합니다. (여기서 ‘더블’이란 말의 유래는 영화에서 스턴트 대역[stunt double]을 생각하시면 될 듯 하네요.)
+
 
 [https://en.wikipedia.org/wiki/Test_double](https://en.wikipedia.org/wiki/Test_double)
 
@@ -37,3 +39,16 @@ Stub은 로직이 없고 단지 원하는 값을 반환합니다. 테스트시�
 
 
 ### 참고
+
+https://adamcod.es/2014/05/15/test-doubles-mock-vs-stub.html
+
+
+https://blog.pragmatists.com/test-doubles-fakes-mocks-and-stubs-1a7491dfa3da
+
+https://martinfowler.com/bliki/TestDouble.html
+
+https://github.com/testdouble/contributing-tests/wiki/Test-Double
+
+https://lostechies.com/derekgreer/2011/05/15/effective-tests-test-doubles/
+
+https://laurentkempe.com/2010/07/17/Unit-Test-using-test-doubles-aka-Mock-Stub-Fake-Dummy/
