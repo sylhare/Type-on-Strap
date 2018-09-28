@@ -16,11 +16,6 @@ layout: default
 	    {% for post in paginator.posts %}
 	    	{% if post.display != "false" %}
 		    <div class="post-teaser">
-		      {% if post.thumbnail %} 
-		      <div class="post-img">
-		         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
-		      </div>
-		      {% endif %}
 		      <span>
 		          <header>
 		            <p class="meta">
@@ -33,6 +28,12 @@ layout: default
 		            </h1>
 		          </header>
 		          
+		          {% if post.thumbnail %} 
+			      <div class="post-img">
+			         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
+			      </div>
+			      {% endif %}
+			      
 		          <div class="excerpt">
 		          	{%if post.subtitle %}
 		          		{{post.subtitle}}

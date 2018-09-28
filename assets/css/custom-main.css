@@ -103,7 +103,7 @@ pre {
 
 code, kbd, pre, samp {
 	font-family: monospace, monospace;
-	font-size: 1em
+	font-size: 1em;
 }
 
 button, input, optgroup, select, textarea {
@@ -1391,7 +1391,10 @@ ul.share-buttons .sr-only {
 	.posts .post-teaser .post-img { height: 150px }
 	
 	table{white-space: nowrap;}
-	pre.highlight>code>span{white-space: nowrap;}
+	
+	pre.highlight{white-space: nowrap !important;}
+	pre.highlight>code{white-space: nowrap !important;}
+	pre.highlight>code>span{white-space: nowrap !important;}
 	
 	
 	.post-teaser h1{font-size: 1.5em;}
