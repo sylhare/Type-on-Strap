@@ -35,7 +35,7 @@ priority: 1.0
 
 ### 스프링 MVC 테스트 범위
 
-<img src="/md/img/TDD/Spring/1.png" height="500px">
+<img src="/md/img/test-in-spring/spring-mvc-architecture.png" height="500px">
 <em>Spring MVC 아키텍처</em>
 
 스프링에서의 테스트의 범위는 `Dispatcher Servlet`, `HandlerMapping`, `ViewResolver`, `Controller` 부분이다. 막상 테스트를 진행하려 보니 `Dispatcher Servlet`, `HandlerMapping`, `ViewResolver`은 추상적인 개념이라 테스트를 하기 어려울 수 있다. 하지만 추상적인 개념들은 스프링 테스트에서 처리를 해주기 때문에 개발자는 `Controller`에 해당되는 비즈니스 로직 테스트에 집중하면 된다.
