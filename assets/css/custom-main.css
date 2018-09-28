@@ -1392,9 +1392,9 @@ ul.share-buttons .sr-only {
 	
 	table{white-space: nowrap;}
 	
-	/* pre.highlight{white-space: pre-wrap!important;} */
-	pre.highlight>code{/* white-space: pre!important; */ width: max-content!important;}
-	/* .highlight>pre>code>span{white-space: nowrap!important;} */
+	.highlight code{display: table-cell!important; white-space: pre!important;}
+	.highlight pre>code>span{white-space: nowrap!important;}
+	
 	
 	
 	.post-teaser h1{font-size: 1.5em;}
