@@ -236,6 +236,9 @@ div.highlighter-rouge>pre, div.highlighter-rouge pre.highlight, figure.highlight
 	width: 100%
 }
 
+.highlight code{display: table-cell!important; white-space: pre!important;}
+.highlight pre>code>span{white-space: nowrap!important;}
+	
 .highlight .hll {
 	background-color: #eff
 }
@@ -614,7 +617,7 @@ table {
 	table-layout: fixed;
 	width: 100%;
 	word-wrap: break-word;
-	overflow-x: scroll;
+	overflow-x: auto;
 	display: inline-block
 }
 
@@ -1391,11 +1394,6 @@ ul.share-buttons .sr-only {
 	.posts .post-teaser .post-img { height: 150px }
 	
 	table{white-space: nowrap;}
-	
-	.highlight code{display: table-cell!important; white-space: pre!important;}
-	.highlight pre>code>span{white-space: nowrap!important;}
-	
-	
 	
 	.post-teaser h1{font-size: 1.5em;}
 	.excerpt{font-size: 0.8em;}
