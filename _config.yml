@@ -65,7 +65,7 @@ theme_settings:
   
   special_page:
     search: 
-      icon: "search" # Assuming page link and icon are the same
+      icon: "search"
       enabled: true
     tags:
       icon: "tags"
