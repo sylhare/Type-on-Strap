@@ -12,6 +12,9 @@
     <script defer=true src="{{ site.baseurl }}/assets/js/partials/navbar.js"></script>
     <script defer=true src="{{ site.baseurl }}/assets/js/main.min.js"></script>
     
+    <!-- google adsense -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
     <!-- CSS -->
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom-main.css">
 
@@ -39,45 +42,20 @@
     <script src="{{ site.baseurl }}/assets/js/vendor/katex.min.js">
     </script>
     {% endif %}
-
-    <!-- Google Analytics -->
-    {% if site.theme_settings.google_analytics %}
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', '{{ site.theme_settings.google_analytics }}', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-    {% endif %}
-    
-    <!-- seo tags -->
-    {% seo %}
-    <!-- Manual seo tags -->
-    
-    <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
-    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
-    
-    <!-- tag Cloud -->
-    <script type="text/javascript">
+	
+	<script type="text/javascript">
     	$(document).ready(function(){
-    		createWordClud();	
+    		createWordClud(); // tag Cloud	
     	});
-    
-    </script>
-    <!-- nav scroller active -->
-    <script type="text/javascript">
-    	$(function(){
+    	
+		// google adSense    	
+	  	(adsbygoogle = window.adsbygoogle || []).push({
+	  	  google_ad_client: "ca-pub-4548893232566663",
+	  	  enable_page_level_ads: true
+	  	});
+		
+		//nav scroller active
+	  	$(function(){
     		$(document).scroll(function() {
 		        var maxHeight = $(".site-header").height();
 			    var currentScroll = $(window).scrollTop();
@@ -96,14 +74,31 @@
 			    	}
 			    }
     		});
-    	})
+    	});
+		
+		//Google Analytics
+	  	{% if site.theme_settings.google_analytics %}	
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', '{{ site.theme_settings.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+        {% endif %}
     </script>
     
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
-	  (adsbygoogle = window.adsbygoogle || []).push({
-	    google_ad_client: "ca-pub-4548893232566663",
-	    enable_page_level_ads: true
-	  });
-	</script>
+    <!-- seo tags -->
+    {% seo %}
+    <!-- Manual seo tags -->
+    
+    <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
 </head>
