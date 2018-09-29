@@ -1433,7 +1433,9 @@ ul.share-buttons .sr-only {
 		width: max-content;
    		background: #0000000d;
 		*/
-		position: relative
+		position: absolute;
+		top: 50px;
+		right: 0px;
 	}
 	nav a {
 		text-align: left;

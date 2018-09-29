@@ -12,8 +12,6 @@ changefreq: daily
 priority: 1.0
 ---
 
-
-
 <!--more-->
 
 # 위험에 대처하는 자세
@@ -22,7 +20,8 @@ priority: 1.0
 
 ### Test double
 
-테스트 더블는 영화에서 나오는 스턴트 대역(Stunt double)에서 유례된 말이다. 테스트시에 실제 객체를 대신 할 수 있는 객체를 의미 합니다. (여기서 ‘더블’이란 말의 유래는 영화에서 스턴트 대역[stunt double]을 생각하시면 될 듯 하네요.)
+ 프로그램 기능을 테스트시에 해당된 객체를 직접적으로 테스트하기엔 위험요소가 많다.   
+테스트 더블은 테스트 할 대상인 오브젝트(클래스)를  영화에서 나오는 스턴트 대역(Stunt double)에서 유례된 말이다. 테스트시에 실제 객체를 대신 할 수 있는 객체를 의미 합니다. (여기서 ‘더블’이란 말의 유래는 영화에서 스턴트 대역[stunt double]을 생각하시면 될 듯 하네요.)
 
 
 [https://en.wikipedia.org/wiki/Test_double](https://en.wikipedia.org/wiki/Test_double)
