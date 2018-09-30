@@ -20,16 +20,12 @@ priority: 1.0
 
 ### Test double
 
- 프로그램 기능을 테스트시에 해당된 객체를 직접적으로 테스트하기엔 위험요소가 많다.   
+ 프로그램 기능을 테스트시에 해당된 객체를 직접적으로 테스트하기엔 위험요소가 많다. 
+ 때문에 테스트시에는 이를 방지하기 위해 테스트 목적으로 실제 오브젝트와 동작이 같은 테스트 오브젝트를 사용하는데 이 오브젝트를 일반적으로 테스트 더블이라 불린다.
+
+https://www.slideshare.net/youngeunchoi12/effective-unit-testing-ch3
+
 테스트 더블은 테스트 할 대상인 오브젝트(클래스)를  영화에서 나오는 스턴트 대역(Stunt double)에서 유례된 말이다. 테스트시에 실제 객체를 대신 할 수 있는 객체를 의미 합니다. (여기서 ‘더블’이란 말의 유래는 영화에서 스턴트 대역[stunt double]을 생각하시면 될 듯 하네요.)
-
-
-[https://en.wikipedia.org/wiki/Test_double](https://en.wikipedia.org/wiki/Test_double)
-
-[https://stackoverflow.com/questions/12827580/mocking-vs-spying-in-mocking-frameworks](https://stackoverflow.com/questions/12827580/mocking-vs-spying-in-mocking-frameworks)
-
-[https://eminentstar.github.io/2017/07/24/about-mock-test.html](https://eminentstar.github.io/2017/07/24/about-mock-test.html)
-[http://www.jpstory.net/2013/07/26/know-your-test-doubles/](http://www.jpstory.net/2013/07/26/know-your-test-doubles/)
 
 테스트 더블이란 테스트시에 실제 객체를 대신 할 수 있는 객체를 의미 합니다. (여기서 ‘더블’이란 말의 유래는 영화에서 스턴트 대역[stunt double]을 생각하시면 될 듯 하네요.)
 
@@ -45,6 +41,17 @@ Stub은 로직이 없고 단지 원하는 값을 반환합니다. 테스트시�
 > Test spy <br/>
 > Fake object <br/>
 > Dummy object <br/>
+
+Doummy object는 전달되지만 실제로 사용되지는 않습니다. 일반적으로 매개 변수 목록을 채우기 위해 사용됩니다.
+
+Fake object는 실제로 실제로 구현되어 있지만 일반적으로 제작에 적합하지 않은 단축키를 사용합니다 ( InMemoryTestDatabase 가 좋은 예입니다).
+
+Test Stub 은 테스트 중에 작성된 호출에 대한 미리 준비된 답변을 제공합니다. 일반적으로 테스트를 위해 프로그래밍 된 내용 외에는 응답하지 않습니다.
+
+Test Spy 은 그들이 불리는 방법에 따라 정보를 기록하는 스텁입니다. 한 가지 형태는 전송 된 메시지의 수를 기록하는 전자 메일 서비스 일 수 있습니다.
+
+Mocks 는 그들이 기대하는 호출의 명세를 형성하는 기대치로 미리 프로그램되어있다. 기대하지 않은 전화를 받았을 때 예외를 throw 할 수 있으며 확인 중에 전화를 통해 예상했던 모든 전화를 받았는지 확인할 수 있습니다.
+
 
 ---
 
@@ -95,3 +102,11 @@ https://github.com/testdouble/contributing-tests/wiki/Test-Double
 https://lostechies.com/derekgreer/2011/05/15/effective-tests-test-doubles/
 
 https://laurentkempe.com/2010/07/17/Unit-Test-using-test-doubles-aka-Mock-Stub-Fake-Dummy/
+
+[https://en.wikipedia.org/wiki/Test_double](https://en.wikipedia.org/wiki/Test_double)
+
+[https://stackoverflow.com/questions/12827580/mocking-vs-spying-in-mocking-frameworks](https://stackoverflow.com/questions/12827580/mocking-vs-spying-in-mocking-frameworks)
+
+[https://eminentstar.github.io/2017/07/24/about-mock-test.html](https://eminentstar.github.io/2017/07/24/about-mock-test.html)
+
+[http://www.jpstory.net/2013/07/26/know-your-test-doubles/](http://www.jpstory.net/2013/07/26/know-your-test-doubles/)
