@@ -1,47 +1,28 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
-title: Type on Strap # site's title
-description: "A website with blog posts and pages" # used by search engines
+baseurl: "/blog"
+url: "https://ai.stanford.edu/"
+title: SAIL Blog # site's title
+description: "The official Stanford AI Lab blog" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
-  avatar: assets/img/triangle.svg
-  favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
+  title: SAIL Blog # blog's title
+  avatar: assets/img/sail-logo.jpg
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
-  header_text_feature_image: assets/img/pexels/triangular.jpeg
+     <p>The official Stanford AI Lab blog</p>
+  header_text_feature_image: assets/img/Stanford_AI_lab.jpg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
   email_address: # Full email address, e.g. "sam@example.com"
-  behance:
-  bitbucket:
-  dribbble:
-  facebook:
-  flickr:
-  gitlab:
-  github: "sylhare"
-  google_plus:
   instagram:
-  keybase:
-  linkedin:  # Full URL
-  pinterest:
-  reddit:
-  soundcloud:
-  stack_exchange:  # Full URL
-  steam:
-  tumblr:
   twitter: # "twitter username"
-  vimeo:
   wordpress:
   youtube:
   
@@ -49,13 +30,8 @@ theme_settings:
   share_buttons:
     facebook: true
     twitter: true
-    google_plus: true
-    tumblr:
-    pinterest:
-    pocket:
+    pocket: true
     reddit: true
-    linkedin:
-    wordpress:
     email: true
 
   # Scripts / Features 
@@ -64,9 +40,6 @@ theme_settings:
   katex: true # Enable if using math markup
   
   special_page:
-    search: 
-      icon: "search"
-      enabled: true
     tags:
       icon: "tags"
       enabled: true

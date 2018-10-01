@@ -44,9 +44,10 @@ header {
 }
 
 .meta {
-    color: rgba($text-color, .5);
-    font-size: 0.9em;
+    color: ($text-color, .8);
+    font-size: 1.2em;
     letter-spacing: 0.1em;
+    font-weight: bold;
     margin: 0;
     text-transform: uppercase;
 }
