@@ -33,7 +33,7 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 물론 위험한 장면이 필요하다면 감독은 해당 장면을 찍어야 하지만 따르는 위험을 측정하기 어렵고 두렵다. 또한, 영화 투자자들도 위험을 좋아하지 않으므로, 이에 감독은 배우에게 위험한 장면을 연기하라고 요청하는 대신 배우처럼 보이는 다른 사람(스턴트 더블)에게 해당 연기를 시킨다. 이처럼 영화에선 여러 위험요소를 최소화하기 위해 스턴트 더블을 사용한다.
 
-영화에서 스턴트 더블이 있다면 테스트엔 테스트 더블이 있다. 이처럼 테스트 더블은 실제 객체와 같은 동작을 하는 객체를 뜻한다.
+영화에서 스턴트 더블이 있다면 테스트엔 테스트 더블이 있다. 이처럼  테스트 더블은 실제 객체와 같은 동작을 하는 객체를 뜻한다.
 
 ---
 
@@ -41,8 +41,8 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 프로그램도 마찬가지다. 물론 때에 따라 실제 객체를 대상으로 테스트를 수행할 수 있지만, 일반적으로 테스트 시에 해당한 객체를 직접 테스트하면 위험요소가 따른다.
 
-<img src="/md/img/test-double/test-double_used_reason_of_in_test-code.png">
-<em>Test 위험요소</em>
+<img src="/md/img/test-double/test-real-object.png" style="max-height: 400px;">
+<em>테스트 의존관계</em>
 
 그 이유인즉슨 테스트 대상이 될 객체를 직접 사용하게 되면 실제 객체(Real Object)와 의존관계가 형성된 다른 객체 간의 상호관계에서 발생하는 부작용을 일으키기 때문에 테스트 시에 실체 객체를 대신 할 수 있는 독립된 객체(테스트 더블)를 생성하여 사용한다.
 
