@@ -357,24 +357,22 @@ if(flagA && flagB){
 	
 	if(flagA && flagB){
 		...
-	}else{
-		...
 	}
 }
 ```
 
 _조건 커버리지 = (수행된 조건 수 /전체 조건 수)*100_
 
-다음 조건문에 해당되는 boolean 값(flagA, flagB)이 각각 true를 반환함으로 50%의 조건 커버리지를 달성했다. 
+다음 조건문에 해당되는 boolean 값(flagA, flagB)이 각각 true를 반환함으로 25%의 조건 커버리지를 달성했다. 
 
 ``` java
-if(flagA){ 
+if(flagA && flagB){ 
 	... 
-}else if(flagB){ 
+}else if(!flagA && flagB){ 
 	... 
-}else if(flagA && flagB){
-	...
-}else{
+}else if(flagA && !flagB){ 
+	... 
+}else if(!flagA && !flagB){
 	...
 }
 ```
