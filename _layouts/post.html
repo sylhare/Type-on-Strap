@@ -9,10 +9,23 @@ layout: default
     {% if page.author %} - {{ page.author }}{% endif %}
     </p>
   </header>
-  <section class="post-content">{{ content }}</section>
+  <section class="post-content">
+  {% if page.bootstrap %}
+  <div class="bootstrap-iso">
+  {% endif %}
+    {{ content }}
+  {% if page.bootstrap %}
+  </div>
+  {% endif %}
+  </section>
+  
+  <!-- Social media shares -->
+  {% include share_buttons.html %}
    
    <!-- Tag list -->
-   {% include tags_list.html tag_count=page.tags.size %}
+  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+  {% include tags_list.html tags=tag_list %}
+    
 </article>
 
 <!-- Disqus -->

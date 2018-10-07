@@ -18,20 +18,35 @@
     </a>
     
     <!-- Menu -->
-    <ul>
-	    <li>
-            <a class="clear" href="{{ site.baseurl }}/">
-                Home
-            </a>
-        </li>
+    <ul class="hide">
+        <!-- Auto Generation of NORMAL pages in the navbar -->
+        {% assign name_page = "" %}
+        
         {% for page in site.pages %}
         {% if page.title and page.hide != true %}
+        {% if name_page contains page.title %}
+        {% else %}
+        <li class="separator"> | </li>
         <li>
             <a class="clear" href="{{ page.url | relative_url }}">
                 {{ page.title }}
             </a>
         </li>
         {% endif %}
+        {% assign name_page = page.title | append: name_page %}
+        {% endif %}
+        {% endfor %} 
+        
+        <!-- Auto Generation of SPECIAL pages in the navbar -->
+        {% for item in site.theme_settings.special_page %}
+          {% if item[1].enabled %}
+            <li class="separator"> | </li>
+            <li>
+                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
+                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
+                </a>
+            </li>
+          {% endif %}
         {% endfor %}
     </ul>
         

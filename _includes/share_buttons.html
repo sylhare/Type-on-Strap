@@ -1,0 +1,76 @@
+<div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        {% if site.theme_settings.share_buttons.facebook %}
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | prepend: site.baseurl | prepend: site.url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_share_on }} Facebook</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.twitter %}
+        <li>
+            <a href="https://twitter.com/intent/tweet?source={{ page.url | prepend: site.baseurl | prepend: site.url }}&text={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}:%20{{ page.url | prepend: site.baseurl | prepend: site.url }}" target="_blank" title="{{ site.theme_settings.str_tweet }}">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_tweet }}</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.google_plus %}
+        <li>
+            <a href="https://plus.google.com/share?url={{ page.url | prepend: site.baseurl | prepend: site.url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Google+">
+			<i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_share_on }} Google+</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.tumblr %}
+        <li>
+            <a href="http://www.tumblr.com/share?v=3&u={{ page.url | prepend: site.baseurl | prepend: site.url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.theme_settings.str_share_on }} Tumblr">
+			<i class="fa fa-tumblr-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_share_on }} Tumblr</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.pinterest %}
+        <li>
+            <a href="http://pinterest.com/pin/create/button/?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&description=" target="_blank" title="{{ site.theme_settings.str_pin_it }}">
+			<i class="fa fa-pinterest-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_pin_it }}</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.pocket %}
+        <li>
+            <a href="https://getpocket.com/save?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.theme_settings.str_add_to }} Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_add_to }} Pocket</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.reddit %}
+        <li>
+            <a href="http://www.reddit.com/submit?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_share_on }} Reddit</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.linkedin %}
+        <li>
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&summary=&source={{ page.url | prepend: site.baseurl | prepend: site.url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} LinkedIn">
+			<i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_share_on }} LinkedIn</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.wordpress %}
+        <li>
+            <a href="http://wordpress.com/press-this.php?u={{ page.url | prepend: site.baseurl | prepend: site.url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.theme_settings.str_share_on }} WordPress">
+			<i class="fa fa-wordpress fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_share_on }} WordPress</span>
+		</a>
+        </li>
+        {% endif %} {% if site.theme_settings.share_buttons.email %}
+        <li>
+            <a href="mailto:?subject={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&body=:%20{{ page.url | prepend: site.baseurl | prepend: site.url }}" target="_blank" title="{{ site.theme_settings.str_email }}">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">{{ site.theme_settings.str_email }}</span>
+		</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>

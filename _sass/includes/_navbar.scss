@@ -1,10 +1,19 @@
 .site-header {
-    padding: $padding-x-small $padding-x-small * 2;
-    padding-top: $padding-x-small;
+    //padding-bottom: 1%;
+    padding: 2% 2% 1% 2%;
     background: $brand-color;
     display: inline-block;
     float: left;
     width: 100%;
+
+    .separator {
+        user-select: none;
+        opacity: $navbar-separator-opacity;
+
+        &:first-child {
+            display: none;
+        }
+    }
 
     a {
         color: $header-link-color;
@@ -39,6 +48,7 @@
             line-height: 1.5;
             float: right;
             text-align: right;
+            display: block;
         }
         li {
             display: inline;
@@ -98,10 +108,31 @@
     nav {
         height: auto;
 
+        .separator {
+            display: none !important;
+        }
+
         ul {
             width: 100%;
-            display: none;
-            height: auto;
+            overflow: hidden;
+
+            transition: font-size .25s,
+                margin .25s,
+                padding .25s,
+                opacity .5s .25s;
+        }
+
+        ul.hide {
+            font-size: 0;
+            margin: 0;
+            opacity: 0;
+            padding: 0;
+            
+            /* fade out, then shrink */
+            transition: opacity .25s,
+                        font-size .5s .25s,
+                        margin .5s .25s,
+                        padding .5s .25s;
         }
 
         li {
