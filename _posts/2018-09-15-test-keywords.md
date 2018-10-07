@@ -253,13 +253,13 @@ WBT는 제어 흐름 테스트 기법, 데이터 흐름 테스트 기법, 지점
 커버리지 기준은 코드 베이스에서 테스트가 되지 않는 부분을 찾는 데 유용한 기준이다. 이 기준에는 `Function coverage(함수 커버리지)`, `Statement coverage(구문(문장) 커버리지)`, `Decision or Branch coverage(분기/결정 커버리지)`, `Condition coverage(조건 커버리지)`,`MC/DC(변경 조건/결정 커버리지)`, `Multiple condition coverage(다중조건 커버리지)`
 등이 있다.
 
-> 1) Function coverage <br/>
-> 2) Statement coverage <br/>
-> 3) Decision or Branch coverage <br/>
-> 4) Condition coverage <br/>
+> 1) Function Coverage <br/>
+> 2) Statement Coverage <br/>
+> 3) Decision or Branch Coverage <br/>
+> 4) Condition Coverage <br/>
 > [Wiki - Basic Coverage Criteria](https://en.wikipedia.org/wiki/Code_coverage#Basic_coverage_criteria)
 
-#### Function coverage(함수 커버리지)
+#### Function Coverage(함수 커버리지)
 
 함수 커버리지란 프로그램 내 모든 기능 기준으로 수행된 정도를 의미한다. 일반적으로 함수 커버리지는 시스템 레벨의 테스트에서 측정해야 그 의미가 있다.
 
@@ -272,7 +272,7 @@ _함수 커버리지 = (수행된 함수 수 /전체 함수 수)*100_
 
 다음 테스트 메소드들이 모두 수행되었다고 가정한다면 100%의 함수 커버리지를 달성했다 말할 수 있다.
 
-#### Statement coverage(구문(문장) 커버리지)
+#### Statement Coverage(구문(문장) 커버리지)
 
 구문 커버리지란 테스트 수행을 통해서 실제 코드의 문장(Line)을 모두 수행했음을 의미한다.
 예를 들어 테스트하는데 100줄의 코드 베이스가 있다고 가정한다면 각 line이 한 번이라도 실행이 되어야 한다. 
@@ -311,7 +311,9 @@ _구문 커버리지 = (수행된 라인 수 /전체 라인 수)*100_
 
 다음의 테스트 메소드를 추가한다면 `Dead Code`가 사라져 100% 구문 커버리지를 달성했다고 할 수 있다.
 
-#### Decision(Branch) coverage(분기(결정) 커버리지)
+#### Decision(Branch) Coverage(결정(분기) 커버리지)
+
+>branch coverage is closely related to decision coverage and at 100% coverage they give exactly the same results. Decision coverage measures the coverage of conditional branches; branch coverage measures the coverage of both conditional and unconditional branches. The Syllabus uses decision coverage, as it is the source of the branches. Some coverage measurement tools may talk about branch coverage when they actually mean decision coverage. (c) ISTQB foundation book. - ISTQB
 
 분기 커버리지는 실제 코드 내의 모든 분기(if, switch, for, while, do-while 등) 수행 결과가 각각 true와 false를 반환해야 한다는 기준이다.
 
@@ -343,7 +345,7 @@ if(flagA && flagB){
 
 기존 코드에 else를 추가시켜 해당 코드는 true와 false를 반환하게 되었다.
 
-#### Condition coverage(조건 커버리지)
+#### Condition Coverage(조건 커버리지)
 
 조건 커버리지는 각 분기문 내부 조건이 true, false를 가지게 되면 충족된다.
 
@@ -379,6 +381,79 @@ if(flagA && flagB){
 
 기존 코드에 다음과 같이 해당 boolean 값이 각각 true, false를 모두 반환했을 때를 가정하여 조건문을 추가한다면 100%의 조건 커버리지를 만족한다고 말할 수 있다.
 
+#### Condition/Decision Coverage(조건/결정(분기) 커버리지)
+
+조건/결정 커버리지는 조건 커버리지와 분기 커버리지를 합친 커버리지로 결과는 분기 커버리지를 내부 조건은 조건 커버리지를 따른다. 즉 조건/결정 커버리지는 조건 커버리지와 분기 커버리지가 모두 충족되어야 한다. 
+
+``` java
+@Test public conditionDecisionCoverage(){
+	Boolean A = true;
+	Boolean B = true;
+	
+	if(A || B){
+		...
+	}
+}
+```
+
+_조건/결정 커버리지 = ((수행된 조건 수  + 수행된 분기 수)  / (전체  조건  수 + 전체 분기 수))*100_
+
+다음 조건문 결과와 내부 조건이 true만 수행하기 때문에 약 50%의 조건/결정 커버리지를 달성했다. 
+
+```java
+A = false;
+B = false;
+
+if(A || B){
+	...
+}
+```
+
+다음 코드처럼 false 값을 추가한 테스트 코드를 작성한다면 100%의 조건/결정 커버리지를 만족한다고 말할 수 있다.
+
+| |  A  | B | 결과 |
+|:---:|:---:|:---:|:---:|
+|1| T | T | T |
+|2| F | F | F |
+
+다음 표를 보면 조건/결정 커버리지의 핵심이 있다. 핵심은 조건에 해당하는 조건들이 모두 true를 반환하고 false를 반환하기만 한다면 자동으로 분기 커버리지를 만족한다는 점이다. 이를 근거하여 조건/결정 커버리지는 조건들이 true와 false만 반환하면 100%의 조건/결정 커버리지가 달성된다.
+ 
+#### MC/DC(Modified condition/Decision coverage) Coverage (수정된 조건/결정(분기) 커버리지)
+
+MC/DC 커버리지는 Condition/Decision Coverage를 보완한 커버리지다.
+
+MC/DC 커버리지는 각 조건이 독립적으로 전체 결과에 영향을 준다는 기준을 충족해야 한다. 즉, 개별 조건이 다른 개별 조건에 영향을 받지 않고 전체 결정(분기)에 독립적으로 영향을 미치는 경우 해당 조건은 MC/DC를 만족한다.
+
+``` java
+if ((A || B) && C){
+	...
+}
+```
+
+다음 코드에 대한 Condition/Decision Coverage인 경우 다음과 같다.
+
+| |  A  | B | C |결과 |
+|:---:|:--:|:---:|:---:|:---:|
+|1    | T | **T** 	| T 	| T |
+|2    | F | F 		| **F** | F |
+
+_MC/DC = (수행된 MC/DC 조건 수 /전체 조건 수)*100_
+
+여기서 조건 A를 기준으로 첫 번째 테스트 케이스를 보면 조건 B의 값이 true이든 false이든 결과는 true이므로 결과에 독립적으로 영향을 주지 않는다. 두 번째 테스트 케이스는 조건 C가 각 값이 결과에 독립적으로 영향을 주지 않기 때문에 이 표는 0% MC/DC 커버리지에 만족한다. 
+
+|   |A  |B   | C |결과 |
+|:---:|:--:|:---:|:---:|:---:|
+|1	|T	|T	 | T | T |
+|2	|T	|T	 | F | F |
+|3	|T	|F	 | T | T |
+|4	|T	|F	 | F | F |
+|5	|F	|T	 | T | T |
+|6	|F	|T	 | F | F |
+|7	|F	|F	 | T | F |
+|8	|F	|F	 | F | F |
+
+다음 조건문은 총 8개의 테스트 케이스가 있다. 이 중에 조건 A를 기준으로 MC/DC를 만족하는 테스트 케이스는 3번, 7번이 필요하다.
+
 이외의 TDD 관점에서 바라본 커버리지에 대해 알고 싶다면 마틴 파울러가 쓴 [Test Coverage](https://martinfowler.com/bliki/TestCoverage.html)를 참고하자.
 
 ---
@@ -413,5 +488,6 @@ if(flagA && flagB){
 >[https://qacomplete.com/resources/articles/test-scripts-test-cases-test-scenarios/](https://qacomplete.com/resources/articles/test-scripts-test-cases-test-scenarios/)<br/>
 >[https://www.softwaretestingclass.com/what-is-difference-between-test-cases-vs-test-scenarios/](https://www.softwaretestingclass.com/what-is-difference-between-test-cases-vs-test-scenarios/)<br/>
 >[https://www.softwaretestinghelp.com/difference-between-test-plan-test-strategy-test-case-test-script-test-scenario-and-test-condition/](https://www.softwaretestinghelp.com/difference-between-test-plan-test-strategy-test-case-test-script-test-scenario-and-test-condition/)<br/>
+>[https://m.blog.naver.com/PostView.nhn?blogId=shiftspace&logNo=220561755364&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F](https://m.blog.naver.com/PostView.nhn?blogId=shiftspace&logNo=220561755364&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)<br/>
 >[https://www.thoughtworks.com/insights/blog/test-assertions-how-do-they-work](https://www.thoughtworks.com/insights/blog/test-assertions-how-do-they-work)<br/>
 >[https://en.wikipedia.org/wiki/Test_assertion](https://en.wikipedia.org/wiki/Test_assertion)<br/>
