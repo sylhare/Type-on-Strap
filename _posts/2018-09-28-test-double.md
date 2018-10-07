@@ -84,30 +84,30 @@ public class UserService {
         this.userFactor = userFactor;
     }
     
-    Double avgAmt(UserDao userDao) {
-        return userFactor.avgAmt(userDao);
+    Double calAvgWage(UserDao userDao) {
+        return userFactor.calAvgWage(userDao);
     }
 }
 ```
 
-Gradebook 저장소에서 실제 학생 성적을 얻기 위해 데이터베이스를 호출하는 대신 반환 될 성적으로 스텁을 사전 구성합니다. 평균 계산 알고리즘을 테스트하기에 충분한 데이터를 정의합니다.
+UserFactor에서 실제 사용자의 평균 임금 데이터를 얻기 위해 데이터베이스를 호출하는 해당 데이터를 Stub으로 사전 구성한다. 이때 Stub은 해당 알고리즘을 테스트하기에 충분한 데이터로 산정한다.  
 
 ``` java
-public class GradesServiceTest {
-    private Student student;
-    private Gradebook gradebook;
+public class UserServiceTest {
+    private UserDao userDao;
+    private UserFactor userFactor;
 
     @Before
     public void setUp() throws Exception {
-        gradebook = mock(Gradebook.class);
-        student = new Student();
+        userFactor = mock(UserFactor.class);
+        userDao = new UserDao();
     }
 
     @Test
-    public void calculates_grades_average_for_student() {
-        when(gradebook.gradesFor(student)).thenReturn(grades(8, 6, 10)); //stubbing gradebook
-        double averageGrades = new GradesService(gradebook).averageGrades(student);
-        assertThat(averageGrades).isEqualTo(8.0);
+    public void calAvgWageTest() {
+        when(userFactor.calAvgWage(userDao)).thenReturn(grades(8, 6, 10)); //stubbing userFactor
+        double avgWage = new UserService(userFactor).calAvgWage(userDao);
+        assertThat(avgWage).isEqualTo(1000000.0);
     }
 }
 ```
@@ -119,6 +119,18 @@ public class GradesServiceTest {
 _used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed_
 
 Mocks 는 그들이 기대하는 호출의 명세를 형성하는 기대치로 미리 프로그램되어있다. 기대하지 않은 전화를 받았을 때 예외를 throw 할 수 있으며 확인 중에 전화를 통해 예상했던 모든 전화를 받았는지 확인할 수 있습니다.
+
+Mock은 수신 호출을 등록하는 객체입니다. 
+테스트 주장에서 우리는 모의 (Mock)에서 모든 예상 된 행동이 수행되었다는 것을 검증 할 수있다.
+
+생산 코드를 호출하고 싶지 않거나 손쉬운 검증 방법이없는 경우 의도 된 코드가 실행되었음을 나타 내기 위해 모의 (mock)를 사용합니다. 반환 값은 없으며 시스템 상태 변경을 확인하는 쉬운 방법이 없습니다. 전자 메일 전송 서비스를 호출하는 기능을 예로들 수 있습니다. 
+우리는 테스트를 실행할 때마다 전자 메일을 보내지 않습니다. 더욱이, 테스트에서 올바른 이메일이 전송되었는지 확인하는 것은 쉽지 않습니다. 우리가 할 수있는 일은 테스트에서 수행 된 기능의 출력을 검증하는 것입니다. 다른 세계에서는 전자 메일 보내기 서비스가 호출되었는지 확인하십시오.
+
+다음 예제에서 비슷한 경우가 나타납니다.
+
+<img src="/md/img/test-double/mock.png">
+<em>Mock object</em>
+
 
 
 ---
@@ -136,6 +148,13 @@ Test Spy 은 그들이 불리는 방법에 따라 정보를 기록하는 스텁�
 _used as a simpler implementation, e.g. using an in-memory database in the tests instead of doing real database access_
 
 Fake object는 실제로 실제로 구현되어 있지만 일반적으로 제작에 적합하지 않은 단축키를 사용합니다 ( InMemoryTestDatabase 가 좋은 예입니다).
+
+가짜 (fake)는 작동하는 구현을 가지고 있지만 제작과는 다른 객체입니다. 보통 그들은 간단한 코드를 사용하고 생산 코드의 버전을 단순화했습니다.
+
+이 바로 가기의 예는 데이터 액세스 개체 또는 저장소의 메모리 내 구현 일 수 있습니다. 이 가짜 구현은 데이터베이스에 관여하지 않지만 단순 콜렉션을 사용하여 데이터를 저장합니다. 이를 통해 데이터베이스를 시작하고 시간이 많이 소요되는 요청을 수행하지 않고도 서비스의 통합 테스트를 수행 할 수 있습니다.
+
+<img src="/md/img/test-double/fake.png">
+<em>Fake object</em>
 
 ---
 
