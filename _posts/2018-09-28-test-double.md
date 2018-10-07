@@ -45,19 +45,16 @@ _a trained professional who stands in for an actor in order to perform dangerous
 <img src="/md/img/test-double/test-real-object.png">
 <em>Class Dependency Relationship</em>
 
-
-
-그 이유인즉슨 테스트 대상이 될 객체를 직접 사용하게 되면 실제 객체(Real Object)와 의존관계가 형성된 다른 객체 간의 상호관계에서 발생하는 부작용을 일으키기 때문에 테스트 시에 실체 객체를 대신 할 수 있는 독립된 객체(테스트 더블)를 생성하여 사용한다.
-
-이처럼 테스트 더블을 사용하는 가장 큰 이유는 테스트 객체의 독립성을 보장받기 때문이다. 이는 테스트 시에 발생하는 위험요소를 최소화할 방법이다. 또한, 테스트 코드의 복잡성이 줄이고 시스템의 나머지 부분과 독립적으로 코드를 검증할 수 있게 도와준다.
-
+다음 그림과 같이 테스트 시 실제 객체를 사용하면 이와 관계를 맺은 다른 객체들에 의해 값이 변경되거나 해당 객체만 테스트하기 어려운 부작용이 생긴다. 이러한 부작용들 때문에 해당 객체를 독립적인 객체로 만드는 코드를 작성하는 경우가 생긴다.
+이러한 행위는 결과적으로 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
 
 <img src="/md/img/test-double/test-double-object.png">
-<em>테스트의 의존관계</em>
+<em>Class Independency Relationship of Test Double</em>
 
+테스트 더블은 다음 그림과 같이 관계를 맺은 객체를 배제해 독립성을 갖게 해주고 실체 객체와 같은 행동을 하는 객체를 생성한다.
+이처럼 독립된 객체를 테스트로 사용하는 이유는 테스트 시에 발생하는 예측 불가능한 위험요소를 최소화할 방법이기 때문이다. 또한, 테스트 코드의 복잡성이 줄이고 시스템의 나머지 부분과 독립적으로 코드를 검증할 수 있게 도와준다. 이외에 특수한 상황을 테스트한다거나 감춰진 정보를 얻기 위해 사용하기도 한다.
 
-
-테스트 더블에는 `Test stub`, `Mock object`, `Test spy`, `Fake object`, `Dummy object`가 있다.
+테스트 더블에는 `Test stub`, `Mock object`, `Test spy`, `Fake object`, `Dummy object`가 있다. 각각의 용도가 다르므로 테스트 객체의 목적에 따라 구분하고 사용해야 한다.
 
 > [Types of test doubles](https://en.wikipedia.org/wiki/Test_double) <br/>
 > - Test stub <br/>
@@ -66,23 +63,54 @@ _a trained professional who stands in for an actor in order to perform dangerous
 > - Fake object <br/>
 > - Dummy object <br/>
 
-테스트 더블의 종류는 각각의 용도가 다르므로 테스트 객체의 목적에 따라 구분하고 사용해야 한다.
-
 ---
 
 ### Stub
 
 _used for providing the tested code with "indirect input"_
 
-Test Stub 은 테스트 중에 작성된 호출에 대한 미리 준비된 답변을 제공한다. 일반적으로 테스트를 위해 프로그래밍 된 내용 외에는 응답하지 않는다.
+Test Stub은 사전에 정의된 데이터를 보유하고 특정 객체 호출할 때 값을 정의해둔 데이터로 대체하는 테스트 더블이다. 즉 Stub은 로직이 없고 단지 원하는 값을 반환한다. 이 때문에 테스트 시에 '이 객체는 무조건 이 값을 반환한다.'라고 가정할 경우 사용한다. 또한, 실제 객체의 데이터를 사용할 때 위험이 있거나 객체를 포함할 수 없는 경우, 또는 원하지 않을 때도 사용한다.
 
-Stub은 로직이 없고 단지 원하는 값을 반환합니다. 테스트시에 “이 객체는 무조건 이 값을 반환한다”고 가정할 경우 사용할 수 있습니다. Stub은 보통 작성하기 쉽지만 불필요한 boilerplate 코드를 줄이기 위해서 Mocking Framework을 이용하는게 편합니다.
+<img src="/md/img/test-double/stub.png">
+<em>Test Stub</em>
 
+가장 단순한 예로는 메소드 호출에 응답하기 위해 데이터베이스에서 일부 데이터를 가져와야 하는 객체다. 실제 객체 대신 Stub을 통해 반환할 데이터를 정의한다.
 
-변형 : 테스트 스텁
-우리는 사용하는 테스트 스텁 (페이지 X)를 하는 진정한 구성 요소 교체 SUT는 테스트가 갖도록 따라 제어 지점 에 대한 간접적 인 입력 의 SUT를 . 이렇게하면 테스트를 통해 SUT 가 달리 실행되지 않을 수도있는 경로 를 강제 로 중단시킬 수 있습니다
+``` java
+public class UserService {
+    private final UserFactor userFactor;
+    
+    public UserService(UserFactor userFactor) {
+        this.userFactor = userFactor;
+    }
+    
+    Double avgAmt(UserDao userDao) {
+        return userFactor.avgAmt(userDao);
+    }
+}
+```
 
-어떤 사람들은 "Test Stub"이라는 용어를 사용하여 실제 객체 나 프로 시저를 사용할 수있을 때까지만 사용되는 임시 구현을 의미합니다. 혼란을 피하기 위해 이것을 임시 테스트 스텁 (Test Stub 참조) 이라고 부릅니다 .
+Gradebook 저장소에서 실제 학생 성적을 얻기 위해 데이터베이스를 호출하는 대신 반환 될 성적으로 스텁을 사전 구성합니다. 평균 계산 알고리즘을 테스트하기에 충분한 데이터를 정의합니다.
+
+``` java
+public class GradesServiceTest {
+    private Student student;
+    private Gradebook gradebook;
+
+    @Before
+    public void setUp() throws Exception {
+        gradebook = mock(Gradebook.class);
+        student = new Student();
+    }
+
+    @Test
+    public void calculates_grades_average_for_student() {
+        when(gradebook.gradesFor(student)).thenReturn(grades(8, 6, 10)); //stubbing gradebook
+        double averageGrades = new GradesService(gradebook).averageGrades(student);
+        assertThat(averageGrades).isEqualTo(8.0);
+    }
+}
+```
 
 ---
 
