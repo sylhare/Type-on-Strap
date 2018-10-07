@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
+baseurl: ""
+url: "https://nutbrown.io"
 title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
@@ -8,39 +8,41 @@ description: "A website with blog posts and pages" # used by search engines
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
-  avatar: assets/img/triangle.svg
+  title: Nutbrown.io
+  avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
+  gravatar: "adfbe6d61be40c206a78d553b848bb16"
+  description: "Personal tech-themed blog for Stephen Nutbrown. Mostly featuring AWS cloud projects written in Java, Javascript, Python, Ruby, Groovy and whatever else is necessary (php is never necessary)." # used by search engines
 
   # Header and footer text
-  header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
+  header_text: >
+    <p>Stephen Nutbrown's personal tech-themed blog, mostly featuring AWS cloud projects written in a wide range of languages.</p>
+    <p>Got an idea or improvement? Pull requests or bug reports are welcome <a href="https://github.com/NutterzUK/nutbrown">here</a>.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+    Gratefully powered by <a href="https://jekyllrb.com/">Jekyll</a>, using <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
-  rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  rss: false
+  email_address: "stephen@nutbrown.io"
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "NutterzUK/nutbrown"
   google_plus:
   instagram:
   keybase:
-  linkedin:  # Full URL
+  linkedin: "https://www.linkedin.com/in/stephen-nutbrown-59a94838/"
   pinterest:
   reddit:
   soundcloud:
-  stack_exchange:  # Full URL
-  steam:
+  stack_exchange:
+  steam: "NutterzUK"
   tumblr:
-  twitter: # "twitter username"
+  twitter: "nutterzuk"
   vimeo:
   wordpress:
   youtube:
@@ -59,9 +61,9 @@ theme_settings:
     email: true
 
   # Scripts / Features 
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
-  katex: true # Enable if using math markup
+  google_analytics: "UA-55663428-6"
+  disqus_shortname: "nutbrown-io"
+  katex: false
   
   special_page:
     search: 
