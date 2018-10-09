@@ -39,7 +39,7 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 ### Independence
 
-프로그램도 마찬가지다. 물론 때에 따라 실제 객체를 대상으로 테스트를 수행할 수 있지만, 일반적으로 테스트 시에 해당한 객체를 직접 테스트하면 위험요소가 따른다. 
+프로그램도 마찬가지다. 물론 때에 따라 실제 객체를 대상으로 테스트를 수행하는 때도 있지만, 일반적으로 테스트 시에 해당한 객체를 직접 테스트하면 위험요소가 따른다. 
 그 이유인즉슨 테스트 대상이 될 객체를 직접 사용하게 되면 실제 객체와 관계가 형성된 객체 간의 상호관계에서 발생하는 부작용을 일으키기 때문이다.
 
 <img src="/md/img/test-double/test-real-object.png">
@@ -69,48 +69,74 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 _used for providing the tested code with "indirect input"_
 
-Test Stub은 사전에 정의된 데이터를 보유하고 특정 객체 호출할 때 값을 정의해둔 데이터로 대체하는 테스트 더블이다. 즉 Stub은 로직이 없고 단지 원하는 값을 반환한다. 이 때문에 테스트 시에 '이 객체는 무조건 이 값을 반환한다.'라고 가정할 경우 사용한다. 또한, 실제 객체의 데이터를 사용할 때 위험이 있거나 객체를 포함할 수 없는 경우, 또는 원하지 않을 때도 사용한다.
+Test Stub은 사전에 정의된 데이터를 보유하고 특정 객체 호출할 때 값을 정의해둔 데이터로 대체하는 테스트 더블이다. 즉 Stub은 로직이 없고 단지 원하는 값을 반환한다. 이 때문에 테스트 시에 '이 객체는 무조건 이 값을 반환한다.'라고 가정할 경우 사용한다. 또한, 실제 객체의 데이터를 사용할 때 위험이 있거나 객체를 포함할 수 없는 경우, 또는 원하지 않을 때 사용한다.
 
 <img src="/md/img/test-double/stub.png">
 <em>Test Stub</em>
 
-가장 단순한 예로는 메소드 호출에 응답하기 위해 데이터베이스에서 일부 데이터를 가져와야 하는 객체다. 실제 객체 대신 Stub을 통해 반환할 데이터를 정의한다.
+가장 단순한 예로는 메소드 호출하여 데이터베이스에서 데이터를 가져와야 하는 경우다. 이 경우 실제 데이터베이스와 통신하는 객체 대신 Stub을 통해 반환할 데이터를 정의한다.
 
 ``` java
-public class UserService {
-    private final UserFactor userFactor;
+public class BankService {
+    private final BankFactor bankFactor;
     
-    public UserService(UserFactor userFactor) {
-        this.userFactor = userFactor;
+    public BankService(BankFactor bankFactor) {
+        this.bankFactor = bankFactor;
     }
     
-    Double calAvgWage(UserDao userDao) {
-        return userFactor.calAvgWage(userDao);
+    Double getAvgWage(UserDAO userDao) {
+        return calAvgWage(bankFactor.selectUserAmt(userDao));
     }
 }
 ```
 
-UserFactor에서 실제 사용자의 평균 임금 데이터를 얻기 위해 데이터베이스를 호출하는 해당 데이터를 Stub으로 사전 구성한다. 이때 Stub은 해당 알고리즘을 테스트하기에 충분한 데이터로 산정한다.  
+다음 코드는 데이터베이스에 접근하여 반환된 값을 통해 사용자의 평균임금을 계산하는 로직이다.
+
+해당 서비스 클래스를 테스트하기 위해선 이와 . 단지 테스트를 진행하려 했을 뿐인데 배꼽이 배보다 큰 상황이다.
+개발자는 서비스 클래스만 테스트하면 될 일을 팩토리 클래스까지 검증해야 할 상황에 직면한다. 이 모든 시작은 데이터베이스에서 데이터를 얻기 위해 시작됐다. 즉 테스트 시 `selectUserAvgWage` 메소드를 직접 테스트하기엔 위험이 따른다.
+
+Stub는  데이터 베이스를 접근하여 사용하기 전에 대신 해당 데이터를 Stub으로 사전 구성한다. 데이터는 해당 알고리즘을 고려하고 테스트하기에 충분한 데이터로 정의한다.
 
 ``` java
-public class UserServiceTest {
-    private UserDao userDao;
-    private UserFactor userFactor;
-
+public class BankServiceTest {
+    private UserDAO    userDao;
+    private BankFactor bankFactor;
+	private StubData   stubData;
+	
     @Before
     public void setUp() throws Exception {
-        userFactor = mock(UserFactor.class);
-        userDao = new UserDao();
+        bankFactor = mock(BankFactor.class);
+        userDao  = new UserDAO();
+        StubData = new StubData();
     }
-
+    
     @Test
-    public void calAvgWageTest() {
-        when(userFactor.calAvgWage(userDao)).thenReturn(grades(8, 6, 10)); //stubbing userFactor
-        double avgWage = new UserService(userFactor).calAvgWage(userDao);
+    public void getAvgWageTest() {
+        when(bankFactor.selectUserAmt(userDao))
+        	.thenReturn(stubData.avgWage()); //stubbing bankFactor
+        	
+        double avgWage = new BankService(bankFactor).getAvgWage(userDao);
         assertThat(avgWage).isEqualTo(1000000.0);
     }
 }
 ```
+
+
+
+결과를 반환하고 시스템의 상태를 변경하지 않는 메소드를 조회 라고 합니다. 방법 averageGrades 학생 성적의 평균 반환 좋은 예입니다.
+Double averageGrades(Student student);
+
+값을 반환하고 부작용이 없습니다. 학생들의 채점 예제에서 보았 듯이이 유형의 메소드를 테스트하기 위해 스텁을 사용합니다. 우리는 실제 기능을 대체하여 메소드가 작업을 수행하는 데 필요한 값을 제공합니다. 그런 다음, 메소드에 의해 리턴 된 값은 표명에 사용될 수 있습니다.
+
+명령 이라는 또 다른 카테고리가 있습니다 . 이것은 메소드가 시스템 상태를 변경하는 일부 조치를 수행하지만 리턴 값을 기대하지 않습니다.
+void sendReminderEmail(Student student);
+
+좋은 방법은 객체의 메서드를 두 개의 분리 된 범주로 나누는 것입니다. 
+이 사례의 이름은 다음과 같습니다 : Bertrand Meyer의 "객체 지향 소프트웨어 구성" 에서 명령 쿼리 분리 .
+
+Query 유형 메소드를 테스트하기 위해 우리는 메소드의 리턴 값을 검증 할 수 있기 때문에 스텁 사용을 선호해야합니다. 하지만 전자 메일을 보내는 방법과 같은 메서드의 명령 유형은 어떻습니까? 값을 반환하지 않을 때 테스트하는 방법? 대답은 모의 (Mock)입니다. 우리가 다룰 마지막 유형의 테스트 더미입니다.
+
+
 
 ---
 
