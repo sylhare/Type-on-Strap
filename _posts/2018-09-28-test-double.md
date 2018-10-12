@@ -44,12 +44,15 @@ _a trained professional who stands in for an actor in order to perform dangerous
 <img src="/md/img/test-double/test-real-object.png">
 <em>Class Dependency Relationship</em>
 
-TestObject에 대한 테스트 코드를 작성한다고 가정하자. 여러 테스트 케이스를 적용하여 테스트 진행하던 중 에러가 발생하였다. 이때 Real Object는 불완전한 상태라고 가정한다면 개발자는 Real Object와 관계가 형성된 객체들부터 검증한 다음에 테스트를 진행해야 TestObject를 검증할 수 있다. 또 다른 예로는 테스트 시 실제 객체와 관계를 맺은 다른 객체들에 의해 값이 변경되는 부작용이 발생할 수 있다. 이러한 예측 불가능한 위험 때문에 해당 객체를 독립적인 객체로 대체하여 테스트를 진행한다. 이러한 행위는 결과적으로 개발자는 많은 상황을 고려해야 하며 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
+TestObject에 대한 테스트 코드를 작성한다고 가정하자. 여러 테스트 케이스를 적용하여 테스트 진행하던 중 에러가 발생하였다. 이때 Real Object는 불완전한 상태라고 가정한다면 개발자는 Real Object와 관계가 형성된 객체들부터 검증한 다음에 테스트를 진행해야 TestObject를 검증할 수 있다. 
+
+또 다른 예로는 테스트 시 실제 객체와 관계를 맺은 다른 객체들에 의해 값이 변경되는 부작용이 발생할 수 있다. 이러한 예측 불가능한 위험 때문에 해당 객체를 독립적인 객체로 대체하여 테스트를 진행한다. 이러한 행위는 결과적으로 개발자는 많은 상황을 고려해야 하며 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
 
 <img src="/md/img/test-double/test-double-object.png">
 <em>Class Independency Relationship of Test Double</em>
 
 테스트 더블은 다음 그림과 같이 관계를 맺은 객체를 배제해 독립성을 갖게 해주고 실체 객체와 같은 행동을 하는 객체를 생성한다.
+
 이처럼 독립된 객체를 테스트로 사용하는 이유는 테스트 시에 발생하는 예측 불가능한 위험요소를 최소화할 방법이기 때문이다. 또한, 테스트 코드의 복잡성이 줄이고 시스템의 나머지 부분과 독립적으로 코드를 검증할 수 있게 도와준다. 이외에 특수한 상황을 테스트한다거나 감춰진 정보를 얻기 위해 사용한다.
 
 테스트 더블에는 `Test stub`, `Mock object`, `Test spy`, `Fake object`, `Dummy object`가 있다. 각각의 용도가 다르므로 테스트 객체의 목적에 따라 구분하고 사용해야 한다.
@@ -205,7 +208,28 @@ public class BankServiceTest {
 
 _used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed. It helps in recording information about the indirect object created_
 
+[http://xunitpatterns.com/Test%20Spy.html](http://xunitpatterns.com/Test%20Spy.html)
+
+https://www.javaworld.com/article/2074508/core-java/mocks-and-stubs---understanding-test-doubles-with-mockito.html
+
+https://adamcod.es/2014/05/15/test-doubles-mock-vs-stub.html
+
 Test Spy 은 그들이 불리는 방법에 따라 정보를 기록하는 스텁입니다. 한 가지 형태는 전송 된 메시지의 수를 기록하는 전자 메일 서비스 일 수 있습니다.
+
+---
+
+한편, 모키토 (Mockito) 는 스파이가 특정 행동을 변경하는 진정한 구현이라고 생각합니다. 모든 동작을 하나씩 지정하는 대신, 대부분의 동작을 수행하는 기존 객체를 사용하면 매우 구체적인 동작 만 변경할 수 있습니다.
+
+
+---
+
+시스템이 메소드를 호출했는지 확인하고 싶을 때 스파이를 사용합니다. 또한 호출 횟수를 계산하거나 매번 전달 된 인수를 기록하는 것과 같은 모든 종류의 것을 기록 할 수 있습니다.
+
+하지만 스파이를 사용하면 테스트를 코드 구현에 긴밀하게 연결해야 할 위험이 있습니다.
+
+간첩은 행동 검증에 독점적으로 사용됩니다.
+
+이러한 유형의 기능은 대부분의 현대 조롱 프레임 워크에서도 잘 다루어집니다.
 
 ---
 
@@ -218,28 +242,45 @@ Fake는 실제 데이터베이스의 데이터에 접근하는 객체, 즉 실�
 <img src="/md/img/test-double/fake.png">
 <em>Fake object</em>
 
-일반적으로 인메모리 데이터베이스에 접근하는 DAO를 Fake로 사용한다. Fake는 실제 데이터베이스가 응답한 데이터 집합의 축소판이라고 생각하면 된다. 이 Fake 구현은 실제 데이터베이스에 관여하지 않고 단순 Collection을 사용하여 테스트 시 필요한 데이터를 저장한다. 이를 통해 데이터베이스의 응답, 요청 시간이 많이 소요되는 서비스 통합 테스트를 비교적 빠르게 검증할 수 있다.
-
-Fake와 실제 객체의 테스트에 대한 결과는 같을 수 있지만, 엄밀히 따지면 실제 결과는 다를 수 있다. 이러한 예외는 비교적 인메모리를 사용하는데 위험이 따르기 때문이다. 개발자들이 흔히하는 실수 중, 축소된 데이터를 가지고 기능을 검증해놓고 기능이 완벽하다고 단정을 짓는 것이다. 물론 속도를 개선할 순 있지만, 인메모리를 사용한 Fake의 테스트 결과에 대한 정확도는 실제 데이터를 검증한 정확도에 비해 떨어질 수밖에 없다는 점을 주의해야 한다.
+Fake는 실제 데이터베이스가 응답한 데이터의 축소판이라고 생각하면 된다. Fake 구현은 실제 데이터베이스에 관여하지 않고 단순 Collection을 사용하여 테스트 시 필요한 데이터를 저장한다. 이를 통해 데이터베이스의 응답, 요청 시간이 많이 소요되는 서비스 통합 테스트를 비교적 빠르게 검증할 수 있다.
 
 ``` java
-@Profile("transient")
-public class FakeAccountRepository implements AccountRepository {
-       
-       Map<User, Account> accounts = new HashMap<>();
-       
-       public FakeAccountRepository() {
-              this.accounts.put(new User("john@bmail.com"), new UserAccount());
-              this.accounts.put(new User("boby@bmail.com"), new AdminAccount());
-       }
-       
-       String getPasswordHash(User user) {
-              return accounts.get(user).getPasswordHash();
-       }
+public class FakeBankRepository {
+	 private UserDAO user = new UserDAO();
+	 private BankDAO bank = new BankDAO();
+	 private Map<UserDAO, BankDAO> userAmts = new HashMap<>();
+     
+     public FakeBankRepository() {
+    	this.user.setId(100L);
+    	this.bank.setBankName("KR은행");
+
+    	this.userAmts.put(user, bank);
+     }
+     
+     String getUserBankName(UserDAO user) {
+            return userAmts.get(user).getBankName();
+     }
 }
 ```
 
-테스트 외에도 Fake 구현은 에자일 개발 방법론에서 [Spike](https://en.wikipedia.org/wiki/Spike_(software_development))나 사용자에게 빠른 피드백을 받기 위한  [프로토 타이핑](https://en.wikipedia.org/wiki/Prototype)에 유용하다. 즉 실제 데이터베이스 설계에 대한 결정을 미루고 인메모리 데이터베이스를 통해 시스템을 구현하고 실행할 수 있다.
+실제 DAO를 대체할 FakeBankRepository 객체를 생성한 뒤 테스트에 필요한 정보를 Collection에 담아 테스트 시 필요한 데이터 Collection을 통해 받는다.
+
+이때 Fake와 실제 DAO의 테스트에 관한 결과는 같을 수 있지만, 엄밀히 따지면 다르다. 이 문제점은 개발자들이 흔히 실수하는 부분인데 객관적이면서 축소된 데이터를 가지고 기능을 검증한 뒤 기능이 완벽하다고 단정을 짓는 것이다.
+
+이러한 문제점을 대체할 Fake 구현 방식은 여러 방법이 있겠지만, 일반적으로 인메모리 데이터베이스의 DAO를 Fake로 사용한다.
+
+``` java
+@H2DB
+public interface BankRepository extends JpaRepository<BankDAO, Long>{
+	public List<BankDAO> findByIdIn(List<Long> ids);
+}
+```
+
+스프링의 AOP를 사용하여 인메모리 데이터베이스로 접속하게 설정했다. 이 때문에 클래스 코드를 변경하지 않고 DAO는 인메모리 데이터베이스의 데이터에 영향을 받을 수 있게 됐다. 해당 인메모리의 데이터는 테스트에 필요한 데이터만 삽입하여 사용한다. 
+
+하지만 인메모리 데이터베이스 또한 테스트의 정확성을 보장하진 않는다. 인메모리를 사용하는데 속도를 개선할 순 있지만, 인메모리를 사용한 테스트 결과에 대한 정확도는 실제 데이터를 검증한 정확도에 비해 떨어질 수밖에 없다. 때문에 테스트 시 Fake의 구현 방식을 권장하지 않고 필요하다면 실제 데이터베이스의 데이터를 통해 기능을 검증한다.
+
+물론 Fake가 그림의 떡은 아니다. 에자일 개발 방법론에서 [스파이크](https://en.wikipedia.org/wiki/Spike_(software_development))나 사용자에게 빠른 피드백을 받기 위한  [프로토 타이핑](https://en.wikipedia.org/wiki/Prototype)에 활용한다면 유용하다. 즉 실제 데이터베이스 설계에 관한 결정을 미루고 인메모리 데이터베이스를 통해 시스템을 구현하고 실행할 수 있다는 장점을 잘 활용해야 한다.
 
 ---
 
@@ -247,11 +288,88 @@ public class FakeAccountRepository implements AccountRepository {
 
 _used when a parameter is needed for the tested method but without actually needing to use the parameter_
 
-Doummy object는 전달되지만 실제로 사용되지는 않습니다. 일반적으로 매개 변수 목록을 채우기 위해 사용됩니다.
+Dummy는 미국의 대표적인 코믹 영화 Dumb and Dumber(덤 앤 더머)와 연관하면 이해하기 쉽다.
+
+영화 제목의 Dumb과 Dumber은 바보의 대명사처럼 모자란 사람을 부를 때 쓰였다. 이와 마찬가지로 Dummy라는 이름에서 알 수 있듯이 Dummy는 매우 바보 같은 객체다. 일반적으로 Dummy object는 해당 객체가 어떻게 사용되는지 상관없이 컴파일과 런타임 실행을 만족 시키기기 위해  객체를 전달할 때 사용한다. 즉 Dummy object는 일반적으로 매개 변수 목록을 채우기 위해 사용한다.
+
+ 예를 들어 테스트 코드에 어느 한 객체가 매개변수가 있는 생성자를 포함하고 있다고 가정하자. 이때 매개 변수를 주입해야 하지만 해당 매개 변수는 테스트 시 해당 매개 변수를 사용하지 않는다면?
+ 
+ 이 경우에 Dummy를 사용하여 해결해보자.
+
+``` java
+public class MailServiceImple implements MailService{
+    private final FileIO fileIO;
+    
+    public MailServiceImple(FileIO fileIO) {
+    	this.fileIO = fileIO;
+    }
+    
+    @Override
+    public void send(String toEmail, String subject, String content, File attachFile){
+    	...
+    }
+    
+    ...
+}
+```
+
+먼저 테스트 코드를 작성할 MailServiceImple를 보면 생성자를 통해  FileIO와 의존관계를 맺어주고 있다. 주입 받은 FileIO는 테스트 시 사용하지 않으리라고 간주하고 해당 객체를 Dummy하여 테스트 코드를 작성해보자.
+
+```java
+public class MailServiceImpleTest {
+	DummyFileIO dummyFileIO;
+
+	@Before
+	public void setUp(){
+		dummyFileIO = mock(DummyFileIO.class);
+	}
+	
+    @Test
+    public void sendTest(){
+    	MailServiceImple mailSvc = new MailServiceImple(dummyFileIO);
+        
+        mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
+        verify(mailSvc).send(null, null, null, null);
+    }
+    
+    class DummyFileIO implements FileIO{
+    	@Override
+    	public StringBuilder read(String filePath) {
+    		throw new RuntimeException("Not expected to be called");
+    	}
+    }
+}
+```
+ 
+ 눈치를 챘는지 모르겠지만 다른 테스트 더블의 구현 방식과는 다르게 Dummy인 경우 내부 클래스로 작성했다. 일반적으로 Dummy는 테스트를 통해 변경되지 않기 때문에 내부 클래스를 만들고 모든 테스트에 재사용하는 것이 더 적합하기 때문이다.
+
+`MailServiceImple mailSvc = new MailServiceImple(null)`
+
+ 또한, 테스트 시 해당 인수 값이 무관하다면 null로 대체해도 무관하다.
+
+`dummyFileIO = mock(DummyFileIO.class);`
+
+해당 인수 값에 의해 예기치 않은 예외를 발생하는 걸 방지하기 위해 mock 객체를 사용하여 테스트 코드를 작성하였다.
 
 ---
 
 ### 마무리
+
+더미 객체는 전달되지만 실제로 사용되지는 않습니다. 일반적으로 매개 변수 목록을 채우기 위해 사용됩니다.
+
+위조 된 객체는 실제로 실제로 구현되어 있지만 일반적으로 제작에 적합하지 않은 단축키를 사용합니다 ( InMemoryTestDatabase 가 좋은 예입니다).
+
+스텁 (stub) 은 테스트 중에 작성된 호출에 대한 미리 준비된 답변을 제공합니다. 일반적으로 테스트를 위해 프로그래밍 된 내용 외에는 응답하지 않습니다.
+
+간첩 은 그들이 불리는 방법에 따라 정보를 기록하는 스텁입니다. 한 가지 형태는 전송 된 메시지의 수를 기록하는 전자 메일 서비스 일 수 있습니다.
+
+모의 (Mock) 는 그들이 기대하는 호출의 명세를 형성하는 기대치로 미리 프로그램되어있다. 기대하지 않은 전화를 받았을 때 예외를 throw 할 수 있으며 확인 중에 전화를 통해 예상했던 모든 전화를 받았는지 확인할 수 있습니다.
+
+https://www.hostettler.net/blog/2014/05/18/fakes-stubs-dummy-mocks-doubles-and-all-that/
+
+https://www.javaworld.com/article/2074508/core-java/mocks-and-stubs---understanding-test-doubles-with-mockito.html
+
+https://www.javacodegeeks.com/2015/11/test-doubles-mocks-dummies-and-stubs.html
 
 http://engineering.pivotal.io/post/the-test-double-rule-of-thumb/
 
@@ -261,6 +379,11 @@ https://blog.pragmatists.com/test-doubles-fakes-mocks-and-stubs-1a7491dfa3da
 
 http://xunitpatterns.com/Test%20Double.html
 
+https://zeroturnaround.com/rebellabs/how-to-mock-up-your-unit-test-environment-to-create-alternate-realities/
+
+https://www.javacodegeeks.com/2014/09/built-in-fake-objects.html
+
+http://blog.celerity.com/unit-testing-django-fake-it-til-you-make-it
 
 ---
 
