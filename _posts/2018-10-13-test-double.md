@@ -80,11 +80,11 @@ Test Stub은 사전에 정의된 데이터를 보유하고 특정 객체 호출�
 public class BankService {
     private final BankFactor bankFactor;
     
-    public BankService(BankFactor bankFactor) {
+    public BankService(BankFactor bankFactor){
         this.bankFactor = bankFactor;
     }
     
-    public double getAvgWage(HashMap<String, Object> params) {
+    public double getAvgWage(HashMap<String, Object> params){
         return calAvgWage(bankFactor.selectUserAmt(params));
     }
     ...
@@ -108,7 +108,7 @@ public class BankServiceTest {
     }
     
     @Test
-    public void getAvgWage() {
+    public void getAvgWage(){
         when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
         	.thenReturn(new StubDatas().userAmts()); //Stubbing bankFactor
         	
@@ -265,7 +265,7 @@ public class MailServiceImpleTest {
 		public int callCount = 0;
 		
 		@Override
-		public StringBuilder read(String filePath) {
+		public StringBuilder read(String filePath){
 			this.callCount++;
 	        return null;
 		}
@@ -295,13 +295,13 @@ public class FakeBankRepository {
 	private BankDAO bank = new BankDAO();
 	private Map<UserDAO, BankDAO> userAmts = new HashMap<>();
     
-	public FakeBankRepository() {
+	public FakeBankRepository(){
 		this.user.setId(100L);
 		this.bank.setBankName("KR은행");
 		this.userAmts.put(user, bank);
 	}
      
-	String getUserBankName(UserDAO user) {
+	String getUserBankName(UserDAO user){
 		return userAmts.get(user).getBankName();
 	}
 }
@@ -347,7 +347,7 @@ Dummy는 미국의 대표적인 코믹 영화 Dumb and Dumber(덤 앤 더머)와
 public class MailServiceImple implements MailService{
 	private final FileIO fileIO;
     
-	public MailServiceImple(FileIO fileIO) {
+	public MailServiceImple(FileIO fileIO){
 		this.fileIO = fileIO;
 	}
     
@@ -381,7 +381,7 @@ public class MailServiceImpleTest {
     
 	private class DummyFileIO implements FileIO{
 		@Override
-		public StringBuilder read(String filePath) {
+		public StringBuilder read(String filePath){
 			throw new RuntimeException("Not expected to be called");
 		}
 	}
