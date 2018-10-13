@@ -153,7 +153,7 @@ public class BankService {
     	this.mailService = mailServiceImple;
     }
     
-    public double getAvgWage(HashMap<String, Object> params) {
+    public double getAvgWage(HashMap<String, Object> params){
     	List<UserDAO> users = bankFactor.selectUserAmt(params);
     	double avgWage = calAvgWage(users);
     	
