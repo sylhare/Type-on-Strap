@@ -78,14 +78,14 @@ Test Stub은 사전에 정의된 데이터를 보유하고 특정 객체 호출�
 
 ``` java
 public class BankService {
-    private final BankFactor bankFactor;
+	private final BankFactor bankFactor;
     
-    public BankService(BankFactor bankFactor){
-        this.bankFactor = bankFactor;
-    }
+	public BankService(BankFactor bankFactor){
+		this.bankFactor = bankFactor;
+	}
     
-    public double getAvgWage(HashMap<String, Object> params){
-        return calAvgWage(bankFactor.selectUserAmt(params));
+	public double getAvgWage(HashMap<String, Object> params){
+    	return calAvgWage(bankFactor.selectUserAmt(params));
     }
     ...
 }
@@ -100,21 +100,21 @@ BankService의 테스트 코드를 작성 시 실제 데이터베이스를 접�
 
 ``` java
 public class BankServiceTest {
-    private BankFactor bankFactor;
+	private BankFactor bankFactor;
 	
-    @Before
-    public void setUp() throws Exception {
-        bankFactor = mock(BankFactor.class);
-    }
+	@Before
+	public void setUp() throws Exception {
+		bankFactor = mock(BankFactor.class);
+	}
     
-    @Test
-    public void getAvgWage(){
-        when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
-        	.thenReturn(new StubDatas().userAmts()); //Stubbing bankFactor
+	@Test
+	public void getAvgWage(){
+		when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
+			.thenReturn(new StubDatas().userAmts()); //Stubbing bankFactor
         	
-        double avgWage = new BankService(bankFactor).getAvgWage(new HashMap<String, Object>());
-        assertThat(avgWage).isEqualTo(1000000.0);
-    }
+		double avgWage = new BankService(bankFactor).getAvgWage(new HashMap<String, Object>());
+		assertThat(avgWage).isEqualTo(1000000.0);
+	}
 }
 ```
 
@@ -145,21 +145,21 @@ Mock은 호출에 대한 기대하는 실행 결과를 사전에 정의한 객�
 
 ``` java
 public class BankService {
-    private final BankFactor bankFactor;
-    private final MailService mailService;
+	private final BankFactor bankFactor;
+	private final MailService mailService;
     
-    public BankService(BankFactor bankFactor, MailServiceImple mailServiceImple){
-    	this.bankFactor = bankFactor;
-    	this.mailService = mailServiceImple;
-    }
+	public BankService(BankFactor bankFactor, MailServiceImple mailServiceImple){
+		this.bankFactor = bankFactor;
+		this.mailService = mailServiceImple;
+	}
     
-    public double getAvgWage(HashMap<String, Object> params){
-    	List<UserDAO> users = bankFactor.selectUserAmt(params);
-    	double avgWage = calAvgWage(users);
+	public double getAvgWage(HashMap<String, Object> params){
+		List<UserDAO> users = bankFactor.selectUserAmt(params);
+		double avgWage = calAvgWage(users);
     	
-    	mailService.sendResultAvgWageEmail(users, Double.toString(avgWage));
-        return avgWage;
-    }
+		mailService.sendResultAvgWageEmail(users, Double.toString(avgWage));
+		return avgWage;
+	}
 }
 ```
 
@@ -267,7 +267,7 @@ public class MailServiceImpleTest {
 		@Override
 		public StringBuilder read(String filePath){
 			this.callCount++;
-	        return null;
+			return null;
 		}
 	}
 }
