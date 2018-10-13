@@ -245,7 +245,7 @@ public void userBankCountTest() throws Exception {
 
 ``` java
 public class MailServiceImpleTest {
-	SpyFileIO spy;
+	private SpyFileIO spy;
 	
 	@Before
 	public void setUp(){
@@ -291,20 +291,19 @@ Fake는 실제 데이터베이스가 응답한 데이터의 축소판이라고 �
 
 ``` java
 public class FakeBankRepository {
-	 private UserDAO user = new UserDAO();
-	 private BankDAO bank = new BankDAO();
-	 private Map<UserDAO, BankDAO> userAmts = new HashMap<>();
+	private UserDAO user = new UserDAO();
+	private BankDAO bank = new BankDAO();
+	private Map<UserDAO, BankDAO> userAmts = new HashMap<>();
+    
+	public FakeBankRepository() {
+		this.user.setId(100L);
+		this.bank.setBankName("KR은행");
+		this.userAmts.put(user, bank);
+	}
      
-     public FakeBankRepository() {
-    	this.user.setId(100L);
-    	this.bank.setBankName("KR은행");
-
-    	this.userAmts.put(user, bank);
-     }
-     
-     String getUserBankName(UserDAO user) {
-            return userAmts.get(user).getBankName();
-     }
+	String getUserBankName(UserDAO user) {
+		return userAmts.get(user).getBankName();
+	}
 }
 ```
 
@@ -346,18 +345,18 @@ Dummy는 미국의 대표적인 코믹 영화 Dumb and Dumber(덤 앤 더머)와
 
 ``` java
 public class MailServiceImple implements MailService{
-    private final FileIO fileIO;
+	private final FileIO fileIO;
     
-    public MailServiceImple(FileIO fileIO) {
-    	this.fileIO = fileIO;
-    }
+	public MailServiceImple(FileIO fileIO) {
+		this.fileIO = fileIO;
+	}
     
-    @Override
-    public void send(String toEmail, String subject, String content, File attachFile){
-    	...
-    }
+	@Override
+	public void send(String toEmail, String subject, String content, File attachFile){
+		...
+	}
     
-    ...
+	...
 }
 ```
 
@@ -365,27 +364,27 @@ public class MailServiceImple implements MailService{
 
 ```java
 public class MailServiceImpleTest {
-	DummyFileIO dummyFileIO;
+	private DummyFileIO dummyFileIO;
 
 	@Before
 	public void setUp(){
 		dummyFileIO = mock(DummyFileIO.class);
 	}
 	
-    @Test
-    public void sendTest(){
-    	MailServiceImple mailSvc = new MailServiceImple(dummyFileIO);
+	@Test
+	public void sendTest(){
+		MailServiceImple mailSvc = new MailServiceImple(dummyFileIO);
         
-        mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
-        verify(mailSvc).send(null, null, null, null);
-    }
+		mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
+		verify(mailSvc).send(null, null, null, null);
+	}
     
-    private class DummyFileIO implements FileIO{
-    	@Override
-    	public StringBuilder read(String filePath) {
-    		throw new RuntimeException("Not expected to be called");
-    	}
-    }
+	private class DummyFileIO implements FileIO{
+		@Override
+		public StringBuilder read(String filePath) {
+			throw new RuntimeException("Not expected to be called");
+		}
+	}
 }
 ```
  
@@ -406,7 +405,7 @@ public class MailServiceImpleTest {
 <img src="/md/img/test-double/test-double-relationship.png">
 <em>Goal of Test double use</em>
 
-테스트 더블은 실제 객체와 관계를 맺은 객체들을 테스트용 객체로 대체하여 독립적인 테스트를 가능할 수 있게 만들어 주는 목적이 있다. 테스트 더블에는 총 다섯 가지의 종류가 있다.
+테스트 더블은 실제 객체와 관계를 맺은 객체들을 테스트용 객체로 대체하여 독립적인 테스트를 가능할 수 있게 만들어 주는 목적이 있다. 앞서 설명했듯이 테스트 더블에는 총 다섯 가지의 종류가 있고 이를 요약함으로써 글을 마친다.
 
 `Test Stub`은 로직이 없고 사전에 정의한 데이터를 반환한다.
 
