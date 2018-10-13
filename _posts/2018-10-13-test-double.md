@@ -148,9 +148,9 @@ public class BankService {
     private final BankFactor bankFactor;
     private final MailService mailService;
     
-    public BankService(BankFactor bankFactor, MailServiceImple mailServiceImple) {
-        this.bankFactor = bankFactor;
-        this.mailService = mailServiceImple;
+    public BankService(BankFactor bankFactor, MailServiceImple mailServiceImple){
+    	this.bankFactor = bankFactor;
+    	this.mailService = mailServiceImple;
     }
     
     public double getAvgWage(HashMap<String, Object> params) {
