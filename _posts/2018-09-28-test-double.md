@@ -125,9 +125,7 @@ public class BankServiceTest {
 
 `void sendResultAvgWageEmail(UserDAO user, String content);`
 
-다음과 같이 계산된 평균임금 값을 사용자의 메일로 발송하는 메소드가 있다고 가정하자. 반환된 값이 있다면 Stub을 통해 검증하면 되지만 반환하는 값이 없다면 어떻게 검증해야 할까?
-
-이런 경우 Mock을 통해 검증하면 된다.
+다음과 같이 계산된 평균임금 값을 사용자의 메일로 발송하는 메소드가 있다고 가정하자. 반환된 값이 있다면 Stub을 통해 검증하면 되지만 반환하는 값이 없다면 어떻게 검증해야 할까? 이런 경우 Mock을 통해 검증하면 된다.
 
 ---
 
@@ -135,7 +133,7 @@ public class BankServiceTest {
 
 _used for verifying "indirect output" of the tested code, by first defining the expectations before the tested code is executed_
 
-Mocks는 호출에 대한 기대하는 실행 결과를 사전에 정의한 객체다. 이 객체를 통해 기대하지 않은 결과를 예외 처리할 수 있으며 예상했던 모든 결과를 확인할 수도 있다. 
+Mock은 호출에 대한 기대하는 실행 결과를 사전에 정의한 객체다. 이 객체를 통해 기대하지 않은 결과를 예외 처리할 수 있으며 예상했던 모든 결과를 확인할 수도 있다. 
 일반적으로 실제 코드를 호출하고 싶지 않거나 손쉬운 검증 방법이 없는 경우 의도된 코드가 실행되었음을 나타내기 위해 사용한다. 즉 Mock은 동작에 대한 검증으로 반환 값은 없다. 동작에 대한 검증은 테스트할 수 있지만, 동작하는 그 자체를 검증하는 것은 어렵다.
 
 <img src="/md/img/test-double/mock.png">
@@ -197,6 +195,8 @@ public class BankServiceTest {
 
 `getAvgWage` 메소드 실행 후 `sendResultAvgWageEmail` 메일 메소드가 실행되었는지 verify 메소드를 통해 확인했다. 하지만 사용자에게 제대로 메일이 전달되었는지 해당 기능이 예외를 반환하는지에 대한 검증은 확인할 수 없다. 이것이 MailService 관점에서 테스트할 수 있는 전부다.
 
+`verify(mailServiceMock).sendResultAvgWageEmail(data, Double.toString(avgWage));`
+
 여기서 '실제 사용자에게 제대로 메일이 전달되었는지 알 수는 없을까?'라는 의문이 든다. 그에 대한 답은 알 수 없다. 그러나 현시점에서 그 의문에 대해 신경 쓰지 않아도 된다. 이는 BankService의 책임이 아닌 MailService 책임이기 때문이다.
 
 ---
@@ -239,7 +239,7 @@ public class FakeAccountRepository implements AccountRepository {
 }
 ```
 
-테스트 외에도 Fake 구현은 에자일 개발 방법론에서 [Spike](https://en.wikipedia.org/wiki/Spike_(software_development))나 사용자에게 빠른 피드백을 받기 위한  [프로토 타이핑](https://en.wikipedia.org/wiki/Prototype)에 유용하다. 즉 실제 데이터베이스 설계에 대한 결정을 미루고 인메모리 데이터베이스를 통해 시스템을 구현하고 실행할 수 있다.
+실제 데이터베이스를 인메모리 데이터베이스로 대체하는 Fake의 구현 방식은 테스트 외에도 에자일 개발 방법론에서 [Spike](https://en.wikipedia.org/wiki/Spike_(software_development))나 사용자에게 빠른 피드백을 받기 위한  [프로토 타이핑](https://en.wikipedia.org/wiki/Prototype)에 유용하다.
 
 ---
 
