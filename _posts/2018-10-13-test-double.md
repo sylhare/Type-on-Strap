@@ -2,7 +2,6 @@
 layout: post
 title: "TDD : Test Double"
 tags: [TDD, TestDouble, Mock, Stub, Fake]
-display: "false"
 feature-img: "md/img/test-double/test-double-thumbnail.jpg"              
 thumbnail: "md/img/test-double/test-double-thumbnail.jpg"
 subtitle: "위험에 대처하는 자세"
@@ -140,7 +139,7 @@ Mock은 호출에 대한 기대하는 실행 결과를 사전에 정의한 객�
 일반적으로 실제 코드를 호출하고 싶지 않거나 손쉬운 검증 방법이 없는 경우 의도된 코드가 실행되었음을 나타내기 위해 사용한다. 즉 Mock은 동작에 대한 검증으로 반환 값은 없다. 동작에 대한 검증은 테스트할 수 있지만, 동작하는 그 자체를 검증하는 것은 어렵다.
 
 <img src="/md/img/test-double/mock.png">
-<em>Mock object</em>
+<em>Mock Object</em>
 
 단편적인 예로는 메일 서비스 기능을 들 수 있다. BankService에서 사용자의 평균임금을 계산한 값을 사용자의 메일로 전송해주는 기능을 추가되었다고 가정하자. 테스트 코드를 실행할 때마다 결괏값이 메일로 전송하지 않는다. 더구나 메일이 올바르게 전송되었는지 확인하기는 쉽지 않다. 개발자가 할 수 있는 일은 테스트에서 수행된 기능의 출력을 검증하는 것이다.
 
@@ -208,28 +207,74 @@ public class BankServiceTest {
 
 _used for verifying "indirect output" of the tested code, by asserting the expectations afterwards, without having defined the expectations before the tested code is executed. It helps in recording information about the indirect object created_
 
-[http://xunitpatterns.com/Test%20Spy.html](http://xunitpatterns.com/Test%20Spy.html)
+Test Spy는 실제 객체의 메소드를 호출하고 반환 값이 있으면 해당 반환값도 반환해준다. 
 
-https://www.javaworld.com/article/2074508/core-java/mocks-and-stubs---understanding-test-doubles-with-mockito.html
+<img src="/md/img/test-double/spy.png">
+<em>Test Spy</em>
 
-https://adamcod.es/2014/05/15/test-doubles-mock-vs-stub.html
+일반적으로 Spy는 시스템이 메소드를 호출했는지 확인하고 싶을 때 사용한다. 예를들어 호출 횟수를 계산하거나 전달 된 인수를 기록하는 것과 같은 모든 종류의 것을 기록하는 목적인 경우 유용하다.
 
-Test Spy 은 그들이 불리는 방법에 따라 정보를 기록하는 스텁입니다. 한 가지 형태는 전송 된 메시지의 수를 기록하는 전자 메일 서비스 일 수 있습니다.
+``` java
+@Test
+public void userBankCountTest() throws Exception {
+	List<UserDAO> bankList = bankFactor.selectFindByBankName("KR은행"); 
+	List<UserDAO> spy = spy(bankList);
+	
+	when(spy.size()).thenReturn(5); //stubbing list size
+	
+	spy.add(new UserDAO(1, "A"));
+	spy.add(new UserDAO(2, "B"));
 
----
+	System.out.println(spy.get(0)); //A
+	System.out.println(spy.size()); //5
 
-한편, 모키토 (Mockito) 는 스파이가 특정 행동을 변경하는 진정한 구현이라고 생각합니다. 모든 동작을 하나씩 지정하는 대신, 대부분의 동작을 수행하는 기존 객체를 사용하면 매우 구체적인 동작 만 변경할 수 있습니다.
+	verify(spy).add(new UserDAO(1, "A"));
+	verify(spy).add(new UserDAO(2, "B"));
 
+	
+	when(spy.get(100))
+		.thenReturn(new UserDAO(1, "A")); // IndexOutOfBoundsException 
+}
+```
 
----
+해당 메소드는 사용자가 등록한 은행의 개수를 반환한다. Mockito 프레임워크에서 제공하는 spy 메소드를 사용하여 반환한 객체를 Spy했다. 당연히 spy된 객체를 Stub을 할 수 있다.
 
-시스템이 메소드를 호출했는지 확인하고 싶을 때 스파이를 사용합니다. 또한 호출 횟수를 계산하거나 매번 전달 된 인수를 기록하는 것과 같은 모든 종류의 것을 기록 할 수 있습니다.
+`doReturn(new UserDAO(1, "A").when(spy).get(100);`
 
-하지만 스파이를 사용하면 테스트를 코드 구현에 긴밀하게 연결해야 할 위험이 있습니다.
+단 Spy를 활용하여 Stub을 하면 실제 인스턴스의 메소드를 호출하기 때문에 종종 예기치 못한 예외가 발생한다. 위의 when(spy.get(100))에서는 진짜 인스턴스의 메소드를 호출하기 때문에 IndexOutOfBountException이 발생하게 된다. 이 경우 Mockito.doReturn를 사용해서 문제를 회피할 수 있다.
 
-간첩은 행동 검증에 독점적으로 사용됩니다.
+``` java
+public class MailServiceImpleTest {
+	SpyFileIO spy;
+	
+	@Before
+	public void setUp(){
+		spy = spy(SpyFileIO.class);
+	}
+	
+	@Test
+	public void sendTest(){
+		MailServiceImple mailSvc = new MailServiceImple(spy);
+		
+		mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
+		verify(mailSvc).send(null, null, null, null);
+		assertEquals(1, spy.callCount);
+	}
+	
+	private class SpyFileIO implements FileIO{
+		public int callCount = 0;
+		
+		@Override
+		public StringBuilder read(String filePath) {
+			this.callCount++;
+	        return null;
+		}
+	}
+}
+```
 
-이러한 유형의 기능은 대부분의 현대 조롱 프레임 워크에서도 잘 다루어집니다.
+다음과 같이 Spy를 활용하여 테스트 시 특정 메소드가 호출된 총횟수를 검사할 수도 있다.
+
 
 ---
 
@@ -240,7 +285,7 @@ _used as a simpler implementation, e.g. using an in-memory database in the tests
 Fake는 실제 데이터베이스의 데이터에 접근하는 객체, 즉 실제 DAO를 대신하여 테스트를 수행할 객체를 의미한다.
 
 <img src="/md/img/test-double/fake.png">
-<em>Fake object</em>
+<em>Fake Object</em>
 
 Fake는 실제 데이터베이스가 응답한 데이터의 축소판이라고 생각하면 된다. Fake 구현은 실제 데이터베이스에 관여하지 않고 단순 Collection을 사용하여 테스트 시 필요한 데이터를 저장한다. 이를 통해 데이터베이스의 응답, 요청 시간이 많이 소요되는 서비스 통합 테스트를 비교적 빠르게 검증할 수 있다.
 
@@ -276,7 +321,7 @@ public interface BankRepository extends JpaRepository<BankDAO, Long>{
 }
 ```
 
-스프링의 AOP를 사용하여 인메모리 데이터베이스로 접속하게 설정했다. 이 때문에 클래스 코드를 변경하지 않고 DAO는 인메모리 데이터베이스의 데이터에 영향을 받을 수 있게 됐다. 해당 인메모리의 데이터는 테스트에 필요한 데이터만 삽입하여 사용한다. 
+스프링의 AOP를 사용하여 인메모리 데이터베이스로 접속하게 설정했다. 이 때문에 클래스 코드를 변경하지 않고 DAO는 인메모리 데이터베이스의 데이터에 영향을 받을 수 있게 됐다. 이때 해당 인메모리의 데이터는 테스트에 필요한 데이터만 삽입하여 사용한다.
 
 하지만 인메모리 데이터베이스 또한 테스트의 정확성을 보장하진 않는다. 인메모리를 사용하는데 속도를 개선할 순 있지만, 인메모리를 사용한 테스트 결과에 대한 정확도는 실제 데이터를 검증한 정확도에 비해 떨어질 수밖에 없다. 때문에 테스트 시 Fake의 구현 방식을 권장하지 않고 필요하다면 실제 데이터베이스의 데이터를 통해 기능을 검증한다.
 
@@ -291,6 +336,9 @@ _used when a parameter is needed for the tested method but without actually need
 Dummy는 미국의 대표적인 코믹 영화 Dumb and Dumber(덤 앤 더머)와 연관하면 이해하기 쉽다.
 
 영화 제목의 Dumb과 Dumber은 바보의 대명사처럼 모자란 사람을 부를 때 쓰였다. 이와 마찬가지로 Dummy라는 이름에서 알 수 있듯이 Dummy는 매우 바보 같은 객체다. 일반적으로 Dummy object는 해당 객체가 어떻게 사용되는지 상관없이 컴파일과 런타임 실행을 만족 시키기기 위해  객체를 전달할 때 사용한다. 즉 Dummy object는 일반적으로 매개 변수 목록을 채우기 위해 사용한다.
+
+<img src="/md/img/test-double/dummy.png">
+<em>Dummy Object</em>
 
  예를 들어 테스트 코드에 어느 한 객체가 매개변수가 있는 생성자를 포함하고 있다고 가정하자. 이때 매개 변수를 주입해야 하지만 해당 매개 변수는 테스트 시 해당 매개 변수를 사용하지 않는다면?
  
@@ -332,7 +380,7 @@ public class MailServiceImpleTest {
         verify(mailSvc).send(null, null, null, null);
     }
     
-    class DummyFileIO implements FileIO{
+    private class DummyFileIO implements FileIO{
     	@Override
     	public StringBuilder read(String filePath) {
     		throw new RuntimeException("Not expected to be called");
@@ -349,62 +397,32 @@ public class MailServiceImpleTest {
 
 `dummyFileIO = mock(DummyFileIO.class);`
 
-해당 인수 값에 의해 예기치 않은 예외를 발생하는 걸 방지하기 위해 mock 객체를 사용하여 테스트 코드를 작성하였다.
+파일 입출력 기능에서 발생하는 예외를 방지하기 위해 해당 인수 값을 mock 객체를 사용하여 독립적인 메일 발송 테스트를 진행했다.
 
 ---
 
 ### 마무리
 
-더미 객체는 전달되지만 실제로 사용되지는 않습니다. 일반적으로 매개 변수 목록을 채우기 위해 사용됩니다.
+<img src="/md/img/test-double/test-double-relationship.png">
+<em>Goal of Test double use</em>
 
-위조 된 객체는 실제로 실제로 구현되어 있지만 일반적으로 제작에 적합하지 않은 단축키를 사용합니다 ( InMemoryTestDatabase 가 좋은 예입니다).
+테스트 더블은 실제 객체와 관계를 맺은 객체들을 테스트용 객체로 대체하여 독립적인 테스트를 가능할 수 있게 만들어 주는 목적이 있다. 테스트 더블에는 총 다섯 가지의 종류가 있다.
 
-스텁 (stub) 은 테스트 중에 작성된 호출에 대한 미리 준비된 답변을 제공합니다. 일반적으로 테스트를 위해 프로그래밍 된 내용 외에는 응답하지 않습니다.
+`Test Stub`은 로직이 없고 사전에 정의한 데이터를 반환한다.
 
-간첩 은 그들이 불리는 방법에 따라 정보를 기록하는 스텁입니다. 한 가지 형태는 전송 된 메시지의 수를 기록하는 전자 메일 서비스 일 수 있습니다.
+`Mock Object`는 객체를 동작이 없고 반환 값이 없는 상태로 만든다.
 
-모의 (Mock) 는 그들이 기대하는 호출의 명세를 형성하는 기대치로 미리 프로그램되어있다. 기대하지 않은 전화를 받았을 때 예외를 throw 할 수 있으며 확인 중에 전화를 통해 예상했던 모든 전화를 받았는지 확인할 수 있습니다.
+`Test Spy`는 실제 객체와 같은 동작을 한다.
 
-https://www.hostettler.net/blog/2014/05/18/fakes-stubs-dummy-mocks-doubles-and-all-that/
+`Fake Object`는 실제 DAO를 대체할 객체이다.
 
-https://www.javaworld.com/article/2074508/core-java/mocks-and-stubs---understanding-test-doubles-with-mockito.html
-
-https://www.javacodegeeks.com/2015/11/test-doubles-mocks-dummies-and-stubs.html
-
-http://engineering.pivotal.io/post/the-test-double-rule-of-thumb/
-
-https://www.slideshare.net/youngeunchoi12/effective-unit-testing-ch3
-
-https://blog.pragmatists.com/test-doubles-fakes-mocks-and-stubs-1a7491dfa3da
-
-http://xunitpatterns.com/Test%20Double.html
-
-https://zeroturnaround.com/rebellabs/how-to-mock-up-your-unit-test-environment-to-create-alternate-realities/
-
-https://www.javacodegeeks.com/2014/09/built-in-fake-objects.html
-
-http://blog.celerity.com/unit-testing-django-fake-it-til-you-make-it
+`Dummy Object`는 동작하지 않고 매개 변수 목록을 채워주기 위해 사용한다. 또한, 컴파일을 가능하게 하기 위한 것일 뿐이며 테스트에 포함되지 않는다.
 
 ---
 
 ### 참고
 
-https://adamcod.es/2014/05/15/test-doubles-mock-vs-stub.html
-
-
-
-https://martinfowler.com/bliki/TestDouble.html
-
-https://github.com/testdouble/contributing-tests/wiki/Test-Double
-
-https://lostechies.com/derekgreer/2011/05/15/effective-tests-test-doubles/
-
-https://laurentkempe.com/2010/07/17/Unit-Test-using-test-doubles-aka-Mock-Stub-Fake-Dummy/
-
-[https://en.wikipedia.org/wiki/Test_double](https://en.wikipedia.org/wiki/Test_double)
-
-[https://stackoverflow.com/questions/12827580/mocking-vs-spying-in-mocking-frameworks](https://stackoverflow.com/questions/12827580/mocking-vs-spying-in-mocking-frameworks)
-
-[https://eminentstar.github.io/2017/07/24/about-mock-test.html](https://eminentstar.github.io/2017/07/24/about-mock-test.html)
-
-[http://www.jpstory.net/2013/07/26/know-your-test-doubles/](http://www.jpstory.net/2013/07/26/know-your-test-doubles/)
+[xUnit - TestDouble](http://xunitpatterns.com/Test%20Double.html)<br/>
+[Martin Fowler - TestDouble](https://martinfowler.com/bliki/TestDouble.html)<br/>
+[Martin Fowler - Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html)<br/>
+[Martin Fowler - CommandQuerySeparation](https://martinfowler.com/bliki/CommandQuerySeparation.html)<br/>
