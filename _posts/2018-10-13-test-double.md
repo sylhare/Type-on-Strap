@@ -45,7 +45,7 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 예를 들어 TestObject에 대한 테스트 코드를 작성한다고 가정하자. 여러 테스트 케이스를 적용하여 테스트 진행하던 중 Real Object에서 에러가 발생하였다. 이때 Real Object는 불완전한 상태라고 가정한다면 개발자는 Real Object와 관계가 형성된 객체들부터 검증한 다음에 테스트를 진행해야 TestObject를 검증할 수 있다.
 
-또 다른 예로는 테스트 시 실제 객체와 관계를 맺은 다른 객체들에 의해 값이 변경되는 부작용이 발생할 수 있다. 이러한 예측 불가능한 위험 때문에 해당 객체를 독립적인 객체로 대체하여 테스트를 진행한다. 이러한 행위는 결과적으로 개발자는 많은 상황을 고려해야 하며 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
+또 다른 예로는 테스트 시 실제 객체와 관계를 맺은 다른 객체들에 의해 값이 변경되는 부작용이 발생할 수 있다. 이러한 예측 불가능한 위험 때문에 해당 객체를 독립적인 객체로 대체하거나 코드를 수정하여 테스트를 진행한다. 이러한 행위는 결과적으로 개발자는 많은 상황을 고려해야 하며, 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
 
 <img src="/md/img/test-double/test-double-object.png">
 <em>Class Independency Relationship of Test Double</em>
@@ -261,7 +261,7 @@ public class MailServiceImpleTest {
 		assertEquals(1, spy.callCount);
 	}
 	
-	private class SpyFileIO implements FileIO{
+	public class SpyFileIO implements FileIO{
 		public int callCount = 0;
 		
 		@Override
@@ -273,7 +273,9 @@ public class MailServiceImpleTest {
 }
 ```
 
-다음과 같이 Spy를 활용하여 테스트 시 특정 메소드가 호출된 총횟수를 검사할 수도 있다.
+앞서 메소드의 실제 값을 얻기 위한 목적으로 Spy를 사용할 수도 있지만, 다음과 같이 Spy를 활용하여 테스트 시 특정 메소드가 호출된 총횟수를 검사할 수도 있다. 이처럼 해당 메소드의 호출에 의한 기댓값(호출 횟수, 인수 등)을 기록하는 Spy의 사용 방법은 많은 개발자가 권장하고 있다.
+
+>Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent. - Martin Fowler
 
 
 ---
@@ -379,7 +381,7 @@ public class MailServiceImpleTest {
 		verify(mailSvc).send(null, null, null, null);
 	}
     
-	private class DummyFileIO implements FileIO{
+	public class DummyFileIO implements FileIO{
 		@Override
 		public StringBuilder read(String filePath){
 			throw new RuntimeException("Not expected to be called");
