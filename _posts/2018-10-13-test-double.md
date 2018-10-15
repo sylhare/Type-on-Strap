@@ -273,7 +273,7 @@ public class MailServiceImpleTest {
 }
 ```
 
-앞서 메소드의 실제 값을 얻기 위한 목적으로 Spy를 사용할 수도 있지만, 다음과 같이 Spy를 활용하여 테스트 시 특정 메소드가 호출된 총횟수를 검사할 수도 있다. 이처럼 해당 메소드의 호출에 의한 기댓값(호출 횟수, 인수 등)을 기록하는 Spy의 사용 방법은 많은 개발자가 권장하고 있다.
+앞서 실제 객체에 메소드의 값을 얻기 위해 Spy를 사용할 수도 있지만, 다음과 같이 Spy를 활용하여 테스트 시 특정 메소드가 호출된 총횟수를 검사할 수도 있다. Spy의 이처럼 해당 메소드의 호출에 의한 기댓값(호출 횟수, 인수 등)을 기록하는 목적으로 사용할 수 있다.
 
 >Spies are stubs that also record some information based on how they were called. One form of this might be an email service that records how many messages it was sent. - Martin Fowler
 
