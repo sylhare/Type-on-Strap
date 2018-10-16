@@ -34,25 +34,31 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 프로그램도 마찬가지다. 영화에서 위험을 최소화하기 위한 장치로 스턴트 더블이 있다면 테스트엔 테스트 더블이 있다. 테스트 더블은 실제 객체를 대체한 객체를 뜻한다.
 
----
+#### 예측 불가능한 위험
 
-### Independence
+그렇다면 실제 객체를 통한 테스트는 신뢰할 수 없다는 것일까?
 
-물론 상황에 따라 실제 객체를 대상으로 테스트를 수행하는 때도 있지만, 일반적으로 테스트 시에 실제 객체를 직접 테스트하면 실제 객체와 관계가 형성된 객체 간의 상호관계에서 발생하는 예측 불가능한 위험이 발생할 수 있다. 
+물론 아니다. 상황에 따라 실제 객체를 대상으로 테스트를 수행하는 때도 있다. 하지만 일반적으로 테스트 시에 실제 객체를 직접 테스트하면 실제 객체와 관계가 형성된 객체 간의 상호관계에서 발생하는 예측 불가능한 위험이 발생할 수 있다. 예측 불가능한 위험은 프로그램뿐만 아니라 개발자에게도 치명적이다. 
+
+그 이유인즉슨 테스트 코드를 작성하는 이유 중 가장 큰 부분은 개발자에게 코드에 대한 신뢰를 준다는 점인데, 위험이 발생 확률을 떠나서 위험이 발생할 수 있다는 두려움은 테스트 코드 자체를 신뢰할 수 없게 만들뿐더러 더는 테스트 코드를 작성할 동기가 없어지게 된다. 이 두려움의 원천은 신뢰할 수 없는 객체와 관계가 형성된 테스트 객체를 검증해야 할 때 시작된다.  
 
 <img src="/md/img/test-double/test-real-object.png">
 <em>Class Dependency Relationship</em>
 
-예를 들어 TestObject에 대한 테스트 코드를 작성한다고 가정하자. 여러 테스트 케이스를 적용하여 테스트 진행하던 중 Real Object에서 에러가 발생하였다. 이때 Real Object는 불완전한 상태라고 가정한다면 개발자는 Real Object와 관계가 형성된 객체들부터 검증한 다음에 테스트를 진행해야 TestObject를 검증할 수 있다.
+예를 들어 TestObject에 대한 테스트 코드를 작성한다고 가정하자. 여러 테스트 케이스를 적용하여 테스트 진행하던 중 Real Object에서 에러가 발생하였다. 이때 Real Object는 불완전한 상태라고 가정한다면 개발자는 Real Object와 관계가 형성된 객체들부터 검증한 다음에 테스트를 진행해야 비로소 TestObject를 검증할 수 있게 된다. 하지만 검증된 객체를 사용함에 부작용이 따른다. 그 이유인즉슨 테스트 시 실제 객체와 관계를 맺은 다른 객체들에 의해 값이 변경될 수 있기 때문이다.
+ 
+ 이러한 예측 불가능한 위험 때문에 해당 객체를 독립적인 객체로 대체하거나 코드를 수정하여 테스트를 진행한다. 이러한 행위는 많은 상황을 고려해야 하며, 실제 객체에서 사용하지 않는 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
 
-또 다른 예로는 테스트 시 실제 객체와 관계를 맺은 다른 객체들에 의해 값이 변경되는 부작용이 발생할 수 있다. 이러한 예측 불가능한 위험 때문에 해당 객체를 독립적인 객체로 대체하거나 코드를 수정하여 테스트를 진행한다. 이러한 행위는 결과적으로 개발자는 많은 상황을 고려해야 하며, 추가적인 코드로 인해 테스트 코드가 복잡해진다. 
+결과적으로 많은 관계가 형성된 객체를 테스트 코드로 작성하기는 쉽지 않다. 하지만 테스트 더블을 활용하여 테스트 코드를 작성한다면 이러한 어려움을 해결할 수 있다.
+
+#### 위험요소를 관리하는 테스트 더블
 
 <img src="/md/img/test-double/test-double-object.png">
 <em>Class Independency Relationship of Test Double</em>
 
 테스트 더블은 다음 그림과 같이 관계를 맺은 객체를 배제해 독립성을 갖게 해주고 실체 객체와 같은 행동을 하는 객체를 생성한다.
 
-이처럼 독립된 객체를 테스트로 사용하는 이유는 테스트 시에 발생하는 예측 불가능한 위험요소를 최소화할 방법이기 때문이다. 또한, 테스트 코드의 복잡성이 줄이고 시스템의 나머지 부분과 독립적으로 코드를 검증할 수 있게 도와준다. 이외에 특수한 상황을 테스트한다거나 감춰진 정보를 얻기 위해 사용한다.
+이처럼 독립된 객체를 사용하여 테스트 시에 발생하는 예측 불가능한 위험요소를 최소화한다. 또한, 테스트 코드의 복잡성이 줄이고 시스템의 나머지 부분과 독립적으로 코드를 검증할 수 있게 도와준다. 이외에 특수한 상황을 테스트한다거나 감춰진 정보를 얻기 위해 사용한다.
 
 테스트 더블에는 `Test stub`, `Mock object`, `Test spy`, `Fake object`, `Dummy object`가 있다. 각각의 용도가 다르므로 테스트 객체의 목적에 따라 구분하고 사용해야 한다.
 
@@ -78,14 +84,14 @@ Test Stub은 사전에 정의된 데이터를 보유하고 특정 객체 호출�
 
 ``` java
 public class BankService {
-	private final BankFactor bankFactor;
+   private final BankFactor bankFactor;
     
-	public BankService(BankFactor bankFactor){
-		this.bankFactor = bankFactor;
-	}
+   public BankService(BankFactor bankFactor){
+      this.bankFactor = bankFactor;
+   }
     
-	public double getAvgWage(HashMap<String, Object> params){
-    	return calAvgWage(bankFactor.selectUserAmt(params));
+   public double getAvgWage(HashMap<String, Object> params){
+       return calAvgWage(bankFactor.selectUserAmt(params));
     }
     ...
 }
@@ -100,21 +106,21 @@ BankService의 테스트 코드를 작성 시 실제 데이터베이스를 접�
 
 ``` java
 public class BankServiceTest {
-	private BankFactor bankFactor;
-	
-	@Before
-	public void setUp() throws Exception {
-		bankFactor = mock(BankFactor.class);
-	}
+   private BankFactor bankFactor;
+   
+   @Before
+   public void setUp() throws Exception {
+      bankFactor = mock(BankFactor.class);
+   }
     
-	@Test
-	public void getAvgWage(){
-		when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
-			.thenReturn(new StubDatas().userAmts()); //Stubbing bankFactor
-        	
-		double avgWage = new BankService(bankFactor).getAvgWage(new HashMap<String, Object>());
-		assertThat(avgWage).isEqualTo(1000000.0);
-	}
+   @Test
+   public void getAvgWage(){
+      when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
+         .thenReturn(new StubDatas().userAmts()); //Stubbing bankFactor
+           
+      double avgWage = new BankService(bankFactor).getAvgWage(new HashMap<String, Object>());
+      assertThat(avgWage).isEqualTo(1000000.0);
+   }
 }
 ```
 
@@ -145,21 +151,21 @@ Mock은 호출에 대한 기대하는 실행 결과를 사전에 정의한 객�
 
 ``` java
 public class BankService {
-	private final BankFactor bankFactor;
-	private final MailService mailService;
+   private final BankFactor bankFactor;
+   private final MailService mailService;
     
-	public BankService(BankFactor bankFactor, MailServiceImple mailServiceImple){
-		this.bankFactor = bankFactor;
-		this.mailService = mailServiceImple;
-	}
+   public BankService(BankFactor bankFactor, MailServiceImple mailServiceImple){
+      this.bankFactor = bankFactor;
+      this.mailService = mailServiceImple;
+   }
     
-	public double getAvgWage(HashMap<String, Object> params){
-		List<UserDAO> users = bankFactor.selectUserAmt(params);
-		double avgWage = calAvgWage(users);
-    	
-		mailService.sendResultAvgWageEmail(users, Double.toString(avgWage));
-		return avgWage;
-	}
+   public double getAvgWage(HashMap<String, Object> params){
+      List<UserDAO> users = bankFactor.selectUserAmt(params);
+      double avgWage = calAvgWage(users);
+       
+      mailService.sendResultAvgWageEmail(users, Double.toString(avgWage));
+      return avgWage;
+   }
 }
 ```
 
@@ -182,11 +188,11 @@ public class BankServiceTest {
     
     @Test
     public void getAvgWage() throws Exception{
-    	List<UserDAO> data = new StubDatas().userDaoList();
-    	
+       List<UserDAO> data = new StubDatas().userDaoList();
+       
         when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
-        	.thenReturn(data); //Stubbing bankFactor
-        	
+           .thenReturn(data); //Stubbing bankFactor
+           
         double avgWage = new BankService(bankFactor, mailServiceMock).getAvgWage(new HashMap<String, Object>());
         
         verify(mailServiceMock).sendResultAvgWageEmail(data, Double.toString(avgWage));
@@ -217,23 +223,23 @@ Test Spy는 실제 객체의 메소드를 호출하고 반환 값이 있으면 �
 ``` java
 @Test
 public void userBankCountTest() throws Exception {
-	List<UserDAO> bankList = bankFactor.selectFindByBankName("KR은행"); 
-	List<UserDAO> spy = spy(bankList);
-	
-	when(spy.size()).thenReturn(5); //stubbing list size
-	
-	spy.add(new UserDAO(1, "A"));
-	spy.add(new UserDAO(2, "B"));
+   List<UserDAO> bankList = bankFactor.selectFindByBankName("KR은행"); 
+   List<UserDAO> spy = spy(bankList);
+   
+   when(spy.size()).thenReturn(5); //stubbing list size
+   
+   spy.add(new UserDAO(1, "A"));
+   spy.add(new UserDAO(2, "B"));
 
-	System.out.println(spy.get(0)); //A
-	System.out.println(spy.size()); //5
+   System.out.println(spy.get(0)); //A
+   System.out.println(spy.size()); //5
 
-	verify(spy).add(new UserDAO(1, "A"));
-	verify(spy).add(new UserDAO(2, "B"));
+   verify(spy).add(new UserDAO(1, "A"));
+   verify(spy).add(new UserDAO(2, "B"));
 
-	
-	when(spy.get(100))
-		.thenReturn(new UserDAO(1, "A")); // IndexOutOfBoundsException 
+   
+   when(spy.get(100))
+      .thenReturn(new UserDAO(1, "A")); // IndexOutOfBoundsException 
 }
 ```
 
@@ -245,31 +251,31 @@ public void userBankCountTest() throws Exception {
 
 ``` java
 public class MailServiceImpleTest {
-	private SpyFileIO spy;
-	
-	@Before
-	public void setUp(){
-		spy = spy(SpyFileIO.class);
-	}
-	
-	@Test
-	public void sendTest(){
-		MailServiceImple mailSvc = new MailServiceImple(spy);
-		
-		mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
-		verify(mailSvc).send(null, null, null, null);
-		assertEquals(1, spy.callCount);
-	}
-	
-	public class SpyFileIO implements FileIO{
-		public int callCount = 0;
-		
-		@Override
-		public StringBuilder read(String filePath){
-			this.callCount++;
-			return null;
-		}
-	}
+   private SpyFileIO spy;
+   
+   @Before
+   public void setUp(){
+      spy = spy(SpyFileIO.class);
+   }
+   
+   @Test
+   public void sendTest(){
+      MailServiceImple mailSvc = new MailServiceImple(spy);
+      
+      mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
+      verify(mailSvc).send(null, null, null, null);
+      assertEquals(1, spy.callCount);
+   }
+   
+   public class SpyFileIO implements FileIO{
+      public int callCount = 0;
+      
+      @Override
+      public StringBuilder read(String filePath){
+         this.callCount++;
+         return null;
+      }
+   }
 }
 ```
 
@@ -292,19 +298,19 @@ Fake는 실제 데이터베이스가 응답한 데이터의 축소판이라고 �
 
 ``` java
 public class FakeBankRepository {
-	private UserDAO user = new UserDAO();
-	private BankDAO bank = new BankDAO();
-	private Map<UserDAO, BankDAO> userAmts = new HashMap<>();
+   private UserDAO user = new UserDAO();
+   private BankDAO bank = new BankDAO();
+   private Map<UserDAO, BankDAO> userAmts = new HashMap<>();
     
-	public FakeBankRepository(){
-		this.user.setId(100L);
-		this.bank.setBankName("KR은행");
-		this.userAmts.put(user, bank);
-	}
+   public FakeBankRepository(){
+      this.user.setId(100L);
+      this.bank.setBankName("KR은행");
+      this.userAmts.put(user, bank);
+   }
      
-	String getUserBankName(UserDAO user){
-		return userAmts.get(user).getBankName();
-	}
+   String getUserBankName(UserDAO user){
+      return userAmts.get(user).getBankName();
+   }
 }
 ```
 
@@ -317,7 +323,7 @@ public class FakeBankRepository {
 ``` java
 @H2DB
 public interface BankRepository extends JpaRepository<BankDAO, Long>{
-	public List<BankDAO> findByIdIn(List<Long> ids);
+   public List<BankDAO> findByIdIn(List<Long> ids);
 }
 ```
 
@@ -346,18 +352,18 @@ Dummy는 미국의 대표적인 코믹 영화 Dumb and Dumber(덤 앤 더머)와
 
 ``` java
 public class MailServiceImple implements MailService{
-	private final FileIO fileIO;
+   private final FileIO fileIO;
     
-	public MailServiceImple(FileIO fileIO){
-		this.fileIO = fileIO;
-	}
+   public MailServiceImple(FileIO fileIO){
+      this.fileIO = fileIO;
+   }
     
-	@Override
-	public void send(String toEmail, String subject, String content, File attachFile){
-		...
-	}
+   @Override
+   public void send(String toEmail, String subject, String content, File attachFile){
+      ...
+   }
     
-	...
+   ...
 }
 ```
 
@@ -365,27 +371,27 @@ public class MailServiceImple implements MailService{
 
 ```java
 public class MailServiceImpleTest {
-	private DummyFileIO dummyFileIO;
+   private DummyFileIO dummyFileIO;
 
-	@Before
-	public void setUp(){
-		dummyFileIO = mock(DummyFileIO.class);
-	}
-	
-	@Test
-	public void sendTest(){
-		MailServiceImple mailSvc = new MailServiceImple(dummyFileIO);
+   @Before
+   public void setUp(){
+      dummyFileIO = mock(DummyFileIO.class);
+   }
+   
+   @Test
+   public void sendTest(){
+      MailServiceImple mailSvc = new MailServiceImple(dummyFileIO);
         
-		mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
-		verify(mailSvc).send(null, null, null, null);
-	}
+      mailSvc.send("gmun0929@gmail.com", "제목", "내용", null);
+      verify(mailSvc).send(null, null, null, null);
+   }
     
-	public class DummyFileIO implements FileIO{
-		@Override
-		public StringBuilder read(String filePath){
-			throw new RuntimeException("Not expected to be called");
-		}
-	}
+   public class DummyFileIO implements FileIO{
+      @Override
+      public StringBuilder read(String filePath){
+         throw new RuntimeException("Not expected to be called");
+      }
+   }
 }
 ```
  
