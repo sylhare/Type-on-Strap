@@ -51,11 +51,7 @@ _a trained professional who stands in for an actor in order to perform dangerous
 
 이처럼 많은 관계가 형성된 객체를 테스트 코드로 작성하기는 쉽지 않다. 하지만 테스트 더블을 활용하여 테스트 코드를 작성한다면 이러한 어려움을 해결할 수 있다.
 
-#### 위험요소를 관리하는 테스트 더블
-
-이 때문에 테스트 시에는 관계가 형성된 객체를 테스트 더블을 통해 만들어진 독립적인 객체를 사용해야 한다.
-
-#### 위험요소를 관 테스트 더블
+#### 위험을 관리하는 테스트 더블
 
 <img src="/md/img/test-double/test-double-object.png">
 <em>Class Independency Relationship of Test Double</em>
