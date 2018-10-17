@@ -3,11 +3,15 @@ layout: post
 title: "TDD : Test Keywords"
 tags: [TDD, TestKeyword, UnitTest, AutomatedTest, TestFramework, TestScript, TestCase, TestScenarios, BlackBoxTest, WhiteBoxTest, Coverage]
 subtitle: "Basic software testing terminologies."
+feature-img: "md/img/thumbnail/keywords.png"              
+thumbnail: "md/img/thumbnail/keywords.png"
 excerpt_separator: <!--more-->
 sitemap:
 changefreq: daily
 priority: 1.0
 ---
+
+
 
 <!--more-->
 

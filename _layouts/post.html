@@ -1,18 +1,17 @@
 ---
 layout: default
 ---
-<style type="text/css">
-</style>
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
-  <header id="main" {% if page.feature-img %} style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}');" class="thumbnail-background" {% endif %}>
-    
-    <div {% if page.feature-img %} class="thumbnail-title" {% endif %}>
-	    <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
-	    <p class="meta">
-	    {{ page.date | date: "%B %-d, %Y" }}
-	    {% if page.author %} - {{ page.author }}{% endif %}
-	    </p>
-    </div>
+  <header id="main" {% if page.feature-img %} style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}'); position: relative;" class="thumbnail-background"{% endif %}>
+  	{% if page.feature-img %}
+	  	<div class="nav-over-lay">
+		</div>
+	{% endif %}
+    <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+    <p class="meta">
+    {{ page.date | date: "%B %-d, %Y" }}
+    {% if page.author %} - {{ page.author }}{% endif %}
+    </p>
   </header>
   <section class="post-content">{{ content }}</section>
   

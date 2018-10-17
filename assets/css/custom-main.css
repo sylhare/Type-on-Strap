@@ -705,7 +705,6 @@ article, .comments, .feature-image .post-content, .feature-image footer,
 }
 
 .nav-over-lay{
-	width: 100%;
     position: absolute;
     top: 0;
     left: 0;
@@ -713,15 +712,10 @@ article, .comments, .feature-image .post-content, .feature-image footer,
     bottom: 0;
     opacity: 0.5;
     z-index: -999;
-    background-color: rgba(0, 0, 0, 0.2196078431372549);
+    background-color: rgba(0, 0, 0, 0.5);
     display: none;
 }
 .thumbnail-background{background-size: 100% auto!important; background-repeat: no-repeat!important;}
-.thumbnail-title{
-	background-color: rgba(0, 0, 0, 0.2196078431372549);
-	display:inline-block;
-	margin: 0 auto;
-}
 
 .header-txt-shadow, .call-out p, .call-out a, .call-out li, .call-out h1,
 	.call-out h2, .call-out h3, .call-out h4, .call-out h5, h1.title {
@@ -926,7 +920,8 @@ article em {
 .posts .post-teaser .post-img {
 	vertical-align: middle;
 	border-radius: 10px;
-	overflow: hidden
+	text-align: center;
+	overflow: hidden;
 }
 
 

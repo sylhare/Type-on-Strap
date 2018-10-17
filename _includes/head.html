@@ -59,13 +59,12 @@
     		createWordClud(); // tag Cloud
     		var newObj = getSetObj();
 				newObj.setValue("");
-				
+				//미사용 수정
 			var thumbnailFlag = $("header#main").hasClass("thumbnail-background");
 			
 		    if(thumbnailFlag){
 		    	$(".nav-over-lay").show();
-		    	$(".site-header a").addClass("header-default-font-style");
-		    	$("#pull>li>a").addClass("header-default-font-style");
+		    	$(".site-header a, #pull>li>a").addClass("header-default-font-style");
 		    }	
     	});
     	
@@ -95,8 +94,7 @@
 		    	if (maxHeight <= currentScroll) {
 		    		if(thumbnailFlag){
 			    		$(".nav-over-lay").hide();
-			    		$(".site-header a").removeClass("header-default-font-style");
-				    	$("#pull>li>a").removeClass("header-default-font-style");
+			    		$(".site-header a, #pull>li>a").removeClass("header-default-font-style");
 			    	}
 		    		
 		    		$(".site-header").css("background-color","white");
@@ -116,8 +114,7 @@
 			    	
 			    	if(thumbnailFlag){
 			    		$(".nav-over-lay").show();	
-			    		$(".site-header a").addClass("header-default-font-style");
-				    	$("#pull>li>a").addClass("header-default-font-style");
+			    		$(".site-header a, #pull>li>a").addClass("header-default-font-style");
 			    	}
 			    }
 			    

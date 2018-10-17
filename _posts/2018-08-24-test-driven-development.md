@@ -3,12 +3,13 @@ layout: post
 title: "TDD : Test-Driven Development"
 tags: [TDD]
 subtitle: "선택이 아닌 필수 TDD"
+feature-img: "md/img/thumbnail/tdd.png"              
+thumbnail: "md/img/thumbnail/tdd.png"
 excerpt_separator: <!--more-->
 sitemap:
 changefreq: daily
 priority: 1.0
 ---
-
 <!--more-->
 
 # 선택이 아닌 필수 티디디

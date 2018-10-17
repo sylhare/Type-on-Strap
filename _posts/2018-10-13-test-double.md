@@ -2,8 +2,8 @@
 layout: post
 title: "UnitTest : Test Double"
 tags: [TDD, UnitTest, TestDouble, Mock, Stub, Fake]
-feature-img: "md/img/test-double/test-double-thumbnail.jpg"              
-thumbnail: "md/img/test-double/test-double-thumbnail.jpg"
+feature-img: "md/img/thumbnail/test-double.jpg"              
+thumbnail: "md/img/thumbnail/test-double.jpg"
 subtitle: "위험에 대처하는 자세"
 excerpt_separator: <!--more-->
 sitemap:
