@@ -106,21 +106,36 @@ BankService의 테스트 코드를 작성 시 실제 데이터베이스를 접�
 
 ``` java
 public class BankServiceTest {
-   private BankFactor bankFactor;
-   
-   @Before
-   public void setUp() throws Exception {
-      bankFactor = mock(BankFactor.class);
-   }
-    
-   @Test
-   public void getAvgWage(){
-      when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
-         .thenReturn(new StubDatas().userAmts()); //Stubbing bankFactor
-           
-      double avgWage = new BankService(bankFactor).getAvgWage(new HashMap<String, Object>());
-      assertThat(avgWage).isEqualTo(1000000.0);
-   }
+	private BankFactor bankFactor;
+
+	@Before
+	public void setUp() throws Exception {
+	   bankFactor = mock(BankFactor.class);
+	}
+
+	@Test
+	public void getAvgWage() {
+	   when(bankFactor.selectUserAmt(new HashMap<String, Object>()))
+	      .thenReturn(new StubDatas().userAmts()); // Stubbing bankFactor
+	   double avgWage = new BankService(bankFactor).getAvgWage(new HashMap<String, Object>());
+	   assertThat(avgWage).isEqualTo(1000000.0);
+	}
+
+	class StubDatas {
+	   public List<UserDAO> userDaoList() {
+	   	List<UserDAO> list = new ArrayList<>();
+	   
+	   	UserDAO user = new UserDAO();
+	   	user.setAmt(1000000);
+	   	user.setEmail("gmun0929@gmail.com");
+	   
+	   	for (int i = 0; i < 10; i++) {
+	   	   list.add(user);
+	   	}
+	   
+	   	return list;
+	   }
+	}
 }
 ```
 
