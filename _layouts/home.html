@@ -18,21 +18,19 @@ layout: default
 		    <div class="post-teaser">
 		      <span>
 		          <header>
-		            <p class="meta">
-		              {{ post.date | date: "%B %-d, %Y" }}
-		            </p>
+		          	<p class="meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+		          	
+		          	{% if post.thumbnail %} 
+				    <div class="post-img">
+				        <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
+				    </div>
+				    {% endif %}
 		            <h1>
 		              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
 		                {{ post.title }}
 		              </a>
 		            </h1>
 		          </header>
-		          
-		          {% if post.thumbnail %} 
-			      <div class="post-img">
-			         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
-			      </div>
-			      {% endif %}
 			      
 		          <div class="excerpt">
 		          	{%if post.subtitle %}

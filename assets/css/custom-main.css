@@ -928,8 +928,13 @@ article em {
 	transform: scale(1.1)
 }
 
+.posts .post-teaser .excerpt{
+	color : rgba(56, 56, 56, 0.5);	
+}
+
 .posts .excerpt {
-	margin-top: 1em
+	margin-top: 1em;
+	
 }
 
 .posts .post-tags {
@@ -989,7 +994,7 @@ article em {
 .tag-list a.button {
 	margin: 0.1em;
     padding: 0.3em 0.9em;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     background: #0000000a;
     border: none;
@@ -1188,7 +1193,6 @@ article em {
 	line-height: 1.5;
 	float: right;
 	text-align: right;
-	display: block;
 	width: max-content;
 }
 
@@ -1374,10 +1378,8 @@ ul.share-buttons .sr-only {
 
 @media screen and (max-width: 768px) {
 	
-	.posts .post-tags footer .tag-list {
-		height: 40px;
-	    overflow: hidden;
-	}
+	.posts .post-tags{ margin: 0px; }
+	.posts .post-tags footer .tag-list { display: none; }
     
 	.postsArea{width: 100%;}
 	.cateArea{display:none;}
@@ -1407,18 +1409,8 @@ ul.share-buttons .sr-only {
 		overflow: hidden;
 		transition: font-size .25s, margin .25s, padding .25s, opacity .25s .25s;
 	}
-	nav ul.hide {
-		display: none;
-		/* 
-		width: 0px;
-    	height: 0px;
-		font-size: 0;
-		margin: 0;
-		opacity: 0;
-		padding: 0;
-		transition: opacity .25s, font-size .5s .25s, margin .25s .25s, padding
-			.5s .25s */
-	}
+	nav ul.hide { display: none; }
+	/* 
 	nav ul.hide li {
 		width: 0px;
     	height: 0px;
@@ -1426,7 +1418,8 @@ ul.share-buttons .sr-only {
 	nav ul.hide a {
 		width: 0px;
     	height: 0px;
-	}
+	} 
+	*/
 	nav li {
 		width: 100%;
 		float: left; 
