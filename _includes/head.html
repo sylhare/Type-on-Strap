@@ -63,7 +63,6 @@
 			var thumbnailFlag = $("header#main").hasClass("thumbnail-background");
 			
 		    if(thumbnailFlag){
-		    	$(".nav-over-lay").show();
 		    	$(".site-header a, #pull>li>a").addClass("header-default-font-style");
 		    }	
     	});
@@ -93,7 +92,6 @@
 		    	
 		    	if (maxHeight <= currentScroll) {
 		    		if(thumbnailFlag){
-			    		$(".nav-over-lay").hide();
 			    		$(".site-header a, #pull>li>a").removeClass("header-default-font-style");
 			    	}
 		    		
@@ -113,7 +111,6 @@
 			    	}
 			    	
 			    	if(thumbnailFlag){
-			    		$(".nav-over-lay").show();	
 			    		$(".site-header a, #pull>li>a").addClass("header-default-font-style");
 			    	}
 			    }

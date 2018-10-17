@@ -713,7 +713,6 @@ article, .comments, .feature-image .post-content, .feature-image footer,
     opacity: 0.5;
     z-index: -999;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none;
 }
 .thumbnail-background{background-size: 100% auto!important; background-repeat: no-repeat!important;}
 
