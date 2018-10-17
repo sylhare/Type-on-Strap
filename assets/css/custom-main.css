@@ -570,7 +570,8 @@ html {
 
 body {
 	color: #383838;
-	font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+	/* font-family: "Source Sans Pro", Helvetica, Arial, sans-serif; */
+	font-family: Arial,'Hiragino Sans GB','Microsoft YaHei','WenQuanYi Micro Hei',sans-serif;
 	font-size: 1.25em;
 	word-wrap: break-word
 }
