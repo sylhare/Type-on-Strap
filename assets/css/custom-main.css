@@ -1146,6 +1146,7 @@ article em {
 	width: 100%;
 	-webkit-transition:0.2s ease-in-out !important;
 	transition:0.2s ease-in-out !important;
+	z-index: 99999;
 	/* background: #fff; */
 	/* display: inline-block; */
 }
