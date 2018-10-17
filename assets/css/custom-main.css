@@ -1143,12 +1143,18 @@ article em {
 }
 
 #post-nav #previous-post {
-	float: left
+	float: left;
+	width: 50%;
+    text-align: left;
 }
+#post-nav>#previous-post>a{text-align: left !important;}
 
 #post-nav #next-post {
-	float: right
+	float: right;
+	width: 50%;
+    text-align: right;
 }
+#post-nav>#next-post>a{text-align: right !important;}
 
 .site-header {
 	padding: 2% 2% 1% 2%;
@@ -1395,7 +1401,7 @@ ul.share-buttons .sr-only {
 }
 
 @media screen and (max-width: 768px) {
-	
+	#post-nav a{font-size: 15px;}
 	.posts .post-tags{ margin: 0px; }
 	.posts .post-tags footer .tag-list { display: none; }
     
