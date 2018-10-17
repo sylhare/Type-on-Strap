@@ -1422,6 +1422,17 @@ ul.share-buttons .sr-only {
 	.site-header .site-title { margin-top: 7px }
 	nav { height: auto }
 	nav .separator { display: none !important }
+	
+	ul.block>li>a.clear{
+		background: #fff;
+	    border-radius: 2px;
+	    padding: 8px 16px;
+	    box-shadow: 0 3px 8px rgba(0,0,0,.2);
+	}
+	ul.block>li>a.clear.header-default-font-style{
+		background: rgba(0, 0, 0, 0.8);
+	}
+	
 	nav ul {
 		width: 100%;
 		overflow: hidden;
