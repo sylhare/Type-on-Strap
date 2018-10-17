@@ -59,6 +59,14 @@
     		createWordClud(); // tag Cloud
     		var newObj = getSetObj();
 				newObj.setValue("");
+				
+			var thumbnailFlag = $("header#main").hasClass("thumbnail-background");
+			
+		    if(thumbnailFlag){
+		    	$(".nav-over-lay").show();
+		    	$(".site-header a").addClass("header-default-font-style");
+		    	$("#pull>li>a").addClass("header-default-font-style");
+		    }	
     	});
     	
 		// google adSense    	
@@ -80,9 +88,17 @@
 				var preScroll = obj.preScroll || 0;
 		    	var scrollFlag = (preScroll > currentScroll);
 		    	
+		    	var thumbnailFlag = $("header#main").hasClass("thumbnail-background");
+		    	
 		    	$(".site-header").css("background-color","");
-
+		    	
 		    	if (maxHeight <= currentScroll) {
+		    		if(thumbnailFlag){
+			    		$(".nav-over-lay").hide();
+			    		$(".site-header a").removeClass("header-default-font-style");
+				    	$("#pull>li>a").removeClass("header-default-font-style");
+			    	}
+		    		
 		    		$(".site-header").css("background-color","white");
 			    	if(scrollFlag){
 			    		if(menuOpacity == 0){
@@ -96,6 +112,12 @@
 			    }else{
 			    	if(menuOpacity == 0){
 			    		$(".site-header").css("opacity","1").css("pointer-events","auto");
+			    	}
+			    	
+			    	if(thumbnailFlag){
+			    		$(".nav-over-lay").show();	
+			    		$(".site-header a").addClass("header-default-font-style");
+				    	$("#pull>li>a").addClass("header-default-font-style");
 			    	}
 			    }
 			    

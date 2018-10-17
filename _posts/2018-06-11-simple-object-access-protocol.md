@@ -3,6 +3,8 @@ layout: post
 title: "SOAP : Simple Object Access Protocol"
 tags: [SOAP]
 subtitle: "SOAP의 개념 및 동작원리"
+feature-img: "md/img/SOAP/soap-communication.png"              
+thumbnail: "md/img/SOAP/soap-communication.png"
 excerpt_separator: <!--more-->
 sitemap:
 changefreq: daily
