@@ -44,8 +44,21 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     
 	<script type="text/javascript">
+		var getSetObj = function(){
+			return {
+			    setValue : function(newValue){
+			    	value = newValue;
+				}
+			   ,getValue : function(){
+				   return value;
+			   }
+			};
+		};
+		
     	$(document).ready(function(){
-    		createWordClud(); // tag Cloud	
+    		createWordClud(); // tag Cloud
+    		var newObj = getSetObj();
+				newObj.setValue("");
     	});
     	
 		// google adSense    	
@@ -61,18 +74,29 @@
 			    var currentScroll = $(window).scrollTop();
 			    
 			    var menuOpacity = $(".site-header").css("opacity");
-			    
-			    if (maxHeight <= currentScroll) {
-			    	if(menuOpacity == 1){
-			    		$(".site-header").css("opacity","0");
-			    		$(".site-header").css("pointer-events","none");
+				
+			    var newObj = getSetObj();
+				var obj = newObj.getValue();
+				var preScroll = obj.preScroll || 0;
+		    	var scrollFlag = (preScroll > currentScroll);
+
+		    	if (maxHeight <= currentScroll) {
+			    	if(scrollFlag){
+			    		if(menuOpacity == 0){
+			    			$(".site-header").css("opacity","1").css("pointer-events","auto");
+			    		}
+			    	}else{
+			    		if(menuOpacity == 1){
+			    			$(".site-header").css("opacity","0").css("pointer-events","none");
+			    		}
 			    	}
 			    }else{
 			    	if(menuOpacity == 0){
-			    		$(".site-header").css("opacity","1");
-			    		$(".site-header").css("pointer-events","auto");
+			    		$(".site-header").css("opacity","1").css("pointer-events","auto");
 			    	}
 			    }
+			    
+			    newObj.setValue({preScroll : currentScroll});
     		});
     	});
 		
