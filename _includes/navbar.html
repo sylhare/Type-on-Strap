@@ -19,14 +19,15 @@
     <!-- Menu -->
     <ul class="hide">
         {% assign name_page = "" %}
+        {% assign thumnailPage = page.feature-img %}
         
         {% for page in site.pages %}
         {% if page.title and page.hide != true %}
         {% if name_page contains page.title %}
         {% else %}
-        <li class="separator"> | </li>
+        <!-- <li class="separator"> | </li> -->
         <li>
-            <a class="clear {% if page.feature-img %}header-default-font-style{% endif %}" href="{{ page.url | relative_url }}" style="font-size: 30px; font-weight: bold;">
+            <a class="clear {% if thumnailPage %}header-default-font-style{% endif %}" href="{{ page.url | relative_url }}" style="font-size: 30px; font-weight: bold;">
                 {{ page.title }}
             </a>
         </li>
@@ -41,7 +42,7 @@
           {% if item[1].enabled %}
 	            <!-- <li class="separator"> | </li> -->
 	            <li>
-	                <a class="clear {% if page.feature-img %}header-default-font-style{% endif %}" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
+	                <a class="clear {% if thumnailPage %}header-default-font-style{% endif %}" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
 	                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
 	                </a>
 	            </li>
