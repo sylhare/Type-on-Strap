@@ -1,19 +1,19 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://gmun.github.io"
-title: 야개미 기술블로그 # site's title
-description: "Development Blog" # used by search engines
+title: Moon`s Development Blog # site's title
+description: "Moon" # used by search engines
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: 야개미 # blog's title
+  title: Moon`s # blog's title
   avatar: assets/marker.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
   # Header and footer text
-  header_text:  <p>Ergate's Development Blog</p> #two or three lines to describe your site
+  header_text:  <p>Moon`s Development Blog</p> #two or three lines to describe your site
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    #Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/gmun/Type-on-Strap">Type on Strap</a>
