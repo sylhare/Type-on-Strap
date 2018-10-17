@@ -2,6 +2,7 @@
 layout: post
 title: "TDD : Test in Spring"
 tags: [TDD]
+categories: [Test]
 subtitle: "Chapter3 Spring에서 테스트"
 excerpt_separator: <!--more-->
 display: "false"

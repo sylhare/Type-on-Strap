@@ -2,6 +2,7 @@
 layout: post
 title: "SOAP : Simple Object Access Protocol"
 tags: [SOAP]
+categories: [Network]
 subtitle: "SOAP의 개념 및 동작원리"
 feature-img: "md/img/thumbnail/soap.png"              
 thumbnail: "md/img/thumbnail/soap.png"
