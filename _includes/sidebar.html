@@ -1,6 +1,39 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		var cate = $("#cate").val();
+		categoriesCount(cate);
+	});
+	
+	function categoriesCount(data){
+		data = data.substr(0, data.length - 1) || "";
+		
+		if(data != ""){
+			var dataObj = data.split("|");
+			
+			var tmp = new Array();
+			
+			for(var i=0; i<dataObj.length; i++){
+				var data = dataObj[i];
+
+				var count = tmp[data] || 0;
+				
+				tmp[data] = count + 1;
+			}
+			
+			for(var cate in tmp){
+				var key = cate;
+				var value = tmp[key];
+				var id = "#count_" + key;
+				$(id).text(value);
+			}
+		}
+	}
+</script>
+
 <!-- cycles through posts to get categories, tags -->
 {% assign rawCategories = "" %}
 {% assign rawtags = "" %}
+{% assign postCount = 0 %}
 
 {% for post in site.posts %}
 	{% if post.display != "false" %}
@@ -19,15 +52,19 @@
 
 <div>
 	<div>
-		<h1>Categories</h1>
+		<h1>Categories</h1> 
 	</div>
+	
   	{% if categories.size > 0 %}
-   	  <div class="tag-list">
+   	  <div class="categories-list">
 	  {% for category in categories %}
 	  		{% if category != "" %}
-		    <a class="button" href="{{site.baseurl}}/categories#{{category}}">
-				<span class="name">{{ category }}</span> 
-		    </a>
+	  			<div class="category-area">
+				    <a href="{{site.baseurl}}/categories#{{category}}">
+						<span class="name">{{ category }}</span> 
+						<span class="categoryCount" id="count_{{category}}"></span>
+				    </a>
+		    	</div>
 			{% endif %}	    
 	  {% endfor %}
       </div>
@@ -48,3 +85,6 @@
       </div>
   {% endif %}
 </div>
+
+
+<input type="hidden" value="{{rawCategories}}" id="cate">

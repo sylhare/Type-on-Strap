@@ -717,6 +717,26 @@ article, .comments, .feature-image .post-content, .feature-image footer,
 }
 .feature-img-background{background-size: 100% auto!important; background-repeat: no-repeat!important;}
 
+.categoryCount{
+    text-align: center;
+    padding: 1px 20px;
+    font-size: 0.8em;
+    color: #fff;
+    background-color: #bbb;
+    border-radius: 50%;
+    transition: 0.5s ease-in-out;
+}
+
+.category-area{
+	margin: 10px 0;
+}
+/* 
+.category-area:hover .category-area>*{
+	color: #fff;
+    background: black;
+} 
+*/
+
 .header-txt-shadow, .call-out p, .call-out a, .call-out li, .call-out h1,
 	.call-out h2, .call-out h3, .call-out h4, .call-out h5, h1.title {
 	text-shadow: 1px 1px 2px #3f3f3f
@@ -998,6 +1018,15 @@ article em {
 	font-size: 0.9em;
 	padding-bottom: 3%
 }
+
+.categories-list {
+	width: 100%;
+	font-size: 1.5em;
+	padding-bottom: 3%
+}
+
+
+	
 
 .tag-list div.meta {
 	margin-right: 0.5em;
