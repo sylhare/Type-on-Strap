@@ -18,12 +18,17 @@ layout: default
 
 <article {% if page.feature-img %}class="feature-image"{% endif %} >
   {% if page.layout == 'tags' %}
-  	<header id="main" style="padding: 0; width: 100%; height: 500px; margin: 10% 0;">
+  	<header id="main" style="padding: 0; width: 100%; height: 500px; margin: 10% 0;" {% if page.feature-img %}class="feature-img-background"{% endif %}>
   		<div id="wordCloud" class="jqColowe" style="width: 100%; height: 100%;">
   		</div>
   	</header>
   {% else %}
-	<header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')" >
+	<header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')" {% if page.feature-img %}class="feature-img-background"{% endif %} >
+		{% if page.feature-img %}
+		  	<div class="over-lay">
+			</div>
+		{% endif %}
+		
 	    <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title">
 	        {{ page.title }}
 	    </h1>

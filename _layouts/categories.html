@@ -1,0 +1,51 @@
+---
+layout: page
+---
+
+
+<div class="home">
+
+<!-- cycles through posts to get tags -->
+{% assign rawCategories = "" %}
+
+{% for post in site.posts %}
+	{% if post.display != "false" %}
+		{% assign post_categories = post.categories | join:'|' | append:'|' %}
+		{% assign rawCategories = rawCategories | append:post_categories %}
+	{% endif %}
+{% endfor %}
+
+<!-- Displays the list of tags-->
+{% include categories_list.html categories=rawCategories %}
+    <div class="posts">
+        {% for category in categories %}
+        <div class="post-area">
+	        <h3 id="{{ category | cgi_escape }}" class="tag-anchor">
+	            <a href="#{{ category | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ category }}</a>
+	            <a href="#{{ page.title }}" style="float: right"><i class="fa fa-chevron-up" aria-hidden="true"> </i> </a>
+	        </h3>
+
+	        <!-- Posts and collection for each tags -->
+	        <div class="tag-posts">
+	            <!-- Posts -->
+	            {% for post in site.posts %}
+	                {% if post.display != "false" %}
+	                	{% if post.categories contains category %}
+			                <h5 class="tag-title">
+				                    <a href="{{ post.url | prepend: site.baseurl }}">
+				                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+				                        {{ post.title }}
+				                    </a>
+			                    <div class="meta">
+			                        {{ post.date | date: "%Y-%m-%-d" }}
+			                    </div>
+			                </h5>
+	                	{% endif %}
+	                {% endif %}
+	            {% endfor %} 
+	        </div>
+	    </div>
+        {% endfor %}
+
+    </div>
+</div>

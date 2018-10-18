@@ -80,12 +80,14 @@
 				var preScroll = obj.preScroll || 0;
 		    	var scrollFlag = (preScroll > currentScroll);
 		    	
-		    	var thumbnailFlag = $("header#main").hasClass("thumbnail-background");
+		    	var thumbnailFlag = $("header#main").hasClass("feature-img-background");
 		    	
 		    	$(".site-header").css("background-color","");
 		    	
 		    	if (maxHeight <= currentScroll) {
 		    		if(thumbnailFlag){
+		    			/* .site-header a, #pull>li>a */
+		    			$("ul").removeClass("header-default-background");
 			    		$(".site-header a, #pull>li>a").removeClass("header-default-font-style");
 			    	}
 		    		
@@ -105,6 +107,8 @@
 			    	}
 			    	
 			    	if(thumbnailFlag){
+			    		/* .site-header a, #pull>li>a */
+			    		$("ul").addClass("header-default-background");
 			    		$(".site-header a, #pull>li>a").addClass("header-default-font-style");
 			    	}
 			    }

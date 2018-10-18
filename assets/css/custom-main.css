@@ -705,7 +705,7 @@ article, .comments, .feature-image .post-content, .feature-image footer,
 	padding: 4% 20%
 }
 
-.nav-over-lay{
+.over-lay{
     position: absolute;
     top: 0;
     left: 0;
@@ -715,7 +715,7 @@ article, .comments, .feature-image .post-content, .feature-image footer,
     z-index: -999;
     background-color: rgba(0, 0, 0, 0.5);
 }
-.thumbnail-background{background-size: 100% auto!important; background-repeat: no-repeat!important;}
+.feature-img-background{background-size: 100% auto!important; background-repeat: no-repeat!important;}
 
 .header-txt-shadow, .call-out p, .call-out a, .call-out li, .call-out h1,
 	.call-out h2, .call-out h3, .call-out h4, .call-out h5, h1.title {
@@ -819,7 +819,8 @@ header h1 {
 	color: #fff;
 	background-size: cover;
 	margin-bottom: 0;
-	padding: 8% 20%
+	padding: 8% 20%;
+	position: relative;
 }
 
 .feature-image header .meta, .feature-image header #post-nav p,
@@ -1218,10 +1219,11 @@ article em {
 	float: right;
 	text-align: right;
 	width: max-content;
+	font-weight: bold;
 }
 
 .site-header nav li {
-	display: inline;
+	display: inline-block;
 	float: right;
 	margin-right: 0.4em;
 }
@@ -1235,12 +1237,12 @@ article em {
 }
 
 .site-header nav a#pull i {
-	/* margin-top: 13px; */
+	margin-top: 13px;
 	float: right
 }
 
 .clear {
-	*zoom: 1
+	/* *zoom: 1 */
 }
 
 .clear:after {
@@ -1430,19 +1432,23 @@ ul.share-buttons .sr-only {
 	nav .separator { display: none !important }
 	
 	ul.block>li>a.clear{
-		background: #fff;
-	    border-radius: 2px;
 	    padding: 8px 16px;
-	    box-shadow: 0 3px 8px rgba(0,0,0,.2);
+	    display: inline-block;
 	}
-	ul.block>li>a.clear.header-default-font-style{
+	ul.block.header-default-background{
 		background: rgba(0, 0, 0, 0.8);
 	}
 	
 	nav ul {
-		width: 100%;
-		overflow: hidden;
-		transition: font-size .25s, margin .25s, padding .25s, opacity .25s .25s;
+		    width: 100%;
+		    overflow: hidden;
+		    position: absolute;
+		    right: 0;
+		    top: 60px;
+		    background: #fff;
+		    border-radius: 2px;
+		    box-shadow: 0 3px 8px rgba(0,0,0,.2);
+		    transition: font-size .25s, margin .25s, padding .25s, opacity .25s .25s;
 	}
 	nav ul.hide { display: none; }
 	/* 
@@ -1457,26 +1463,29 @@ ul.share-buttons .sr-only {
 	*/
 	nav li {
 		width: 100%;
-		float: left; 
 		/* 
+		float: left; 
 		float: right;
 		width: max-content;
    		background: #0000000d;
-		*/
 		position: absolute;
 		top: 50px;
 		right: 0px;
+		*/
 	}
 	nav a {
 		text-align: left;
 		width: 100%
 	}
+	/* 
 	nav a#pull {
 		margin-top: 13px;
 		display: block;
 		width: 100%;
 		position: relative
-	} 
+	}  
+	*/
+	
 	nav a#pull:after {
 		content: "";
 		display: inline-block;

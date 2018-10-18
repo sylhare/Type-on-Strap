@@ -1,15 +1,21 @@
-<!-- cycles through posts to get categories -->
+<!-- cycles through posts to get categories, tags -->
 {% assign rawCategories = "" %}
+{% assign rawtags = "" %}
+
 {% for post in site.posts %}
 	{% if post.display != "false" %}
 		{% if post.categories != "" %}
 			{% assign post_categories = post.categories | join:'|' | append:'|' %}
 			{% assign rawCategories = rawCategories | append:post_categories %}
+			
+			{% assign post_tags = post.tags | join:'|' | append:'|' %}
+			{% assign rawtags 	= rawtags | append:post_tags %}
 		{% endif %}
 	{% endif %}
 {% endfor %}
 
 {% assign categories = rawCategories | split:'|' | sort | uniq %}
+{% assign tags = rawtags | split:'|' | sort | uniq %}
 
 <div>
 	<div>
@@ -23,6 +29,21 @@
 				<span class="name">{{ category }}</span> 
 		    </a>
 			{% endif %}	    
+	  {% endfor %}
+      </div>
+  {% endif %}
+</div>
+
+<div>
+	<div>
+		<h1>Tags</h1>
+	</div>
+  	{% if tags.size > 0 %}
+   	  <div class="tag-list">
+	  {% for tag in tags %}
+		    <a class="button" href="{{site.baseurl}}/tags#{{tag}}">
+				<span class="name">{{ tag }}</span> 
+		    </a>
 	  {% endfor %}
       </div>
   {% endif %}

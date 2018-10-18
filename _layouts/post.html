@@ -2,9 +2,9 @@
 layout: default
 ---
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
-  <header id="main" {% if page.feature-img %} style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}'); position: relative;" class="thumbnail-background"{% endif %}>
+  <header id="main" {% if page.feature-img %} style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}'); position: relative;" class="feature-img-background"{% endif %}>
   	{% if page.feature-img %}
-	  	<div class="nav-over-lay">
+	  	<div class="over-lay">
 		</div>
 	{% endif %}
     <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>

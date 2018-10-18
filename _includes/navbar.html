@@ -16,33 +16,39 @@
 	    	<i class="fa fa-bars fa-lg"></i>
 	    </a> 
     
+    {% assign name_page = "" %}
+    {% assign thumnailPage = page.feature-img %}
+
     <!-- Menu -->
-    <ul class="hide">
-        {% assign name_page = "" %}
-        {% assign thumnailPage = page.feature-img %}
-        
+    <ul class="hide {% if thumnailPage %}header-default-background{% endif %}">
         {% for page in site.pages %}
-        {% if page.title and page.hide != true %}
-        {% if name_page contains page.title %}
-        {% else %}
-        <!-- <li class="separator"> | </li> -->
-        <li>
-            <a class="clear {% if thumnailPage %}header-default-font-style{% endif %}" href="{{ page.url | relative_url }}" style="font-size: 30px; font-weight: bold;">
-                {{ page.title }}
-            </a>
-        </li>
-        {% endif %}
-        {% assign name_page = page.title | append: name_page %}
-        {% endif %}
-        {% endfor %} 
-        
-        
-        
+	        {% if page.title and page.hide != true %}
+		        {% if name_page contains page.title %}
+		        
+		        {% else %}
+			        <li class="separator"> | </li>
+			        <li>
+			            <a class="clear {% if thumnailPage %}header-default-font-style{% endif %}" href="{{ page.url | relative_url }}">
+			            	{% if page.fa-icon %}
+			            		<i class="{{page.fa-icon}}"></i>
+			            	{% endif %}
+			            	
+			                {{ page.title }}
+			            </a>
+			        </li>
+		        {% endif %}
+		        
+		        {% assign name_page = page.title | append: name_page %}
+	        {% endif %}
+	    {% endfor %} 
+	        
+	        
+	        
         {% for item in site.theme_settings.special_page %}
           {% if item[1].enabled %}
-	            <!-- <li class="separator"> | </li> -->
+	            <li class="separator"> | </li>
 	            <li>
-	                <a class="clear {% if thumnailPage %}header-default-font-style{% endif %}" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
+	                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[1].icon }}">
 	                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
 	                </a>
 	            </li>

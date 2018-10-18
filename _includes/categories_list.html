@@ -1,0 +1,17 @@
+{% assign categories = include.categories | split:'|' | sort | uniq %}
+
+{% if include.categories.size > 0 %}
+<footer>
+  <div class="tag-list">
+    {% for category in categories %}
+    <a class="button" href="{{site.baseurl}}/categories#{{category}}">
+      <p>{{ category }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</footer>
+{% else %}
+<footer>
+  <div class="tag-list"></div>
+</footer>
+{% endif %}

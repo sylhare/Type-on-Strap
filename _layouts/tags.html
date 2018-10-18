@@ -25,9 +25,6 @@ layout: page
 	{% endif %}
 {% endfor %}
 
-{% assign categories = rawCategories | split:'|' | sort | uniq %}
-
- 
 <!-- cycles through portfolio collection to get tags -->
 {% assign portfolio =  site.portfolio | map: 'tags' | join: ','  | split: ',' | uniq %}
 {% for tag in portfolio %}
@@ -47,12 +44,13 @@ layout: page
     
 <!-- Displays the list of tags-->
 {% include tags_list.html tags=rawtags %}
-	<!-- Displays the posts and pages that contains the tag-->
+
+    <!-- Displays the posts and pages that contains the tag-->
     <div class="posts">
-        {% for category in categories %}
+        {% for tag in tags %}
         <div class="post-area">
-	        <h3 id="{{ category | cgi_escape }}" class="tag-anchor">
-	            <a href="#{{ category | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ category }}</a>
+	        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
+	            <a href="#{{ tag | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ tag }}</a>
 	            <a href="#{{ page.title }}" style="float: right"><i class="fa fa-chevron-up" aria-hidden="true"> </i> </a>
 	        </h3>
 
@@ -79,23 +77,23 @@ layout: page
 	            {% endfor %} 
 	            
 	            <!-- Posts -->
-	            {% for post in site.posts %}
-	                {% if post.display != "false" %}
-	                	{% if post.categories contains category %}
+	            {% for post in site.posts %} 
+	                {% if post.tags contains tag %}
+	                	{% if post.display != "false" %}
 			                <h5 class="tag-title">
 				                    <a href="{{ post.url | prepend: site.baseurl }}">
-				                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+				                        <!-- <i class="fa fa-file-text-o" aria-hidden="true"></i> -->
 				                        {{ post.title }}
 				                    </a>
 			                    <div class="meta">
 			                        {{ post.date | date: "%Y-%m-%-d" }}
 			                    </div>
 			                </h5>
-	                	{% endif %}
-	                {% endif %}
+			            {% endif %}
+	                {% endif %} 
 	            {% endfor %} 
 	            
-	            <!-- Portfolio --> 
+	            <!-- Portfolio -->
 	            {% for note in site.portfolio %} 
 	                {% if note.tags contains tag %}
 	                <h5 class="tag-title">
