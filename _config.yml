@@ -9,7 +9,7 @@ theme_settings:
   # Meta
   title: Moon`s # blog's title
   avatar: assets/marker.png
-  favicon: assets
+  favicon: assets/favicon
   gravatar: # Email MD5 hash
 
   # Header and footer text
