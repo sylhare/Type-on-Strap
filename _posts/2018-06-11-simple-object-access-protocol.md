@@ -1,6 +1,5 @@
 ---
 layout: post
-post-file-real-name: "simple-object-access-protocol"
 title: "SOAP : Simple Object Access Protocol"
 tags: [SOAP]
 categories: [Network]

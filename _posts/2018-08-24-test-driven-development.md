@@ -1,6 +1,5 @@
 ---
 layout: post
-post-file-real-name: "test-driven-development"
 title: "TDD : Test-Driven Development"
 tags: [TDD]
 categories: [Test]

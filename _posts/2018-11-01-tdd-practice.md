@@ -1,6 +1,5 @@
 ---
 layout: post
-post-file-real-name: "tdd-practice"
 title: "TDD : TDD-Cycle 연습하기"
 tags: [TDD]
 categories: [Test]

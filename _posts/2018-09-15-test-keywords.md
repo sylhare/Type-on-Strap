@@ -1,6 +1,5 @@
 ---
 layout: post
-post-file-real-name: "test-keywords"
 title: "TDD : Test Keywords"
 tags: [TDD, TestKeyword, UnitTest, AutomatedTest, TestFramework, TestScript, TestCase, TestScenarios, BlackBoxTest, WhiteBoxTest, Coverage]
 subtitle: "Basic software testing terminologies."
