@@ -164,5 +164,3 @@
 	<meta property="og:image" content="{{ site.baseurl }}/{{ site.theme_settings.favicon }}/ios/120.png" />
 	<meta property="og:url" content="{{ site.url }}/{% if page.post-file-real-name %}{% if page.categories %}{{page.categories|join:"/"|append:"/"}}{% endif %}{{page.date | date: "%Y/%m/%-d" | append:"/" }}{{page.post-file-real-name | append:".html"}}{% endif %}">
 </head>
-
-{{ site.url }}/{% if page.post-file-real-name %}{% if page.categories %}{{page.categories|join:"/"|append:"/"}}{% endif %}{{page.date | date: "%Y/%m/%-d" | append:"/" }}{{page.post-file-real-name | append:".html"}}{% endif %}
