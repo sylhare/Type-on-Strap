@@ -1,5 +1,6 @@
 ---
 layout: post
+post-file-real-name: "test-double"
 title: "UnitTest : Test Double"
 tags: [TDD, UnitTest, TestDouble, Mock, Stub, Fake]
 categories: [Test]

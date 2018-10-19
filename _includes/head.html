@@ -158,8 +158,9 @@
     
     <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
-    <meta property="og:title" content="Moon`s Development Blog" /> 
-	<meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}" /> 
+    
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}" /> 
+	<meta property="og:description" content="{% if page.subtitle %}{{ page.subtitle }}{% else %}{{ site.theme_settings.description }}{% endif %}" /> 
 	<meta property="og:image" content="{{ site.baseurl }}/{{ site.theme_settings.favicon }}/ios/120.png" />
-	<meta property="og:url" content="{{ site.baseurl }}">
+	<meta property="og:url" content="{{ site.baseurl }}/{% if page.post-file-real-name %}{% if page.categories %}{{page.categories|join:"/"|append:"/"}}{% endif %}{{page.date | date: "%Y/%m/%-d" | append:"/" }}{{page.post-file-real-name | append:".html"}}{% endif %}">
 </head>
