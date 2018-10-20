@@ -40,14 +40,13 @@ function createWordClud(){
 				var tag = $(this).text().trim();
 				$("#" + tag).animate();
 				window.location.href = "/tags/#" + tag;
-				console.log(tag);
 			}		              
 			,beforeCloudRender: function(){
 			    date1 = new Date();
 		 	}
 		 	,afterCloudRender: function(){
 		 		var date2 = new Date();
-				console.log("Cloud Completed in "+(date2.getTime()-date1.getTime()) +" milliseconds");
+				//console.log("Cloud Completed in "+(date2.getTime()-date1.getTime()) +" milliseconds");
 			}
 		});
 	})();
