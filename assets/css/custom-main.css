@@ -1261,14 +1261,14 @@ article em {
 }
 
 .clear:after {
-	clear: both
+	clear: both;
 }
 
 .clear:before, .clear:after {
+	clear: both;
  	content: " "; 
 	display: none;
 }
-
 
 .portfolio-link {
 	display: block;
@@ -1445,12 +1445,12 @@ ul.share-buttons .sr-only {
 	.site-header img.avatar { margin-top: -7px }
 	.site-header .site-title { margin-top: 7px }
 	
-	.site-header nav a#pull{ opacity: 0;     z-index: -999;}
+	/* .site-header nav a#pull{ opacity: 0; clear: both;} */
 	.site-header nav a#pull i{display: block;}
 	
 	nav { height: auto }
 	nav .separator { display: none !important }
-	
+	nav.clear { float: right; }
 	ul.block>li>a.clear{
 	    padding: 8px 16px;
 	    display: inline-block;
@@ -1495,7 +1495,9 @@ ul.share-buttons .sr-only {
 	}
 	nav a {
 		text-align: left;
-		width: 100%
+		width: 100%;
+		outline: 0;
+		border: 0;
 	}
 	/* 
 	nav a#pull {
