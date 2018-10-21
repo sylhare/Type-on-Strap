@@ -9,6 +9,9 @@ body {
 	margin: 0
 }
 
+body *{
+	-webkit-tap-highlight-color:transparent;
+}
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	main, menu, nav, section, summary {
 	display: block
@@ -1253,7 +1256,7 @@ article em {
 
 .site-header nav a#pull{display: inline-block; 
 						outline: none; 
-						-webit-appearance:none;}
+						-webkit-appearance:none;}
 .site-header nav a#pull i {
 	padding: 13px;
 	float: right
