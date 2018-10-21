@@ -1251,6 +1251,7 @@ article em {
 	color: #383838;
 }
 
+.site-header nav a#pull{display: inline-block;}
 .site-header nav a#pull i {
 	padding: 13px;
 	float: right
