@@ -1468,7 +1468,7 @@ ul.share-buttons .sr-only {
 		    background: #fff;
 		    border-radius: 2px;
 		    box-shadow: 0 3px 8px rgba(0,0,0,.2);
-		    transition: font-size .25s, margin .25s, padding .25s, opacity .25s .25s;
+		    /* transition: font-size .25s, margin .25s, padding .25s, opacity .25s .25s; */
 	}
 	nav ul.hide { display: none; }
 	/* 
