@@ -1508,13 +1508,15 @@ ul.share-buttons .sr-only {
 	}  
 	*/
 	
+	/* 
 	nav a#pull:after {
 		content: "";
 		display: inline-block;
 		position: absolute;
 		right: 15px;
 		top: 10px
-	}
+	} 
+	*/
 	
 }
 
