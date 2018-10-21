@@ -1445,7 +1445,7 @@ ul.share-buttons .sr-only {
 	.site-header img.avatar { margin-top: -7px }
 	.site-header .site-title { margin-top: 7px }
 	
-	.site-header nav a#pull{ opacity: 0}
+	.site-header nav a#pull{ opacity: 0;     z-index: -999;}
 	.site-header nav a#pull i{display: block;}
 	
 	nav { height: auto }
