@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/gmun/gmun.github.io#readme",
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
