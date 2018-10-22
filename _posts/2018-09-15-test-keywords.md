@@ -476,21 +476,21 @@ _MC/DC = (수행된 MC/DC 조건 수 /전체 조건 수)*100_
 
 ### 참고
 
-> [https://smartbear.com/learn/automated-testing/test-automation-frameworks/](https://smartbear.com/learn/automated-testing/test-automation-frameworks/) <br/>
-> [https://www.360logica.com/blog/use-unit-testing/](https://www.360logica.com/blog/use-unit-testing/)<br/>
-> [https://programmingwithmosh.com/csharp/unit-testing/](https://programmingwithmosh.com/csharp/unit-testing/) <br/>
-> [https://dzone.com/articles/why-do-you-need-to-unit-test-if-you-have-a-qa-team](https://dzone.com/articles/why-do-you-need-to-unit-test-if-you-have-a-qa-team) <br/>
-> [https://blog.ndepend.com/good-unit-test-5-must-haves/](https://blog.ndepend.com/good-unit-test-5-must-haves/) <br/>
-> [https://www.guru99.com/unit-testing-guide.html](https://www.guru99.com/unit-testing-guide.html) <br/>
-> [https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you](https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you) <br/>
-> [https://dzone.com/articles/testing-in-micro-services-architecture](https://dzone.com/articles/testing-in-micro-services-architecture)<br/>
->[https://flylib.com/books/en/2.671.1.99/1/](https://flylib.com/books/en/2.671.1.99/1/)<br/>
->[https://midojeong.github.io/2018/04/19/mocking-is-a-code-smell/](https://midojeong.github.io/2018/04/19/mocking-is-a-code-smell/)<br/>
->[https://lumiloves.github.io/2018/08/21/my-first-frontend-test-code-experience](https://lumiloves.github.io/2018/08/21/my-first-frontend-test-code-experience)<br/>
->[https://en.wikipedia.org/wiki/Test_case](https://en.wikipedia.org/wiki/Test_case)	<br/>
->[https://qacomplete.com/resources/articles/test-scripts-test-cases-test-scenarios/](https://qacomplete.com/resources/articles/test-scripts-test-cases-test-scenarios/)<br/>
->[https://www.softwaretestingclass.com/what-is-difference-between-test-cases-vs-test-scenarios/](https://www.softwaretestingclass.com/what-is-difference-between-test-cases-vs-test-scenarios/)<br/>
->[https://www.softwaretestinghelp.com/difference-between-test-plan-test-strategy-test-case-test-script-test-scenario-and-test-condition/](https://www.softwaretestinghelp.com/difference-between-test-plan-test-strategy-test-case-test-script-test-scenario-and-test-condition/)<br/>
->[https://m.blog.naver.com/PostView.nhn?blogId=shiftspace&logNo=220561755364&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F](https://m.blog.naver.com/PostView.nhn?blogId=shiftspace&logNo=220561755364&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)<br/>
->[https://www.thoughtworks.com/insights/blog/test-assertions-how-do-they-work](https://www.thoughtworks.com/insights/blog/test-assertions-how-do-they-work)<br/>
->[https://en.wikipedia.org/wiki/Test_assertion](https://en.wikipedia.org/wiki/Test_assertion)<br/>
+[https://smartbear.com/learn/automated-testing/test-automation-frameworks/](https://smartbear.com/learn/automated-testing/test-automation-frameworks/) <br/>
+[https://www.360logica.com/blog/use-unit-testing/](https://www.360logica.com/blog/use-unit-testing/)<br/>
+[https://programmingwithmosh.com/csharp/unit-testing/](https://programmingwithmosh.com/csharp/unit-testing/) <br/>
+[https://dzone.com/articles/why-do-you-need-to-unit-test-if-you-have-a-qa-team](https://dzone.com/articles/why-do-you-need-to-unit-test-if-you-have-a-qa-team) <br/>
+[https://blog.ndepend.com/good-unit-test-5-must-haves/](https://blog.ndepend.com/good-unit-test-5-must-haves/) <br/>
+[https://www.guru99.com/unit-testing-guide.html](https://www.guru99.com/unit-testing-guide.html) <br/>
+[https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you](https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you) <br/>
+[https://dzone.com/articles/testing-in-micro-services-architecture](https://dzone.com/articles/testing-in-micro-services-architecture)<br/>
+[https://flylib.com/books/en/2.671.1.99/1/](https://flylib.com/books/en/2.671.1.99/1/)<br/>
+[https://midojeong.github.io/2018/04/19/mocking-is-a-code-smell/](https://midojeong.github.io/2018/04/19/mocking-is-a-code-smell/)<br/>
+[https://lumiloves.github.io/2018/08/21/my-first-frontend-test-code-experience](https://lumiloves.github.io/2018/08/21/my-first-frontend-test-code-experience)<br/>
+[https://en.wikipedia.org/wiki/Test_case](https://en.wikipedia.org/wiki/Test_case)	<br/>
+[https://qacomplete.com/resources/articles/test-scripts-test-cases-test-scenarios/](https://qacomplete.com/resources/articles/test-scripts-test-cases-test-scenarios/)<br/>
+[https://www.softwaretestingclass.com/what-is-difference-between-test-cases-vs-test-scenarios/](https://www.softwaretestingclass.com/what-is-difference-between-test-cases-vs-test-scenarios/)<br/>
+[https://www.softwaretestinghelp.com/difference-between-test-plan-test-strategy-test-case-test-script-test-scenario-and-test-condition/](https://www.softwaretestinghelp.com/difference-between-test-plan-test-strategy-test-case-test-script-test-scenario-and-test-condition/)<br/>
+[https://m.blog.naver.com/PostView.nhn?blogId=shiftspace&logNo=220561755364&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F](https://m.blog.naver.com/PostView.nhn?blogId=shiftspace&logNo=220561755364&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F)<br/>
+[https://www.thoughtworks.com/insights/blog/test-assertions-how-do-they-work](https://www.thoughtworks.com/insights/blog/test-assertions-how-do-they-work)<br/>
+[https://en.wikipedia.org/wiki/Test_assertion](https://en.wikipedia.org/wiki/Test_assertion)<br/>

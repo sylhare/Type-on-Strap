@@ -312,7 +312,7 @@ public class CalcurationTest {
 
 ### 참고
 
-> [https://www.guru99.com/unit-testing-guide.html](https://www.guru99.com/unit-testing-guide.html) <br/>
-> [https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you]<br/>
+[https://www.guru99.com/unit-testing-guide.html](https://www.guru99.com/unit-testing-guide.html) <br/>
+[https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you]<br/>
 
 ---

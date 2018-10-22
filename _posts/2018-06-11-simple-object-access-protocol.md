@@ -220,12 +220,12 @@ REST는 리소스 기반 (또는 데이터베이스)을 중점으로 작업하�
 
 ### 참고
 
-> [https://www.ibm.com/support/knowledgecenter/en/SSGMCP_5.3.0/com.ibm.cics.ts.webservices.doc/concepts/dfhws_definition.html](https://www.ibm.com/support/knowledgecenter/en/SSGMCP_5.3.0/com.ibm.cics.ts.webservices.doc/concepts/dfhws_definition.html) <br/>
-> [https://ko.wikipedia.org/wiki/SOAP](https://ko.wikipedia.org/wiki/SOAP)<br/>
-> [https://www.codecademy.com/articles/what-is-rest](https://www.codecademy.com/articles/what-is-rest) <br/>
-> [https://docs.oracle.com/cd/E12890_01/ales/docs32/webservicesprogrammersguide/webservice_api.html](https://docs.oracle.com/cd/E12890_01/ales/docs32/webservicesprogrammersguide/webservice_api.html)<br/>
-> [https://medium.freecodecamp.org/rest-is-the-new-soap-97ff6c09896d](https://medium.freecodecamp.org/rest-is-the-new-soap-97ff6c09896d)<br/>
-> [https://stormpath.com/blog/rest-vs-soap](https://stormpath.com/blog/rest-vs-soap)<br/>
-> [https://www.infoq.com/articles/rest-soap-when-to-use-each](https://www.infoq.com/articles/rest-soap-when-to-use-each)<br/>
-> [https://www.tutorialspoint.com/soap/what_is_soap.htm](https://www.tutorialspoint.com/soap/what_is_soap.htm)<br/>
-> [https://searchmicroservices.techtarget.com/definition/SOAP-Simple-Object-Access-Protocol](https://searchmicroservices.techtarget.com/definition/SOAP-Simple-Object-Access-Protocol)<br/>
+[https://www.ibm.com/support/knowledgecenter/en/SSGMCP_5.3.0/com.ibm.cics.ts.webservices.doc/concepts/dfhws_definition.html](https://www.ibm.com/support/knowledgecenter/en/SSGMCP_5.3.0/com.ibm.cics.ts.webservices.doc/concepts/dfhws_definition.html) <br/>
+[https://ko.wikipedia.org/wiki/SOAP](https://ko.wikipedia.org/wiki/SOAP)<br/>
+[https://www.codecademy.com/articles/what-is-rest](https://www.codecademy.com/articles/what-is-rest) <br/>
+[https://docs.oracle.com/cd/E12890_01/ales/docs32/webservicesprogrammersguide/webservice_api.html](https://docs.oracle.com/cd/E12890_01/ales/docs32/webservicesprogrammersguide/webservice_api.html)<br/>
+[https://medium.freecodecamp.org/rest-is-the-new-soap-97ff6c09896d](https://medium.freecodecamp.org/rest-is-the-new-soap-97ff6c09896d)<br/>
+[https://stormpath.com/blog/rest-vs-soap](https://stormpath.com/blog/rest-vs-soap)<br/>
+[https://www.infoq.com/articles/rest-soap-when-to-use-each](https://www.infoq.com/articles/rest-soap-when-to-use-each)<br/>
+[https://www.tutorialspoint.com/soap/what_is_soap.htm](https://www.tutorialspoint.com/soap/what_is_soap.htm)<br/>
+[https://searchmicroservices.techtarget.com/definition/SOAP-Simple-Object-Access-Protocol](https://searchmicroservices.techtarget.com/definition/SOAP-Simple-Object-Access-Protocol)<br/>
