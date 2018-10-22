@@ -8,8 +8,8 @@ description: "Moon" # used by search engines
 theme_settings:
   # Meta
   title: Moon # blog's title
-  avatar: assets/marker.png
-  favicon: assets/favicon
+  avatar: "assets/marker.png"
+  favicon: "assets/favicon"
   gravatar: # Email MD5 hash
 
   # Header and footer text
