@@ -2,14 +2,9 @@
   "name": "gmun.github.io",
   "version": "1.0.0",
   "description": "jekyll theme",
-  "homepage": "https://github.com/gmun/gmun.github.io#readme",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts ejct",
-    "deploy": "npm run build&&gh-pages -d build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -23,6 +18,7 @@
   "bugs": {
     "url": "https://github.com/gmun/gmun.github.io/issues"
   },
+  "homepage": "https://github.com/gmun/gmun.github.io#readme",
   "devDependencies": {
     "gh-pages": "^2.0.1",
     "gulp": "^3.9.1",
