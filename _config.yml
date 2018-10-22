@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: ""
+baseurl: "gmun.github.io"
 url: "https://gmun.github.io/"
 title: Moon`s Development Blog # site's title
 description: "Moon" # used by search engines
