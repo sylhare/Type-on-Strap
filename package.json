@@ -1,5 +1,5 @@
 {
-  "name": "type-on-strap",
+  "name": "gmun.github.io",
   "version": "1.0.0",
   "description": "jekyll theme",
   "main": "index.js",
@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sylhare/Type-on-Strap.git"
+    "url": "git+https://github.com/gmun/gmun.github.io.git"
   },
   "keywords": [
     "jekyll"
   ],
-  "author": "sylhare",
+  "author": "gmun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sylhare/Type-on-Strap/issues"
+    "url": "https://github.com/gmun/gmun.github.io/issues"
   },
-  "homepage": "https://github.com/Sylhare/Type-on-Strap#readme",
+  "homepage": "https://github.com/gmun/gmun.github.io#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
