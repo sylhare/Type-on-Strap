@@ -48,12 +48,13 @@ gulp.task("isolate-bootstrap-css", gulp.series('css', function isolating() {
         .pipe(gulp.dest('css/vendor/'));
 }));
 
-gulp.task("serve", function serving() {
-    
-    return shell.task([
+gulp.task("serve", function serving(done) {
+    console.log('... not working at the moment try \ncd .. && bundle exec jekyll serve --watch\n',
+                'then go to \nhttp://localhost:4000/Type-on-Strap/');
+    shell.task([
         "python -m webbrowser 'http://localhost:4000/Type-on-Strap/'; cd .. && bundle exec jekyll serve --watch"
-    ])
-    
+    ]);
+    done();
 });
 
 gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));
