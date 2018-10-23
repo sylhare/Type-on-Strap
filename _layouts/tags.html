@@ -7,8 +7,10 @@ layout: page
 <!-- cycles through posts to get tags -->
 {% assign rawtags = "" %}
 {% for post in site.posts %}
+{% if post.tags.size > 0 %}
 {% assign post_tags = post.tags | join:'|' | append:'|' %}
 {% assign rawtags = rawtags | append:post_tags %}
+{% endif %}
 {% endfor %}
 
 <!-- cycles through portfolio collection to get tags -->
@@ -20,7 +22,7 @@ layout: page
 
 <!-- cycles through pages to get tags -->
 {% for page in site.pages %}
-{% if page.tags %}
+{% if page.tags.size > 0 %}
 {% assign page_tags = page.tags | join:'|' | append:'|' %}
 {% assign rawtags = rawtags | append:page_tags %}
 {% endif %}
