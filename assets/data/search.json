@@ -7,7 +7,7 @@
         "title"    : "{{ post.title | escape }}",
         "category" : "{{ post.category }}",
         "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
-        "url"      : "{{ site.baseurl }}{{ post.url }}",
+        "url"      : "{{ post.url | relative_url }}",
         "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
         "excerpt"  : {{ post.content | truncate: '250' | jsonify }},
         "content"  : {{ post.content | jsonify }}
@@ -20,7 +20,7 @@
           "title"    : "{{ page.title | escape }}",
           "category" : "{{ page.category }}",
           "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
-          "url"      : "{{ site.baseurl }}{{ page.url }}",
+          "url"      : "{{ page.url | relative_url }}",
           "date"     : "{{ page.date | date: "%B %-d, %Y" }}",
           "excerpt"  : {{ page.content | truncate: '250' | jsonify }},
           "content"  : {{ page.content | truncate: '250' | jsonify }}

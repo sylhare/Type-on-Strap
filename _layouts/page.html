@@ -3,7 +3,7 @@ layout: default
 ---
 
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
-  <header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
+  <header id="main" style="background-image: url('{{ page.feature-img | relative_url }}')">
     <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title">
         {{ page.title }}
     </h1>

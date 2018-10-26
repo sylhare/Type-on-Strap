@@ -47,7 +47,7 @@ layout: page
             {% for page in site.pages %} 
                 {% if page.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ page.url | prepend: site.baseurl }}">
+                    <a href="{{ page.url | relative_url }}">
                         <i class="fa fa-file-image-o" aria-hidden="true"></i>
                         {{ page.title }}
                     </a>
@@ -63,7 +63,7 @@ layout: page
             {% for post in site.posts %} 
                 {% if post.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ post.url | prepend: site.baseurl }}">
+                    <a href="{{ post.url | relative_url }}">
                         <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         {{ post.title }}
                     </a>
@@ -79,7 +79,7 @@ layout: page
             {% for note in site.portfolio %} 
                 {% if note.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ site.baseurl }}{{ note.url }}">
+                    <a href="{{ note.url | relative_url }}">
                         <i class="fa fa-file-o" aria-hidden="true"></i>
                         {{ note.title }}
                     </a>

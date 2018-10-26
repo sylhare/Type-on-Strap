@@ -3,7 +3,7 @@
     <channel>
         <title>{{ site.theme_settings.title | xml_escape }}</title>
         <atom:link href="{{ "/feed.xml" | relative_url }}" rel="self" type="application/rss+xml"/>
-        <link>{{ site.url }}{{ site.baseurl }}/</link>
+        <link>{{ "/" | absolute_url }}</link>
         <description>{{ site.theme_settings.description | xml_escape }}</description>
         <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
         {% for post in site.posts limit:15 %}
