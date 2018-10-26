@@ -3,13 +3,13 @@
     <div class="post-teaser">
         {% if post.thumbnail %}
         <div class="post-img">
-            <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
+            <img src="{{ post.thumbnail | relative_url }}">
         </div>
         {% endif %}
         <span>
           <header>
             <h1>
-              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+              <a class="post-link" href="{{ post.url | relative_url }}">
                 {{ post.title }}
               </a>
             </h1>
@@ -20,7 +20,7 @@
           <div class="excerpt">
               {{ post.excerpt | strip_html | escape }}
             <!--{{ post.content | strip_html | truncate: "250" }}-->
-            <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
+            <!--<a class="button" href="{{ post.url | relative_url }}">
               {{ site.theme_settings.str_continue_reading }}
             </a>-->
           </div>
@@ -32,11 +32,11 @@
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
     {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button">
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="button">
       <i class="fa fa-chevron-left"></i>
       {{ site.theme_settings.str_previous_page }}
     </a> {% endif %} {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button">
+    <a href="{{ paginator.next_page_path | relative_url }}" class="button">
       {{ site.theme_settings.str_next_page }}
       <i class="fa fa-chevron-right"></i>
     </a> {% endif %}

@@ -2,12 +2,12 @@
     
     <!-- Logo and title -->
 	<div class="branding">
-		<a href="{{ site.baseurl }}/">
-			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
+		<a href="{{ "/" | relative_url }}">
+			<img class="avatar" src="{{ site.theme_settings.avatar | relative_url }}" alt=""/>
 		</a>
 
 		<h1 class="site-title">
-			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
+			<a href="{{ "/" | relative_url }}">{{ site.theme_settings.title }}</a>
 		</h1>
 	</div>
     
@@ -42,7 +42,7 @@
           {% if item[1].enabled %}
             <li class="separator"> | </li>
             <li>
-                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[0] }}">
+                <a class="clear" href="{{ item[0] | relative_url }}">
                     <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
                 </a>
             </li>

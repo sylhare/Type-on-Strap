@@ -40,7 +40,7 @@ Demo display of [jekyll-table-of-contents](https://github.com/ghiculescu/jekyll-
 If you want to customize the theme it is up to you, you can add the `toc.js` file into the `asset > js` and add it into the `page.html` layout with:
 
 ```html
-<script src="{{ site.baseurl }}/assets/js/toc.js" ></script>
+<script src="{{ "/assets/js/toc.js" | relative_url }}" ></script>
 ```
 Then you can use it as it is said on the repository.
 
