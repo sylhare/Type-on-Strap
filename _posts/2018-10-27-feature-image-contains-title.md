@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Feature images with title
-hide_title: Yes
+hide_title: true
 feature-img: "assets/img/pexels/feedback.jpeg"
 tags: [Test, Lorem]
 ---
