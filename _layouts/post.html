@@ -1,15 +1,16 @@
 ---
 layout: default
 ---
-<article {% if page.feature-img %}class="feature-image"{% endif %}>
+<article>
   
-  <header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
-    <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+  <header id="main">
+    <h1 id="{{ page.title | cgi_escape }}">{{ page.title }}</h1>
     <p class="meta">
     {% if page.author %}{{ page.author }}<br>{% endif %}
     {{ page.date | date: "%B %-d, %Y" }}
     </p>
   </header>
+
 
   <section class="post-content">
   {% if page.bootstrap %}
@@ -20,13 +21,18 @@ layout: default
   </div>
   {% endif %}
   </section>
+
+  <section>
+    <h2>Citation</h2>
+    <
+  </section>
   
   <!-- Social media shares -->
-  {% include share_buttons.html %}
+  <!-- {% include share_buttons.html %} -->
     
   <!-- Tag list -->
-  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-  {% include tags_list.html tags=tag_list %}
+  <!-- {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+  {% include tags_list.html tags=tag_list %} -->
 </article>
 
 <!-- Disqus -->
@@ -37,6 +43,6 @@ layout: default
 {% endif %}
 
 <!-- Post navigation -->
-{% if site.theme_settings.post_navigation %}
+<!-- {% if site.theme_settings.post_navigation %}
   {% include post_nav.html %}
-{% endif %}
+{% endif %} -->

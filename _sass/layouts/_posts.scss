@@ -46,10 +46,7 @@ header {
 .meta {
     color: ($text-color, .8);
     font-size: 1.2em;
-    letter-spacing: 0.1em;
-    font-weight: bold;
     margin: 0;
-    text-transform: uppercase;
 }
 
 
@@ -76,6 +73,21 @@ header {
         @extend %padding-regular;
         padding-top: 0;
     }
+}
+
+
+//stick to side table of contents
+#markdown-toc {
+   width: 15%;
+   font-size: 14px;
+   position:absolute;
+   z-index: 99;
+   left: 2%;
+   top: 20%;
+   list-style: none;
+   border-top: 1px solid rgba(0, 0, 0, 0.1);
+   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    
 }
 
 // Responsive scrolling

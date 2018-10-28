@@ -38,54 +38,51 @@
 
 // Post listing
 .posts {
+    text-align: center;
     .post-teaser {
+
         @extend %padding-regular;
-        width: 100%;
-        margin-bottom: 0;
+        width: 70%;
+        border-radius: 20px;
+        box-shadow: 0 0.6rem 4rem rgba(0,0,0,0.08);
+
+        .info {
+            text-align: left;
+            float: right;
+            width: 70%;
+        }
+
         display: inline-block;
         background-size: $feature-image-size;
         border-bottom: 1px solid $border-color;
+        padding: 2% 2%;
+        margin-top: 2.5%;
+        margin-bottom: 2.5%;
         p a {
             @extend .body-link;
         }
         img {
-            width: 100%;
             padding: 0;
-            vertical-align: middle;
+            border-radius: 50%;
+            height: 250px;
+            width: 250px;            
         }
 
         .post-img {
-            vertical-align: middle;
-            border-radius: 10px;
-            overflow: hidden;
-
+            float: left;
             @media (min-width: $break) {
                 height: 250px;
+                width: 250px;
             } //Smaller screen
             @media screen and (max-width: $break) {
                 height: 150px;
+                width: 150px;
             }
         }
 
-        .post-img img {
-            //max-width: 100%;
-
-            -moz-transition-timing-function: ease-out;
-            -webkit-transition-timing-function: ease-out;
-            transition-timing-function: ease-out;
-
-            -moz-transition: all 2s;
-            -webkit-transition: all 2s;
-            transition: all 2s;
-
-            &:hover {
-                -moz-transform: scale(1.1);
-                -webkit-transform: scale(1.1);
-                transform: scale(1.1);
-            }
-        }
     }
     .excerpt {
+        text-align: left;
         margin-top: 1em;
     }
 }

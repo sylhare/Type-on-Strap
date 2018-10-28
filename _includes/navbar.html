@@ -6,9 +6,9 @@
 			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
 		</a>
 
-		<h1 class="site-title">
+		<!-- <h1 class="site-title">
 			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
-		</h1>
+		</h1> -->
 	</div>
     
     <!-- Toggle menu -->
@@ -38,7 +38,7 @@
         {% endfor %} 
         
         <!-- Auto Generation of SPECIAL pages in the navbar -->
-        {% for item in site.theme_settings.special_page %}
+        <!-- {% for item in site.theme_settings.special_page %}
           {% if item[1].enabled %}
             <li class="separator"> | </li>
             <li>
@@ -47,7 +47,7 @@
                 </a>
             </li>
           {% endif %}
-        {% endfor %}
+        {% endfor %} -->
     </ul>
         
 	</nav>

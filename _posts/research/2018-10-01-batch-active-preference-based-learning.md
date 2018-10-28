@@ -3,7 +3,7 @@ layout: post
 title: "Batch-Active Preference-based Learning of Reward Functions"
 subtitle: "stuf stuff stuff"
 feature-img: "assets/img/posts/2018-10-01-batch-active-preference-based-learning.png"
-thumbnail: "assets/img/thumbnails/2018-10-01-batch-active-preference-based-learning.png"
+thumbnail: "assets/img/stock1.png"
 author: Erdem Bıyık
 tags: [Test, Lorem]
 ---

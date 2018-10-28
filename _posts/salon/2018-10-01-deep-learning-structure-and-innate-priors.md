@@ -3,7 +3,7 @@ layout: post
 title: "Deep Learning, Structure and Innate Priors"
 subtitle: "A Discussion between Yann LeCun and Christopher Manning on 'What innate priors should we build into the architecture of deep learning systems?'"
 feature-img: "assets/img/posts/2018-10-03-deep-learning-structure-and-innate-priors.png"
-thumbnail: "assets/img/thumbnails/2018-10-03-deep-learning-structure-and-innate-priors.png"
+thumbnail: "assets/img/stock1.png"
 author: Abigail See
 tags: [Test, Lorem]
 ---

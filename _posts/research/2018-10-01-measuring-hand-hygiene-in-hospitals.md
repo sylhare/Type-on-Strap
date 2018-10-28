@@ -3,7 +3,7 @@ layout: post
 title: "Measuring Hand Hygiene in Hospitals"
 subtitle: "stuf stuff stuff"
 feature-img: "assets/img/posts/2018-10-01-measuring-hand-hygiene-in-hospitals.png"
-thumbnail: "assets/img/thumbnails/2018-10-01-measuring-hand-hygiene-in-hospitals.png"
+thumbnail: "assets/img/stock2.png"
 author: Albert Haque and Michelle Guo
 tags: [Test, Lorem]
 ---

@@ -3,12 +3,12 @@ layout: default
 ---
 
 <div class="home">
-  {% if site.theme_settings.header_text %}
+  <!-- {% if site.theme_settings.header_text %}
   <div id="main" class="call-out"
   style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
     {{ site.theme_settings.header_text }}
   </div>
-  {% endif %}
+  {% endif %} -->
 
   <div class="posts">
     {% for post in paginator.posts %}
@@ -18,7 +18,7 @@ layout: default
          <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
       </div>
       {% endif %}
-      <span>
+      <div class="info">
           <header>
         
             <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
@@ -37,7 +37,7 @@ layout: default
               {{ site.theme_settings.str_continue_reading }}
             </a>-->
           </div>
-      </span>
+      </div>
     </div>
     {% endfor %}
   </div>
