@@ -1,10 +1,10 @@
 {
   "name": "type-on-strap",
   "version": "1.0.0",
-  "description": "jekyll theme",
-  "main": "index.js",
+  "description": "Gulp file to manage the jekyll theme",
+  "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
