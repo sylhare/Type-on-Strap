@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Measuring Hand Hygiene in Hospitals"
-subtitle: "stuf stuff stuff"
+subtitle: "Building a computer vision system to detect when people wash their hands"
 feature-img: "assets/img/posts/2018-10-01-measuring-hand-hygiene-in-hospitals.png"
-thumbnail: "assets/img/stock2.png"
+thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
 author: Albert Haque and Michelle Guo
 tags: [Test, Lorem]
 ---

@@ -3,40 +3,36 @@ layout: default
 ---
 
 <div class="home">
-  <!-- {% if site.theme_settings.header_text %}
   <div id="main" class="call-out"
   style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
-    {{ site.theme_settings.header_text }}
   </div>
-  {% endif %} -->
 
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
       {% if post.thumbnail %} 
       <div class="post-img">
-         <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
+        <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
       </div>
       {% endif %}
       <div class="info">
-          <header>
-        
-            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-              <h2 style="margin: 5px;"> {{ post.title }} </h2>
-            </a>
-            
-             <p class="meta" style="margin: 1px;">
-              <h4 style="margin: 1px;"> {{ post.author }} </h4>
-              <!-- {{ post.date | date: "%B %-d, %Y" }} -->
-            </p> 
-          </header>
-          <div class="excerpt">
-              {{ post.subtitle | strip_html | escape }}
-            <!--{{ post.content | strip_html | truncate: "250" }}-->
-            <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
-              {{ site.theme_settings.str_continue_reading }}
-            </a>-->
-          </div>
+        <header>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+            <h2> {{ post.title }} </h2>
+          </a>
+          
+           <p class="meta">
+            <h4> {{ post.author }} </h4>
+            <!-- {{ post.date | date: "%B %-d, %Y" }} -->
+          </p> 
+        </header>
+        <div class="excerpt">
+            {{ post.subtitle | strip_html | escape }}
+          <!--{{ post.content | strip_html | truncate: "250" }}-->
+          <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
+            {{ site.theme_settings.str_continue_reading }}
+          </a>-->
+        </div>
       </div>
     </div>
     {% endfor %}

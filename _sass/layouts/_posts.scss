@@ -1,5 +1,4 @@
-article,
-.comments {
+article, .comments {
     @extend %padding-regular;
     border-bottom: 1px solid $border-color;
     float: left;
@@ -8,7 +7,6 @@ article,
 
 article {
     header {
-        margin-bottom: 6%;
         text-align: center;
     }
     a:hover {
@@ -49,12 +47,12 @@ header {
     margin: 0;
 }
 
-
 /* --- Feature image --- */
 .feature-image {
     padding: 0;
     .post-link {
         color: $feature-image-text-color;
+        margin-left: 10px;
     }
     header {
         color: $feature-image-text-color;

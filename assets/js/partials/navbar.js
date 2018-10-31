@@ -19,4 +19,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         c.backgroundPosition = '100% ' + parseInt(-x/3) + 'px' + ', 0%, center top';
     });
+    
+    var cw = $('.post-image').width();
+    $('.post-image').css({
+        'height': cw + 'px'
+    });
 });
+
+

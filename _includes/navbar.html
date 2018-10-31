@@ -1,18 +1,19 @@
 <header class="site-header">
     
     <!-- Logo and title -->
-	<div class="branding">
-		<a href="{{ site.baseurl }}/">
-			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
-		</a>
+  <a href="{{ site.baseurl }}/">
+	  <div class="branding">
+			  <img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
+		
 
-		<!-- <h1 class="site-title">
-			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
-		</h1> -->
-	</div>
+	    <h1 class="site-title">
+			  <a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
+		  </h1> 
+	  </div>
+	</a>
     
-    <!-- Toggle menu -->
-    <nav class="clear">
+  <!-- Toggle menu -->
+  <nav class="clear">
     <a id="pull" class="toggle" href="#">
     <i class="fa fa-bars fa-lg"></i>
     </a>
@@ -49,6 +50,6 @@
           {% endif %}
         {% endfor %} -->
     </ul>
-        
 	</nav>
+  <hr/>
 </header>

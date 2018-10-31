@@ -8,13 +8,13 @@ description: "The official Stanford AI Lab blog" # used by search engines
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: SAIL Blog # blog's title
-  avatar: assets/img/sail-logo.jpg
+  title: The Stanford AI Lab Blog # blog's title
+  avatar: assets/img/sail-logo.png
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
      <p>The official Stanford AI Lab blog</p>
-  header_text_feature_image: assets/img/Stanford_AI_lab.jpg
+  header_text_feature_image: assets/img/Stanford_oval.jpg
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
