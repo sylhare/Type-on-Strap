@@ -4,12 +4,17 @@
     {% for item in site.portfolio %}
     <div class="portfolio-cell">
         <a href="{{ site.baseurl }}{{ item.url }}" class="portfolio-link" data-keyboard="true">
+	    {% unless site.theme_settings.hover_caption == false %}
             <div class="caption" title="{{ item.title }}">
                 <div class="caption-content">
                     <i class="fa fa-search-plus fa-3x"></i>
                 </div>
             </div>
-            <img src="{{ site.baseurl }}/{{ item.img }}" class="" alt="">
+	    {% endunless %}
+            <img src="{{ site.baseurl }}/{{ item.img }}" class="" alt="{{ page.title }}">
+	    {% if site.theme_settings.show_caption %}
+	    <div class="caption-content"><center> {{ item.title }} </center></div>
+	    {% endif %}
         </a>
     </div>
     {% endfor %}

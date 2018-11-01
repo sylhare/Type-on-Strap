@@ -92,7 +92,11 @@ theme_settings:
 
   # Post navigation
   post_navigation: true
-  
+
+  # Controls whether in the portfolio, the item titles are shown
+  # when hovering over the images or as captions under the images
+  show_caption: false
+  hover_caption: true
   
 # PAGINATION
 paginate: 5
