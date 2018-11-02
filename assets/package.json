@@ -1,10 +1,10 @@
 {
   "name": "type-on-strap",
   "version": "1.0.0",
-  "description": "jekyll theme",
-  "main": "index.js",
+  "description": "Gulp file to manage the jekyll theme",
+  "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -20,13 +20,14 @@
   },
   "homepage": "https://github.com/Sylhare/Type-on-Strap#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-imagemin": "^4.1.0",
-    "gulp-less": "^3.5.0",
+    "gulp-less": "^4.0.1",
     "gulp-replace": "^1.0.0",
     "gulp-shell": "^0.6.5",
     "gulp-uglify": "^3.0.1"
-  }
+  },
+  "dependencies": {}
 }

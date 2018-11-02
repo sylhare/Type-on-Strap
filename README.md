@@ -58,8 +58,8 @@ jekyll-theme-basically-basic
 ├── pages
 |   ├── 404.md		       # To be displayed when url is wrong
 |   ├── about.md               # About example page
-|   ├── gallery.md              # Gallery page for your photos
-|   ├── portfolio.md	         # Portfolio page for your projects
+|   ├── gallery.md             # Gallery page for your photos
+|   ├── portfolio.md	       # Portfolio page for your projects
 |   ├── search.html	       # Search page
 |   └── search.json            # Specify the search target (page, post, collection)
 ├── _config.yml                # sample configuration
@@ -236,6 +236,7 @@ This are the basic features you can use with the  `post` layout.
 ---
 layout: post
 title: Hello World                                # Title of the page
+hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
 thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
 bootstrap: true                                   # Add bootstrap to the page
