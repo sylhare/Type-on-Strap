@@ -9,6 +9,7 @@ layout: default
     {% if page.author %}{{ page.author }}<br>{% endif %}
     {{ page.date | date: "%B %-d, %Y" }}
     </p>
+  <hr>
   </header>
 
 
@@ -21,14 +22,9 @@ layout: default
   </div>
   {% endif %}
   </section>
-
-  <section>
-    <h2>Citation</h2>
-    <
-  </section>
   
   <!-- Social media shares -->
-  <!-- {% include share_buttons.html %} -->
+  {% include share_buttons.html %} 
     
   <!-- Tag list -->
   <!-- {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}

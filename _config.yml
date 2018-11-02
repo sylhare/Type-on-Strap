@@ -14,9 +14,8 @@ theme_settings:
   # Header and footer text
   header_text: > #two or three lines to describe your site
      <p>The official Stanford AI Lab blog</p>
-  header_text_feature_image: assets/img/Stanford_oval.jpg
   footer_text: >
-   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+   &copy; 2018 Stanford AI Lab | Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> based on <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a> theme.
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
@@ -71,13 +70,7 @@ theme_settings:
 paginate: 5
 paginate_path: "blog/page:num"
 
-
-# PORTFOLIO
-collections:
-  portfolio:
-    output: true
-    permalink: /:collection/:name
-
+permalink: /:categories/:title/
 
 # BUILD SETTINGS
 markdown: kramdown

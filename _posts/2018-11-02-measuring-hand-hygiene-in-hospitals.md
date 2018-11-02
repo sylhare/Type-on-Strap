@@ -2,13 +2,11 @@
 layout: post
 title: "Measuring Hand Hygiene in Hospitals"
 subtitle: "Building a computer vision system to detect when people wash their hands"
-feature-img: "assets/img/posts/2018-10-01-measuring-hand-hygiene-in-hospitals.png"
-thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
+feature-img: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
+thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/thumb.png"
 author: Albert Haque and Michelle Guo
 tags: [Test, Lorem]
 ---
-
-# Measuring Hand Hygiene in Hospitals
 
 Believe it or not, more people die from hospital-acquired infections than car accidents. When you are admitted to a hospital, there is a 1 in 25 chance you will become worse than had you not gone to the hospital at all.
 
