@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "TDD : TDD-Cycle 연습하기"
-tags: [TDD]
+tags: [TDD, JUnit, JUnit4]
 categories: [Test]
 subtitle: "계산기 예제"
 excerpt_separator: <!--more-->
