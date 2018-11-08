@@ -1426,7 +1426,7 @@ ul.share-buttons .sr-only {
 }
 
 @media ( min-width : 768px) {
-	.posts .post-teaser .post-img { height: 250px }
+	.posts .post-teaser .post-img { max-height: 250px }
 	.postsArea{width: 100%;}
 	.cateArea{display:none;}
 }
@@ -1448,7 +1448,7 @@ ul.share-buttons .sr-only {
 	.posts>.post-area>.tag-posts>.tag-title>.meta{display: none;}
 	#main p{font-size: 0.5em;}
 	.feature-image header { padding: 4% 4% }
-	.posts .post-teaser .post-img { height: 150px }
+	.posts .post-teaser .post-img { max-height: 150px }
 	
 	table{white-space: nowrap;}
 	
@@ -1537,7 +1537,7 @@ ul.share-buttons .sr-only {
 @media ( min-width : 850px) {
 	a#pull { display: none }
 	.site-header nav a#pull i{display: none;}
-	.posts .post-teaser .post-img { height: 250px }
+	.posts .post-teaser .post-img { max-height: 250px }
 	.postsArea{width: 69%;}
 	.cateArea{display:inline-block; width: 28%;}
 }

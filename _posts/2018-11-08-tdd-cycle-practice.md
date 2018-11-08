@@ -4,8 +4,8 @@ title: "JUnit : 단위 테스트 코드 개발"
 tags: [TDD, TDDCycle, RGRCycle, JUnit, JUnit4, UnitTest]
 categories: [Test]
 subtitle: "단위 테스트 코드 개발에서 발생하는 TDD-Cycle의 각 단계에 대처하며 개발하기"
-feature-img: "md/img/thumbnail/JUnit.png"    
-thumbnail: "md/img/thumbnail/JUnit.png"
+feature-img: "md/img/thumbnail/tdd-cycle-practice.png"    
+thumbnail: "md/img/thumbnail/tdd-cycle-practice.png"
 excerpt_separator: <!--more-->
 display: "false"
 sitemap:
@@ -15,7 +15,7 @@ priority: 1.0
 
 <!--more-->
 
-# JUnit의 단위 테스트 코드 입문기
+# 단위 테스트 코드 입문기
 
 ---
 
@@ -25,8 +25,19 @@ priority: 1.0
 
 TDD-Cycle이 왜, 언제 발생되는지 모른다거나 자세한 개념적인 부분이 필요하다면 이전에 작성한 [TestFramework : JUnit](https://gmun.github.io/test/2018/11/04/junit.html)과 [TDD : Test-Driven Development](https://gmun.github.io/test/2018/08/24/test-driven-development.html)를 같이 참고한다면 본 포스팅을 읽는 데 도움이 될 것 같다.
 
-### Library 
+### JUnit Download
 
+JUnit4는 Java7 이상, JUnit5는 Java8 버전 이상인 경우에 완전 호환을 할 수있다.
+
+현재 JUnit4의 최종 버전은 [JUnit4.12](https://github.com/junit-team/junit4/wiki/Download-and-Install)으로 Jar, Maven, Gradle의 설치방법을 제시하고 있다.  
+
+
+_JUnit 5 = JUnit Platform + JUnit Jupiter + JUnit Vintage_
+
+>[JUnit4.12](https://github.com/junit-team/junit4/wiki/Download-and-Install)
+>[JUnit5 API](https://junit.org/junit5/docs/current/api/overview-summary.html)
+>[JUnit5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
+>[JUnit5 Release Note](https://junit.org/junit5/docs/current/release-notes/index.html#release-notes)
 
 ### Test.class Naming convention
 
