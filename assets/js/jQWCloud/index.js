@@ -3,19 +3,23 @@ function createWordClud(){
 	return (function(){
 
 		var wordData = [];
-		var tagList = $(".tag-list>a>p");
+		var tagList = $(".tag-list>a>p") || "";
 		
 		for(var i=0; i<tagList.length; i++){
-			var name 	= tagList[i].textContent || tagList[i].outerText || tagList[i].innerText;
-			var weight 	= name.length;
+			var name 	= tagList[i].textContent || tagList[i].outerText || tagList[i].innerText || "";
+			var weight 	= name.length || 0;
 				weight 	= weight*100 - weight*3;	// size 조절
 			
-			var obj = new Array();
+			var obj = {};
 				obj.word 	= name;
 				obj.weight  = weight;
 			//{word: 'Prashant', weight: 40}, {word: 'Ajinkya', weight: 11, color: 'green'}
 			wordData.push(obj);
-		}		
+		}
+		
+		if(wordData.length == 0){
+			return;
+		}
 
 		$("#wordCloud").jQWCloud({
 			
