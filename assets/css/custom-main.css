@@ -708,6 +708,13 @@ article, .comments, .feature-image .post-content, .feature-image footer,
 	padding: 4% 20%
 }
 
+.post-teaser h1{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
+
 .over-lay{
     position: absolute;
     top: 0;

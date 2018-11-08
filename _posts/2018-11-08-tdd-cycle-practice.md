@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "TDD : TDD-Cycle 연습하기"
-tags: [TDD, JUnit, JUnit4]
+title: "JUnit : 단위 테스트 코드 개발"
+tags: [TDD, TDDCycle, RGRCycle, JUnit, JUnit4, UnitTest]
 categories: [Test]
-subtitle: "계산기 예제"
+subtitle: "단위 테스트 코드 개발에서 발생하는 TDD-Cycle의 각 단계에 대처하며 개발하기"
+feature-img: "md/img/thumbnail/JUnit.png"    
+thumbnail: "md/img/thumbnail/JUnit.png"
 excerpt_separator: <!--more-->
 display: "false"
 sitemap:
@@ -13,9 +15,17 @@ priority: 1.0
 
 <!--more-->
 
-# TDD-Cycle 연습하기
+# JUnit의 단위 테스트 코드 입문기
 
 ---
+
+본 포스팅은 단위 테스트 코드 개발에 처음 입문한 사람들을 대상으로한다.
+
+이 글에선 개념적인 부분보다는 JUnit을 통해 단위 테스트를 작성하는 방법과 테스트 검증 시 일어나는 TDD-Cycle의 각 단계에서 대처 방법에 초점을 둘 예정이다.
+
+TDD-Cycle이 왜, 언제 발생되는지 모른다거나 자세한 개념적인 부분이 필요하다면 이전에 작성한 [TestFramework : JUnit](https://gmun.github.io/test/2018/11/04/junit.html)과 [TDD : Test-Driven Development](https://gmun.github.io/test/2018/08/24/test-driven-development.html)를 같이 참고한다면 본 포스팅을 읽는 데 도움이 될 것 같다.
+
+### Library 
 
 
 ### Test.class Naming convention
