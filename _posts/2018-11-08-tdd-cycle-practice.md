@@ -27,11 +27,11 @@ TDD-Cycle이 왜, 언제 발생되는지 모른다거나 자세한 개념적인 
 
 ### Download
 
-JUnit 버전에 따라 요구하는 Java 버전이 다르지만 JUnit5 이전의 버전을 사용한다면 Java7이면  충분하다. 본 포스팅에선 JUnit4를 사용하기 때문에  반드시 Java7이면 충분하다.
+JUnit 버전에 따라 요구하는 Java 버전이 다르지만 본 포스팅에선 JUnit4를 사용하기 때문에 Java7이면  충분하다. 
 
 현재 JUnit4의 최종 버전은 4.12로 `junit.jar`, `hamcrest-core.jar` 두 가지 라이브러리를 필요로하다. [JUnit4.12 다운로드 홈페이지](https://github.com/junit-team/junit4/wiki/Download-and-Install)에서 JAR, Maven, Gradle에 따른 설치방법을 알려주고 있다. 현재 자신의 프로젝트가 라이브러리를 관리하는 방식에 따라 JUnit4 라이브러리를 프로젝트에 추가하자.
 
->JUnit5는 Java8 필요로 하다. 이전 버전에서 지원하지 않았던 람다식, 스트림을 테스트할 수 있도록 지원하고 테스트 필터링, 확장 등 더 다양한 테스트 환경을 제공하고 있다.
+>JUnit5는 최소 Java8 이상의 자바 버전을 요구한다. 이전 버전에서 지원하지 않았던 람다식, 스트림을 테스트할 수 있도록 지원하고 테스트 필터링, 확장 등 더 다양한 테스트 환경을 제공하고 있다.
 
 ### 클래스 생성 - Test.class Naming convention
 
