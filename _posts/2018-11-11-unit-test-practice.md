@@ -346,14 +346,14 @@ public class Calcuration {
 2. 테스트가 통과할 정도로만 실제 코드에 작성한다.
 3. 실제 코드를 작성하기 전 실패하는 테스트 코드부터 작성한다.
 
-<img src="/md/img/unit-test-practice/unit-test-flowchart.png">
+<img src="/md/img/unit-test-practice/unit-test-flowchart.png" style="max-height:400px;">
 <em>Unit Test 작성 순서도</em>
 
 단위 테스트 작성은 기능의 설계에 대해 테스트 케이스를 작성하는 것부터 시작이다. 이 말인즉슨 설계가 어느 정도는 설계의 틀이 잡혀 있어야 하고 개발자가 전반적으로 기능에 대해 이해를 하고 있어야 한다는 뜻이다.
 
 마지막으로 박재성님이 추천하는 학습 방법을 소개하며 글을 마무리한다.
 
-<img src="/md/img/unit-test-practice/practice-flow.png">
+<img src="/md/img/unit-test-practice/practice-flow.png" style="max-height:none;">
 <em>박재성님의 학습 방법</em>
 
 
