@@ -45,9 +45,11 @@ JUnit 버전에 따라 요구하는 Java 버전이 다르지만 본 포스팅에
 
  단위 테스트를 연습할 주제를 선정해보자. 가장 처음 [TDD](https://gmun.github.io/test/2018/08/24/test-driven-development.html)를 연습할 때는 유틸성 기능 또는 알고리즘 문제를 통해 연습하면 좋다.
  
-> 문제 1) 더하기, 빼기, 나누기, 곱셈할 수 있는 문자열 계산기 만들기
+_문제 1) 더하기, 빼기, 나누기, 곱셈할 수 있는 문자열 계산기 만들기_
 
 다음의 문제는 유틸성 문제 중 가장 기초적인 `문자열 계산기 만들기`이다. 이를 통해 단위 테스트를 연습해보려 한다.
+
+>[백준 알고리즘](https://www.acmicpc.net/)
 
 ### TestCase를 작성하자
 
@@ -334,9 +336,9 @@ public class Calcuration {
 
 6단계를 끝으로 모든 테스트 케이스를 적용하여 단위 테스트 코드를 작성했다. 하지만 아직 문자열 계산기는 부족한 부분이 많다. 
 
->7) 입력 값이 null일때 처리
+>7) 입력 값 null 처리
 
-단편적인 예로 `입력 값이 null일때 처리` 같은 보완해야 할 로직이 많다. 이 경우엔 `TestCase를 작성하자`에서 설명했던 것처럼 테스트 케이스를 추가하여 점진적으로 기능을 보완하면 된다.
+단편적인 예로 `입력 값 null 처리` 같은 보완해야 할 로직이 많다. 이 경우엔 `TestCase를 작성하자`에서 설명했던 것처럼 테스트 케이스를 추가하여 점진적으로 기능을 보완하면 된다. 단위 테스트를 연습할 때도 마찬가지다. 처음부터 난도를 높게 잡지 말고 하나씩 제약사항들을 추가하며 난도를 높이는 것이 바람직하다.
 
 ### 마무리
 
@@ -354,11 +356,10 @@ public class Calcuration {
 마지막으로 박재성님이 추천하는 학습 방법을 소개하며 글을 마무리한다.
 
 <img src="/md/img/unit-test-practice/practice-flow.png" style="max-height:none;">
-<em>박재성님의 학습 방법</em>
+<em>박재성님이 추천하는 학습 방법</em>
 
 
 ### 참고
 
 [UNIT Testing Tutorial - Learn in 10 Minutes](https://www.guru99.com/unit-testing-guide.html) <br/>
 [What is a Unit Test?](https://content.pivotal.io/blog/what-is-a-unit-test-the-answer-might-surprise-you)<br/>
-[백준 알고리즘](https://www.acmicpc.net/)<br/>
