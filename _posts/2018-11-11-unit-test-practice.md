@@ -148,8 +148,8 @@ public class CalcurationTest {
 		Calcuration cal = new Calcuration(a, b);
 		
 		//assertEquals : 값을 비교하는 JUnit 단정문 메소드
-		assertEquals(a, cal.getA());
-		assertEquals(b, cal.getB());
+		assertEquals(1, cal.getA());
+		assertEquals(2, cal.getB());
 	}
 }
 
