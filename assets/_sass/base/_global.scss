@@ -168,6 +168,88 @@ img[align=right] {
     margin-left: 3%;
 }
 
+figure {
+    display:block;
+    margin: 20px; /* adjust as needed */
+}
+
+figure img {
+    vertical-align: top;
+}
+
+figure figcaption {
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.postimage {
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+
+.postimage_unpadded {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 0;
+}
+
+.postimagesmall {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: auto;
+}
+
+.postimageactual {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: auto;
+}
+
+.postimagesmaller {
+  width: 75%;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  height: auto;
+}
+
+.postimage_50 {
+  width: 50%;
+  display:block;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+.postimage_25 {
+  width: 25%;
+  display:block;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.postimagehalf {
+  width: 49%;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 1%;
+}
+
+.postimagequarter {
+  width: 24%;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
 /* ---- Responsive ---- */
 
 @media screen and (max-width: $break) {

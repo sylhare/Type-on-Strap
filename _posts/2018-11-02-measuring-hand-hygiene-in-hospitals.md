@@ -21,23 +21,21 @@ solutions to this problem, perhaps the simplest is to use the most common human
 strategy -- visually confirm whether people are washing their hands or not -- with
 computer vision.
 
-<div style="width:100%; height: 14em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/washing_first.gif" width="75%" height="100%" style=""> 
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/washing_second.gif" width="75%" height="100%" style=""> 
-</div>
-
+<figure>
+    <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/washing_first.gif"/> 
+    <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/washing_second.gif"/> 
+</figure>
 
 Developing such a technological solution has been a multi-year project being done by the
 Stanford Partnership in AI-Assisted Care (PAC)​ and many collaborators around the
 world. Much remains to be done, but we hope this technology can help hospitals
 decrease infection rates and improve patients’ health.
 
-
 ## Why Vision
 
-<div style="width:100%; height: 14em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/five_moments.png" width="55%" height="100%" style=""> 
-</div>
+{% figure%}
+[<img class="postimagesmaller" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/five_moments.png" alt="Five moments"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/five_moments.png)
+{% endfigure %}
 
 Today, hospitals reinforce proper hand hygiene
 through educational tools such as medical school
@@ -74,10 +72,10 @@ they record distance. In a normal color image, each pixel denotes a color. In a 
 image, each pixel denotes the “distance” to the pixel in real-world space. This is usually a
 floating point number such as 1.337 meters.
 
-<div style="width:100%; height: 10em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/camera_images.png" width="100%" height="100%" style=""> 
-</div>
-_(Left) Color photo of the hospital, taken with a cell phone. (Right) Corresponding depth image taken by our sensor on the ceiling. Darker colors indicate objects closer to the depth sensor._
+{% figure caption:'(Left) Color photo of the hospital, taken with a cell phone. (Right) Corresponding depth image taken by our sensor on the ceiling. Darker colors indicate objects closer to the depth sensor.' %}
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/camera_images.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/camera_images.png)
+{% endfigure %}
+
 
 In the depth image above, notice how you can’t really see the people’s faces, but can still
 tell what they’re doing. This protects our users’ privacy, which is important in hospitals
@@ -85,10 +83,9 @@ To develop and validate our computer vision technology, we installed depth senso
 the ceiling at two hospitals. One was a children’s cardiovascular unit and the other was
 an adult intensive care unit (ICU).
 
-<div style="width:100%; height: 10em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/installed.png" width="100%" height="100%" style=""> 
-</div>
-_(Above) Our depth sensors installed on the ceiling of a children’s hospital._
+{% figure caption:'Our depth sensors installed on the ceiling of a children’s hospital.' %}
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/installed.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/installed.png)
+{% endfigure %}
 
 With depth sensors installed at two different hospitals, we can then use 3D computer
 vision tools to automatically measure hand hygiene. This involves three steps:
@@ -99,9 +96,9 @@ vision tools to automatically measure hand hygiene. This involves three steps:
 
 ### Pedestrian Detection
 
-<div style="width:100%; height: 12em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/depth_above.png" width="75%" height="100%" style=""> 
-</div>
+{% figure %}
+[<img class="postimage_smaller" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/depth_above.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/depth_above.png)
+{% endfigure %}
 
 Continuing with our self-driving car analogy: to understand the environment we need to
 first detect people.While there exists many object detection methods, most of them are
@@ -110,11 +107,10 @@ run on any type of image by leveraging two aspects of the problem: that people t
 occupy small amounts of space in a given image of a room, and that in depth images
 people typically look like ‘blobs’ that clearly stand out against the background of the floor.
 
-<div style="width:100%; height: 6em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/dictionary.png" width="100%" height="100%" style=""> 
-</div>
-_(Above) Entries of the dictionary. Each dictionary entry contains a synthetic image,
-corresponding to how a person would look like, had they been standing at that position._
+{% figure caption:'Entries of the dictionary. Each dictionary entry contains a synthetic image,
+corresponding to how a person would look like, had they been standing at that position.' %}
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/dictionary.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/dictionary.png)
+{% endfigure %}
 
 One way to detect people is to determine an ​occupancy grid​ over the ground, which is a
 binary matrix indicating whether a person is occupying a particular position in the ground
@@ -143,9 +139,9 @@ l_x^{(i)} $$ in the trajectory $$ X $$, to the subsequent detection $$ l_x^{(i+1
 probability given by $$ P(l_x^{(i+1)} | l_x^{i}) $$. We can now formulate the MAP task as a
 linear integer program by finding the flow $$ f $$ that minimizes the cost $$C$$:
 
-<div style="width:100%; height: 3em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/costC.png" width="100%" height="100%" style=""> 
-</div>
+{% figure %}
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/costC.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/costC.png)
+{% endfigure %}
 
 where $$ f_i $$ is the flow variable indicating whether the corresponding detection is a
 true positive, and $$ f_{ij} $$ indicates if the corresponding detections are linked together.
@@ -170,11 +166,10 @@ so it can work with any sensor viewpoint. Since traditional ​convolutional neu
 (CNNs) are generally ​not viewpoint invariant​, we use a ​spatial transformer network​ (STN)
 instead.
 
-<div style="width:100%; height: 8em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/vision.png" width="100%" height="100%" style=""> 
-</div>
-_(Left) Data augmentation stage with a person segmentation. (Right) Hand hygiene activity
-classifier: a ​spatial transformer network​ plus a ​densely connected​ convolutional network._
+{% figure caption:'(Left) Data augmentation stage with a person segmentation. (Right) Hand hygiene activity
+classifier: a ​spatial transformer network​ plus a ​densely connected​ convolutional network.' %}
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/vision.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/vision.png)
+{% endfigure %}
 
 The input to the STN is any arbitrary image and the output is a warped image. To help our
 model learn more quickly, we also provide a person segmentation (i.e., body mask) to the
@@ -232,12 +227,11 @@ labeled remotely and not in real-time. Remote annotators had access to all senso
 correct. In-person auditors did not have “access” to all sensors and they could not replay
 events in time.
 
-<div style="width:100%; height: 8em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/results.png" width="100%" height="100%" style=""> 
-</div>
-_(Above) Hand hygiene detections over time. Blue squares indicate someone using a hand
+{% figure caption:'Hand hygiene detections over time. Blue squares indicate someone using a hand
 hygiene dispenser. Darker blue indicates more simultaneous events. The ground truth is
-shown at the bottom. In general, more white space is bad._
+shown at the bottom. In general, more white space is bad.' %}
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/results.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/results.png)
+{% endfigure %}
 
 Numbers aside, a more interesting result is a visual one. The image above shows how
 infrequently the in-person auditors detect hand hygiene activity. Notice all the white
@@ -246,11 +240,10 @@ the observers are missing a lot of hand hygiene events. This is often due to obs
 getting distracted: they may doze off, look at unrelated activity elsewhere in the unit, or
 simply just not see hand hygiene events occuring.
 
-<div style="width:100%; height: 8em; margin-bottom: 30px; display:flex; align-items: center; justify-content: space-evenly;">
- <img src="/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/traj.gif" width="60%" height="100%" style=""> 
-</div>
-_(Above) Spatio-temporal heatmap of people walking in the intensive care unit. Yellow/red
-colors indicate more people standing/walking in that area._
+{% figure caption:'Spatio-temporal heatmap of people walking in the intensive care unit. Yellow/red
+colors indicate more people standing/walking in that area.' %}
+[<img class="postimagesmaller" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/traj.gif"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/traj.gif)
+{% endfigure %}
 
 We conclude with one final visualization. The animation above shows a top view of the
 hospital unit. Because we can track people across the entire unit, we know their specific

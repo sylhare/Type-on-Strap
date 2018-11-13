@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: 
+baseurl: /blog
 url: 
 title: SAIL Blog # site's title
 description: "The official Stanford AI Lab blog" # used by search engines
@@ -21,9 +21,8 @@ theme_settings:
   rss: true  # Make sure you created a feed.xml with feed.xml layout
   email_address: # Full email address, e.g. "sam@example.com"
   instagram:
-  twitter: # "twitter username"
+  twitter: StanfordAI # "twitter username"
   wordpress:
-  youtube:
   
   # Sharing options
   share_buttons:
@@ -34,7 +33,7 @@ theme_settings:
     email: true
 
   # Scripts / Features 
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  google_analytics: UA-129018108-1 # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
   katex: true # Enable if using math markup
   
@@ -76,7 +75,7 @@ permalink: /:categories/:title/
 markdown: kramdown
 highlighter: rouge
 sass:
-  sass_dir: _sass
+  sass_dir: assets/_sass
   style: :compressed
 plugins: [jekyll-paginate, jekyll-seo-tag]
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
