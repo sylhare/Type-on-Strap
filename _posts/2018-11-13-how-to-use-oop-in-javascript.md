@@ -4,8 +4,8 @@ title: "프로토타입 기반 언어인 자바스크립트로 OOP를 사용하�
 tags: [JavaScript, OOP]
 categories: [JavaScript]
 subtitle: "프로토타입 기반 자바스크립트로 OOP 기법"
-feature-img: "md/img/thumbnail/java-script-oop.png"    
-thumbnail: "md/img/thumbnail/java-script-oop.png"
+feature-img: "md/img/thumbnail/java-script-logo.png"    
+thumbnail: "md/img/thumbnail/java-script-logo.png"
 excerpt_separator: <!--more-->
 sitemap: 
 display: "false"

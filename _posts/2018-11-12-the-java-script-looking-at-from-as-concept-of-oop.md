@@ -4,8 +4,8 @@ title: "OOP의 개념으로 바라본 Prototype 기반 언어인 자바스크립
 tags: [JavaScript, OOP]
 categories: [JavaScript]
 subtitle: "자바스크립트로 이해하는 프로토타입 기반 프로그래밍"
-feature-img: "md/img/thumbnail/java-script-oop.png"    
-thumbnail: "md/img/thumbnail/java-script-oop.png"
+feature-img: "md/img/thumbnail/java-script-logo.png"    
+thumbnail: "md/img/thumbnail/java-script-logo.png"
 excerpt_separator: <!--more-->
 sitemap: 
 display: "false"
