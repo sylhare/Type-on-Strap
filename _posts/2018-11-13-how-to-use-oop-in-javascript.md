@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "프로토타입 기반 언어인 자바스크립트로 OOP 구현하기"
+title: "자바스크립트로 OOP 구현하기"
 tags: [JavaScript, OOP]
 categories: [JavaScript]
-subtitle: "전반적인 OOP의 이해와 이를 자바스크립트로 구현하기"
+subtitle: "자바스크립트로 구현한 다양한 OOP"
 feature-img: "md/img/thumbnail/java-script-logo.png"    
 thumbnail: "md/img/thumbnail/java-script-logo.png"
 excerpt_separator: <!--more-->

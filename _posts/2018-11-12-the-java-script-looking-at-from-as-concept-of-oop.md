@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "OOP의 개념으로 바라본 Prototype 기반 언어인 자바스크립트"
+title: "OOP의 관점으로 바라본 자바스크립트"
 tags: [JavaScript, OOP]
 categories: [JavaScript]
-subtitle: "OOP와 프로토타입 기반 언어의 차이점 및 자바스크립트의 동작원리"
+subtitle: "OOP의 관점으로 프로토타입 기반 언어 자바스크립트를 분석하기"
 feature-img: "md/img/thumbnail/java-script-logo.png"    
 thumbnail: "md/img/thumbnail/java-script-logo.png"
 excerpt_separator: <!--more-->
