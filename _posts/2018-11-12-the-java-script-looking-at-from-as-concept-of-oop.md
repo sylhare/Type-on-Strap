@@ -3,7 +3,7 @@ layout: post
 title: "OOP의 개념으로 바라본 Prototype 기반 언어인 자바스크립트"
 tags: [JavaScript, OOP]
 categories: [JavaScript]
-subtitle: "자바스크립트로 이해하는 프로토타입 기반 프로그래밍"
+subtitle: "OOP와 프로토타입 기반 언어의 차이점 및 자바스크립트의 동작원리"
 feature-img: "md/img/thumbnail/java-script-logo.png"    
 thumbnail: "md/img/thumbnail/java-script-logo.png"
 excerpt_separator: <!--more-->
@@ -26,6 +26,7 @@ priority: 1.0
 ### 1. 프로토 타입 기반 프로그래밍
 
 ### 2. 클래스 기반과의 비교
+[클래스 기반(일반 언어)과 프로토타입(자바스크립트) 기반 비교](http://webclub.tistory.com/162)
 
 ### 3. 프로토 타입을 가지고 있는 자료형 특징
 ####   3.1 가장 기초적인 Object 부터 int float string 등등
@@ -44,7 +45,11 @@ priority: 1.0
 [제로 초](https://www.zerocho.com/category/JavaScript/post/573c2acf91575c17008ad2fc)
 
 ### 6. this의 차이
+
+[JavaScript에서 '프로토 타입'과 'this'의 사용?](https://code.i-harness.com/ko-kr/q/4be560)
+
 [자바스크립트 this 바인딩 우선순위](http://blog.jeonghwan.net/2017/10/22/js-context-binding.html)
+
 [this의 이해](http://webframeworks.kr/tutorials/translate/explanation-of-this-in-javascript-1/)
 
 [[Java] OOP(객체지향 프로그래밍)의 특징](https://gmlwjd9405.github.io/2018/07/05/oop-features.html)
