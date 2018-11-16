@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OOL"
+title: "generalization와 specialization "
 tags: [OO,  OOL, Class-based language, Prototype-based language]
 categories: [OO]
 subtitle: "클래스기반 언어와 프로토타입 기반 언어"
