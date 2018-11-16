@@ -1,13 +1,14 @@
 ---
 layout: default
+title: Posts
 ---
 
 <div class="home">
   <!--<div id="main" class="call-out"
   style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
   </div>-->
-
   <div class="posts">
+    {% include page-title.html %} 
     {% for post in paginator.posts %}
     <div class="post-teaser">
       {% if post.thumbnail %} 
@@ -27,11 +28,13 @@ layout: default
           </p> 
         </header>
         <div class="excerpt">
-            {{ post.subtitle | strip_html | escape }}
-          <!--{{ post.content | strip_html | truncate: "250" }}-->
-          <!--<a class="button" href="{{ post.url | prepend: site.baseurl }}">
-            {{ site.theme_settings.str_continue_reading }}
-          </a>-->
+          <!--  {{ post.subtitle | strip_html | escape }}-->
+          {{ post.content | strip_html | truncate: "120" }}
+          <div class="continue-reading">
+            <a class="button" href="{{ post.url | prepend: site.baseurl }}">
+              {{ site.theme_settings.str_continue_reading }}
+            </a>
+          </div>
         </div>
       </div>
     </div>

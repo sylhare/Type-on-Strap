@@ -22,13 +22,15 @@ layout: default
   </div>
   {% endif %}
   </section>
+  <hr>
+  {% include subscribe.html %}
   
   <!-- Social media shares -->
   {% include share_buttons.html %} 
-    
+   
   <!-- Tag list -->
-  <!-- {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-  {% include tags_list.html tags=tag_list %} -->
+  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+  {% include tags_list.html tags=tag_list %}
 </article>
 
 <!-- Disqus -->

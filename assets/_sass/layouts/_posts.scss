@@ -6,9 +6,6 @@ article, .comments {
 }
 
 article {
-    header {
-        text-align: center;
-    }
     a:hover {
         @extend .body-link;
     }

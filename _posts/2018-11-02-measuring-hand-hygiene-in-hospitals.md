@@ -33,10 +33,6 @@ decrease infection rates and improve patients’ health.
 
 ## Why Vision
 
-{% figure%}
-[<img class="postimagesmaller" src="{{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/five_moments.png" alt="Five moments"/>]({{ site.baseurl }}/assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/five_moments.png)
-{% endfigure %}
-
 Today, hospitals reinforce proper hand hygiene
 through educational tools such as medical school
 classes, flyers posted on bulletin boards, and

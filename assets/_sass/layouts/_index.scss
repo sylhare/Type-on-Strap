@@ -34,10 +34,26 @@
 
 #main {
     background-position: 100% 0, 0 center, center top;
+    
+
+}
+
+header {
+    text-align: center;
 }
 
 // Post listing
 .posts {
+    #page-title {
+      margin-top: 1%;
+    }    
+    hr {
+      width: 70%;
+      margin-left: 15%;
+    } 
+    .continue-reading {
+      text-align: center;
+    }
     text-align: center;
     .post-teaser {
 
@@ -79,6 +95,7 @@
         }
 
         .post-img {
+            max-width: 250px;
             @media (min-width: $break) {
                 margin-left: 1%;
                 float: left;

@@ -1,7 +1,7 @@
 method: git                               # How do you want to deploy? git, rsync or s3.
 site_dir: _site                           # Location of your static site files.
 
-git_url: git@github.com:andreykurenkov/andreykurenkov.github.io  # remote repository url, e.g. git@github.com:username/repo_name
+git_url: git@github.com:StanfordVL/sail-blog.git  # remote repository url, e.g. git@github.com:username/repo_name
 
 # Note on git_branch:
 # If using GitHub project pages, set the branch to 'gh-pages'.
