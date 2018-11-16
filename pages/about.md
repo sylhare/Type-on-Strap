@@ -6,9 +6,9 @@ feature-img: "assets/img/sailbanner.jpg"
 tags: [About, Archive]
 ---
 
-The Stanford AI Lab (SAIL) Blog is a place for SAIL researchers to communicate their research in a more accessible style, to share discussions held at SAIL concerning the field, and to post various updates from SAIL labs. It is intended to be read by both experts and a general audience.
+The Stanford AI Lab is a place for SAIL students, faculty, and researchers to share our work with the general public. We will write about our latest research, [discussions](http://ai.stanford.edu/events/ai-salon/) and [talks](http://ai.stanford.edu/events/ai-distinguished-speakers-series/) held at SAIL, and other interesting updates from our labs. To learn more about the various AI research being done at SAIL, visit [here](http://ai.stanford.edu/).
 
-The SAIL blog is run with faculty advisors [Dorsa Sadigh](https://dorsa.fyi/) and an editorial board consisting of the following SAIL students:
+All our blog posts are written by members in the SAIL community, with faculty advisor [Dorsa Sadigh](https://dorsa.fyi/) and the following editorial board:
 
 * [Andrey Kurenkov](http://www.andreykurenkov.com/)
 * Michelle Lee

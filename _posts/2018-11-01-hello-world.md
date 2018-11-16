@@ -12,8 +12,3 @@ We are excited to launch the Stanford AI Lab (SAIL) Blog, where we hope to share
 
 The blog will be primarily contributed by members and affiliates of SAIL, though we also welcome members of the wider AI community at Stanford to contribute. See the about page for more details.
 
-Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="https://twitter.com/skynet_today"><i class="fa fa-twitter-square fa fa" title="Twitter"></i> Twitter</a> or good ol' email:
-
-{% include mailchimp-sign.html %}
-
-
