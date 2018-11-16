@@ -29,11 +29,11 @@ priority: 1.0
 
 ---
 
+### 프로토 타입 기반 프로그래밍이란
+
+
  여기서 우리는 프로토타입 기반 언어가 OOL를 시초로 두고 있다는걸 알 수 있고 프로토타입 기반 언어인 자바스크립트 또한 OOP의 능력을 지니고 있다는걸 알 수 있다.
 
----
-
-### 프로토 타입 기반 프로그래밍이란
 
 프로토타입 기반 프로그래밍은 클래스가 존재하지 않는 객체지향 프로그래밍의 한가지 스타일로, 동작 재사용(behavior reuse, 클래스기반 언어에서는 상속이라고함)은 프로토타입으로서 존재하는 객체를 데코레이팅하는 과정을 통해 수행된다.
 프로토타입 기반 언어의 원형적인 예는 David Ungar과 Randall Smith가 개발한 'Self'라는 프로그래밍 언어이다. 그러나 클래스가 없는 프로그래밍 스타일이 최근 인기를 얻으며 성장하였고, 자바스크립트, Cecil, NewtonScript, Io, MOO, REBOL, Kevo, Squeak 등의 언어에서 채택되어 왔다.2
@@ -95,7 +95,6 @@ priority: 1.0
 
 [this의 이해](http://webframeworks.kr/tutorials/translate/explanation-of-this-in-javascript-1/)
 
-[[Java] OOP(객체지향 프로그래밍)의 특징](https://gmlwjd9405.github.io/2018/07/05/oop-features.html)
 
 프로토타입 기반 언어에 필요한 깊은 키워드들이 들어가야한다고 말한거지
 
