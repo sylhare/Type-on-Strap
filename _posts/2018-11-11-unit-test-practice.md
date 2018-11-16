@@ -4,8 +4,8 @@ title: "단위 테스트 코드를 작성 해보자"
 tags: [TDD, TDDCycle, RGRCycle, JUnit, JUnit4, UnitTest]
 categories: [Test]
 subtitle: "RGR 단계를 인식하며 단위 테스트 코드를 개발하기"
-feature-img: "md/img/thumbnail/tdd-cycle-practice.png"    
-thumbnail: "md/img/thumbnail/tdd-cycle-practice.png"
+feature-img: "md/img/thumbnail/unit-test.png"    
+thumbnail: "md/img/thumbnail/unit-test.png"
 excerpt_separator: <!--more-->
 sitemap:
 changefreq: daily
