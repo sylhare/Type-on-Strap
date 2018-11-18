@@ -1,15 +1,15 @@
 <header class="site-header">
     
     <!-- Logo and title -->
-  
+    <a href="{{ site.baseurl }}/">
 	  <div class="branding">
-			<a href="http://ai.stanford.edu/"><img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/></a>
-		
+			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
 
 	    <h1 class="site-title">
-			  <a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
+			  {{ site.theme_settings.title }}
 		  </h1> 
 	  </div>
+	  </a>
     
   <!-- Toggle menu -->
   <nav class="clear">
@@ -38,16 +38,25 @@
         {% endfor %} 
         
         <!-- Auto Generation of SPECIAL pages in the navbar -->
-        <!-- {% for item in site.theme_settings.special_page %}
+        {% for item in site.theme_settings.special_page %}
           {% if item[1].enabled %}
             <li class="separator"> | </li>
+            {% if item[1].icon %}
             <li>
                 <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[0] }}">
                     <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
                 </a>
             </li>
+            {% endif %}
+            {% if item[1].link %}
+            <li>
+                <a class="clear" href="{{ item[1].link }}">
+                    {{ item[1].text }}
+                </a>
+            </li>
+            {% endif %}
           {% endif %}
-        {% endfor %} -->
+        {% endfor %}
     </ul>
 	</nav>
   <hr/>

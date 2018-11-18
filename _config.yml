@@ -40,6 +40,10 @@ theme_settings:
   special_page:
     tags:
       icon: "tags"
+      enabled: false
+    sail:
+      text: SAIL
+      link: http://ai.stanford.edu/
       enabled: true
   
   # Localization strings
