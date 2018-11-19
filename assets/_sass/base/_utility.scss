@@ -60,9 +60,10 @@ a.button {
 }
 
 .post-link {
+    color: black;
     &:hover {
         text-decoration: none;
-        color: lighten($link-color, 10%);
+        color: darken($link-color, 20%);
     }
 }
 

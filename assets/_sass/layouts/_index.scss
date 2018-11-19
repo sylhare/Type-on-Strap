@@ -51,15 +51,12 @@ header {
       width: 70%;
       margin-left: 15%;
     } 
-    .continue-reading {
-      text-align: center;
-    }
     text-align: center;
     .post-teaser {
 
         @extend %padding-regular;
         width: 70%;
-        box-shadow: 0 0.6rem 4rem rgba(0,0,0,0.08);
+        box-shadow: 0.3rem 0.6rem 1rem rgba(0,0,0,0.08);
 
         .info {
             text-align: left;
@@ -112,6 +109,19 @@ header {
         text-align: left;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
+
+        .excerpt-text {
+          height: 80%;
+        }
+        
+        .excerpt-continue {
+          height: 20%;
+          text-align: center;
+        }
+        
+        .button {
+            vertical-align: middle;
+        }
     }
 }
 

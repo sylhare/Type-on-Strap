@@ -1,16 +1,16 @@
 <div id="post-nav">
   {% if page.previous.url %}
   <div id="previous-post" class="post-nav-post">
-      <p>{{ site.theme_settings.str_previous_post }}</p>
       <a href="{{ site.baseurl }}{{ page.previous.url }}">
+      <p>{{ site.theme_settings.str_previous_post }}</p>
         {{ page.previous.title }}
       </a>
   </div>
   {% endif %}
   {% if page.next.url %}
   <div id="next-post" class="post-nav-post">
-      <p>{{ site.theme_settings.str_next_post }}</p>
       <a href="{{ site.baseurl }}{{ page.next.url }}">
+      <p>{{ site.theme_settings.str_next_post }}</p>
         {{ page.next.title }}
       </a>
   </div>

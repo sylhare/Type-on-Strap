@@ -4,7 +4,7 @@ title: "Towards Vision-Based Smart Hospitals"
 subtitle: "Building a computer vision system to detect when people wash their hands"
 feature-img: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
 thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/thumb.png"
-author: Albert Haque and Michelle Guo
+author: <a href='https://www.albert.cm'>Albert Haque</a> and <a href='https://twitter.com/mshlguo'>Michelle Guo</a>
 tags: [Healthcare, Vision, PAC]
 ---
 
@@ -27,7 +27,7 @@ computer vision.
 </figure>
 
 Developing such a technological solution has been a multi-year project being done by the
-Stanford Partnership in AI-Assisted Care (PAC)​ and many collaborators around the
+[Stanford Partnership in AI-Assisted Care (PAC)​](https://aicare.stanford.edu/) and many collaborators around the
 world. Much remains to be done, but we hope this technology can help hospitals
 decrease infection rates and improve patients’ health.
 
@@ -183,7 +183,6 @@ For each hand hygiene classifier detection (i.e., dispenser is being used), we m
 it to a single track. A match occurs between the classifier and tracker when a track $$
 \mathcal{T} $$ satisfies two conditions:
 
-
 1. Track $$ \mathcal{T} $$ contains $$ (x,y) $$ points $$ \mathcal{P} $$ which
     occur at the same time as the hand hygiene detection event $$ \mathcal{E} $$,
     within some temporal tolerance level.
@@ -219,7 +218,7 @@ our algorithm surpassed even human auditors with a 75% accuracy. This is not too
 surprising, since the auditors were competing with the “global view” computer vision
 system. Since the ground truth labels are also annotated by humans, how did the humans
 observers do worse than the algorithm? The reason is that our ground truth labels were
-labeled remotely and not in real-time. Remote annotators had access to all sensors andcould play the video forward and backward in time to ensure their annotations are
+labeled remotely and not in real-time. Remote annotators had access to all sensors and could play the video forward and backward in time to ensure their annotations are
 correct. In-person auditors did not have “access” to all sensors and they could not replay
 events in time.
 

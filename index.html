@@ -4,9 +4,6 @@ title: Posts
 ---
 
 <div class="home">
-  <!--<div id="main" class="call-out"
-  style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
-  </div>-->
   <div class="posts">
     {% include page-title.html %} 
     {% for post in paginator.posts %}
@@ -23,14 +20,16 @@ title: Posts
           </a>
           
            <p class="meta">
-            <h4> {{ post.author }} </h4>
+            {{ post.author }} 
             <!-- {{ post.date | date: "%B %-d, %Y" }} -->
           </p> 
         </header>
         <div class="excerpt">
           <!--  {{ post.subtitle | strip_html | escape }}-->
-          {{ post.content | strip_html | truncate: "120" }}
-          <div class="continue-reading">
+          <div class="excerpt-text">
+              {{ post.content | strip_html | truncate: "145" }}
+          </div>
+          <div class="excerpt-continue">
             <a class="button" href="{{ post.url | prepend: site.baseurl }}">
               {{ site.theme_settings.str_continue_reading }}
             </a>
