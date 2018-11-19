@@ -83,9 +83,11 @@
     {% if site.theme_settings.twitter %}<meta name="twitter:creator" content="@{{ site.theme_settings.twitter }}">{% endif %}
     {% if page.feature-img %}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{{ site.url }}/{{ page.feature-img }}">
+    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/{{ page.feature-img }}">
+    <meta name="og:image" content="{{ site.url }}{{ site.baseurl }}/{{ page.feature-img }}">
     {% else %}
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:image" content="{{ site.url }}/{{ site.baseurl }}/{{ site.theme_settings.avatar }}">
+    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/{{ site.theme_settings.avatar }}">
+    <meta name="og:image" content="{{ site.url }}{{ site.baseurl }}/{{ site.theme_settings.avatar }}">
     {% endif %}
 </head>
