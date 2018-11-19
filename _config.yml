@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: /blog
-url: 
+url: http://ai.stanford.edu/
 title: SAIL Blog # site's title
 description: "The official Stanford AI Lab blog" # used by search engines
 
@@ -9,6 +9,7 @@ description: "The official Stanford AI Lab blog" # used by search engines
 theme_settings:
   # Meta
   title: The Stanford AI Lab Blog # blog's title
+  description: The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.
   avatar: assets/img/sail-logo.png
 
   # Header and footer text

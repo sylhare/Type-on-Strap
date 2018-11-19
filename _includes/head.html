@@ -68,9 +68,31 @@
     
     <!-- seo tags -->
     {% seo %}
+    
     <!-- Manual seo tags -->
-    <!--
     <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.theme_settings.title }}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.theme_settings.description }}{% endif %}">
-    -->
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.theme_settings.title }}{% endif %}">
+    {% if page.excerpt %}
+    <meta name="twitter:description" content="{{ page.excerpt | strip_html }}">
+    {% else %}
+    <meta name="twitter:description" content="{{ site.theme_settings.description }}">
+    {% endif %}
+    {% if site.theme_settings.twitter %}<meta name="twitter:creator" content="@{{ site.theme_settings.twitter }}">{% endif %}
+    {% if page.feature-img %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ site.url }}/{{ page.feature-img }}">
+    {% else %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="{{ site.url }}/{{ site.baseurl }}/{{ site.theme_settings.avatar }}">
+    {% endif %}
+    <!-- Open Graph -->
+    <meta property="og:locale" content="{{ site.locale }}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    {% if page.excerpt %}<meta property="og:description" content="{{ page.excerpt | strip_html }}">{% endif %}
+    <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
 </head>
