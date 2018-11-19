@@ -4,7 +4,7 @@ title: "Towards Vision-Based Smart Hospitals"
 subtitle: "Building a computer vision system to detect when people wash their hands"
 feature-img: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
 thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/thumb.png"
-author: <a href='https://www.albert.cm'>Albert Haque</a> and <a href='https://twitter.com/mshlguo'>Michelle Guo</a>
+author: <a href='https://www.alberthaque.com'>Albert Haque</a> and <a href='https://twitter.com/mshlguo'>Michelle Guo</a>
 tags: [Healthcare, Vision, PAC]
 ---
 
