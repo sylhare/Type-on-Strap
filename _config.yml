@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: /blog
-url: http://ai.stanford.edu/
+url: http://ai.stanford.edu
 title: SAIL Blog # site's title
 description: "The official Stanford AI Lab blog" # used by search engines
 
