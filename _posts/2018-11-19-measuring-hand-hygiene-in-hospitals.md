@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Towards Vision-Based Smart Hospitals"
-subtitle: "Building a computer vision system to detect when people wash their hands"
+excerpt: "How computer vision can help hospitals decrease infection rates and improve patients’ health"
 feature-img: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
 thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/thumb.png"
-author: <a href='https://www.alberthaque.com'>Albert Haque</a> and <a href='https://twitter.com/mshlguo'>Michelle Guo</a>
+author: <a href='https://www.alberthaque.com'>Albert Haque</a> and <a href='https://www.shellguo.com/'>Michelle Guo</a>
 tags: [Healthcare, Vision, PAC]
 ---
 
