@@ -315,11 +315,9 @@ questions warrant further research:
 
 -   How can we build incentives for altruism?
 
--   How can we use autonomy to deal with traffic disturbances such as
-    - accidents, closed lanes/bottlenecks, etc.?
+-   How can we use autonomy to deal with traffic disturbances such as accidents, closed lanes/bottlenecks, etc.?
 
--   How does the results of this work extend to more general network
-    - topologies?
+-   How does the results of this work extend to more general network topologies?
 
 Hopefully, we can manage to tackle these further questions, and we shall
 all suffer slightly less from the stress caused by congested traffic.
