@@ -13,8 +13,7 @@ ever asked why all the cars on the roads can't just all go with some
 constant speed? Most drivers have had such thoughts. And if you live in
 a large city, you may relate to this funny scene from "Office Space":
 
-Video:
-<iframe src="https://drive.google.com/file/d/12yfT0TTk53QlZB0Zv0EGPQBhLvrObcnN/preview" width="640" height="480" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="postimage" src="https://drive.google.com/file/d/12yfT0TTk53QlZB0Zv0EGPQBhLvrObcnN/preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 
 In this post, we will present a mathematical model of traffic congestion
 and explain why it happens using this model. Afterwards, we will analyze
