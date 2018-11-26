@@ -5,7 +5,7 @@ excerpt: "A mathematical model to analyze the effects of autonomous cars on traf
 feature-img: "assets/img/posts/2018-11-26-altruistic-autonomy/thumbnail.png"
 thumbnail: "assets/img/posts/2018-11-26-altruistic-autonomy/thumbnail.png"
 author: <a href='http://stanford.edu/~ebiyik/'>Erdem Bıyık</a>
-tags: [Autonomy, Traffic, Congestion]
+tags: [autonomy, optimization, control]
 ---
 
 Have you ever felt you are losing too much time in traffic? Have you
@@ -13,7 +13,9 @@ ever asked why all the cars on the roads can't just all go with some
 constant speed? Most drivers have had such thoughts. And if you live in
 a large city, you may relate to this funny scene from "Office Space":
 
-<iframe class="postimage" src="https://drive.google.com/file/d/12yfT0TTk53QlZB0Zv0EGPQBhLvrObcnN/preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<figure align="figure"> 
+<iframe class="postimagehalf" src="https://drive.google.com/file/d/12yfT0TTk53QlZB0Zv0EGPQBhLvrObcnN/preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</figure>
 
 In this post, we will present a mathematical model of traffic congestion
 and explain why it happens using this model. Afterwards, we will analyze
@@ -59,7 +61,7 @@ cars are slowing down. This is shown by the second important plot of
 model, that of latency (the time it takes to travel from one point to
 another on the road) vs flow:
 
-<figure>
+<figure class="figure">
     <img align="middle" class="postimagesmaller" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/traffic-model-2.png"/>
 </figure>
 
@@ -201,7 +203,7 @@ Then we define *Robust Best Nash Equilibrium* (RBNE) as the BNE that
 maximizes robustness. RBNE, too, is not necessarily unique.
 
 {% figure caption:'Two different BNEs with different robustness values.' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image3.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image3.png)
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image3.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image3.png)
 {% endfigure %}
 
 For example, in the configuration above, the BNE at right is more
@@ -232,7 +234,7 @@ accepts reaching its destination 1.5 times slower than the other
 routing, given the altruism profile.
 
 {% figure caption:'BNE is compared to the BANE with some modest altruism profile.' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image7.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image7.png)
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image7.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image7.png)
 {% endfigure %}
 
 As you can see from the above figure, when a modest portion of the
@@ -256,7 +258,7 @@ different autonomy level and altruism profile. We first evaluated our
 FDT model accuracy.
 
 {% figure caption:'Theoretical FDT is compared to the simulation results. ⍺ represents the autonomy.' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image9.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image9.png)
+[<img class="postimage_unpadded" src="{{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image9.png"/>]({{ site.baseurl }}/assets/img/posts/2018-11-26-altruistic-autonomy/image9.png)
 {% endfigure %}
 
 
@@ -298,7 +300,9 @@ equilibrium definitions. In this scenario, there are 4 roads between two
 points. Each road is shown as a single lane and we present the latency
 values in the video below.
 
-<iframe width="1206" height="678" src="https://www.youtube.com/embed/Hy2S6zbL6Z0?ecver=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<figure>
+<iframe class="postimage_75" src="https://www.youtube.com/embed/Hy2S6zbL6Z0?ecver=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</figure>
 
 ## Future Directions
 
