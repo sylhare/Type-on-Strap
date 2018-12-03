@@ -1,11 +1,8 @@
 ---
 layout: post
-
-subtitle: ""
-
-layout: post
 title: "Deep Learning, Structure and Innate Priors"
-excerpt: "A Discussion between Yann LeCun and Christopher Manning"
+excerpt: "A Discussion between Yann LeCun and Christopher Manning about the future of Deep Learning and NLP"
+summary: "A Discussion between Yann LeCun and Christopher Manning about the future of Deep Learning and NLP"
 feature-img: "assets/img/posts/2018-12-03-deep-learning-structure-and-innate-priors/feature.png"
 thumbnail: "assets/img/posts/2018-12-03-deep-learning-structure-and-innate-priors/thumb.png"
 author: <a href='https://cs.stanford.edu/people/abisee/'>Abigail See</a>

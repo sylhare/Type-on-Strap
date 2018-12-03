@@ -27,7 +27,11 @@ title: Posts
         <div class="excerpt">
           <!--  {{ post.subtitle | strip_html | escape }}-->
           <div class="excerpt-text">
-              {{ post.content | strip_html | truncate: "145" }}
+              {% if post.summary %} 
+                {{ post.summary | strip_html | truncate: "145" }}
+              {% else %} 
+                {{ post.content | strip_html | truncate: "145" }}
+              {% endif %} 
           </div>
           <div class="excerpt-continue">
             <a class="button" href="{{ post.url | prepend: site.baseurl }}">
