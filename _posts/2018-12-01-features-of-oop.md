@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "OOP의 특징과 원칙"
+title: "OOP의 특징"
 tags: [OO, OOP-features, OOP-Principles]
 categories: [OO]
-subtitle: "OOP를 이해하며 프로그램 Qulity 향상시키기"
+subtitle: "OOP의 특징부터 객체의 다양한 활용법"
 feature-img: "md/img/thumbnail/oop.png"
 thumbnail: "md/img/thumbnail/oop.png"
 excerpt_separator: <!--more-->
@@ -15,26 +15,25 @@ priority: 1.0
 
 <!--more-->
 
-# OOP를 이해하며 프로그램 Qulity 향상시키기
+# OOP의 특징부터 객체의 다양한 활용법
 
 ---
 
 ### 들어가기전
 
-이전 포스팅에서 객체 지향과 그 외 관련된 개념들을 알아봤다면, 본 포스팅은 OOP의 특징들을 활용한 기본 원리와 OOP를 활용할 때 지켜야할 원칙들에 대해 중점적으로 작성할 예정이다. 개념적인 부분은 이전 포스팅 ["객체지향에 대해"](https://gmun.github.io/oo/2018/11/12/oo.html), ["OOP에 대한 고찰"](https://gmun.github.io/oo/2018/11/20/oop.html)을 참고하기 바란다.
+이전 포스팅에서 객체 지향과 그 외 관련된 개념들을 알아봤다면, 본 포스팅은 OOP의 특징들의 개념과 이를 통해 다양한 객체의 활용 방법에 대해 작성할 예정이다. 개념적인 부분은 이전 포스팅 ["객체지향에 대해"](https://gmun.github.io/oo/2018/11/12/oo.html), ["OOP에 대한 고찰"](https://gmun.github.io/oo/2018/11/20/oop.html)을 참고하기 바란다.
 
-1. [객체지향에 대해](https://gmun.github.io/oo/2018/11/12/oo.html)
-2. [OOP에 대한 고찰](https://gmun.github.io/oo/2018/11/20/oop.html)
-3. [OOP의 특징과 원칙](https://gmun.github.io/oo/2018/12/01/features-and-principles-of-oop.html)
+>[1. 객체지향에 대해](https://gmun.github.io/oo/2018/11/12/oo.html) <br/>
+>[2. OOP에 대한 고찰](https://gmun.github.io/oo/2018/11/20/oop.html) <br/>
 
 ### 학습 목표
 
-OOP는 모듈들이 이뤄진 패러다임이다. 이 모듈을 일반적으로 클래스를 뜻한다. 결국, 객체 지향의 프로그램은 클래스의 설계에서 비롯되는 클래스 간의 결합도와 의존성에 따라서 프로그램의 질이 판가름 되는데, 이 설계에 대한 부분은 OOP의 기본 특성과 원칙들에 대해 얼마만큼 이해하고 준수했는지에 따라 다르다.
-
-따라서 본 포스팅은 OOP의 특성과 원리에 대해 알아보고 이에 따라 다음과 같은 학습 목표가 있다.
-
 1. OOP의 특징의 이해
-2. OOP의 원칙의 이해
+2. 캡슐화에 대한 이해
+3. 추상화에 대한 이해
+4. 다형성에 대한 이해
+5. 상속성에 대한 이해
+6. 정보 은닉에 대한 이해
 
 ---
 
@@ -48,7 +47,12 @@ OOP의 특징엔 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형�
 - Inheritance(상속성)
 - Information hiding(정보 은닉)
 
+OOP
+
+
 ### Encapsulation(캡슐화) - 데이터를 가두고 보호하다
+
+![img](/md/img/oop/encapsulation.png "Encapsulation")
 
 먼저 캡슐화를 설명하기 전에 "캡슐화"라는 단어에 대해 이미지화해보자.
 
@@ -195,37 +199,7 @@ OOP의 가장 기본적인 개념 중 하나는 추상 입니다. 추상화는 "
 
  이것은 클래스 외부에는 제한된 접근 권한을 제공하며 원하지 않는 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
 
-  ---
-
-
-### 객체지향의 SOLID 원칙
-
-http://www.nextree.co.kr/p6960/
-
-https://blog.martinwork.co.kr/theory/2017/12/10/oop-solid-principle.html
-
-https://en.wikipedia.org/wiki/SOLID
-
-https://rubygarage.org/blog/solid-principles-of-ood
-
-https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design
-
-https://medium.com/@cramirez92/s-o-l-i-d-the-first-5-priciples-of-object-oriented-design-with-javascript-790f6ac9b9fa
-
-#### 단일 책임의 원칙(SRP, Single Responsibility Principle)
-
-
-#### 개방 폐쇄의 원칙(OCP, Open Close Principle)
-
-
-#### 리스코프 치환 원칙(LSP, The Liskov Substitution Principle)
-
-
-#### 인터페이스 분리의 원칙(ISP, Interface Segregation Principle)
-
-
-#### 의존성 역전의 원칙(DIP,  Dependency Inversion Principle)
-
+---
 
 ### 마무리
 
