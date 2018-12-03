@@ -1,7 +1,9 @@
 ---
 layout: default
 ---
-<img src="{{ site.baseurl }}/{{ page.feature-img }}">
+{% if page.feature-img %}
+  <img src="{{ site.baseurl }}/{{ page.feature-img }}">
+{% endif %}
 <article>
 
   {% include page-title.html %}    
