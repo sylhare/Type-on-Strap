@@ -3,7 +3,7 @@ layout: post
 title: "OOP의 특징"
 tags: [OO, OOP-features, OOP-Principles]
 categories: [OO]
-subtitle: "OOP의 특징부터 객체의 다양한 활용법"
+subtitle: "OOP의 특징, 객체의 다양한 활용법"
 feature-img: "md/img/thumbnail/oop.png"
 thumbnail: "md/img/thumbnail/oop.png"
 excerpt_separator: <!--more-->
@@ -15,29 +15,16 @@ priority: 1.0
 
 <!--more-->
 
-# OOP의 특징부터 객체의 다양한 활용법
+# OOP의 특징, 객체의 다양한 활용법
 
 ---
 
 ### 들어가기전
 
-이전 포스팅에서 객체 지향과 그 외 관련된 개념들을 알아봤다면, 본 포스팅은 OOP의 특징들의 개념과 이를 통해 다양한 객체의 활용 방법에 대해 작성할 예정이다. 개념적인 부분은 이전 포스팅 ["객체지향에 대해"](https://gmun.github.io/oo/2018/11/12/oo.html), ["OOP에 대한 고찰"](https://gmun.github.io/oo/2018/11/20/oop.html)을 참고하기 바란다.
+이전 포스팅에서 객체 지향과 그 외 관련된 개념들을 알아봤다면, 본 포스팅은 OOP의 특징들의 개념과 이를 통해 프로그래밍에서 다양한 객체의 사용법에 대해 작성할 예정이다. 개념적인 부분은 이전 포스팅 ["객체지향에 대해"](https://gmun.github.io/oo/2018/11/12/oo.html), ["OOP에 대한 고찰"](https://gmun.github.io/oo/2018/11/20/oop.html)을 참고하기 바란다.
 
 >[1. 객체지향에 대해](https://gmun.github.io/oo/2018/11/12/oo.html) <br/>
 >[2. OOP에 대한 고찰](https://gmun.github.io/oo/2018/11/20/oop.html) <br/>
-
-### 학습 목표
-
-1. OOP의 특징의 이해
-2. 캡슐화에 대한 이해
-3. 추상화에 대한 이해
-4. 다형성에 대한 이해
-5. 상속성에 대한 이해
-6. 정보 은닉에 대한 이해
-
----
-
-### OOP의 특징 - 캡추다산정
 
 OOP의 특징엔 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형성, 상속성, 정보 은닉이 있다.
 
@@ -46,6 +33,18 @@ OOP의 특징엔 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형�
 - Polymorphism(다형성)
 - Inheritance(상속성)
 - Information hiding(정보 은닉)
+
+### 학습 목표
+
+본 포스팅은 OOP의 특징에 대해 알아보고 다음과 같은 학습 목표가 있다.
+
+1. 캡슐화에 대한 이해
+2. 추상화에 대한 이해
+3. 다형성에 대한 이해
+4. 상속성에 대한 이해
+5. 정보 은닉에 대한 이해
+
+---
 
 ### Encapsulation(캡슐화) - 묶고, 숨기다.
 
@@ -94,6 +93,8 @@ OOP의 특징엔 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형�
 
 #### Abstract(추상화) - 분리하다
 
+![img](/md/img/oop/abstract.png "Abstract")
+
  간단히 예를 들자면 추상화라는건 클래스의 설계를 위해서 상속관계/구현 등의 구조를 관계가 느슨하도록 만들면서도 서로 강하게 연결되도록 구조화시키는데 쓰이는 개념이지
 
  그렇다면 클래스 기반의 언어에서는 추상화를 쓸 수 있다는거네요? 자료의 추상화를 자료를 은닉시키고 상속관계하에서 접근을 제한/허용하는 등의 접근체계를 만드는 개념이지 추상화는 설계의 개념이야
@@ -123,6 +124,8 @@ OOP의 가장 기본적인 개념 중 하나는 추상 입니다. 추상화는 "
 
 #### Polymorphism(다형성) - 다양한 형태
 
+![img](/md/img/oop/polymorphism.png "Polymorphism")
+
 셋째, 다형성이 있습니다. 다형성이란 하나의 이름(방법)으로 많은 상황에 대처하는 기법입니다. 개념적으로 동일한 작업을 하는 함수들에 똑같은 이름을 부여할 수 있으므로 코드가 더 간단해지는 효과가 있습니다.
 
 
@@ -148,6 +151,8 @@ OOP의 가장 기본적인 개념 중 하나는 추상 입니다. 추상화는 "
 
 #### Inheritance(상속성) - 관계
 
+![img](/md/img/oop/inheritance.png "Inheritance")
+
 둘째, 상속이 있습니다. 상속은 이미 작성된 클래스를 이어 받아서 새로운 클래스를 생성하는 기법으로 위에서 말한 기존 코드를 재활용해서 사용하는 것을 의미합니다. 객체지향 방법의 큰 장점중 하나입니다.
 
 상속은 엔티티가 다른 엔티티의 속성을 상속 할 수 있다는 개념입니다. 프로그래머는 비슷한 속성을 반복해서 재정의 할 필요없이 비슷한 엔티티를 만들 수 있습니다.
@@ -172,6 +177,7 @@ OOP의 가장 기본적인 개념 중 하나는 추상 입니다. 추상화는 "
 
 #### Information hiding(정보 은닉) - 보호
 
+![img](/md/img/oop/information-hiding.png "Information hiding")
 
 |---|---|---|---|---|---|
 | Modifier  | Class | Package | Subclass |  Other Classes| Note |
