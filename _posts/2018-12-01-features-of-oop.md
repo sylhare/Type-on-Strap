@@ -21,22 +21,16 @@ priority: 1.0
 
 ### 들어가기전
 
-이전 포스팅에서 객체 지향과 그 외 관련된 개념들을 알아봤다면, 본 포스팅은 OOP의 특징들의 개념과 이를 통해 프로그래밍에서 다양한 객체의 사용법에 대해 작성할 예정이다. 개념적인 부분은 이전 포스팅 ["객체지향에 대해"](https://gmun.github.io/oo/2018/11/12/oo.html), ["OOP에 대한 고찰"](https://gmun.github.io/oo/2018/11/20/oop.html)을 참고하기 바란다.
+OOP는 객체를 위주로 프로그래밍하는 컴퓨터 프로그래밍 패러다임이다. OOP에선 이 객체를 독립적인 모듈로 바라보고 있다.
+
+독립적인 모듈이란, 다른 기능에 의존적이지 않으면서 모듈 안에 이와 관련한 요소들이 얼마나 밀집되어 있느냐에 있다. 즉, 높은 응집과 낮은 결합일수록 변화에 대처하기 쉽고, 이는 소프트웨어 공학에서 요구사항 변경에 대처하는 고전적인 설계 원리다.
+
+이러한 이상적인 모듈화 과정에서 OOP의 다양한 특징들을 볼 수 있다. 본 포스팅은 OOP의 특징, 흔히 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형성, 상속성, 정보 은닉에 대해 작성할 예정이다. 객체지향, OOP의 개념적인 부분은 아래 링크를 참고하기 바란다.
 
 >[1. 객체지향에 대해](https://gmun.github.io/oo/2018/11/12/oo.html) <br/>
 >[2. OOP에 대한 고찰](https://gmun.github.io/oo/2018/11/20/oop.html) <br/>
 
-OOP의 특징엔 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형성, 상속성, 정보 은닉이 있다.
-
-- Encapsulation(캡슐화)
-- Abstract(추상화)
-- Polymorphism(다형성)
-- Inheritance(상속성)
-- Information hiding(정보 은닉)
-
 ### 학습 목표
-
-본 포스팅은 OOP의 특징에 대해 알아보고 다음과 같은 학습 목표가 있다.
 
 1. 캡슐화에 대한 이해
 2. 추상화에 대한 이해
@@ -50,46 +44,87 @@ OOP의 특징엔 "캡추다산정"이라 불리는 캡슐화, 추상화, 다형�
 
 ![img](/md/img/oop/encapsulation.png "Encapsulation")
 
-캡슐화란 객체(Object)의 속성(Attribute)과 행위(Behavior)를 하나로 묶는 개념을 뜻한다.
+캡슐화란 속성(Attribute)과 행위(Behavior)를 객체라는 독립적인 단일 단위로 정의하고 일부 데이터(변수, 변소드 등)를 외부에 감추어 은닉하는 OOP의 특징이다.
 
-- Attribute  = Variable(Data filed)
-- Behavior = Method(Function)
-
-  언어적 측면에서 접근 제한자를 두어 외부로 부터 정보를 감추는 방법으로, 정보들을 구현 내용의 일부를 외부에 감추어 은닉하고, 직접 호출하지 않는 대신, 필요에 따라 사용할 수 있는 기능을 외부에 공개하는 방식이다.
-
-
-먼저 캡슐화를 설명하기 전에 "캡슐화"라는 단어에 대해 이미지화해보자.
-
-나 같은 경우엔 캡슐화하면 알약의 이미지가 가장 먼저 떠올랐는데,  그 이유엔  "캡슐화"라는 단어가 "어떤 대상을 가두고, 보호하고 있는 형태"라는 정의가 강하게 박혀있기 때문이었다. 이처럼 캡슐화라는 단어가 우리에게 주는 이미지와 마찬가지로 OOP의 캡슐화의 의미는 "데이터를 가두다"라는 의미로 이해하면 편하다.
-
-- 1 Unit
+- 1 Unit = Object = Attribute(data members) + Behavior(member functions)
 - Data hiding
 
-객체의 attribute,  behavior를 하나로 묶어 독립적인  모듈로 보는것
+객체의 속성은 데이터로 변수로 정의하고 행위는 데이터를 조작하는 메소드로 정의하고 OOP에선 이 객체를 독립적인 단위로 바라본다. 따라서 하나의 클래스에 이와 관련된 공통적인 기능과 데이터가 포함되기 때문에, 자연스레 응집도는 높게 구성된다.
 
-객체의 속성(data fields)과 행위(메서드, methods)를 하나로 묶고,
-실제 구현 내용 일부를 외부에 감추어 은닉한다.
+``` java
+class Grade{
+  String subject;
+  int grade;
+
+  void calculator(String subject, int grade){
+    //TODO 성적 계산
+    ...
+  }
+
+  void avgGrade(){
+    //TODO 종합 성적 평균 계산
+    calculator(subject, grade); // 성적 계산 호출
+    ...
+  }
+}
+```
+
+다음 코드는 캡슐화의 기본적인 매커니즘에 따라, 데이터와 메소드를 하나의 클래스에 작성되었다. 하지만 이 코드의 데이터들은 별도의 접근 제한자를 지정하지 않아 기본적으로 모든 데이터가 외부에서 접근이 가능하다.
+
+이 경우, 크게 두 가지의 문제가 있다.
+
+1. 데이터 무결성을 보장할 수 없다.
+2. 기능의 사용성을 어렵게 만든다.
+
+``` java
+void peronAvgInsert(parameter1){
+  Person person = new Person();
+  person.name = "아무개";
+  person.grade = "A";
+
+  person.avgGrade();
+  person.calcuator();
+
+  execute(person);
+}
+```
+
+다음 코드를 보면 문제가 되는
+
+기능을 활용하기 위한 기존의 접근방식을 위반한
+
+
+언어적 측면에서 접근지정자를 두어 은닉의 정도를 기술하여 구현한다. 은닉의 정도를 접근지정자로 기술하고 해당 영역에 들어가는 속성이나 메서드를 제한하면 된다. 접근지정자에 의해 제한된 멤버들은 컴파일러에 의해 판단된다. 언어적 측면에서 접근지정자에 의해 정의된 해당 멤버변수나 멤버함수는 코드 중에 접근방식을 위반한 코드를 작성하면 컴파일 오류로 처리하고 실행코드 생성을 제한한다.
+
+ 이것은 클래스 외부에는 제한된 접근 권한을 제공하며 원하지 않는 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
+
+ 구현 일부를 외부에 감추는 방법으론, 접근 제한자를 두어 외부로 부터 정보를 감추는 방법으로, 정보들을 구현 내용의 일부를 외부에 감추어 은닉하고, 직접 호출하지 않는 대신, 필요에 따라 사용할 수 있는 기능을 외부에 공개하는 방식이다.
+
+
+ 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
+
+``` java
+class Person{
+  String name;
+  String int;
+  ...
+  void calculator(){ ... }
+
+  int amt(arg1){
+    return calculator();
+  }
+}
+```
 
 
 가끔, 캡슐화와 정보은닉(Information Hiding)에 대해서 혼란을 겪을 수 있는데, 캡슐화는 모듈화(modularity)의 의미가 더 강하고, 정보 은닉은 '대상에 대한 정보를 묻지(Query) 않으면 알 수 없게 만든다'는 의미를 갖는다. 따라서, 잘 된 캡슐화는 정보 은닉의 내용을 포함한다.
 
----
 
-외부에 감추는 방법으로는 언어적 측면에서 접근지정자를 두어 은닉의 정도를 기술하여 구현한다. 은닉의 정도를 접근지정자로 기술하고 해당 영역에 들어가는 속성이나 메서드를 제한하면 된다. 접근지정자에 의해 제한된 멤버들은 컴파일러에 의해 판단된다. 언어적 측면에서 접근지정자에 의해 정의된 해당 멤버변수나 멤버함수는 코드 중에 접근방식을 위반한 코드를 작성하면 컴파일 오류로 처리하고 실행코드 생성을 제한한다.
+ 이 메커니즘은 마틴 파울러가 작성한 `TellDontAsk` 글에서도 이와 관련된 개념을 찾을 수 있다.
 
+<img src="https://martinfowler.com/bliki/images/tellDontAsk/sketch.png" height="300px">
 
-
-캡슐화란 관련된 데이터와 알고리즘(코드)이 하나의 묶음으로 정리된 것으로써 개발자가 만들었으며, 관련된 코드와 데이터가 묶여있고 오류가 없어 사용이 편리합니다. 데이터를 감추고 외부 세계와의 상호작용은 메소드를 통하는 방법인데, 라이브러리로 만들어 업그레이드하면 쉽게 바꿀 수 있습니다.
-
-※ 메소드 : 메시지에 따라 실행시킬 프로시저로서 객체지향 언어에서 사용되는 것. 객체지향 언어에서는 메시지를 보내 메소드를 수행시킴으로써 통신(communication)을 수행한다.
-
----
-
-객체의 상세한 내용을 객체 외부에 철저히 숨기고 단순히 메시지만으로 객체와의 상호작용을 하게 하는 것을 캡슐화(encapsulation)라고 한다. 정보 은닉(information hiding)이라는 표현으로 설명하기도 하는데 추상화와 동일한 개념이다. 캡슐화는 추상화와 거의 같은 개념이지만 추상화를 지원하며 보다 구체적이고 제한적이라고 할 수 있다.
-
-예를 들면, 클래스를 선언하고 그 클래스를 구성하는 객체에 대하여 "public" 또는 "private" 등으로 정의해준다. 이렇게 되면 "public"으로 정의된 함수 또는 데이터는 외부에서 사용이 가능하며, "private"으로 선언된 경우는 외부에서 제어할 수 없고 내부에서만 사용된다.
-
-이것은 클래스 외부에는 제한된 접근 권한을 제공하며 원하지 않는 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
+의 기대 효과는  마틴 파울러가 작성한 `TellDontAsk`을 보면 이해하는데 도움이된다.
 
 #### Abstract(추상화) - 분리하다
 
@@ -173,31 +208,31 @@ OOP의 가장 기본적인 개념 중 하나는 추상 입니다. 추상화는 "
 
  참고로 하위 클래스는 상위 클래스가 가지고 있는 모든 자료와 메소드를 물려받아 자유롭게 사용할 수 있지만, 또한 자신만의 자료와 메소드를 추가적으로 덧붙임으로써 새로운 형태의 클래스로 발전할 수 있다.
 
----
 
-#### Information hiding(정보 은닉) - 보호
+ #### Information hiding(정보 은닉) - 보호
 
-![img](/md/img/oop/information-hiding.png "Information hiding")
+ ![img](/md/img/oop/information-hiding.png "Information hiding")
 
-|---|---|---|---|---|---|
-| Modifier  | Class | Package | Subclass |  Other Classes| Note |
-| private  | Y | N | N | N| 자기 클래스 내부의 메서드에서만 접근 허용 |
-| default  | Y | Y | N | N| 같은 패키지에 있는 객체만 접근 허용 |
-| protected  | Y | Y | Y | N| 같은 패키지에 있는 객체 또는 상속받은 자식 클래스에서 접근 허용|
-| public  | Y | Y | Y | Y| 모든 접근을 허용|
+ |---|---|---|---|---|---|
+ | Modifier  | Class | Package | Subclass |  Other Classes| Note |
+ | private  | Y | N | N | N| 자기 클래스 내부의 메서드에서만 접근 허용 |
+ | default  | Y | Y | N | N| 같은 패키지에 있는 객체만 접근 허용 |
+ | protected  | Y | Y | Y | N| 같은 패키지에 있는 객체 또는 상속받은 자식 클래스에서 접근 허용|
+ | public  | Y | Y | Y | Y| 모든 접근을 허용|
 
-위의 특성들로 인해 생기는 객체지향 방법의 장점은 다음과 같습니다.
+ 위의 특성들로 인해 생기는 객체지향 방법의 장점은 다음과 같습니다.
 
- 신뢰성 있는 소프트웨어를 쉽게 작성할 수 있다. (개발자가 만든 데이터를 사용하기에 신뢰할 수 있다.)
- 코드를 재사용하기 쉽다.
- 업그레이드가 쉽다.
- 디버깅이 쉽다.
+  신뢰성 있는 소프트웨어를 쉽게 작성할 수 있다. (개발자가 만든 데이터를 사용하기에 신뢰할 수 있다.)
+  코드를 재사용하기 쉽다.
+  업그레이드가 쉽다.
+  디버깅이 쉽다.
 
- 객체의 상세한 내용을 객체 외부에 철저히 숨기고 단순히 메시지만으로 객체와의 상호작용을 하게 하는 것을 캡슐화(encapsulation)라고 한다. 정보 은닉(information hiding)이라는 표현으로 설명하기도 하는데 추상화와 동일한 개념이다. 캡슐화는 추상화와 거의 같은 개념이지만 추상화를 지원하며 보다 구체적이고 제한적이라고 할 수 있다.
+  객체의 상세한 내용을 객체 외부에 철저히 숨기고 단순히 메시지만으로 객체와의 상호작용을 하게 하는 것을 캡슐화(encapsulation)라고 한다. 정보 은닉(information hiding)이라는 표현으로 설명하기도 하는데 추상화와 동일한 개념이다. 캡슐화는 추상화와 거의 같은 개념이지만 추상화를 지원하며 보다 구체적이고 제한적이라고 할 수 있다.
 
- 예를 들면, 클래스를 선언하고 그 클래스를 구성하는 객체에 대하여 "public" 또는 "private" 등으로 정의해준다. 이렇게 되면 "public"으로 정의된 함수 또는 데이터는 외부에서 사용이 가능하며, "private"으로 선언된 경우는 외부에서 제어할 수 없고 내부에서만 사용된다.
+  예를 들면, 클래스를 선언하고 그 클래스를 구성하는 객체에 대하여 "public" 또는 "private" 등으로 정의해준다. 이렇게 되면 "public"으로 정의된 함수 또는 데이터는 외부에서 사용이 가능하며, "private"으로 선언된 경우는 외부에서 제어할 수 없고 내부에서만 사용된다.
 
- 이것은 클래스 외부에는 제한된 접근 권한을 제공하며 원하지 않는 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
+  이것은 클래스 외부에는 제한된 접근 권한을 제공하며 원하지 않는 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
+
 
 ---
 
@@ -211,24 +246,3 @@ OOP의 등장 배경을 설명하기 전에 새로운 기술이 나오는 이유
 
 
 ---
-
-### 참고
-
-[마틴 파울러 - tellDontAst](https://martinfowler.com/bliki/TellDontAsk.html)
-
-[OOP Concept for Beginners: What is Encapsulation](https://stackify.com/oop-concept-for-beginners-what-is-encapsulation/)
-
- [캡슐화는 정보 숨김이 아닙니다.](https://www.javaworld.com/article/2075271/core-java/encapsulation-is-not-information-hiding.html)
-
-[캡슐화(encapsulation)이란?](http://blog.naver.com/PostView.nhn?blogId=netrance&logNo=110096417364)
-
-[객체 지향 프로그래밍의 4 가지 주요 원칙](http://codebetter.com/raymondlewallen/2005/07/19/4-major-principles-of-object-oriented-programming/)
-
-[Four Principles of Object-Oriented Programming with Examples in Java](http://scottpantall.com/2017/09/four-principles-object-oriented-programming-examples-java/)
-
-[객체 지향 프로그래밍의 네 가지 원칙](https://medium.com/@benjaminpjacobs/the-four-principle-of-object-oriented-programming-f78600f62608)
-
-[나무위키 - 객체지향의 5대 원칙](https://namu.wiki/w/%EA%B0%9D%EC%B2%B4%20%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/%EC%9B%90%EC%B9%99)
-
-
-[JAVA의 OOP](https://beginnersbook.com/2013/03/oops-in-java-encapsulation-inheritance-polymorphism-abstraction/)
