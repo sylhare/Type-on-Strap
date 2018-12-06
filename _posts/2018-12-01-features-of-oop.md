@@ -44,78 +44,109 @@ OOP는 객체를 위주로 프로그래밍하는 컴퓨터 프로그래밍 패�
 
 ![img](/md/img/oop/encapsulation.png "Encapsulation")
 
-캡슐화란 속성(Attribute)과 행위(Behavior)를 객체라는 독립적인 단일 단위로 정의하고 일부 데이터(변수, 변소드 등)를 외부에 감추어 은닉하는 OOP의 특징이다.
+캡슐화란 속성(Attribute)과 행위(Behavior)를 객체라는 독립적인 단일 단위로 정의하고 일부 데이터를 외부에 감추어 은닉하는 OOP의 특징이다.
 
 - 1 Unit = Object = Attribute(data members) + Behavior(member functions)
 - Data hiding
 
+#### 묶다 -  Object = data members + member functions
+
 객체의 속성은 데이터로 변수로 정의하고 행위는 데이터를 조작하는 메소드로 정의하고 OOP에선 이 객체를 독립적인 단위로 바라본다. 따라서 하나의 클래스에 이와 관련된 공통적인 기능과 데이터가 포함되기 때문에, 자연스레 응집도는 높게 구성된다.
 
-``` java
-class Grade{
-  String subject;
-  int grade;
+여기까진 클래스 기반 언어에서 객체를 정의하는 방법과 같고, 이는 캡슐화의 가장 기본적인 메커니즘이다. 하지만 캡슐화의 또 다른 OOP 측면에서는 데이터 은닉(Data hiding)이라는 핵심 개념이 존재한다.
 
-  void calculator(String subject, int grade){
-    //TODO 성적 계산
-    ...
+#### 숨기다 - Data hiding
+
+데이터 은닉은 외부에서 데이터 접근을 제한한다는 기본적인 개념이다. 언어적 측면에서 데이터 은닉은 접근 제한자를 통해 은닉의 정도를 구현할 수 있다. 따라서 클래스의 데이터 또는 메소드에 접근 제한자를 기술하여 외부에서 데이터 접근을 제한할 수 있다.
+
+캡슐화 측면에서 이 개념은 프로그래밍에 있어 크게 두 가지 방향성을 제시한다.
+
+1. 데이터 무결성 보장
+2. 기능의 사용성 직접적인 명의
+
+>*데이터 무결성(Data integrity)은 컴퓨팅 분야에서 완전한 수명 주기를 거치며 데이터의 정확성과 일관성을 유지하고 보증하는 것을 가리키며 데이터베이스나 RDBMS 시스템의 중요한 기능이다.
+
+``` java
+public class Alam {
+  long wakeTime = 0; // 알람시간
+  boolean isStart = true; // 알람여부
+
+  Alam(long wakeTime, boolean isStart){
+    this.wakeTime = wakeTime;
+    this.isStart = isStart;
   }
 
-  void avgGrade(){
-    //TODO 종합 성적 평균 계산
-    calculator(subject, grade); // 성적 계산 호출
-    ...
+  // 실행
+  void execute(){
+    if(checkAlam()){
+      wakeUp();
+    }else{
+      distoryData();
+    }
+  }
+
+  // 알람여부 체크
+  boolean checkAlam(){
+  if(this.wakeTime < new Date().getTime()
+      && isStart){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  // 알람
+  void wakeUp(){
+    System.out.println("일어나세요.");
+  }
+
+  // 알람 데이터 삭제
+  void distoryData(){
+    System.out.println("알람 비 활성화");
+  }
+}
+
+class Execute{
+  void execute(){
+  DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+  long wakeTime;
+  try {
+    wakeTime = dateFormat.parse("19990101").getTime();
+    Alam alam = new Alam(wakeTime, true);
+
+    alam.execute(); // 일어나세요.
+
+    alam.isStart = false;  // 알람여부 변경
+
+    alam.execute(); // 알람 비 활성화
+
+  } catch (ParseException e) {
+    e.printStackTrace();
   }
 }
 ```
 
-다음 코드는 캡슐화의 기본적인 매커니즘에 따라, 데이터와 메소드를 하나의 클래스에 작성되었다. 하지만 이 코드의 데이터들은 별도의 접근 제한자를 지정하지 않아 기본적으로 모든 데이터가 외부에서 접근이 가능하다.
+다음 코드를 보면 `Alam` 클래스의 변수, 메소드에 별도의 접근 제한자를 지정을 하지 않았다. Java에선 별도의 접근 제한자를 지정해주지 않으면 `public`으로 인식한다.
 
-이 경우, 크게 두 가지의 문제가 있다.
+>접근 제한자에 대해선 `Information hiding(정보 은닉) - 보호` 세션에서 자세히 설명할 예정이기 때문에 `"pulbic = 외부에서 데이터 접근 가능"`이라고 가볍게 이해하고 넘어가자.
 
-1. 데이터 무결성을 보장할 수 없다.
-2. 기능의 사용성을 어렵게 만든다.
+본론으로 돌아와서 `Alam` 클래스엔 값을 지정해주는 `setData()` 메소드가 정의되어 있다. 하지만 `Execute` 클래스에서 직접 변수 a, b에 접근하여 값을 지정해줬다.
 
-``` java
-void peronAvgInsert(parameter1){
-  Person person = new Person();
-  person.name = "아무개";
-  person.grade = "A";
-
-  person.avgGrade();
-  person.calcuator();
-
-  execute(person);
-}
-```
-
-다음 코드를 보면 문제가 되는
-
-기능을 활용하기 위한 기존의 접근방식을 위반한
-
-
-언어적 측면에서 접근지정자를 두어 은닉의 정도를 기술하여 구현한다. 은닉의 정도를 접근지정자로 기술하고 해당 영역에 들어가는 속성이나 메서드를 제한하면 된다. 접근지정자에 의해 제한된 멤버들은 컴파일러에 의해 판단된다. 언어적 측면에서 접근지정자에 의해 정의된 해당 멤버변수나 멤버함수는 코드 중에 접근방식을 위반한 코드를 작성하면 컴파일 오류로 처리하고 실행코드 생성을 제한한다.
-
- 이것은 클래스 외부에는 제한된 접근 권한을 제공하며 원하지 않는 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
-
- 구현 일부를 외부에 감추는 방법으론, 접근 제한자를 두어 외부로 부터 정보를 감추는 방법으로, 정보들을 구현 내용의 일부를 외부에 감추어 은닉하고, 직접 호출하지 않는 대신, 필요에 따라 사용할 수 있는 기능을 외부에 공개하는 방식이다.
-
-
- 외부의 접근에 대해 내부를 보호하는 작용을 한다. 이렇게 함으로써 이들 부분이 프로그램의 다른 부분들에 영향을 미치지 않고 변경될 수 있다.
+개발자의 목적과 상관없이 기존에 추출하고 3이라는 결괏값 대신 0이 추출되었고, 결과적으로 데이터 무결성을 보장하지 못했다. 가령 a와 b를 외부에서 직접 접근을 의도하여 작성했다고 치면 `setData()` 메소드의 기능의 목적이 사라지는 것이다.
 
 ``` java
-class Person{
-  String name;
-  String int;
+public class Alam {
+  private int a, b, result;
   ...
-  void calculator(){ ... }
-
-  int amt(arg1){
-    return calculator();
-  }
 }
 ```
 
+이 때문에 접근 제한자를 활용하여 외부에서 변수에 직접적인 접근을 제한해야 한다. 또한, 클래스 내부에서 실제적으로 데이터를 조작하는 메소드 또는 핵심 메소드를 은닉하고, 직접 호출하지 않는 대신, 필요에 따라 사용할 수 있는 기능을 외부에 공개해야 한다.
+
+기능의 용이성은
+
+
+ 결과적으로 개발자는 필요한 메소드만 호출하여 데이터를 얻을 수 있고, 동시에 다른 기능, 데이터에 영향을 미치지 않고 변경될 수 있다.
 
 가끔, 캡슐화와 정보은닉(Information Hiding)에 대해서 혼란을 겪을 수 있는데, 캡슐화는 모듈화(modularity)의 의미가 더 강하고, 정보 은닉은 '대상에 대한 정보를 묻지(Query) 않으면 알 수 없게 만든다'는 의미를 갖는다. 따라서, 잘 된 캡슐화는 정보 은닉의 내용을 포함한다.
 
