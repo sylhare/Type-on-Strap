@@ -45,6 +45,8 @@ h6 {
     a {
         color: $text-color;
     }
+    
+    
 }
 
 h1 {
@@ -62,6 +64,51 @@ h3 {
 h4 {
     font-size: 1.15em;
 }
+
+/* ---- Responsive ---- */
+
+@media screen and (max-width: $break) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    h3 {
+        font-size: 1em;
+    }
+    h4,
+    .meta {
+        font-size: 0.9em;
+    }
+    p,
+    li,
+    a {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: $sm-break) {
+    h1 {
+        font-size: 1.5em;
+    }
+    h2 {
+        font-size: 1em;
+    }
+    h3 {
+        font-size: 0.7em;
+    }
+    h4,
+    .meta {
+        font-size: 0.6em;
+    }
+    p,
+    li,
+    a {
+        font-size: 0.4em;
+    }
+}
+
 
 blockquote {
     border-left: 2px solid darken($blockquote-color, 20%);
@@ -166,25 +213,4 @@ img[align=left] {
 
 img[align=right] {
     margin-left: 3%;
-}
-
-/* ---- Responsive ---- */
-
-@media screen and (max-width: $break) {
-    h1 {
-        font-size: 2em;
-    }
-    h2 {
-        font-size: 1.5em;
-    }
-    h3 {
-        font-size: 1em;
-    }
-    h4 {
-        font-size: 0.9em;
-    }
-    p,
-    li {
-        font-size: 0.8em;
-    }
 }
