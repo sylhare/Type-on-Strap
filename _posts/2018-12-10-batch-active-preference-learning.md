@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Batch-Active Preference-Based Learning of Reward Functions"
-excerpt: "A mathematical model to analyze the effects of autonomous cars on traffic congestion"
+excerpt: "Efficient reward learning is hard. With a focus on preference-based learning methods, we show how sample-efficiency can be achieved along with computational efficiency by using batch-active methods."
+summary: "Efficient reward learning is hard. With a focus on preference-based learning methods, we show how sample-efficiency can be achieved along with computational efficiency by using batch-active methods."
 feature-img: "assets/img/posts/2018-12-10-batch-active-preference-learning/feature.png"
 thumbnail: "assets/img/posts/2018-12-10-batch-active-preference-learning/thumb.png"
 author: <a href='http://stanford.edu/~ebiyik/'>Erdem Bıyık</a>
@@ -318,6 +319,8 @@ Erdem Bıyık, Dorsa Sadigh
 
 *Proceedings of the 2nd Conference on Robot Learning (CoRL), October
 2018*
+
+It was also shared on the [iliad lab's blog](http://iliad.stanford.edu/blog/2018/10/06/batch-active-preference-based-learning-of-reward-functions/).
 
 [^1]: Also known as ‘Programming by Demonstration’, this is just what it
     sounds like: teaching a robot skills by [*demonstrating how to do
