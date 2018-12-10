@@ -284,8 +284,8 @@ unboundedly large!
 We also explored the effect of altruism level on a simple scenario where
 all autonomous cars have the same altruism level. In the heat-map below,
 colors represent the overall latency (black shows infeasibility),
-$\bar{x}\ $and $\bar{y}$ denote the total regular and autonomous flow
-demand, respectively. And $\kappa_{0}$is the common altruism factor.
+$\bar{x}\$ and $\bar{y}$ denote the total regular and autonomous flow
+demand, respectively. And $\kappa_{0}$ is the common altruism factor.
 This first map has completely discrete latencies, as it has no altruism.
 With increasing altruism, the overall latency decreases and the
 insertion of extra cars does not hurt much.

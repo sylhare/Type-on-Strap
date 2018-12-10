@@ -26,12 +26,18 @@
     <!-- Bootstrap-3.3.7 isolation CSS -->
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/vendor/bootstrap-iso.min.css">
 
-    <!-- JQuery 2.2.4 -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
     <!-- Bootstrap-3.3.7 compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     {% endif %}
+    
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/vendor/bigfoot-default.css">
+    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+        $.bigfoot();
+    </script>
 
     <!-- Google Fonts -->
     {% if site.theme_settings.google_fonts %}
@@ -43,6 +49,7 @@
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/vendor/katex.min.css">
     <script src="{{ site.baseurl }}/assets/js/vendor/katex.min.js">
     </script>
+    
     {% endif %}
     
     <!-- Google Analytics -->
