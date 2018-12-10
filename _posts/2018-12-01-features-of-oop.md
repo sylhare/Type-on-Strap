@@ -167,8 +167,6 @@ OOP의 등장 배경을 설명하기 전에 새로운 기술이 나오는 이유
 
 앞서 설명을 통해 OOP라는 개념을 처음 알게 되었을진 몰라도 우리는 능숙하게 OOP를 하며 개발하고 있다. 흔히 우리가 사용했던 JAVA가 바로 대표적인 객체지향 언어로 클래스, 메소드, 변수를 사용하며 개발하기 때문이다.
 
-
-
  이 메커니즘은 마틴 파울러가 작성한 `TellDontAsk` 글에서도 이와 관련된 개념을 찾을 수 있다.
 
 <img src="https://martinfowler.com/bliki/images/tellDontAsk/sketch.png" height="300px">
@@ -176,14 +174,11 @@ OOP의 등장 배경을 설명하기 전에 새로운 기술이 나오는 이유
 의 기대 효과는  마틴 파울러가 작성한 `TellDontAsk`을 보면 이해하는데 도움이된다.
 
 
----
-
 [데이터 프로페셔널](http://dataprofessional.tistory.com/75)
 
 [특징](https://gmlwjd9405.github.io/2018/07/05/oop-features.html)
 
 [generalization-specialization-and-inheritance](https://sourcemaking.com/uml/modeling-it-systems/structural-view/generalization-specialization-and-inheritance)
-
 
 [sw-design](https://awesomecodeing.blogspot.com/2013/03/inheritance-generalization-specialization-association-aggregation-composition.html)
 
