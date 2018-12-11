@@ -11,9 +11,17 @@
     background-size: $feature-image-size;
 
     /* --- Responsive --- */
-    @media screen and (max-width: 850px) {
-        background-size: 100% auto;
+    @media screen and (min-width: $break) {
+        background-size: 120% auto;
     } 
+    
+    @media screen and (max-width: $break) {
+        background-size: 200% auto;
+    } 
+    
+    @media screen and (max-width: $sm-break) {
+        background-size: 400% auto;
+    }
     
     //For white images
     p,

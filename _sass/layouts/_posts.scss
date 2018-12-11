@@ -27,10 +27,7 @@ footer {
     display: inline-block;
     text-align: center;
     .meta {
-        color: rgba($text-color, .5);
-        letter-spacing: 0.1em;
         display: inline;
-        text-transform: uppercase;
     }
     a.button {
         margin-left: 1em;
@@ -45,7 +42,6 @@ header {
 
 .meta {
     color: rgba($text-color, .5);
-    font-size: 0.9em;
     letter-spacing: 0.1em;
     margin: 0;
     text-transform: uppercase;
@@ -60,7 +56,6 @@ header {
     }
     header {
         color: $feature-image-text-color;
-        background-size: $feature-image-size;
         margin-bottom: 0;
         padding: $padding-large/2.5 $padding-large;
         .meta {
@@ -82,6 +77,19 @@ header {
     @media screen and (max-width: $break) {
         padding: $padding-small $padding-small;
     }
+    
+    /* --- Responsive --- */
+    @media screen and (min-width: $break) {
+        background-size: 120% auto;
+    } 
+    
+    @media screen and (max-width: $break) {
+        background-size: 200% auto;
+    } 
+    
+    @media screen and (max-width: $sm-break) {
+        background-size: 400% auto;
+    }
 }
 
 /* --- Post navigation --- */
@@ -97,7 +105,6 @@ header {
     }
 
     .page-title {
-        font-size: 1.2em;
         margin-bottom: 1em;
         width: 100%;
     }
