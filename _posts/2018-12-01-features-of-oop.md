@@ -8,7 +8,6 @@ feature-img: "md/img/thumbnail/oop.png"
 thumbnail: "md/img/thumbnail/oop.png"
 excerpt_separator: <!--more-->
 sitemap:
-display: "false"
 changefreq: daily
 priority: 1.0
 ---
@@ -27,7 +26,6 @@ priority: 1.0
 
 -[객체지향에 대해](https://gmun.github.io/oo/2018/11/12/oo.html) <br/>
 -[ OOP에 대해](https://gmun.github.io/oo/2018/11/20/oop.html) <br/>
-
 
 ### 학습 목표
 
@@ -118,7 +116,7 @@ priority: 1.0
 
  자연스레 추상화 객체와 관련된 실제 구현 객체들은 설계 구조상 묶여 있으므로 응집도가 높아지게 된다. 또한, 실제 참조하는 객체 대신 추상화 객체를 사용함으로써, 외부로부터 실제 구동되는 객체의 세부 기능은 감춰지고, 동시에 객체 간 관계를 느슨하게 만들어져 결합도를 낮춰진다.
 
- #### 설계에 초점을 둔 추상화
+#### 설계에 초점을 둔 추상화
 
  이처럼 추상화는 설계 측면으로써 객체들을 하나의 공통 대상으로 추출하고, 각 구현되는 객체의 세부 기능들을 은닉한다. 이는 캡슐화와 유사하지만, 은닉 레벨, 수준, 초점에 따라 그 차이를 볼 수 있다.
 
@@ -161,7 +159,7 @@ priority: 1.0
 
 이처럼 정보은닉을 통해 강한 결합을 유연하게 만들 수 있지만, 하위 클래스는 상위 클래스의 메소드를 재정의를 하여 다른 처리 작업을 수행할 수 있다. 따라서 각 하위 클래스들은 다른 처리 방식을 취할 수 있는 특징을 가지고 있고, 이를 다형성이라 한다.
 
- ### Polymorphism(다형성) - 다양한 형태를 제공한다.
+### Polymorphism(다형성) - 다양한 형태를 제공한다.
 
  ![img](/md/img/oop/polymorphism.png "Polymorphism")
 
