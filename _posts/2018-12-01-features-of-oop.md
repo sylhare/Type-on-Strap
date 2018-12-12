@@ -4,8 +4,9 @@ title: "OOP의 특징"
 tags: [OO, OOP-features, Encapsulation, Information hiding, Abstract, Inheritance,  Polymorphism]
 categories: [OO]
 subtitle: "OOP를 하면서, 무심코 지나쳤던 OOP의 특징들"
-feature-img: "md/img/thumbnail/oop.png"
-thumbnail: "md/img/thumbnail/oop.png"
+feature-img: "md/img/thumbnail/features-of-oop.png"
+thumbnail: "md/img/thumbnail/features-of-oop.png"
+display: "false"
 excerpt_separator: <!--more-->
 sitemap:
 changefreq: daily
@@ -102,17 +103,22 @@ priority: 1.0
 
 추상화란 대상을 하나의 공통된 기준으로 분리한다는 개념이다.
 
+
 설계적 측면에서의 추상화란 여러 모듈의 공통적인 성향을 묶고, 세부적으로 분리하여 관리를 쉽게 만들고 더 나아가 확장의 용이성을 향상한다는 방향성을 제시하고 있다.
 
 - 공통된 하나의 대상 추출
 - 불필요한 세부사항 제거
 
- 추상화 설계의 첫 단계는 객체들의 공통된 특성을 띤 기능을 파악하는 데 있다. 따라서 공통 기능과 비공통 기능을 식별하여 분리하고 공통 기능을 묶어 추상화 메서드로 추상화 객체에 정의한다. 이를 구현하는 실제 객체에선 추상화 메소드를 각 구현 객체에 맞게 상세히 기술하여 구현하고, 동시에 비공통 기능 또한, 각 객체의 특성에 맞게 구현한다.
+<img src="/md/img/oop/abstract1.png" style="max-height:none">
 
+ 추상화 설계의 첫 단계는 객체들의 공통된 특성을 띤 기능을 파악하는 데 있다. 따라서 공통 기능과 비공통 기능을 식별하여 분리하고 공통 기능을 묶어 추상화 메서드로 추상화 객체에 정의한다. 이를 구현하는 실제 객체에선 추상화 메소드를 각 구현 객체에 맞게 상세히 기술하여 구현한다.
+ 
 - 소프트웨어의 복잡성 감소
 - 외부로부터 세부 기능 은닉
 - 필요한 기능을 추상 클래스에 정의, 따라서 같은 특성을 띈 클래스의 초기 설계 고려 감소
 - 클래스의 확장성 증가
+
+<img src="/md/img/oop/abstract2.png" style="max-height:none">
 
  자연스레 추상화 객체와 관련된 실제 구현 객체들은 설계 구조상 묶여 있으므로 응집도가 높아지게 된다. 또한, 실제 참조하는 객체 대신 추상화 객체를 사용함으로써, 외부로부터 실제 구동되는 객체의 세부 기능은 감춰지고, 동시에 객체 간 관계를 느슨하게 만들어져 결합도를 낮춰진다.
 
@@ -120,11 +126,7 @@ priority: 1.0
 
  이처럼 추상화는 설계 측면으로써 객체들을 하나의 공통 대상으로 추출하고, 각 구현되는 객체의 세부 기능들을 은닉한다. 이는 캡슐화와 유사하지만, 은닉 레벨, 수준, 초점에 따라 그 차이를 볼 수 있다.
 
-|---|---|---|
-||추상화|캡슐화|
-|은닉 레벨|디자인관점|구현레벨|
-|은닉 수준|원치 않는 세부사항 은닉|코드와 데이터 단위로 은닉|
-|은닉 초점| 정보객체의 포함여부| 보안상 세부사항, 객체 동작|
+<img src="/md/img/oop/abstract-table.png" style="max-height:none">
 
 이러한 차이는 객체를 바라보는 관점의 차이에서 비롯된다. 캡슐화는 객체의 단위의 초점을 맞춰 정보 은닉을 하였다면, 추상화는 설계를 중점으로 객체를 바라보았기 때문이다.
 
