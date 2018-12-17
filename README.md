@@ -58,8 +58,8 @@ jekyll-theme-basically-basic
 ├── pages
 |   ├── 404.md		       # To be displayed when url is wrong
 |   ├── about.md               # About example page
-|   ├── gallery.md              # Gallery page for your photos
-|   ├── portfolio.md	         # Portfolio page for your projects
+|   ├── gallery.md             # Gallery page for your photos
+|   ├── portfolio.md	       # Portfolio page for your projects
 |   ├── search.html	       # Search page
 |   └── search.json            # Specify the search target (page, post, collection)
 ├── _config.yml                # sample configuration
