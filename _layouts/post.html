@@ -1,9 +1,12 @@
 ---
 layout: default
 ---
-<!-- {% if page.feature-img %}
-  <img src="{{ site.baseurl }}/{{ page.feature-img }}">
-{% endif %} -->
+{% if page.show-feature %}
+  <figure>
+    <img class="postimagehalf" src="{{ site.baseurl }}/{{ page.feature-img }}">
+  </figure>
+{% endif %}
+
 <article>
   
   <header id="main">

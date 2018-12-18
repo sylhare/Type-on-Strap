@@ -4,6 +4,7 @@ title: "Towards Vision-Based Smart Hospitals"
 excerpt: "How computer vision can help hospitals decrease infection rates and improve patients’ health"
 feature-img: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/main.png"
 thumbnail: "assets/img/posts/2018-11-02-measuring-hand-hygiene-in-hospitals/thumb.png"
+show-feature: true
 author: <a href='https://www.alberthaque.com'>Albert Haque</a> and <a href='https://www.shellguo.com/'>Michelle Guo</a>
 tags: [Healthcare, Vision, PAC]
 ---
