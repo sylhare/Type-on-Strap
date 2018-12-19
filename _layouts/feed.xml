@@ -7,13 +7,15 @@
         <description>{{ site.theme_settings.description | xml_escape }}</description>
         <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
         {% for post in site.posts limit:15 %}
-        <item>
-            <title>{{ post.title | xml_escape }}</title>
-            <link>{{ post.url | relative_url }}</link>
-            <guid isPermaLink="true">{{ post.url | relative_url }}</guid>
-            <description>{{ post.content | xml_escape }}</description>
-            <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        </item>
+          {% unless post.hide %}
+          <item>
+              <title>{{ post.title | xml_escape }}</title>
+              <link>{{ post.url | relative_url }}</link>
+              <guid isPermaLink="true">{{ post.url | relative_url }}</guid>
+              <description>{{ post.content | xml_escape }}</description>
+              <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+          </item>
+          {% endunless %}
         {% endfor %}
     </channel>
 </rss>

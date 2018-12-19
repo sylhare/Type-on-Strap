@@ -7,40 +7,42 @@ title: Posts
   <div class="posts">
     {% include page-title.html %} 
     {% for post in paginator.posts %}
-    <div class="post-teaser">
-      {% if post.thumbnail %} 
-      <div class="post-img">
-        <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
-      </div>
-      {% endif %}
-      <div class="info">
-        <header>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
-            <h2> {{ post.title }} </h2>
-          </a>
-          
-           <p class="meta">
-            {{ post.author }} 
-            <!-- {{ post.date | date: "%B %-d, %Y" }} -->
-          </p> 
-        </header>
-        <div class="excerpt">
-          <!--  {{ post.subtitle | strip_html | escape }}-->
-          <div class="excerpt-text">
-              {% if post.summary %} 
-                {{ post.summary | strip_html | truncate: "200" }}
-              {% else %} 
-                {{ post.content | strip_html | truncate: "145" }}
-              {% endif %} 
-          </div>
-          <div class="excerpt-continue">
-            <a class="button" href="{{ post.url | prepend: site.baseurl }}">
-              {{ site.theme_settings.str_continue_reading }}
+      {% unless post.hide %}
+      <div class="post-teaser">
+        {% if post.thumbnail %} 
+        <div class="post-img">
+          <img src="{{ site.baseurl }}/{{ post.thumbnail }}">
+        </div>
+        {% endif %}
+        <div class="info">
+          <header>
+            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+              <h2> {{ post.title }} </h2>
             </a>
+            
+             <p class="meta">
+              {{ post.author }} 
+              <!-- {{ post.date | date: "%B %-d, %Y" }} -->
+            </p> 
+          </header>
+          <div class="excerpt">
+            <!--  {{ post.subtitle | strip_html | escape }}-->
+            <div class="excerpt-text">
+                {% if post.summary %} 
+                  {{ post.summary | strip_html | truncate: "200" }}
+                {% else %} 
+                  {{ post.content | strip_html | truncate: "145" }}
+                {% endif %} 
+            </div>
+            <div class="excerpt-continue">
+              <a class="button" href="{{ post.url | prepend: site.baseurl }}">
+                {{ site.theme_settings.str_continue_reading }}
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {% endunless %}
     {% endfor %}
   </div>
 
