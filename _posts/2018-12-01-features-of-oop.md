@@ -256,27 +256,36 @@ class int extends Object{}
 
 다형성이란 하나의 이름으로 다양한 처리 작업을 할 수 있는 개념이다.
 
-- poly =  many
-- morphism = form<br/>
-= many from = 많은 형태 = 다양한 형태
+<img src="/md/img/oop/polymorphism1.png" style="max-height:none">
 
  본래 Polymorphism의 단어는 many(많은) + form(형태)의 기원으로 "다양한 형태"의 뜻을 지니고 있고, 프로그래밍에서도 이와 같은 의미로 정의한다.
 
 프로그래밍 측면에서 다형성이란 동일한 이름으로 상이한 기능을 구현하여 하나의 메시지가 객체에 따라 다르게 응답이 가능하다는 메커니즘으로써,  이는 실행되는 시점에 따라 정적일 수 있고 동적일 수 있고 종류에는 오버로딩과 오버라이딩이 있다.
 
-- Overloading = Static Polymorphism = Compile Polymorphism (Compile time)
-- Overriding = Dynamic Polymorphism = Runtime Polymorphism (Runtime)
+<img src="/md/img/oop/polymorphism2.png" style="max-height:none">
+
+- Overloading(Compile time)
+	- = Static Polymorphism
+	- = Compile Polymorphism
+- Overriding(Runtime)
+	- = Dynamic Polymorphism
+	- = Runtime Polymorphism
 
  오버로딩은 컴파일 시점에 호출할 메소드가 미리 결정되고, 동시에 컴파일 시점에 메모리가 할당된다. 때문에 오버로딩을 정적 다형성 또는 컴파일 다형성이라 한다. 하지만 오버라이딩은 런타임 시점에 호출될 메소드가 정해지기 때문에, 런타임 시점에 메모리가 할당된다. 이로 인해 동적 다형성 또는 런타임 다형성이라 한다.
 
-- Overloading : Same Name + Different Parameter
-- Overriding : Same Name + Same Paramter
+<img src="/md/img/oop/polymorphism3.png" style="max-height:none">
+
+- Overloading
+	- = Same Name + Different Parameter
+- Overriding
+	- = Same Name + Same Paramter
 
 정적 다형성인 오버로딩은 같은 이름, 다른 매개 변수 타입과 개수를 정의하여 구현한다. 특히 오버로딩은 같은 클래스에서 같은 이름을 가진 메소드를 구현해야 한다. 이러한 특징을 두고 오버로딩을 **수평적 다형성**이라 한다.
 
 - 클래스 내부에서 메소드 재정의
 - 다른 매개 변수 타입
 - 다른 매개 변수 개수
+- 다른 매개 변수 순서
 
 이와 달리 오버라이딩은 상위 클래스로부터 상속받은 메소드를 하위 클래스에서 재정의한다는 개념으로써 반드시 상위 클래스의 메소드와 같은 이름, 매개 변수여야 한다. 이처럼 위에서 상속받아 아래에서 재정의하는 방식을 빗대어 **수직적 다형성**이라고도 한다.
 
