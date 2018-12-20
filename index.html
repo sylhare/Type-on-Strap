@@ -29,9 +29,9 @@ title: Posts
             <!--  {{ post.subtitle | strip_html | escape }}-->
             <div class="excerpt-text">
                 {% if post.summary %} 
-                  {{ post.summary | strip_html | truncate: "200" }}
+                  {{ post.summary | strip_html | truncate: "300" }}
                 {% else %} 
-                  {{ post.content | strip_html | truncate: "145" }}
+                  {{ post.content | strip_html | truncate: "150" }}
                 {% endif %} 
             </div>
             <div class="excerpt-continue">

@@ -6,7 +6,7 @@ summary: "A Discussion between Yann LeCun and Christopher Manning about the futu
 feature-img: "assets/img/posts/2018-12-03-deep-learning-structure-and-innate-priors/feature.png"
 thumbnail: "assets/img/posts/2018-12-03-deep-learning-structure-and-innate-priors/thumb.png"
 author: <a href='https://cs.stanford.edu/people/abisee/'>Abigail See</a>
-tags: [AI Salon, autonomy, optimization, control]
+tags: [AI Salon, video]
 ---
 
 *This blog post was originally posted on [Abigail See's blog](http://www.abigailsee.com/2018/02/21/deep-learning-structure-and-innate-priors.html) on February 21 of 2018. The event it covers happened on February 2nd of 2018, as part of [SAIL's regular AI Salon](http://ai.stanford.edu/events/ai-salon/) discussion series. Look forward to more blog posts on new AI Salon events soon!*
