@@ -8,7 +8,7 @@ description: "Story of a time-traveller" # used by search engines
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
+  title: A Story # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: CFC919D7671DD101B036109961CA2297 # Email MD5 hash
