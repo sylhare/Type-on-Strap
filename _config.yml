@@ -15,7 +15,7 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-    <p> Life is short,\nbut enough for alive. </p>
+    <p> Life is short,<br/>but enough for alive. </p>
   header_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
     Thanks
