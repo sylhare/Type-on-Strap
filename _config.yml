@@ -11,7 +11,7 @@ theme_settings:
   title: Type on Strap # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
+  gravatar: CFC919D7671DD101B036109961CA2297 # Email MD5 hash
 
   # Header and footer text
   header_text: >
