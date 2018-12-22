@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/blog"
+baseurl: ""
 url: "https://codekaust.github.io"
 title: A Story # site's title
 description: "Story of a time-traveller" # used by search engines
