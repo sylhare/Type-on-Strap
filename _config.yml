@@ -2,14 +2,14 @@
 baseurl: ""
 url: "https://codekaust.github.io"
 title: A Story # site's title
-description: "Story of a time-traveller" # used by search engines
+description: "A Time Travel" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
   title: A Story # blog's title
-  avatar: assets/img/triangle.svg
+  avatar: assets/favicon.ico
   favicon: assets/favicon.ico
   gravatar: CFC919D7671DD101B036109961CA2297 # Email MD5 hash
 
@@ -17,11 +17,10 @@ theme_settings:
   header_text: >
     <p> Life is short,<br/>but enough for alive. </p>
   header_feature_image: assets/img/pexels/triangular.jpeg
-  footer_text: >
-    Thanks
+  footer_text: Wanna be friends? Contacts below ;)
 
   # Icons
-  rss: true  # Make sure you created a feed.xml with feed.xml layout
+  rss: false  # Make sure you created a feed.xml with feed.xml layout
   email_address: kaustubh1303@gmail.com # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
@@ -60,7 +59,7 @@ theme_settings:
 
   # Scripts / Features 
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
+  disqus_shortname: "kaustubhtrivedi"
   katex: true # Enable if using math markup
   
   special_page:
