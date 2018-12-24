@@ -7,7 +7,7 @@ tags: [About]
 ---
 
 ***Hey there !***
-<img src="{{ site.baseurl }}/assets/img/myimages/dp.jpg" alt="drawing" width="300px" height="320px" align = "left" style="padding:0px 0px"/>
+<img src="{{ site.baseurl }}/assets/img/myimages/dp2.jpg" alt="drawing" width="320px" height="320px" align = "left" style="padding:0px 0px"/>
 
 I am Kaustubh. An undergrad second year CSE student at Indian Institute of Technology, Roorkee. I have worked in Android Development and I am currently exploring ML and Blockchain(yeah its cliché ;) ).
 
