@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://codekaust.github.io"
+url: "http://codekaust.github.io"
 title: A Story # site's title
 description: "A Time Travel" # used by search engines
 
@@ -43,7 +43,7 @@ theme_settings:
   vimeo:
   wordpress:
   youtube:
-  
+
   # Sharing options
   share_buttons:
     facebook: true
@@ -57,19 +57,19 @@ theme_settings:
     wordpress:
     email: true
 
-  # Scripts / Features 
+  # Scripts / Features
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname: "kaustubhtrivedi"
   katex: true # Enable if using math markup
-  
+
   special_page:
-    search: 
+    search:
       icon: "search"
       enabled: true
     tags:
       icon: "tags"
       enabled: true
-  
+
   # Localization strings
   str_follow_on: "Follow on"
   str_rss_follow: "Follow RSS feed"
@@ -90,8 +90,8 @@ theme_settings:
 
   # Post navigation
   post_navigation: true
-  
-  
+
+
 # PAGINATION
 paginate: 5
 paginate_path: "blog/page:num"
