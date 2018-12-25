@@ -3,10 +3,9 @@ layout: post
 title: Jourlog#1 - The Sunsrise
 tags: [Jourlog]
 feature-img: assets/img/pexels/sunrise-2019.jpg
-excerpt_separator: <!--more-->
 ---
 This is the my first blog of the series Jourlog, where I share my weekly learnings. I will try to continue this series through out the year.
-<!--more-->
+
 # The Sunrise
 
 As a new year resolution I have taken up to write a weekly Jourlog(Journal Blog) compiling my works and learnings.
