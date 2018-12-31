@@ -1,9 +1,12 @@
 ---
 layout: post
-title: Jourlog#1 - The Sunrise
+title: Life_Paper #1 - Genesis
 tags: [Jourlog]
 feature-img: assets/img/pexels/sunrise-2019.jpg
 ---
+
+# Genesis
+
 This marks the start of my blog series called **Life_Paper**, where I shall share my weekly learning and experiences mostly about CS related stuff but also books and unprecedented experiences. By the way, that's my *new year resolution* too.
 >  Knowledge increases by sharing and writing is one of the best ways to absorb knowledge.
 
