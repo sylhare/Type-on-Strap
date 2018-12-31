@@ -1,13 +1,14 @@
 ---
 layout: post
 title: Life_Paper #1 - Genesis
-tags: [Jourlog]
+tags: [Life_Paper]
 feature-img: assets/img/pexels/sunrise-2019.jpg
 ---
 
 # Genesis
 
 This marks the start of my blog series called **Life_Paper**, where I shall share my weekly learning and experiences mostly about CS related stuff but also books and unprecedented experiences. By the way, that's my *new year resolution* too.
+
 >  Knowledge increases by sharing and writing is one of the best ways to absorb knowledge.
 
 The year 2019 is going to be a very crucial and impact-full year for me. With a lot of goals and commitments, I see it as great opportunity to learn to work not just more but *deeper* (in words of Cal Newport), as I firmly believe that [Flow](https://en.wikipedia.org/wiki/Flow_(psychology) is one of the most fulfilling feelings I have ever experienced.
