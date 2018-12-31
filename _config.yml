@@ -9,7 +9,7 @@ description: "A Time Travel" # used by search engines
 theme_settings:
   # Meta
   title: A Story # blog's title
-  avatar: assets/img/triangle.svg
+  avatar: assets/img/icon.svg
   favicon: assets/img/favicon.ico
   gravatar: CFC919D7671DD101B036109961CA2297 # Email MD5 hash
 
