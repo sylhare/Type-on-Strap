@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Life_Paper #1 - Genesis
+title: "Life_Paper #1"
 tags: [Life_Paper]
-feature-img: assets/img/myimages/Life_Paper#1.jpg
+feature-img: assets/img/myimages/solace.jpg
 ---
 This marks the inception of my blog series - **Life_Paper**, as they say - *After a while, we don't regret what we did, but that we didn't.*
 
