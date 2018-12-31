@@ -13,7 +13,7 @@ As this is the first blog let me introduce the series, here in **Life_Paper**, I
 
 >  Knowledge increases by sharing and writing is the best way to absorb it.
 
-The year 2019 is going to be a very crucial and impact-full year for me. With a lot of goals and commitments, I see it as great opportunity to learn to work not just more but *deeper* (in words of Cal Newport), as I firmly believe that [Flow](https://en.wikipedia.org/wiki/Flow_(psychology) is one of the most fulfilling feelings I have ever experienced.
+The year 2019 is going to be a very crucial and impact-full year for me. With a lot of goals and commitments, I see it as great opportunity to learn to work not just more but *deeper* (in words of Cal Newport), as I firmly believe that [Flow](https://en.wikipedia.org/wiki/Flow_(psychology)#Components) is one of the most fulfilling feelings I have ever experienced.
 
 My first 6 months, I will focus on :
 * *Internship Preparation*
