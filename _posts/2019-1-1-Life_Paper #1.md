@@ -29,7 +29,7 @@ My first 6 months, I will focus on :
   * Open-source contributions.
 * *Other major events*
   * Shrishti - College's tech project exhibition.
-  * HINT - Hackathon in IIIT Allabad
+  * HINT - Hackathon in IIIT Allahbad
 
 <br/>In every blog I will share :
 * **Strategies** - General rules followed during the week
