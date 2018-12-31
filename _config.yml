@@ -15,7 +15,7 @@ theme_settings:
 
   # Header and footer text
   header_text: >
-    <p> After a while, we don't regret what we did,<br/>but that we didn't.</p>
+    <p> After a while,<br/> we don't regret what we did, but that we didn't.</p>
   header_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: Wanna be friends? Contacts below ;)
 
