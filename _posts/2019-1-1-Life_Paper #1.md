@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Life_Paper #1"
+title: "Life_Paper #1 - Genesis"
 tags: [Life_Paper]
 feature-img: assets/img/pexels/travel.jpeg
 ---
@@ -29,7 +29,7 @@ My first 6 months, I will focus on :
   * Open-source contributions.
 * *Other major events*
   * Shrishti - College's tech project exhibition
-  * HINT - Hackathon in IIIT Allahbad
+  * HINT - Hackathon in IIIT Allahabad
   * Eunoia - Slam poetry event in IITR
 
 <br/>In every blog I will share :
@@ -37,6 +37,7 @@ My first 6 months, I will focus on :
 * **Targets & Accomplishments** -  They may be either time investment target or specific goals.
   * I shall use [Toggl](https://toggl.com/app/timer) for monitoring time.
   * These shall act as *Contents* for every blog.
+  * Targets shall usually be same as *Next Week Goals*, or an equivalent updated version of them.
 * **Week Story** - This will be a walk through my week with highlighted learnings and resources.
   * Throughout the year, I will try to read a book in 1.5 to 2.5 weeks(as per book size) and try to write blogs on really useful books but will share the essence of each one here.
 * **Next Week Goals** - Broad goals for coming week.
@@ -48,7 +49,7 @@ My first 6 months, I will focus on :
 |---|---|
 |Competitive Programming|21 H = 3h*7d|
 |GSOC|Study orgs 21H = 3h*7d|
-|Winter Intern Completition|10H|
+|Winter Intern Completion|10H|
 |Operating System|15H = 2h*7d|
 |*Book* = [HtoWF&IF](https://en.wikipedia.org/wiki/How_to_Win_Friends_and_Influence_People)|Complete this previously started book|
 
