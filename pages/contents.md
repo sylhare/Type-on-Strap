@@ -2,7 +2,7 @@
 layout: page
 title : Contents 
 permalink: /portfolio/
-subtitle: "Programs, languages, and More" 
+subtitle: "What do you want to learn about: programs, languages, and more" 
 feature-img: "assets/img/pexels/computer.jpeg"
 tags: [Archive]
 ---
