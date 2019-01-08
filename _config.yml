@@ -97,9 +97,9 @@ paginate: 5
 paginate_path: "blog/page:num"
 
 
-# PORTFOLIO
+# Contents
 collections:
-  portfolio:
+  contents:
     output: true
     permalink: /:collection/:name
 
