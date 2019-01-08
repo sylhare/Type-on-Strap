@@ -1,14 +1,14 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
-title: Type on Strap # site's title
-description: "A website with blog posts and pages" # used by search engines
+baseurl: "/"
+url: "https://Data-Scholars-Discovery.github.io"
+title: Data Science Discovery Guide # site's title
+description: "A complete, beginner friendly guide to data science. Created and maintained by the Data Scholars: Discovery program at UC Berkeley." # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
+  title: Data Science Discovery Guide # blog's title
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
@@ -21,14 +21,14 @@ theme_settings:
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: "berkeley.discovery.scholars@gmail.com" # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "Data-Scholars-Discovery"
   google_plus:
   instagram:
   keybase:
@@ -46,13 +46,13 @@ theme_settings:
   
   # Sharing options
   share_buttons:
-    facebook: true
-    twitter: true
-    google_plus: true
+    facebook: 
+    twitter: 
+    google_plus: 
     tumblr:
     pinterest:
     pocket:
-    reddit: true
+    reddit: 
     linkedin:
     wordpress:
     email: true
