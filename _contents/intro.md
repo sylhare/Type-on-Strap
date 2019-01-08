@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Starting Out
-img: "assets/img/portfolio/ninja.png"
+img: "assets/img/contents/Green_Power_Button.png"
 date: January, 08 2019
 tags: [Beginners]
 ---
