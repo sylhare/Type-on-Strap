@@ -5,7 +5,7 @@
  
 ##### Managed and created by the Data Scholars Discovery seminar at the UC Berkeley Division of Data Sciences.
 
-## [Visit the webpage for a more streamlined guide](https://data-scholars-discovery.github.io/)
+### [Visit the webpage for a more streamlined guide](https://data-scholars-discovery.github.io/)
 
 # Contents:
 #### Navigate to the other repositories to start learning!
@@ -29,4 +29,5 @@
 ## Website Design built from: 
 
 [Sylhare's Type-on-Strap Template](https://github.com/sylhare/Type-on-Strap)
+
 [Demo](https://sylhare.github.io/Type-on-Strap/)
