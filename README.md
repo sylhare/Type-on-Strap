@@ -5,6 +5,8 @@
  
 ##### Managed and created by the Data Scholars Discovery seminar at the UC Berkeley Division of Data Sciences.
 
+## [Visit the webpage for a more streamlined guide](https://data-scholars-discovery.github.io/)
+
 # Contents:
 #### Navigate to the other repositories to start learning!
 ### [Intro Guide](https://github.com/Data-Scholars-Discovery-Guide/Intro_Guide) - Online Learning Sites and [Where to Start](https://github.com/Data-Scholars-Discovery-Guide/Intro_Guide/blob/master/README.md#where-to-start-absolute-beginners)
