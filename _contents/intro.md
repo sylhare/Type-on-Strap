@@ -6,8 +6,6 @@ date: January, 08 2019
 tags: [General]
 ---
 
-![image]({{ page.img | relative_url }})
-
 ## Collection of online learning sites for data science
 
 ## Sites for finding online data science courses:
