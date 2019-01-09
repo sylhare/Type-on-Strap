@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Starting Out
-img: "assets/img/contents/Green_Power_Button.png"
+title: Start Here
+img: ""
 date: January, 08 2019
 tags: [Beginners]
 ---
@@ -13,8 +13,6 @@ Have no fear! There have never been more beginner-friendly resources.
 
 ### Here's a quick guide on how to get started:
 
-## Starting from Scratch:
-
 First, confirm that you have a good grasp of statistics and probability, linear algebra, and project management. While not essential to programming, these skills are invaluable and without them it is very difficult to build, de-bug, or interpret most data science models. 
 
 If you do need to learn (or refresh) some statistics, I recommend a course that combines theoretical knowledge with intro programming, such as the [“EdX: Statistics and R”](https://www.edx.org/course/statistics-and-r) or [“EdX: Probability and Statistics in Data Science using Python”](https://www.edx.org/course/probability-and-statistics-in-data-science-using-python-0). For other, more conceptual, courses on statistics and probability, check out the [“Recommended Skills”](https://github.com/Data-Scholars-Discovery-Guide/Recommended_Skills) section of this guide.
@@ -22,8 +20,6 @@ If you do need to learn (or refresh) some statistics, I recommend a course that 
 Remember, for EdX you can always "audit" a course for free, so don't get intimidated by the price tags for certificates!
 
 The other [“Recommended Skills”](https://github.com/Data-Scholars-Discovery-Guide/Recommended_Skills) are also helpful, though you can learn these simultaneously with programming. I particularly recommend learning more about “Research Methodology”, “Transparent and Open Source Research Methods”, and “Causal Identification Techniques”, especially if you are applying data science for research or impact assessment purposes.
-
-Literally start from Scratch: if you’ve never coded before, [Scratch](https://scratch.mit.edu/) is a great (free) first step. It operates like a programming language but in a visualized way that helps beginners learn to think in code.
 
 ## Choose your Path: Python or R?
 
