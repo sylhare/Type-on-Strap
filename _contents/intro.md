@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Online Learning Resources
-img: "assets/img/contents/Green_Power_Button.png"
+img: "assets/img/contents/books_1065938.png"
 date: January, 08 2019
 tags: [General]
 ---
