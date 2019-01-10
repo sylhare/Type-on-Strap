@@ -36,7 +36,11 @@ We highly recommend that you install both (RStudio won't work without R) and sta
 
 # Intermediate Guides
 * [UC Berkeley D-Lab: Data Wrangling (dplyr)](https://github.com/dlab-berkeley/R-wrang) - GitHub repo on cleaning and manipulating data in R with the popular dplyr package. Structured similarly to R Fundamentals. Use the "tutorial.Rmd" file to start learning!
+
 * [UC Berkeley D-Lab: Data Visualization (ggplot2)](https://github.com/dlab-berkeley/R-graphics) - GitHub repo on making plots in R with the popular ggplot2 package.
+
 * [R-Statistics.co: ggplot2 Tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html) - Online guide to using ggplot2 with example code.
+
 * [R-Statistics.co: ggplot2 Quick Reference](http://r-statistics.co/ggplot2-cheatsheet.html) - Helpful reference guide of ggplot2 commands with examples.
+
 * [RStudio: ggplot2 Cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/12/ggplot2-cheatsheet-2.0.pdf) - PDF of almost all ggplot2 commands with options. If you do a lot of diverse plotting, I highly recommend printing it out and keeping it next to your computer!
