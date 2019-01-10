@@ -9,7 +9,7 @@ description: "A complete, beginner friendly guide to data science. Created and m
 theme_settings:
   # Meta
   title: Data Science Discovery Guide # blog's title
-  avatar: assets/img/triangle.svg
+  avatar: assets/img/Berkeley_Data_Sciences.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
