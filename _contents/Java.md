@@ -3,7 +3,7 @@ layout: post
 title: Java and Eclipse Resources
 img: "assets/img/contents/java-coffee-cup-logo.png"
 date: January, 17 2019
-tags: [Java], [Eclipse]
+tags: [Java]
 ---
 
 ### [Java SE Download Website](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
