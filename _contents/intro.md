@@ -2,7 +2,7 @@
 layout: post
 title: Online Learning Resources
 img: "assets/img/contents/books_1065938.png"
-date: January, 08 2019
+date: January, 01 2019
 tags: [General]
 ---
 
