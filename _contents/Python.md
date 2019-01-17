@@ -3,7 +3,7 @@ layout: post
 title: Python and Anaconda Resources
 img: "assets/img/contents/Python.svg.png"
 date: January, 08 2019
-tags: [Python]
+tags: [Python, Anaconda, python, anaconda]
 ---
 
 ### [Python Website](https://www.python.org/)
