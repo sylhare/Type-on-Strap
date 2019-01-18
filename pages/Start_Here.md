@@ -1,7 +1,7 @@
 ---
-layout: post
+layout: page
 title: Start Here
-img: ""
+img: "assets/img/pexels/retro-school.jpeg"
 date: January, 08 2019
 tags: [Beginners]
 ---
