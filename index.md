@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: Data Science Discovery Guide
 feature-img: "assets/img/pexels/circuit.jpeg"
 tags: [Home, Archive]
 ---
