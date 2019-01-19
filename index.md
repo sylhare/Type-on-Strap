@@ -1,6 +1,8 @@
 ---
 layout: page
-title: ""
+title: Home
+hide_title: true
+permalink: 
 feature-img: "assets/img/pexels/computer.jpeg"
 tags: [Home, Archive]
 ---
