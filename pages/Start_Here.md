@@ -1,9 +1,8 @@
 ---
 layout: page
 title: Start Here
-img: "assets/img/pexels/retro-school.jpeg"
-date: January, 08 2019
-tags: [Beginners]
+feature-img: "assets/img/pexels/retro-school.jpeg"
+tags: [Beginners, Start]
 ---
 
 # Where to Start: Absolute Beginners
@@ -34,12 +33,4 @@ While there are dozens of programming languages that can be applied to data scie
 [GitHub](https://github.com/Data-Scholars-Discovery-Guide/Git_and_GitHub) is by far the most popular project management platform for programmers of all stripes. It offers extensive version control and communication for teams or individuals, plus publication, presentation, and web hosting services. Even if you don’t anticipate learning more about programming or hosting a team project, knowing how to navigate and use GitHub is invaluable, as most other data scientists use it for their work. “Can you use GitHub?” is typically a make-or-break interview question, since teams and entire companies can host their digital library there.
 
 Even if you don’t intend to work with teams or desire to publish open-source code, knowing Git--the language underpinning GitHub--can help you write more understandable, replicable code, which is quickly becoming a prerequisite for anyone to publish or share their results.
-
-## What is Stata and should I learn it?
-
-[Stata](https://github.com/Data-Scholars-Discovery-Guide/Stata) is a statistical analysis program created and distributed by a private company, Stata Corp. As such it can cost upwards of $100 per year to use. Why, then, does anyone use it when there are free programs that can perform all of the same functions and more? 
-
-Mostly because it has been an industry standard among social scientists (particularly anyone working with survey data) for decades. If you plan on doing any work with researchers in social sciences (economics, sociology, demography, public policy, etc), it may be useful to learn Stata, if nothing else to know the file formats and how to convert its syntax to another (more versatile and open-source) platform such as Python or R.
-
-That said, it is very user-friendly and interpretable, particularly if you only need basic statistical analysis or visualizations on singular datasets (summary statistics, regressions, plots, etc).
 
