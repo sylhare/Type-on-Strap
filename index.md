@@ -5,7 +5,7 @@ feature-img: "assets/img/pexels/computer.jpeg"
 tags: [Home, Archive]
 ---
 
-# Welcome to the Discovery Guide!
+## Welcome to the Discovery Guide!
 
 Are you passionate about finding and sharing information with others?
 
