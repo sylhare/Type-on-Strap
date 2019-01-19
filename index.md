@@ -1,5 +1,6 @@
 ---
 layout: page
+title: ""
 feature-img: "assets/img/pexels/computer.jpeg"
 tags: [Home, Archive]
 ---
