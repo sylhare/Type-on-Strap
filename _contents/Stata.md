@@ -35,8 +35,8 @@ Since Stata isn't open source there is not as large of a package environment as 
 
 [Germán Rodríguez: Stata Tutorial](https://data.princeton.edu/stata) - Online guide from Princeton with sample code, visuals, and explanations on everything from loading data to using macros.
 
-[UCLA CCPR: Intro to Stata and Efficient Workflow](https://ccpr.ucla.edu/services/statistics-and-methods-core-mission/#toggle-id-5) - Presentation slides, video podcast, and example do-file for introductory Stata. To get started navigate to the “Bootcamp” dropdown menu, then find “10/26/2012 – Introduction to Stata and Efficient Workflow” and open the “Podcast” link.
+[UCLA CCPR: Intro to Stata and Efficient Workflow](https://ccpr.ucla.edu/services/statistics-and-methods-core-mission/#toggle-id-5) - Presentation slides, video podcast, and example do-file for introductory Stata. To get started navigate to the Bootcamp dropdown menu, then find “10/26/2012 – Introduction to Stata and Efficient Workflow” and open the Podcast link.
 
 
 # Intermediate Guides
-[UCLA: Advanced Stata Programming](https://ccpr.ucla.edu/services/statistics-and-methods-core-mission/#toggle-id-5) - Another helpful set of resources from UCLA CCPR on "programming" in Stata, including macros, loops, and ado-files. To use navigate to the “Bootcamp” dropdown, then find “4/4/2013 – Advanced Stata Programming” and open the “Podcast” link.
+[UCLA: Advanced Stata Programming](https://ccpr.ucla.edu/services/statistics-and-methods-core-mission/#toggle-id-5) - Another helpful set of resources from UCLA CCPR on programming in Stata, including macros, loops, and ado-files. To use navigate to the Bootcamp dropdown, then find “4/4/2013 – Advanced Stata Programming” and open the Podcast link.
