@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Start Here
-feature-img: "assets/img/pexels/retro-school.jpeg"
+feature-img: "assets/img/pexels/travel.jpeg"
 tags: [Beginners, Start]
 ---
 
