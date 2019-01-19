@@ -8,7 +8,9 @@ tags: [Home, Archive]
 # Welcome to the Discovery Guide!
 
 Are you passionate about finding and sharing information with others?
+
 Interested in learning an applied skill that unleashes your intellectual potential?
+
 Just want to impress your friends with computer code and fancy plots?
 
 Sounds like you would make a great data scientist!
