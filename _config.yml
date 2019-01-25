@@ -13,25 +13,25 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Bienvenido a mi <code>blog de pruebas</code> <br> que aún no sé para qué será.</p>
+     <p>Bienvenido a mi <code>blog de pruebas</code> <br> de códigos.</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    Desarrollado por <a href="https://jekyllrb.com/">Jekyll</a> con <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
-  rss: true
-  email_address: # Full email address, e.g. "sam@example.com"
+  rss: false
+  email_address: "talpiod@gmail.com" # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
   dribbble:
-  facebook:
+  facebook: "Talpio"
   flickr:
   gitlab:
   github: "Talpio"
   google_plus:
-  instagram:
+  instagram:"talpiod"
   keybase:
-  linkedin:  # Full URL
+  linkedin: "https://www.linkedin.com/in/delgadojesus"  # Full URL
   pinterest:
   reddit:
   soundcloud:
