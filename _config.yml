@@ -19,7 +19,7 @@ theme_settings:
    Desarrollado por <a href="https://jekyllrb.com/">Jekyll</a> con <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Icons
-  rss: false
+  rss: true
   email_address: "talpiod@gmail.com" # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
