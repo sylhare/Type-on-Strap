@@ -11,14 +11,7 @@ tags: [Python, Anaconda, python, anaconda]
 
 Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone using Python.
 
-
-## General Resource Guides
-* []() - 
-
-* []() - 
-
 ## Complete Tutorials
-
 
 * [Open Source Data Science Masters](http://datasciencemasters.org/) - Collection of recommended courses with projects and timeline.
 
@@ -34,13 +27,16 @@ Python is one of the most used programming languages in data science. It is open
 * [Harvard: CS109 Data Science Course](http://cs109.github.io/2014/index.html) - 
 
 # Intermediate Guides
-* []() - 
+* [EdX: Berkeley Inferential Thinking by Re-Sampling](https://www.edx.org/course/foundations-of-data-science-inferential-thinking-by-resampling-0) - 
 
 * []() - 
 
 * []() - 
 
 * []() - 
+
+# Machine Learning
+* [EdX: Berkeley Prediction by Machine Learning](https://www.edx.org/course/foundations-of-data-science-prediction-and-machine-learning-0)
 
 # Textbooks and Resources
 * [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html) - User-friendly textbook that starts at a beginner level with very clear explanations
