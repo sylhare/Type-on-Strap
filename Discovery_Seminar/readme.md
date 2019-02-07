@@ -1,4 +1,4 @@
-# Start a Seminar
+# For Teachers
 
 The Data Scholars program at the University of California, Berkeley aims to foster a community of inclusive learning for students from diverse backgrounds with a passion for data science.
 The focus of the program are the seminars, which are structured in three levels: Foundations, Pathways, and Discovery.
