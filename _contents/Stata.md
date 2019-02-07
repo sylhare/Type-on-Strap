@@ -31,6 +31,8 @@ Since Stata isn't open source there is not as large of a package environment as 
 
 
 ## Beginner's Guides
+[UC Berkeley: Intro to Stata for Policy Analysts](https://github.com/AaronScherf/Stata_for_Policy_Analysts) - Beginner Stata seminar built for graduate students of the Goldman School of Public Policy at UC Berkeley.
+
 [UNC Carolina Population Center: Introduction to Stata](https://www.cpc.unc.edu/research/tools/data_analysis/statatutorial/) - Useful online guide with example code and exercises for starting out with Stata.
 
 [Germán Rodríguez: Stata Tutorial](https://data.princeton.edu/stata) - Online guide from Princeton with sample code, visuals, and explanations on everything from loading data to using macros.
