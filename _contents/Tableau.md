@@ -6,9 +6,9 @@ date: January, 17 2019
 tags: [Tableau]
 ---
 
-### [Tableau Website](https://www.tableau.com/)
+# [Tableau Website](https://www.tableau.com/)
 
-### [Tableau Desktop Free for Students!](https://www.tableau.com/academic/students)
+[Tableau Desktop Free for Students!](https://www.tableau.com/academic/students)
 
 ## General Resource Guides
 * [Tableau: Starter Kits - Author a Viz](https://www.tableau.com/learn/starter-kits) - Collection of intro guides from Tableau.
