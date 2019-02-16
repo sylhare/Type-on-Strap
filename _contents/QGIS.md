@@ -6,9 +6,9 @@ date: January, 17 2019
 tags: [QGIS, GIS]
 ---
 
-### [QGIS Website](https://qgis.org/en/site/index.html)
+# [QGIS Website](https://qgis.org/en/site/index.html)
 
-
+[Download QGIS Here](https://qgis.org/en/site/forusers/download.html)
 
 ## General Resource Guides
 * [Official QGIS Training Resources](https://www.qgis.org/en/site/forusers/trainingmaterial/index.html#english) - Repository of resources from the makers of QGIS.
