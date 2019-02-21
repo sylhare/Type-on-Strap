@@ -224,22 +224,21 @@ Likewise, the NeurIPS affiliated [ML Ally pledge](https://sites.google.com/view/
 
 -   AI Influencers
 
-    Many researchers may also have the potential to have an impact
-    beyond academia, such as in policy or industry. In addition to the
-    prior recommendations, the [Montréal Declaration for Responsible AI](https://www.montrealdeclaration-responsibleai.com/&sa=D&ust=1550739471115000) and
-    [AI4People list of Principles and Recommendations](https://link.springer.com/article/10.1007%252Fs11023-018-9482-5&sa=D&ust=1550739471115000) offer
-    an excellent overview of things to consider when developing AI
-    in general. And, there are also the more specific [Lethal Autonomous Weapons Pledge](https://futureoflife.org/lethal-autonomous-weapons-pledge/&sa=D&ust=1550739471115000),the [Campaign to Stop Killer Robots](https://www.stopkillerrobots.org/&sa=D&ust=1550739471116000), and
-    the [Safe Face Pledge](https://www.safefacepledge.org/&sa=D&ust=1550739471116000),
-    which are likewise very relevant to anyone involved in the research
-    and development of AI technology. Specific companies and research
-    labs (such as [Google](https://www.blog.google/technology/ai/ai-principles/&sa=D&ust=1550739471116000),
-    [OpenAI](https://blog.openai.com/openai-charter/&sa=D&ust=1550739471116000),
-    [DeepMind](https://deepmind.com/applied/deepmind-ethics-society/principles/&sa=D&ust=1550739471116000),
-    [Salesforce](https://www.salesforce.org/ai-good-principles-believe/&sa=D&ust=1550739471117000),
-    and [IBM](https://www.ibm.com/blogs/policy/trust-principles/&sa=D&ust=1550739471117000))
-    have also begun to specify their principles, and when considering
-    joining these institutions it is worth reviewing these documents.
+Many researchers may also have the potential to have an impact
+beyond academia, such as in policy or industry. In addition to the
+prior recommendations, the [Montréal Declaration for Responsible AI](https://www.montrealdeclaration-responsibleai.com/&sa=D&ust=1550739471115000) and [AI4People list of Principles and Recommendations](https://link.springer.com/article/10.1007%252Fs11023-018-9482-5&sa=D&ust=1550739471115000) offer
+an excellent overview of things to consider when developing AI
+in general. And, there are also the more specific [Lethal Autonomous Weapons Pledge](https://futureoflife.org/lethal-autonomous-weapons-pledge/&sa=D&ust=1550739471115000),the [Campaign to Stop Killer Robots](https://www.stopkillerrobots.org/&sa=D&ust=1550739471116000), and
+the [Safe Face Pledge](https://www.safefacepledge.org/&sa=D&ust=1550739471116000),
+which are likewise very relevant to anyone involved in the research
+and development of AI technology. Specific companies and research
+labs (such as [Google](https://www.blog.google/technology/ai/ai-principles/&sa=D&ust=1550739471116000),
+[OpenAI](https://blog.openai.com/openai-charter/&sa=D&ust=1550739471116000),
+[DeepMind](https://deepmind.com/applied/deepmind-ethics-society/principles/&sa=D&ust=1550739471116000),
+[Salesforce](https://www.salesforce.org/ai-good-principles-believe/&sa=D&ust=1550739471117000),
+and [IBM](https://www.ibm.com/blogs/policy/trust-principles/&sa=D&ust=1550739471117000))
+have also begun to specify their principles, and when considering
+joining these institutions it is worth reviewing these documents.
     
 {% figure caption:'[Source](https://motherboard.vice.com/en_us/article/vvv559/the-campaign-to-stop-killer-robots-is-not-going-well&sa=D&ust=1550739471117000)' %}
 [<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image14.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image14.png)
