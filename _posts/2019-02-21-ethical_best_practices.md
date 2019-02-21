@@ -11,7 +11,7 @@ author: <a href='http://web.stanford.edu/~shushman/'>Shushman Choudhury</a>, <a 
 tags: [opinion, ethics]
 ---
 
-*Disclaimer: this is an opinion piece that represents the views of its authors, and not all of SAIL. We would like to thank SAIL professors Fei-Fei Li, Chris Manning, and Dorsa Sadigh for reviewing and approving this post. We would also like to thank Margaret Mitchell, Timnit Gebru, Joy Buolamwini, Rachel Thomas, and many others for inspiring us to write this.*
+*Disclaimer: this is an opinion piece that represents the views of its authors, and not all of SAIL. We would like to thank SAIL professors Fei-Fei Li, Christopher Manning, and Dorsa Sadigh for reviewing and approving this post. We would also like to thank Margaret Mitchell, Timnit Gebru, Joy Buolamwini, Rachel Thomas, and many others for inspiring us to write this.*
 
 What are the ethical responsibilities of AI researchers? Or to put it in more pragmatic terms, what are best practices AI
 researchers can follow to avoid unintended consequences of their research?
@@ -63,7 +63,7 @@ their work and how to respond to them. 
 In this piece, we intend to promote several best practices that we
 think AI researchers and engineers should be aware of. We focus
 primarily on what researchers can do to avoid unintended negative
-consequences of their work, and do not go into depth what those negative
+consequences of their work, and do not go into as much depth on the topics of what those negative
 consequences can be or how to deal with intentionally bad actors. The
 ideas we promote are not new (in fact, most of them are ideas suggested
 by prominent researchers who we shall credit), nor are they
