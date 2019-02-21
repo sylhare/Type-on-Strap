@@ -42,8 +42,8 @@ research of AI as well.
 
 Yes, the topic has received growing attention, particularly within
 the subfield of research focused on Fairness,
-Accountability, and Transparency for AI (see  [FAT ML](http://www.fatml.org/&sa=D&ust=1550739471099000) and
-[FAT*](https://fatconference.org/&sa=D&ust=1550739471099000)).
+Accountability, and Transparency for AI (see  [FAT ML](http://www.fatml.org/) and
+[FAT*](https://fatconference.org/)).
 However, as PhD students working in AI, we have never been explicitly
 instructed or even incentivized to speak openly and enthusiastically
 about this topic. This, despite a documented
