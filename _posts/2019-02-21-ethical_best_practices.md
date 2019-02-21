@@ -6,12 +6,11 @@ summary: "What are the ethical responsibilities of AI researchers? Or to put it 
 researchers can follow to avoid unintended consequences of their research?"
 thumbnail: "assets/img/posts/2019-02-21-ethical_best_practices/icon.png"
 opinion: true
-hide: true
 author: <a href='http://web.stanford.edu/~shushman/'>Shushman Choudhury</a>, <a href='https://twitter.com/michellearning'>Michelle Lee</a>, and <a href='https://twitter.com/andrey_kurenkov'>Andrey Kurenkov</a>
 tags: [opinion, ethics]
 ---
 
-*Disclaimer: this is an opinion piece that represents the views of its authors, and not all of SAIL. We would like to thank SAIL professors Fei-Fei Li, Christopher Manning, and Dorsa Sadigh for reviewing and approving this post. We would also like to thank Margaret Mitchell, Timnit Gebru, Joy Buolamwini, Rachel Thomas, and many others for inspiring us to write this.*
+*Disclaimer: this is an opinion piece that represents the views of its authors, and not all of SAIL. We would like to thank SAIL professors Fei-Fei Li, Christopher Manning, and Dorsa Sadigh for providing invaluable comments and feedback on this post.*
 
 What are the ethical responsibilities of AI researchers? Or to put it in more pragmatic terms, what are best practices AI
 researchers can follow to avoid unintended consequences of their research?
@@ -540,17 +539,11 @@ focusing on the ethics and policy of AI, and this list is
 non-comprehensive.
 
 ### Conclusion
-The question of the relationship between creations and
-creators is not a new one. Regardless of one’s opinions on this
-question, the undeniable fact is that AI has more potential to change
+Regardless of how much one cares to discuss ethics, the undeniable fact is that AI has more potential to change
 the landscape of our civilization than perhaps any other human
 invention. The nature of this change will depend greatly on our
 collective understanding of the benefits and limitations of various AI
 technologies, and this understanding depends greatly on the engagement
 of researchers with policymakers, legislators and the broader public as
-well. The time for taking shelter behind the ivory tower of academic
-immunity and washing our hands of the implications of our work is over.
-Let us all come together, and in whatever way we find suitable,
-contribute to a more profound and honest understanding of our field, for
-the betterment of human civilization.
+well. The time for taking shelter behind the ivory tower of academic immunity and washing our hands of the implications of our work is over. Instead, let us think about, discuss, and account for these implications in our work to keep them as positive as possible.
 
