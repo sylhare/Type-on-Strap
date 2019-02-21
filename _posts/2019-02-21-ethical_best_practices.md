@@ -280,7 +280,7 @@ for [dual-use](https://en.wikipedia.org/wiki/Dual-use_technology&sa=D&ust=155073
 Her [blog post](http://www.m-mitchell.com/publications/multitask-blurb.html&sa=D&ust=1550739471120000) provides
 even more details. 
 
-{% figure caption:'An example of an ethical considerations section (from [Margaret Mitchell's blog post](http://www.m-mitchell.com/publications/multitask-blurb.html&sa=D&ust=1550739471120000))' %}
+{% figure caption:"An example of an ethical considerations section (from [Margaret Mitchell's blog post](http://www.m-mitchell.com/publications/multitask-blurb.html))" %}
 [<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image12.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image12.png)
 {% endfigure %}
 
