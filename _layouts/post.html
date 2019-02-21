@@ -10,6 +10,9 @@ layout: default
 <article>
   
   <header id="main">
+    {% if page.opinion %}
+      <h4>Opinion</h4>
+    {% endif %}
     <h1 id="{{ page.title | cgi_escape }}">{{ page.title }}</h1>
     <p class="meta">
     {% if page.author %}{{ page.author }}<br>{% endif %}
