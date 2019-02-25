@@ -508,7 +508,7 @@ powerful, more directed efforts aimed at dealing with ethical issues in
 AI research are also useful. Therefore, we conclude by highlighting some
 of the emerging institutions committed to this cause: 
 
--   [AI](https://ainowinstitute.org/) [Now](https://ainowinstitute.org/) Institute: An NYU research institute that focuses on four domains: rights and liberties, labor and automation, bias and
+-   [AI Now](https://ainowinstitute.org/) Institute: An NYU research institute that focuses on four domains: rights and liberties, labor and automation, bias and
     inclusion, and safety and critical domains. 
 -   [Human-Centered AI Institute](https://hai.stanford.edu/) (HAI):
     A Stanford institute that works on advancing AI research that
@@ -521,6 +521,7 @@ of the emerging institutions committed to this cause:
     Berkman-Klein Center for Internet and Society, that does both
     philanthropic work as well as research in justice, information
     quality, and autonomy & interaction.  
+-   [AAAI/ACM Conference on AI, Ethics, and Society](http://www.aies-conference.com/): a multi-disciplinary conference meant to help address ethical concerns regarding ethics and AI with the collaboration of experts from various disciplines, such as ethics, philosophy, economics, sociology, psychology, law, history, and politics.
 -   [The IEEE Global Initiative on Ethics of Autonomous and Intelligent Systems](https://standards.ieee.org/industry-connections/ec/autonomous-systems.html):
     An IEEE committee working on the overarching principles of the
     ethical design and use of autonomous and intelligent systems
