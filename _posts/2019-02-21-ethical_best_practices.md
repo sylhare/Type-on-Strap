@@ -314,7 +314,9 @@ request before being shared, with a newer example being
 [The Pilot Parliaments Benchmark](https://www.ajlunited.org/gender-shades&sa=D) (see
 above). The benefit of such a process is clear for any dataset with a
 potential for [dual-use](https://en.wikipedia.org/wiki/Dual-use_technology&sa=D), although it is admittedly not without some overhead for the
-lab or organization distributing the dataset. The same process could
+lab or organization distributing the dataset. 
+
+The same process could
 also be applied for code and pretrained models, which of course also
 have potential for dual-use, though this precedent there is not as
 established; in general, we believe the AI research community will need
