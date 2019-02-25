@@ -19,7 +19,7 @@ researchers can follow to avoid unintended consequences of their research?
     <img class="postimagehalf" style="width:69%;" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image13.png"/> 
     <img class="postimagehalf" style="width:30%;" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image2.png"/> 
     <figcaption> 
-      Left: Microsoft’s <a href="https://qz.com/653084/microsofts-disastrous-tay-experiment-shows-the-hidden-dangers-of-ai/&sa=D&ust=1550739471096000">infamous chatbot</a> Tay (now discontinued). Right: https://xkcd.com/1390/
+      Left: Microsoft’s <a href="https://qz.com/653084/microsofts-disastrous-tay-experiment-shows-the-hidden-dangers-of-ai/">infamous chatbot</a> Tay (now discontinued). Right: https://xkcd.com/1390/
     </figcaption>
 </figure>
 <br>
@@ -31,9 +31,9 @@ impactful research -- research published at conferences and
 in journals -- but not all of us are asked or expected to
 develop best practices for ethical research that prevents potential
 misuse. This is already or increasingly the norm for other influential
-disciplines such as [law](https://engagedscholarship.csuohio.edu/cgi/viewcontent.cgi?article%3D2157%26context%3Dclevstlrev&sa=D&ust=1550739471097000),
-[medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2598142/&sa=D&ust=1550739471097000),
-and [engineering](http://theinstitute.ieee.org/ieee-roundup/blogs/blog/why-schools-are-getting-more-serious-about-teaching-engineering-students-about-ethics&sa=D&ust=1550739471098000), and we believe it should be normalized in the education and
+disciplines such as [law](https://engagedscholarship.csuohio.edu/cgi/viewcontent.cgi?article%3D2157%26context%3Dclevstlrev),
+[medicine](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2598142/),
+and [engineering](http://theinstitute.ieee.org/ieee-roundup/blogs/blog/why-schools-are-getting-more-serious-about-teaching-engineering-students-about-ethics), and we believe it should be normalized in the education and
 research of AI as well.
 
 {% figure caption:'Evidence over growing concerns about ethics and AI. Source: [cbiinsights.com](https://www.cbinsights.com/research/google-amazon-facebook-apple-hiring-techlash/)' %}
@@ -89,33 +89,33 @@ thought-provoking and well-researched works:
 
 
 -   Machine learning researchers and practitioners may find it
-    insightful to ponder on the [opacity of machine learning algorithms](http://journals.sagepub.com/doi/abs/10.1177/2053951715622512&sa=D&ust=1550739471102000) (even more relevant in the present age of learning with
+    insightful to ponder on the [opacity of machine learning algorithms](http://journals.sagepub.com/doi/abs/10.1177/2053951715622512) (even more relevant in the present age of learning with
     deep neural networks).
     
 <figure>
     <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image5.png"/> 
     <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image6.png"/> 
     <figcaption> 
-      Left: Redlining (systemic denial of services to residents of certain districts, often racially defined) in the 1940s. Right: Worrying patterns replicated by algorithms (<a href="https://www.skynettoday.com/editorials/biased-ai&sa=D&ust=1550739471102000">source</a>)
+      Left: Redlining (systemic denial of services to residents of certain districts, often racially defined) in the 1940s. Right: Worrying patterns replicated by algorithms (<a href="https://www.skynettoday.com/editorials/biased-ai">source</a>)
     </figcaption>
 </figure>
 
 -   For those working in big data analysis, many of the ethical
     issues, particularly stemming from disparate impact, have been
-    [outlined in a recent paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id%3D2477899&sa=D&ust=1550739471103000) in
-    Big Data & Society as well as the report “[Unfairness By Algorithm: Distilling the Harms of Automated Decision-Making](https://fpf.org/2017/12/11/unfairness-by-algorithm-distilling-the-harms-of-automated-decision-making/&sa=D&ust=1550739471103000)”
+    [outlined in a recent paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id%3D2477899) in
+    Big Data & Society as well as the report “[Unfairness By Algorithm: Distilling the Harms of Automated Decision-Making](https://fpf.org/2017/12/11/unfairness-by-algorithm-distilling-the-harms-of-automated-decision-making/)”
     by the future of privacy forum.
 -   Researchers in robotics, i.e. embodied AI systems, can start
-    with a discussion on the issues of [robot ethics in a mechanized world](https://www.sciencedirect.com/science/article/pii/S0004370211000178&sa=D&ust=1550739471104000). 
+    with a discussion on the issues of [robot ethics in a mechanized world](https://www.sciencedirect.com/science/article/pii/S0004370211000178). 
 
-{% figure caption:'The biased results found by ACLU - people of color who are members of congress were found to be disproportionately incorrectly classified as being criminals 39% of the time with facial recognition technology from Amazon. [(source)](https://www.aclu.org/blog/privacy-technology/surveillance-technologies/amazons-face-recognition-falsely-matched-28&sa=D&ust=1550739471104000) ' %}
+{% figure caption:'The biased results found by ACLU - people of color who are members of congress were found to be disproportionately incorrectly classified as being criminals 39% of the time with facial recognition technology from Amazon. [(source)](https://www.aclu.org/blog/privacy-technology/surveillance-technologies/amazons-face-recognition-falsely-matched-28) ' %}
 [<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image3.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image3.png)
 {% endfigure %}
 
 -   Facial recognition systems, a
     prominent application of computer vision, have a host of related
-    [ethical concerns](https://www.emeraldinsight.com/doi/pdf/10.1108/14779960480000246&sa=D&ust=1550739471105000).
-    The issue of [emotional privacy](http://blog.practicalethics.ox.ac.uk/2014/03/computer-vision-and-emotional-privacy/&sa=D&ust=1550739471105000) while decoding facial pain expressions is also relevant. This [broader survey](https://jyx.jyu.fi/bitstream/handle/123456789/55806/1/URN%253ANBN%253Afi%253Ajyu-201711084167.pdf&sa=D&ust=1550739471105000) highlights a range of additional ethical challenges for computer vision.
+    [ethical concerns](https://www.emeraldinsight.com/doi/pdf/10.1108/14779960480000246).
+    The issue of [emotional privacy](http://blog.practicalethics.ox.ac.uk/2014/03/computer-vision-and-emotional-privacy/) while decoding facial pain expressions is also relevant. This [broader survey](https://jyx.jyu.fi/bitstream/handle/123456789/55806/1/URN%253ANBN%253Afi%253Ajyu-201711084167.pdf) highlights a range of additional ethical challenges for computer vision.
 
 {% figure %}
 [<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image10.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-21-ethical_best_practices/image10.png)
