@@ -71,7 +71,7 @@ theme_settings:
   
   
 # PAGINATION
-paginate: 5
+paginate: 10
 paginate_path: "blog/page:num"
 
 permalink: /:categories/:title/
