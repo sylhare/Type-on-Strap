@@ -7,20 +7,24 @@ thumbnail: "assets/img/posts/2019-02-26-beyond_local_pattern_matching/thumb.png"
 author: <a href='http://qipeng.me/'>Peng Qi</a> and <a href='https://cs.stanford.edu/~danqi/'>Danqi Chen</a>
 tags: [nlp,qa]
 ---
-Have you ever Googled some random question, such as _how many countries are there in the world_, and been impressed to see Google presenting the precise answer to you rather than _just_ a list of links? This feature is clearly nifty and useful, but is also still limited; a search for a slightly more complex question such as _how long do I need to bike to burn the calories in a Big Mac_ will not yield a nice answer, even though any person could look over the content of the first or second link and find the answer. 
+Have you ever Googled some random question, such as _how many countries are there in the world_, and been impressed to see Google presenting the precise answer to you rather than _just_ a list of links? This feature is clearly nifty and useful, but is also still limited; a search for a slightly more complex question such as _how long do I need to bike to burn the calories in a Big Mac_ will not yield a nice answer, even though any person could look over the content of the first or second link and find the answer.
 
 <figure>
-    <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img1.png"/> 
-    <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img2.png"/> 
-    <figcaption> 
+    <p>
+    <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img1.png"/>
+    <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img2.png"/>
+    <figcaption>
         Example search results from Google, as of the writing of this article.
     </figcaption>
+    </p>
 </figure>
 
 In today's age of information explosion, when too much new knowledge is generated every day in text (among other modalities) for any single person to digest, enabling machines to read large amounts of text and answer questions for us is one of the most crucial and practical tasks in the field of natural language understanding. Solving the task of machine reading, or question answering, will lay an important cornerstone towards a powerful and knowledgeable AI system like the librarian in the movie _Time Machine_:
 
 <figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CQbkhYg2DzM?start=91" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>
+<iframe width="720" height="405" src="https://www.youtube.com/embed/CQbkhYg2DzM?start=91" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 </figure>
 
 Recently, large-scale question answering datasets like the [Stanford Question Answering Dataset (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer/) and [TriviaQA](http://nlp.cs.washington.edu/triviaqa/) have fueled much of the progress in this direction. By allowing researchers to train powerful and data-hungry deep learning models, these datasets have already enabled impressive results such as an algorithm that can answer many arbitrary questions by finding the appropriate answer in Wikipedia pages -- removing the need for a human to do all the hard work themselves.[^1]
@@ -62,7 +66,7 @@ We conducted an in-depth analysis of our dataset. As presented in the following 
 We also find that only 30.5% of the questions do not rely on coreference with the conversational history and are answerable on their own. For the rest, 49.7% of the questions contain explicit coreference markers such as *he*, *she*, or *it*, and the remaining 19.8% of questions (e.g., *Where?*) refer to an entity or event *implicitly*.
 
 {% figure %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png)
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png)
 {% endfigure %}
 
 Compared to the question distribution of SQuAD 2.0, we find that our questions are much shorter than the SQuAD questions (5.5 vs 10.1 words on average), which reflects the conversational nature of our dataset.  Our dataset also presents a richer variety of questions; while nearly half of SQuAD questions are dominated by *what* questions, the distribution of CoQA is spread across multiple question types. Several sectors indicated by prefixes *did*, *was*, *is*, *does* are frequent in CoQA but are completely absent in SQuAD.
@@ -93,14 +97,14 @@ The Web contains the answers to many of these questions, but not always in a rea
 To answer this question, one would need to laboriously browse multiple Wikipedia articles, until they come across the following article titled [History of Yahoo!](https://en.wikipedia.org/wiki/History_of_Yahoo!):
 
 {% figure %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img9.gif"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img9.gif)
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img9.gif"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img9.gif)
 {% endfigure %}
 
 As one can see, we can answer the question in the following steps of reasoning:
 
 * We note that the first sentence of this article states that _Yahoo!_ was founded at [Stanford University](https://en.wikipedia.org/wiki/Stanford_University).
 * Then, we can look up Stanford University in Wikipedia (in this case we simply clicked on the link), to find out where it's located in
-* The Stanford University page tells us that it is located in California. 
+* The Stanford University page tells us that it is located in California.
 * Finally, we can combine these two facts to arrive at the answer to the original question: _Yahoo!_ was founded in the State of _California_.
 
 Note that to answer this question, two skills were essential: (1) *a bit of detective work* to find out about what documents, or supporting facts, to use that could lead to an answer to our question, and (2) the ability to *reason with multiple supporting facts* to arrive at the final answer.
@@ -109,7 +113,7 @@ These are important capabilities for machine reading systems to acquire in order
 
 ### What is HotpotQA?
 
-HotpotQA is a large-scale question answering (QA) dataset containing about 113,000 question-answer pairs that have the characteristics of those we mentioned above. That is, the questions require QA systems to be able to sift through large quantities of text documents to find information pertinent to generating an answer, and to reason with the multiple supporting facts it found to arrive at the final answer (see below for an example).
+HotpotQA is a large-scale question answering (QA) dataset containing about 113,000 question-answer pairs that have the characteristics of those we mentioned above.[^8] That is, the questions require QA systems to be able to sift through large quantities of text documents to find information pertinent to generating an answer, and to reason with the multiple supporting facts it found to arrive at the final answer (see below for an example).
 
 {% figure caption:'An example question from HotpotQA' %}
 [<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png)
@@ -120,17 +124,17 @@ The questions and answers are collected in the context of the entire English Wik
 The questions require many challenging types of reasoning to answer. For example, in the _Yahoo!_ example, one would need to first infer the relation between Yahoo! and the "missing link" essential to answering the question, _Stanford University_, and then leverage the fact that _Stanford University_ is located in _California_ to arrive at the final answer. Schematically, the inference chain looks like the following:
 
 {% figure %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img11.gif"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img11.gif)
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img11.gif"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img11.gif)
 {% endfigure %}
 
-Here, we call _Stanford University_ the <span style="color:#ff7f00">bridge entity</span> in the context, as it bridges between the known entity _Yahoo!_ and the intended answer _California_. We observe that in fact many of the questions one would be interested in involve such bridge entities in some way. 
+Here, we call _Stanford University_ the <span style="color:#ff7f00">bridge entity</span> in the context, as it bridges between the known entity _Yahoo!_ and the intended answer _California_. We observe that in fact many of the questions one would be interested in involve such bridge entities in some way.
 
 For example, consider the following question: _Which team does the player named 2015 Diamond Head Classic’s MVP play for?_
 
 In this question, we can first ask ourselves who the [2015 Diamond Head Classic](https://en.wikipedia.org/wiki/2015_Diamond_Head_Classic)'s MVP is, before looking up which team that player is currently playing for. In this question, the MVP player ([Buddy Hield](https://en.wikipedia.org/wiki/Buddy_Hield)) serves as the <span style="color:#ff7f00">bridge entity</span> that leads us to the answer. The subtle difference from how we reasoned in the _Yahoo!_ case is that here _Buddy Hield_ is the answer to part of the original question, whereas _Stanford University_ isn't.
 
 {% figure %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img12.gif"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img12.gif)
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img12.gif"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img12.gif)
 {% endfigure %}
 
 One could also easily conjure up interesting questions where the <span style="color:#ff7f00">bridge entity</span> is the answer, for instance: _Which movie featuring Ed Harris is based on a French novel?_ (The answer is [_Snowpiercer_](https://en.wikipedia.org/wiki/Snowpiercer).)
@@ -143,13 +147,13 @@ To successfully answer these questions, a QA system needs to be able to not only
 
 The former problem of finding relevant supporting facts is not easy, either, and could even be more challenging. Although it is often relatively easy to locate the relevant facts for comparison questions, it is highly non-trivial for bridge entity questions.
 
-In our experiments with a traditional information retrieval (IR) approach, which ranks all Wikipedia articles from most relevant to least relevant given the question as the query. As a result, we see that on average, out of the two paragraphs that are necessary to correctly answer the question (which we call the "gold paragraphs"), only about 1.1 can be found in the top 10 results. In the plot for IR rankings of gold paragraphs below, both the <span style='color:#66aadd'>higher-ranking paragraph</span> and the <span style='color:orange'>lower-ranking one</span> exhibit a heavy tailed distribution. 
+In our experiments with a traditional information retrieval (IR) approach, which ranks all Wikipedia articles from most relevant to least relevant given the question as the query. As a result, we see that on average, out of the two paragraphs that are necessary to correctly answer the question (which we call the "gold paragraphs"), only about 1.1 can be found in the top 10 results. In the plot for IR rankings of gold paragraphs below, both the <span style='color:#66aadd'>higher-ranking paragraph</span> and the <span style='color:orange'>lower-ranking one</span> exhibit a heavy tailed distribution.
 
 {% figure %}
 [<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img13.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img13.png)
 {% endfigure %}
 
-More specifically, while more than 80% of the higher-ranking paragraphs can be found in the Top 10 IR results, only less than 30% of the lower-ranking ones can be found in the same range[^3]. We calculated that if one naively reads all of the top ranked documents until both of the gold supporting paragraphs have been found, on average this amounts to reading about 600 documents to answer each question -- and even after all that the algorithm still can't reliably tell if we have indeed found both already!
+More specifically, while more than 80% of the higher-ranking paragraphs can be found in the Top 10 IR results, only less than 30% of the lower-ranking ones can be found in the same range.[^3] We calculated that if one naively reads all of the top ranked documents until both of the gold supporting paragraphs have been found, on average this amounts to reading about 600 documents to answer each question -- and even after all that the algorithm still can't reliably tell if we have indeed found both already!
 
 This calls for new methods to tackle the problem of machine reading in the wild when multiple steps of reasoning are required, as progress in this direction will greatly facilitate the development of more effective information access systems.
 
@@ -157,12 +161,12 @@ This calls for new methods to tackle the problem of machine reading in the wild 
 
 Another important and desirable trait of good question answering systems is _explainability_. In fact, a QA system that simply spits out an answer with no explanation or demonstrations to help verify its answers is almost useless, because the user wouldn't be able to trust its answers even if they appear to be correct most of the time. Unfortunately, this has been a problem with many state-of-the-art question answering systems.
 
-To this end, when collecting the data for HotpotQA we also asked our annotators to specify the supporting sentences they used to arrive at the final answer, and released these as part of the dataset. 
+To this end, when collecting the data for HotpotQA we also asked our annotators to specify the supporting sentences they used to arrive at the final answer, and released these as part of the dataset.
 
 In the actual example below from the dataset, sentences <span style="color:#33a02c">in green</span> serve as the supporting facts that underpin the answer (although through numerous steps of reasoning in this case). For more examples of (less dense) supporting facts, the reader is invited to view examples through the [HotpotQA data explorer](https://hotpotqa.github.io/explorer.html).
 
 {% figure %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img14.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img14.png)
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img14.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img14.png)
 {% endfigure %}
 
 
@@ -174,13 +178,13 @@ With the abundance of human knowledge recorded in writing, and more and more of 
 
 To this end, CoQA considers a series of questions that would arise in a natural dialog given a shared context, with challenging questions that require reasoning beyond one dialog turn; HotpotQA, on the other hand, focuses on multi-document reasoning, and challenges the research community to develop new methods to acquire supporting information in a large corpus.
 
-We believe that both datasets will fuel significant development in question answering systems, and we look forward to new insights that these systems will bring to the community. 
+We believe that both datasets will fuel significant development in question answering systems, and we look forward to new insights that these systems will bring to the community.
 
 [^1]: Danqi Chen, Adam Fisch, Jason Weston, Antoine Bordes. Reading Wikipedia to Answer Open-Domain Questions. ACL 2017.
-[^2]: At least they did not mention it as of MM DD, 2019, when this blog post was originally published.
+[^2]: At least they did not mention it as of the writing of this article.
 [^3]: And this is with 25% of the questions being comparison questions, where the names of both entities are specified in the question.
 [^4]: https://github.com/google-research/bert
-[^5]: CoQA is pronounced as *coca*.
+[^5]: Siva Reddy, Danqi Chen, and Christopher D. Manning. [CoQA: A Conversational Question Answering Challenge](https://arxiv.org/pdf/1808.07042.pdf). TACL 2019. "CoQA" is pronounced as *coca*.
 [^6]: See, for instance, "Robin Jia and Percy Liang. Adversarial Examples for Evaluating Reading Comprehension Systems. EMNLP 2017."
 [^7]: In collaboration with our great collaborators from [Carnegie Mellon University](https://www.cs.cmu.edu/) and [Mila](https://mila.quebec/en/).
-
+[^8]: Zhilin Yang\*, Peng Qi\*, Saizheng Zhang\*, Yoshua Bengio, William W. Cohen, Ruslan Salakhutdinov, Christopher D. Manning. [HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering](https://arxiv.org/pdf/1809.09600.pdf). EMNLP 2018. (\* indicates equal contribution)
