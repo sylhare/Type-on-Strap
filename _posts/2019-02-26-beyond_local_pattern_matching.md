@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Beyond Local Pattern Matching: Recent Advances in Machine Reading"
-short-summary: "Summarizing two new datasets meant to enable more conversational, explainable, and powerful QA systems."
-summary: "Summarizing work on two recent NLP datasets — CoQA and HotpotQA — and how they enable more conversational, explainable, and powerful question answering systems."
+short-summary: "Summarizing two new datasets meant to enable more conversational, explainable, and capable QA systems."
+summary: "Summarizing work on two recent NLP datasets — CoQA and HotpotQA — and how they enable more conversational, explainable, and capable question answering systems."
 thumbnail: "assets/img/posts/2019-02-26-beyond_local_pattern_matching/thumb.png"
 author: <a href='http://qipeng.me/'>Peng Qi</a> and <a href='https://cs.stanford.edu/~danqi/'>Danqi Chen</a>
 tags: [nlp,qa]
