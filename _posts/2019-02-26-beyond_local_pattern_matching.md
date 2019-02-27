@@ -184,7 +184,7 @@ We believe that both datasets will fuel significant development in question answ
 [^2]: At least they did not mention it as of the writing of this article.
 [^3]: And this is with 25% of the questions being comparison questions, where the names of both entities are specified in the question.
 [^4]: https://github.com/google-research/bert
-[^5]: Siva Reddy, Danqi Chen, and Christopher D. Manning. [CoQA: A Conversational Question Answering Challenge](https://arxiv.org/pdf/1808.07042.pdf). TACL 2019. "CoQA" is pronounced as *coca*.
+[^5]: Siva Reddy\*, Danqi Chen\*, and Christopher D. Manning. [CoQA: A Conversational Question Answering Challenge](https://arxiv.org/pdf/1808.07042.pdf). TACL 2019. (\* indicates equal contribution) "CoQA" is pronounced as *coca*.
 [^6]: See, for instance, "Robin Jia and Percy Liang. Adversarial Examples for Evaluating Reading Comprehension Systems. EMNLP 2017."
 [^7]: In collaboration with our great collaborators from [Carnegie Mellon University](https://www.cs.cmu.edu/) and [Mila](https://mila.quebec/en/).
 [^8]: Zhilin Yang\*, Peng Qi\*, Saizheng Zhang\*, Yoshua Bengio, William W. Cohen, Ruslan Salakhutdinov, Christopher D. Manning. [HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering](https://arxiv.org/pdf/1809.09600.pdf). EMNLP 2018. (\* indicates equal contribution)
