@@ -21,10 +21,8 @@ Have you ever Googled some random question, such as _how many countries are ther
 
 In today's age of information explosion, when too much new knowledge is generated every day in text (among other modalities) for any single person to digest, enabling machines to read large amounts of text and answer questions for us is one of the most crucial and practical tasks in the field of natural language understanding. Solving the task of machine reading, or question answering, will lay an important cornerstone towards a powerful and knowledgeable AI system like the librarian in the movie _Time Machine_:
 
-<figure>
-<p>
-<iframe width="720" height="405" src="https://www.youtube.com/embed/CQbkhYg2DzM?start=91" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+<figure class="video_container">
+<iframe class="video" src="https://www.youtube.com/embed/CQbkhYg2DzM?start=91" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </figure>
 
 Recently, large-scale question answering datasets like the [Stanford Question Answering Dataset (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer/) and [TriviaQA](http://nlp.cs.washington.edu/triviaqa/) have fueled much of the progress in this direction. By allowing researchers to train powerful and data-hungry deep learning models, these datasets have already enabled impressive results such as an algorithm that can answer many arbitrary questions by finding the appropriate answer in Wikipedia pages -- removing the need for a human to do all the hard work themselves.[^1]
@@ -38,7 +36,7 @@ SQuAD consists of 100k+ examples collected from 500+ Wikipedia articles. For eac
 However, as impressive as such results may seem, these datasets have significant drawbacks that are limiting further advancements in this area. In fact, researchers have shown that models trained with these datasets are not actually learning very sophisticated language understanding and are instead largely drawing on simple pattern-matching heuristics.[^6]
 
 {% figure caption:'From Jia and Liang. Short added sentences showcase that the model learn to pattern-match city names, rather than truly understanding the question and answer.' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img4.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img4.png)
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img4.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img4.png)
 {% endfigure %}
 
 In this blog post, we introduce two recent datasets collected by the Stanford NLP Group with an aim to further advance the field of machine reading. Specifically, these datasets aim at incorporating more "reading" and "reasoning" in the task of question answering, to move beyond questions that can be answered by simple pattern matching. The first of the two, CoQA, attacks the problem from a conversational angle, by introducing a context-rich interface of a natural dialog about a paragraph of text. The second, HotpotQA[^7], goes beyond the scope of one paragraph and instead presents the challenge of reasoning over multiple documents to arrive at the answer, as we will introduce in detail below.
@@ -50,7 +48,7 @@ In this blog post, we introduce two recent datasets collected by the Stanford NL
 Most current question answering systems are limited to answering questions independently (as the SQuAD examples shown above). Though this sort of question-answer exchange does sometimes happen between people, it is more common to seek information by engaging in conversations involving a series of interconnected questions and answers. CoQA is a **Co**nversational **Q**uestion **A**nswering dataset that we developed to address this limitation with a goal of driving the development of conversational AI systems.[^5]  Our dataset contains 127k questions with answers, obtained from 8k conversations about text passages from seven diverse domains.
 
 {% figure %}
-[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img5.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img5.png)
+[<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img5.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img5.png)
 {% endfigure %}
 
 As is shown above, a CoQA example consists of a text passage (collected from a CNN news article in this example) and a conversation about the content of the passage. In this conversation, each turn contains a question and an answer, and every question after the first is dependent on the conversation thus far. Unlike SQuAD and many other existing datasets, the conversation history is indispensable for answering many questions. For example, the second question Q2 (where?) is impossible to answer without knowing what has already been said. It is also worth noting that the entity of focus can actually change through a conversation, for example, "his" in Q4, "he" in Q5, and "them" in Q6 all refer to different entities, which makes understanding these questions more challenging.
@@ -66,7 +64,7 @@ We conducted an in-depth analysis of our dataset. As presented in the following 
 We also find that only 30.5% of the questions do not rely on coreference with the conversational history and are answerable on their own. For the rest, 49.7% of the questions contain explicit coreference markers such as *he*, *she*, or *it*, and the remaining 19.8% of questions (e.g., *Where?*) refer to an entity or event *implicitly*.
 
 {% figure %}
-[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png)
+[<img class="postimage_75" style="max-width: 750px;" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png)
 {% endfigure %}
 
 Compared to the question distribution of SQuAD 2.0, we find that our questions are much shorter than the SQuAD questions (5.5 vs 10.1 words on average), which reflects the conversational nature of our dataset.  Our dataset also presents a richer variety of questions; while nearly half of SQuAD questions are dominated by *what* questions, the distribution of CoQA is spread across multiple question types. Several sectors indicated by prefixes *did*, *was*, *is*, *does* are frequent in CoQA but are completely absent in SQuAD.
@@ -116,7 +114,7 @@ These are important capabilities for machine reading systems to acquire in order
 HotpotQA is a large-scale question answering (QA) dataset containing about 113,000 question-answer pairs that have the characteristics of those we mentioned above.[^8] That is, the questions require QA systems to be able to sift through large quantities of text documents to find information pertinent to generating an answer, and to reason with the multiple supporting facts it found to arrive at the final answer (see below for an example).
 
 {% figure caption:'An example question from HotpotQA' %}
-[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png)
+[<img class="postimage_75" style="max-width: 750px;" src="{{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png"/>]({{ site.baseurl }}/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png)
 {% endfigure %}
 
 The questions and answers are collected in the context of the entire English Wikipedia, and covers a diverse range of topics ranging from science, astronomy, and geography, to entertainment, sports, and legal cases.
