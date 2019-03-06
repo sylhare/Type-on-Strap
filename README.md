@@ -2,8 +2,9 @@
 
 To write a new post - 
 1. install Jekyll
-2. Try running serve_jekyll, and go to the link printed in console in browser
-3. If all looks good, go to \_posts and follow examples of prior posts in writing
+2. Run bundle install in the root dir 
+3. Try running serve_jekyll, and go to the link printed in console in browser
+4. If all looks good, go to \_posts and follow examples of prior posts in writing
 a new one.
 
 To sync with online version, run jekyll build, then 'octopress deploy'
