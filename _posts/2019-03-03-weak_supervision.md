@@ -4,7 +4,7 @@ title: "Weak Supervision: A New Programming Paradigm for Machine Learning"
 short-summary: "Using weak supervision to efficiently label training data."
 summary: "Using weak supervision, or high-level noisy sources of labels, to efficiently label training data."
 thumbnail: "assets/img/posts/2019-02-26-beyond_local_pattern_matching/thumb.png"
-author: Members of Hazy Research
+author: <a href='https://www.paroma.xyz'>Paroma Varma</a>, <a href='https://ajratner.github.io'>Alex Ratner</a>, <a href='https://www.bradenhancock.com'>Braden Hancock</a>, <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>, and <a href='https://cs.stanford.edu/people/chrismre/#students'>other members of Hazy Lab</a>
 tags: [nlp,ws]
 ---
 
