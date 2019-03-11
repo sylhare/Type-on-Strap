@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Weak Supervision: A New Programming Paradigm for ML"
+title: "Weak Supervision: A New Programming Paradigm for Machine Learning"
 short-summary: "On using weak supervision, or high-level noisy sources of labels, to efficiently label training data."
 summary: "On using weak supervision, or high-level noisy sources of labels, to efficiently label training data."
 thumbnail: "assets/img/posts/2019-03-03-weak_supervision/thumb.png"
