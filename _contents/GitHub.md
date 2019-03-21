@@ -21,6 +21,8 @@ GitHub is primarily a file hosting and version control site that allows users to
 
 * [Official Git Book](https://git-scm.com/book/en/v2)
 
+* [Branching with Git](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)
+
 ## Complete Tutorials
 * []() - 
 

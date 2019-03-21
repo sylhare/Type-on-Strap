@@ -30,6 +30,9 @@ There is no clearly superior platform and many courses are cross-listed on sever
 ## Full courses
 * [Open Source Society University Data Science Course](https://github.com/ossu/data-science) - Exhaustive collection of online resources organized into a one-year open source course
 
+## Textbooks
+* [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf) - One of two textbooks utilized in CS 189: Introduction to Machine Learning. 
+
 ## Listicles of Recommended Courses
 * [Free Code Camp: List of Best Online Interactive Courses for Intro Data Science](https://medium.freecodecamp.org/i-ranked-all-the-best-data-science-intro-courses-based-on-thousands-of-data-points-db5dc7e3eb8e)
 * [Free Code Camp: Guide to Data Science with Python](https://medium.freecodecamp.org/a-path-for-you-to-learn-analytics-and-data-skills-bd48ccde7325)
