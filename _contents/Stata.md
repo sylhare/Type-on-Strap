@@ -58,6 +58,8 @@ Since Stata isn't open source there is not as large of a package environment as 
 
 [UCLA IDRE: Applied Survey Data Analysis](https://stats.idre.ucla.edu/stata/seminars/applied-svy-stata13/)
 
+[UNC CPC: Commands to Analyze Survey Data](https://www.cpc.unc.edu/research/tools/data_analysis/statatutorial/sample_surveys/svy_commands)
+
 
 ## Advanced Guides
 [Germán Rodríguez: Stata Programming](https://data.princeton.edu/stata/programming)
