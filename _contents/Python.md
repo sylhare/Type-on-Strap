@@ -60,7 +60,7 @@ Python is one of the most used programming languages in data science. It is open
 
 [Udemy: Bayesian Machine Learning in Python: A/B Testing](https://www.udemy.com/bayesian-machine-learning-in-python-ab-testing/) - 5.5 hour intro to Bayesian statistics and applications for A/B testing in Python. Typically $12.
 
-[Udemy: Unsupervised Machine Learning Hidden Markov Models in Python](https://www.udemy.com/unsupervised-machine-learning-hidden-markov-models-in-python/) - Intro to HMM models for stock price analysis, language modeling, web analytics, biology, and PageRank.
+[Udemy: Unsupervised Machine Learning Hidden Markov Models in Python](https://www.udemy.com/unsupervised-machine-learning-hidden-markov-models-in-python/) - Intro to HMM models for stock price analysis, language modeling, web analytics, biology, and PageRank. Also typically $12.
 
 
 ## Machine Learning
@@ -69,17 +69,17 @@ Python is one of the most used programming languages in data science. It is open
 
 [Udemy: Python for Data Science and Machine Learning](https://www.udemy.com/python-for-data-science-and-machine-learning-bootcamp/) - Over 22 hours of video on everything from Pandas to SciKit-Learn and Tensorflow. Also $12.
 
-[Udemy: Machine Learning A-Z](https://www.udemy.com/machinelearning/) - Great course by the SuperDataScience Team with over 41 hours of video, including corollary exercises in R. Typically costs $12.
+[Udemy: Machine Learning A-Z](https://www.udemy.com/machinelearning/) - Great course by the SuperDataScience Team with over 41 hours of video, including corollary exercises in R. Again, $12.
 
 [Udemy: AWS Machine Learning, AI, SageMaker - With Python](https://www.udemy.com/aws-machine-learning-a-complete-guide-with-python/) - Learn about cloud based machine learning algorithms and how to integrate with your applications.
 
-[Udemy: Deep Learning A-Z™ - Hands-On Artificial Neural Networks](https://www.udemy.com/deeplearning/) - Extension of the SuperDataScience Team course focusing on ANN's with over 22 hours of video.
+[Udemy: Deep Learning A-Z™ - Hands-On Artificial Neural Networks](https://www.udemy.com/deeplearning/) - Extension of the SuperDataScience Team course focusing on ANN's with over 22 hours of video. Yup, $12.
 
-[Udemy: Artificial Intelligence - Reinforcement Learning in Python](https://www.udemy.com/artificial-intelligence-reinforcement-learning-in-python/) - Complete guide to artificial intelligence and machine learning, prep for deep reinforcement learning.
+[Udemy: Artificial Intelligence - Reinforcement Learning in Python](https://www.udemy.com/artificial-intelligence-reinforcement-learning-in-python/) - Complete guide to artificial intelligence and machine learning, prep for deep reinforcement learning. You guessed it, $12.
 
-[Udemy: Deep Learning - Convolutional Neural Networks in Python](https://www.udemy.com/deep-learning-convolutional-neural-networks-theano-tensorflow/) - Computer Vision and Data Science and Machine Learning combined! In Theano and TensorFlow.
+[Udemy: Deep Learning - Convolutional Neural Networks in Python](https://www.udemy.com/deep-learning-convolutional-neural-networks-theano-tensorflow/) - Computer Vision and Data Science and Machine Learning combined! In Theano and TensorFlow. Okay, technically it's $11.99.
 
-[Udemy: Unsupervised Deep Learning in Python](https://www.udemy.com/unsupervised-deep-learning-in-python/) - Theano and Tensorflow: Autoencoders, Restricted Boltzmann Machines, Deep Neural Networks, t-distributed Stochastic Neighbor Embedding (SNE) and Principal Component Anaylsis (PCA).
+[Udemy: Unsupervised Deep Learning in Python](https://www.udemy.com/unsupervised-deep-learning-in-python/) - Theano and Tensorflow: Autoencoders, Restricted Boltzmann Machines, Deep Neural Networks, t-distributed Stochastic Neighbor Embedding (SNE) and Principal Component Anaylsis (PCA). Costs somewhere between $11.98 and $12, before tax.
 
 
 ## Textbooks and Resources
