@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Prereqs
-feature-img: "assets/img/pexels/travel.jpeg"
+feature-img: ""
 tags: [Beginners, Start, Prereqs, Prerequisite, Skills, Stats, Statistics, Math]
 ---
 
