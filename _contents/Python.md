@@ -71,9 +71,9 @@ Python is one of the most used programming languages in data science. It is open
 
 [Udemy: Machine Learning A-Z](https://www.udemy.com/machinelearning/) - Great course by the SuperDataScience Team with over 41 hours of video, including corollary exercises in R. Again, $12.
 
-[Udemy: AWS Machine Learning, AI, SageMaker - With Python](https://www.udemy.com/aws-machine-learning-a-complete-guide-with-python/) - Learn about cloud based machine learning algorithms and how to integrate with your applications.
+[Udemy: AWS Machine Learning, AI, SageMaker - With Python](https://www.udemy.com/aws-machine-learning-a-complete-guide-with-python/) - Learn about cloud based machine learning algorithms and how to integrate with your applications. $12.
 
-[Udemy: Deep Learning A-Z™ - Hands-On Artificial Neural Networks](https://www.udemy.com/deeplearning/) - Extension of the SuperDataScience Team course focusing on ANN's with over 22 hours of video. Yup, $12.
+[Udemy: Deep Learning A-Z™ - Hands-On Artificial Neural Networks](https://www.udemy.com/deeplearning/) - Extension of the SuperDataScience Team course focusing on ANN's with over 22 hours of video. Yup, everything on Udemy is $12.
 
 [Udemy: Artificial Intelligence - Reinforcement Learning in Python](https://www.udemy.com/artificial-intelligence-reinforcement-learning-in-python/) - Complete guide to artificial intelligence and machine learning, prep for deep reinforcement learning. You guessed it, $12.
 
