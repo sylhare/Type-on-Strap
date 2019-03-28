@@ -1,4 +1,11 @@
-# Prereqs
+---
+layout: page
+title: Prereqs
+feature-img: "assets/img/pexels/travel.jpeg"
+tags: [Beginners, Start, Prereqs, Prerequisite, Skills, Stats, Statistics, Math]
+---
+
+# Prerequisite Skills
 
 Data science at it's core is mostly applied statistics and mathematics. In order to properly use and interpret a lot of code and output you'll need some background in statistics and probability. Calculus and linear algebra are helpful too. A background in computer science or programming is helpful but not essential, though you will need basic familiarity with file storage, installing programs, etc.
 
