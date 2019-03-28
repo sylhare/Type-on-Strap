@@ -12,7 +12,8 @@ tags: [Python, Anaconda, python, anaconda]
 
 ## [Jupyter Notebooks](https://jupyter.org/)
 
-Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone using Python.
+Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone using Python. Jupyter Notebooks offer a clean, interactive environment for running Python from a browser. Spyder is a more traditional graphical user interface (GUI) application, similar to the RStudio or Stata environment.
+
 
 ## Complete Tutorials
 
@@ -20,12 +21,12 @@ Python is one of the most used programming languages in data science. It is open
 
 [Stackify: 30 Python Tutorials](https://stackify.com/learn-python-tutorials/) - Comprehensive list of Python tutorials, from the beginner to the advanced.
 
-[Hitchhikers Guide to Python](https://docs.python-guide.org/intro/learning/)
+[Hitchhikers Guide to Python](https://docs.python-guide.org/intro/learning/) - This opinionated guide exists to provide both novice and expert Python developers a best practice handbook to the installation, configuration, and usage of Python on a daily basis.
 
 
 ## Beginner's Guides
 
-[EdX: Python for Data Science](https://www.edx.org/course/python-for-data-science-0)
+[EdX UCSD: Python for Data Science](https://www.edx.org/course/python-for-data-science-0) - Learn to use powerful, open-source, Python tools, including Pandas, Git and Matplotlib, to manipulate, analyze, and visualize complex datasets.
 
 [EdX Berkeley: Computational Thinking with Python](https://www.edx.org/course/foundations-data-science-computational-uc-berkeleyx-data8-1x) - First in the "Data 8" series by UC Berkeley, introducing concepts of data science through Python.
 
@@ -39,6 +40,7 @@ Python is one of the most used programming languages in data science. It is open
 
 
 ## Jupyter Notebooks
+
 [Datacamp: Jupyter Notebook Tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook)
 
 [RealPython: Intro to Jupyter Notebook](https://realpython.com/jupyter-notebook-introduction/)
@@ -49,7 +51,8 @@ Python is one of the most used programming languages in data science. It is open
 
 
 ## Intermediate Guides
-[EdX Berkeley: Inferential Thinking by Re-Sampling](https://www.edx.org/course/foundations-of-data-science-inferential-thinking-by-resampling-0) - 
+
+[EdX Berkeley: Inferential Thinking by Re-Sampling](https://www.edx.org/course/foundations-of-data-science-inferential-thinking-by-resampling-0) - Learn how to use inferential thinking to make conclusions about unknowns based on data in random samples.
 
 [Real Python: Intermediate Python Guides](https://realpython.com/tutorials/intermediate/) - Huge collection of guides on Django, object-oriented programming, and more!
 
@@ -62,7 +65,7 @@ Python is one of the most used programming languages in data science. It is open
 
 ## Machine Learning
 
-[EdX Berkeley: Prediction by Machine Learning](https://www.edx.org/course/foundations-of-data-science-prediction-and-machine-learning-0)
+[EdX Berkeley: Prediction and Machine Learning](https://www.edx.org/course/foundations-of-data-science-prediction-and-machine-learning-0) - Learn how to use machine learning, with a focus on regression and classification, to automatically identify patterns in your data and make better predictions.
 
 [Udemy: Python for Data Science and Machine Learning](https://www.udemy.com/python-for-data-science-and-machine-learning-bootcamp/) - Over 22 hours of video on everything from Pandas to SciKit-Learn and Tensorflow. Also $12.
 
