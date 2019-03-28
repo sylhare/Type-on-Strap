@@ -6,9 +6,18 @@ feature-img: "assets/img/pexels/circuit.jpeg"
 tags: [About, Archive]
 ---
 
-Type on Strap is based on Type Theme, a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
+The Data Science Discovery Guide is for anyone interesting in learning more about data science! Our collection of resources features online courses, textbooks, data sources, and programming languages and projects that are perfect for everyone from the absolute beginner to the advanced data scientist. 
 
-Head over to the [theme's documentation](https://github.io/sylhare/Type-on-Strap) for much more information about Type on Strap or to install this theme on your own Jekyll site.
+Interested in seeing if data science is right for you? Check out our [Starter's Guide].
 
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
+Want to be a data scientist but not sure that you have enough stats or math background? Refresh your skills in the [Prereqs section].
+
+Already know which program or language you would like to learn more about? Head over to the [Contents section].
+
+Everything in the Guide is updated and maintained by our loving community of data scientists. If you have a suggestion for a new resource or comment about an existing one, don't hesitate to email us or make a pull request on [our GitHub repo]!
  
+The Discovery Guide was started with the [Data Scholars: Discovery] team at the University of California, Berkeley. While we are happy to have been founded by Cal Bears, we do not represent the University of California or the [Division of Data Science] in any official capacity.
+ 
+Feel free to share anything and everything from the Guide as widely as you would like! We would always appreciate attribution, since we love to share our knowledge and resources with more folks, but we are committed to being fully open-source. Many of the resources gathered here are proprietary, however, in the form of online courses or sample code, so please make sure to respect their intellectual property.
+ 
+Finally, a big shout-out to the [Type-on-Strap web theme] on GitHub for designing this amazing template! 
