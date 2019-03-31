@@ -8,6 +8,9 @@ thumbnail: "assets/img/posts/2019-02-21-ethical_best_practices/icon.png"
 opinion: true
 author: <a href='http://web.stanford.edu/~shushman/'>Shushman Choudhury</a>, <a href='https://twitter.com/michellearning'>Michelle Lee</a>, and <a href='https://twitter.com/andrey_kurenkov'>Andrey Kurenkov</a>
 tags: [opinion, ethics]
+redirect_from:
+  - ethical_best_practices/
+  - ethical_best_practices
 ---
 
 *Disclaimer: this is an opinion piece that represents the views of its authors, and not all of SAIL. We would like to thank SAIL professors Fei-Fei Li, Christopher Manning, and Dorsa Sadigh for providing invaluable comments and feedback on this post.*
