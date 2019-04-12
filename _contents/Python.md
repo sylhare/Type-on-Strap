@@ -14,6 +14,10 @@ tags: [Python, Anaconda, python, anaconda]
 
 Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone using Python. Jupyter Notebooks offer a clean, interactive environment for running Python from a browser. Spyder is a more traditional graphical user interface (GUI) application, similar to the RStudio or Stata environment.
 
+Here are some quick guides to follow along for installing Python and Anaconda:
+[Installing Python](https://realpython.com/installing-python/)
+[Installing Anaconda (Windows)](https://www.datacamp.com/community/tutorials/installing-anaconda-windows)
+[Installing Anaconda (Mac)](https://www.datacamp.com/community/tutorials/installing-anaconda-mac-os-x)
 
 ## Complete Tutorials
 
