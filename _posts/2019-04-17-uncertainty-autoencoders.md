@@ -39,12 +39,12 @@ where $$\epsilon$$ is any external noise in the measurement process. The acquisi
 
 In **standard compressed sensing**, the acquistion mapping $$ f$$ is typically linear in $$ x $$ (i.e., $$ f(x) = Wx$$ for some matrix $$ W \in \mathbb{R}^{m\times n}$$). In such a case, the system is underdetermined since we have more variables ($$ n $$) than constraints ($$ m $$). To guarantee unique, non-trivial recovery, we assume the signals are sparse in an appropriate basis (e.g., Fourier basis for audio, wavelet basis for images). Thereafter, acquisition via certain classes of random matrices and recovery by solving a LASSO optimization method guarantees unique recovery with high probability using only a few measurements (roughly logarithmic in the data dimensionality).
 
-In this work, we consider the setting of **statistical compressed sensing** where we have access to a dataset $$ \mathcal{D} $$ of training data signals $$ x $$. We assume that every signal $$ x \stackrel{i.i.d.}{\sim} q_{\textrm{data}}$$ for some unknown data distribution $$q_{\textrm{data}}$$. One way to think about acquisition and recovery in this setting is to consider a game between an agent and nature. 
+In this work, we consider the setting of **statistical compressed sensing** where we have access to a dataset $$ \mathcal{D} $$ of training data signals $$ x $$. We assume that every signal $$ x \stackrel{i.i.d.}{\sim} q_{\textrm{data}}$$ for some unknown data distribution $$q_{\textrm{data}}$$. One way to think about acquisition and recovery in this setting is to consider a game between an agent and nature.
 
 **At training time:**
 
 1. Nature shows the agent a finite dataset $$ \mathcal{D} $$ of high-dimensional signals.
-2. Agent learns the acquistion and recovery mappings  $$f$$ and $$g$$ by optimizing a suitable objective. 
+2. Agent learns the acquistion and recovery mappings  $$f$$ and $$g$$ by optimizing a suitable objective.
 
 **At test time:**
 
@@ -56,9 +56,9 @@ To play this game, the agent's task is to choose the acquisition and recovery ma
 
 ### Uncertainty Autoencoders
 
-In practice, there are two sources of uncertainty in recovering the signal $$x$$ from the measurements $$y$$ alone, even if the agent is allowed to pick an acquisition mapping $$f$$. One is due to the stochastic measurement noise $$ \epsilon $$. Second, the acquisition mapping $$f$$ is typically parameterized with a family of finite-precision restricted mappings $$ \Phi$$ (e.g., linear mappings as in standard compressed sensing or more generally neural networks). Given that the dimensionality of the measurements $$ y $$ is smaller than that of the signal $$ x $$, such restrictions would prohibit learning a bijective mapping even in the absence of noise. 
+In practice, there are two sources of uncertainty in recovering the signal $$x$$ from the measurements $$y$$ alone, even if the agent is allowed to pick an acquisition mapping $$f$$. One is due to the stochastic measurement noise $$ \epsilon $$. Second, the acquisition mapping $$f$$ is typically parameterized with a family of finite-precision restricted mappings $$ \Phi$$ (e.g., linear mappings as in standard compressed sensing or more generally neural networks). Given that the dimensionality of the measurements $$ y $$ is smaller than that of the signal $$ x $$, such restrictions would prohibit learning a bijective mapping even in the absence of noise.
 
-For the illustrative case where the mapping $$ f $$ is linear, we established that exact recovery is not possible. Then what are some other ways to efficiently acquire data? In the figure below, we consider a toy setting where the true data distribution is an equally-weighted mixture of two 2D Gaussians stretched along orthogonal directions. We sample 100 points (black) from this mixture and consider two methods to reduce the dimensionality of these points to one dimension. 
+For the illustrative case where the mapping $$ f $$ is linear, we established that exact recovery is not possible. Then what are some other ways to efficiently acquire data? In the figure below, we consider a toy setting where the true data distribution is an equally-weighted mixture of two 2D Gaussians stretched along orthogonal directions. We sample 100 points (black) from this mixture and consider two methods to reduce the dimensionality of these points to one dimension.
 
 
 {% figure %}
@@ -66,7 +66,7 @@ For the illustrative case where the mapping $$ f $$ is linear, we established th
 {% endfigure %}
 
 
-One option is to project the data along directions that account most for the variability in the data using principal component analysis (PCA). For the 2D example above, this is shown via the blue points on the magenta line. This line captures a large fraction of the variance in the data but collapses data sampled from the bottom right Gaussian into a narrow region. When multiple datapoints are collapsed into overlapping, densely clustered regions in the low-dimensional space, disambiguating the association between the low-dimensional projections and the original datapoints is difficult during recovery.  
+One option is to project the data along directions that account most for the variability in the data using principal component analysis (PCA). For the 2D example above, this is shown via the blue points on the magenta line. This line captures a large fraction of the variance in the data but collapses data sampled from the bottom right Gaussian into a narrow region. When multiple datapoints are collapsed into overlapping, densely clustered regions in the low-dimensional space, disambiguating the association between the low-dimensional projections and the original datapoints is difficult during recovery.
 
 Alternatively, we can consider the projections (red points) on the green axis. These projections are more spread out and suggest that recovery is easier, even if doing so increases the total variance in the projected space compared to PCA. Next, we present the UAE framework which learns precisely the aforementioned low-dimensional projections that make recovery more accurate[^pca].
 
@@ -96,7 +96,7 @@ Evaluating (and optimizing) the mutual information is unfortunately non-trivial 
 In particular, we consider a parameterized, variational approximation $$ p_\theta (x \vert y )$$  to the true posterior $$q_\phi( x \vert y) $$. Here, $$\theta \in \Theta$$ denote the variational parameters. Substituting the variational distribution gives us the following lower bound to the original objective
 
 $$
- \mathcal{L}(\phi) \geq  E_{q_\phi(x, y)}[\log p_\theta(x \vert y)] := \mathcal{L}(\phi, \theta). 
+ \mathcal{L}(\phi) \geq  E_{q_\phi(x, y)}[\log p_\theta(x \vert y)] := \mathcal{L}(\phi, \theta).
 $$
 
 The above expression defines the learning objective for **uncertainty autoencoders**, where **acquisition can be seen as encoding the data signals** and **recovery corresponds to decoding the signals from the measurements**.
@@ -104,7 +104,7 @@ The above expression defines the learning objective for **uncertainty autoencode
 
 #### Example
 
-In practice, the expectation in the UAE objective is evaluated via Monte Carlo: the data signal $$ x$$ is sampled from the training dataset $$ \mathcal{D}$$, and the measurements $$ y $$ are sampled from an assumed noise model that permits reparameterization (e.g., isotropic Gaussian). Depending on the accuracy metric of interest for recovery, we can make a distributional assumption on the amortized variational distribution $$ p_\theta(x \vert y)$$ (e.g., Gaussian with fixed variance for $$\ell_2$$, Laplacian for $$\ell_1$$) and map the measurements $$ y$$ to the sufficient statistics of $$ p_\theta(x \vert y)$$ via the recovery mapping $$ g_\theta $$. 
+In practice, the expectation in the UAE objective is evaluated via Monte Carlo: the data signal $$ x$$ is sampled from the training dataset $$ \mathcal{D}$$, and the measurements $$ y $$ are sampled from an assumed noise model that permits reparameterization (e.g., isotropic Gaussian). Depending on the accuracy metric of interest for recovery, we can make a distributional assumption on the amortized variational distribution $$ p_\theta(x \vert y)$$ (e.g., Gaussian with fixed variance for $$\ell_2$$, Laplacian for $$\ell_1$$) and map the measurements $$ y$$ to the sufficient statistics of $$ p_\theta(x \vert y)$$ via the recovery mapping $$ g_\theta $$.
 
 As an illustration, consider an isotropic Gaussian noise model $$ q_\phi(y \vert x) $$ with known scalar variance $$ \sigma^2$$. If we also let the variational distribution $$ p_\theta(x \vert y)$$ be an isotropic Gaussian with fixed scalar variance, we obtain the following objective for an uncertainty autoencoder (UAE)
 
@@ -119,9 +119,9 @@ for some normalization constant $$ c$$ that is  independent of $$ \phi$$ and $$\
 Even beyond statistical compressive sensing, UAEs present an alternate framework for unsupervised representation learning where the compressed measurements can be interpreted as the latent representations. Below, we discuss how UAEs computationally differ and relate to commonly used autoencoders.
 
 * *Standard autoencoders (AE):* In the absence of any noise in the latent space, the UAE learning objective reduces to that of an AE.
-* *Denoising autoencoders (DAE)[^dae]:* A DAE 
+* *Denoising autoencoders (DAE)[^dae]:* A DAE
 adds noise in the observed space (i.e., to the data signals), whereas a UAE models the uncertainty in the latent space.
-* *Variational autoencoders (VAE)[^vae]:* A VAE 
+* *Variational autoencoders (VAE)[^vae]:* A VAE
 regularizes the latent space to follow a prior distribution. There is no explicit prior in a UAE, and consequently no KL divergence regularization of the distribution over the latent space[^bvae]. This avoids pitfalls of representation learning with VAEs where the latent representations are ignored in the presence of powerful decoders[^vlae].
 
 
@@ -131,7 +131,7 @@ Yes! Under suitable assumptions, we show that a UAE learns an implicit generativ
 
 
 {% figure %}
-[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/markovchain.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/markovchain.png) 
+[<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/markovchain.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/markovchain.png)
 <figcaption>
 	Illustration of the Markov chain sampler for q<sub>data</sub> based on UAE.
 </figcaption>
@@ -141,21 +141,21 @@ Yes! Under suitable assumptions, we show that a UAE learns an implicit generativ
 ### Overview of experimental results
 
 We present some experimental results on statistical compressive sensing of image datasets below for varying numbers of measurements $$m$$ and random Gaussian noise.  We compare against two baselines:
-* LASSO in an appropriate sparsity-inducing basis 
+* LASSO in an appropriate sparsity-inducing basis
 * CS-VAE/DCGAN[^csgm], a recently proposed compressed sensing method that searches the latent space of pretrained generative models such as VAEs and GANs for the latent vectors that minimize the recovery loss.
 
- 
+
 #### MNIST
 
 {% figure %}
-[<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist.png) 
+[<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist.png)
 <figcaption>
 	Test <i>l</i><sub>2</sub> reconstruction error (per image) for varying <i>m</i>.
 </figcaption>
 {% endfigure %}
 
 {% figure %}
-[<img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist_reconstr.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist_reconstr.png) 
+[<img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist_reconstr.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist_reconstr.png)
 <figcaption>
 	Reconstructions for <i>m</i>=25 measurements.
 </figcaption>
@@ -164,14 +164,14 @@ We present some experimental results on statistical compressive sensing of image
 #### CelebA
 
 {% figure %}
-[<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba.png) 
+[<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba.png)
 <figcaption>
 	Test <i>l</i><sub>2</sub> reconstruction error (per image) for varying <i>m</i>.
 </figcaption>
 {% endfigure %}
 
 {% figure %}
-[<img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba_reconstr.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba_reconstr.png) 
+[<img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba_reconstr.png"/>]({{ site.baseurl }}/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba_reconstr.png)
 <figcaption>
 	Reconstructions for <i>m</i>=50 measurements.
 </figcaption>
@@ -179,14 +179,14 @@ We present some experimental results on statistical compressive sensing of image
 
  On average, we observe a 32% improvement across all datasets and measurements. For results on more datasets and tasks involving applications of UAE to transfer learning and supervised learning, check out our paper below!
 
-> Uncertainty Autoencoders: Learning Compressed Representations via Variational Information  Maximization  
-> Aditya Grover, Stefano Ermon  
-> AISTATS, 2019.   
+> Uncertainty Autoencoders: Learning Compressed Representations via Variational Information  Maximization
+> Aditya Grover, Stefano Ermon
+> AISTATS, 2019.
 > [paper](https://arxiv.org/pdf/1812.10539) [code](https://github.com/aditya-grover/uae)
 
-This post was shared earlier on the [Ermongroup blog](https://ermongroup.github.io/blog/uae/).
+This post was shared earlier on the [Ermon group blog](https://ermongroup.github.io/blog/uae/).
 
-[^pca]: We show in Theorem 2 in the paper that in the case of a Gaussian noise model, PCA is a special case of the information maximizing objective for a linear encoder and optimal (potentially non-linear) decoder under suitable assumptions. 
+[^pca]: We show in Theorem 2 in the paper that in the case of a Gaussian noise model, PCA is a special case of the information maximizing objective for a linear encoder and optimal (potentially non-linear) decoder under suitable assumptions.
 
 [^bvae]: While not discussed in the original paper, the UAE objective can be seen as a special case of the $$\beta$$-VAE objective for $$\beta=0$$. Higgins, Irina, Loic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, and Alexander Lerchner. 2016. “Beta-Vae: Learning Basic Visual Concepts with a Constrained Variational Framework.” In ICLR, 2017.
 
