@@ -103,7 +103,7 @@ header {
    list-style: none;
    border-top: 1px solid rgba(0, 0, 0, 0.1);
    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    
+
 }
 
 // Responsive scrolling
@@ -143,6 +143,9 @@ header {
     }
 }
 
+.math-display {
+    text-align: center;
+  
 .post-date {
   font-size: 80%;
   color: #999;
