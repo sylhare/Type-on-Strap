@@ -15,8 +15,8 @@ layout: default
     {% endif %}
     <h1 id="{{ page.title | cgi_escape }}">{{ page.title }}</h1>
     <p class="meta">
-    {% if page.author %}{{ page.author }}<br>{% endif %}
-    {{ page.date | date: "%B %-d, %Y" }}
+    {% if page.author %}{{ page.author }}{% endif %}
+    <div class="post-date">{{ page.date | date: "%B %-d, %Y" }}</div>
     </p>
   <hr>
   </header>
