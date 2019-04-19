@@ -106,13 +106,13 @@ The above expression defines the learning objective for **uncertainty autoencode
 
 In practice, the expectation in the UAE objective is evaluated via Monte Carlo: the data signal $$ x$$ is sampled from the training dataset $$ \mathcal{D}$$, and the measurements $$ y $$ are sampled from an assumed noise model that permits reparameterization (e.g., isotropic Gaussian). Depending on the accuracy metric of interest for recovery, we can make a distributional assumption on the amortized variational distribution $$ p_\theta(x \vert y)$$ (e.g., Gaussian with fixed variance for $$\ell_2$$, Laplacian for $$\ell_1$$) and map the measurements $$ y$$ to the sufficient statistics of $$ p_\theta(x \vert y)$$ via the recovery mapping $$ g_\theta $$.
 
-As an illustration, consider an isotropic Gaussian noise model $$ q_\phi(y \vert x) $$ with known scalar variance $$ \sigma^2$$. If we also let the variational distribution $$ p_\theta(x \vert y)$$ be an isotropic Gaussian with fixed scalar variance, we obtain the following objective for an uncertainty autoencoder (UAE)
+As an illustration, consider an isotropic Gaussian noise model $$ q_\phi(y \vert x) $$ with known scalar variance $$ \sigma^2$$. If we also let the variational distribution $$ p_\theta(x \vert y)$$ be an isotropic Gaussian with fixed scalar variance, we obtain the following objective maximized by an uncertainty autoencoder (UAE)
 
 $$
-\mathcal{L}(\phi, \theta) \approx c \sum_{x \in \mathcal{D}} \sum_{y \sim \mathcal{N}(y \mid f_\phi(x), \sigma^2)} \Vert x - g_\theta(y)\Vert_2
+\mathcal{L}(\phi, \theta) \approx - c \sum_{x \in \mathcal{D}} \sum_{y \sim \mathcal{N}(y \mid f_\phi(x), \sigma^2)} \Vert x - g_\theta(y)\Vert_2
 $$
 
-for some normalization constant $$ c$$ that is  independent of $$ \phi$$ and $$\theta$$.
+for some positive normalization constant $$ c$$ that is independent of $$ \phi$$ and $$\theta$$.
 
 ### Comparison with commonly used autoencoders
 
@@ -179,10 +179,10 @@ We present some experimental results on statistical compressive sensing of image
 
  On average, we observe a 32% improvement across all datasets and measurements. For results on more datasets and tasks involving applications of UAE to transfer learning and supervised learning, check out our paper below!
 
-> Uncertainty Autoencoders: Learning Compressed Representations via Variational Information  Maximization
-> Aditya Grover, Stefano Ermon
+> Uncertainty Autoencoders: Learning Compressed Representations via Variational Information  Maximization. 
+> Aditya Grover, Stefano Ermon. 
 > AISTATS, 2019.
-> [paper](https://arxiv.org/pdf/1812.10539) [code](https://github.com/aditya-grover/uae)
+> [paper](https://arxiv.org/pdf/1812.10539), [code](https://github.com/aditya-grover/uae)
 
 This post was shared earlier on the [Ermon group blog](https://ermongroup.github.io/blog/uae/).
 
