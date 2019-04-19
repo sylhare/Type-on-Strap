@@ -1,7 +1,7 @@
 // Typography
-$font-family-main: Roboto, Helvetica, Arial, sans-serif;
-$font-family-headings: Roboto, Helvetica, Arial, sans-serif;
-$font-size: 1.1em;
+$font-family-main: "Open Sans", sans-serif;
+$font-family-headings: $font-family-main;
+$font-size: medium;
 
 // Padding
 $padding-large: 20%;
@@ -27,7 +27,7 @@ $text-shadow: #3f3f3f;
 $search-color: #999;
 
 // Header colours
-$header-link-color: #000;
+$header-link-color: #444;
 $navbar-separator-opacity: 0;
 
 // Feature image for articles

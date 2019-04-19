@@ -16,7 +16,7 @@ theme_settings:
   header_text: > #two or three lines to describe your site
      <p>The official Stanford AI Lab blog</p>
   footer_text: >
-   &copy; 2018 Stanford AI Lab | Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> based on <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a> theme.
+   &copy; 2019 Stanford AI Lab
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
