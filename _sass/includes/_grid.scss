@@ -25,7 +25,6 @@
     float: left;
     border-radius: 5px;
 
-
     img {
         /* for image formatting in the masonry */
         display: block;
@@ -37,12 +36,11 @@
 /* --- Masonry gutter size --- */
 
 .gutter-sizer {
-
     width: 1%;
 }
 
 .grid-item:first-of-type {
-    margin: 0;
+    margin-bottom: 1%;
 }
 
 .grid-item {
