@@ -3,13 +3,13 @@
     <div class="post-teaser">
         {% if post.thumbnail %}
         <div class="post-img">
-            <img alt="{{ post.title }}" src="{{ site.baseurl }}/{{ post.thumbnail }}">
+            <img alt="{{ post.title }}" src="{{ post.thumbnail | relative_url }}">
         </div>
         {% endif %}
         <span>
           <header>
             <h1>
-              <a alt="{{ post.title }}" class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+              <a alt="{{ post.title }}" class="post-link" href="{{ post.url | relative_url }}">
                 {{ post.title }}
               </a>
             </h1>
@@ -26,17 +26,46 @@
 </div>
 
 {% if paginator.total_pages > 1 %}
-<div class="pagination">
+<div class="pagination" style="display: inline-block;">
+    <div style="position: absolute; left: 35%;">
     {% if paginator.previous_page %}
-    <a alt="{{ site.theme_settings.str_previous_page }}" 
-       href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button">
-      <i class="fa fa-chevron-left"></i>
-      {{ site.theme_settings.str_previous_page }}
-    </a> {% endif %} {% if paginator.next_page %}
-    <a alt="{{ site.theme_settings.str_next_page }}" 
-       href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="button">
-      {{ site.theme_settings.str_next_page }}
-      <i class="fa fa-chevron-right"></i>
-    </a> {% endif %}
+        <!-- << -->
+        {% if paginator.previous_page != 1 %}
+        <a alt="{{ site.theme_settings.str_previous_page }}"
+           href="{{ '/' | relative_url }}" style="margin-right:0" class="button">
+          <i class="fa fa-angle-double-left"></i>
+        </a>
+        {% endif %}   
+        <!-- < previous -->
+        <a href="{{ paginator.previous_page_path | relative_url }}" {% if paginator.previous_page != 1 %}style="margin-left:0"{% endif %} class="button">
+          <i class="fa fa-chevron-left"></i>
+          {{ site.theme_settings.str_previous_page }}
+        </a>
+    {% endif %}
+    </div>            
+    
+    <!-- Centering not working well on all format
+    <div style="position: absolute; left: 50%;">
+        <div style="position: relative; left: -50%;">
+        {{ paginator.page }} / {{ paginator.total_pages }}
+        </div>    
+    </div> -->     
+
+    <div style="position: absolute; right: 35%;">
+    {% if paginator.next_page %}
+        <!-- next > -->
+        <a alt="{{ site.theme_settings.str_next_page }}" 
+           href="{{ paginator.next_page_path | relative_url }}" {% if paginator.next_page != paginator.total_pages %}style="margin-right:0"{% endif %} class="button">
+          {{ site.theme_settings.str_next_page }}
+          <i class="fa fa-chevron-right"></i>
+        </a>
+        <!-- >> -->
+        {% if paginator.next_page != paginator.total_pages %}
+        <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" style="margin-left:0" class="button">
+          <i class="fa fa-angle-double-right"></i>
+        </a>
+        {% endif %}
+    {% endif %}
+    </div>     
 </div>
 {% endif %}

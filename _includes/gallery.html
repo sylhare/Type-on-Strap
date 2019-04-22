@@ -12,13 +12,12 @@ html { overflow-y: scroll; }
 <div class="gutter-sizer"></div>
 {% for image in site.static_files %}
   {% if image.path contains include.gallery_path %}
-    
-        <img src="{{ image.path | prepend: site.baseurl }}" alt="" class="grid-item" style="padding: 0;">
-      
+    {% unless image.path contains '.md' %}
+        <img src="{{ image.path | relative_url }}" alt="" class="grid-item" style="padding: 0;">
+    {% endunless %}  
   {% endif %}
 {% endfor %}
 </div> 
 
-<!-- Require JQuery >= 3.2.1 Requireas well -->
-<script src="{{ site.baseurl }}/assets/js/vendor/masonry.pkgd.min.js" type="text/javascript"></script>
-<script src="{{ site.baseurl }}/assets/js/vendor/imagesloaded.min.js" type="text/javascript"></script>
+<script src="{{ "/assets/js/vendor/imagesloaded.min.js" | relative_url }}" type="text/javascript"></script>
+<script src="{{ "/assets/js/vendor/masonry.pkgd.min.js" | relative_url }}" type="text/javascript"></script>
