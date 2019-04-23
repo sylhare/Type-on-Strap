@@ -1,0 +1,51 @@
+// Pagination
+.pagination {
+    padding: $padding-small $padding-large 0 $padding-large;
+    text-align: center;
+    margin-bottom: 2em;
+
+    @media (max-width: 600px) {
+        padding: $padding-small;
+    }
+
+    .button {
+        display: inline;
+        margin: 0em 1.5em;
+        overflow: auto;
+
+        i {
+            vertical-align: middle;
+        }
+
+        @media (max-width: $break) {
+            display: table-cell;
+        }
+    }
+
+    .previous {
+        position: absolute;
+        left: 10%;
+
+        @media (min-width: $break) {
+            left: 35%;
+        }
+
+        @media (max-width: $break) {
+            left: 2%;
+        }
+
+    }
+
+    .next {
+        position: absolute;
+        right: 10%;
+
+        @media (min-width: $break) {
+            right: 35%;
+        }
+
+        @media (max-width: $break) {
+            right: 2%;
+        }
+    }
+}
