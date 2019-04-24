@@ -12,6 +12,10 @@ script:
   
 notifications:
   email: false
+  
+after_script:  
+  - gem install type-on-strap
+  - gem install jekyll-theme-type-on-strap  
 
 # branch whitelist, only for GitHub Pages
 branches:

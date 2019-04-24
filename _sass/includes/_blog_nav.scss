@@ -1,0 +1,50 @@
+// Pagination
+.pagination {
+    padding: $padding-small $padding-large 0 $padding-large;
+    display: inline-block;
+    text-align: center;
+    //margin-bottom: 2em;
+    width: 100%;
+    clear: both;
+
+    @media (max-width: 600px) {
+        padding: $padding-small;
+    }
+
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .page_number {
+        display: inline-block;
+        margin-top: 0.4em;
+        
+         @media (max-width: 254px) {
+            display: none;
+        }
+    }
+
+    .button {
+        margin: 0em;
+        display: inline;
+
+        i {
+            vertical-align: middle;
+        }
+
+        @media (max-width: $break) {
+            display: table-cell;
+        }
+    }
+
+    .previous {
+        float: left;
+    }
+
+    .next {
+        float: right;
+    }
+}

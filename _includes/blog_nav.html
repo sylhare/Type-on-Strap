@@ -1,0 +1,40 @@
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+    <div class="previous">
+        
+        {% if paginator.previous_page and paginator.previous_page != 1%}
+        <!-- << -->
+        <a alt="{{ site.theme_settings.str_previous_page }}" href="{{ '/' | relative_url }}" style="margin-right:0.1em" class="button">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
+        {% endif %}
+        
+        <!-- < previous -->
+        <a href="{{ paginator.previous_page_path | relative_url }}" {% unless paginator.previous_page %}style="visibility:hidden"{% endunless %} class="button">
+            <i class="fa fa-chevron-left"></i>
+            {{ site.theme_settings.str_previous_page }}
+        </a>
+    </div>
+
+    <div class="page_number">
+        {{ paginator.page }} / {{ paginator.total_pages }}
+    </div>
+
+    <div class="next">
+        
+        <!-- next > -->
+        <a alt="{{ site.theme_settings.str_next_page }}" href="{{ paginator.next_page_path | relative_url }}" {% unless paginator.next_page %}style="visibility:hidden"{% endunless %} class="button">
+            {{ site.theme_settings.str_next_page }}
+            <i class="fa fa-chevron-right"></i>
+        </a>
+
+        {% if paginator.next_page and paginator.next_page != paginator.total_pages %}
+        <!-- >> -->
+        <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" style="margin-left:0.1em" class="button">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+        {% endif %}
+        
+    </div>
+</div>
+{% endif %}
