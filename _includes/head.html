@@ -35,10 +35,13 @@
 
     <!-- Google Fonts -->
     {% if site.theme_settings.google_fonts %}
-    <link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css"> 
+    <link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css">
+    {% else %}
+    <link rel="stylesheet" href="{{ '/assets/css/vendor/google_fonts.min.css' | relative_url }}">
     {% endif %}
 
     <!-- KaTeX 0.8.3 -->
+    <!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
     {% if site.theme_settings.katex %}
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/vendor/katex.min.css' | relative_url }}">
     <script src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}">
