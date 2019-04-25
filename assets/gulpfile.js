@@ -10,6 +10,7 @@ const shell = require('gulp-shell');
 const less = require('gulp-less');
 const cssmin = require('gulp-cssmin')
 const replace = require('gulp-replace');
+const webp = require('gulp-webp');
 
 gulp.task('js', function minijs() {
     return gulp.src(['js/partials/**.js'])
@@ -22,13 +23,19 @@ gulp.task('js', function minijs() {
 });
 
 gulp.task("img", function imging() {
-    return gulp.src('img/**/*.{png,svg,jpg,gif}')
+    return gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
         .pipe(imagemin())
         .on('error', (err) => {
             console.log(err.toString());
         })
         .pipe(gulp.dest('img/'))
 });
+
+gulp.task('webpp', () =>
+    gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
+        .pipe(webp())
+        .pipe(gulp.dest('img/'))
+);
 
 gulp.task('css', function minicss() {
     return gulp.src('css/vendor/bootstrap-iso.css')
