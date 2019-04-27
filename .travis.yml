@@ -1,30 +1,30 @@
 language: ruby
 rvm:
-  - 2.3.3
-  
+- 2.3.3
 before_install:
-  - gem update --system
-  - gem install bundler  
-
-script: 
-  - bundle install
-  - bundle exec jekyll build
-  
+- gem update --system
+- gem install bundler
+script:
+- bundle install
+- bundle exec jekyll build
 notifications:
   email: false
-  
-after_script:  
-  - gem install type-on-strap
-  - gem install jekyll-theme-type-on-strap  
-
-# branch whitelist, only for GitHub Pages
+after_script:
+- gem install type-on-strap
+- gem install jekyll-theme-type-on-strap
 branches:
   only:
   - gh-pages
   - master
-
 env:
   global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-
-sudo: false # route your build to the container-based infrastructure for a faster build
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+sudo: false
+deploy:
+  provider: rubygems
+  api_key:
+    secure: DNJmBojaNJU0VFS2RE3Gy5CBnll1GXm7wtvxVMDfAqFNbCQdq2LR/v3LDNNm/ZEPMQfgdvlom8s5Pm26nnxbWFAAFcLTBD/cyJffvudgiCo3ONLkpm/PsVJiTyNbzZyb/XPE879S+LVtdKGlhLFSBaqUKfrhyRHT1W9LWrrjZMTQngUZCPlJmw6AsLvqT2x1CcBvVD2Q6tN8bOwq2blsDUtI6449ey1qWfgaERvM8KvF76aB32YQ7t8986NMkfHRDXPlgxm64pCc4kduBqAk9UHP5JAJzO4c3zEhX5Mb6Hc1CoxdgF3WSpmiN6HVVMaSC1byL4evocR+Enh5Gjc0VxEmIjCESpyheQG7YkkaadC7Lrvb18/qoSj0iDeB386k11XMiRN1dxu1CehPOkyQh5V5UEbZrm/9W9U/eQGgG1YoqicShcfxLDGeWRK4moLW8a8pvvBs+dduZyCWUgaC08S1u+HwvO8TpWcslr9/J05sRV4PAjk+u66+FVdILn0YWsbOKTezY/APTDfHnn/NQGZWXI4W5PMtf+KfPjL9kU0ouhqGpElGxrg2Hlw8kaPY3QrYLviVC7/DvWNWPGt9hmvcneuEg16zJTMoeNzckK5AUimyzvvjpVPVBh30T1YpZtcg+gFgesTHjyo/piFxEFX4ttYKoxvLMABONbniXcE=
+  gem: type-on-strap
+  on:
+    tags: true
+    repo: sylhare/Type-on-Strap
