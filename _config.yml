@@ -84,12 +84,12 @@ theme_settings:
   str_previous_page: "Prev"
   str_javascript_required_disqus: "Please enable JavaScript to view comments."
 
-  # Colours, typography and padding
-  # Open the "_sass > base" folder, and open "_variables.scss"
-  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
-
   # Post navigation
   post_navigation: true
+  
+  # Colours, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
+  # google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"  
   
   
 # PAGINATION

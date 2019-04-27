@@ -27,7 +27,8 @@
     "gulp-less": "^4.0.1",
     "gulp-replace": "^1.0.0",
     "gulp-shell": "^0.7.0",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.1",
+    "gulp-webp": "^4.0.1"
   },
   "dependencies": {}
 }
