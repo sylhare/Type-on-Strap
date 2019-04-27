@@ -1,24 +1,25 @@
 language: ruby
 rvm:
-- 2.3.3
+  - 2.3.3
 before_install:
-- gem update --system
-- gem install bundler
+  - gem update --system
+  - gem install bundler
 script:
-- bundle install
-- bundle exec jekyll build
+  - bundle install
+  - bundle exec jekyll build
 notifications:
   email: false
 after_script:
-- gem install type-on-strap
-- gem install jekyll-theme-type-on-strap
+  - gem install type-on-strap
+  - gem install jekyll-theme-type-on-strap
 branches:
   only:
-  - gh-pages
-  - master
+    - gh-pages
+    - master
+    - /^v.*$/
 env:
   global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 sudo: false
 deploy:
   provider: rubygems
