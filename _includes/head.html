@@ -1,7 +1,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
+
     <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
     <script defer=true src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
     
@@ -16,10 +16,6 @@
 
     <!-- RSS -->
     <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ 'feed.xml' | absolute_url }}"/>
-
-    <!-- Font Awesome -->
-    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/vendor/font-awesome.min.css' | relative_url }}">
     
     {% if page.bootstrap %}
     <!-- Bootstrap-4.1.3 isolation CSS -->
@@ -33,19 +29,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     {% endif %}
 
-    <!-- Google Fonts -->
-    {% if site.theme_settings.google_fonts %}
-    <link href="//fonts.googleapis.com/css?family={{ site.theme_settings.google_fonts }}" rel="stylesheet" type="text/css">
-    {% else %}
-    <link rel="stylesheet" href="{{ '/assets/css/vendor/google_fonts.min.css' | relative_url }}">
-    {% endif %}
-
     <!-- KaTeX 0.8.3 -->
     <!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
     {% if site.theme_settings.katex %}
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/vendor/katex.min.css' | relative_url }}">
-    <script src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}">
-    </script>
+    <script src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}"></script>
     {% endif %}
 
     <!-- Google Analytics -->
