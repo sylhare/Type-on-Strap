@@ -30,7 +30,7 @@
         {% else %}
         <li class="separator"> | </li>
         <li>
-            <a class="clear" name="{{ page.title }}" 
+            <a class="clear" name="{{ page.title }}" aria-label="{{ page.title }}"
                href="{{ page.url | relative_url }}">
                 {{ page.title }}
             </a>
@@ -45,7 +45,7 @@
           {% if item[1].enabled %}
             <li class="separator"> | </li>
             <li>
-              <a class="clear" href="{{ item[0] | relative_url }}" name="{{ item[0] }}">
+              <a class="clear" href="{{ item[0] | relative_url }}" name="{{ item[0] }}" aria-label="{{ item[0] }}">
                 <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
               </a>
             </li>
