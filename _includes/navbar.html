@@ -3,11 +3,11 @@
     <!-- Logo and title -->
 	<div class="branding">
 		<a href="{{ '/' | relative_url }}">
-			<img alt="logo img" class="avatar" src="{{ site.theme_settings.avatar | relative_url }}" alt=""/>
+			<img alt="logo img" class="avatar" src="{{ site.theme_settings.avatar | relative_url }}" />
 		</a>
 
 		<h1 class="site-title">
-			<a alt="{{ site.theme_settings.title }}" href="{{ '/' | relative_url }}"> 
+			<a aria-label="{{ site.theme_settings.title }}" href="{{ '/' | relative_url }}">
         {{ site.theme_settings.title }}
       </a>
 		</h1>
@@ -15,7 +15,7 @@
     
     <!-- Toggle menu -->
     <nav class="clear">
-    <a name="pull" id="pull" class="toggle" href="#">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
     <i class="fa fa-bars fa-lg"></i>
     </a>
     
@@ -30,8 +30,7 @@
         {% else %}
         <li class="separator"> | </li>
         <li>
-            <a class="clear" name="{{ page.title }}" aria-label="{{ page.title }}"
-               href="{{ page.url | relative_url }}">
+            <a class="clear" aria-label="{{ page.title }}" href="{{ page.url | relative_url }}">
                 {{ page.title }}
             </a>
         </li>
@@ -45,7 +44,7 @@
           {% if item[1].enabled %}
             <li class="separator"> | </li>
             <li>
-              <a class="clear" href="{{ item[0] | relative_url }}" name="{{ item[0] }}" aria-label="{{ item[0] }}">
+              <a class="clear" href="{{ item[0] | relative_url }}" aria-label="{{ item[0] }}">
                 <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
               </a>
             </li>
