@@ -23,7 +23,7 @@ gulp.task('js', function minijs() {
 });
 
 gulp.task("img", function imging() {
-  return gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
+  return gulp.src('img/**/*.{png,svg,jpg,webp,jpeg,gif}')
     .pipe(imagemin())
     .on('error', (err) => {
       console.log(err.toString());
@@ -31,9 +31,13 @@ gulp.task("img", function imging() {
     .pipe(gulp.dest('img/'))
 });
 
-gulp.task('webpp', () =>
+gulp.task('webp', () =>
   gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
-    .pipe(webp())
+    .pipe(webp({
+        quality: 60,
+        preset: 'photo',
+        method: 6
+    }))
     .pipe(gulp.dest('img/'))
 );
 
