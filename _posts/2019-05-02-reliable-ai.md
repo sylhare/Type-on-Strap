@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "Progress Towards Safe and Reliable AI"
+title: "Progress Toward Safe and Reliable AI"
 short-summary: "An overview of research at SAIL related to new techniques that allow us to look inside the black box of neural networks, to how it is possible to find and remove bias, and to how safety in autonomous systems can be assured."
 summary: "An overview of research at SAIL related to new techniques that allow us to look inside the black box of neural networks, to how it is possible to find and remove bias, and to how safety in autonomous systems can be assured."
 thumbnail: "assets/img/posts/2019-05-02-reliable-ai/thumb.png"
 author: <a href='https://seglash.people.stanford.edu/'>Steve Eglash</a>
 tags: [ml, rl, interpretability, safety]
-hide: true
 ---
 Artificial intelligence and particularly machine learning have recently demonstrated tremendous achievements, and the future seems brighter still. However, these systems aren’t perfect and there is huge risk when they are deployed in applications where mistakes lead to the loss of human life or of hundreds of millions of dollars.  Think of applications like commercial aircraft collision avoidance, financial transactions, or control of massive power generating or chemical manufacturing plants.
 
@@ -37,7 +36,7 @@ Reluplex was applied to test a neural network fit to an early prototype of ACAS 
 [<img class="postimage_50" src="{{ site.baseurl }}/assets/img/posts/2019-05-02-reliable-ai/reluplex.png"/>]({{ site.baseurl }}/assets/img/posts/2019-05-02-reliable-ai/reluplex.png)
 {% endfigure %}
 
-In one scenario the researchers were asked to show that if Intruder approaches from the left, then the system would advise Ownship to turn strong right.  The researchers proved in 1.5 hours using modest compute resources that the network functions correctly for this scenario in every case.  A more complicated second scenario considered a situation where Intruder and Ownship are at different altitudes and additionally where Ownship had received a previous advisory to turn weak left.  This illustrates the sort of complexity that can arise in such systems.  In this case the network should advise COC (clear of conflict, that is, maintain current course) or weak left.  The researchers found a counter example in 11 hours using modest compute resources, and later corrected the counter example in a different network.
+In one scenario the researchers were asked to show that if Intruder approaches from the left, then the system would advise Ownship to turn strong right.  The researchers proved in 1.5 hours using modest compute resources that the network functions correctly for this scenario in every case.  A more complicated second scenario considered a situation where Intruder and Ownship are at different altitudes and additionally where Ownship had received a previous advisory to turn weak left.  This illustrates the sort of complexity that can arise in such systems.  In this case the network should advise COC (clear of conflict, that is, maintain current course) or weak left.  The researchers found a counter example in 11 hours using modest compute resources, and the counter example was later corrected in a different network.
 
 **Understanding Model Predictions**
 
@@ -51,7 +50,7 @@ In the above figure, if the pixels of the white dog are responsible for activati
 
 Finding and Removing Bias
 -----------------------------------------------------------------------------------
-It’s no surprise that AI systems reflect societal bias.  Zou and Schiebinger [[Design AI so that it’s fair.  James Zou and Londa Schiebinger.  Nature (2018).]](https://www.nature.com/magazine-assets/d41586-018-05707-8/d41586-018-05707-8.pdf) point out that bias can result from two sources:  training data and algorithms.  Bias in training data can result from some groups being over- or under-represented in a dataset, and the solution is to investigate how training data is curated.  Algorithms can amplify bias because a typical machine learning program tries to maximize the overall prediction accuracy across the training data, so the solution is to investigate how bias is propagated and amplified.
+It’s no surprise that AI systems reflect societal bias.  Zou and Schiebinger [[Design AI so that it’s fair.  James Zou and Londa Schiebinger.  Nature (2018).]](https://www.nature.com/articles/d41586-018-05707-8) point out that bias can result from two sources:  training data and algorithms.  Bias in training data can result from some groups being over- or under-represented in a dataset, and the solution is to investigate how training data is curated.  Algorithms can amplify bias because a typical machine learning program tries to maximize the overall prediction accuracy across the training data, so the solution is to investigate how bias is propagated and amplified.
 
 **Geometry Captures Semantics**
 
@@ -69,7 +68,7 @@ Let’s take a look at another word pairing:  he is to brother as she is to what
 [<img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2019-05-02-reliable-ai/bias_table.png"/>]({{ site.baseurl }}/assets/img/posts/2019-05-02-reliable-ai/bias_table.png)
 {% endfigure %}
 
-The researchers found that it is possible to reduce gender bias by removing gender stereotypes such as the association between receptionist and female while preserving desired associations such as that between queen and female.  In order to do this they distinguish between gender-specific words that are associated with gender by definition, like brother, sister, businessman, and businesswoman, and the remaining gender neutral words.  Geometrically, they identified two orthogonal dimensions — the difference between the embeddings of the words he and she and a direction that captures gender neutrality.  Their debiasing algorithm removes the gender pair associations for gender neutral words by collapsing the gender neutral direction.  This sort of debiasing is used by Google, Twitter, Facebook, Microsoft, and others.
+The researchers found that it is possible to reduce gender bias by removing gender stereotypes such as the association between receptionist and female while preserving desired associations such as that between queen and female.  In order to do this they distinguish between gender-specific words that are associated with gender by definition, like brother, sister, businessman, and businesswoman, and the remaining gender-neutral words.  Geometrically, they identified two orthogonal dimensions — the difference between the embeddings of the words he and she and a direction that captures gender neutrality.  Their debiasing algorithm removes the gender pair associations for gender-neutral words by collapsing the gender-neutral direction.  This sort of debiasing is used by Google, Twitter, Facebook, Microsoft, and others.
 
 **Achieving Fairness Without Demographics**
 
