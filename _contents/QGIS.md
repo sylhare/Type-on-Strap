@@ -28,5 +28,14 @@ tags: [QGIS, GIS]
 
 
 # Textbooks and Other Resources
+
+## Textbooks
 * [Learning QGIS eBook](https://www.packtpub.com/big-data-and-business-intelligence/learning-qgis-third-edition) - $20 eBook
 * [QGIS by Example](https://www.packtpub.com/application-development/qgis-example) - $25 eBook
+
+## Shapefile Repositories
+* [World GIS Data](http://libguides.humboldt.edu/c.php?g=303789&p=2025985)
+* [USA GIS Data](http://libguides.humboldt.edu/c.php?g=303789&p=2026116)
+* [California GIS Data](http://libguides.humboldt.edu/c.php?g=303789&p=2026238)
+* [US Roads](https://catalog.data.gov/dataset?tags=roads)
+* [DHS/Census Data Repository (General)](https://spatialdata.dhsprogram.com/home/)
