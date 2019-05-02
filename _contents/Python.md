@@ -85,6 +85,11 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 
 [Udemy: Unsupervised Deep Learning in Python](https://www.udemy.com/unsupervised-deep-learning-in-python/) - Theano and Tensorflow: Autoencoders, Restricted Boltzmann Machines, Deep Neural Networks, t-distributed Stochastic Neighbor Embedding (SNE) and Principal Component Anaylsis (PCA). Costs somewhere between $11.98 and $12, before tax.
 
+## Geospacial Data in Jupyter
+* [Geopandas](http://geopandas.org/)
+* [Geopandas: How to Download](http://geopandas.org/install.html)
+* [Geopandas: Examples](http://geopandas.org/gallery/index.html)
+
 
 ## Textbooks and Resources
 [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html) - User-friendly textbook that starts at a beginner level with very clear explanations
