@@ -8,11 +8,9 @@ author: <a href='https://aditya-grover.github.io'>Aditya Grover</a>
 tags: [ml, deep learning, unsupervised representation learning, compressed sensing]
 ---
 
-
 >TL;DR: Compressed sensing techniques enable efficient acquisition and recovery of sparse, high-dimensional data signals via low-dimensional projections. In our [AISTATS 2019 paper](https://arxiv.org/pdf/1812.10539), we introduce uncertainty autoencoders (UAE) where we treat the low-dimensional projections as noisy latent representations of an autoencoder and directly learn both the acquisition (i.e., encoding) and amortized recovery (i.e., decoding) procedures via a tractable variational information maximization objective. Empirically, we obtain on average a 32% improvement over competing methods on the task of statistical compressed sensing of high-dimensional data.
 
 The broad goal of unsupervised representation learning is to learn transformations of the input data which succinctly capture the statistics of an underlying data distribution. A plethora of learning objectives and algorithms have been proposed in prior work, motivated from the perspectives of latent variable generative modeling, dimensionality reduction, and others. In this post, we will describe a new framework for unsupervised representation learning inspired from compressed sensing. We begin with a primer of statistical compressed sensing.
-
 
 ### Statistical Compressed Sensing
 
