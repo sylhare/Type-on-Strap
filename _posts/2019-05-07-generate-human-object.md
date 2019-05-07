@@ -7,10 +7,12 @@ thumbnail: "assets/img/posts/2019-05-07-generate-human-object/thumb.gif"
 author: <a href='https://twitter.com/drsrinathsridha'>Srinath Sridhar</a>
 tags: [hci, learning]
 ---
+{% figure caption:"Sources: Oculus First Contact, Boston Dynamics." %}
 <figure>
     <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-05-07-generate-human-object/robotvr.gif"/> 
     <img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2019-05-07-generate-human-object/robotsnow.gif"/> 
 </figure>
+{% endfigure %}
 
 Tremendous progress has been made in the last few years in developing
 advanced virtual reality (VR) and robotics platforms. As the examples
@@ -29,7 +31,7 @@ Jordan, EPIC Kitchens." %}
 To understand why, consider the diversity of interactions in daily human
 life. We spend almost all of our waking hours performing
 activities---simple actions like picking up a fruit or more complex ones
-like cooking a meal. These physical interactions, called **human–object interactions**, are multi-stepped and governed by physics as well sa human goals, customs, and biomechanics. In order to develop more dynamic virtual
+like cooking a meal. These physical interactions, called **human–object interactions**, are multi-stepped and governed by physics as well as human goals, customs, and biomechanics. In order to develop more dynamic virtual
 worlds, and smarter robots, we need to *teach machines to capture, understand, and replicate* these interactions. The information we need
 to learn these interactions is already widely available in the form of
 large video collections (e.g., YouTube, Netflix, Facebook).
@@ -165,7 +167,7 @@ recognition system in part 2 allows us to create action plots from
 videos. The goal now is to use extracted action plots from video
 collections to learn to generate novel interactions. To make the problem
 tractable, we decouple the time-varying and the time-invariant
-parameters in the action tuple $$T=L \bigcup p$$ where $$L=(a,d,o,s)$$).
+parameters in the action tuple $$T=L \bigcup p$$ where $$L=(a,d,o,s)$$.
 More specifically, we use a many-to-many RNN to model
 $$L$$ and a time-independent Gaussian mixture model for $$p$$.
 
@@ -190,7 +192,7 @@ consecutive FC, ReLU, FC layers.
 {% endfigure %}
 
 **Time-Independent Object Position Model:** Many interactions involve
-object motions that needs to be modeled to generate new plausible
+object motions that need to be modeled to generate new plausible
 motions. There are strong physical and co-occurrence priors in object
 distribution. It is common to find open bottles around cups, but
 uncommon around laptops. Since these are not strongly time-dependent, we
@@ -268,16 +270,19 @@ plausibility of the interactions we generate.
 We believe that methods that take a sequential view of interactions
 provide a strong foundation for learning to generate human--object
 interactions. Our method provides one possible solution, but extensive
-research needed before we can create more immersive and dynamic virtual
+research is needed before we can create more immersive and dynamic virtual
 realities, or build robots that can make dinner and wash dishes.
+
+---
 
 This blog post is based on the following paper that will appear at
 [*Eurographics 2019*](https://www.eurographics2019.it/). For more
 details on this work, datasets, and code, please visit the [*project webpage*](http://www.pirk.info/projects/learning_interactions/index.html).
 
-*Learning a Generative Model for Multi-Step Human-Object Interactions
-from Videos.* He Wang\*, Soeren Pirk\*, Ersin Yumer, Vladimir Kim, Ozan
+**Learning a Generative Model for Multi-Step Human-Object Interactions
+from Videos.** He Wang\*, Soeren Pirk\*, Ersin Yumer, Vladimir Kim, Ozan
 Sener, Srinath Sridhar, Leonidas J. Guibas. Eurographics 2019.
+[*Project Webpage*](http://www.pirk.info/projects/learning_interactions/index.html), [*PDF*] (http://www.pirk.info/papers/Wang.etal-2019-LearningInteractions.pdf)
 
 \* joint first authors
 
