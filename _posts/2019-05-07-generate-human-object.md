@@ -1,10 +1,8 @@
 ---
 layout: post
 title: "Learning to Generate Human–Object Interactions"
-short-summary: "Human–object interactions are multi-stepped, governed by human goals, customs,
-physics, and biomechanics -- how can we teach machines to capture, understand, and replicate these interactions?"
-summary: "Human–object interactions are multi-stepped, governed by human goals, customs,
-physics, and biomechanics. In order to develop more dynamic virtual worlds, and smarter robots, we need to teach machines to capture, understand, and replicate these interactions. This post presents several initial steps towards that goal."
+short-summary: "Human–object interactions are multi-stepped and governed by physics as well human goals, customs, and biomechanics -- how can we teach machines to capture, understand, and replicate these interactions?"
+summary: "Human–object interactions are multi-stepped and governed by physics as well human goals, customs, and biomechanics -- how can we teach machines to capture, understand, and replicate these interactions?"
 thumbnail: "assets/img/posts/2019-05-07-generate-human-object/thumb.gif"
 author: <a href='https://twitter.com/drsrinathsridha'>Srinath Sridhar</a>
 tags: [hci, learning]
@@ -31,8 +29,7 @@ Jordan, EPIC Kitchens." %}
 To understand why, consider the diversity of interactions in daily human
 life. We spend almost all of our waking hours performing
 activities---simple actions like picking up a fruit or more complex ones
-like cooking a meal. These physical interactions, called **human–object interactions**, are multi-stepped, governed by human goals, customs,
-physics, and biomechanics. In order to develop more dynamic virtual
+like cooking a meal. These physical interactions, called **human–object interactions**, are multi-stepped and governed by physics as well sa human goals, customs, and biomechanics. In order to develop more dynamic virtual
 worlds, and smarter robots, we need to *teach machines to capture, understand, and replicate* these interactions. The information we need
 to learn these interactions is already widely available in the form of
 large video collections (e.g., YouTube, Netflix, Facebook).
