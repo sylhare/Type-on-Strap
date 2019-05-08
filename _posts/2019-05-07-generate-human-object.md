@@ -156,7 +156,7 @@ extract meaningful image features for each frame, (2) use the extracted
 features to classify action labels for each frame and segment the
 actions. For added robustness to over-segmentation resulting from
 frame-based action classification, we use a Long Short-Term Memory
-(LSTM) network to aggregate information temporally. Please see [our paper](http://www.pirk.info/projects/learning_interactions/index.html
+(LSTM) network to aggregate information temporally. Please see [*our paper*](http://www.pirk.info/projects/learning_interactions/index.html)
 for more details.
 
 **3. Generate using Recurrent Neural Nets**
@@ -282,7 +282,7 @@ details on this work, datasets, and code, please visit the [*project webpage*](h
 **Learning a Generative Model for Multi-Step Human-Object Interactions
 from Videos.** He Wang\*, Soeren Pirk\*, Ersin Yumer, Vladimir Kim, Ozan
 Sener, Srinath Sridhar, Leonidas J. Guibas. Eurographics 2019.
-[*Project Webpage*](http://www.pirk.info/projects/learning_interactions/index.html), [*PDF*] (http://www.pirk.info/papers/Wang.etal-2019-LearningInteractions.pdf)
+[*Project Webpage*](http://www.pirk.info/projects/learning_interactions/index.html), [*PDF*](http://www.pirk.info/papers/Wang.etal-2019-LearningInteractions.pdf)
 
 \* joint first authors
 
