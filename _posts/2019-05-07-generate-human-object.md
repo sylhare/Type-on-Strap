@@ -281,7 +281,7 @@ details on this work, datasets, and code, please visit the [*project webpage*](h
 
 **Learning a Generative Model for Multi-Step Human-Object Interactions
 from Videos.** He Wang\*, Soeren Pirk\*, Ersin Yumer, Vladimir Kim, Ozan
-Sener, Srinath Sridhar, Leonidas J. Guibas. Eurographics 2019.
+Sener, Srinath Sridhar, Leonidas J. Guibas. Eurographics 2019 [**Honorable Mention**].
 [*Project Webpage*](http://www.pirk.info/projects/learning_interactions/index.html), [*PDF*](http://www.pirk.info/papers/Wang.etal-2019-LearningInteractions.pdf)
 
 \* joint first authors
