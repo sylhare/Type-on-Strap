@@ -1,4 +1,4 @@
-// Header text feature
+/* --- Header text feature --- */
 .call-out {
     @extend %padding-medium;
     display: inline-block;
@@ -44,7 +44,7 @@
     background-position: 100% 0, 0 center, center top;
 }
 
-// Post listing
+/* --- Post listing --- */
 .posts {
     .post-teaser {
         @extend %padding-regular;
@@ -80,7 +80,6 @@
         }
 
         .post-img img {
-            //max-width: 100%;
             -moz-transition-timing-function: ease-out;
             -webkit-transition-timing-function: ease-out;
             transition-timing-function: ease-out;

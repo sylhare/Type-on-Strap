@@ -5,15 +5,17 @@
 @import 'external/reset';
 @import 'external/syntax';
 @import 'external/font-awesome';
+@import 'external/pacifico';
 @import 'external/katex';
 @import 'external/source-sans-pro';
+
 // Base
 @import 'base/global';
 @import 'base/utility';
 
 // Posts
 @import 'layouts/posts';
-@import 'layouts/index';
+@import 'layouts/blog';
 @import 'layouts/page';
 @import 'layouts/tags';
 @import 'layouts/search';
