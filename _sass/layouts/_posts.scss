@@ -91,32 +91,3 @@ header {
         background-size: 400% auto;
     }
 }
-
-/* --- Post navigation --- */
-#post-nav {
-    width: 100%;
-    border-bottom: 1px solid $border-color;
-    display: flex;
-    float: left;
-
-    a,
-    .page-title {
-        display: inline-block;
-    }
-
-    .page-title {
-        margin-bottom: 1em;
-        width: 100%;
-    }
-
-    a {
-        padding: 2em 3em;
-        border: 1px solid rgba(255, 255, 255, 0);
-        text-align: center;
-        width: 50%;
-    }
-
-    i {
-        vertical-align: middle;
-    }
-}
