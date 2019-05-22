@@ -1,4 +1,4 @@
-// Pagination
+/* --- Pagination --- */
 .pagination {
     padding: $padding-small $padding-large 0 $padding-large;
     display: inline-block;
@@ -20,9 +20,9 @@
 
     .page_number {
         display: inline-block;
-        margin-top: 0.4em;
-        
-         @media (max-width: 254px) {
+        vertical-align: sub;
+
+        @media (max-width: 254px) {
             display: none;
         }
     }
@@ -31,8 +31,14 @@
         margin: 0em;
         display: inline;
 
-        i {
-            vertical-align: middle;
+        .fa {
+            &.fa-chevron-right, &.fa-chevron-left {
+                font-size: initial;
+            }
+        }
+
+        i .fa-chevron-left .fa-chevron-right {
+            vertical-align: inherit;
         }
 
         @media (max-width: $break) {
