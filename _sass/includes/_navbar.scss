@@ -9,7 +9,6 @@
     .separator {
         user-select: none;
         opacity: $navbar-separator-opacity;
-
         &:first-child {
             display: none;
         }
@@ -33,8 +32,8 @@
     .site-title {
         float: left;
         font-weight: bold;
-        font-size: 1em;
-        line-height: 1.5;
+        font-family: $font-family-logo;
+        font-size: 1.3em;
     }
 
     nav {
