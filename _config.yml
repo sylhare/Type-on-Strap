@@ -105,6 +105,7 @@ collections:
 # BUILD SETTINGS
 markdown: kramdown
 highlighter: rouge
+remote_theme: sylhare/type-on-strap
 sass:
   sass_dir: _sass
   style: :compressed
