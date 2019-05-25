@@ -1,11 +1,13 @@
+$pacifico-font-path: "../../assets/fonts/pacifico" !default;
+
 @font-face {
     font-family: 'Pacifico';
-    src: url('../fonts/Pacifico/Pacifico.eot'); /* IE9 Compat Modes */
-    src: url('../fonts/Pacifico/Pacifico.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/Pacifico/Pacifico.woff2') format('woff2'),
-         url('../fonts/Pacifico/Pacifico.woff') format('woff'),/* Modern Browsers */
-         url('../fonts/Pacifico/Pacifico.ttf') format('truetype'),/* Safari, Android, iOS */
-         url('../fonts/Pacifico/Pacifico.svg#Pacifico') format('svg');/* Legacy iOS */
+    src: url('#{$pacifico-font-path}/Pacifico.eot'); /* IE9 Compat Modes */
+    src: url('#{$pacifico-font-path}/Pacifico.eot?#iefix') format('embedded-opentype'),
+         url('#{$pacifico-font-path}/Pacifico.woff2') format('woff2'),
+         url('#{$pacifico-font-path}/Pacifico.woff') format('woff'),/* Modern Browsers */
+         url('#{$pacifico-font-path}/Pacifico.ttf') format('truetype'),/* Safari, Android, iOS */
+         url('#{$pacifico-font-path}/Pacifico.svg#Pacifico') format('svg');/* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }

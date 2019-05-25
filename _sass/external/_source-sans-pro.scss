@@ -3,14 +3,14 @@
  * (Font: SIL OFL 1.1, CSS: MIT License)
  */
 
-$font-path: "#{$font-path}" !default;
+$ssp-font-path: "../../assets/fonts/source-sans-pro"  !default;
 /* latin */
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: italic;
   font-display: auto;
   font-weight: 400;
-  src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"), url(#{$font-path}/source-sans-pro-italic.woff2) format("woff2");
+  src: local("Source Sans Pro Italic"), local("SourceSansPro-Italic"), url('#{$ssp-font-path}/source-sans-pro-italic.woff2') format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -20,7 +20,7 @@ $font-path: "#{$font-path}" !default;
   font-style: italic;
   font-display: auto;
   font-weight: 700;
-  src: local("Source Sans Pro Bold Italic"), local("SourceSansPro-BoldItalic"), url(#{$font-path}/source-sans-pro-bold-italic.woff2) format("woff2");
+  src: local("Source Sans Pro Bold Italic"), local("SourceSansPro-BoldItalic"), url('#{$ssp-font-path}/source-sans-pro-bold-italic.woff2') format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -30,7 +30,7 @@ $font-path: "#{$font-path}" !default;
   font-style: normal;
   font-display: auto;
   font-weight: 400;
-  src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url(#{$font-path}/source-sans-pro-regular.woff2) format("woff2");
+  src: local("Source Sans Pro Regular"), local("SourceSansPro-Regular"), url('#{$ssp-font-path}/source-sans-pro-regular.woff2') format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -40,6 +40,6 @@ $font-path: "#{$font-path}" !default;
   font-style: normal;
   font-display: auto;
   font-weight: 700;
-  src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url(#{$font-path}/source-sans-pro-bold.woff2) format("woff2");
+  src: local("Source Sans Pro Bold"), local("SourceSansPro-Bold"), url('#{$ssp-font-path}/source-sans-pro-bold.woff2') format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
