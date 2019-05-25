@@ -4,5 +4,5 @@ title: Search
 permalink: /search/
 subtitle: "What are you looking for?"
 feature-img: "assets/img/pexels/search-map.webp"
-hide: true
+icon: "fa-search"
 ---

@@ -260,11 +260,13 @@ subtitle: "This is a subtitle"
 feature-img: "assets/img/sample.png" 
 permalink: /about.html               # Set a permalink your your page
 hide: true                           # Prevent the page title to appear in the navbar
+icon: "fa-search"                    # Will Display only the fontawesome icon (here: fa-search) and not the title
 tags: [sample, markdown, html]
 ---
 ```
 
-The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. Use the `_draft` folder to keep files from being generated on your site.
+The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. 
+Use the `_draft` folder to keep files from being generated on your site.
 
 ### Layout: Default
 
@@ -314,22 +316,25 @@ gallery: "assets/img/pexels"
 
 ### Search
 
-The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
+The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
+there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
 
 Then there's a `search.js` displaying the formatted results entered in the `search.html` page.
 
+The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
 
-The search page can be enable/disable in the navigation bar through the `_config.yml` via:
 ```yml
-special_page:
-    search: 
-      icon: "search"
-      enabled: true
+---
+layout: search
+title: Search
+icon: "search"
+---
 ```
 
 ### Tags
 
-Tags should be placed between `[]` in your post metadata. Separate each tag with a comma. Tags are recommended for posts and portfolio items.
+Tags should be placed between `[]` in your post metadata. Separate each tag with a comma. 
+Tags are recommended for posts and portfolio items.
 
 For example:
 
@@ -344,18 +349,12 @@ tags: [sample, markdown, html]
 > Tags are case sensitive `Tag_nAme` ≠ `tag_name`
 
 All the tags will be listed in `tags.html` with a link toward the pages or posts.
-The tags page can be enable/disable in the navigation bar through the `_config.yml` via:
-
-```yml
-special_page:
-    tags: 
-      icon: "tags"
-      enabled: true
-```
+The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
 
 ## Template as a Gem
 
-You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
+You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). 
+Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
 To make the feature pages available in from the gem I created them as layouts that can be invoked in the pages folder.
 
 So if you're using the template as a theme, Make sure you have:
