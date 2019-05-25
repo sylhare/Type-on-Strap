@@ -62,14 +62,6 @@ theme_settings:
   disqus_shortname:
   katex: true # Enable if using math markup
 
-  special_page:
-    search:
-      icon: "search"
-      enabled: true
-    tags:
-      icon: "tags"
-      enabled: true
-
   # Localization strings
   str_follow_on: "Follow on"
   str_rss_follow: "Follow RSS feed"
