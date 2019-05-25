@@ -1,0 +1,8 @@
+<div class="post-info">
+  {% if include.post.author_avatar %}
+    <img src="{{ include.post.author_avatar | relative_url }}">
+  {% endif %}
+  <p class="meta">
+    {% if include.post.author %}{{ include.post.author }} - {% endif %}{{ include.post.date | date: "%B %-d, %Y" }}
+  </p>
+</div>

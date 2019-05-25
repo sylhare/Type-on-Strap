@@ -2,6 +2,8 @@
 layout: post
 title: Sample post
 tags: [A Tag, Test, Lorem, Ipsum]
+author: mhagnumdw
+author_avatar: "/assets/img/avatars/mhagnumdw_avatar.jpg"
 excerpt_separator: <!--more-->
 ---
 
