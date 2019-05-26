@@ -4,7 +4,6 @@ url: "https://sylhare.github.io"
 title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
-
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
@@ -86,13 +85,11 @@ theme_settings:
 paginate: 5
 paginate_path: "blog/page:num"
 
-
 # PORTFOLIO
 collections:
   portfolio:
     output: true
     permalink: /:collection/:name
-
 
 # BUILD SETTINGS
 markdown: kramdown
