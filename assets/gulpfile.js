@@ -1,4 +1,5 @@
-/* 
+/*
+ * Here are all of the gulp tasks you can use to help manage your blog
  * Use `npm install` to install all the dependencies located in package.json 
  * Then `gulp default` to minimize css and images.
  */
@@ -6,7 +7,6 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
-const shell = require('gulp-shell');
 const less = require('gulp-less');
 const cssmin = require('gulp-cssmin')
 const replace = require('gulp-replace');
@@ -59,13 +59,5 @@ gulp.task("isolate-bootstrap-css", gulp.series('css', function isolating() {
     .pipe(gulp.dest('css/vendor/'));
 }));
 
-gulp.task("serve", function serving(done) {
-  console.log('... not working at the moment try \ncd .. && bundle exec jekyll serve --watch\n',
-    'then go to \nhttp://localhost:4000/Type-on-Strap/');
-  shell.task([
-    "python -m webbrowser 'http://localhost:4000/Type-on-Strap/'; cd .. && bundle exec jekyll serve --watch"
-  ]);
-  done();
-});
 
 gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));

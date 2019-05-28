@@ -23,10 +23,9 @@
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
-    "gulp-imagemin": "^4.1.0",
+    "gulp-imagemin": "^5.0.3",
     "gulp-less": "^4.0.1",
     "gulp-replace": "^1.0.0",
-    "gulp-shell": "^0.7.0",
     "gulp-uglify": "^3.0.1",
     "gulp-webp": "^4.0.1"
   },
