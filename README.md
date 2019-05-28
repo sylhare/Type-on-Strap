@@ -104,7 +104,6 @@ Change these variables in `_config.yml`:
   theme_settings:
     title: My Jekyll Blog                 # Name of website
     avatar: assets/img/triangular.svg     # Path of avatar image, to be displayed in the theme's header
-    gravatar: f98....6bfc                 # MD5 hash of your email address
     description: My blog posts            # Short description, primarily used by search engines
 ```
 
@@ -249,6 +248,7 @@ title: Hello World                                # Title of the page
 hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
 thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
 bootstrap: true                                   # Add bootstrap to the page
 tags: [sample, markdown, html]
 ---
@@ -257,7 +257,10 @@ tags: [sample, markdown, html]
 With `thumbnail`, you can add a smaller image than the `feature-img`. 
 If you don't want/have a thumbnail you can still use the same image as the feature one.
 
-So the **bootstrap** is not mandatory and is only usefull if you want to add bootstrapped content in your page. 
+The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
+you can edit it in the config file (`theme_settings > color_image`). If you want another one, put it in `/assets/img` as well. 
+
+The **bootstrap** is not mandatory and is only useful if you want to add bootstrapped content in your page. 
 It will respect the page and theme layout, mind the padding on the sides.
 
 ### Layout: Page
