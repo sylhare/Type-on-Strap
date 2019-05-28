@@ -11,6 +11,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Bootstrap : [Get Bootstrap](http://getbootstrap.com/)
 * Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
+* Nice fonts : [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
 * Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
 * Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
 * Free of rights images from [pexels](https://www.pexels.com/)
@@ -53,7 +54,7 @@ jekyll-theme-basically-basic
 ├── assets
 |  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
 |  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
-|  ├── fonts		       # Font-Awesome, Glyphicon, and other fonts
+|  ├── fonts		       # Font-Awesome, and other fonts
 |  └── img		       # Images used for the template
 ├── pages
 |   ├── 404.md		       # To be displayed when url is wrong
@@ -94,7 +95,8 @@ Please configure this  before using the theme.
 
 ### Meta and Branding
 
-Meta variables hold basic information about your Jekyll site which will be used throughout the site and as meta properties for search engines, browsers, and the site's RSS feed.
+Meta variables hold basic information about your Jekyll site which will be used throughout the site 
+and as meta properties for search engines, browsers, and the site's RSS feed.
 
 Change these variables in `_config.yml`:
 
@@ -102,7 +104,6 @@ Change these variables in `_config.yml`:
   theme_settings:
     title: My Jekyll Blog                 # Name of website
     avatar: assets/img/triangular.svg     # Path of avatar image, to be displayed in the theme's header
-    gravatar: f98....6bfc                 # MD5 hash of your email address
     description: My blog posts            # Short description, primarily used by search engines
 ```
 
@@ -147,11 +148,14 @@ Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually repre
 {{ liquid.tag | filter }}
 ```
 
-These are useful to render your jekyll files. You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
+These are useful to render your jekyll files. 
+You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
 ### Footer's icons
 
-Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) in the footer. All icon variables should be your username enclosed in quotes (e.g. "username") in `_config.yml`, except for the following variables:
+Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) in the footer. 
+All icon variables should be your username enclosed in quotes (e.g. "username") in `_config.yml`, 
+except for the following variables:
 
 ```yml
   theme_settings:
@@ -166,7 +170,8 @@ Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-A
 Optionally, if you have a [Disqus](https://disqus.com/) account, you can show a 
 comments section below each post.
 
-To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) to your project's `_config.yml` file:
+To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) 
+to your project's `_config.yml` file:
 
 ```yml
   theme_settings:
@@ -192,7 +197,8 @@ When KateX is set in `_config.yml`:
      katex: true # to Enable it
 ```
 
-You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable in `_config.yml` to `true` for math typesetting.
+You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable 
+in `_config.yml` to `true` for math typesetting.
 
 For inline math typesetting, type your math expression on the *same line* as your content. For example:
 
@@ -210,7 +216,9 @@ $$
 
 ### Post excerpt
 
-The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
+The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. 
+The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
+
 ```yml
 ---
 layout: post
@@ -226,7 +234,8 @@ some text in the excerpt
 The html is stripped out of the excerpt so it only display text.
 
 ## Layout
-Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). Non-standard features are documented below.
+Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). 
+Non-standard features are documented below.
 
 ### Layout: Post
 
@@ -239,14 +248,20 @@ title: Hello World                                # Title of the page
 hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
 thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
 bootstrap: true                                   # Add bootstrap to the page
 tags: [sample, markdown, html]
 ---
 ```
 
-With `thumbnail`, you can add a smaller image than the `feature-img`. If you don't want/have a thumbnail you can still use the same image as the feature one.
+With `thumbnail`, you can add a smaller image than the `feature-img`. 
+If you don't want/have a thumbnail you can still use the same image as the feature one.
 
-So the **bootstrap** is not mandatory and is only usefull if you want to add bootstrapped content in your page. It will respect the page and theme layout, mind the padding on the sides.
+The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
+you can edit it in the config file (`theme_settings > color_image`). If you want another one, put it in `/assets/img` as well. 
+
+The **bootstrap** is not mandatory and is only useful if you want to add bootstrapped content in your page. 
+It will respect the page and theme layout, mind the padding on the sides.
 
 ### Layout: Page
 
@@ -274,7 +289,8 @@ This layout includes the head, navigation bar and footer around your content.
 
 ## Feature pages
 
-All feature pages besides the "home" one are stored in the `page` folder, they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
+All feature pages besides the "home" one are stored in the `page` folder, 
+they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
 
 Here are the documentation for the other feature pages that can be added through `_config.yml`.
 
@@ -283,7 +299,8 @@ Here are the documentation for the other feature pages that can be added through
 This page is the used as the home page of the template (in the `index.html`). It displays the list of article in `_posts`.
 You can use this layout in another page (adding a title to it will make it appear in the navigation bar).
 
-The recommended width and height for the home picture is width:`2484px;` and height:`1280px` which are the dimension of the actual picture for it to be rolling down as you scroll the page. 
+The recommended width and height for the home picture is width:`2484px;` and height:`1280px` 
+which are the dimension of the actual picture for it to be rolling down as you scroll the page. 
 
 ### Portfolio
 
@@ -301,7 +318,10 @@ title : Portfolio
 
 ### Gallery
 
-You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position based on available vertical space. You need to specify the `gallery_path` which will be used to find the pictures to render. It will take all of the picture under that directory. Then use the `include` to add it in your page. 
+You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position 
+based on available vertical space. 
+You need to specify the `gallery_path` which will be used to find the pictures to render. 
+It will take all of the picture under that directory. Then use the `include` to add it in your page. 
 
 ```
 ---
@@ -367,4 +387,5 @@ Now you can use any theme gem with github pages : [29/11/2017 Github Pages Broad
 
 ## License
 
+There are some fonts and component on this theme going under the MIT licence as well in this theme.
 [The MIT License (MIT)](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/master/LICENSE)

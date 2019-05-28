@@ -4,14 +4,13 @@ url: "https://sylhare.github.io"
 title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
-
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
   title: Type on Strap # blog's title
   avatar: assets/img/triangle.svg
+  color_image: /assets/img/lineart.png # In post when you set color
   favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
 
   # Header and footer text
   header_text: Change header text in <code>_config.yml</code>
@@ -86,13 +85,11 @@ theme_settings:
 paginate: 5
 paginate_path: "blog/page:num"
 
-
 # PORTFOLIO
 collections:
   portfolio:
     output: true
     permalink: /:collection/:name
-
 
 # BUILD SETTINGS
 markdown: kramdown
