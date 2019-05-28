@@ -9,8 +9,8 @@ theme_settings:
   # Meta
   title: Type on Strap # blog's title
   avatar: assets/img/triangle.svg
+  color_image: /assets/img/lineart.png # In post when you set color
   favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
 
   # Header and footer text
   header_text: Change header text in <code>_config.yml</code>

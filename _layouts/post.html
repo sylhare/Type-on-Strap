@@ -52,7 +52,7 @@ layout: default
     header#main { background-color: {{ page.color }} !important; }
   {% endif %}
 
-  {% if page.feature-img %}{% assign image_url = page.feature-img %}{% elsif page.color %}{% assign image_url = "/assets/img/lineart.png" %}{% endif %}
+  {% if page.feature-img %}{% assign image_url = page.feature-img %}{% elsif page.color %}{% assign image_url = site.theme_settings.color_image %}{% endif %}
   header#main {
     background-repeat:no-repeat;
     background-image: url('{{ image_url | relative_url }}');
