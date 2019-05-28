@@ -8,7 +8,7 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
 const less = require('gulp-less');
-const cssmin = require('gulp-cssmin')
+const cleanCSS = require('gulp-clean-css');
 const replace = require('gulp-replace');
 const webp = require('gulp-webp');
 
@@ -43,13 +43,13 @@ gulp.task('webp', () =>
 
 gulp.task('css', function minicss() {
   return gulp.src('css/vendor/bootstrap-iso.css')
-    .pipe(cssmin())
+    .pipe(cleanCSS())
     .on('error', (err) => {
       console.log(err.toString());
     })
     .pipe(concat('bootstrap-iso.min.css'))
     .pipe(gulp.dest('css/vendor/'));
-})
+});
 
 gulp.task("isolate-bootstrap-css", gulp.series('css', function isolating() {
   return gulp.src('css/bootstrap-iso.less')
