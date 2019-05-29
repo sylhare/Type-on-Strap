@@ -402,9 +402,9 @@ sudo npm install gulp-cli -g
 npm install
 ```
 
-Now, whenever you want to minify and optimize, run:
+**Now, whenever you want to minify and optimize, run:**
 ```shell
-cd assets
+cd assets/
 gulp default
 # tip: run a git status to see the changes
 git status
