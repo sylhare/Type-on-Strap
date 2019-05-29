@@ -406,6 +406,8 @@ Now, whenever you want to minify and optimize, run:
 ```shell
 cd assets
 gulp default
+# tip: run a git status to see the changes
+git status
 ```
 
 ## License
