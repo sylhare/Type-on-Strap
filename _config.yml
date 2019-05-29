@@ -7,7 +7,6 @@ description: "A website with blog posts and pages" # used by search engines
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Type on Strap # blog's title
   avatar: assets/img/triangle.svg
   color_image: /assets/img/lineart.png # In post when you set color
   favicon: assets/favicon.ico
