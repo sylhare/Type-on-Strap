@@ -16,7 +16,7 @@ You can go fork and star hers too! 😉
 
 Basically you need to add just one thing, the color:
 
-```post
+```yml
 ---
 layout: post
 title: Color Post
@@ -26,7 +26,7 @@ color: brown
 
 It can either be a html color like `brown` (which look like red to me). Or with the rgb:
 
-```post
+```yml
 ---
 layout: post
 title: Color Post
