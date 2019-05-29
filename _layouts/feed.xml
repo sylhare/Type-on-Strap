@@ -4,7 +4,7 @@
         <title>{{ site.theme_settings.title | xml_escape }}</title>
         <atom:link href="{{ "/feed.xml" | absolute_url }}" rel="self" type="application/rss+xml"/>
         <link>{{ "/" | absolute_url }}</link>
-        <description>{{ site.theme_settings.description | xml_escape }}</description>
+        <description>{{ site.description | xml_escape }}</description>
         <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
         {% for post in site.posts limit:15 %}
         <item>
