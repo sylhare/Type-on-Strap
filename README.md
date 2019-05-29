@@ -28,7 +28,8 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 4. [Layout](https://github.com/Sylhare/Type-on-Strap#layout)
 5. [Feature pages](https://github.com/Sylhare/Type-on-Strap#feature-pages)
 6. [Template as a Gem](https://github.com/Sylhare/Type-on-Strap#Template-as-a-Gem)
-7. [License](https://github.com/Sylhare/Type-on-Strap#license)
+7. [Advanced](https://github.com/Sylhare/Type-on-Strap#advanced)
+8. [License](https://github.com/Sylhare/Type-on-Strap#license)
 
 ## Usage
 
@@ -384,6 +385,30 @@ So if you're using the template as a theme, Make sure you have:
   - Some content ready in `_posts` and `_portfolio` to be displayed
 
 Now you can use any theme gem with github pages : [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages)
+
+## Advanced
+
+### Minimizing and optimizing: css, js and images
+
+Before you need to have `node` and `npm` installed:
+- Windows: https://nodejs.org/
+- Ubuntu/Debian: `apt-get install nodejs npm libgl1 libxi6`
+- Fedora (dnf) / RHEL/CentOS (yum): `dnf install node npm libglvnd-glx libXi`
+
+Then you need to install [`gulp-cli`](https://gulpjs.com/) and its dependencies:
+```shell
+cd assets/
+sudo npm install gulp-cli -g
+npm install
+```
+
+**Now, whenever you want to minify and optimize, run:**
+```shell
+cd assets/
+gulp default
+# tip: run a git status to see the changes
+git status
+```
 
 ## License
 
