@@ -1,8 +1,14 @@
+{%- assign author-id = include.post.author-id -%}
+
+{%- assign author_name = site.authors[author-id].name | default: author-id -%}
+{%- assign avatar = site.authors[author-id].avatar -%}
+{%- assign date = include.post.date -%}
+
 <div class="post-info">
-  {% if include.post.author_avatar %}
-    <img src="{{ include.post.author_avatar | relative_url }}">
+  {% if avatar %}
+    <img src="{{ avatar | relative_url }}">
   {% endif %}
   <p class="meta">
-    {% if include.post.author %}{{ include.post.author }} - {% endif %}{{ include.post.date | date: "%B %-d, %Y" }}
+    {% if author_name %}{{ author_name }} - {% endif %}{{ date | date: "%B %-d, %Y" }}
   </p>
 </div>
