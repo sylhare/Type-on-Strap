@@ -48,9 +48,13 @@ Putting it all together, our final objective is to find the models $$q_\phi $$, 
 <!-- Putting it all together, our final objective is to find the model $$q_\phi$$ that minimizes (and along the way the model $$p_\theta$$ that minimizes and the adversarial model $$p_\psi$$ that maximizes) the following:
  -->
 
+<div class="center" markdown="1">
+
 | Our "hard-constrained" objective for learning fair representations |
 | :------------------------------ ----------------------------: |
 | $$\min_{\theta,\phi}\max_{\psi}$$ <span style="background-color:#b2e1ff">$$L_r $$</span> $$\text{s.t. } $$ <span style="background-color:#ffb77c">$$C_1< \epsilon_1 $$</span>, <span style="background-color:#ffb77c">$$C_2< \epsilon_2 $$</span> |
+
+</div>
 
 where $$\epsilon_1$$ and $$\epsilon_2$$ are limits that have been set by the concerned party.
 
@@ -58,11 +62,17 @@ This gives us a principled approach to learning fair representations. And we are
 
 <!-- <br>corresponding to our "hard-constrained" objective -->
 
+<div class="center" markdown="1">
+
 | The "soft-regularized" loss function for learning fair representations |
 | :----------------------------------------------------------: |
 | $$\min_{\theta,\phi}\max_{\psi}$$ <span style="background-color:#b2e1ff">$$L_r$$</span>$$+$$<span style="background-color:#ffb77c">$$\lambda_1 C_1$$</span>$$+$$<span style="background-color:#ffb77c">$$\lambda_2 C_2$$</span> |
 
+</div>
+
 <br>
+
+<div class="center" markdown="1">
 
 | Existing methods | The <span style="background-color:#ffb77c">$$\lambda_1$$</span> they use | The <span style="background-color:#ffb77c">$$\lambda_2$$</span> they use |
 | :--------------: | :----------------------: | :----------------------: |
@@ -70,6 +80,8 @@ This gives us a principled approach to learning fair representations. And we are
 |        Edwards and Storkey 2015[^edwards]        |           $$0$$            |      $$\alpha/\beta$$      |
 |        Madras et al. 2018[^madras2]        |           $$0$$            |      $$\gamma/\beta$$      |
 |        Louizos et al. 2015[^louizos]        |           $$1$$            |         $$\beta$$          |
+
+</div>
 
 We see that our framework generalizes a range of existing methods!
 
@@ -81,9 +93,13 @@ Let's now take a closer look at the "soft-regularized" loss function. It should 
 Luckily, there's a way! We introduce:
 <!-- The trick is that we should minimize $$L_r$$, $$C_1$$, and $$C_2$$ (like the "soft-regularized" loss function), but whenever we are concerned about unfairness because $$C_1 > \epsilon_1$$  or $$C_2 > \epsilon_2$$, the $$\lambda$$s should place additional emphasis on the unsatisfied constraint until $$C_1$$ and $$C_2$$ return to satisfying the limits set by the concerned party. And wh, optimizing $$L_r$$ will be prioritized, encouraging expressive representations. -->
 
+<div class="center" markdown="1">
+
 | Our loss function for learning controllable fair representations |
 | :----------------------------------------------------------: |
 | $$\max_{\lambda \geq 0}\min_{\theta,\phi}\max_{\psi}$$<span style="background-color:#b2e1ff">$$L_r$$</span>$$+$$<span style="background-color:#ffb77c">$$\lambda_1 (C_1-\epsilon_1)$$</span>$$+$$<span style="background-color:#ffb77c">$$\lambda_2 (C_2-\epsilon_2)$$</span> |
+
+</div>
 
 Intuitively, this loss function dictates that whenever we should be concerned about unfairness because $$C_1 > \epsilon_1$$  or $$C_2 > \epsilon_2$$, the $$\lambda$$s will place additional emphasis on the unsatisfied constraint; this additional emphasis will persist until $$C_1$$ and $$C_2$$ return to satisfying the limits $$\epsilon$$ set by the concerned party. The rest of the time, when $$C_1$$ and $$C_2$$ are safely within the limits, minimizing $$L_r$$ will be prioritized, encouraging expressive representations.
 
@@ -121,12 +137,16 @@ Our results also demonstrate that, compared to existing methods, our method can 
 
 And our method is able to take care of many notions of fairness simultaneously.
 
+<div class="center" markdown="1">
+
 |  | $$I(x;z \mid u)$$ | $$C_1$$ | $$C_2$$ | $$I_{EO}$$ | $$I_{EOpp}$$ |
 | |  (higher is expressive) | (lower is fairer) | (lower is fairer) | (lower is fairer) | (lower is fairer) |
 | :-: |  :-: |  :-: |  :-: |  :-: | :-: |
 | *constraints* |  | *< 10* | *< .1* | *< .1* | *< .1* |
 | our method | <span style="background-color:#b2e1ff">9.94</span> | <span style="background-color:#ffecdd">9.95</span> | <span style="background-color:#ffb77c">0.08</span> | <span style="background-color:#ffb77c">0.09</span> | <span style="background-color:#ffb77c">0.04</span> |
 | existing methods | <span style="background-color:#e8f6ff">9.34</span> | <span style="background-color:#ffb77c">9.39</span> | <span style="background-color:#ffecdd">0.09</span> | <span style="background-color:#ffecdd">0.10</span> | <span style="background-color:#ffecdd">0.07</span> |
+
+</div>
 
 {% figure %}
 <figcaption>

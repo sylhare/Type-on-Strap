@@ -74,9 +74,7 @@ footer p:last-child {
 
 table {
     table-layout: fixed;
-    width: 100%;
     word-wrap: break-word;
-    overflow-x: scroll;
     display: inline-block;
 }
 
@@ -178,6 +176,10 @@ figure img {
 figure figcaption {
     text-align: center;
     font-size: 0.9em;
+}
+
+.center {
+    text-align: center;
 }
 
 .postimage {
