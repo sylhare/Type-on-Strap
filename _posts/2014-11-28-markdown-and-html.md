@@ -15,7 +15,7 @@ Content Cell  | Content Cell
 
 Here's an example of an image, which is included using Markdown:
 
-![Image of a glass on a book]({{ "/assets/img/pexels/book-glass.webp" | relative_url }})
+![Image of a glass on a book]({{ "/assets/img/pexels/book-glass.jpeg" | relative_url }})
 
 Highlighting for code in Jekyll is done using Base16 or Rouge. This theme makes use of Rouge by default.
 

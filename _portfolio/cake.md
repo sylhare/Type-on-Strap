@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Cake
-feature-img: "assets/img/portfolio/cake.webp"
-img: "assets/img/portfolio/cake.webp"
+feature-img: "assets/img/portfolio/cake.jpeg"
+img: "assets/img/portfolio/cake.jpeg"
 date: 27 September 2015
 tags: [Lorem, Ipsum, Portfolio]
 ---

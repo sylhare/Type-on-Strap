@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Lorem Ipsum
-feature-img: "assets/img/portfolio/submarine.webp"
-img: "assets/img/portfolio/submarine.webp"
+feature-img: "assets/img/portfolio/submarine.jpeg"
+img: "assets/img/portfolio/submarine.jpeg"
 date: 2017-09-03
 ---
 

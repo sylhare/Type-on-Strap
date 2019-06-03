@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Circus
-img: "assets/img/portfolio/circus.webp"
+img: "assets/img/portfolio/circus.jpeg"
 date: September 2014
 tags: [Ipsum]
 ---
