@@ -49,16 +49,17 @@ header {
 
 /* --- Post info --- */
 .post-info {
-    // border: 1px solid $border-color;
-    border-radius: 1em;
+    /* For border in author
+    border: 1px solid $border-color;
     padding-left: 0.5em;
+    */
+    border-radius: 1em;
     padding-right: 0.5em;
     display: inline-flex;
 
     a {
         display: flex;
         align-items: center;
-    
     }
 
     img {
@@ -68,7 +69,6 @@ header {
         height: 100%;
         margin-right: 0.5em;
     }
-
 }
 
 /* --- Feature image --- */
@@ -95,13 +95,12 @@ header {
     }
 }
 
-// Responsive scrolling
+/*-- feature-image Responsive scrolling --*/
 .feature-image header {
     @media screen and (max-width: $break) {
         padding: $padding-small $padding-small;
     }
-    
-    /* --- Responsive --- */
+
     @media screen and (min-width: $break) {
         background-size: 120% auto;
     } 
