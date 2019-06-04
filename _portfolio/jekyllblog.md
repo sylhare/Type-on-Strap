@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Jekyll
-feature-img: "assets/img/portfolio/cabin.webp"
-img: "assets/img/portfolio/cabin.webp"
+feature-img: "assets/img/portfolio/cabin.jpeg"
+img: "assets/img/portfolio/cabin.jpeg"
 date: 2017-05-26
 ---
 

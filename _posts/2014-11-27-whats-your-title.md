@@ -2,7 +2,7 @@
 layout: post
 title: What's your title
 hide_title: true
-feature-img: assets/img/pexels/story.webp
+feature-img: assets/img/pexels/story.jpeg
 tags: [Test, Lorem]
 ---
 

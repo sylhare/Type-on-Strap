@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Creative
-feature-img: "assets/img/portfolio/safe.webp"
-img: "assets/img/portfolio/safe.webp"
+feature-img: "assets/img/portfolio/safe.jpeg"
+img: "assets/img/portfolio/safe.jpeg"
 date: August, 16 2014
 tags: [Ipsum]
 ---
