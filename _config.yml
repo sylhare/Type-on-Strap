@@ -4,10 +4,17 @@ url: "https://sylhare.github.io"
 title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
+defaults:
+  - 
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      image: assets/img/triangle.png # seo tag
+
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  avatar: assets/img/triangle.svg
+  avatar: assets/img/triangle.png
   color_image: /assets/img/lineart.png # In post when you set color
   favicon: assets/favicon.ico
 
