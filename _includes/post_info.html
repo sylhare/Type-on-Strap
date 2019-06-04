@@ -1,0 +1,22 @@
+{%- assign author-id = include.post.author-id -%}
+
+{%- assign author_name = site.authors[author-id].name | default: author-id -%}
+{%- assign avatar = site.authors[author-id].avatar -%}
+{%- assign author_url = site.authors[author-id].url -%}
+{%- assign date = include.post.date -%}
+{%- if (author_url and (avatar or author_name)) -%}
+  {%- assign render_url = true -%}
+{%- else -%}
+  {%- assign render_url = false -%}
+{% endif %}
+
+<div class="post-info">
+  {%- if render_url -%}<a href="{{ author_url | relative_url }}" target="_blank">{%- endif -%}
+    {% if avatar %}
+      <img src="{{ avatar | relative_url }}">
+    {% endif %}
+    <p class="meta">
+      {% if author_name %}{{ author_name }} - {% endif %}{{ date | date: "%B %-d, %Y" }}
+    </p>
+  {%- if render_url -%}</a>{%- endif -%}
+</div>

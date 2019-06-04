@@ -5,10 +5,7 @@ layout: default
   <header id="main" style="">
     {% unless page.hide_title %}
       <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
-      <p class="meta">
-      {{ page.date | date: "%B %-d, %Y" }}
-      {% if page.author %} - {{ page.author }}{% endif %}
-      </p>
+      {% include post_info.html post=page %}
     {% endunless %}
   </header>
   <section class="post-content">

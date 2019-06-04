@@ -58,12 +58,6 @@
             @extend .body-link;
         }
 
-        img {
-            width: 100%;
-            padding: 0;
-            vertical-align: middle;
-        }
-
         .post-img {
             vertical-align: middle;
             border-radius: 10px;
@@ -77,6 +71,13 @@
             @media screen and (max-width: $break) {
                 height: 150px;
             }
+
+            img {
+                width: 100%;
+                padding: 0;
+                vertical-align: middle;
+            }
+    
         }
 
         .post-img img {

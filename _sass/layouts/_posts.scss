@@ -47,6 +47,29 @@ header {
     text-transform: uppercase;
 }
 
+/* --- Post info --- */
+.post-info {
+    // border: 1px solid $border-color;
+    border-radius: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    display: inline-flex;
+
+    a {
+        display: flex;
+        align-items: center;
+    
+    }
+
+    img {
+        border-radius: 1em;
+        padding: 0px;
+        width: 1.5em;
+        height: 100%;
+        margin-right: 0.5em;
+    }
+
+}
 
 /* --- Feature image --- */
 .feature-image {
