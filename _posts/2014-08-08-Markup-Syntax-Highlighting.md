@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Markup: Syntax Highlighting"
-author-id: "Michael's Rose"
+author-id: "Michael Rose"
 tags: [code]
 ---
 
