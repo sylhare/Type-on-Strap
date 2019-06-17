@@ -28,7 +28,7 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 
 [Stackify: 30 Python Tutorials](https://stackify.com/learn-python-tutorials/) - Comprehensive list of Python tutorials, from the beginner to the advanced.
 
-[Hitchhikers Guide to Python](https://docs.python-guide.org/intro/learning/) - This opinionated guide exists to provide both novice and expert Python developers a best practice handbook to the installation, configuration, and usage of Python on a daily basis.
+[Hitchhikers Guide to Python](https://docs.python-guide.org/intro/learning/) - This opinionated guide exists to provide both novice and expert Python developers a best practice handbook to the installation, configuration, and usage of Python on a daily basis. It also has an exhaustive list of resources for beginners to Python!
 
 
 ## Beginner's Guides
