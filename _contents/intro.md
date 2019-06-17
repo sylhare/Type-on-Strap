@@ -25,13 +25,14 @@ tags: [General]
 * [Stack Overflow](https://stackoverflow.com/) - Go-to help site for programmers, contains countless useful threads
 
 #### Which online course site is "best"? 
-There is no clearly superior platform and many courses are cross-listed on several. Udemy, Coursera, EdX, and FutureLearn are similar and tend to host the largest variety of courses. Udacity is more streamlined into career-oriented paths. Codecademy is more focused on general computer programming and Data Camp is a "gamified" introduction. For a curated list of courses check out the repositories for each language or program in the [rest of the guide](https://data-scholars-discovery-guide.github.io/Table_of_Contents/).
+There is no clearly superior platform and many courses are cross-listed on several. Udemy, Coursera, EdX, and FutureLearn are similar and tend to host the largest variety of courses. Udacity is more streamlined into career-oriented paths. Codecademy is more focused on general computer programming and Data Camp is a "gamified" introduction. For a curated list of courses check out the repositories for each language or program in the [rest of the guide](https://data-scholars-discovery.github.io/contents/).
 
 ## Full courses
 * [Open Source Society University Data Science Course](https://github.com/ossu/data-science) - Exhaustive collection of online resources organized into a one-year open source course
 
 ## Textbooks
-* [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf) - One of two textbooks utilized in CS 189: Introduction to Machine Learning. 
+* [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20First%20Printing.pdf) - One of two textbooks utilized in CS 189: Introduction to Machine Learning. Provides application examples in R.
+* [Deep Learning Book](http://www.deeplearningbook.org/) - Free online textbook covering the fundamental mathematics and methods of deep learning. More theoretical than other guides, best for those that already have experience applying mathematical concepts in programming.
 
 ## Listicles of Recommended Courses
 * [Free Code Camp: List of Best Online Interactive Courses for Intro Data Science](https://medium.freecodecamp.org/i-ranked-all-the-best-data-science-intro-courses-based-on-thousands-of-data-points-db5dc7e3eb8e)
