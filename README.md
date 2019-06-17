@@ -9,7 +9,7 @@
 
 # Contents:
 #### Navigate to the other repositories to start learning!
-### [Where to Start](https://github.com/Data-Scholars-Discovery/Data-Scholars-Discovery.github.io/blob/master/pages/Start_Here.md) - How to Start for Beginners
+### [Where to Start](https://github.com/Data-Scholars-Discovery/Data-Scholars-Discovery.github.io/blob/master/pages/start_here.md) - How to Start for Beginners
 ### [Online Resources](https://github.com/Data-Scholars-Discovery/Data-Scholars-Discovery.github.io/blob/master/_contents/intro.md) - Online Learning Sites 
 ### [Git and GitHub](https://github.com/Data-Scholars-Discovery/Data-Scholars-Discovery.github.io/blob/master/_contents/GitHub.md) - Project Management and Hosting Site
 ### [R and RStudio](https://github.com/Data-Scholars-Discovery/Data-Scholars-Discovery.github.io/blob/master/_contents/R.md) - Statistical Analysis Language and UI
