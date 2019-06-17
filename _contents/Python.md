@@ -33,7 +33,7 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 
 ## Beginner's Guides
 
-[EdX UCSD: Python for Data Science](https://www.edx.org/course/python-for-data-science-0) - Learn to use powerful, open-source, Python tools, including Pandas, Git and Matplotlib, to manipulate, analyze, and visualize complex datasets.
+[Python: The Python Tutorial](https://docs.python.org/3/tutorial/index.html) - Introduction to Python by the folks who made it. The table of contents is comprehensive so it's a good resource if you get stuck too.
 
 [EdX Berkeley: Computational Thinking with Python](https://www.edx.org/course/foundations-data-science-computational-uc-berkeleyx-data8-1x) - First in the "Data 8" series by UC Berkeley, introducing concepts of data science through Python.
 
@@ -44,6 +44,10 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 [UC Berkeley D-Lab: Python Fundamentals](https://github.com/dlab-berkeley/python-fundamentals) - GitHub repo of Python materials split into 4 "days" of instruction. Useful for anyone teaching Python in a seminar!
 
 [Harvard: CS109 Data Science Course](http://cs109.github.io/2014/index.html) - Lecture videos and course materials from Harvard's intro to data science (circa 2014).
+
+[Google CoLab: Intro to Pandas](https://colab.research.google.com/notebooks/mlcc/intro_to_pandas.ipynb#scrollTo=av6RYOraVG1V)
+
+[EdX UCSD: Python for Data Science](https://www.edx.org/course/python-for-data-science-0) - Learn to use powerful, open-source, Python tools, including Pandas, Git and Matplotlib, to manipulate, analyze, and visualize complex datasets.
 
 
 ## Jupyter Notebooks
