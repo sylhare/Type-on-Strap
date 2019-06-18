@@ -15,13 +15,6 @@
 			<span class="sr-only">{{ site.theme_settings.str_tweet }}</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.google_plus %}
-        <li>
-            <a href="https://plus.google.com/share?url={{ page.url | absolute_url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Google+">
-			<i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_share_on }} Google+</span>
-		</a>
-        </li>
         {% endif %} {% if site.theme_settings.share_buttons.tumblr %}
         <li>
             <a href="http://www.tumblr.com/share?v=3&u={{ page.url | absolute_url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.theme_settings.str_share_on }} Tumblr">
