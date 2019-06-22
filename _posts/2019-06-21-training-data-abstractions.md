@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Powerful Abstractions for Programmatically Building and Managing Training Sets
-short-summary: "Machine learning practitioners are spending less time on model architectures and hardware optimizations and, instead, focusing on training data."
-summary: "Machine learning practitioners are spending less time on model architectures and hardware optimizations and, instead, focusing on training data."
-thumbnail: "assets/img/posts/2019-05-27-controllable-fairness/fair.png"
+short-summary: "Machine learning practitioners are spending less time on model architectures and hardware optimizations and, instead, focusing on training data. We describe three powerful abstractions that practitioners can use to programmatically build and manage their training data."
+summary: "Machine learning practitioners are spending less time on model architectures and hardware optimizations and, instead, focusing on training data. We describe three powerful abstractions that practitioners can use to programmatically build and manage their training data."
+thumbnail: "assets/img/posts/2019-06-21-training-data-abstractions/fig_abstractions_thumbnail.png"
 author: <a href='https://vincentsc.com'>Vincent S. Chen</a>, <a href='https://stanford.edu/~senwu/'>Sen Wu</a>, <a href='https://www.bradenhancock.com'>Braden Hancock</a>, <a href='https://ajratner.github.io'>Alex Ratner</a>, <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>, and&nbsp;<a href='https://cs.stanford.edu/people/chrismre/#students'>other&nbsp;members&nbsp;of&nbsp;Hazy&nbsp;Lab</a>
 tags: [ml,systems,research]
 ---
