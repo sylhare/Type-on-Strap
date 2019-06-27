@@ -125,6 +125,9 @@ The Snorkel project is active and ongoing! We have a number of exciting, ongoing
 
 A code release later this month will include significant infrastructural improvements and tutorials for how to apply LFs, TFs, and SFs to SuperGLUE and other tasks. If you've used Snorkel for your own applications, we'd love to hear about it! For updates on Snorkel developments and applications, you can always visit the Snorkel [landing page](http://snorkel.stanford.edu/) or [open-source repository](https://github.com/HazyResearch/snorkel).
 
+## Acknowledgements
+The authors would like to thank Feng Niu and Charles Srisuwananukorn for many helpful discussions, tests, and collaborations throughout the development of slicing!
+
 <!-- ##### Footnotes -->
 <!-- * footnotes will be placed here. This line is necessary -->
 <!-- {:footnotes} -->
