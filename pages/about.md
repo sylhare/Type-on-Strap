@@ -10,9 +10,8 @@ The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and resea
 
 All our blog posts are written by members in the SAIL community, with faculty advisor [Dorsa Sadigh](https://dorsa.fyi/) and the following editorial board:
 
-* [Andrey Kurenkov](https://twitter.com/andrey_kurenkov)
+* [Andrey Kurenkov](http://www.andreykurenkov.com/)
 * [Michelle Lee](https://twitter.com/michellearning)
-* [Jorge Cueto](https://twitter.com/HipHipHipJorge)
-* [Krishnan Srinivasan](https://twitter.com/krishpopdesu)
+* [Dylan Losey](http://dylanlosey.com/)
 
 

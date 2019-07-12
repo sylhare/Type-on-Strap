@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Influencing Leading and Following in Human-Robot Teams"
-excerpt: "On a scalable way we can represent inherent structures in human teams, which we can use this structure to design intelligent influencing behaviors"
-summary: "On a scalable way we can represent inherent structures in human teams, which we can use this structure to design intelligent influencing behaviors"
+excerpt: "On a scalable way we can represent inherent structures in human teams, which we can use this structure to design intelligent influencing behaviors."
+summary: "On a scalable way we can represent inherent structures in human teams, which we can use this structure to design intelligent influencing behaviors."
 thumbnail: "assets/img/posts/2019-06-24-influencelead/examples.png"
-author: <a href='https://www.linkedin.com/in/minae-kwon-baaa0b7a'>Minae Kwon</a>
+author: <a href='https://www.linkedin.com/in/minae-kwon-baaa0b7a'>Minae Kwon</a>, <a href='https://www.linkedin.com/in/mengxi-li-103926126/'>Mengxi Li</a>
 tags: [reward functions, learning from humans, human-robot interaction, demonstrations, preferences]
 ---
 So much of our lives centers around coordinating in groups. For instance, we are able to coordinate with and influence groups of people both implicitly (e.g. when sharing lanes on the highway) and explicitly (e.g. when cooking a meal together). As robots become increasingly integrated into society, they should be able to similarly coordinate well with human groups. 
