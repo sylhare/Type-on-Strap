@@ -104,7 +104,7 @@ Change these variables in `_config.yml`:
 ```yml
   theme_settings:
     title: My Jekyll Blog                 # Name of website
-    avatar: assets/img/triangular.svg     # Path of avatar image, to be displayed in the theme's header
+    avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
     description: My blog posts            # Short description, primarily used by search engines
 ```
 
@@ -117,7 +117,7 @@ Customize your site header/footer with these variables in `_config.yml`:
 ```yml
   theme_settings:
     header_text: Welcome to my Jekyll blog
-    header_text_feature_image: assets/img/sample3.png
+    header_feature_image: assets/img/sample3.png
     footer_text: Copyright 2017
 ```
 
