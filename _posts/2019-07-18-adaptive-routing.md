@@ -3,7 +3,7 @@ layout: post
 title: "Adaptive Energy-Efficient Routing for Autonomous Vehicles"
 excerpt: "We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We also propose a scalable and performant planning algorithm for solving such problems."
 summary: "We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We also propose a scalable and performant planning algorithm for solving such problems."
-thumbnail: "assets/img/posts/2019-07-22-adaptive-routing/fig1_roads_png.png"
+thumbnail: "assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png"
 author: <a href='https://web.stanford.edu/~shushman/'>Shushman Choudhury</a>
 tags: [routing, planning, multimodal, transit networks]
 ---
@@ -11,7 +11,7 @@ tags: [routing, planning, multimodal, transit networks]
 _A team of aerial and terrestrial robots is sent to analyze previously unexplored  terrain by taking photographs and soil samples. Only the aerial robots — drones — can obtain high quality images of tall structures. Imagine that, instead of flying directly from the mission hub to their respective destinations, the drones docked on the ground vehicles for segments of their routes and flew off for a short time to capture some data before swiftly docking back on to a (potentially different) vehicle.
 Drones are more energy-constrained and sensitive to atmospheric disturbances than their terrestrial counterparts. With such coordination, we could improve energy-efficiency and allow for broader coverage and longer missions._
 
-<div style="text-align: center"><img src="{{ site.baseurl }}/assets/img/posts/2019-07-22-adaptive-routing/gif-1-street-vid.gif" width="800"/></div>
+<div style="text-align: center"><img src="{{ site.baseurl }}/assets/img/posts/2019-07-18-adaptive-routing/gif-1-street-vid.gif" width="800"/></div>
 
 **We are interested in the planning and real-time execution of routes for autonomous vehicles, in settings where the vehicle can use multiple modes of transportation** (through other vehicles in the area). The transportation options are updated dynamically and not known in advance. We design a planning and control framework for judiciously choosing transit options and making the corresponding connections in time. The GIF above shows a qualitative example using real GPS data from north San Francisco, in which drones can land on certain cars. A longer, annotated video is [available](https://youtu.be/c3nfTa8BA-E) on YouTube.
 
@@ -22,7 +22,7 @@ The same methodology used for the coordinated exploration problem above can also
 To formalize our use cases of interest, we introduce the problem class of Dynamic Real-time Multimodal Routing (DREAMR).  Ultimately, we are interested in **routing** the autonomous agent, and in doing so in **real-time** rather than on request. The agent has access to a **dynamic** or rapidly-changing set of transit options, in which it can use multiple modes of transportation (we refer to this as **multimodal**), in addition to moving by itself. In this post, we will explain how DREAMR  problems are difficult and propose an algorithmic framework to solve them. For simplicity, we will continue to use the example of drones planning over car routes, as in figure 1.
 
 {% figure caption:'Fig. 1: The DREAMR problem requires real-time decisions for an agent to traverse a network of dynamic transit routes. The example of drones riding on cars is purely illustrative; our framework permits other agent dynamics and transit route properties. ' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-22-adaptive-routing/fig1_roads_png.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-22-adaptive-routing/fig1_roads_png.png)
+[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png)
 {% endfigure %}
 
 ### Understanding DREAMR
@@ -34,7 +34,7 @@ Compared to the well-studied multimodal route planning problem, the DREAMR setti
 
 {% figure caption:'Fig. 2: Every DREAMR route is composed of three kinds of sub-routes: Constrained Flight (time-constrained), Riding, and Unconstrained Flight.
  ' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-22-adaptive-routing/graph_layer_png.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-22-adaptive-routing/graph_layer_png.png)
+[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-18-adaptive-routing/graph_layer_png.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-18-adaptive-routing/graph_layer_png.png)
 {% endfigure %}
 
 Existing off-the-shelf methods for multimodal route planning or Markov Decision Processes cannot be applied naively to solve DREAMR problems. However, two forms of **underlying structure** will help us cut them down to size — the DREAMR solution routes can be **decomposed** into simpler sub-routes, as illustrated in figure 2, and there is **partial controllability** in the system, i.e. drones can be controlled but not cars. We look to exploit this structure intelligently and efficiently in our decision-making framework.
@@ -43,7 +43,7 @@ Existing off-the-shelf methods for multimodal route planning or Markov Decision 
 
 
 {% figure caption:'Fig. 3: Our approach exploits the sequential dependency structure for the decisions to be made in DREAMR problems. The choice of transit option defines possible connection points, i.e. where the drone can board a car and alight from it. The chosen connection point determines the appropriate control strategy, i.e. accelerate, decelerate, maintain. ' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-22-adaptive-routing/hhp_structure.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-22-adaptive-routing/hhp_structure.png)
+[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-18-adaptive-routing/hhp-structure.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-18-adaptive-routing/hhp-structure.png)
 {% endfigure %}
 
 Our planning algorithm relies on analyzing the sequential structure between the decisions that need to be made for DREAMR problems, as illustrated in figure 3. The algorithm is **hierarchical**, i.e. there is a _global_ layer that repeatedly computes a good nominal route from the drone’s current location to the destination, and a _local_ layer that controls the drone to make the next transit connection for the chosen route. The nature of the decisions is **hybrid** — the transit choices and connection points are discrete (e.g. choosing a specific metro station) while the control actions are continuous (e.g. velocity or acceleration). Interleaving planning and execution allows adapting to changes such as switching to a new car route that is more helpful, or abandoning a timed connection that is likely to fail when the target car abruptly speeds up.
@@ -51,7 +51,7 @@ Our planning algorithm relies on analyzing the sequential structure between the 
 
 {% figure caption:'Fig. 4: The global layer (left) decides which transit options and connection points to aim for; the local layer (middle) controls the agent under uncertainty to make the timed connections; the interleaving (right) responds to better transit options and abrupt speedups/delays.
  ' %}
-[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-22-adaptive-routing/hhp-behavior.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-22-adaptive-routing/hhp-behavior.png)
+[<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2019-07-18-adaptive-routing/hhp-behavior.png"/>]({{site.baseurl}}/assets/img/posts/2019-07-18-adaptive-routing/hhp-behavior.png)
 {% endfigure %}
 
 
@@ -66,7 +66,7 @@ For the experiments, we designed a large-scale simulation setup with hundreds of
 **_Performance._** We also examine the tradeoff between energy expended and elapsed time for the solution trajectories obtained by our method, over a wide range of DREAMR scenarios. Our key observation here is that our trajectories have a significantly better tradeoff compared to a deterministic replanning-based method. In particular, **the performance gap increases as energy saving is prioritized**; more timed connections are attempted , and our approach is much more robust and adaptive in making those timed connections than the baseline. Furthermore, the routes executed by our method **save up to 60% energy by judiciously choosing transit options**. Some qualitative behavior is demonstrated below (with the longer annotated version [here](https://www.youtube.com/watch?v=e5IcB79TEXY&feature=youtu.be))
 
 
-<div style="text-align: center"><img src="{{ site.baseurl }}/assets/img/posts/2019-07-22-adaptive-routing/gif-2-qualitative.gif" width="800"/></div>
+<div style="text-align: center"><img src="{{ site.baseurl }}/assets/img/posts/2019-07-18-adaptive-routing/gif-2-qualitative.gif" width="800"/></div>
 
 ### The Bottom Line
 
