@@ -317,6 +317,22 @@ title : Portfolio
 {% include portfolio.html %}
 ```
 
+#### Portofolio posts
+
+You can format the portfolio posts in the `_portfolio` folder using the `post layout`. Here are little explaination on some of the possible feature you can use and what they will do.
+
+If you decide to use a date, please be sure to use one that can be parsed such as `yyyy-mm-dd`. You can see more format example on the demo posts that are available for the theme:
+
+```yml
+---
+layout: post
+title: Circus				       # Title of the portfolio post
+feature-img: "assets/img/portfolio/cake.png"   # Will display the image in the post
+img: "assets/img/portfolio/cake.png"           # Will display the image in the portfolio page
+date: 2019-07-25		 	       # Not mandatory, however needs to be in date format to display the date
+---
+```
+
 ### Gallery
 
 You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position 
@@ -324,7 +340,7 @@ based on available vertical space.
 You need to specify the `gallery_path` which will be used to find the pictures to render. 
 It will take all of the picture under that directory. Then use the `include` to add it in your page. 
 
-```
+```yml
 ---
 layout: page
 title: Gallery
