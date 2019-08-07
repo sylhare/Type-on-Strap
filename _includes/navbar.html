@@ -15,9 +15,7 @@
     
     <!-- Toggle menu -->
     <nav class="clear">
-    <a aria-label="pull" id="pull" class="toggle" href="#">
-    <i class="fa fa-bars fa-lg"></i>
-    </a>
+    
     
     <!-- Menu -->
     <ul class="hide">
@@ -35,7 +33,11 @@
             {% endunless %}
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
+    <a class="toggle" href="#">
+        <i class="fa fa-bars fa-lg"></i>
+    </a>
     </ul>
+    
         
 	</nav>
 </header>

@@ -1,28 +1,28 @@
 # SITE CONFIGURATION
 baseurl: 
 url: "https://sylhare.github.io"
-title: Type on Strap # site's title
-description: "A website with blog posts and pages" # used by search engines
+title: Minji's blog # site's title
+description: "All about programming" # used by search engines
 
 defaults:
   - 
     scope:
       path: "" # an empty string here means all files in the project
     values:
-      image: assets/img/triangle.png # seo tag
+      image: assets/img/smile.png # seo tag
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  avatar: assets/img/triangle.png
+  avatar: assets/img/smile.png
   color_image: /assets/img/lineart.png # In post when you set color
   favicon: assets/favicon.ico
 
   # Header and footer text
-  header_text: Change header text in <code>_config.yml</code>
+  header_text: Programming 101
   header_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
-    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+    <span class="copyright">Copyright &copy; Minji Song</span> Powered by Github Pages. 
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
@@ -33,7 +33,7 @@ theme_settings:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "ssminji"
   google_plus:
   instagram:
   keybase:
@@ -96,10 +96,10 @@ authors:
     name: MhagnumDw
     avatar: "assets/img/avatars/mhagnumdw_avatar.jpg"
     url: 
-  sylhare:
-    name: Sylhare
+  ssminji:
+    name: ssminji
     avatar: "assets/img/avatars/sylhare_avatar.png"
-    url: "https://github.com/sylhare"
+    url: "https://github.com/ssMinji"
 
 # PORTFOLIO
 collections:
