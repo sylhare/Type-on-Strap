@@ -47,3 +47,9 @@
         line-height: normal;
     }
 }
+
+@media screen and (max-width: $sm-break) {
+    .tag-posts .meta {
+        display: none;
+    }
+}
