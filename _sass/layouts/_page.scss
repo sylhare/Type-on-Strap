@@ -1,5 +1,6 @@
 h1.title {
     @extend .header-txt-shadow;
+    padding: $title-padding 0;
 }
 
 .subtitle {

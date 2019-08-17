@@ -1,4 +1,3 @@
-article,
 .comments {
     @extend %padding-regular;
     border-bottom: 1px solid $border-color;
@@ -7,6 +6,7 @@ article,
 }
 
 article {
+    @extend .comments;
     header {
         margin-bottom: 6%;
         text-align: center;

@@ -4,13 +4,13 @@ $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-logo: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
-
 // Padding
 $padding-x-large: 23%;
 $padding-large: 20%;
 $padding-medium: 6%;
 $padding-small: 4%;
 $padding-x-small: 3%;
+$title-padding: 0.5em;
 
 // Brand colours
 $theme-color: #337ab7;
@@ -50,8 +50,6 @@ $sm-break: 450px;
 $monospace: Monaco, Consolas, "Lucida Console", monospace !default;
 $font-size-code: 0.75em !default; // ~12px
 $border-radius: 4px !default;
-
-
 
 // base16 Material Theme
 $base00: #263238 !default;  // Default Background
