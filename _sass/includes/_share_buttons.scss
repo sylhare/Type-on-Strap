@@ -1,29 +1,30 @@
 ul.share-buttons {
-    list-style: none;
-    padding: $padding-x-small/2 0 $padding-x-small/2 0;
-    margin: 0;
-    text-align: center;
-    
-    div.meta {
-        display: inline;
-        margin-right: 0.5em;
-    }
+  list-style: none;
+  padding: $padding-x-small/2 0 $padding-x-small/2 0;
+  margin: 0;
+  text-align: center;
 
-    li {
-        display: inline;
-        
-        a:hover {
-            text-decoration: none;
-        }
+  div.meta {
+    display: inline;
+    margin-right: 0.5em;
+  }
+
+  li {
+    display: inline;
+
+    a:hover {
+      text-decoration: none;
     }
-    .sr-only {
-        position: absolute;
-        clip: rect(1px 1px 1px 1px);
-        clip: rect(1px, 1px, 1px, 1px);
-        padding: 0;
-        border: 0;
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-    }
+  }
+
+  .sr-only {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
 }

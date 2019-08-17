@@ -1,32 +1,33 @@
 #post-nav {
+  width: 100%;
+  display: inline-block;
+  @extend %padding-small;
+
+  a {
     width: 100%;
-    display: inline-block;
-    @extend %padding-small;
-   
-    a {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-    p {
-        @extend .meta;
-    }
-    
-    #previous-post {
-        float: left;
-        width: 50%;
-    }
-    
-    #next-post {
-        float: right;
-        text-align:right;
-        width: 50%;
-    }
-    
-    @media screen and (max-width: $sm-break) {
+    padding: 0;
+    margin: 0;
+  }
+
+  p {
+    @extend .meta;
+  }
+
+  #previous-post {
+    float: left;
+    width: 50%;
+  }
+
+  #next-post {
+    float: right;
+    text-align: right;
+    width: 50%;
+  }
+
+  @media screen and (max-width: $sm-break) {
     a, p {
-        font-size: 0.8em;
+      font-size: 0.8em;
     }
-}
+  }
 }
 

@@ -1,56 +1,56 @@
 /* --- Pagination --- */
 .pagination {
-    padding: $padding-small $padding-large 0 $padding-large;
+  padding: $padding-small $padding-large 0 $padding-large;
+  display: inline-block;
+  text-align: center;
+  //margin-bottom: 2em;
+  width: 100%;
+  clear: both;
+
+  @media (max-width: 600px) {
+    padding: $padding-small;
+  }
+
+  &:before {
+    content: '';
     display: inline-block;
-    text-align: center;
-    //margin-bottom: 2em;
-    width: 100%;
-    clear: both;
+    height: 100%;
+    vertical-align: middle;
+  }
 
-    @media (max-width: 600px) {
-        padding: $padding-small;
+  .page_number {
+    display: inline-block;
+    vertical-align: sub;
+
+    @media (max-width: 254px) {
+      display: none;
+    }
+  }
+
+  .button {
+    margin: 0em;
+    display: inline-block;
+
+    .fa {
+      &.fa-chevron-right, &.fa-chevron-left {
+        font-size: initial;
+      }
     }
 
-    &:before {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
+    i .fa-chevron-left .fa-chevron-right {
+      vertical-align: inherit;
     }
 
-    .page_number {
-        display: inline-block;
-        vertical-align: sub;
-
-        @media (max-width: 254px) {
-            display: none;
-        }
+    @media (max-width: $break) {
+      display: table-cell;
     }
+  }
 
-    .button {
-        margin: 0em;
-        display: inline-block;
+  .previous {
+    float: left;
+  }
 
-        .fa {
-            &.fa-chevron-right, &.fa-chevron-left {
-                font-size: initial;
-            }
-        }
-
-        i .fa-chevron-left .fa-chevron-right {
-            vertical-align: inherit;
-        }
-
-        @media (max-width: $break) {
-            display: table-cell;
-        }
-    }
-
-    .previous {
-        float: left;
-    }
-
-    .next {
-        float: right;
-    }
+  .next {
+    float: right;
+  }
 }
