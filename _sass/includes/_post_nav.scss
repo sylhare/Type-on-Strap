@@ -14,10 +14,13 @@
     
     #previous-post {
         float: left;
+        width: 50%;
     }
     
     #next-post {
         float: right;
+        text-align:right;
+        width: 50%;
     }
     
     @media screen and (max-width: $sm-break) {
