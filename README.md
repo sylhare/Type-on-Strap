@@ -9,3 +9,5 @@ a new one in the right format. To convert from Google doc to markdown, you can u
 
 To sync with online version, run jekyll build, then 'octopress deploy'
 Then go to /afs/.cs/group/ai/www/blog/ and pull latest from master
+
+If you don't have octopress, install it with `gem install octopress`

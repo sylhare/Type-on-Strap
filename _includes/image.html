@@ -1,0 +1,22 @@
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    {% if include.url %}
+    <a href="{{ include.url }}" title="{{ include.title }}" target="_blank">
+    {% endif %}
+      <img class="postimage_100"
+        src="{{ site.baseurl }}/{{ include.img }}"
+        alt="{{ include.alt }}"
+        {% if include.width %}
+        width="{{ include.width }}"
+        {% endif %}
+        {% if include.height %}
+        height="{{ include.height }}"
+        {% endif %}
+      />
+    {% if include.url %}
+    </a>
+    {% endif %}
+    {% if include.caption %}
+        <p class="image-caption">{{ include.caption }}</p>
+    {% endif %}
+</figure>
