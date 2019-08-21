@@ -3,13 +3,12 @@ layout: post
 title: "What makes a good conversation?"
 subtitle: "How controllable attributes affect human judgments"
 thumbnail: "assets/img/posts/2019-08-18-controllable-dialogue/personachat.png"
-
 short-summary: "In this work, we control multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance."
 summary: "In this work, we control multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance."
 author: <a href='http://www.abigailsee.com/'>Abigail See</a> 
 tags: [nlp, ai, chatbots]
 ---
-
+*This post was originally on [Abigail See's website](http://www.abigailsee.com/2019/08/13/what-makes-a-good-conversation.html) and has been replicated here with permission.*
 
 ### The Natural Language Generation task spectrum
 
@@ -235,10 +234,10 @@ By __increasing specificity__ to around human levels, we obtain improvements to 
 However, finding the right balance is difficult -- increasing specificity too much leads to lower <font color="#db4437">making sense</font> and <font color="#db4437">fluency</font> scores.
 
 {% include image.html
-  img="assets/img/posts/2019-08-18-controllable-dialogue/spec2.png"
+  img="assets/img/posts/2019-08-18-controllable-dialogue/spec.png"
   alt="An example chat between the bot and a human"
   caption="Our increased specificity bot typically offers more interesting details about itself."
-  
+  width=700
 %}
 
 Lastly, we were unable to obtain an improvement in any of our evaluation categories by controlling __response-relatedness__.
