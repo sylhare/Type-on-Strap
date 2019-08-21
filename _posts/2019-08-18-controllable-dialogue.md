@@ -336,5 +336,5 @@ This blog post is based on the [NAACL 2019](https://naacl2019.org/) paper __What
 
 *For further details on this work, check out the [paper](https://www.aclweb.org/anthology/N19-1170) or our [presentation slides](https://cs.stanford.edu/people/abisee/naacl2019slides.pdf) .*
 
-*To chat to the bots yourself, follow the instructions [here](https://parl.ai/projects/controllable_dialogue) -- it only takes a few minutes to set up!*
+*The code, data, pretrained models, and an interactive demo are available [here](https://parl.ai/projects/controllable_dialogue).*
 
