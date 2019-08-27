@@ -1,5 +1,5 @@
 .comments {
-  @extend %padding-regular;
+  @extend %padding-post;
   border-bottom: 1px solid $border-color;
   float: left;
   width: 100%;
@@ -95,12 +95,12 @@ header {
   }
 
   .post-content {
-    @extend %padding-regular;
+    @extend %padding-post;
     padding-bottom: 0;
   }
 
   footer {
-    @extend %padding-regular;
+    @extend %padding-post;
     padding-top: 0;
   }
 }

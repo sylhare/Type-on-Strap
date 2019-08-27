@@ -6,11 +6,19 @@ $font-size: 1.25em;
 
 // Padding
 $padding-x-large: 23%;
-$padding-large: 20%;
+$padding-large: 9%;
 $padding-medium: 6%;
 $padding-small: 4%;
 $padding-x-small: 3%;
 $title-padding: 0.5em;
+
+// Mobile display
+$xl-break: 2000px;
+$l-break: 1400px;
+$m-break: 1000px;
+$break: 768px;
+$sm-break: 576px;
+$x-sm-break: 300px;
 
 // Brand colours
 $theme-color: #337ab7;
@@ -40,10 +48,6 @@ $feature-image-size: cover; // options include "cover", "contain", "auto"
 // Header description box
 $header-desc-background-color: $theme-color;
 $header-desc-text-color: #FFF;
-
-// Mobile display
-$break: 768px;
-$sm-break: 450px;
 
 /*  Syntax highlighting  */
 // Syntax typography

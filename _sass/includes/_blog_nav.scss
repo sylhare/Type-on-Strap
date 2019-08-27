@@ -1,15 +1,11 @@
 /* --- Pagination --- */
 .pagination {
-  padding: $padding-small $padding-large 0 $padding-large;
+  @extend %padding-nav;
   display: inline-block;
   text-align: center;
   //margin-bottom: 2em;
   width: 100%;
   clear: both;
-
-  @media (max-width: 600px) {
-    padding: $padding-small;
-  }
 
   &:before {
     content: '';
@@ -22,13 +18,13 @@
     display: inline-block;
     vertical-align: sub;
 
-    @media (max-width: 254px) {
+    @media (max-width: $x-sm-break) {
       display: none;
     }
   }
 
   .button {
-    margin: 0em;
+    margin: 0;
     display: inline-block;
 
     .fa {
@@ -39,10 +35,6 @@
 
     i .fa-chevron-left .fa-chevron-right {
       vertical-align: inherit;
-    }
-
-    @media (max-width: $break) {
-      display: table-cell;
     }
   }
 
