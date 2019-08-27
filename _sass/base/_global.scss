@@ -13,6 +13,10 @@ figure {
   box-sizing: content-box;
 }
 
+pre {
+  overflow-x: scroll;
+}
+
 html {
   background: $background-color;
 }
@@ -104,6 +108,10 @@ h4 {
   p, li {
     font-size: 0.8em;
   }
+
+  table {
+    overflow-x: scroll;
+  }
 }
 
 
@@ -124,7 +132,6 @@ table {
   table-layout: fixed;
   width: 100%;
   word-wrap: break-word;
-  overflow-x: scroll;
   display: inline-block;
 }
 
