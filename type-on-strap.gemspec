@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "1.4.0"
+  spec.version       = "1.4.1"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
 
@@ -22,6 +22,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "jekyll-seo-tag", "~>2.6"
 
   spec.add_development_dependency "bundler", "~> 2.0", ">= 2.0.1"
-  spec.add_development_dependency "rake", "~> 10.0"
-
 end
