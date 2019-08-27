@@ -51,7 +51,6 @@ h6 {
     color: $text-color;
   }
 
-
 }
 
 h1 {
@@ -68,6 +67,23 @@ h3 {
 
 h4 {
   font-size: 1.15em;
+}
+
+iframe,
+img,
+embed,
+object,
+video {
+  max-width: 100%;
+  padding: 0 9%;
+}
+
+img[align=left] {
+  margin-right: 3%;
+}
+
+img[align=right] {
+  margin-left: 3%;
 }
 
 /* ---- Responsive ---- */
@@ -88,6 +104,15 @@ h4 {
   }
   p, li {
     font-size: 0.8em;
+  }
+
+  iframe,
+  img,
+  embed,
+  object,
+  video {
+    max-width: 100%;
+    padding: 0 1%;
   }
 }
 
@@ -201,21 +226,4 @@ hr {
 a {
   color: $link-color;
   text-decoration: none;
-}
-
-iframe,
-img,
-embed,
-object,
-video {
-  max-width: 100%;
-  padding: 0 10%;
-}
-
-img[align=left] {
-  margin-right: 3%;
-}
-
-img[align=right] {
-  margin-left: 3%;
 }
