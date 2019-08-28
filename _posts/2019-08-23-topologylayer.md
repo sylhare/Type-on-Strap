@@ -6,7 +6,7 @@ summary: "Topology is a combinatorial property that is tricky to utilize in grad
 feature-img: "assets/img/posts/2019-08-23-topologylayer/examples.png"
 thumbnail: "assets/img/posts/2019-08-23-topologylayer/examples.png"
 author: <a href='http://www.bruel.org'>Rickard Brüel Gabrielsson</a>
-tags: [machine learning, computational topology, computational geometry, persistent homology]
+tags: [machine learning, computational topology, computational geometry]
 ---
 
 We often use machine learning to try to uncover patterns in data. In order for those patterns to be useful they should be meaningful and express some underlying structure. Geometry deals with such structure, and in machine learning we especially leverage _local geometry_. This can be seen in the Euclidean-inspired loss functions we use for generative models as well as for regularization. However, _global geometry_, which is the focus of <a target='_blank' a_ href='https://en.wikipedia.org/wiki/Topology'>Topology</a>, also deals with meaningful structure, the only difference being that the structure is global instead of local. Topology is at present less exploited in machine learning, which is also why it is important to make it more available to the machine learning community at large.
