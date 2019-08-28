@@ -17,9 +17,15 @@
             </h1>
             {% include post_info.html post=post %}
           </header>
-          <div class="excerpt">
-              {{ post.excerpt | strip_html | escape }}
-          </div>
+          {% if site.theme_settings.excerpt %}
+              <div class="excerpt">
+                  {% if site.theme_settings.excerpt == "truncate" %}
+                     {{ post.content | strip_html | truncate: '250' | escape }}
+                  {% else %}
+                     {{ post.excerpt | strip_html | escape }}
+                  {% endif %}
+              </div>
+          {% endif %}
       </span>
     </div>
     {% endfor %}

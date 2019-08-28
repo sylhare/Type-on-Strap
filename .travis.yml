@@ -1,6 +1,7 @@
 language: ruby
 rvm:
   - 2.3.3
+
 before_install:
   - gem update --system
   - gem install bundler
@@ -17,10 +18,12 @@ branches:
     - gh-pages
     - master
     - /^v.*$/
+
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 sudo: false
+
 deploy:
   provider: rubygems
   api_key:
