@@ -174,6 +174,17 @@
 </li>
 {% endif %}
 
+{% if site.theme_settings.stack_overflow %}
+<li>
+    <a href="{{ site.theme_settings.stack_overflow }}" title="{{ site.theme_settings.str_follow_on }} Stack Overflow">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+{% endif %}
+
 {% if site.theme_settings.steam %}
 <li>
 	<a href="http://steamcommunity.com/id/{{ site.theme_settings.steam }}" title="{{ site.theme_settings.str_follow_on }} Steam">
