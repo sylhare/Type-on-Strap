@@ -1,7 +1,7 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://han1448.github.io"
-title: Type on Strap # site's title
+title: Sweet Life # site's title
 description: "A website with blog posts and pages" # used by search engines
 
 defaults:
@@ -28,14 +28,14 @@ theme_settings:
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: han1448oppa@naver.com
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: https://github.com/han1448
   instagram:
   keybase:
   linkedin:  # Full URL
@@ -58,14 +58,14 @@ theme_settings:
     tumblr:
     pinterest:
     pocket:
-    reddit: true
+    reddit:
     linkedin:
     wordpress:
     email: true
 
   # Scripts / Features 
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
+  disqus_shortname: seunghyunhan
   katex: true # Enable if using math markup
 
   # Localization strings
@@ -94,10 +94,14 @@ paginate_path: "blog/page:num"
 
 # AUTHORS
 authors:
+  oppalove: # author-id
+    name: oppalove
+    avatar: "assets/img/avatars/oppalove.jpeg"
+    url:
   mhagnumdw: # author-id
     name: MhagnumDw
     avatar: "assets/img/avatars/mhagnumdw_avatar.jpg"
-    url: 
+    url:
   sylhare:
     name: Sylhare
     avatar: "assets/img/avatars/sylhare_avatar.png"
