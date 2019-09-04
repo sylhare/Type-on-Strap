@@ -51,13 +51,15 @@ gulp.task('css', function minicss() {
     .pipe(gulp.dest('css/vendor/'));
 });
 
-gulp.task("isolate-bootstrap-css", gulp.series('css', function isolating() {
+gulp.task('isolate', function isolateBootstrap() {
   return gulp.src('css/bootstrap-iso.less')
-    .pipe(less())
+    .pipe(less({strictMath: 'on'}))
     .pipe(replace('.bootstrap-iso html', ''))
     .pipe(replace('.bootstrap-iso body', ''))
     .pipe(gulp.dest('css/vendor/'));
-}));
+});
+
+gulp.task("isolate-bootstrap-css", gulp.series('isolate', 'css'));
 
 
 gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));
