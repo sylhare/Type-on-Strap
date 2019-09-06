@@ -76,7 +76,7 @@
 }
 
 
-// To clear things when we float the element inisde nav and ul 
+// To clear things when we float the element inside nav and ul
 .clear {
   *zoom: 1;
 
@@ -125,6 +125,13 @@
       margin .25s,
       padding .25s,
       opacity .5s .25s;
+
+      li {
+        background-color: darken($background-color, 4%);
+        &:nth-of-type(4n) {
+          background-color: $background-color;
+        }
+      }
     }
 
     ul.hide {
@@ -142,7 +149,8 @@
 
     li {
       width: 100%;
-      float: left;
+      text-align: center;
+      font-size: 1em;
       position: relative;
     }
 
