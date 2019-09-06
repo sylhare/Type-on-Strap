@@ -1,5 +1,5 @@
 <header class="site-header">
-    
+
     <!-- Logo and title -->
 	<div class="branding">
 		<a href="{{ '/' | relative_url }}">
@@ -12,17 +12,17 @@
       </a>
 		</h1>
 	</div>
-    
+
     <!-- Toggle menu -->
     <nav class="clear">
     <a aria-label="pull" id="pull" class="toggle" href="#">
     <i class="fa fa-bars fa-lg"></i>
     </a>
-    
+
     <!-- Menu -->
     <ul class="hide">
         {% assign name_page = "" %}
-        
+
         {% for page in site.pages %}
             {% unless page.title == null or page.hide or name_page contains page.title %}
             <li class="separator"> | </li>
@@ -36,6 +36,6 @@
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
     </ul>
-        
+
 	</nav>
 </header>
