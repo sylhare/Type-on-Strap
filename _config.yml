@@ -5,9 +5,8 @@ title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
 defaults:
-  - 
-    scope:
-      path: "" # an empty string here means all files in the project
+  - scope:
+      path: "" # an empty string here means all necessary files are in the project
     values:
       image: assets/img/triangle.png # seo tag
 
@@ -98,7 +97,7 @@ authors:
   mhagnumdw: # author-id
     name: MhagnumDw
     avatar: "assets/img/avatars/mhagnumdw_avatar.jpg"
-    url: 
+    url:
   sylhare:
     name: Sylhare
     avatar: "assets/img/avatars/sylhare_avatar.png"
@@ -119,5 +118,6 @@ sass:
 plugins: [jekyll-paginate, jekyll-seo-tag]
 exclude: [".jekyll-cache", "Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", ".idea",
           "LICENSE", "README.md", "screenshot.png", "assets/package.json", "assets/node_modules", "assets/gulpfile.js"]
+
 # theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
 remote_theme: sylhare/Type-on-Strap # If using as a remote_theme in github
