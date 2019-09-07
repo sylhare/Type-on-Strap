@@ -43,7 +43,7 @@ Since we use a random function, we will get different results each time.
     WeightedRandomCollection<String> collection = new WeightedRandomCollection<>();
     collection.add(5, "This is 50%!!!!!");
     collection.add(3, "This is 30%!!!");
-    collection.add(1, "This is 10%!");
+    collection.add(2, "This is 20%!");
 
     IntStream.range(1,10)
             .forEach(i-> System.out.println(collection.get()));
@@ -55,7 +55,7 @@ This is 50!!!!!%
 This is 50!!!!!%
 This is 50!!!!!%
 This is 50!!!!!%
-This is 10!%
+This is 20!%
 This is 50!!!!!%
 This is 50!!!!!%
 This is 30!!!%
