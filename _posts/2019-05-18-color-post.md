@@ -3,6 +3,7 @@ layout: post
 title: Color Post
 tags: [Test, Color, Markdown]
 color: brown
+excerpt_separator: <!--more-->
 ---
 
 # What a colorful post!
@@ -11,6 +12,8 @@ This is an idea that came from [xukimseven/HardCandy-Jekyll](https://github.com/
 looking at this cheerful and colorful them, I wanted to enable something similar for mine.
 
 You can go fork and star hers too! 😉
+
+<!--more-->
 
 ## How does it work?
 
