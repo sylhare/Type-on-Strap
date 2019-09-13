@@ -3,12 +3,11 @@ layout: default
 ---
 
 <div class="home">
-  {% if site.theme_settings.header_text %}
+
   <div id="main" class="call-out"
-  style="background-image: url('{{ site.theme_settings.header_feature_image | relative_url }}')">
-    <h1> {{ site.theme_settings.header_text }} </h1>
+       style="background-image: url('{{ site.theme_settings.header_feature_image | relative_url }}')">
+    <h1> {{ site.theme_settings.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
   </div>
-  {% endif %}
 
   {% include blog.html %}
     

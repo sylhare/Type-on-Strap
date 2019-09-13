@@ -49,9 +49,9 @@ layout: default
     header#main { background-color: {{ page.color }} !important; }
   {% endif %}
 
-  {% if page.feature-img %}{% assign image_url = page.feature-img %}{% elsif page.color %}{% assign image_url = site.theme_settings.color_image %}{% endif %}
   header#main {
     background-repeat:no-repeat;
-    background-image: url('{{ image_url | relative_url }}');
+    {% if page.feature-img %} background-image: url('{{ page.feature-img | relative_url }}');
+    {% elsif page.color %}background-image: url('{{ site.theme_settings.color_image | relative_url }}');  {% endif %}
   }
 </style>

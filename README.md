@@ -63,7 +63,7 @@ jekyll-theme-basically-basic
 |   ├── gallery.md             # Gallery page for your photos
 |   ├── portfolio.md	       # Portfolio page for your projects
 |   ├── search.html	       # Search page
-|   └── search.json            # Specify the search target (page, post, collection)
+|   └── tags.md         # The tag page
 ├── _config.yml                # sample configuration
 └── index.html                 # sample home page (blog page paginated)
 ```
@@ -120,6 +120,8 @@ Customize your site header/footer with these variables in `_config.yml`:
     header_feature_image: assets/img/sample3.png
     footer_text: Copyright 2017
 ```
+
+If you don't want anything, replace the value by `" "`.
 
 #### Localisation string
 
