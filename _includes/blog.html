@@ -15,7 +15,7 @@
                 {{ post.title }}
               </a>
             </h1>
-            {% include post_info.html post=post %}
+            {% include post_info.html author=post.author date=post.date %}
           </header>
           {% if site.theme_settings.excerpt %}
               <div class="excerpt">

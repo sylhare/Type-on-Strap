@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Markup: Syntax Highlighting"
-author-id: "Michael Rose"
+author: mmistakes
 tags: [code]
 ---
 

@@ -2,7 +2,6 @@
 layout: post
 title: Sample post
 tags: [A Tag, Test, Lorem, Ipsum]
-author-id: mhagnumdw
 excerpt_separator: <!--more-->
 ---
 
