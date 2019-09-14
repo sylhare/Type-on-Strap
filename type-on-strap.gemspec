@@ -7,20 +7,21 @@ Gem::Specification.new do |spec|
   spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
 
   spec.summary       =  "A simple and responsive jekyll theme template"
-  spec.description   = %q{A custom Type Theme template (a free and open-source Jekyll theme). Great for blogs, easy to customize and responsive.}
+  spec.description   = %q{A simple and responsive jekyll theme template based on type-theme. Great for blogs, easy to customize and responsive.}
   spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
   spec.license       = "MIT"
 
-  spec.files         = Dir.glob("**/{*,.*}").select do |f|
-    f.match(%r{^(assets/(js|css|fonts|data)|_(includes|layouts|sass)/|(LICENSE|README.md))}i)
+  spec.metadata["plugin_type"] = "theme"
+  spec.files         = `git ls-files -z`.split("\x0").select do |f|
+    f.match(%r!^(assets/(js|css|fonts|data)/|_(includes|layouts|sass)/|_data/language.yml|(LICENSE|README)((\.(txt|md|markdown)|$)))!i)
   end
 
-  spec.required_ruby_version = '~> 2.3'
+  spec.required_ruby_version = '>= 2.4'
     
-  spec.add_runtime_dependency "jekyll", "~> 3.8", ">= 3.8.5"
+  spec.add_runtime_dependency "jekyll", ">= 3.5", "< 5.0"
   spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
   spec.add_runtime_dependency "jekyll-paginate", "~> 1.1"
   spec.add_runtime_dependency "jekyll-seo-tag", "~>2.6"
 
-  spec.add_development_dependency "bundler", "~> 2.0", ">= 2.0.1"
+  spec.add_development_dependency "bundler", ">= 2.0", "< 2.1.0"
 end
