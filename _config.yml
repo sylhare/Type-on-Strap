@@ -4,89 +4,32 @@ url: "https://sylhare.github.io"
 title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
-defaults:
-  - scope:
-      path: "" # an empty string here means all necessary files are in the project
-    values:
-      image: assets/img/triangle.png # seo tag
-
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
   avatar: assets/img/triangle.png
-  color_image: /assets/img/lineart.png # In post when you set color
+  color_image: /assets/img/lineart.png # A bit transparent for color posts.
   favicon: assets/favicon.ico
 
   # Header and footer text
-  header_text: Change header text in <code>_config.yml</code>
+  header_text: # Change Blog header text
   header_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
     Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
   # Blog
   excerpt: true # Or "truncate" (first 250 characters), "false" to disable
-
-  # Icons
-  rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
-  behance:
-  bitbucket:
-  dribbble:
-  facebook:
-  flickr:
-  gitlab:
-  github: "sylhare"
-  instagram:
-  keybase:
-  linkedin:  # Full URL
-  pinterest:
-  reddit:
-  soundcloud:
-  stack_overflow:
-  stack_exchange:  # Full URL
-  steam:
-  tumblr:
-  twitter: # "twitter username"
-  vimeo:
-  wordpress:
-  youtube:
-
-  # Sharing options
-  share_buttons:
-    facebook: true
-    twitter: true
-    tumblr:
-    pinterest:
-    pocket:
-    reddit: true
-    linkedin:
-    wordpress:
-    email: true
-
-  # Scripts / Features 
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
-  katex: true # Enable if using math markup
-
-  # Localization strings
-  str_follow_on: "Follow on"
-  str_rss_follow: "Follow RSS feed"
-  str_share_on: "Share on"
-  str_add_to: "Add to"
-  str_email: "Email"
-  str_tweet: "Tweet"
-  str_pin_it: "Pin it"
-  str_next_post: "Next post"
-  str_previous_post: "Previous post"
-  str_next_page: "Next"
-  str_previous_page: "Prev"
-  str_javascript_required_disqus: "Please enable JavaScript to view comments."
-
-  # Post navigation
   post_navigation: true
 
-  # Colours, typography and padding
-  # Open the "_sass > base" folder, and open "_variables.scss"
+  # Features
+  footer_icons: # In _data/social.yml
+  share_buttons: # In _data/social.yml
+  authors: # In _data/authors.yml
+  language: # In _data/language.yml
+  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  disqus_shortname: # Your discus shortname for comments
+  katex: true # Enable if using math markup
+  layout_variables: # Open the "_sass > base" folder, and open "_variables.scss"
 
 # PAGINATION
 paginate: 5
