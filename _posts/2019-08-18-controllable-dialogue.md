@@ -3,7 +3,7 @@ layout: post
 title: "What makes a good conversation?"
 subtitle: "How controllable attributes affect human judgments"
 thumbnail: "assets/img/posts/2019-08-18-controllable-dialogue/personachat.png"
-short-summary: "Looking into multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance."
+excerpt: "Looking into multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance."
 summary: "Looking into multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance."
 author: <a href='http://www.abigailsee.com/'>Abigail See</a> 
 tags: [nlp, ai, chatbots]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Adaptive Energy-Efficient Routing for Autonomous Vehicles"
-excerpt: "We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We also propose a scalable and performant planning algorithm for solving such problems."
+short-summary: "We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We also propose a scalable and performant planning algorithm for solving such problems."
 summary: "We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We also propose a scalable and performant planning algorithm for solving such problems."
 thumbnail: "assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png"
 author: <a href='https://web.stanford.edu/~shushman/'>Shushman Choudhury</a>
