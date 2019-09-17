@@ -1,0 +1,7 @@
+{% assign page = include.page %}
+
+<meta property="og:url"          content="{{ page.url }}" />
+<meta property="og:type"         content="article" />
+<meta property="og:title"        content="{{ page.title }}" />
+<meta property="og:description"  content="{{ page.excerpt }}" />
+<meta property="og:image"        content="{{ page.feature-img | default: site.theme_settings.header_feature_image }}" />
