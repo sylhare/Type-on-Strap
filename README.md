@@ -102,70 +102,40 @@ and as meta properties for search engines, browsers, and the site's RSS feed.
 Change these variables in `_config.yml`:
 
 ```yml
-  theme_settings:
-    title: My Jekyll Blog                 # Name of website
-    avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
-    description: My blog posts            # Short description, primarily used by search engines
+  title: My Jekyll Blog                 # Name of website
+  avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
+  description: My blog posts            # Short description, primarily used by search engines
+  favicon: assets/favicon.ico           # Icon displayed in the tab
 ```
 
-### Customizing text
+### Main configuration
 
 #### Footer and Header's text
 
 Customize your site header/footer with these variables in `_config.yml`:
 
 ```yml
-  theme_settings:
-    header_text: Welcome to my Jekyll blog
-    header_feature_image: assets/img/sample3.png
-    footer_text: Copyright 2017
+  header_text: Welcome to my Jekyll blog
+  header_feature_image: assets/img/sample3.png
+  footer_text: Copyright 2017
 ```
 
 If you don't want anything, replace the value by `" "`.
 
 #### Localisation string
 
-Change localization string variables in `_config.yml`.
+Localization string is a way to quickly change the template language for text like *Next Post* or *Follow on*, ...
+You can find all the properties in `_data/language.yml`.
 
-English text used in the theme has been grouped  so you can quickly translate the theme or change labels to suit your needs.
+By default it is in english, but you can easily add your own language.
 
-```yml
-  theme_settings:
-     str_follow_on: "Follow on"
-     str_rss_follow: "Follow RSS feed"
-     str_email: "Email"
-     str_next_post: "Next post"
-     str_previous_post: "Previous post"
-     str_next_page: "Next"
-     str_previous_page: "Prev"
-     str_continue_reading: "Continue reading"
-     str_javascript_required_disqus: "Please enable JavaScript to view comments."
-```
+### Google Analytics
 
-
-### Other features
-
-Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually represented by:
-
-```
-{{ liquid.tag | filter }}
-```
-
-These are useful to render your jekyll files. 
-You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
-
-### Footer's icons
-
-Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) in the footer. 
-All icon variables should be your username enclosed in quotes (e.g. "username") in `_config.yml`, 
-except for the following variables:
+To enable Google Analytics, add your [tracking ID](https://support.google.com/analytics/answer/1032385) 
+to `_config.yml` like so:
 
 ```yml
-  theme_settings:
-     rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
-     email_address: type@example.com
-     linkedin: https://www.linkedin.com/in/FirstLast
-     stack_exchange: https://stackoverflow.com/users/0000/first-last
+  google_analytics: UA-NNNNNNNN-N
 ```
 
 ### Comments (via Disqus)
@@ -177,18 +147,7 @@ To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/c
 to your project's `_config.yml` file:
 
 ```yml
-  theme_settings:
-     disqus_shortname: my_disqus_shortname
-```
-
-### Google Analytics
-
-To enable Google Analytics, add your [tracking ID](https://support.google.com/analytics/answer/1032385) 
-to `_config.yml` like so:
-
-```yml
-  theme_settings:
-     google_analytics: UA-NNNNNNNN-N
+  disqus_shortname: my_disqus_shortname
 ```
 
 ### Math typesetting
@@ -196,8 +155,7 @@ to `_config.yml` like so:
 When KateX is set in `_config.yml`:
 
 ```yml
-  theme_settings:
-     katex: true # to Enable it
+  katex: true # to Enable it
 ```
 
 You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable 
@@ -217,7 +175,64 @@ $$
 $$
 ```
 
-### Post excerpt
+### Social icons
+
+In `_data/social.yml` you can customize the social icons from other wbesite you wish to display in the blog.
+The site icons come from [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
+
+#### Share in article
+
+The share icons are the one at the bottom of the blog page if enabled, 
+to share the article on those platform.
+
+
+#### Footer
+
+Display  in the footer. 
+All icon variables should be your username enclosed in quotes (e.g. "username") in `_config.yml`, 
+except for the following variables:
+
+```yml
+  rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
+  email_address: type@example.com
+  linkedin: https://www.linkedin.com/in/FirstLast
+  stack_exchange: https://stackexchangecom/users/0000/first-last
+  stack_overflow: https://stackoverflow.com/users/0000/first-last
+```
+
+### Customizing Posts
+
+When writing a post, be sure in jekyll to:
+ - Put it in the `_posts` folder
+ - Name it with the date first like `2019-08-21-This-is-my-blog-post.md`
+
+#### Layout: Post
+
+This are the basic features you can use with the  `post` layout.
+
+```yml
+---
+layout: post
+title: Hello World                                # Title of the page
+hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
+feature-img: "assets/img/sample.png"              # Add a feature-image to the post
+thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
+bootstrap: true                                   # Add bootstrap to the page
+tags: [sample, markdown, html]
+---
+```
+
+With `thumbnail`, you can add a smaller image than the `feature-img`. 
+If you don't have a thumbnail you can still use the same image as the feature one.
+
+The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
+you can edit it in the config file (`_config.yml > color_image`). If you want another one, put it in `/assets/img` as well. 
+
+The **bootstrap** is not mandatory and is only useful if you want to add bootstrapped content in your page. 
+It will respect the page and theme layout, mind the padding on the sides.
+
+#### Post excerpt
 
 The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. 
 The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
@@ -236,35 +251,9 @@ some text in the excerpt
 
 The html is stripped out of the excerpt so it only display text.
 
-## Layout
+## Other Layouts
 Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). 
 Non-standard features are documented below.
-
-### Layout: Post
-
-This are the basic features you can use with the  `post` layout.
-
-```yml
----
-layout: post
-title: Hello World                                # Title of the page
-hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
-feature-img: "assets/img/sample.png"              # Add a feature-image to the post
-thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
-color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
-bootstrap: true                                   # Add bootstrap to the page
-tags: [sample, markdown, html]
----
-```
-
-With `thumbnail`, you can add a smaller image than the `feature-img`. 
-If you don't want/have a thumbnail you can still use the same image as the feature one.
-
-The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
-you can edit it in the config file (`theme_settings > color_image`). If you want another one, put it in `/assets/img` as well. 
-
-The **bootstrap** is not mandatory and is only useful if you want to add bootstrapped content in your page. 
-It will respect the page and theme layout, mind the padding on the sides.
 
 ### Layout: Page
 
@@ -335,6 +324,21 @@ date: 2019-07-25		 	       # Not mandatory, however needs to be in date format t
 ---
 ```
 
+#### Portfolio in gem
+
+Make sure your `_config.yml` contains the following if you are using the theme as a gem:
+
+```yml
+
+# PORTFOLIO
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:name
+```    
+
+This creates the collection for Jekyll so it can find and display your portfolio posts.
+
 ### Gallery
 
 You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position 
@@ -390,21 +394,18 @@ tags: [sample, markdown, html]
 All the tags will be listed in `tags.html` with a link toward the pages or posts.
 The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
 
-## Template as a Gem
-
-You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). 
-Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
-To make the feature pages available in from the gem I created them as layouts that can be invoked in the pages folder.
-
-So if you're using the template as a theme, Make sure you have:
-  - A `index.html` file
-  - The right `_config.yml` with the theme setting such as `theme: type-on-strap` uncommented
-  - The feature page included. (ex: as it is already in `pages`)
-  - Some content ready in `_posts` and `_portfolio` to be displayed
-
-Now you can use any theme gem with github pages : [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages)
-
 ## Advanced
+
+### Liquid tags
+
+Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually represented by:
+
+```
+{{ liquid.tag | filter }}
+```
+
+These are useful to render your jekyll files. 
+You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
 ### Minimizing and optimizing: css, js and images
 
@@ -426,6 +427,43 @@ cd assets/
 gulp default
 # tip: run a git status to see the changes
 git status
+```
+
+### Use as Ruby Gem
+
+You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). 
+
+Ruby Gem Method
+Add this line to your Jekyll site's Gemfile (or create one):
+
+```ruby
+gem "type-on-strap"
+```
+Add this line to your Jekyll site's `_config.yml` file:
+
+```yml
+theme: jekyll-theme-so-simple
+```
+
+Then run Bundler to install the theme gem and dependencies:
+
+```bash
+bundle install
+```
+
+Then you can start adding content like:
+  - Add a `index.html` file
+  - Add the feature page you want. (ex: as it is already in `pages`)
+  - Add posts in `_posts` and `_portfolio` to be displayed
+
+
+### Remote Theme
+
+Now you can use any theme gem with github pages with [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
+For that remove all `theme:` attributes from `_config.yml` and add instead:
+
+```yml
+remote_theme: sylhare/Type-on-Strap 
 ```
 
 ## License
