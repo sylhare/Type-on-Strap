@@ -5,31 +5,30 @@ title: Type on Strap # site's title
 description: "A website with blog posts and pages" # used by search engines
 
 # THEME-SPECIFIC CONFIGURATION
-theme_settings:
-  # Meta
-  avatar: assets/img/triangle.png
-  color_image: /assets/img/lineart.png # A bit transparent for color posts.
-  favicon: assets/favicon.ico
+# Images
+avatar: assets/img/triangle.png # Empty for no avatar in navbar
+color_image: /assets/img/lineart.png # A bit transparent for color posts.
+favicon: assets/favicon.ico # Icon displayed in the tab
 
-  # Header and footer text
-  header_text: # Change Blog header text
-  header_feature_image: assets/img/pexels/triangular.jpeg
-  footer_text: >
-    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+# Header and footer text
+header_text: # Change Blog header text
+header_feature_image: assets/img/pexels/triangular.jpeg
+footer_text: >
+  Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 
-  # Blog
-  excerpt: true # Or "truncate" (first 250 characters), "false" to disable
-  post_navigation: true
+# Blog
+excerpt: true # Or "truncate" (first 250 characters), "false" to disable
+post_navigation: true
 
-  # Features
-  footer_icons: # In _data/social.yml
-  share_buttons: # In _data/social.yml
-  authors: # In _data/authors.yml
-  language: # In _data/language.yml
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname: # Your discus shortname for comments
-  katex: true # Enable if using math markup
-  layout_variables: # Open the "_sass > base" folder, and open "_variables.scss"
+# Features
+footer_icons: # In _data/social.yml
+share_buttons: # In _data/social.yml
+authors: # In _data/authors.yml
+language: # In _data/language.yml
+google_analytics: # Tracking ID, e.g. "UA-000000-01"
+disqus_shortname: # Your discus shortname for comments
+katex: true # Enable if using math markup
+layout_variables: # Open the "_sass > base" folder, and open "_variables.scss"
 
 # PAGINATION
 paginate: 5
