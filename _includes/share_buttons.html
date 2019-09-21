@@ -3,14 +3,14 @@
         <div class="meta">Share</div>
         {% if site.data.social.share.facebook %}
         <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}" target="_blank" title="{{ site.data.social.language.str_share_on }} Facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank" title="{{ site.data.social.language.str_share_on }} Facebook">
 			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">{{ site.data.social.language.str_share_on }} Facebook</span>
 		</a>
         </li>
         {% endif %} {% if site.data.social.share.twitter %}
         <li>
-            <a href="https://twitter.com/intent/tweet?source={{ page.url | absolute_url }}&text={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}:%20{{ page.url | absolute_url }}" target="_blank" title="{{ site.data.social.language.str_tweet }}">
+            <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" target="_blank" title="{{ site.data.social.language.str_tweet }}">
 			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">{{ site.data.social.language.str_tweet }}</span>
 		</a>
@@ -24,7 +24,7 @@
         </li>
         {% endif %} {% if site.data.social.share.pinterest %}
         <li>
-            <a href="http://pinterest.com/pin/create/button/?url={{ page.url | absolute_url }}&description=" target="_blank" title="{{ site.data.social.language.str_pin_it }}">
+            <a href="http://pinterest.com/pin/create/button/?url={{ page.url | absolute_url }}&description={{ page.excerpt }}" target="_blank" title="{{ site.data.social.language.str_pin_it }}">
 			<i class="fa fa-pinterest-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">{{ site.data.social.language.str_pin_it }}</span>
 		</a>
