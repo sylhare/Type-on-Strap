@@ -1,17 +1,17 @@
 <div id="post-nav">
     {% if page.next.url %}
     <div id="previous-post">
-        <p>{{ site.data.language.str_next_post }}</p>
         <a alt="{{ page.next.title }}" href="{{ page.next.url | relative_url }}">
+            <p>{{ site.data.language.str_previous_post }}</p>
             {{ page.next.title }}
         </a>
     </div>
     {% endif %}
-    {% if page.previous.url %}
 
+    {% if page.previous.url %}
     <div id="next-post">
-        <p>{{ site.data.language.str_previous_post }}</p>
         <a alt="{{ page.previous.title }}" href="{{ page.previous.url | relative_url }}">
+            <p>{{ site.data.language.str_next_post }}</p>
             {{ page.previous.title }}
         </a>
     </div>

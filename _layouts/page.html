@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{% include share_thumbnail.html page=page %}
 
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
   <header id="main" style="background-image: url('{{ page.feature-img | relative_url }}')">
