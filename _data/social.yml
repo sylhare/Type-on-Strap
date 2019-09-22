@@ -1,6 +1,6 @@
 # Icons on the footer
-rss: true  # Make sure you created a feed.xml with feed.xml layout
-email_address: # Full email address, e.g. "sam@example.com"
+rss: true         # Make sure you created a feed.xml with feed.xml layout
+email_address:    # Full email address, e.g. "sam@example.com"
 behance:
 bitbucket:
 dribbble:
@@ -10,15 +10,15 @@ gitlab:
 github: "sylhare"
 instagram:
 keybase:
-linkedin:  # Full URL
+linkedin:         # Full URL
 pinterest:
 reddit:
 soundcloud:
 stack_overflow:
-stack_exchange:  # Full URL
+stack_exchange:   # Full URL
 steam:
 tumblr:
-twitter: # "twitter username"
+twitter:          # "twitter username"
 vimeo:
 wordpress:
 youtube:

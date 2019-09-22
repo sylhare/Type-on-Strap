@@ -17,7 +17,7 @@
             </h1>
             {% include post_info.html author=post.author date=post.date %}
           </header>
-          {% if site.excerpt %}
+          {% if site.excerpt or site.theme_settings.excerpt %}
               <div class="excerpt">
                   {% if site.excerpt == "truncate" %}
                      {{ post.content | strip_html | truncate: '250' | escape }}

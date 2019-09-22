@@ -30,14 +30,14 @@ layout: default
 </article>
 
 <!-- Disqus -->
-{% if site.disqus_shortname %}
+{% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
 <div class="comments">
   {% include disqus.html %}
 </div>
 {% endif %}
 
 <!-- Post navigation -->
-{% if site.post_navigation %}
+{% if site.post_navigation  or site.theme_settings.post_navigation %}
   {% include post_nav.html %}
 {% endif %}
 

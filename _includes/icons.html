@@ -1,6 +1,6 @@
-{% if site.data.social.rss %}
+{% if site.data.social.rss or site.theme_settings.rss %}
 <li>
-	<a href="{{ "feed.xml" | absolute_url }}" title="{{ site.data.language.str_rss_follow }}">
+	<a href="{{ "feed.xml" | absolute_url }}" title="{{ site.data.language.str_rss_follow | default: "Follow RSS feed" }}">
 		<span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -9,7 +9,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.email_address %}
+{% if site.data.social.email_address or site.theme_settings.email_address %}
 <li>
 	<a href="mailto:{{ site.data.social.email_address }}" title="{{ site.data.language.str_email }}">
 		<span class="fa-stack fa-lg">
@@ -20,7 +20,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.behance %}
+{% if site.data.social.behance or site.theme_settings.behance %}
 <li>
 	<a href="https://www.behance.net/{{ site.data.social.behance }}" title="{{ site.data.language.str_follow_on }} Behance">
 		<span class="fa-stack fa-lg">
@@ -31,7 +31,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.bitbucket %}
+{% if site.data.social.bitbucket or site.theme_settings.bitbucket %}
 <li>
 	<a href="https://bitbucket.org/{{ site.data.social.bitbucket }}" title="{{ site.data.language.str_follow_on }} Bitbucket">
 		<span class="fa-stack fa-lg">
@@ -42,7 +42,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.dribbble %}
+{% if site.data.social.dribbble or site.theme_settings.dribbble %}
 <li>
 	<a href="https://dribbble.com/{{ site.data.social.dribbble }}" title="{{ site.data.language.str_follow_on }} Dribbble">
 		<span class="fa-stack fa-lg">
@@ -53,7 +53,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.facebook %}
+{% if site.data.social.facebook or site.theme_settings.facebook %}
 <li>
 	<a href="https://www.facebook.com/{{ site.data.social.facebook }}" title="{{ site.data.language.str_follow_on }} Facebook">
 		<span class="fa-stack fa-lg">
@@ -64,7 +64,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.flickr %}
+{% if site.data.social.flickr or site.theme_settings.flickr %}
 <li>
 	<a href="https://www.flickr.com/photos/{{ site.data.social.flickr }}" title="{{ site.data.language.str_follow_on }} Flickr">
 		<span class="fa-stack fa-lg">
@@ -75,7 +75,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.github %}
+{% if site.data.social.github or site.theme_settings.github %}
 <li>
 	<a href="https://github.com/{{ site.data.social.github }}" title="{{ site.data.language.str_follow_on }} GitHub">
 		<span class="fa-stack fa-lg">
@@ -86,7 +86,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.instagram %}
+{% if site.data.social.instagram or site.theme_settings.instagram %}
 <li>
 	<a href="http://instagram.com/{{ site.data.social.instagram }}" title="{{ site.data.language.str_follow_on }} Instagram">
 		<span class="fa-stack fa-lg">
@@ -97,7 +97,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.keybase %}
+{% if site.data.social.keybase or site.theme_settings.keybase %}
 <li>
 	<a href="https://keybase.io/{{ site.data.social.keybase }}" title="{{ site.data.language.str_follow_on }} Keybase">
 		<span class="fa-stack fa-lg">
@@ -108,7 +108,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.linkedin %}
+{% if site.data.social.linkedin or site.theme_settings.linkedin %}
 <li>
 	<a href="{{ site.data.social.linkedin }}" title="{{ site.data.language.str_follow_on }} LinkedIn">
 		<span class="fa-stack fa-lg">
@@ -119,7 +119,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.pinterest %}
+{% if site.data.social.pinterest or site.theme_settings.pinterest %}
 <li>
 	<a href="http://www.pinterest.com/{{ site.data.social.pinterest }}" title="{{ site.data.language.str_follow_on }} Pinterest">
 		<span class="fa-stack fa-lg">
@@ -130,7 +130,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.reddit %}
+{% if site.data.social.reddit or site.theme_settings.reddit %}
 <li>
 	<a href="https://www.reddit.com/user/{{ site.data.social.reddit }}" title="{{ site.data.language.str_follow_on }} Reddit">
 		<span class="fa-stack fa-lg">
@@ -141,7 +141,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.soundcloud %}
+{% if site.data.social.soundcloud or site.theme_settings.soundcloud %}
 <li>
 	<a href="https://soundcloud.com/{{ site.data.social.soundcloud }}" title="{{ site.data.language.str_follow_on }} SoundCloud">
 		<span class="fa-stack fa-lg">
@@ -152,7 +152,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.stack_exchange %}
+{% if site.data.social.stack_exchange or site.theme_settings.stack_exchange %}
 <li>
 	<a href="{{ site.data.social.stack_exchange }}" title="{{ site.data.language.str_follow_on }} Stack Exchange">
 		<span class="fa-stack fa-lg">
@@ -163,7 +163,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.stack_overflow %}
+{% if site.data.social.stack_overflow or site.theme_settings.stack_overflow %}
 <li>
     <a href="{{ site.data.social.stack_overflow }}" title="{{ site.data.language.str_follow_on }} Stack Overflow">
 		<span class="fa-stack fa-lg">
@@ -174,7 +174,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.steam %}
+{% if site.data.social.steam or site.theme_settings.steam %}
 <li>
 	<a href="http://steamcommunity.com/id/{{ site.data.social.steam }}" title="{{ site.data.language.str_follow_on }} Steam">
 		<span class="fa-stack fa-lg">
@@ -185,7 +185,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.tumblr %}
+{% if site.data.social.tumblr or site.theme_settings.tumblr %}
 <li>
 	<a href="http://{{ site.data.social.tumblr }}.tumblr.com/" title="{{ site.data.language.str_follow_on }} Tumblr">
 		<span class="fa-stack fa-lg">
@@ -196,7 +196,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.gitlab %}
+{% if site.data.social.gitlab or site.theme_settings.gitlab %}
 <li>
 	<a href="https://gitlab.com/{{ site.data.social.gitlab }}" title="{{ site.data.language.str_follow_on }} Gitlab">
         <span class="fa-stack fa-lg">
@@ -207,7 +207,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.twitter %}
+{% if site.data.social.twitter or site.theme_settings.twitter %}
 <li>
 	<a href="https://twitter.com/{{ site.data.social.twitter }}" title="{{ site.data.language.str_follow_on }} Twitter" class="type">
         <span class="fa-stack fa-lg">
@@ -218,7 +218,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.vimeo %}
+{% if site.data.social.vimeo or site.theme_settings.vimeo %}
 <li>
 	<a href="https://vimeo.com/{{ site.data.social.vimeo }}" title="{{ site.data.language.str_follow_on }} Vimeo" class="type">
         <span class="fa-stack fa-lg">
@@ -229,7 +229,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.wordpress %}
+{% if site.data.social.wordpress or site.theme_settings.wordpress %}
 <li>
 	<a href="https://{{ site.data.social.wordpress }}.wordpress.com/" title="{{ site.data.language.str_follow_on }} WordPress">
 		<span class="fa-stack fa-lg">
@@ -240,7 +240,7 @@
 </li>
 {% endif %}
 
-{% if site.data.social.youtube %}
+{% if site.data.social.youtube or site.theme_settings.youtube %}
 <li>
 	<a href="https://www.youtube.com/user/{{ site.data.social.youtube }}" title="{{ site.data.language.str_follow_on }} YouTube">
 		<span class="fa-stack fa-lg">

@@ -31,7 +31,7 @@
 
     <!-- KaTeX 0.8.3 -->
     <!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
-    {% if site.katex %}
+    {% if site.katex or site.theme_settings.katex %}
     <script src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}"></script>
     {% endif %}
 
