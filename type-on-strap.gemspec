@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "1.5.0"
+  spec.version       = "2.0.0"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
 
@@ -14,11 +14,12 @@ Gem::Specification.new do |spec|
   spec.rdoc_options            = ["--charset=UTF-8"]
   spec.extra_rdoc_files        = %w(README.md LICENSE)
   spec.metadata["plugin_type"] = "theme"
+
   spec.files                   = `git ls-files -z`.split("\x0").select do |f|
-    f.match(%r!^(assets/(js|css|fonts|data)/|_(includes|layouts|sass)/|_data/language.yml|(LICENSE|README)((\.(txt|md|markdown)|$)))!i)
+    f.match(%r!^(assets/(js|css|fonts)/|_(includes|layouts|sass)/|_data/language.yml|(LICENSE|README)((\.(txt|md|markdown)|$)))!i)
   end
 
-  spec.required_ruby_version   = '>= 2.4'
+  spec.required_ruby_version   = '>= 2.4.0'
     
   spec.add_runtime_dependency "jekyll", ">= 3.5", "< 5.0"
   spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
