@@ -19,6 +19,21 @@ Gem::Specification.new do |spec|
     f.match(%r!^(assets/(js|css|fonts)/|_(includes|layouts|sass)/|_data/language.yml|(LICENSE|README)((\.(txt|md|markdown)|$)))!i)
   end
 
+    spec.post_install_message =  <<~MSG
+                                    ----------------------------------------------------------
+
+                                    Type on strap v2+ is using Jekyll 4.0:
+
+                                      * Please make sure you have updated your _config.yml.
+
+                                      * Use _data/ for social and language customization
+
+                                      * Vist https://github.com/sylhare/Type-on-Strap
+                                      for more info.
+
+                                    ----------------------------------------------------------
+                                  MSG
+
   spec.required_ruby_version   = '>= 2.4.0'
     
   spec.add_runtime_dependency "jekyll", ">= 3.5", "< 5.0"
