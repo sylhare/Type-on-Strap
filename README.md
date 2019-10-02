@@ -16,7 +16,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
-> [Demo](https://sylhare.github.io/Type-on-Strap/)
+> [Demo Site](https://sylhare.github.io/Type-on-Strap/)
  
 [![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
@@ -33,12 +33,18 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 ## Usage
 
+### As a ruby gem
+
+Check out this tutorial: [Use Type on strap as a gem](https://github.com/sylhare/Type-on-Strap/tree/v2#use-as-ruby-gem)
+
+### As a github page
+
 1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/Sylhare/Type-on-Strap.git`
 2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
 3. Install the theme's dependencies: `bundle install`
 4. Customize the theme
 	- Github Page: [update `_config.yml`](https://github.com/Sylhare/Type-on-Strap#site-configuration)
-5. Run the Jekyll server: `jekyll serve`
+5. Run the Jekyll server: `bundle exec jekyll serve`
 
 ## Structure
 
@@ -63,7 +69,7 @@ jekyll-theme-basically-basic
 |   ├── gallery.md             # Gallery page for your photos
 |   ├── portfolio.md	       # Portfolio page for your projects
 |   ├── search.html	       # Search page
-|   └── tags.md         # The tag page
+|   └── tags.md                # The tag page
 ├── _config.yml                # sample configuration
 └── index.html                 # sample home page (blog page paginated)
 ```
@@ -81,15 +87,15 @@ Configure Jekyll as your own blog or with a subpath in in `_config.yml`:
 Jekyll website *without* a subpath (such as a GitHub Pages website for a given username):
 
 ```yml
-  baseurl: ""
-  url: "https://username.github.io"
+baseurl: ""
+url: "https://username.github.io"
 ```
 
 Jekyll website *with* subpath (like the Type on Strap [demo](https://sylhare.github.io/Type-on-Strap/) page):
 
 ```yml
-  baseurl: "/sub-directory"
-  url: "https://username.github.io/"
+baseurl: "/sub-directory"
+url: "https://username.github.io/"
 ```
 
 Please configure this  before using the theme.
@@ -102,10 +108,10 @@ and as meta properties for search engines, browsers, and the site's RSS feed.
 Change these variables in `_config.yml`:
 
 ```yml
-  title: My Jekyll Blog                 # Name of website
-  avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
-  description: My blog posts            # Short description, primarily used by search engines
-  favicon: assets/favicon.ico           # Icon displayed in the tab
+title: My Jekyll Blog                 # Name of website
+avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
+description: My blog posts            # Short description, primarily used by search engines
+favicon: assets/favicon.ico           # Icon displayed in the tab
 ```
 
 ### Main configuration
@@ -115,9 +121,9 @@ Change these variables in `_config.yml`:
 Customize your site header/footer with these variables in `_config.yml`:
 
 ```yml
-  header_text: Welcome to my Jekyll blog
-  header_feature_image: assets/img/sample3.png
-  footer_text: Copyright 2017
+header_text: Welcome to my Jekyll blog
+header_feature_image: assets/img/sample3.png
+footer_text: Copyright 2017
 ```
 
 If you don't want anything, replace the value by `" "`.
@@ -135,7 +141,7 @@ To enable Google Analytics, add your [tracking ID](https://support.google.com/an
 to `_config.yml` like so:
 
 ```yml
-  google_analytics: UA-NNNNNNNN-N
+google_analytics: UA-NNNNNNNN-N
 ```
 
 ### Comments (via Disqus)
@@ -147,7 +153,7 @@ To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/c
 to your project's `_config.yml` file:
 
 ```yml
-  disqus_shortname: my_disqus_shortname
+disqus_shortname: my_disqus_shortname
 ```
 
 ### Math typesetting
@@ -155,7 +161,7 @@ to your project's `_config.yml` file:
 When KateX is set in `_config.yml`:
 
 ```yml
-  katex: true # to Enable it
+katex: true # to Enable it
 ```
 
 You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable 
@@ -193,11 +199,11 @@ All icon variables should be your username enclosed in quotes (e.g. "username") 
 except for the following variables:
 
 ```yml
-  rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
-  email_address: type@example.com
-  linkedin: https://www.linkedin.com/in/FirstLast
-  stack_exchange: https://stackexchangecom/users/0000/first-last
-  stack_overflow: https://stackoverflow.com/users/0000/first-last
+rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
+email_address: type@example.com
+linkedin: https://www.linkedin.com/in/FirstLast
+stack_exchange: https://stackexchangecom/users/0000/first-last
+stack_overflow: https://stackoverflow.com/users/0000/first-last
 ```
 
 ### Customizing Posts
@@ -442,7 +448,7 @@ gem "type-on-strap"
 Add this line to your Jekyll site's `_config.yml` file:
 
 ```yml
-theme: jekyll-theme-so-simple
+theme: type-on-strap
 ```
 
 Then run Bundler to install the theme gem and dependencies:
