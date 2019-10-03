@@ -1,67 +1,67 @@
 <div class="share-buttons">
     <ul class="share-buttons">
         <div class="meta">Share</div>
-        {% if site.theme_settings.share_buttons.facebook %}
+        {% if site.data.social.share.facebook or site.theme_settings.share_buttons.facebook %}
         <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank" title="{{ site.data.social.language.str_share_on }} Facebook">
 			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_share_on }} Facebook</span>
+			<span class="sr-only">{{ site.data.social.language.str_share_on | default: "Share on" }} Facebook</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.twitter %}
+        {% endif %} {% if site.data.social.share.twitter or site.theme_settings.twitter %}
         <li>
-            <a href="https://twitter.com/intent/tweet?source={{ page.url | absolute_url }}&text={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}:%20{{ page.url | absolute_url }}" target="_blank" title="{{ site.theme_settings.str_tweet }}">
+            <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" target="_blank" title="{{ site.data.social.language.str_tweet }}">
 			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_tweet }}</span>
+			<span class="sr-only">{{ site.data.social.language.str_tweet | default: "Tweet" }}</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.tumblr %}
+        {% endif %} {% if site.data.social.share.tumblr or site.theme_settings.tumblr %}
         <li>
-            <a href="http://www.tumblr.com/share?v=3&u={{ page.url | absolute_url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.theme_settings.str_share_on }} Tumblr">
+            <a href="http://www.tumblr.com/share?v=3&u={{ page.url | absolute_url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.data.social.language.str_share_on }} Tumblr">
 			<i class="fa fa-tumblr-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_share_on }} Tumblr</span>
+			<span class="sr-only">{{ site.data.social.language.str_share_on | default: "Share on" }} Tumblr</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.pinterest %}
+        {% endif %} {% if site.data.social.share.pinterest or site.theme_settings.pinterest %}
         <li>
-            <a href="http://pinterest.com/pin/create/button/?url={{ page.url | absolute_url }}&description=" target="_blank" title="{{ site.theme_settings.str_pin_it }}">
+            <a href="http://pinterest.com/pin/create/button/?url={{ page.url | absolute_url }}&description={{ page.excerpt }}" target="_blank" title="{{ site.data.social.language.str_pin_it }}">
 			<i class="fa fa-pinterest-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_pin_it }}</span>
+			<span class="sr-only">{{ site.data.social.language.str_pin_it | default: "Pin it" }}</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.pocket %}
+        {% endif %} {% if site.data.social.share.pocket or site.theme_settings.pocket %}
         <li>
-            <a href="https://getpocket.com/save?url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.theme_settings.str_add_to }} Pocket">
+            <a href="https://getpocket.com/save?url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.data.social.language.str_add_to }} Pocket">
 			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_add_to }} Pocket</span>
+			<span class="sr-only">{{ site.data.social.language.str_add_to | default: "Add to" }} Pocket</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.reddit %}
+        {% endif %} {% if site.data.social.share.reddit or site.theme_settings.reddit %}
         <li>
-            <a href="http://www.reddit.com/submit?url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.theme_settings.str_share_on }} Reddit">
+            <a href="http://www.reddit.com/submit?url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.data.social.language.str_share_on }} Reddit">
 			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_share_on }} Reddit</span>
+			<span class="sr-only">{{ site.data.social.language.str_share_on | default: "Share on" }} Reddit</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.linkedin %}
+        {% endif %} {% if site.data.social.share.linkedin or site.theme_settings.linkedin %}
         <li>
-            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&summary=&source={{ page.url | absolute_url }}" target="_blank" title="{{ site.theme_settings.str_share_on }} LinkedIn">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&summary=&source={{ page.url | absolute_url }}" target="_blank" title="{{ site.data.social.language.str_share_on }} LinkedIn">
 			<i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_share_on }} LinkedIn</span>
+			<span class="sr-only">{{ site.data.social.language.str_share_on | default: "Share on" }} LinkedIn</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.wordpress %}
+        {% endif %} {% if site.data.social.share.wordpress or site.theme_settings.wordpress %}
         <li>
-            <a href="http://wordpress.com/press-this.php?u={{ page.url | absolute_url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.theme_settings.str_share_on }} WordPress">
+            <a href="http://wordpress.com/press-this.php?u={{ page.url | absolute_url }}&quote={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&s=" target="_blank" title="{{ site.data.social.language.str_share_on }} WordPress">
 			<i class="fa fa-wordpress fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_share_on }} WordPress</span>
+			<span class="sr-only">{{ site.data.social.language.str_share_on | default: "Share on" }} WordPress</span>
 		</a>
         </li>
-        {% endif %} {% if site.theme_settings.share_buttons.email %}
+        {% endif %} {% if site.data.social.share.email or site.theme_settings.email %}
         <li>
-            <a href="mailto:?subject={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&body=:%20{{ page.url | absolute_url }}" target="_blank" title="{{ site.theme_settings.str_email }}">
+            <a href="mailto:?subject={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}&body=:%20{{ page.url | absolute_url }}" target="_blank" title="{{ site.data.social.language.str_email }}">
 			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
-			<span class="sr-only">{{ site.theme_settings.str_email }}</span>
+			<span class="sr-only">{{ site.data.social.language.str_email | default: "Email" }}</span>
 		</a>
         </li>
         {% endif %}

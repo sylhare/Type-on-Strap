@@ -15,11 +15,11 @@
                 {{ post.title }}
               </a>
             </h1>
-            {% include post_info.html post=post %}
+            {% include post_info.html author=post.author date=post.date %}
           </header>
-          {% if site.theme_settings.excerpt %}
+          {% if site.excerpt or site.theme_settings.excerpt %}
               <div class="excerpt">
-                  {% if site.theme_settings.excerpt == "truncate" %}
+                  {% if site.excerpt == "truncate" %}
                      {{ post.content | strip_html | truncate: '250' | escape }}
                   {% else %}
                      {{ post.excerpt | strip_html | escape }}
