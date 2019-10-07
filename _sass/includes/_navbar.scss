@@ -52,6 +52,15 @@
     font-size: 1.3em;
   }
 
+  .site-title-with-sub {
+    float: left;
+    margin-top: -7px;
+    font-weight: bold;
+    font-family: $font-family-logo;
+    font-size: 1em;
+    span{ display: block; font-weight: normal; font-size: 0.8em; }
+  }
+
   nav {
     list-style: none;
     margin: 0;

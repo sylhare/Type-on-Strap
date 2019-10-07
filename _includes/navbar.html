@@ -8,11 +8,18 @@
 		</a>
         {% endif %}
 
-		<h1 class="site-title">
-			<a aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
-        {{ site.title }}
-      </a>
-		</h1>
+        {% if site.subtitle %}
+                <div class="site-title-with-sub">
+        {% else %}
+	        <div class="site-title">
+        {% endif %}
+                  <a aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
+		    {{ site.title }}
+                  </a>
+                  {% if site.subtitle %}
+                  <span>{{ site.subtitle }}</span>
+                  {% endif %}
+                </div>
 	</div>
 
     <!-- Toggle menu -->

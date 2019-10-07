@@ -4,6 +4,7 @@ url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: Type on Strap                                    # site's title
+subtitle: "A website with blog posts and pages"         # optional subtitle in smaller font
 description: "A website with blog posts and pages"      # used by search engines
 avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
