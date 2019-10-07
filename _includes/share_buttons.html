@@ -1,3 +1,13 @@
+{% if site.data.social.share.facebook or site.theme_settings.share_buttons.facebook
+   or site.data.social.share.twitter or site.theme_settings.twitter
+   or site.data.social.share.tumblr or site.theme_settings.tumblr
+   or site.data.social.share.pinterest or site.theme_settings.pinterest
+   or site.data.social.share.pocket or site.theme_settings.pocket
+   or site.data.social.share.reddit or site.theme_settings.reddit
+   or site.data.social.share.linkedin or site.theme_settings.linkedin
+   or site.data.social.share.wordpress or site.theme_settings.wordpress
+   or site.data.social.share.email or site.theme_settings.email %}
+
 <div class="share-buttons">
     <ul class="share-buttons">
         <div class="meta">Share</div>
@@ -67,3 +77,5 @@
         {% endif %}
     </ul>
 </div>
+
+{% endif %}
