@@ -7,7 +7,7 @@ summary: "The NLP community has made great progress on open-domain QA, but our s
 author: <a href='http://qipeng.me/'>Peng Qi</a> 
 tags: [nlp, ai, qa]
 ---
-*This post was originally on [Peng Qi's website](http://qipeng.me/blog/answering-complex-open-domain-questions-at-scale.html) and has been replicated here with minor edits with permission.*
+*This post was originally on [Peng Qi's website](http://qipeng.me/blog/answering-complex-open-domain-questions-at-scale.html) and has been replicated here (with minor edits) with permission.*
 
 > **TL;DR:** The NLP community has made great progress on open-domain question answering, but our systems still struggle to answer complex questions over a large collection of text. We present an efficient and explainable method for enabling multi-step reasoning in these systems.
 
@@ -233,7 +233,7 @@ All of these can be found in our [code repository on GitHub](https://github.com/
 
 **Language Note:** All datasets and most of the research mentioned in this post are collected/tested for the English language only, but our principle of semantic overlap is applicable to answering open-domain complex questions in other languages than English if suitably augmented with lemmatization for highly inflected languages.
 
-#### Footnotes
+
 [^2]: This is of course contingent on the fact that very few highly ranked articles on the Web mention Jason Momoa in his next movie in close proximity to stating that he’s the “Aquaman” star who played Aquaman in that movie. This is just an example to demonstrate that as simple as this question seems, it’s not too difficult to construct questions that require information from more than one document to answer.
 [^3]: Comparison questions make up about 25% of the HotpotQA dataset. For more details please see [our HotpotQA paper](https://arxiv.org/pdf/1809.09600.pdf).
 [^4]: By "gold documents" we mean the documents needed in the chain of reasoning to answer the question.
