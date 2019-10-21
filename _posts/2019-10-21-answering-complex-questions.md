@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Answering Complex Open-domain Questions <br> at Scale"
+title: "Answering Complex Open-domain Questions at Scale"
 thumbnail: "assets/img/posts/2019-10-21-answering-complex-questions/needle-haystack.png"
 excerpt: "The NLP community has made great progress on open-domain QA, but our systems still struggle to answer complex open-domain questions in an large collection of text. We present an efficient and explainable method for enabling multi-step reasoning in these systems."
 summary: "The NLP community has made great progress on open-domain QA, but our systems still struggle to answer complex open-domain questions in an large collection of text. We present an efficient and explainable method for enabling multi-step reasoning in these systems."
