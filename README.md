@@ -462,6 +462,7 @@ Then you can start adding content like:
   - Add the feature page you want. (ex: as it is already in `pages`)
   - Add posts in `_posts` and `_portfolio` to be displayed
 
+[Jekyll::Paginate](https://jekyllrb.com/docs/pagination/) is required for the home page to work.
 
 ### Remote Theme
 
