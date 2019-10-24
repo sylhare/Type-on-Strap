@@ -9,7 +9,7 @@ To write a new post -
 a new one in the right format. To convert from Google doc to markdown, you can use [this add-on](https://gsuite.google.com/marketplace/app/docs_to_markdown/700168918607), download as docx and use pandoc, or do it manually.
 5. Once you've written a full draft, send it on to whoever from SAIL blog you are in contact with (one of the editors listed here http://ai.stanford.edu/blog/about/) and it'll go through some editing, and then be released.
 
-## For authors 
+## For editors 
 
 The way things work is that we have a 'source' branch with all the markdown and jekyll files, and the master branch has the compiled HTML. This master branch is closed to /afs/.cs/group/ai/www/blog/ and is how we update the site's contents. 
 
