@@ -12,7 +12,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
 * Nice fonts : [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
-* Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
+* Seo Tags : [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
 * Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
@@ -25,17 +25,16 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 1. [Usage](https://github.com/Sylhare/Type-on-Strap#Usage)
 2. [Structure](https://github.com/Sylhare/Type-on-Strap#structure)
 3. [Configure Type on Strap](https://github.com/Sylhare/Type-on-Strap#configure-type-on-strap)
-4. [Layout](https://github.com/Sylhare/Type-on-Strap#layout)
+4. [Other Layouts](https://github.com/Sylhare/Type-on-Strap#other-layouts)
 5. [Feature pages](https://github.com/Sylhare/Type-on-Strap#feature-pages)
-6. [Template as a Gem](https://github.com/Sylhare/Type-on-Strap#Template-as-a-Gem)
-7. [Advanced](https://github.com/Sylhare/Type-on-Strap#advanced)
-8. [License](https://github.com/Sylhare/Type-on-Strap#license)
+6. [Advanced](https://github.com/Sylhare/Type-on-Strap#advanced)
+7. [License](https://github.com/Sylhare/Type-on-Strap#license)
 
 ## Usage
 
 ### As a ruby gem
 
-Check out this tutorial: [Use Type on strap as a gem](https://github.com/sylhare/Type-on-Strap/tree/v2#use-as-ruby-gem)
+Check out this tutorial: [Use as Ruby Gem](https://github.com/Sylhare/Type-on-Strap#use-as-ruby-gem)
 
 ### As a github page
 
@@ -184,7 +183,7 @@ $$
 ### Social icons
 
 In `_data/social.yml` you can customize the social icons from other wbesite you wish to display in the blog.
-The site icons come from [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
+The site icons come from [Font Awesome](https://fontawesome.com/).
 
 #### Share in article
 
