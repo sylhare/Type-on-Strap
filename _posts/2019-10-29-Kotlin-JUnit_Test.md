@@ -53,6 +53,18 @@ Kotlin JUnit5 Test
     </build>
 ```
 
+### Test class
+```kotlin
+class CalcService(private val sumService: SumService) {
+    fun addSum(a: Int, b: Int): Int = sumService.add(a, b)
+}
+
+class SumService {
+    fun add(a: Int, b: Int): Int = a + b
+}
+
+```
+
 ### Using mockito
 #### Verify
 ```kotlin
