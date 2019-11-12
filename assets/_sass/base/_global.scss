@@ -167,10 +167,15 @@ figure {
     margin: 20px; /* adjust as needed */
     margin: 0;
     text-align: center;
+    vertical-align: middle;
 }
 
 figure img {
-    vertical-align: top;
+    vertical-align: middle;
+}
+
+figure video {
+    vertical-align: middle;
 }
 
 figure figcaption {
