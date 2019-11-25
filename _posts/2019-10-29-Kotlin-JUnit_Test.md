@@ -7,6 +7,7 @@ excerpt_separator: <!--more-->
 ---
 # Overview
 Kotlin JUnit5 Test 
+<!--more-->
 ### Dependencies
 ```xml
     <properties>
