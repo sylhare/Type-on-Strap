@@ -44,6 +44,50 @@ Three videos side by side, with a caption:
     Prior data collection methodologies include autonomous data collection (left), human supervision with web interfaces (middle), and human teleoperation with motion interfaces (right).
     </figcaption>
     {% endfigure %}
+   
+Two rows of three images side by side, with a sub-caption for each image and a caption for overall figure:
+
+    {% figure %}
+    <figure class="postfigurethird" >
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/align_tshirt.gif" />
+      <figcaption>
+      Kuka can align shirts next to the others
+      </figcaption>
+    </figure>
+    <figure class="postfigurethird" >
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/color_stripe_front.gif"/>
+      <figcaption>
+      Baxter can sweep the table with cloth
+      </figcaption>
+    </figure>
+    <figure class="postfigurethird">
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/marker_marker.gif" />
+      <figcaption>
+      Franka can grasp and reposition the markers
+      </figcaption>
+    </figure>
+    <figure class="postfigurethird" >
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/move_plate.gif" class="postimagethird"/>
+      <figcaption>
+      Kuka can move the plate to the edge of the table
+      </figcaption>
+    </figure>
+    <figure class="postfigurethird" >
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/socks_right.gif" class="postimagethird" />
+      <figcaption>
+      Baxter can pick up and reposition socks 
+      </figcaption>
+    </figure>
+    <figure class="postfigurethird">
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/towel_stack.gif" class="postimagethird" />
+      <figcaption>
+      Franka can stack the towel on the pile
+      </figcaption>
+    </figure>
+    <figcaption>
+    Here you can see examples of visual foresight fine-tuned to perform basic control tasks in three entirely different environments. For the experiments, the target robot and environment was subtracted from RoboNet during pre-training. Fine-tuning was accomplished with data collected in one afternoon.
+    </figcaption>
+    {% endfigure %}
 
 The full list of CSS classes is this:
 
@@ -128,6 +172,33 @@ The full list of CSS classes is this:
       margin-left:auto;
       margin-right:auto;
     }
+    
+    .postfigurehalf {
+      width: 49%;
+      height: auto;
+      margin-left:auto;
+      margin-right:auto;
+      padding: 1%;
+      display: inline-block;
+    }
+
+    .postfigurethird {
+      width: 30%;
+      height: auto;
+      margin-left:auto;
+      margin-right:auto;
+      padding: 1%;
+      display: inline-block;
+    }
+
+    .postfigurequarter {
+      width: 24%;
+      height: auto;
+      margin-left:auto;
+      margin-right:auto;
+      display: inline-block;
+    }
+
   
 ### Citations
 
