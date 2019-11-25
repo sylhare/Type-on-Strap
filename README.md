@@ -49,37 +49,37 @@ Two rows of three images side by side, with a sub-caption for each image and a c
 
     {% figure %}
     <figure class="postfigurethird" >
-      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/align_tshirt.gif" />
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/align_tshirt.gif" class="postimage_unpadded"/>
       <figcaption>
       Kuka can align shirts next to the others
       </figcaption>
     </figure>
     <figure class="postfigurethird" >
-      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/color_stripe_front.gif"/>
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/color_stripe_front.gif" class="postimage_unpadded"/>
       <figcaption>
       Baxter can sweep the table with cloth
       </figcaption>
     </figure>
     <figure class="postfigurethird">
-      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/marker_marker.gif" />
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/marker_marker.gif" class="postimage_unpadded"/>
       <figcaption>
       Franka can grasp and reposition the markers
       </figcaption>
     </figure>
     <figure class="postfigurethird" >
-      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/move_plate.gif" class="postimagethird"/>
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/move_plate.gif" class="postimage_unpadded"/>
       <figcaption>
       Kuka can move the plate to the edge of the table
       </figcaption>
     </figure>
     <figure class="postfigurethird" >
-      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/socks_right.gif" class="postimagethird" />
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/socks_right.gif" class="postimage_unpadded"/>
       <figcaption>
       Baxter can pick up and reposition socks 
       </figcaption>
     </figure>
     <figure class="postfigurethird">
-      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/towel_stack.gif" class="postimagethird" />
+      <img src="{{ site.baseurl }}/assets/img/posts/2019-11-26-robonet/towel_stack.gif" class="postimage_unpadded" />
       <figcaption>
       Franka can stack the towel on the pile
       </figcaption>
@@ -88,6 +88,7 @@ Two rows of three images side by side, with a sub-caption for each image and a c
     Here you can see examples of visual foresight fine-tuned to perform basic control tasks in three entirely different environments. For the experiments, the target robot and environment was subtracted from RoboNet during pre-training. Fine-tuning was accomplished with data collected in one afternoon.
     </figcaption>
     {% endfigure %}
+
 
 The full list of CSS classes is this:
 
