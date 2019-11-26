@@ -270,6 +270,33 @@ figure figcaption {
   margin-right:auto;
 }
 
+.postfigurehalf {
+  width: 49%;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 1%;
+  display: inline-block;
+}
+
+.postfigurethird {
+  width: 30%;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 1%;
+  display: inline-block;
+}
+
+.postfigurequarter {
+  width: 24%;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+  display: inline-block;
+}
+
+
 /* ---- Responsive ---- */
 
 @media screen and (max-width: $break) {
