@@ -107,5 +107,41 @@ class KotlinFunctionTest {
 }
 ```
 
+#### Parameterize
+Add dependency to use the parameterize test
+```xml
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.5.2</version>
+            <scope>test</scope>
+        </dependency>
+```
+
+Add annotation `@TestInstance` to class to resolve non-static method issue
+```kotlin
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class KotlinFunctionTest {
+
+     @MethodSource("source")
+     @ParameterizedTest
+     fun add(a: Int, b: Int, expected: Int) {
+         val sumService = SumService()
+         val actual = sumService.add(a, b)
+ 
+         assertEquals(expected, actual)
+     }
+ 
+     fun source(): Stream<Arguments> {
+         return Stream.of(
+                 Arguments.of(1, 1, 2),
+                 Arguments.of(2, 2, 4),
+                 Arguments.of(5, 10, 15),
+                 Arguments.of(-1, -1, -2)
+         )
+     }
+}
+```
+
 ### Reference
 * https://site.mockito.org/
