@@ -11,23 +11,6 @@ tags: [nlp, ml, causal inference, interpretability, feature selection]
 ---
 
 
-
-
-*This post summarizes the following 3 papers:*
-
-1.  *[Deconfounded Lexicon Induction for Interpretable Social Science  
-    ](https://nlp.stanford.edu/pubs/pryzant2018lexicon.pdf)*
-    
-2. *[Interpretable Neural Architectures for Attributing an Ad's Performance to its Writing Style](https://nlp.stanford.edu/pubs/pryzant2018emnlp.pdf)*
-3. *[Predicting Sales from the Language of Product Descriptions 
-](https://nlp.stanford.edu/pubs/pryzant2017sigir.pdf)*
-
-
-**The algorithms in this blog post have been [open-sourced](https://github.com/rpryzant/causal_selection)! Install via pip:**
-```
-pip3 install causal-selection
-```
-
 ## Making Causal Inferences with Text
 
 Identifying the linguistic features that cause people to act a certain way after reading a text, regardless of confounding variables, is something people do all the time without even realizing it. For example,
@@ -149,6 +132,12 @@ Furthermore, we can interpret features these algorithms are selecting to learn a
 
 This work presented two methods for identifying text features which best explain an outcome, controlling for confounding variables we are not interested in. This method is generally applicable to a variety of data science and social science applications. In the future, we hope to strengthen the method’s theoretical guarantees in a causal inference framework.
 
+
+
+**The algorithms in this blog post have been [open-sourced](https://github.com/rpryzant/causal_selection)! Install via pip:**
+```
+pip3 install causal-selection
+```
 
 
 *This post was based on the following papers:*
