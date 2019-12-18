@@ -51,7 +51,6 @@ Here are the main files of the template
 
 ```bash
 jekyll-theme-basically-basic
-├── _draft	               # To store your drafts, they won't be published on your site
 ├── _includes	               # theme includes
 ├── _layouts                   # theme layouts (see below for details)
 ├── _portfolio	               # collection of article to be populated in the portfolio page
@@ -278,7 +277,6 @@ tags: [sample, markdown, html]
 ```
 
 The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. 
-Use the `_draft` folder to keep files from being generated on your site.
 
 ### Layout: Default
 
