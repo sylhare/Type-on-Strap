@@ -32,6 +32,7 @@
   h3,
   h4,
   h5 {
+    font-family: $font-family-logo;
     @extend .header-txt-shadow;
   }
 
