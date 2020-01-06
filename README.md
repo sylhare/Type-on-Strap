@@ -240,7 +240,15 @@ It will respect the page and theme layout, mind the padding on the sides.
 #### Post excerpt
 
 The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. 
-The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
+The length of the excerpt has a default of around `250` characters or can be manually set in the post using:
+
+in `conflig.yml`:
+
+```yml
+excerpt: true
+```
+
+Then in your post, add the `excerpt separator`:
 
 ```yml
 ---
