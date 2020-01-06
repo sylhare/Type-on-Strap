@@ -21,7 +21,7 @@ tumblr:
 twitter:          # "twitter username"
 vimeo:
 wordpress:
-youtube:
+youtube:          # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
 
 # Share button options
 share:

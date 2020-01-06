@@ -203,6 +203,7 @@ email_address: type@example.com
 linkedin: https://www.linkedin.com/in/FirstLast
 stack_exchange: https://stackexchangecom/users/0000/first-last
 stack_overflow: https://stackoverflow.com/users/0000/first-last
+youtube: UCqECaJ8Gagnn7YCbPEzWH6g  # Youtube token of your channel in the url 
 ```
 
 ### Customizing Posts
