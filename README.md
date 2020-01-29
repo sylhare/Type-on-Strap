@@ -198,7 +198,7 @@ All icon variables should be your username enclosed in quotes (e.g. "username") 
 except for the following variables:
 
 ```yml
-rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
+rss: true                                                   
 email_address: type@example.com
 linkedin: https://www.linkedin.com/in/FirstLast
 stack_exchange: https://stackexchangecom/users/0000/first-last
