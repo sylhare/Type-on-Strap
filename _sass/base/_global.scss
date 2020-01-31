@@ -157,8 +157,8 @@ blockquote {
   box-shadow: 0 2px 2px $border-color;
 }
 
-blockquote p:last-child,
-footer p:last-child {
+blockquote *:last-child,
+footer *:last-child {
   margin-bottom: 0;
 }
 
