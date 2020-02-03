@@ -23,13 +23,13 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 ## Table of Contents
 
-1. [Usage](https://github.com/Sylhare/Type-on-Strap#Usage)
-2. [Structure](https://github.com/Sylhare/Type-on-Strap#structure)
-3. [Configure Type on Strap](https://github.com/Sylhare/Type-on-Strap#configure-type-on-strap)
-4. [Other Layouts](https://github.com/Sylhare/Type-on-Strap#other-layouts)
-5. [Feature pages](https://github.com/Sylhare/Type-on-Strap#feature-pages)
-6. [Advanced](https://github.com/Sylhare/Type-on-Strap#advanced)
-7. [License](https://github.com/Sylhare/Type-on-Strap#license)
+  - [Usage](#usage)
+  - [Structure](#structure)
+  - [Configure Type on Strap](#configure-type-on-strap)
+  - [Other Layouts](#other-layouts)
+  - [Feature pages](#feature-pages)
+  - [Advanced](#advanced)
+  - [License](#license)
 
 ## Usage
 
