@@ -6,23 +6,13 @@ date: January, 08 2019
 tags: [Python, Anaconda, python, anaconda]
 ---
 
-## [Python Website](https://www.python.org/)
+## Python and Anaconda
 
-## [Anaconda Website](https://www.anaconda.com/download/)
+#### [Python Website](https://www.python.org/)
 
-## Python User Interface Options:
+#### [Anaconda Website](https://www.anaconda.com/download/)
 
-### [Jupyter Notebooks](https://jupyter.org/)
-
-### [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb)
-
-### [Kaggle Notebooks](https://www.kaggle.com/notebooks)
-
-Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. 
-
-The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone. Jupyter Notebooks offer a clean, interactive environment for running Python from a browser. Its cousin, JupyterLab, is also available for operating from a remote machine. Spyder is a more traditional graphical user interface (GUI) application, similar to the RStudio or Stata environment.
-
-Google Colab and Kaggle Notebooks are another set of interface options. Both host their runtime remotely, so you don't need a program installed on your local computer (like JupterLab). They also allow you to share notebooks of code with others as easily as a Google Doc. Both also have extensive sets of tutorials and example notebooks for all kinds of applications. Colab has the additional benefit of interacting easily with other Google applications, like [Earth Engine](https://earthengine.google.com/) or [Compute Engine](https://cloud.google.com/compute).
+If you want a local copy of Python on your computer, install the base program or the entire Anaconda package of programs. We recommend beginners start with Anaconda.
 
 Here are some quick guides to follow along for installing Python and Anaconda:
 
@@ -31,6 +21,21 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 [Installing Anaconda (Windows)](https://www.datacamp.com/community/tutorials/installing-anaconda-windows)
 
 [Installing Anaconda (Mac)](https://www.datacamp.com/community/tutorials/installing-anaconda-mac-os-x)
+
+
+## Python User Interface Options:
+
+#### [Jupyter Notebooks](https://jupyter.org/)
+
+#### [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb)
+
+#### [Kaggle Notebooks](https://www.kaggle.com/notebooks)
+
+Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. 
+
+The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone. Jupyter Notebooks offer a clean, interactive environment for running Python from a browser. Its cousin, JupyterLab, is also available for operating from a remote machine. Spyder is a more traditional graphical user interface (GUI) application, similar to the RStudio or Stata environment.
+
+Google Colab and Kaggle Notebooks are another set of interface options. Both host their runtime remotely, so you don't need a program installed on your local computer (like JupterLab). They also allow you to share notebooks of code with others as easily as a Google Doc. Both also have extensive sets of tutorials and example notebooks for all kinds of applications. Colab has the additional benefit of interacting easily with other Google applications, like [Earth Engine](https://earthengine.google.com/) or [Compute Engine](https://cloud.google.com/compute).
 
 ## Complete Tutorials
 
