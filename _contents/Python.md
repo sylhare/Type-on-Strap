@@ -47,6 +47,7 @@ Google Colab and Kaggle Notebooks are another set of interface options. Both hos
 
 [Hitchhikers Guide to Python](https://docs.python-guide.org/intro/learning/) - This opinionated guide exists to provide both novice and expert Python developers a best practice handbook to the installation, configuration, and usage of Python on a daily basis. It also has an exhaustive list of resources for beginners to Python!
 
+[Kaggle: Micro-Courses](https://www.kaggle.com/learn/overview) - Kaggle has developed a great set of tutorial notebooks conveniently organized by topic. Their idea is to get you the skills and code you need, fast. A good reference for future projects.
 
 ## Beginner's Guides
 
