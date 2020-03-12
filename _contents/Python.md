@@ -57,10 +57,9 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 
 [Harvard: CS109 Data Science Course](http://cs109.github.io/2014/index.html) - Lecture videos and course materials from Harvard's intro to data science (circa 2014).
 
-[Google CoLab: Intro to Pandas](https://colab.research.google.com/notebooks/mlcc/intro_to_pandas.ipynb#scrollTo=av6RYOraVG1V)
-
 [EdX UCSD: Python for Data Science](https://www.edx.org/course/python-for-data-science-0) - Learn to use powerful, open-source, Python tools, including Pandas, Git and Matplotlib, to manipulate, analyze, and visualize complex datasets.
 
+[UC Berkeley: Data 100 Course Website](http://www.ds100.org/) - Collection of current and previous semesters of Berkeley's "Priciples and Techniques of Data Science". The syllabus pages for each semester often have notebooks, slides, and other resources [(Spring 20 example)](http://www.ds100.org/sp20/syllabus/), while [the textbook is continuously updated with new lessons](https://www.textbook.ds100.org/intro).
 
 ## Jupyter Notebooks
 
