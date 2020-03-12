@@ -10,9 +10,19 @@ tags: [Python, Anaconda, python, anaconda]
 
 ## [Anaconda Website](https://www.anaconda.com/download/)
 
-## [Jupyter Notebooks](https://jupyter.org/)
+## Python User Interface Options:
 
-Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone using Python. Jupyter Notebooks offer a clean, interactive environment for running Python from a browser. Spyder is a more traditional graphical user interface (GUI) application, similar to the RStudio or Stata environment.
+### [Jupyter Notebooks](https://jupyter.org/)
+
+### [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb)
+
+### [Kaggle Notebooks](https://www.kaggle.com/notebooks)
+
+Python is one of the most used programming languages in data science. It is open-source, has powerful tools, and has an array of user-interfaces and user-created packages for any sort of task. We recommend it for anyone who plans to integrate data science into a broader programming skill set, or who plans to work with other computer-oriented folks. 
+
+The Anaconda suite of user interfaces contains both Jupyter Notebooks and Spyder, two common programs for working in Python that we recommend for everyone. Jupyter Notebooks offer a clean, interactive environment for running Python from a browser. Its cousin, JupyterLab, is also available for operating from a remote machine. Spyder is a more traditional graphical user interface (GUI) application, similar to the RStudio or Stata environment.
+
+Google Colab and Kaggle Notebooks are another set of interface options. Both host their runtime remotely, so you don't need a program installed on your local computer (like JupterLab). They also allow you to share notebooks of code with others as easily as a Google Doc. Both also have extensive sets of tutorials and example notebooks for all kinds of applications. Colab has the additional benefit of interacting easily with other Google applications, like [Earth Engine](https://earthengine.google.com/) or [Compute Engine](https://cloud.google.com/compute).
 
 Here are some quick guides to follow along for installing Python and Anaconda:
 
@@ -25,6 +35,8 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 ## Complete Tutorials
 
 [Open Source Data Science Masters](http://datasciencemasters.org/) - Collection of recommended courses with projects and timeline.
+
+[O'Reilly Data Science Handbook in Colab](https://colab.research.google.com/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/Index.ipynb) - Full set of tutorial notebooks on everything Numpy, Pandas, Matplotlib, and Machine Learning. 
 
 [Stackify: 30 Python Tutorials](https://stackify.com/learn-python-tutorials/) - Comprehensive list of Python tutorials, from the beginner to the advanced.
 
@@ -69,12 +81,10 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 
 [Python Programming: Intermediate Python Programming](https://pythonprogramming.net/introduction-intermediate-python-tutorial/) - Complete tutorial guide including list comprehension, generators, and multiprocessors.
 
-[Udemy: Bayesian Machine Learning in Python: A/B Testing](https://www.udemy.com/bayesian-machine-learning-in-python-ab-testing/) - 5.5 hour intro to Bayesian statistics and applications for A/B testing in Python. Typically $12.
-
-[Udemy: Unsupervised Machine Learning Hidden Markov Models in Python](https://www.udemy.com/unsupervised-machine-learning-hidden-markov-models-in-python/) - Intro to HMM models for stock price analysis, language modeling, web analytics, biology, and PageRank. Also typically $12.
-
 
 ## Machine Learning
+
+[Google: Introduction to Machine Learning](https://developers.google.com/machine-learning/crash-course/ml-intro) - Full set of tutorials from Google split into conceptual overviews, videos, and code examples.
 
 [EdX Berkeley: Prediction and Machine Learning](https://www.edx.org/course/foundations-of-data-science-prediction-and-machine-learning-0) - Learn how to use machine learning, with a focus on regression and classification, to automatically identify patterns in your data and make better predictions.
 
@@ -91,6 +101,10 @@ Here are some quick guides to follow along for installing Python and Anaconda:
 [Udemy: Deep Learning - Convolutional Neural Networks in Python](https://www.udemy.com/deep-learning-convolutional-neural-networks-theano-tensorflow/) - Computer Vision and Data Science and Machine Learning combined! In Theano and TensorFlow. Okay, technically it's $11.99.
 
 [Udemy: Unsupervised Deep Learning in Python](https://www.udemy.com/unsupervised-deep-learning-in-python/) - Theano and Tensorflow: Autoencoders, Restricted Boltzmann Machines, Deep Neural Networks, t-distributed Stochastic Neighbor Embedding (SNE) and Principal Component Anaylsis (PCA). Costs somewhere between $11.98 and $12, before tax.
+
+[Udemy: Bayesian Machine Learning in Python: A/B Testing](https://www.udemy.com/bayesian-machine-learning-in-python-ab-testing/) - 5.5 hour intro to Bayesian statistics and applications for A/B testing in Python. Typically $12.
+
+[Udemy: Unsupervised Machine Learning Hidden Markov Models in Python](https://www.udemy.com/unsupervised-machine-learning-hidden-markov-models-in-python/) - Intro to HMM models for stock price analysis, language modeling, web analytics, biology, and PageRank. Also typically $12.
 
 
 ## Textbooks and Resources
