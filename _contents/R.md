@@ -25,6 +25,8 @@ We highly recommend that you install both (RStudio won't work without R) and sta
 
 [Data Camp: Data Scientist with R Career Track](https://www.datacamp.com/tracks/data-scientist-with-r) - Over 23 interactive tutorials for all things data science in R! DataCamp offers some free courses but most require a premium account for $29 per month. If you're okay with paying for high-quality courses and don't want to search around for different guides, DataCamp has everything in one place.
 
+[UC Business Analytics with R](http://uc-r.github.io/) - University of Cincinatti's Business School has an excellent set of tutorials for all things R, produced by @bradleyboehmke. Includes everything from an intro bootcamp to predictive analytics with machine learning.
+
 ## Beginner's Guides
 [Udemy: R Programming A-Z](https://www.udemy.com/r-programming/) - Interactive video course from the SuperDataScience Team for basic programming in R. Usually $12 for the complete course (Udemy has "sales" almost every day and lots of great courses).
 
@@ -35,6 +37,10 @@ We highly recommend that you install both (RStudio won't work without R) and sta
 [DataCamp: Free Intro to R](https://www.datacamp.com/courses/free-introduction-to-r) - Basics of R and its data types with 4 hours of video and 62 exercises.
 
 # Intermediate Guides
+[tidyverse Homepage](https://www.tidyverse.org/) - If you get the basics of importing and visualizing data, the next step is manipulating data in the tidyverse workflow. Fortunately, the makers of tidyverse have consolidated all their packages in one place, along with a "Learn" tab full of great resources.
+
+[dplyr Homepage](https://dplyr.tidyverse.org/) - The core of all data wrangling in the tidyverse, a set of R packages that is pretty much essential.
+
 [UC Berkeley D-Lab: Data Wrangling (dplyr)](https://github.com/dlab-berkeley/R-wrang) - GitHub repo on cleaning and manipulating data in R with the popular dplyr package. Structured similarly to R Fundamentals. Use the "tutorial.Rmd" file to start learning!
 
 [UC Berkeley D-Lab: Data Visualization (ggplot2)](https://github.com/dlab-berkeley/R-graphics) - GitHub repo on making plots in R with the popular ggplot2 package.
@@ -44,3 +50,5 @@ We highly recommend that you install both (RStudio won't work without R) and sta
 [R-Statistics.co: ggplot2 Quick Reference](http://r-statistics.co/ggplot2-cheatsheet.html) - Helpful reference guide of ggplot2 commands with examples.
 
 [RStudio: ggplot2 Cheatsheet](http://www.rstudio.com/wp-content/uploads/2015/12/ggplot2-cheatsheet-2.0.pdf) - PDF of almost all ggplot2 commands with options. If you do a lot of diverse plotting, I highly recommend printing it out and keeping it next to your computer!
+
+[Leaflet for R: Maps!](https://rstudio.github.io/leaflet/) - Leaflet is a must have package for creating interactive maps in a tidyverse workflow.
