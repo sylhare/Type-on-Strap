@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sylhare/Type-on-Strap.git"
+    "url": "git+https://github.com/sylhare/Type-on-Strap.git"
   },
   "keywords": [
     "jekyll"
@@ -18,12 +18,12 @@
   "bugs": {
     "url": "https://github.com/Sylhare/Type-on-Strap/issues"
   },
-  "homepage": "https://github.com/Sylhare/Type-on-Strap#readme",
+  "homepage": "https://github.com/sylhare/Type-on-Strap#readme",
   "devDependencies": {
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-clean-css": "^4.2.0",
-    "gulp-imagemin": "^5.0.3",
+    "gulp-imagemin": "^7.1.0",
     "gulp-less": "^4.0.1",
     "gulp-replace": "^1.0.0",
     "gulp-uglify": "^3.0.2",
