@@ -4,7 +4,9 @@
   "description": "Gulp file to manage the jekyll theme",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "update": "ncu dev -u",
+    "fix": "npm audit fix"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,8 @@
   "homepage": "https://github.com/sylhare/Type-on-Strap#readme",
   "devDependencies": {
     "gulp": "^4.0.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
-    "gulp-clean-css": "^4.2.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-less": "^4.0.1",
     "gulp-replace": "^1.0.0",
