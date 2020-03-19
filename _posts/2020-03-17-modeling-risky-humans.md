@@ -217,7 +217,7 @@ This blog post is based on the 2020 paper _When Humans Aren’t Optimal: Robots 
 For further details on this work, check out the [paper on Arxiv](https://arxiv.org/abs/2001.04377).
 
 [^1]:
-     Peter Abbeel and Andrew Ng, “Apprenticeship learning via inverse reinforcement learning,” _ICML_ 2004.
+     Pieter Abbeel and Andrew Ng, “Apprenticeship learning via inverse reinforcement learning,” _ICML_ 2004.
 
 [^2]:
      Brian Ziebart et al., “Maximum entropy inverse reinforcement learning,” _AAAI_ 2008.
