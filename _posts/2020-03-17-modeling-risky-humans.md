@@ -164,7 +164,7 @@ If the tower fell over, the human and robot team received no points! Looking at 
 <img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2020-03-17-modeling-risky-humans/image13.gif"/>
 {% endfigure %}
 
-1. **Aggressive but Rational.** When the robot is using the **Noisy Rational** model, it immediately goes for the closer cup, since this behavior is more efficient. Put another way, the robot using the Noisy Rational model **incorrectly anticipates** that the human wants to make the efficient but unstable tower. This erroneous prediction causes the human and robot to clash, and the robot has to undo its mistake (as you can see in the video above).
+**Aggressive but Rational.** When the robot is using the **Noisy Rational** model, it immediately goes for the closer cup, since this behavior is more efficient. Put another way, the robot using the Noisy Rational model **incorrectly anticipates** that the human wants to make the efficient but unstable tower. This erroneous prediction causes the human and robot to clash, and the robot has to undo its mistake (as you can see in the video above).
 
 {% figure %}
 <img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2020-03-17-modeling-risky-humans/image14.png"/>
@@ -173,7 +173,7 @@ If the tower fell over, the human and robot team received no points! Looking at 
 <img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2020-03-17-modeling-risky-humans/image15.gif"/>
 {% endfigure %}
 
-2. **Conservative and Risk-Aware.** A **Risk-Aware** robot gets this prediction right: it correctly anticipates that the human is overly concerned about the tower falling, and starts to build the less efficient but stable tower. Having the right prediction here prevents the human and robot from reaching for the same cup, so that they more seamlessly collaborate during the task!
+**Conservative and Risk-Aware.** A **Risk-Aware** robot gets this prediction right: it correctly anticipates that the human is overly concerned about the tower falling, and starts to build the less efficient but stable tower. Having the right prediction here prevents the human and robot from reaching for the same cup, so that they more seamlessly collaborate during the task!
 
 **Results.** In our in-person user studies, participants chose to build the stable tower $$75$$% of the time. The suboptimal choice was more likely --- which the Noisy Rational model failed to recognize. By contrast, our Risk-Aware robot was able to anticipate what the human would try to do, and could correctly guess which cup it should pick up. This improved prediction accuracy resulted in human-robot teams that completed the task more **efficiently** (in less time) and **safely** (following a shorter trajectory):
 
@@ -207,7 +207,7 @@ If you have any questions, please contact Minae Kwon at: [mnkwon@stanford.edu](m
 Our team of collaborators is shown below!
 
 {% figure %}
-<img class="postimage_100" src="{{ site.baseurl }}/assets/img/posts/2020-03-17-modeling-risky-humans/image18.png"/>
+<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-03-17-modeling-risky-humans/image18.png"/>
 {% endfigure %}
 
 <hr>
@@ -217,7 +217,7 @@ This blog post is based on the 2020 paper _When Humans Aren’t Optimal: Robots 
 For further details on this work, check out the [paper on Arxiv](https://arxiv.org/abs/2001.04377).
 
 [^1]:
-     Peter Abbeel and Andrew Ng, “Apprenticeship learning via inverse reinforcement learning,” _ICML_ 2004.
+     Pieter Abbeel and Andrew Ng, “Apprenticeship learning via inverse reinforcement learning,” _ICML_ 2004.
 
 [^2]:
      Brian Ziebart et al., “Maximum entropy inverse reinforcement learning,” _AAAI_ 2008.
