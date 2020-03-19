@@ -56,7 +56,7 @@ $$R_H(a_H) = p^{(1)}R^{(1)}_H(a_H) + p^{(2)}R^{(2)}_H(a_H), \cdots, p^{(K)}R^{(K
 
 where $$p^{(k)}$$ is the probability of outcome $$k$$, and there are $$K$$ possible outcomes. Overall, this equation tells us how _valuable_ the choice $$a_H$$ is to the human[^4].
 
-**The Rational Model.** If the human behaved like a robot --- and made perfectly rational decisions --- then we might anticipate that the human will choose the action that leads to the highest reward $$R_H(a_H)$$. Let’s use the [boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution) to write the probability of choosing action $$a_H$$, and model the human as always choosing the action with the highest reward:
+**The Rational Model.** If the human behaved like a robot --- and made perfectly rational decisions --- then we might anticipate that the human will choose the action that leads to the highest reward $$R_H(a_H)$$. Let’s use the [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution) to write the probability of choosing action $$a_H$$, and model the human as always choosing the action with the highest reward:
 
 $$a_H^* = \text{arg}\max_{a_H} \frac{exp(R_H(a_H))}{\sum_{a \in \mathcal{A}_H}exp(R_H(a))}$$
 
