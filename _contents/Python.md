@@ -67,6 +67,8 @@ Google Colab and Kaggle Notebooks are another set of interface options. Both hos
 
 [UC Berkeley: Data 100 Course Website](http://www.ds100.org/) - Collection of current and previous semesters of Berkeley's "Priciples and Techniques of Data Science". The syllabus pages for each semester often have notebooks, slides, and other resources [(Spring 20 example)](http://www.ds100.org/sp20/syllabus/), while [the textbook is continuously updated with new lessons](https://www.textbook.ds100.org/intro).
 
+[Post Title of Resource](www.url_example.com) - Some kind of description.
+
 ## Jupyter Notebooks
 
 [Datacamp: Jupyter Notebook Tutorial](https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook)
