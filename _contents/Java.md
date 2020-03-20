@@ -21,7 +21,7 @@ tags: [Java]
 * []() - 
 
 ## Beginner's Guides
-* []() - 
+* [Data Flair: Operators & Java Program Structure](https://data-flair.training/blogs/basic-java-syntax/) - This guide is useful for learning basic Java syntax and how the language functions.
 
 * []() - 
 
