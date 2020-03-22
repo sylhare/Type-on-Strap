@@ -29,6 +29,8 @@ GitHub is primarily a file hosting and version control site that allows users to
 ## Beginner's Guides
 * [GitHub Learning Lab](https://lab.github.com/courses) - Recommended first step for using GitHub!
 
+* [Basics of Git](https://www.youtube.com/watch?v=IHaTbJPdB-s) - This is a short video that covers the basics of Git, its importance, how to get started using Git and GitHub, and includes a full walkthrough example of using it in a project. It is a useful source for anyone who needs a grasp on Git and is interested in hosting an accessible group project. 
+
 ## Learning Git
 * [Git Tutorials](https://gist.github.com/jaseemabid/1321592)
 
