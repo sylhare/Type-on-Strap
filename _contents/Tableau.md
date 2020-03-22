@@ -25,4 +25,10 @@ tags: [Tableau]
 
 
 # Textbooks and Other Resources
-* []()
+
+## Shapefile Repositories
+* [World GIS Data](http://libguides.humboldt.edu/c.php?g=303789&p=2025985)
+* [USA GIS Data](http://libguides.humboldt.edu/c.php?g=303789&p=2026116)
+* [California GIS Data](http://libguides.humboldt.edu/c.php?g=303789&p=2026238)
+* [US Roads](https://catalog.data.gov/dataset?tags=roads)
+* [DHS/Census Data Repository (General)](https://spatialdata.dhsprogram.com/home/)
