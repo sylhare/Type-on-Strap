@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
   var pull = document.getElementById('pull');
   var menu = document.querySelector('nav ul');
 
-  pull.addEventListener('click', function (e) {
-    menu.classList.toggle('hide');
+
+  ['click', 'touch'].forEach(function (e) {
+    pull.addEventListener(e, function (e) {
+      menu.classList.toggle('hide')
+    }, false);
   });
 
   /*

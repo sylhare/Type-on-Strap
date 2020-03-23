@@ -81,6 +81,7 @@
       &#pull {
         i {
           margin-top: 13px;
+          margin-right: 10px;
           float: right;
         }
 
@@ -121,7 +122,8 @@
       overflow: hidden;
 
       /* fade out, then shrink */
-      transition: opacity .5s .25s, font-size .5s .25s;
+      transition: opacity .25s 0s, font-size .25s 0s;
+      transition-delay: 0s;
 
       &.hide {
         font-size: 0;
@@ -129,24 +131,25 @@
         opacity: 0;
         padding: 0;
       }
+    }
 
-      li {
-        width: 100%;
-        text-align: center;
-        font-size: 1em;
-        position: relative;
-        background-color: darken($background-color, 2%);
+    li {
+      width: 100%;
+      text-align: center;
+      font-size: 1em;
+      position: relative;
+      background-color: darken($background-color, 2%);
 
-        &:nth-of-type(4n) {
-          background-color: $background-color;
-        }
-
-        a {
-          width: 100%;
-          margin: 0;
-          display: block;
-        }
+      &:nth-of-type(4n) {
+        background-color: $background-color;
       }
+
+      a {
+        width: 100%;
+        margin: 0;
+        display: block;
+      }
+
     }
   }
 }
