@@ -1,0 +1,9 @@
+{% assign images = include.images | split: ',' %}
+
+<div class="row">
+    {% for image in images %}
+    <div class="column">
+        <img src="{{ image | prepend: 'assets/img/' | relative_url }}" alt="{{ image | prepend: '/' | split: '/' | last }}">
+    </div>
+    {% endfor %}
+</div>

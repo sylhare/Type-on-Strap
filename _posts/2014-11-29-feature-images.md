@@ -15,3 +15,13 @@ feature-img: "assets/img/pexels/desk-messy.jpeg"
 ```
 
 >  - And now it is working
+
+You can also add images aligned in your post using:
+
+{% include aligner.html images="pexels/book-glass.jpeg,pexels/desk-messy.jpeg" %}
+
+```html
+{% raw %}
+{% include aligner.html images="pexels/book-glass.jpeg,triangle.png" %}
+{% endraw %}
+```
