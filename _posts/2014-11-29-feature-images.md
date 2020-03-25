@@ -16,12 +16,26 @@ feature-img: "assets/img/pexels/desk-messy.jpeg"
 
 >  - And now it is working
 
-You can also add images aligned in your post using:
+You can also add images aligned in your post using the `aligner` include.
+Make sure to separate all of the image path from in a string separated with `,`.
+It by default look into `assets/img/` so give the path from there, example:
 
-{% include aligner.html images="pexels/book-glass.jpeg,pexels/desk-messy.jpeg" %}
-
-```html
+{% highlight ruby %}
 {% raw %}
 {% include aligner.html images="pexels/book-glass.jpeg,triangle.png" %}
 {% endraw %}
-```
+{% endhighlight %}
+
+{% include aligner.html images="pexels/book-glass.jpeg,pexels/desk-messy.jpeg" %}
+
+
+Here you have two images side by side, but you can set more and set the amount per columns 
+(by specifying the number of columns or let it be automatic using `"auto"`):
+
+{% highlight ruby %}
+{% raw %}
+{% include aligner.html images="portfolio/cabin.png,portfolio/cake.png,portfolio/circus.png" column=3 %}
+{% endraw %}
+{% endhighlight %}
+
+{% include aligner.html images="portfolio/cabin.png,portfolio/cake.png,portfolio/circus.png" column=3 %}
