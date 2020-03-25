@@ -265,6 +265,22 @@ some text in the excerpt
 
 The html is stripped out of the excerpt so it only display text.
 
+#### Image aligner
+
+To easily add align images side by side in your article using the `aligner.html` include:
+
+```ruby
+{% include aligner.html images="path/to/img1.png,path/to/img2.png,path/to/img3.png" column=3 %}
+```
+
+Use it in any markdown file. There are two fields in the include you need to look into:
+  - _images_: Takes a string separated with `,` of all the images path. 
+    - It by default look into `assets/img/` so give the path from there.
+  - _column_: (OPTIONAL) Set the number of column you want your imaged displayed in.
+    - default is 2 columns
+    - `column=3` set 3 columns
+    - `column="auto"` makes as many columns as images
+
 ## Other Layouts
 Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). 
 Non-standard features are documented below.

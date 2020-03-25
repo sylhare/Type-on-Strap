@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "type-on-strap"
-  spec.version       = "2.0.3"
+  spec.version       = "2.1.0"
   spec.authors       = ["Sylhare","Rohan Chandra"]
   spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
 
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
 
                                   * Use _data/ for social and language customization
 
-                                  * Vist https://github.com/sylhare/Type-on-Strap for more info.
+                                  * Visit https://github.com/sylhare/Type-on-Strap for more info.
 
                                 -------------------------------------------------------------------------------------
                                MSG
