@@ -2,7 +2,7 @@
 layout: post
 title:  "BERT, ELMo, & GPT-2: How Contextual are Contextualized Word Representations?"
 short-summary: "Geometric properties of contextualized word representations and what that says about how contextualized they are."
-summary: "Incorporating context into word embeddings has proven to be a watershed idea in NLP. Replacing static vectors with contextualized word representations has led to significant improvements on virtually every NLP task. In this blog post we study the geometric properties of contextualized word representations and find surprising conclusions."
+summary: "Replacing static vectors with contextualized word representations has led to significant improvements on virtually every NLP task. In this blog post we study the geometric properties of contextualized word representations and find surprising conclusions."
 
 feature-img: "assets/img/posts/2020-03-24-contextual/teaser.png"
 thumbnail: "assets/img/posts/2020-03-24-contextual/teaser.png"
