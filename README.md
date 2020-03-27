@@ -2,10 +2,10 @@
 
 ## For post authors 
 To write a new post - 
-1. Get a draft of your post in Google doc, and email the lead editors ([Andrey Kurenkov and Michelle Lee](http://ai.stanford.edu/blog/about/)) to get an editor assigned to the draft.
+1. Get a draft of your post in Google doc, and email the lead editor ([Michelle Lee](http://ai.stanford.edu/blog/about/)) to get an editor assigned to the draft. More detailed instructions on that [here](https://docs.google.com/document/d/1PWuruWbudrAwTI_iJYC-ZkjAd-hILcisL9Ao_VOUtx4/edit?usp=sharing).
 2. Once you have a draft that is finalized, you need to create a pull request with markdown and images of your post. First, fork the repo, clone the fork and pull source branch
-3. Install Jekyll
-4. Run bundle install in the root dir 
+3. [Install Jekyll](https://jekyllrb.com/docs/installation/)
+4. Run bundle install in the root dir (NOTE: if you have any issues with installation, feel free to ask SAIL Blog editors to help)
 5. Try running serve_jekyll, and go to the link printed in console in browser
 6. If all looks good, go to \_posts and follow examples of prior posts in writing
 a new one in the right format. To convert from Google doc to markdown, you can download as docx and use pandoc (and also download as webpage to get images, and add back in), or do it manually.
