@@ -1,4 +1,8 @@
 # SAIL Blog
+## Why write for SAIL blog
+It's a great way to let a broader set of people get exposed to your work and help represent SAIL. We started in November of 2018, and we are already getting a wide audience for our blog posts, with a total of 82k page views, 26 blog posts, and an average of 2.5k of page views per blog post.
+
+So if you have recently published or ongoing research that you feel could benefit from being shared more widely in this format, or if one of your new year's resolution is to work on scientific communication, please reach out to the lead editor (mishlee@stanford) and we will let you know the process from there.
 
 ## For post authors 
 To write a new post - 
