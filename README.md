@@ -1,4 +1,4 @@
-# SAIL Blog
+# [SAIL Blog](http://ai.stanford.edu/blog/)
 ## Why write for SAIL blog
 It's a great way to let a broader set of people get exposed to your work and help represent SAIL. We started in November of 2018, and we are already getting a wide audience for our blog posts, with a total of 95k page views, 28 blog posts, and an average of 2.5k of page views per blog post.
 
