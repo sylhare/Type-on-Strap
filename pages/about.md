@@ -13,5 +13,5 @@ All our blog posts are written by members in the SAIL community, with faculty ad
 * [Andrey Kurenkov](http://www.andreykurenkov.com/)
 * [Michelle Lee](https://twitter.com/michellearning)
 * [Dylan Losey](http://dylanlosey.com/)
-
-
+* [Nelson Liu](https://cs.stanford.edu/~nfliu/)
+* [Sidd Karamcheti](https://www.siddkaramcheti.com/)
