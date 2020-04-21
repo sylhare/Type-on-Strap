@@ -4,7 +4,7 @@ title: "Automating the Art of Data Augmentation: Practice, Theory and New Direct
 short-summary: "Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model. In this blog post, we provide an overview of recent work on the practice, theory and new direction of data augmentation research."
 summary: "Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model. In this blog post, we provide an overview of recent work on the practice, theory and new direction of data augmentation research."
 thumbnail: "assets/img/posts/2020-04-20-data-augmentation/thumbnail.png"
-author: <a href='http://yixuanli.net/'>Sharon Y. Li</a>, <a href='https://cs.stanford.edu/~chrismre/'>Chris Ré</a> and members of <a href='https://hazyresearch.stanford.edu/index'>Hazy Research</a>.
+author: <a href='http://yixuanli.net/'>Sharon Y. Li</a>
 tags: [ml]
 ---
 
