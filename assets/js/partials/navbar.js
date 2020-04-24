@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
   ['click', 'touch'].forEach(function (e) {
-    pull.addEventListener(e, function (e) {
+    pull.addEventListener(e, function () {
       menu.classList.toggle('hide')
     }, false);
   });
@@ -17,10 +17,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
    * Make the header images move on scroll
    */
   window.addEventListener('scroll', function () {
-    var x = window.pageYOffset || document.body.scrollTop;
-    var main = document.getElementById("main");
-    var mainStyle = main.style;
-
-    mainStyle.backgroundPosition = '100% ' + parseInt(-x / 3) + 'px' + ', 0%, center top';
+    var offset = -(window.scrollY || window.pageYOffset || document.body.scrollTop) / 3;
+    document.getElementById("main").style.backgroundPosition = '100% ' + offset + 'px' + ', 0%, center top';
   });
 });
