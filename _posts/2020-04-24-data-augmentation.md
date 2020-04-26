@@ -135,10 +135,10 @@ Our results suggest that the model patching framework is a promising direction f
 ## Further Reading
 
 
-* [Automating the Art of Data Augmentation (Part I: Overview)]({{site.baseurl}}/data-aug-part-1)
-* [Automating the Art of Data Augmentation (Part II: Practical Methods)]({{site.baseurl}}/data-aug-part-2)
-* [Automating the Art of Data Augmentation (Part III: Theory)]({{site.baseurl}}/data-aug-part-3)
-* [Automating the Art of Data Augmentation (Part IV: New Direction)]({{site.baseurl}}/data-aug-part-4)
+* [Automating the Art of Data Augmentation (Part I: Overview)](https://hazyresearch.stanford.edu/data-aug-part-1)
+* [Automating the Art of Data Augmentation (Part II: Practical Methods)](https://hazyresearch.stanford.edu/data-aug-part-2)
+* [Automating the Art of Data Augmentation (Part III: Theory)](https://hazyresearch.stanford.edu/data-aug-part-3)
+* [Automating the Art of Data Augmentation (Part IV: New Direction)](https://hazyresearch.stanford.edu/data-aug-part-4)
 
 
 **Acknowledgments**
