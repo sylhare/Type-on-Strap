@@ -69,7 +69,7 @@ Despite the rapid progress of practical data augmentation techniques, precisely 
 
 [Dao et al. 2019](http://proceedings.mlr.press/v97/dao19b/dao19b.pdf) developed a theoretical framework by modeling data augmentation as a Markov Chain, in which augmentation is performed via a random sequence of transformations, akin to how data augmentation is performed in practice. We show that the effect of applying the Markov Chain on the training dataset (combined with a k-nearest neighbor classifier) is akin to using a kernel classifier, where the kernel is a function of the base transformations.
 
-Built on the connection between kernel theory and data augmentation, Dao et al. 2019 show that a kernel classifier on augmented data approximately decomposes into two components: (i) an averaged version of the transformed features, and (ii) a data-dependent variance regularization term. This suggests a more nuanced explanation of data augmentation—namely, that it improves generalization both by inducing invariance and by reducing model complexity. Dao et al. 2019 validate the quality of our approximation empirically, and draw connections to other generalization-improving techniques, including recent work on invariant learning and robust optimization ([Namkoong & Duchi, 2017](https://papers.nips.cc/paper/6890-variance-based-regularization-with-convex-objectives.pdf)).  
+Built on the connection between kernel theory and data augmentation, Dao et al. 2019 show that a kernel classifier on augmented data approximately decomposes into two components: (i) an averaged version of the transformed features, and (ii) a data-dependent variance regularization term. This suggests a more nuanced explanation of data augmentation—namely, that it improves generalization both by inducing invariance and by reducing model complexity. Dao et al. 2019 validate the quality of our approximation empirically, and draw connections to other generalization-improving techniques, including recent work on invariant learning ([van der Wilk et al. 2018](https://papers.nips.cc/paper/8199-learning-invariances-using-the-marginal-likelihood)) and robust optimization ([Namkoong & Duchi, 2017](https://papers.nips.cc/paper/6890-variance-based-regularization-with-convex-objectives.pdf)).  
 
 **Data Augmentation Under A Simplified Linear Setting**
 
@@ -84,7 +84,7 @@ Figure 3. Illustration of common linear transformations applied in data augmenta
   </figcaption>
 {% endfigure %}
 
-**Theory-inspired New State-of-the-art**. One insight from our theoretical investigation is that different (compositions of) transformations show very different end performance. Inspired by this observation, we’d like to make use of the fact that certain transformations are better performing than others. We propose an uncertainty-based random sampling scheme which, among the transformed data points, picks those with the highest losses, i.e. those “providing the most information” (see Figure 4). Our sampling scheme achieves higher accuracy by finding more useful transformations compared to RandAugment on three different CNN architectures, establishing new state-of-the-art performance on common benchmarks. For example, our method outperforms RandAugment by **0.59**% on CIFAR-10 and **1.24**% on CIFAR-100 using Wide-ResNet-28-10. Our code and paper will be released soon for you to try out!
+**Theory-inspired New State-of-the-art**. One insight from our theoretical investigation is that different (compositions of) transformations show very different end performance. Inspired by this observation, we’d like to make use of the fact that certain transformations are better performing than others. We propose an uncertainty-based random sampling scheme which, among the transformed data points, picks those with the highest losses, i.e. those “providing the most information” (see Figure 4). Our sampling scheme achieves higher accuracy by finding more useful transformations compared to RandAugment on three different CNN architectures, establishing new state-of-the-art performance on common benchmarks. For example, our method outperforms RandAugment by **0.59**% on CIFAR-10 and **1.24**% on CIFAR-100 using Wide-ResNet-28-10. Please check out our full paper [here](http://stanford.edu/~senwu/publications/data_augmentation_draft.pdf). Our code will be released soon for you to try out!
 
 {% figure %}
 [<img class="postimage_95" src="{{ site.baseurl }}/assets/img/posts/2020-04-20-data-augmentation/fig4.png"/>]({{ site.baseurl }}/assets/img/2020-04-20-data-augmentation/fig4.png)
@@ -135,15 +135,15 @@ Our results suggest that the model patching framework is a promising direction f
 ## Further Reading
 
 
-* [Automating the Art of Data Augmentation (Part I: Overview)]({{site.baseurl}}/data-aug-part-1)
-* [Automating the Art of Data Augmentation (Part II: Practical Methods)]({{site.baseurl}}/data-aug-part-2)
-* [Automating the Art of Data Augmentation (Part III: Theory)]({{site.baseurl}}/data-aug-part-3)
-* [Automating the Art of Data Augmentation (Part IV: New Direction)]({{site.baseurl}}/data-aug-part-4)
+* [Automating the Art of Data Augmentation (Part I: Overview)](https://hazyresearch.stanford.edu/data-aug-part-1)
+* [Automating the Art of Data Augmentation (Part II: Practical Methods)](https://hazyresearch.stanford.edu/data-aug-part-2)
+* [Automating the Art of Data Augmentation (Part III: Theory)](https://hazyresearch.stanford.edu/data-aug-part-3)
+* [Automating the Art of Data Augmentation (Part IV: New Direction)](https://hazyresearch.stanford.edu/data-aug-part-4)
 
 
 **Acknowledgments**
 
-Thanks to members of Hazy Research who provided feedback on the blog post. Special thanks to Sidd Karamcheti from the SAIL blog team for the editorial help. 
+Thanks to members of Hazy Research who provided feedback on the blog post. Special thanks to Sidd Karamcheti and Andrey Kurenkov from the SAIL blog team for the editorial help. 
 
 
 **About the Author**
