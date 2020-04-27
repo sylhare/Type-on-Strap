@@ -69,7 +69,7 @@ Despite the rapid progress of practical data augmentation techniques, precisely 
 
 [Dao et al. 2019](http://proceedings.mlr.press/v97/dao19b/dao19b.pdf) developed a theoretical framework by modeling data augmentation as a Markov Chain, in which augmentation is performed via a random sequence of transformations, akin to how data augmentation is performed in practice. We show that the effect of applying the Markov Chain on the training dataset (combined with a k-nearest neighbor classifier) is akin to using a kernel classifier, where the kernel is a function of the base transformations.
 
-Built on the connection between kernel theory and data augmentation, Dao et al. 2019 show that a kernel classifier on augmented data approximately decomposes into two components: (i) an averaged version of the transformed features, and (ii) a data-dependent variance regularization term. This suggests a more nuanced explanation of data augmentation—namely, that it improves generalization both by inducing invariance and by reducing model complexity. Dao et al. 2019 validate the quality of our approximation empirically, and draw connections to other generalization-improving techniques, including recent work on invariant learning and robust optimization ([Namkoong & Duchi, 2017](https://papers.nips.cc/paper/6890-variance-based-regularization-with-convex-objectives.pdf)).  
+Built on the connection between kernel theory and data augmentation, Dao et al. 2019 show that a kernel classifier on augmented data approximately decomposes into two components: (i) an averaged version of the transformed features, and (ii) a data-dependent variance regularization term. This suggests a more nuanced explanation of data augmentation—namely, that it improves generalization both by inducing invariance and by reducing model complexity. Dao et al. 2019 validate the quality of our approximation empirically, and draw connections to other generalization-improving techniques, including recent work on invariant learning ([van der Wilk et al. 2018](https://papers.nips.cc/paper/8199-learning-invariances-using-the-marginal-likelihood)) and robust optimization ([Namkoong & Duchi, 2017](https://papers.nips.cc/paper/6890-variance-based-regularization-with-convex-objectives.pdf)).  
 
 **Data Augmentation Under A Simplified Linear Setting**
 
@@ -143,7 +143,7 @@ Our results suggest that the model patching framework is a promising direction f
 
 **Acknowledgments**
 
-Thanks to members of Hazy Research who provided feedback on the blog post. Special thanks to Sidd Karamcheti from the SAIL blog team for the editorial help. 
+Thanks to members of Hazy Research who provided feedback on the blog post. Special thanks to Sidd Karamcheti and Andrey Kurenkov from the SAIL blog team for the editorial help. 
 
 
 **About the Author**
