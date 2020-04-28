@@ -1,2 +1,2 @@
-find . -type f -name \*.jpg -exec sh -c 'jpegoptim "{}" > "$(dirname {})/$(basename {} .jpg).erb"' \;
-find . -type f -name \*.png -exec sh -c 'optipng "{}" > "$(dirname {})/$(basename {} .png).erb"' \;
+find . -type f -name \*.jpg -exec sh -c 'jpegoptim "{}"' \;
+find . -type f -name \*.png -exec sh -c 'optipng "{}"' \;
