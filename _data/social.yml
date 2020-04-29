@@ -1,5 +1,5 @@
 # Icons on the footer
-rss: true        
+rss: true
 email_address:    # Full email address, e.g. "sam@example.com"
 behance:
 bitbucket:
@@ -22,6 +22,10 @@ twitter:          # "twitter username"
 vimeo:
 wordpress:
 youtube:          # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
+
+# rss specify feed path
+feed:
+  path: feed.xml
 
 # Share button options
 share:

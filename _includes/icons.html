@@ -1,8 +1,8 @@
 {% if site.data.social.rss or site.theme_settings.rss %}
 <li>
-    <a feed.xml href="{{ "" | absolute_url }}" title="{{ site.data.language.str_rss_follow | default: "Follow RSS feed"
-    }}">
-    <span class="fa-stack fa-lg">
+    <a feed.xml href="{{ absolute_url }}{{ site.data.social.feed.path | default: 'feed.xml' }}"
+       title="{{ site.data.language.str_rss_follow | default: "Follow RSS feed" }}">
+        <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
         </span>
