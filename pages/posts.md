@@ -2,7 +2,7 @@
 layout: archive
 title: Posts
 permalink: /posts
-subtitle: "What are you looking for?"
+subtitle: "Stanford AI Lab Blog posts"
 feature-img: "assets/img/pexels/search-map.jpeg"
 hide: true
 ---
