@@ -1,5 +1,28 @@
-# RSS specific
-rss: true         # Icons on the footer
+# Icons on the footer
+rss: true
+email_address: "vuhailongkl97@gmail.com"   # Full email address, e.g. "sam@example.com"
+behance:
+bitbucket:
+dribbble:
+facebook:
+flickr:
+gitlab:
+github: "vuhailongkl97"
+instagram:
+keybase:
+linkedin:         # Full URL
+pinterest:
+reddit:
+soundcloud:
+stack_overflow:
+stack_exchange:   # Full URL
+steam:
+tumblr:
+twitter:          # "twitter username"
+vimeo:
+wordpress:
+youtube:          # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
+
 feed:
   path: feed.xml  # RSS feed path
 
