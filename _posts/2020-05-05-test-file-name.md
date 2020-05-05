@@ -1,8 +1,10 @@
 ---
 layout: post
-title: test file name 
-tags: [Test, Markdown]
+title: neigh table in IPv6
+tags:
+  - Test
+  - Markdown
+published: true
 ---
 
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
-abcdef
+[state of neigh table in IPv6](https://gtacknowledge.extremenetworks.com/articles/Q_A/What-are-the-state-transitions-for-ND6-Entries "state of neigh table in IPv6")
