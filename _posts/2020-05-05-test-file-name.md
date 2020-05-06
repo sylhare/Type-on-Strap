@@ -2,9 +2,9 @@
 layout: post
 title: neigh table in IPv6
 tags:
-  - Test
+  - IPv6
   - Markdown
 published: true
 ---
 
-[state of neigh table in IPv6](https://gtacknowledge.extremenetworks.com/articles/Q_A/What-are-the-state-transitions-for-ND6-Entries "state of neigh table in IPv6")
+[ipv6 basic](https://sites.google.com/site/amitsciscozone/home/important-tips/ipv6/neighbor-discovery-in-ipv6)
