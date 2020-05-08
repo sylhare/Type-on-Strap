@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Blogging with title
+title: Tech Stuff example
 tags: [Test, Markdown]
 ---
 
@@ -94,4 +94,39 @@ class Module::Class
   \\\\\\\\\
   end
 end
+```
+
+### YAML
+
+You can also render some yaml, like this `_config.yml`:
+
+```yml
+
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# This file, "_config.yml" is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+# SITE CONFIGURATION
+baseurl: "/Type-on-Strap"
+url: "https://sylhare.github.io"
+
+# THEME-SPECIFIC CONFIGURATION
+title: Type on Strap                                    # site's title
+description: "A website with blog posts and pages"      # used by search engines
+avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
+favicon: assets/favicon.ico                             # Icon displayed in the tab
+
+remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
 ```
