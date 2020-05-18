@@ -42,4 +42,3 @@ jobs:
         on:
           tags: true
           repo: sylhare/Type-on-Strap
-        
