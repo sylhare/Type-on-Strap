@@ -4,11 +4,11 @@ layout: default
 
 <div class="home">
 
-  <div id="main" class="call-out"
-       style="background-image: url('{{ site.header_feature_image | relative_url }}')">
-    <h1> {{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
-  </div>
+    <div id="main" class="call-out"
+         style="background-image: url('{{ site.header_feature_image | relative_url }}')">
+        <h1> {{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
+    </div>
 
-  {% include blog.html %}
-    
+    {% include blog.html %}
+
 </div>
