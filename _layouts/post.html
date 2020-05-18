@@ -3,31 +3,34 @@ layout: default
 ---
 {% include share_thumbnail.html page=page %}
 
-<article {% if page.feature-img or page.color %}class="feature-image"{% endif %}>
-  <header id="main" style="">
-    {% if page.hide_title %}
-      <div class="feature-image-padding"></div>
-    {% else %}
-      <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
-      {% include post_info.html author=page.author date=page.date %}
-    {% endif %}
-  </header>
-  <section class="post-content">
-  {% if page.bootstrap %}
-    <div class="bootstrap-iso">
-    {% endif %}
-      {{ content }}
-    {% if page.bootstrap %}
-    </div>
-  {% endif %}
-  </section>
+<article {% if page.feature-img or page.color %}class="feature-image" {% endif %}>
+    <header id="main" style="">
+        <div class="title-padder">
+            {% if page.hide_title %}
+            <div class="feature-image-padding"></div>
+            {% else %}
+            <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+            {% include post_info.html author=page.author date=page.date %}
+            {% endif %}
+        </div>
+    </header>
 
-  <!-- Social media shares -->
-  {% include share_buttons.html %}
+    <section class="post-content">
+        {% if page.bootstrap %}
+        <div class="bootstrap-iso">
+            {% endif %}
+            {{ content }}
+            {% if page.bootstrap %}
+        </div>
+        {% endif %}
+    </section>
 
-   <!-- Tag list -->
-  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-  {% include tags_list.html tags=tag_list %}
+    <!-- Social media shares -->
+    {% include share_buttons.html %}
+
+    <!-- Tag list -->
+    {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+    {% include tags_list.html tags=tag_list %}
 
 </article>
 
@@ -56,6 +59,6 @@ layout: default
   header#main {
     background-repeat:no-repeat;
     {% if page.feature-img %} background-image: url('{{ page.feature-img | relative_url }}');
-    {% elsif page.color %}background-image: url('{{ site.color_image | relative_url }}');  {% endif %}
+    {% elsif page.color %}    background-image: url('{{ site.color_image | relative_url }}');  {% endif %}
   }
 </style>

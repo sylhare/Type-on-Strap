@@ -1,6 +1,10 @@
+.title-padder {
+  padding: $title-padding;
+}
+
 h1.title {
   @extend .header-txt-shadow;
-  padding: $title-padding 0;
+  padding: 0.5em 0;
 }
 
 .subtitle {
@@ -8,6 +12,12 @@ h1.title {
   margin-top: 5px;
   text-shadow: 1px 1px 2px $text-shadow;
 }
+
+//Shared css in _post.scss
+
+
+/* --- Aligner --- */
+/* within page/posts */
 
 .row {
   display: flex;
@@ -27,5 +37,3 @@ h1.title {
     display: block;
   }
 }
-
-//Shared css in _post.scss
