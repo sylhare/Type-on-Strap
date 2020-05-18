@@ -116,7 +116,7 @@ We evalaute how well our representation captures our multimodal sensor inputs by
 We examine the potential of transferring the learned policies and representations to two novel shapes previously unseen in representation and policy training, the hexagonal peg and the square peg. For policy transfer, we take the representation model and the policy trained for the triangular peg, and execute with the new unseen square peg. As you can see in the gif below, when we do policy transfer, our success rate drops from 92% to 62%.  A better transfer performance can be achieved by taking the representation model trained on the triangular peg, and training a new policy for the new hexagonal peg. As seen in the gif, our peg insertion rate goes up to 92% again when we transfer the multimodal representation. Our transfer learning results indicate that the multimodal representations from visual and haptic feedback generalize well across variations of our contact-rich manipulation tasks.
 
 {% figure %}
-<img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/transfer3.gif"  width='91%'/>
+<img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/transfer.gif"  width='91%'/>
 {% endfigure %}                
 
 **Policy robustness**
