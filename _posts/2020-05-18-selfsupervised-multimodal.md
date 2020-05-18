@@ -2,16 +2,16 @@
 layout: post
 title: "Making Sense of Vision and Touch: Multimodal Representations for Contact-Rich Tasks "
 short-summary: "We learn a multimodal representation that combines vision and touch through self-supervision."
-summary: "Contact-rich manipulation tasks in unstructured environments often require both haptic and visual feedback. However, it is non-trivial to manually design a robot controller that combines modalities with very different characteristics. In this blog post, we introduce how to use self-supervision to learn a compact and multimodal representation of vision and touch, which can then be used to improve the sample efficiency of policy learning for contact-rich tasks."
+summary: "Contact-rich manipulation tasks in unstructured environments often require both tactile and visual feedback. In this blog post, we introduce how to use self-supervision to learn a compact and multimodal representation of vision and touch."
 feature-img: "/assets/img/posts/2020-05-18-selfsupervised-multimodal/intro.png"
 thumbnail: "/assets/img/posts/2020-05-18-selfsupervised-multimodal/intro.png"
 author: <a href="http://stanford.edu/~mishlee/">Michelle A. Lee</a>
 tags: [reinforcement learning, ml, robotics, representation learning]
 ---
 
-Sound, smell, taste, touch, and vision -- these are the five senses that humans use to perceive and understand the world. We are able to seamlessly combine these different senses when perceiving the world -- for example, watching a movie requires constant processing of both visual and auditory information, and we do that effortlessly. As roboticists, we are particularly interested in studying how humans combine our sense of touch and our sense of sight. Vision and touch are especially important when doing manipulation tasks that require contact with the environment, such as closing a water bottle or inserting a dollar bill into a vending machine.
+Sound, smell, taste, touch, and vision -- these are the five senses that humans use to perceive and understand the world. We are able to seamlessly combine these different senses when perceiving the world. For example, watching a movie requires constant processing of both visual and auditory information, and we do that effortlessly. As roboticists, we are particularly interested in studying how humans combine our sense of touch and our sense of sight. Vision and touch are especially important when doing manipulation tasks that require contact with the environment, such as closing a water bottle or inserting a dollar bill into a vending machine.
 
-Let’s take closing a water bottle as an example. With our eyes we might be observing the colors, edges, and shapes in the scene, from which we can infer task-relevant information, such as the poses and geometry of the water bottle and the cap. Meanwhile, our tactile senses would let us know texture, pressure, and forces, which also gives us task-relevant information such as the force we are applying to the water bottle and the slippage of the cap in our grasp. Furthermore, humans can infer the same kind of information using either or both types of senses: our tactile senses can also give us pose and geometric information, while our visual senses can predict when we are going to make contact with the environment.
+Let’s take closing a water bottle as an example. With our eyes, we can observe the colors, edges, and shapes in the scene, from which we can infer task-relevant information, such as the poses and geometry of the water bottle and the cap. Meanwhile, our sense of touch tells us texture, pressure, and force, which also give us task-relevant information such as the force we are applying to the water bottle and the slippage of the bottle cap in our grasp. Furthermore, humans can infer the same kind of information using either or both types of senses: our tactile senses can also give us pose and geometric information, while our visual senses can predict when we are going to make contact with the environment.
 
 {% figure %}
 <img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/intro.png"  width='91%'/>
@@ -24,7 +24,7 @@ From these multimodal observations and task-relevant features, we come up with  
 
 Learning features from raw observation inputs (such as RGB images and force/torque data from sensors commonly seen on modern robots) is also known as representation learning. We want to learn a representation for vision and touch, and preferably a representation that can combine the two senses together. We hypothesize that if we can learn a representation that captures task-relevant features, we can use the same representation for similar contact-rich tasks. In other words, learning a rich multimodal representation can help us generalize.
 
-While humans interact with the world in an inherently multimodal manner, it is not clear how to combine very different kinds of data directly from sensors. RGB images from cameras are very high dimensional (usually at least having 640 x 480 x 3 pixels). On the other hand, force/torque sensor readings only have 6 dimensions but also have the complicating quality of sometimes rapidly changing (e.g. when the robot is not touching anything, the sensor registers 0 force, but that can quickly jump to 20 N once contact is made).
+While humans interact with the world in an inherently multimodal manner, it is not clear how to combine very different kinds of data directly from sensors. RGB images from cameras are very high dimensional (often around 640 x 480 x 3 pixels). On the other hand, force/torque sensor readings only have 6 dimensions but also have the complicating quality of sometimes rapidly changing (e.g. when the robot is not touching anything, the sensor registers 0 newtons, but that can quickly jump to 20 newtons once contact is made).
 
 Combining Vision and Touch
 -------------------------------------------------
@@ -38,13 +38,13 @@ Our encoder architectures to fuse the multimodal inputs.
 </figcaption>
 {% endfigure %}
 
-We can leverage a deep neural network to learn features from our high dimensional raw sensor data. The above figure shows our the architecture of our multimodal representation learning neural net, which we train to create a fused vector representation of RGB images, force sensor readings (from a wrist-attached force/torque sensor), and robot states (the position and velocity of the robot wrist from which the peg is attached).
+We can leverage a deep neural network to learn features from our high dimensional raw sensor data. The above figure shows our multimodal representation learning neural network architecture, which we train to create a fused vector representation of RGB images, force sensor readings (from a wrist-attached force/torque sensor), and robot states (the position and velocity of the robot wrist from which the peg is attached).
 
-Because our different sensor readings have such different characteristics, we use a different neural network architecture to encode each modality:
+Because our sensor readings have such different characteristics, we use a different network architecture to encode each modality:
 
 -The image encoder is a simplified FlowNet[^Flownet] network, with a 6-layer convolutional neural network (CNN). This will be helpful for our self-supervised objective.
 
--Because our force reading is a time series data with temporal correlation, we take the causal convolution of our force readings. This is similar to the architecture of WaveNet[^Wavenet], which has been shown to work well with time-sequenced audio data.
+-Because our force reading is a time series data with temporal correlation, we take the causal convolutions of our force readings. This is similar to the architecture of WaveNet[^Wavenet], which has been shown to work well with time-sequenced audio data.
 
 -For proprioceptive sensor readings (end-effector position and velocity), we encode it with fully connected layers, as this is commonly done in robotics.
 
@@ -52,7 +52,7 @@ Each encoder produces a feature vector. If we want a deterministic representatio
 
 
 **How do we learn multimodal features without manual labeling?**
-Our modality encoders have close to half a million learnable parameters, and so  require large amounts of labeled data to train. It would be very costly and expensive to manually label our data, so we design training objectives for which the labels can be automatically generated during data collection. In other words, we train the encoders using a form of self-supervised learning. Imagine trying to annotate 1000 hours of video of a robot doing a task or trying to manually label the poses of the objects. Intuitively, you'd much rather just write down a rule like 'keep track of the force on the robot arm and label the state and action pair when force readings are too high', rather than checking each frame one by one for when the robot is touching the box. We did something similar, with algorithmically defined labeling of data we collected from the rollouts of the robot.
+Our modality encoders have close to half a million learnable parameters, which would require large amounts of labeled data to train with supervised learning. It would be very costly and expensive to manually label our data. However, we can design training objectives whose labels are automatically generated during data collection. In other words, we can train the encoders using self-supervised learning. Imagine trying to annotate 1000 hours of video of a robot doing a task or trying to manually label the poses of the objects. Intuitively, you'd much rather just write down a rule like 'keep track of the force on the robot arm and label the state and action pair when force readings are too high', rather than checking each frame one by one for when the robot is touching the box. We do something similar, by algorithmically labeling the data we collect from the robot rollouts.
 
 {% figure %}
 <img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/decoder.png"  width='91%'/>
@@ -78,15 +78,15 @@ A good representation should:
 
 - Enable use to learn a policy that is robust to sensor noises, external perturbations, and different goal locations
 
-To study how to learn this multimodal representation, we use the classic peg insertion task as an experimental setup.  Our multimodal inputs are raw RGB image, force readings from a force/torque sensor, and end-effector position and velocity. And unlike classical works on tight tolerance peg insertion that need prior knowledge of peg geometries, we will be learning policies for different geometries directly from raw RGB images and F/t sensor readings. More importantly, we want to learn a representation from one peg geometry, and see if it generalizes to new unseen geometries.
+To study how to learn this multimodal representation, we use a peg insertion task as an experimental setup.  Our multimodal inputs are raw RGB image, force readings from a force/torque sensor, and end-effector position and velocity. And unlike classical works on tight tolerance peg insertion that need prior knowledge of peg geometries, we will be learning policies for different geometries directly from raw RGB images and force/torque sensor readings. More importantly, we want to learn a representation from one peg geometry, and see if that representation can generalize to new unseen geometries.
 
 Learning a policy
 -------------------------------------------------
 
-To learn a policy, we use any off-the-shelf deep reinforcement learning algorithms.
-Deep reinforcement learning (DRL) has shown great advances in playing [video games](https://deepmind.com/research/publications/playing-atari-deep-reinforcement-learning), [robotic grasping](https://ai.googleblog.com/2018/06/scalable-deep-reinforcement-learning.html), and [solving Rubik's cubes](https://openai.com/blog/solving-rubiks-cube/). Specifically here, we use Trust Region Policy Optimization[^TRPO], an on-policy RL algorithm, and a dense reward that guides the robot towards the hole for peg insertion.
+We want the robot to be able to learn policies directly from its own interactions with the environment. Here, we turn to deep reinforcement learning (RL) algorithms, which enable agents to learn from trial and error and a reward function.
+Deep reinforcement learning has shown great advances in playing [video games](https://deepmind.com/research/publications/playing-atari-deep-reinforcement-learning), [robotic grasping](https://ai.googleblog.com/2018/06/scalable-deep-reinforcement-learning.html), and [solving Rubik's cubes](https://openai.com/blog/solving-rubiks-cube/). Specifically, we use Trust Region Policy Optimization[^TRPO], an on-policy RL algorithm, and a dense reward that guides the robot towards the hole for peg insertion.
 
-Once we learn the representation, we feed the representation directly to a DRL policy. And we are able to learn a peg insertion task for different peg geometries in about 5 hours from raw sensory inputs.
+Once we learn the representation, we feed the representation directly to a RL policy. And we are able to learn a peg insertion task for different peg geometries in about 5 hours from raw sensory inputs.
 
 Here is the robot when it first starts learning the task.
 {% figure %}
@@ -113,7 +113,11 @@ We evaluate how well our representation captures our multimodal sensor inputs by
 
 **Generalization of our representation**
 
-We examine the potential of transferring the learned policies and representations to two novel shapes previously unseen in representation and policy training, the hexagonal peg and the square peg. For policy transfer, we take the representation model and the policy trained for the triangular peg, and execute with the new unseen square peg. As you can see in the gif below, when we do policy transfer, our success rate drops from 92% to 62%.  A better transfer performance can be achieved by taking the representation model trained on the triangular peg, and training a new policy for the new hexagonal peg. As seen in the gif, our peg insertion rate goes up to 92% again when we transfer the multimodal representation. Our transfer learning results indicate that the multimodal representations from visual and haptic feedback generalize well across variations of our contact-rich manipulation tasks.
+We examine the potential of transferring the learned policies and representations to two novel shapes previously unseen in representation and policy training, the hexagonal peg and the square peg. For policy transfer, we take the representation model and the policy trained for the triangular peg, and execute with the new unseen square peg. As you can see in the gif below, when we do policy transfer, our success rate drops from 92% to 62%.  This shows that a policy learned for one peg geometry does not necessarily transfer to a new peg geometry. 
+
+A better transfer performance can be achieved by taking the representation model trained on the triangular peg, and training a new policy for the new hexagonal peg. As seen in the gif, our peg insertion rate goes up to 92% again when we transfer the multimodal representation. Even though the learned policies do not transfer to new geometries, we show that our multimodal representation from visual and tactile feedback can transfer to new task instances. Our representation generalizes to new unseen peg geometries, and captures task-relevant information across task instances.
+
+
 
 {% figure %}
 <img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/transfer.gif"  width='91%'/>
@@ -151,7 +155,7 @@ Also notice we run our policies on two different robots, the orange KUKA IIWA ro
 
 **Ablation study**
 
-To study the effects of how the different modalities affect the representation, we ran an ablation study in simulation. In our simulation experiments where we randomize the box location, we can study how each sensor is being used by completely taking away a modality during representation and policy training. If we only have force data, our policy is not able to find the box. With only image data, we get a 49% task success rate, but our policy really struggles with aligning the peg with the hole, since the camera cannot capture these small precise movements. With both force and image, our task completion rate goes up to 77% in simulation.
+To study the effects of how the different modalities affect the representation, we ran an ablation study in simulation. In our simulation experiments where we randomize the box location, we can study how each sensor is being used by completely taking away a modality during representation and policy training. If we only have force data, our policy is not able to find the box. With only image data, we achieve a 49% task success rate, but our policy really struggles with aligning the peg with the hole, since the camera cannot capture these small precise movements. With both force and image inputs, our task completion rate goes up to 77% in simulation.
 
 {% figure %}
 <img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/sim_results.png"  width='91%'/>
@@ -160,7 +164,7 @@ Simulation results for modality ablation study
 </figcaption>
 {% endfigure %}
 
-The learning curves also demonstrate that while at first the Full Model and the Image Only Model (No Haptics) have similar returns, the returns start to diverge once the robot gets close to the hole.
+The learning curves also demonstrate that the Full Model and the Image Only Model (No Haptics) have similar returns in the beginning of the training. As training goes on and the robot learns to get closer to the box, the returns start to diverge when the Full Model is able to more quickly and robustly learn how to insert the peg with both visual and force feedback.
 
 {% figure %}
 <img src="{{ site.baseurl }}/assets/img/posts/2020-05-18-selfsupervised-multimodal/training_curve.jpeg" class="postimagehalf"/>
@@ -169,12 +173,12 @@ Policy learning curves for modality ablation study
 </figcaption>
 {% endfigure %}
 
-It’s not surprising that learning a representation with more modalities improves policy learning, but our result also shows that our representation is using all the modalities for contact-rich tasks.
+It’s not surprising that learning a representation with more modalities improves policy learning, but our result also shows that our representation and policy are using all the modalities for contact-rich tasks.
 
 Summary
 -------------------------------------------------
 
-As an overview of our method, we collect self-labeled data through self-supervision, which takes about 90 minutes to collect 100k data points. We can learn a representation from this data, which takes about 24 hours, but is done fully offline. Afterward, you can learn new policies from the same representation, which only takes 5 hours of real robot training. This method can be done on different robots or for different kinds of tasks.
+As an overview of our method, we collect self-labeled data through self-supervision, which takes about 90 minutes to collect 100k data points. We can learn a representation from this data, which takes about 24 hours training on a GPU, but is done fully offline. Afterward, you can learn new policies from the same representation, which only takes 5 hours of real robot training. This method can be done on different robots or for different kinds of tasks.
 
 Here are some of the key takeaways from this work. The first is, self-supervision, specifically dynamics and temporal concurrency prediction can give us rich objectives to train a representation model of different modalities.
 
@@ -182,7 +186,7 @@ Second, our representation that captures our modality concurrency and forward dy
 
 Lastly, our experiments show that learning multimodal representation leads to learning efficiency and policy robustness.
 
-For future work, we want our method to be able to generalize beyond a task family to completely different contact-rich tasks (e.g. chopping vegetables, changing a lightbulb, inserting an electric plug). To do so, we might need to utilize more modalities, such as incorporating temperature, audio, or tactile sensors, and also find algorithms that can give us quick few-shot policy adaptation to new tasks.
+For future work, we want our method to be able to generalize beyond a task family to completely different contact-rich tasks (e.g. chopping vegetables, changing a lightbulb, inserting an electric plug). To do so, we might need to utilize more modalities, such as incorporating temperature, audio, or tactile sensors, and also find algorithms that can give us quick adaptations to new tasks.
 
 <hr>
 
@@ -198,8 +202,8 @@ The code and multimodal dataset are available [here](https://github.com/stanford
 
 ##### Acknowledgements
 
-<p class="small-text"> 
-Many thanks to Andrey Kurenkov, Yuke Zhu, and Jeannette Bohg for comments and edits on this blog post. 
+<p class="small-text">
+Many thanks to Andrey Kurenkov, Yuke Zhu, and Jeannette Bohg for comments and edits on this blog post.
 </p>
 
 [^Flownet]: Fischer et al. FlowNet: Learning Optical Flow with Convolutional Networks. ICCV, 2015.
