@@ -7,12 +7,26 @@ tags: [Test, Markdown]
 ---
 
 
-Search should be working even for complicated escape symbols
-```
+Because if you put some code in your blog, you would at least make it:
+
+1. Searchable
+2. Good looking
+
+## Search on code
+
+Search should be working even for complicated escape symbols.
+
+```bash
 sed -i 's/\"hostname\"\:.*$/\"hostname\"\: \"'$IPADDR'\"\,/g' open-falcon/agent/config/cfg.json
 ```
 
-## Some tech stuff blog
+Or try searching for partial of a command, like this article should be returned when looking for "find grep"
+
+```bash
+find /etc -type f -exec cat '{}' \; | tr -c '.[:digit:]' '\n' | grep '^[^.][^.]*\.[^.][^.]*\.[^.][^.]*\.[^.][^.]*$'
+```
+
+## Code highlighting examples
 
 Because you might put code in your blog post and you want to make sure 
 it will look good in here.

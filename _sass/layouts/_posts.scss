@@ -72,7 +72,7 @@ header {
 
   img {
     border-radius: 1em;
-    padding: 0px;
+    padding: 0;
     width: 1.5em;
     height: 100%;
     margin-right: 0.5em;
@@ -105,6 +105,10 @@ header {
   footer {
     @extend %padding-post;
     padding-top: 0;
+  }
+
+  .feature-image-padding {
+    padding: 15%;
   }
 }
 
