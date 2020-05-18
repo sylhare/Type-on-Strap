@@ -8,8 +8,16 @@
 
 <div class="row">
     {% for image in images %}
-    <div {% unless column %}class="column"{% endunless%} style="flex: {{ column }}%" >
-        <img src="{{ image | prepend: 'assets/img/' | relative_url }}" alt="{{ image | prepend: '/' | split: '/' | last }}">
+    <div {% if column %} style="flex: {{ column }}%" {% else %} class="column" {% endif %}  >
+        <img {% if images.size == 1 %}class="single"{% endif %}
+             src="{{ image | prepend: 'assets/img/' | relative_url }}"
+             alt="{{ image | prepend: '/' | split: '/' | last }}">
     </div>
     {% endfor %}
 </div>
+
+{% comment %}
+To avoid propagation of column if used multiple time in the page.
+Column variable is assigned to false at the end.
+{% endcomment %}
+{% assign column = false %}

@@ -21,6 +21,11 @@ h1.title {
     width: 100%;
     min-width: 250px;
   }
+
+  .single {
+    width: 50%;
+    display: block;
+  }
 }
 
 //Shared css in _post.scss
