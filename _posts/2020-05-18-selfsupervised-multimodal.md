@@ -190,7 +190,7 @@ For future work, we want our method to be able to generalize beyond a task famil
 
 - Our ICRA 2019 conference paper: ["Making sense of vision and touch: Self-supervised learning of multimodal representations for contact-rich tasks"](https://arxiv.org/abs/1810.10191) by Michelle A. Lee\*, Yuke Zhu\*, Krishnan Srinivasan, Parth Shah, Silvio Savarese, Li Fei-Fei, Animesh Garg, Jeannette Bohg.[^note]
 
-- Our Transactions on Robotics journal paper:  ["Making Sense of Vision and Touch: Learning Multimodal Representations for Contact-Rich Tasks"](https://arxiv.org/abs/1907.13098s) by Michelle A. Lee, Yuke Zhu, Peter Zachares, Matthew Tan, Krishnan Srinivasan, Silvio Savarese, Li Fei-Fei, Animesh Garg, Jeannette Bohg
+- Our Transactions on Robotics journal paper:  ["Making Sense of Vision and Touch: Learning Multimodal Representations for Contact-Rich Tasks"](https://arxiv.org/abs/1907.13098) by Michelle A. Lee, Yuke Zhu, Peter Zachares, Matthew Tan, Krishnan Srinivasan, Silvio Savarese, Li Fei-Fei, Animesh Garg, Jeannette Bohg
 
 For further details on this work, check out our [video](https://sites.google.com/view/visionandtouch) and our [2020 GTC Talk](https://www.nvidia.com/en-us/gtc/session-catalog/?search=S22668).
 
