@@ -3,7 +3,15 @@ layout: default
 ---
 
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
-  {% include post_header.html page=page %}
+
+  <header id="main" style="background-image: url('{{ page.feature-img | relative_url }}')">
+    <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title">
+    {{ page.title }}
+    </h1>
+    {% if page.subtitle %}
+    <h2 class="subtitle">{{ page.subtitle }}</h2>
+    {% endif %}
+  </header>
 
   <section class="post-content">
   {% if page.bootstrap %}
@@ -14,10 +22,10 @@ layout: default
   </div>
   {% endif %}
   </section>
-    
-    
+
+
   <!-- Tag list for portfolio -->
   {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
   {% include tags_list.html tags=tag_list %}
-    
+
 </article>
