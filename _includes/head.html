@@ -58,9 +58,5 @@
 
     <!-- seo tags -->
     {% seo %}
-    <!-- Manual seo tags -->
-    <!--
-    <title>{% if page.title %}{{ page.title }} |{% endif %} {{ site.title }}</title>
-    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-    -->
+    <meta property="og:image" content="{{ '/' | absolute_url }}{% if page.thumbnail %}page.thumbnail{% else %}{{ page.feature-img | default: site.header_feature_image }}{% endif %} " />
 </head>
