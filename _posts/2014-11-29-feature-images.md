@@ -51,7 +51,7 @@ However you can just use the Markdown way of doing it to get the image normal si
 {% raw %}
 # Markdown way (bigger)
 ![Travel]({{ "/assets/img/pexels/story.jpeg" | relative_url}})
-# Aligner wat (50% of width)
+# Aligner with only One (50% of width)
 {% include aligner.html images="pexels/story.jpeg" %}
 {% endraw %}
 {% endhighlight %}
