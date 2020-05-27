@@ -218,13 +218,12 @@ Then at bottom of file:
 
 ## For editors 
 
-The way things work is that we have a 'source' branch with all the markdown and jekyll files, and the master branch has the compiled HTML. This master branch is cloned to /afs/.cs/group/ai/www/blog/ and is how we update the site's contents. 
+The way things work is that we have a 'source' branch with all the markdown and jekyll files, and the master branch has the compiled HTML. This master branch is cloned to /afs/.cs/group/ai/www/blog/ and is how we update the site's contents. To do this, go to repo root folder source branch, run `gem install octopress` (if you have not yet), then run ./scripts/build_push_to_master, and lastly go to /afs/.cs/group/ai/www/blog/ and run git pull.
 
-So to sync with online version, run in terminal 
+build_push_to_master just does the following:
 1. bundle exec jekyll clean
 2. export JEKYLL_ENV=production
 3. bundle exec jekyll build 
 4. 'octopress deploy'
-5. go to /afs/.cs/group/ai/www/blog/ and pull latest from master
 
-If you don't have octopress, install it with `gem install octopress`. You don't technically need it, you can also just copy the \_site contents after build and commit them to master manually, but octopress deploy is a little shortcut that makes this simpler.
+You don't technically need it, you can also just copy the \_site contents after build and commit them to master manually, but octopress deploy is a little shortcut that makes this simpler.
