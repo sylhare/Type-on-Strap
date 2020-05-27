@@ -28,9 +28,9 @@ More specifically, we present the following:
 
 * Through an unsupervised method, we find that mBERT natively represents dependency clusters that largely overlap with the UD standard.
 
-Our results are presented in the forthcoming ACL 2020 paper, [Finding Universal Grammatical Relations in Multilingual BERT]([https://arxiv.org/pdf/2005.04511.pdf](https://arxiv.org/pdf/2005.04511.pdf)).  This post draws from the paper, which is joint work with John Hewitt and Chris Manning.  You can also find the code [here]([https://github.com/ethanachi/multilingual-probing-visualization](https://github.com/ethanachi/multilingual-probing-visualization)).
+Our results are presented in the forthcoming ACL 2020 paper, [Finding Universal Grammatical Relations in Multilingual BERT](https://arxiv.org/pdf/2005.04511.pdf).  This post draws from the paper, which is joint work with John Hewitt and Chris Manning.  You can also find the code [here](https://github.com/ethanachi/multilingual-probing-visualization).
 
-If you’d like to skip the background and jump to the discussion of our methods, go [here](#link to A Tale of Syntax and Subspaces).  Otherwise, read on!
+If you’d like to skip the background and jump to the discussion of our methods, click [here](#finding-universal-grammatical-relations-in-mbert).  Otherwise, read on!
 
 ## Learning Languages
 
@@ -186,7 +186,7 @@ Training a probe successfully demonstrates that we can map from mBERT’s repres
 
 By contrast, the structural probe never receives information about what humans think dependency label categories should look like. Because we only ever pass in head-dependent pairs, rather than the category labels associated with these pairs, our method is free from human category labels. Instead, the clusters that emerge from the data are a view into **mBERT’s innate dependency label representations**.[^ud]
 
-For more work on the *latent* linguistic ontology of BERT, see: [Michael et al. (2020)]([https://arxiv.org/abs/2004.14513](https://arxiv.org/abs/2004.14513)) and [Limisiewicz et al. (2020)]([https://arxiv.org/pdf/2004.14620.pdf](https://arxiv.org/pdf/2004.14620.pdf)).
+For more work on the *latent* linguistic ontology of BERT, see: [Michael et al. (2020)](https://arxiv.org/abs/2004.14513) and [Limisiewicz et al. (2020)](https://arxiv.org/pdf/2004.14620.pdf).
 
 ## Analyzing mBERT’s Internal Representations
 
