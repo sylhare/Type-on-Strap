@@ -29,6 +29,7 @@ reliable is implement on diffence layers. each layer has own implementation beca
 on receiver side:
 
 > error detection ( via checksum field)
+
 > receiver feedback (ACK = 1 or NAK = 0) 
 
 retransimition A packet that is received in error at the receiver will be retrans-mitted by the sender 
