@@ -10,7 +10,10 @@ The server host may support many simultaneous TCP connection sockets, witheach s
 
 For TCP, nmap sequentiallyscans ports, looking for ports that are accepting TCP connections. For UDP, nmapagain sequentially scans ports, looking for UDP ports that respond to transmitted UDP segments. In both cases, nmap returns a list of open, closed, or unreachableports. A  host running nmap can attempt to scan any target host anywherein theInternet
 
-TCP :No Connection state 
+UDP require a minimum seding rate & without hand shaking step ( without the delay)
+UDP :No connection establishment
+UDP :No Connection state 
+
 UDP, on the other hand, doesnot maintain connection state and does not track any of these parameters. For thisreason, a server devoted to a particular application can typically support manymore active clients when the application runs over UDP rather than TCP.•Small packet header overhead.
 
 The TCP segment has 20 bytes of header over-head in every segment, whereas UDP has only 8 bytes of overhead
