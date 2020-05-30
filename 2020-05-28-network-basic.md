@@ -32,6 +32,8 @@ on receiver side:
 
 > receiver feedback (ACK = 1 or NAK = 0) 
 
-retransimition A packet that is received in error at the receiver will be retrans-mitted by the sender 
+Retransimition : A packet that is received in error at the receiver will be retrans-mitted by the sender
+
+
 
 
