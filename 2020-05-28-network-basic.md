@@ -21,3 +21,16 @@ UDP, on the other hand, doesnot maintain connection state and does not track any
 The TCP segment has 20 bytes of header over-head in every segment, whereas UDP has only 8 bytes of overhead
 
 Blocking UDP traffic for security reasons, TCP becomes an increasingly attractive protocol for streaming media transport.
+
+## principles of reliable data transfer 
+reliable is implement on diffence layers. each layer has own implementation because may be below it don't have any implementaion reliable.
+
+### ARQ Automaic Repeat reQuest protocols
+on receiver side:
+
+> error detection ( via checksum field)
+> receiver feedback (ACK = 1 or NAK = 0) 
+
+retransimition A packet that is received in error at the receiver will be retrans-mitted by the sender 
+
+
