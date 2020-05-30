@@ -35,5 +35,8 @@ on receiver side:
 Retransimition : A packet that is received in error at the receiver will be retrans-mitted by the sender
 TCP have sequence number to indicate piece of packet number
 
+# conclusion 
+ Check-sums, sequence numbers, timers, and positive and negative acknowledgment pack-ets each play a crucial and necessary role in the operation of the protocol
+ 
 
 
