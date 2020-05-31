@@ -5,13 +5,13 @@ tag:
 ---
 #outline
 ---
-[Theory : 4 tubles value](#theory:-4-tuples-value)
-[Scanning port](#scanning-port)
-[Difference between TCP & UDP](#difference-between-tcp-and-udp)
-[Principles of reliable data transfer](#principles-of-reliable-data-transfer)
-[ARQ Automaic Repeat reQuest protocols](#arq-automaic-repeat-request-protocols)
-[Conclusion](#conclusion)
-[Impovement in tcp](#impovement-in-tcp)
+- [Theory : 4 tubles value](#theory:-4-tuples-value)
+- [Scanning port](#scanning-port)
+- [Difference between TCP & UDP](#difference-between-tcp-and-udp)
+- [Principles of reliable data transfer](#principles-of-reliable-data-transfer)
+- [ARQ Automaic Repeat reQuest protocols](#arq-automaic-repeat-request-protocols)
+- [Conclusion](#conclusion)
+- [Impovement in tcp](#impovement-in-tcp)
 
 ## Theory: 4 tuples value
 ----
