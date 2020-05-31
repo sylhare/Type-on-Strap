@@ -39,7 +39,11 @@ TCP have sequence number to indicate piece of packet number
  Check-sums, sequence numbers, timers, and positive and negative acknowledgment pack-ets each play a crucial and necessary role in the operation of the protocol
  
  ### impovement in tcp 
-Go-Back-N (GBN) protocol, the sender is allowed to transmit multiple packets(when available) without waiting for an acknowledgment,
+Go-Back-N (GBN) protocol :  the sender is allowed to transmit multiple packets(when available) without waiting for an acknowledgment,
+Selective Repeat (SR)    : make sender only resend with specific lost packet instead of all packet in a window size
+
+
+
 
  
  
