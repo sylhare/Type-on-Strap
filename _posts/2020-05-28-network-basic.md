@@ -66,3 +66,11 @@ Go-Back-N (GBN) protocol :  the sender is allowed to transmit multiple packets(w
 Selective Repeat (SR)    : make sender only resend with specific lost packet instead of all packet in a window size
 
 ![summary of reliable data transfer]({{site.baseurl}}/assets/img/summary_reliable_data_transfer.png)
+
+
+# Connection-Oriented transport TCP
+A TCP connection provides a full-duplex service
+TCP have three-way handshake before 2 end-system can transfer data properly
+## TCP header structure
+
+![tcp header structure]({{site.baseurl}}/assets/img/tcp_segment_structure.png)
