@@ -5,15 +5,15 @@ tag:
 ---
 #outline
 ---
-[Theory : 4 tubles value](#theory-,-4-tuples-value)
+[Theory : 4 tubles value](#theory:-4-tuples-value)
 [Scanning port](#scanning-port)
-[Difference between TCP & UDP](#difference-between-tcp-&-udp)
+[Difference between TCP & UDP](#difference-between-tcp-and-udp)
 [Principles of reliable data transfer](#principles-of-reliable-data-transfer)
 [ARQ Automaic Repeat reQuest protocols](#arq-automaic-repeat-request-protocols)
 [Conclusion](#conclusion)
 [Impovement in tcp](#impovement-in-tcp)
 
-## Theory , 4 tuples value
+## Theory: 4 tuples value
 ----
 The transport layer at the server notes the following four values in the con-nection-request segment: 
 1. the source port number in the segment
@@ -29,7 +29,7 @@ When a TCP segment arrives at the host, all four fields (source IP address,sourc
 ----
 For TCP, nmap sequentiallyscans ports, looking for ports that are accepting TCP connections. For UDP, nmapagain sequentially scans ports, looking for UDP ports that respond to transmitted UDP segments. In both cases, nmap returns a list of open, closed, or unreachableports. A host running nmap can attempt to scan any target host anywherein theInternet
 
-## Difference between TCP & UDP
+## Difference between TCP and UDP
 ----
 UDP require a minimum seding rate & without hand shaking step ( without the delay)
 UDP :No connection establishment
