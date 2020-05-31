@@ -1,3 +1,6 @@
+---
+published: false
+---
 ## Theory , 4 tuples value
 The transport layer at the server notes the following four values in the con-nection-request segment: 
 (1) the source port number in the segment, 
@@ -42,12 +45,4 @@ TCP have sequence number to indicate piece of packet number
 Go-Back-N (GBN) protocol :  the sender is allowed to transmit multiple packets(when available) without waiting for an acknowledgment,
 Selective Repeat (SR)    : make sender only resend with specific lost packet instead of all packet in a window size
 
-![summary of reliable data transfer]({{site.imgpath}}/summary_reliable_data_transfer.png)
-
-
-
- 
- 
- 
-
-
+![summary of reliable data transfer](summary_reliable_data_transfer.png)
