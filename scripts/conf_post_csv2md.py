@@ -42,7 +42,7 @@ def format_pub_in_md(pub):
     pub_in_md += '\n**Authors**: %s'%pub.authors
     pub_in_md += '\n<br>**Contact**: %s'%pub.contactmail
     if pub.awards:
-        pub_in_md += '\n<br>**Award nominators:** %s'%pub.awards
+        pub_in_md += '\n<br>**Award nominations:** %s'%pub.awards
     if pub.paperlink or pub.bloglink or pub.videolink:
         pub_in_md += '\n<br>**Links:**' 
         if pub.paperlink:
