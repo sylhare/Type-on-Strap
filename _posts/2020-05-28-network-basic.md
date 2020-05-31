@@ -42,6 +42,7 @@ TCP have sequence number to indicate piece of packet number
 Go-Back-N (GBN) protocol :  the sender is allowed to transmit multiple packets(when available) without waiting for an acknowledgment,
 Selective Repeat (SR)    : make sender only resend with specific lost packet instead of all packet in a window size
 
+![summary of reliable data transfer]({{site.imgpath}}/summary_reliable_data_transfer.png)
 
 
 

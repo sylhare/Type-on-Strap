@@ -1,6 +1,7 @@
 # SITE CONFIGURATION
 baseurl: "/blog"
 url: "https://vuhailongkl97.github.io"
+imgpath: "/assets/img"
 
 # THEME-SPECIFIC CONFIGURATION
 title: Vu Hai Long                                   # site's title
