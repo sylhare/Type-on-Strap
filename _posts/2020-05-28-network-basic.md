@@ -1,5 +1,7 @@
 ---
-published: false
+published: true
+tag:
+  - networking
 ---
 ## Theory , 4 tuples value
 The transport layer at the server notes the following four values in the con-nection-request segment: 
