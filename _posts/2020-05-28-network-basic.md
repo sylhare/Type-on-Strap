@@ -69,8 +69,37 @@ Selective Repeat (SR)    : make sender only resend with specific lost packet ins
 
 
 # Connection-Oriented transport TCP
+----
 A TCP connection provides a full-duplex service
 TCP have three-way handshake before 2 end-system can transfer data properly
 ## TCP header structure
+----
 
 ![tcp header structure]({{site.baseurl}}/assets/img/tcp_segment_structure.png)
+
+Sequence Numbers and Acknowledgment Numbers  
+they are 2 of the most important fileds in the TCP segment header. 
+
+> The sequence number for a segment
+> The acknowledgment number that Host A puts in its segmentis the sequence number of the next byte Host A is expecting from Host B.
+
+![tcp header structure]({{site.baseurl}}/assets/img/sequence_and_ack_number.png)
+
+### Rount Trip Time Estimation and Timeout
+the mechanism to recover from lost segments 
+
+![ack generation]({{site.baseurl}}/assets/img/ack_generation.png)
+
+## Flow Control
+
+Support if sender send message with speed higher than receiver reading data. 
+
+TCP provides flow control by having the sendermaintain a variable called thereceive window.
+Informally, the receive window is used to give the sender an idea ofhow much free buffer space is available at the receive
+
+## TCP connection management
+
+establish & closing
+
+
+
