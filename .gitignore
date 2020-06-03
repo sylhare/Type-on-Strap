@@ -28,3 +28,4 @@ jekyll-theme-type-on-strap.gemspec
 *copy.md
 .jekyll-cache/*
 test/*
+assets/package-lock.json
