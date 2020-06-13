@@ -98,15 +98,15 @@ TCP provides flow control by having the sendermaintain a variable called therece
 Informally, the receive window is used to give the sender an idea ofhow much free buffer space is available at the receive
 
 ## TCP connection management
+Establish & closing 
 
-establish & closing
 ![three way handshaking in tcp]({{site.baseurl}}/assets/img/establish_3way_hanshake.png)
 
-when in the ESTABLISHED state , the tCP client can send and receive TCP segments containing payload
+when in the ESTABLISHED state , the tCP client can send and receive TCP segments containing payload 
 
 ![closing connection TCP]({{site.baseurl}}/assets/img/closing_tcp_connection.png)
 
-int the case client want to disconnect with server . it need to wait :
-FIN_WAIT1 for ACK from server
-FIN_WAIT2 for FIN from server
-TIME_WAIT for prepare for resend ack if ack is lost ( to server when server resend FIN)
+In the case client want to disconnect with server . it need to wait : 
++ FIN_WAIT1 for ACK from server 
++ FIN_WAIT2 for FIN from server 
++ TIME_WAIT for prepare for resend ack if ack is lost ( to server when server resend FIN) 
