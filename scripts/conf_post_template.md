@@ -20,4 +20,4 @@ $content$
 
 <hr>
 
-We look forward to seeing you at MD_NAME!
+We look forward to seeing you at CONF_NAME!
