@@ -14,19 +14,21 @@ except:
     print('Was not able to change sys encoding to utf-8, probably b/c you\'re on Python 3.')
     pass
 
-# One thing that may still need some manual work is the video thumbnail image insertion. I tried using this website to convert YouTube link to markdown http://embedyoutube.org/, however the thumbnail image has some randomness and may not always locate the title image. For the time being I took the screenshots manually...But otherwise the script should automate bulk of the content which is great! 
-
-Publication = namedtuple('Publication', 'timestamp title authors abstract keywords contactmail paperlink awards bloglink videolink')
+IMG_PATH = "{{ site.baseurl }}/assets/img/posts/"
+Publication = namedtuple('Publication', 'timestamp email_address title authors abstract keywords contactmail imagelink awards websitelink paperlink bloglink videolink')
 
 _FUZZY_CATEGRORIES = [
     "Timestamp",
+    "Email Address",
     "Title",
     "Authors (full name, comma separated)",
     "Abstract",
     "key words",
     "Point of contact email address",
-    "Link to paper",
+    "Image To Represent Paper (for example , see images used in http://ai.stanford.edu/blog/icra-2020/)",
     "Award Nominations (if any, comma separated)",
+    "Link to website",
+    "Link to paper",
     "Link to blog post (if any)",
     "Link to public video (e.g. YouTube, if any)",
 ]
@@ -34,11 +36,13 @@ _FUZZY_CATEGRORIES = [
 def get_info(data_row):
     return Publication(*[data_row[cat] for cat in _FUZZY_CATEGRORIES])
 
-def format_pub_in_md(pub):
+def format_pub_in_md(pub, img_path):
     if pub.paperlink:
         pub_in_md = '#### [%s](%s)'%(pub.title,pub.paperlink)
     else:
         pub_in_md = '#### %s'%pub.title
+
+    pub_in_md += '\n<img class="postimage_75" src="%s"/>'%img_path
     pub_in_md += '\n**Authors**: %s'%pub.authors
     pub_in_md += '\n<br>**Contact**: %s'%pub.contactmail
     if pub.awards:
@@ -53,7 +57,6 @@ def format_pub_in_md(pub):
             pub_in_md += ' \| [Video](%s)'%(pub.videolink)
     pub_in_md += '\n<br>**Keywords**: %s'%pub.keywords.lower().strip()
     return pub_in_md
-
 
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
@@ -87,11 +90,24 @@ if __name__ == "__main__":
     # Construct a blurb for each pub in markdown
     md_blurbs_per_pub = []
     pubs = []
-
+    
+    download_images = False
+    if not os.path.isfile('imgs'):
+        os.system('mkdir imgs')
+        download_images = True
+            
     for row_num, row in enumerate(csv):
         publication = get_info(row)
         pubs.append(publication)
-        md_blurbs_per_pub.append(format_pub_in_md(publication))
+        
+        if download_images:
+            image_index = publication.imagelink.find('id=')
+            image_id = publication.imagelink[image_index:]
+            os.system(" wget --no-check-certificate 'https://docs.google.com/uc?export=download&%s' -O imgs/img%d"%(image_id,row_num))
+                  
+        img_path = os.path.join(IMG_PATH + args.output_md.replace('.md',''),'img%d'%row_num)
+        img_path = extract_image_path(publication, row_num)
+        md_blurbs_per_pub.append(format_pub_in_md(publication,img_path))
 
     md_blurbs_per_pub = sorted(md_blurbs_per_pub)
 
