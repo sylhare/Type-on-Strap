@@ -189,11 +189,16 @@ $$
 In `_data/social.yml` you can customize the social icons from other wbesite you wish to display in the blog.
 The site icons come from [Font Awesome](https://fontawesome.com/).
 
+### Cookie consent
+
+You can add a cookie consent with a disclaimer if you use Google Analytics while respecting the [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation).
+Set to true, there will be a banner at the bottom of the page with the disclaimer and a approve button.
+Once the user clicks on "Approve" the cookies will be created for Google Analytics.
+
 #### Share in article
 
 The share icons are the one at the bottom of the blog page if enabled, 
 to share the article on those platform.
-
 
 #### Footer
 

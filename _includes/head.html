@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
-    <script defer=true src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -36,25 +36,27 @@
     {% endif %}
 
     <!-- Google Analytics -->
-    {% if site.google_analytics %}
-    <!-- Global site tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ site.google_analytics }}');
-    </script>
-    
-    <!-- Page analysis (analytics.js) -->
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', '{{ site.google_analytics }}', 'auto');
-      ga('send', 'pageview');
-    </script>
+    {% if site.cookie_consent %}
+        {% include cookie-consent.html %}
+    {% elsif site.google_analytics and !%}
+        <!-- Global site tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ site.google_analytics }}');
+        </script>
+
+        <!-- Page analysis (analytics.js) -->
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+        <script>
+          window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+          ga('create', '{{ site.google_analytics }}', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <!-- End Google Analytics -->
     {% endif %}
-    <!-- End Google Analytics -->
 
     <!-- seo tags -->
     {% seo %}

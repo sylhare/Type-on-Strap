@@ -1,5 +1,6 @@
 .site-footer {
   @extend %padding-post;
+  z-index: -1;
   display: inline-block;
   text-align: center;
   width: 100%;
