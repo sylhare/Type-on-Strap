@@ -1,5 +1,3 @@
-// Inspired by: https://github.com/mmistakes/minimal-mistakes/blob/master/_sass/minimal-mistakes/_syntax.scss
-
 // ==========================================================================
 //   Syntax highlighting
 // ==========================================================================
@@ -81,252 +79,132 @@ code.highlighter-rouge {
 }
 
 .highlight {
-  .c { /* Comment */ color: $base04 }
-  .err { /* Error */ color: $base0c }
-  .k { /* Keyword */ color: $base0d }
-
-  .l { /* Literal */
-    color: $base0e
-  }
-
-  .n { /* Name */
-    color: $base05
-  }
-
-  .o { /* Operator */
-    color: $base08
-  }
-
-  .p { /* Punctuation */
-    color: $base05
-  }
-
-  .cm { /* Comment.Multiline */
-    color: $base04
-  }
-
-  .cp { /* Comment.Preproc */
-    color: $base04
-  }
-
-  .c1 { /* Comment.Single */
-    color: $base04
-  }
-
-  .cs { /* Comment.Special */
-    color: $base04
-  }
-
-  .gd { /* Generic.Deleted */
-    color: $base0c
-  }
-
-  .ge { /* Generic.Emph */
-    font-style: italic
-  }
-
-  .gh { /* Generic.Heading */
-    color: $base05;
-    font-weight: bold
-  }
-
-  .gi { /* Generic.Inserted */
-    color: $base0a
-  }
-
-  .gp { /* Generic.Prompt */
-    color: $base04;
-    font-weight: bold
-  }
-
-  .gs { /* Generic.Strong */
-    font-weight: bold
-  }
-
-  .gu { /* Generic.Subheading */
-    color: $base08;
-    font-weight: bold
-  }
-
-  .kc { /* Keyword.Constant */
-    color: $base0d
-  }
-
-  .kd { /* Keyword.Declaration */
-    color: $base0d
-  }
-
-  .kn { /* Keyword.Namespace */
-    color: $base08
-  }
-
-  .kp { /* Keyword.Pseudo */
-    color: $base0d
-  }
-
-  .kr { /* Keyword.Reserved */
-    color: $base0d
-  }
-
-  .kt { /* Keyword.Type */
-    color: $base09
-  }
-
-  .ld { /* Literal.Date */
-    color: $base0a
-  }
-
-  .m { /* Literal.Number */
-    color: $base0e
-  }
-
-  .s { /* Literal.String */
-    color: $base0a
-  }
-
-  .na { /* Name.Attribute */
-    color: $base0b
-  }
-
-  .nb { /* Name.Builtin */
-    color: $base05
-  }
-
-  .nc { /* Name.Class */
-    color: $base09
-  }
-
-  .no { /* Name.Constant */
-    color: $base0c
-  }
-
-  .nd { /* Name.Decorator */
-    color: $base08
-  }
-
-  .ni { /* Name.Entity */
-    color: $base05
-  }
-
-  .ne { /* Name.Exception */
-    color: $base0c
-  }
-
-  .nf { /* Name.Function */
-    color: $base0b
-  }
-
-  .nl { /* Name.Label */
-    color: $base05
-  }
-
-  .nn { /* Name.Namespace */
-    color: $base09
-  }
-
-  .nx { /* Name.Other */
-    color: $base0b
-  }
-
-  .py { /* Name.Property */
-    color: $base05
-  }
-
-  .nt { /* Name.Tag */
-    color: $base08
-  }
-
-  .nv { /* Name.Variable */
-    color: $base0c
-  }
-
-  .ow { /* Operator.Word */
-    color: $base08
-  }
-
-  .w { /* Text.Whitespace */
-    color: $base05
-  }
-
-  .mf { /* Literal.Number.Float */
-    color: $base0e
-  }
-
-  .mh { /* Literal.Number.Hex */
-    color: $base0e
-  }
-
-  .mi { /* Literal.Number.Integer */
-    color: $base0e
-  }
-
-  .mo { /* Literal.Number.Oct */
-    color: $base0e
-  }
-
-  .sb { /* Literal.String.Backtick */
-    color: $base0a
-  }
-
-  .sc { /* Literal.String.Char */
-    color: $base05
-  }
-
-  .sd { /* Literal.String.Doc */
-    color: $base04
-  }
-
-  .s2 { /* Literal.String.Double */
-    color: $base0a
-  }
-
-  .se { /* Literal.String.Escape */
-    color: $base0e
-  }
-
-  .sh { /* Literal.String.Heredoc */
-    color: $base0a
-  }
-
-  .si { /* Literal.String.Interpol */
-    color: $base0e
-  }
-
-  .sx { /* Literal.String.Other */
-    color: $base0a
-  }
-
-  .sr { /* Literal.String.Regex */
-    color: $base0a
-  }
-
-  .s1 { /* Literal.String.Single */
-    color: $base0a
-  }
-
-  .ss { /* Literal.String.Symbol */
-    color: $base0a
-  }
-
-  .bp { /* Name.Builtin.Pseudo */
-    color: $base05
-  }
-
-  .vc { /* Name.Variable.Class */
-    color: $base0c
-  }
-
-  .vg { /* Name.Variable.Global */
-    color: $base0c
-  }
-
-  .vi { /* Name.Variable.Instance */
-    color: $base0c
-  }
-
-  .il { /* Literal.Number.Integer.Long */
-    color: $base0e
-  }
+  .c { /* Comment */
+    color: $base04 }
+  .err { /* Error */
+    color: $base0c }
+  .k { /* Keyword */
+    color: $base0d }
+  .l{ /* Literal */
+    color: $base0e  }
+  .n{ /* Name */
+    color: $base05  }
+  .o{ /* Operator */
+    color: $base08  }
+  .p{ /* Punctuation */
+    color: $base05  }
+  .cm{ /* Comment.Multiline */
+    color: $base04  }
+  .cp{ /* Comment.Preproc */
+    color: $base04  }
+  .c1{ /* Comment.Single */
+    color: $base04  }
+  .cs{ /* Comment.Special */
+    color: $base04  }
+  .gd{ /* Generic.Deleted */
+    color: $base0c  }
+  .ge{ /* Generic.Emph */
+    font-style: italic  }
+  .gh{ /* Generic.Heading */
+    color: $base05;font-weight: bold  }
+  .gi{ /* Generic.Inserted */
+    color: $base0a  }
+  .gp{ /* Generic.Prompt */
+    color: $base04;font-weight: bold  }
+  .gs{ /* Generic.Strong */
+    font-weight: bold  }
+  .gu{ /* Generic.Subheading */
+    color: $base08;font-weight: bold  }
+  .kc{ /* Keyword.Constant */
+    color: $base0d  }
+  .kd{ /* Keyword.Declaration */
+    color: $base0d  }
+  .kn{ /* Keyword.Namespace */
+    color: $base08  }
+  .kp{ /* Keyword.Pseudo */
+    color: $base0d  }
+  .kr{ /* Keyword.Reserved */
+    color: $base0d  }
+  .kt{ /* Keyword.Type */
+    color: $base09  }
+  .ld{ /* Literal.Date */
+    color: $base0a  }
+  .m{ /* Literal.Number */
+    color: $base0e  }
+  .s{ /* Literal.String */
+    color: $base0a  }
+  .na{ /* Name.Attribute */
+    color: $base0b  }
+  .nb{ /* Name.Builtin */
+    color: $base05  }
+  .nc{ /* Name.Class */
+    color: $base09  }
+  .no{ /* Name.Constant */
+    color: $base0c  }
+  .nd{ /* Name.Decorator */
+    color: $base08  }
+  .ni{ /* Name.Entity */
+    color: $base05  }
+  .ne{ /* Name.Exception */
+    color: $base0c  }
+  .nf{ /* Name.Function */
+    color: $base0b  }
+  .nl{ /* Name.Label */
+    color: $base05  }
+  .nn{ /* Name.Namespace */
+    color: $base09  }
+  .nx{ /* Name.Other */
+    color: $base0b  }
+  .py{ /* Name.Property */
+    color: $base05  }
+  .nt{ /* Name.Tag */
+    color: $base08  }
+  .nv{ /* Name.Variable */
+    color: $base0c  }
+  .ow{ /* Operator.Word */
+    color: $base08  }
+  .w{ /* Text.Whitespace */
+    color: $base05  }
+  .mf{ /* Literal.Number.Float */
+    color: $base0e  }
+  .mh{ /* Literal.Number.Hex */
+    color: $base0e  }
+  .mi{ /* Literal.Number.Integer */
+    color: $base0e  }
+  .mo{ /* Literal.Number.Oct */
+    color: $base0e  }
+  .sb{ /* Literal.String.Backtick */
+    color: $base0a  }
+  .sc{ /* Literal.String.Char */
+    color: $base05  }
+  .sd{ /* Literal.String.Doc */
+    color: $base04  }
+  .s2{ /* Literal.String.Double */
+    color: $base0a  }
+  .se{ /* Literal.String.Escape */
+    color: $base0e  }
+  .sh{ /* Literal.String.Heredoc */
+    color: $base0a  }
+  .si{ /* Literal.String.Interpol */
+    color: $base0e  }
+  .sx{ /* Literal.String.Other */
+    color: $base0a  }
+  .sr{ /* Literal.String.Regex */
+    color: $base0a  }
+  .s1{ /* Literal.String.Single */
+    color: $base0a  }
+  .ss{ /* Literal.String.Symbol */
+    color: $base0a  }
+  .bp{ /* Name.Builtin.Pseudo */
+    color: $base05  }
+  .vc{ /* Name.Variable.Class */
+    color: $base0c  }
+  .vg{ /* Name.Variable.Global */
+    color: $base0c  }
+  .vi{ /* Name.Variable.Instance */
+    color: $base0c  }
+  .il{ /* Literal.Number.Integer.Long */
+    color: $base0e  }
 }
 
 // Fix Github syntax display
