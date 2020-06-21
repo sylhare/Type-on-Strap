@@ -4,7 +4,7 @@ rohanchandra: # author-id
   url: "https://github.com/rohanchandra"
 sylhare:
   name: Sylhare
-  avatar: "assets/img/avatars/sylhare_avatar.png"
+  avatar: "https://avatars3.githubusercontent.com/u/20642750?s=460&v=4"
   url: "https://github.com/sylhare"
 mmistakes:
   name: "Michael Rose"
@@ -12,7 +12,7 @@ mmistakes:
   url: "https://github.com/mmistakes"
 mhagnumdw:
   name: Mhagnumdw
-  avatar: "assets/img/avatars/mhagnumdw_avatar.jpg"
+  avatar: "https://avatars2.githubusercontent.com/u/17688846?s=460&v=4"
   url:
 unknown:
   name: Unknown
