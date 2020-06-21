@@ -1,12 +1,16 @@
 ---
 layout: default
 ---
-<article {% if page.feature-img or page.color %}class="feature-image"{% endif %}>
+<article {% if page.feature-img or page.color %}class="feature-image" {% endif %}>
   <header id="main" style="">
-    {% unless page.hide_title %}
-    <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
-    {% include post_info.html author=page.author date=page.date %}
-    {% endunless %}
+    <div class="title-padder">
+      {% if page.hide_title %}
+      <div class="feature-image-padding"></div>
+      {% else %}
+      <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+      {% include post_info.html author=page.author date=page.date %}
+      {% endif %}
+    </div>
   </header>
 
   <section class="post-content">
