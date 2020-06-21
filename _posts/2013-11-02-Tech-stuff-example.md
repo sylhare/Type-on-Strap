@@ -37,6 +37,9 @@ And that the search function is working!
 java example
 
 ```java
+import java.util.*;
+
+@Example
 public class Demo {
   private static final String CONSTANT = "String";
   private Object o;
@@ -46,11 +49,12 @@ public class Demo {
    */
   public Demo(Object o) {
     this.o = o;
-    String s = CONSTANT + "Other";
-    int i = 123;
+    String s = CONSTANT + "Other example of text";
+    int i = 123 - 33 % 11;
   }
   public static void main(String[] args) {
     Demo demo = new Demo();
+    System.out.println(demo.o.toString())
   }
 }
 ```
@@ -60,56 +64,34 @@ public class Demo {
 html example
 
 ```html
-HTML
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-<!-- Sample comment -->
-<HTML>
-<head>
-<title>IntelliJ IDEA</title>
-</head>
-<body>
-  <h1>IntelliJ IDEA</h1>
-  <p><br><b><IMG border=0 height=12 src="images/hg.gif" width=18 >
-    Hello&nbsp;World! &#x00B7; &Alpha; </b><br><br>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div class="content">
+        This is an example
+    </div>
+  </body>
 </html>
-
 ```
 
-### Ruby
+### Javascript
 
-ruby example
+```js
+/**
+ * Does a thing
+ */
+function helloWorld(param1, param2) {
+  var something = 0;
 
-```ruby
-require "test"
-CONSTANT = 777
+  // Do something
+  if (2.0 % 2 == something) {
+    console.log('Hello, world!');
+  } else {
+    return null;
+  }
 
-# Sample comment
-
-class Module::Class
-  include Testcase
-
-  render :action => 'foo'
-  def foo(parameter)
-    @parameter = parameter
-  end
-
-  local_var = eval <<-"FOO";\
-  printIndex "Hello world!"
-  And now this is heredoc!
-  printIndex "Hello world again!"
-  FOO
-  foo("#{$GLOBAL_TIME >> $`} is \Z sample \"string\"" * 777);
-  if ($1 =~ /sample regular expression/ni) then
-  begin
-    puts %W(sample words), CONSTANT, :fooo;
-    do_something :action => "action"
-  end
-  expect{counter[0]}.to_be eq 1
-  1.upto(@@n) do |index| printIndex 'Hello' + index end
-  \\\\\\\\\
-  end
-end
+  // @TODO comment
+}
 ```
 
 ### YAML
