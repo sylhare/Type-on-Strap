@@ -60,16 +60,16 @@ $font-height-code: 1.3em !default;
 $border-radius: 4px !default;
 
 // base16 Material Theme
-$base00: #263238 !default; // Default Background
+$base00: #302f2d !default; // Default Background
 $base01: #2E3C43 !default; // Lighter Background (Used for status bars)
 $base02: #314549 !default; // Selection Background
 $base03: #546E7A !default; // Comments, Invisible, Line Highlighting
 $base04: #B2CCD6 !default; // Dark Foreground (Used for status bars)
 $base05: #EEFFFF !default; // Light Foreground (Not often used)
 $base06: #EEFFFF !default; // Light Background (Not often used)
-$base07: #FFFFFF !default; // Default text color
+$base07: #FFFFFF !default; // Default Foreground, Default text color
 $base08: #F07178 !default; // Parenthesis, Caret, Delimiters, Operators
-$base09: $base07;//#F78C6C !default; // Classes, Markup Bold, Search Text Background
+$base09: #F78C6C !default; // Classes, Markup Bold, Search Text Background
 $base0a: #FFCB6B !default; // Strings, Inherited Class, Markup Code, Diff Inserted
 $base0b: #98C379 !default; // Functions, Methods, Attribute IDs, Headings
 $base0c: #89DDFF !default; // Support, Regular Expressions, Escape Characters, Markup Quotes
@@ -87,7 +87,7 @@ $base0f: #FF5370 !default; // Deprecated, Opening/Closing Embedded Language Tags
 //$base06: #f5f4f1 !default; // Light Background (Not often used)
 //$base07: #f9f8f5 !default; // Default text color
 //$base08: #f92672 !default; // Parenthesis, Caret, Delimiters, Operators
-//$base09: $base07;//#fd971f !default; // Classes, Markup Bold, Search Text Background
+//$base09: #fd971f !default; // Classes, Markup Bold, Search Text Background
 //$base0a: #e6db74 !default; // Strings, Inherited Class, Markup Code, Diff Inserted
 //$base0b: #a6e22e !default; // Functions, Methods, Attribute IDs, Headings
 //$base0c: #a1efe4 !default; // Support, Regular Expressions, Escape Characters, Markup Quotes
