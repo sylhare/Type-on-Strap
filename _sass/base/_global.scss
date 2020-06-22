@@ -106,12 +106,6 @@ img[align=right] {
   p, li, td {
     font-size: 0.8em;
   }
-  li li {
-    font-size: 0.95em;
-  }
-  li li * {
-    font-size: 1em;
-  }
 
   iframe,
   img,
@@ -211,6 +205,7 @@ dl,
 // Lists within lists
 li {
   p {
+    font-size: inherit;
     display: inline;
   }
 
