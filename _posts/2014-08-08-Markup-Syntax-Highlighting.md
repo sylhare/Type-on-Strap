@@ -5,8 +5,8 @@ author: mmistakes
 tags: [code]
 ---
 
-From Michael's Rose [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/markup-syntax-highlighting).
-Syntax highlighting is a feature that displays source code, in different colors and fonts according to the category of terms. This feature facilitates writing in a structured language such as a programming language or a markup language as both structures and syntax errors are visually distinct. [Highlighting](http://en.wikipedia.org/wiki/Syntax_highlighting) does not affect the meaning of the text itself; it is intended only for human readers.
+Syntax highlighting[^1] is a feature that displays source code. 
+This feature facilitates writing in a structured language such as a programming language or a markup language as it makes import things visually distinct.
 
 
 ### GFM Code Blocks
@@ -81,7 +81,9 @@ Indentation matters. Be sure the indent of the code block aligns with the first 
 
 ### GitHub Gist Embed
 
-An example of a Gist embed below.
+An example of a Gist embed below:
 
-<script async src="https://gist.github.com/mmistakes/77c68fbb07731a456805a7b473f47841.js"></script>
+<script src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js"></script>
 
+[^1]: 
+    {% include citation.html key="highlight" %}

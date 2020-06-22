@@ -17,8 +17,22 @@ figure.highlight,
   > pre,
   pre.highlight {
     margin: 0;
-    padding: 1em
+    padding: 1em;
   }
+}
+
+li .highlight * {
+  font-size: 14px;
+}
+
+pre .rouge-table,
+.highlight pre,
+.code pre {
+  margin: 0;
+}
+
+.rouge-table * {
+  font-size: 1em;
 }
 
 li div.highlighter-rouge {
@@ -210,6 +224,12 @@ code.highlighter-rouge {
 // Fix Github syntax display
 .gist .blob-num {
   width: 3.5% !important;
+}
+
+.gist {
+  th, td {
+    border-bottom: 0;
+  }
 }
 
 // Fix nbconvert dataframe
