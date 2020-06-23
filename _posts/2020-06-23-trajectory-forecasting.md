@@ -3,8 +3,8 @@ layout: post
 title: "Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving"
 short-summary: "Recent advances in deep generative modeling have brought forth a paradigm shift in trajectory forecasting. In this blog post, we provide an overview of existing work, highlight new opportunities, and present our latest work on developing methods that are cognizant of their downstream use cases."
 summary: "Recent advances in deep generative modeling have brought forth a paradigm shift in trajectory forecasting. In this blog post, we provide an overview of existing work, highlight new opportunities, and present our latest work on developing methods that are cognizant of their downstream use cases."
-feature-img: "assets/img/posts/2020-06-19-trajectory-forecasting/thumbnail.png"
-thumbnail: "assets/img/posts/2020-06-19-trajectory-forecasting/thumbnail.png"
+feature-img: "assets/img/posts/2020-06-23-trajectory-forecasting/thumbnail.png"
+thumbnail: "assets/img/posts/2020-06-23-trajectory-forecasting/thumbnail.png"
 author: <a href="http://www.borisivanovic.com">Boris Ivanovic</a>
 tags: [autonomous driving, robotics, human-robot interaction, prediction, ml]
 ---
@@ -12,7 +12,7 @@ tags: [autonomous driving, robotics, human-robot interaction, prediction, ml]
 Merging into traffic is one of the most common day-to-day maneuvers we perform as drivers, [yet still poses a major problem for self-driving vehicles](https://www.wired.com/story/self-driving-cars-merging-highways). The reason that humans can naturally navigate through many social interaction scenarios, such as merging in traffic, is that they have an intrinsic capacity to reason about other people's intents, beliefs, and desires, using such reasoning to predict what might happen in the future and make corresponding decisions[^GweonSaxe2013]. However, many current autonomous systems do not use such proactive reasoning, which leads to difficulties when deployed in the real world. For example, there have been numerous instances of self-driving vehicles failing to merge into traffic, getting stuck in intersections, and making unnatural decisions that confuse others. As a result, imbuing autonomous systems with the ability to reason about other agents' actions could enable more informed decision making and proactive actions to be taken in the presence of other intelligent agents, e.g., in human-robot interaction scenarios. Indeed, the ability to predict other agents' behaviors (also known as multi-agent behavior prediction) has already become a core component of modern robotic systems. This holds especially true in safety-critical applications such as autonomous vehicles, which are currently being tested in the real world and targeting widespread deployment in the near future[^waymouber]. The diagram below illustrates a scenario where predicting the motion of other agents may help inform an autonomous vehicle's path planning and decision making. Here, an autonomous vehicle is deciding whether to stay put or continue driving, depending on surrounding pedestrian movement. The red paths indicate future navigational plans for the vehicle, depending on its eventual destination.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/hero.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/hero.png"/>
 {% endfigure %}
 
 At a high level, <b>trajectory forecasting</b> is the problem of predicting the path (trajectory) $$y$$ that some sentient agent (e.g., a bicyclist, pedestrian, car driver, or bus driver) will move along in the future given the trajectory $$x$$ that agent moved along in the past. In scenarios with multiple agents, we are also given their past trajectories, which can be used to infer how they interact with each other. Trajectories of length $$T$$ are usually represented as a sequence of positional waypoints $$\{(p_1, p_2)_i\}_{i=1...T}$$ (e.g., GPS coordinates). Since we aim to make good predictions, we evaluate methods by some metric that compares the predicted trajectory $$\widehat{y}$$ against the actual trajectory the agent takes (denoted earlier as $$y$$). 
@@ -24,7 +24,7 @@ In this post, we will dive into methods for trajectory forecasting, building a t
 There are many approaches for multi-agent trajectory forecasting, ranging from classical, physics-based models to deterministic regressors to generative probabilistic models[^review]. To explore them in a structured manner, we will first group methods by the assumptions they make followed by the technical approaches they employ, building a taxonomy of trajectory forecasting methodologies along the way.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-02.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-02.png"/>
 {% endfigure %}
 
 The first major assumption that approaches make is about the structure, if any, the problem possesses. In trajectory forecasting, this is manifested by approaches being either <b>ontological</b> or <b>phenomenological</b>. Ontological approaches (sometimes referred to as theory of mind) generally postulate (assume) some structure about the problem, whether that be a set of rules that agents follow or rough formulations of agents' internal decision-making schemes. Phenomenological approaches do not make such assumptions, instead relying on a wealth of data to gleam agent behaviors without reasoning about underlying motivations.
@@ -54,7 +54,7 @@ This distribution over paths also gives us a policy which can be sampled from. S
 Wrapping up, ontological approaches provide a structured method for learning how sentient agents make decisions. Due to their strong structural assumptions, they are both very sample-efficient (there are not many parameters to learn), computationally-efficient to optimize, and generally easier to pair with decision making systems (e.g., [game theory](https://arxiv.org/abs/1904.05423)). However, these strong structural assumptions also limit the maximum performance that an ontological approach may achieve. For example, what if the expert’s actual reward function was non-linear, had different terms than the assumed reward function, or was non-Markovian (i.e., had a history dependency)? In these cases, the assumed model would necessarily underfit the observed data. Further, data availability is growing at an exponential rate, with terabytes of autonomous driving data publicly being released every few months (companies have access to orders of magnitude more internally). With so much data, it becomes natural to consider phenomenological approaches[^anca], which form the other main branch of our trajectory forecasting taxonomy.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-03.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-03.png"/>
 {% endfigure %}
 
 Including these two ontological approaches in our trajectory forecasting taxonomy yields the above tree. Next, we will dive into mainline phenomenological approaches.
@@ -70,13 +70,13 @@ While these methods have enjoyed strong performance, there is a subtle point tha
 Generative approaches in particular have emerged as state-of-the-art trajectory forecasting methods due to recent advancements in deep generative models[^deepgenmodels]. Notably, they have caused a paradigm shift from focusing on predicting the single best trajectory to producing a <b>distribution</b> of potential future trajectories. This is advantageous in autonomous systems as full distribution information is more useful for downstream tasks, e.g., motion planning and decision making, where information such as variance can be used to make safer decisions. Most works in this category use a deep recurrent backbone architecture (like an LSTM) with a latent variable model, such as a [Conditional Variational Autoencoder (CVAE)](https://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models), to explicitly encode multimodality[^cvaemethods], or a [Generative Adversarial Network (GAN)](https://papers.nips.cc/paper/5423-generative-adversarial-nets) to implicitly do so[^ganmethods]. Common to both approach styles is the need to produce position distributions. GAN-based models can directly produce these and CVAE-based recurrent models usually rely on a bivariate Gaussian or bivariate Gaussian Mixture Model (GMM) to output position distributions. Including the two in our taxonomy balances out the right branch.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-04.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-04.png"/>
 {% endfigure %}
 
 The main difference between GAN-based and CVAE-based approaches is in the form of their resulting output distribution. At a high level, GANs are generative models that generate data which, in aggregate, match the distribution $$p(y)$$ of its training dataset $$\mathcal{D}$$. They achieve this by learning to map samples $$x$$ from a known distribution $$K$$ to samples $$y$$ of an unknown distribution $$\mathcal{D}$$ for which we have samples, i.e., the training dataset. Intuitively, this is very similar to [inverse transform sampling](https://en.wikipedia.org/wiki/Inverse_transform_sampling), which is a method for generating samples from any probability distribution given its cumulative distribution function. This is roughly illustrated below, where samples from a simple uniform distribution are mapped to a standard Gaussian distribution.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/ITS.jpeg"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/ITS.jpeg"/>
 <figcaption>Sourced from <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29">this excellent article</a> on understanding GANs.</figcaption>
 {% endfigure %}
 
@@ -91,7 +91,7 @@ $$p(y \mid x) = \sum_z p(y \mid x, z) p(z \mid x).$$
 Note that the sum in the above equation implies that $$z$$ is discrete (has finitely-many values). The latent variable $$z$$ can also be continuous, but there is work showing that discrete latent spaces lead to better performance (this also holds true for trajectory forecasting)[^discretez], so for this post we will only concern ourselves with a discrete $$z$$. By decomposing $$p(y \mid x)$$ in this way, one can produce an analytic output distribution. This is very similar to GMMs, which also decompose their desired $$p(\text{data})$$ distribution in this manner to produce an analytic distribution. This completes our taxonomy, and broadly summarizes current approaches for multi-agent trajectory forecasting.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-05.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-05.png"/>
 {% endfigure %}
 
 With such a variety of approach styles, how do we know which is best? How can we determine if, for example, an approach that produces an analytic distribution outperforms a deterministic regressor? 
@@ -101,7 +101,7 @@ With such a variety of approach styles, how do we know which is best? How can we
 With such a broad range of approaches and output structures, it can be difficult to evaluate progress in the field. Even phrasing the question introduces biases towards methods. For example, asking the following excludes generative or probabilistic approaches: Given a trajectory forecast $$\{\widehat{y}_1, ..., \widehat{y}_T\}$$ and the ground truth future trajectory $$\{y_1, ..., y_T\}$$, how does one evaluate how "close" the forecast is to the ground truth? We will start with this question, even if it is exclusionary for certain classes of methods.
 
 {% figure %}
-<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-07.png"/>
+<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-07.png"/>
 {% endfigure %}
 
 Illustrated above, one of the most common ways is to directly compare them side-by-side, i.e., measure how far $$\widehat{y}_i$$ is from $$y_i$$ for each $$i$$ and then average these distances to obtain the average error over the prediction horizon. This is commonly known as <b>Average Displacement Error (ADE)</b> and is usually reported in units of length, e.g., meters:
@@ -113,7 +113,7 @@ $$ADE(\widehat{y}, y) = \frac{1}{T} \sum_{i=1}^T ||\widehat{y}_i - y_i||_2^2.$$
 Often, we are also interested in the displacement error of only the final predicted point, illustrated below (in particular, only $$\widehat{y}_3$$ and $$y_3$$ are compared).
 
 {% figure %}
-<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-08.png"/>
+<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-08.png"/>
 {% endfigure %}
 
 This provides a measure of a method’s error at the end of the prediction horizon, and is frequently referred to as <b>Final Displacement Error (FDE)</b>. It is also usually reported in units of length.
@@ -129,20 +129,20 @@ As mentioned earlier, safety-critical systems need to reason about many possible
 Given the ground truth future trajectory $$\{y_1, ..., y_T\}$$ and the ability to sample trajectory forecasts $$\{\widehat{y}_1, ..., \widehat{y}_T\}$$, how does one evaluate how "good" the samples are with respect to the ground truth? One initial idea, illustrated below, is to sample $$N$$ forecasts from the model and then return the performance of the best forecast. This is usually referred to as <b>Best-of-N (BoN)</b>, along with the underlying performance metric used. For example, a Best-of-N ADE metric is illustrated below, since $$N = 3$$ and we measure the ADE of the best forecast, i.e., the forecast with minimum ADE.
 
 {% figure %}
-<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-09.png"/>
+<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-09.png"/>
 {% endfigure %}
 
 This is the main metric used by generative methods that produce empirical distributions, such as GAN-based approaches. The idea behind this evaluation scheme is to identify if the ground truth is near the forecasts produced by a few samples from the model ($$N$$ is usually chosen to be small, e.g., $$20$$). Implicitly, this evaluation metric selects one sample as the best prediction and then evaluates it with the ADE/FDE metrics from before. However, this is inappropriate for autonomous driving because it requires knowledge of the future (in order to select the best prediction) and it is unclear how to relate BoN performance to the real world. It is also difficult to objectively compare methods using BoN because approaches that produce wildly different output samples may yield similar BoN metric values, as illustrated below.
 
 {% figure %}
-<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/BoN_bad_example.png"/>
+<img class="postimage_75" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/BoN_bad_example.png"/>
 <figcaption>This is a figure from <a href="https://arxiv.org/abs/1810.05993">our recent trajectory forecasting work</a> at ICCV 2019 which compares versions of our method, the Trajectron, with that of the (generative, empirical) <a href="https://arxiv.org/abs/1803.10892">Social GAN</a>. If one were to use a Best-of-N ADE or FDE metric on these outputs, both methods might perform similarly even though Social GAN produces outputs with significantly higher variance.</figcaption>
 {% endfigure %}
 
 To address these shortcomings in the Best-of-N metric, we proposed a new evaluation scheme for generative, empirical methods in our recent ICCV 2019 paper[^trajectron]. Illustrated below, one starts by sampling many trajectories ($$\sim 10^3$$, to obtain a representative set of outputs) from the methods being compared. A [Kernel Density Estimate](https://en.wikipedia.org/wiki/Kernel_density_estimation) (KDE; a statistical tool that fits a probability density function to a set of samples) is then fit at each prediction timestep to obtain a probability density function (pdf) of the sampled positions at each timestep. From these pdfs, we compute the mean log-likelihood of the ground truth trajectory. This metric is called the KDE-based Negative Log-Likelihood (KDE NLL) and is reported in logarithmic units, i.e., nats.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Sail toyota_blog-10.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Sail toyota_blog-10.png"/>
 {% endfigure %}
 
 KDE NLL does not suffer from the same downsides that BoN does, as (1) methods with wildly different outputs will yield wildly different KDEs, and (2) it does not require looking into the future during evaluation. Additionally, it fairly estimates a method's NLL without any assumptions on the method's output distribution structure; both empirical and analytical distributions can be sampled from. Thus, KDE NLL can be used to compare methods across taxonomy groups.
@@ -150,7 +150,7 @@ KDE NLL does not suffer from the same downsides that BoN does, as (1) methods wi
 While KDE NLL can compare generative methods, deterministic lines of work are still disparate in their metrics and evaluating across the generative/deterministic boundary remains difficult. We also tried to tackle this in our 2019 ICCV paper, settling on the following comparison where we compared boxplots of generative methods alongside ADE and FDE (shown below) values from deterministic methods. The methods were trained and evaluated on the [ETH](https://ieeexplore.ieee.org/document/5459260) and [UCY](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2007.01089.x) pedestrian datasets, containing thousands of rich multi-human interaction scenarios.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/fse_boxplots.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/fse_boxplots.png"/>
 {% endfigure %}
 
 Even though we created the above figure, it is not immediately obvious how to interpret it. Should one compare means and medians? Should one try statistical hypothesis tests between error distributions and mean error values from deterministic values? Unfortunately, using boxplots (as we did in our ICCV work) disregards the possibility for multimodal error distributions (i.e., a distribution with many peaks). Another possibility may be to let dataset curators decide the most relevant metrics for their dataset, e.g., the nuScenes dataset (a large-scale autonomous driving dataset from nuTonomy) has [a prediction challenge](https://www.nuscenes.org/prediction) with specific evaluation metrics. This may yield proper comparisons for a specific dataset, but it still allows for biases towards certain kinds of approaches and makes it difficult to compare approaches across datasets. For example, evaluating generative approaches with ADE and FDE ignores variance, which may make two different methods appear to perform the same (see trajectory samples from Trajectron vs. Social GAN in the earlier qualitative plot).
@@ -170,14 +170,14 @@ As mentioned earlier, nearly every trajectory forecasting method directly produc
 Towards this end, we have developed <b>Trajectron++</b>, a significant addition to the Trajectron framework, that addresses this shortcoming. In contrast to existing approaches, Trajectron++ explicitly accounts for system dynamics, and leverages heterogeneous input data (e.g., maps, camera images, LIDAR point clouds) to produce state-of-the-art trajectory forecasting results on a variety of large-scale real-world datasets and agent types.
 
 {% figure %}
-<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/Trajectron++.png"/>
+<img class="postimage" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/Trajectron++.png"/>
 {% endfigure %}
 
 Trajectron++ is a graph-structured generative (CVAE-based) neural architecture that forecasts the trajectories of a general number of diverse agents while incorporating agent dynamics and heterogeneous data (e.g., semantic maps). It is designed to be tightly integrated with robotic planning and control frameworks; for example, it can produce predictions that are optionally conditioned on ego-agent motion plans. At a high level, it operates by first creating a spatiotemporal graph representation of a scene from its topology. Then, a similarly-structured deep learning architecture is generated that forecasts the evolution of node attributes, producing agent trajectories. An example of this is shown below.
 
 {% figure %}
-<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/frame_to_graph.png"/>
-<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/architecture_diagram.png"/>
+<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/frame_to_graph.png"/>
+<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/architecture_diagram.png"/>
 <figcaption>A scene around the ego-vehicle in the nuScenes dataset is shown. From the distances between different agents (e.g., pedestrians, cars), a spatiotemporal graph is built (left) which then dictates how the corresponding neural network architecture (right) is constructed. The architecture models agents by encoding the agent’s history and local interactions (edges).</figcaption>
 {% endfigure %}
 
@@ -196,8 +196,8 @@ As a bonus, adding agent dynamics to the model yields noticeable performance imp
 An additional feature of Trajectron++ is its ability to combine data from a variety of sources to produce forecasts. In particular, the presence of a single backbone representation vector, denoted $$e_x$$ in the above architecture diagram, enables for the seamless addition of new data via concatenation. To illustrate this, we show the benefits of including high-definition maps in the figure below. In it, we can see that the model is able to improve its predictions in turns, better reflecting the local lane geometry.
 
 {% figure %}
-<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/qual_nuScenes_no_map.png"/>
-<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-19-trajectory-forecasting/qual_nuScenes_map.png"/>
+<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/qual_nuScenes_no_map.png"/>
+<img class="postimagehalf" src="{{ site.baseurl }}/assets/img/posts/2020-06-23-trajectory-forecasting/qual_nuScenes_map.png"/>
 <figcaption><b>Left:</b> Without map information, the model tends to undershoot turns. <b>Right:</b> Encoding a local map of the agent's surroundings notably increases Trajectron++'s accuracy and confidence in turns. It is able to use semantic labels (shown in color) to reason about where agents can go.</figcaption>
 {% endfigure %}
 
