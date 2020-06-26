@@ -4,12 +4,12 @@
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
 
-A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
+A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily cusomizable:
 
-* Responsive design
-* Portfolio page for your projects
+* Responsive design on all devices
+* Portfolio, Gallery page for your projects
 * Tags compatibility
-* Bootstrap : [Get Bootstrap](http://getbootstrap.com/)
+* Handle Bootstrap'ed pages: [Get Bootstrap](http://getbootstrap.com/)
 * Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
 * Nice fonts : [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
