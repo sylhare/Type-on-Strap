@@ -23,9 +23,9 @@ _FUZZY_CATEGRORIES = [
     "Title",
     "Authors (full name, comma separated)",
     "Abstract",
-    "key words",
+    "Keywords",
     "Point of contact email address",
-    "Image To Represent Paper (for example , see images used in http://ai.stanford.edu/blog/icra-2020/)",
+    "Image To Represent Paper",
     "Award Nominations (if any, comma separated)",
     "Link to website",
     "Link to paper",
@@ -48,7 +48,7 @@ def format_pub_in_md(pub, img_path):
     if pub.awards:
         pub_in_md += '\n<br>**Award nominations:** %s'%pub.awards
     if pub.paperlink or pub.bloglink or pub.videolink:
-        pub_in_md += '\n<br>**Links:**' 
+        pub_in_md += '\n<br>**Links:**'
         if pub.paperlink:
             pub_in_md += ' [Paper](%s)'%(pub.paperlink)
         if pub.bloglink:
@@ -79,40 +79,40 @@ if __name__ == "__main__":
         md_template = f.read()
 
     logging.info('Reading {}'.format(args.input_csv))
-    
+
     with open(args.input_csv) as f:
         reader = csv.reader(f, skipinitialspace=True)
         header = next(reader)
         csv = [dict(zip(header, row)) for row in reader]
     print(csv[0].keys())
     logging.info('Populating content...')
-    
+
     # Construct a blurb for each pub in markdown
     md_blurbs_per_pub = []
     pubs = []
-    
+
     download_images = False
     if not os.path.isfile('imgs'):
         os.system('mkdir imgs')
         download_images = True
-            
+
     for row_num, row in enumerate(csv):
         publication = get_info(row)
         pubs.append(publication)
-        
+
         if download_images:
             image_index = publication.imagelink.find('id=')
             image_id = publication.imagelink[image_index:]
             os.system(" wget --no-check-certificate 'https://docs.google.com/uc?export=download&%s' -O imgs/img%d"%(image_id,row_num))
-                  
+
         img_path = os.path.join(IMG_PATH + args.output_md.replace('.md',''),'img%d'%row_num)
-        img_path = extract_image_path(publication, row_num)
+        # img_path = extract_image_path(publication, row_num)
         md_blurbs_per_pub.append(format_pub_in_md(publication,img_path))
 
     md_blurbs_per_pub = sorted(md_blurbs_per_pub)
 
     content = "\n<hr>\n".join(md_blurbs_per_pub)
-    
+
     md = md_template.replace('$content$', content)
 
     logging.info('Saving digest markdown...')
