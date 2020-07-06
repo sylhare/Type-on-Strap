@@ -25,7 +25,7 @@ youtube:          # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
 
 # rss specify feed path
 feed:
-  path: feed.xml
+  path: /feed.xml
 
 # Share button options
 share:
