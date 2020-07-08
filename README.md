@@ -465,25 +465,31 @@ You can learn more about them on [shopify's doc](https://help.shopify.com/themes
 
 ### Minimizing and optimizing: css, js and images
 
-Before you need to have `node` and `npm` installed:
+Before you need to have *node* and `npm` installed:
+
 - Windows: https://nodejs.org/
 - Ubuntu/Debian: `apt-get install nodejs npm libgl1 libxi6`
 - Fedora (dnf) / RHEL/CentOS (yum): `dnf install node npm libglvnd-glx libXi`
 
 Then you need to install [`gulp-cli`](https://gulpjs.com/) and its dependencies:
-```shell
+
+```bash
 cd assets/
 sudo npm install gulp-cli -g
 npm install
 ```
 
-**Now, whenever you want to minify and optimize, run:**
-```shell
+You can run the default task that will compress the js, css and images and create the thumbnails for the supported image
+formats:
+
+```bash
 cd assets/
 gulp default
 # tip: run a git status to see the changes
 git status
 ```
+
+You can find more about the gulp tasks in the [gulpfile.js](assets/gulpfile.js)
 
 ### Use as Ruby Gem
 
