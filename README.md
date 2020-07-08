@@ -228,12 +228,13 @@ When writing a post, be sure in jekyll to:
 This are the basic features you can use with the  `post` layout.
 
 ```yml
+
 ---
 layout: post
 title: Hello World                                # Title of the page
 hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
-thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+thumbnail: "assets/thumbnails/sample-th.png"      # Add a thumbnail image on blog view
 color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
 bootstrap: true                                   # Add bootstrap to the page
 tags: [sample, markdown, html]
@@ -241,7 +242,7 @@ tags: [sample, markdown, html]
 ```
 
 With `thumbnail`, you can add a smaller image than the `feature-img`. 
-If you don't have a thumbnail you can still use the same image as the feature one.
+If you don't have a thumbnail you can still use the same image as the feature one. Or use the gulp task to create it.
 
 The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
 you can edit it in the config file (`_config.yml > color_image`). If you want another one, put it in `/assets/img` as well. 
@@ -263,6 +264,7 @@ excerpt: true
 Then in your post, add the `excerpt separator`:
 
 ```yml
+
 ---
 layout: post
 title: Sample Page
@@ -307,6 +309,7 @@ Non-standard features are documented below.
 The page layout have a bit more features explained here.
 
 ```yml
+
 ---
 layout: page
 title: "About" 
@@ -347,7 +350,9 @@ If your posts are not displaying ensure that you have added the line `paginate: 
 Portfolio is a feature page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
 
 To use the portfolio, simply create a `portfolio.md` with this information inside:
+
 ```yml
+
 --- 
 layout: page
 title : Portfolio 
@@ -363,6 +368,7 @@ You can format the portfolio posts in the `_portfolio` folder using the `post la
 If you decide to use a date, please be sure to use one that can be parsed such as `yyyy-mm-dd`. You can see more format example on the demo posts that are available for the theme:
 
 ```yml
+
 ---
 layout: post
 title: Circus				       # Title of the portfolio post
@@ -377,7 +383,6 @@ date: 2019-07-25		 	       # Not mandatory, however needs to be in date format t
 Make sure your `_config.yml` contains the following if you are using the theme as a gem:
 
 ```yml
-
 # PORTFOLIO
 collections:
   portfolio:
@@ -395,6 +400,7 @@ You need to specify the `gallery_path` which will be used to find the pictures t
 It will take all of the picture under that directory. Then use the `include` to add it in your page. 
 
 ```yml
+
 ---
 layout: page
 title: Gallery
@@ -415,6 +421,7 @@ Then there's a `search.js` displaying the formatted results entered in the `sear
 The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
 
 ```yml
+
 ---
 layout: search
 title: Search
@@ -430,6 +437,7 @@ Tags are recommended for posts and portfolio items.
 For example:
 
 ```yml
+
 ---
 layout: post
 title: Markdown and HTML
@@ -487,6 +495,7 @@ Add this line to your Jekyll site's Gemfile (or create one):
 ```ruby
 gem "type-on-strap"
 ```
+
 Add this line to your Jekyll site's `_config.yml` file:
 
 ```yml
