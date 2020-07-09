@@ -1,8 +1,6 @@
 # [SAIL Blog](http://ai.stanford.edu/blog/)
 ## Why write for SAIL blog
-It's a great way to let a broader set of people get exposed to your work and help represent SAIL. We started in November of 2018, and we are already getting a wide audience for our blog posts, with a total of 95k page views, 28 blog posts, and an average of 2.5k of page views per blog post.
-
-So if you have recently published or ongoing research that you feel could benefit from being shared more widely in this format, or if one of your new year's resolution is to work on scientific communication, please reach out to the  email the [editors](http://ai.stanford.edu/blog/about/) and we will let you know the process from there.
+It's a great way to let a broader set of people get exposed to your work and help represent SAIL. So if you have recently published or ongoing research that you feel could benefit from being shared more widely in this format, or if one of your new year's resolution is to work on scientific communication, please reach out to the  email the [editors](http://ai.stanford.edu/blog/about/) and we will let you know the process from there.
 
 ## How to write a new blost post
 1. Confirm your paper(s) are a good fit to write a blog post for (see requirements [here](https://docs.google.com/document/d/1PWuruWbudrAwTI_iJYC-ZkjAd-hILcisL9Ao_VOUtx4/edit?usp=sharing)). You are encouraged to email the [editors](http://ai.stanford.edu/blog/about/) confirm your paper is a good fit and ask any quetsions. 
