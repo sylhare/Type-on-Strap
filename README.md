@@ -1,25 +1,25 @@
-# Type on Strap 
+# Type on Strap  
 
 [![Build Status](https://travis-ci.org/sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/sylhare/Type-on-Strap)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
 
+[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
+
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily cusomizable:
 
-* Responsive design on all devices
-* Portfolio, Gallery page for your projects
-* Tags compatibility
+* Responsive design on all devices (🖥, 💻, 📱, ...)
+* Portfolio 🗂, Gallery 🖼 pages for your projects
+* Tags compatibility 🏷
 * Handle Bootstrap'ed pages: [Get Bootstrap](http://getbootstrap.com/)
-* Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
+* 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
-* Nice fonts : [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
-* Seo Tags : [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
-* Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
+* 🖋 Nice fonts: [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
+* Seo Tags: [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
+* 🛠 Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
 * Free of rights images from [pexels](https://www.pexels.com/)
 
 > [Demo Site](https://sylhare.github.io/Type-on-Strap/)
- 
-[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
 ## Table of Contents
 
@@ -33,11 +33,11 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 ## Usage
 
-### As a ruby gem
+### As a ruby gem 💎
 
 Check out this tutorial: [Use as Ruby Gem](https://github.com/Sylhare/Type-on-Strap#use-as-ruby-gem)
 
-### As a github page
+### As a github page 📋
 
 1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/Sylhare/Type-on-Strap.git`
 2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
@@ -77,7 +77,7 @@ Type-on-Strap
 └── index.html                 # sample home page (blog page paginated)
 ```
 	
-## Configure Type on Strap
+## Configure Type on Strap 🛠
 
 Open `_config.yml` in a text editor to change most of the blog's settings.
 
@@ -85,16 +85,17 @@ If a variable in this document is marked as "optional", disable the feature by r
 
 
 ### Site configuration
-Configure Jekyll as your own blog or with a subpath in in `_config.yml`:
 
-Jekyll website *without* a subpath (such as a GitHub Pages website for a given username):
+Configure Jekyll as your own blog or with a "baseurl" in in `_config.yml`:
+
+Jekyll website *without* a "baseurl" (such as a GitHub Pages website for a given username):
 
 ```yml
 baseurl: ""
 url: "https://username.github.io"
 ```
 
-Jekyll website *with* subpath (like the Type on Strap [demo](https://sylhare.github.io/Type-on-Strap/) page):
+Jekyll website *with* "baseurl" (like the Type on Strap [demo](https://sylhare.github.io/Type-on-Strap/) page):
 
 ```yml
 baseurl: "/sub-directory"
@@ -300,7 +301,8 @@ Like all CSS variables in the theme, you can edit the color of the code highligh
 The code highlighting works with [base16](https://github.com/chriskempson/base16-html-previews/tree/master/css) you can find existing example 
 of your favourite highlight color scheme on this format.
 
-## Other Layouts
+## Layouts Explanation
+
 Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). 
 Non-standard features are documented below.
 
@@ -361,7 +363,7 @@ title : Portfolio
 {% include portfolio.html %}
 ```
 
-#### Portofolio posts
+#### Portfolio posts
 
 You can format the portfolio posts in the `_portfolio` folder using the `post layout`. Here are little explaination on some of the possible feature you can use and what they will do.
 
