@@ -1,10 +1,8 @@
 import os
 import logging
 import argparse
-import numpy as np
 from collections import Counter, namedtuple
 import csv
-import inflect
 
 try:
     import sys
