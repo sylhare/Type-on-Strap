@@ -1,2 +1,3 @@
 find . -type f -name \*.jpg -exec sh -c 'jpegoptim "{}"' \;
 find . -type f -name \*.png -exec sh -c 'optipng "{}"' \;
+find . -type f -name \*img\* -exec sh -c 'optipng "{}"' \;
