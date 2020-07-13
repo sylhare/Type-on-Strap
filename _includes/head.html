@@ -60,5 +60,23 @@
 
     <!-- seo tags -->
     {% seo %}
-    <meta property="og:image" content="{{ '/' | absolute_url }}{% if page.thumbnail %}page.thumbnail{% else %}{{ page.feature-img | default: site.header_feature_image }}{% endif %} " />
+    <meta property="og:image" content="{{ '/' | absolute_url }}{% if page.thumbnail %} {{ page.thumbnail }} {% else %} {{ page.feature-img | default: site.header_feature_image }} {% endif %}" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.theme_settings.title }}{% endif %}">
+    <meta name="twitter:description" content="{{ page.content | strip_html | strip_newlines | truncate: 160 }}">
+    {% if site.theme_settings.twitter %}<meta name="twitter:creator" content="@{{ site.theme_settings.twitter }}">{% endif %}
+    {% if page.feature-img %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ page.feature-img | relative_url }}">
+    <meta name="og:image" content="{{ page.feature-img | relative_url }}">
+    {% elsif page.thumbnail %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="{{ page.thumbnail | relative_url }}">
+    <meta name="og:image" content="{{ page.thumbnail | relative_url }}">
+    {% else %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="{{ site.theme_settings.avatar | relative_url }}">
+    <meta name="og:image" content="{{ site.theme_settings.avatar | relative_url }}">
+    {% endif %}
 </head>
