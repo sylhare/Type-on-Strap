@@ -23,7 +23,6 @@ color_image: /assets/img/lineart.png                    # A bit transparent for 
 katex: true                                             # Enable if using math markup
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
-cookie_consent_disclaimer: We would like to use third party cookies and scripts to improve the functionality of this website.
 disqus_shortname:                                       # Your discus shortname for comments
 layout_variables:                                       # Open the "_sass > base" folder, and open "_variables.scss"
 footer_icons:                                           # In _data/social.yml
