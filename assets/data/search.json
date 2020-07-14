@@ -3,7 +3,7 @@
 [
   {% for post in site.posts %}
   {
-    "title"    : "{{ post.title | escape }}",
+    "title"    : "{{ post.title | strip_newlines | escape }}",
     "category" : "{{ post.category }}",
     "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
     "url"      : "{{ post.url | relative_url }}",
@@ -16,7 +16,7 @@
   {% for page in site.portfolio %}
   {
   {% if page.title != nil %}
-  "title"    : "{{ page.title | escape }}",
+  "title"    : "{{ page.title | strip_newlines | escape }}",
   "category" : "{{ page.category }}",
   "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
   "url"      : "{{ page.url | relative_url }}",
