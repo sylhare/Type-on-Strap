@@ -86,4 +86,4 @@ gulp.task('isolate', function isolateBootstrap() {
 
 
 gulp.task("isolate-bootstrap-css", gulp.series('isolate', 'css'));
-gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img', 'thumbnails')));
+gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));

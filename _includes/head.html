@@ -35,27 +35,23 @@
     <script src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}"></script>
     {% endif %}
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics / Cookie Consent -->
+    <script>
+      const cookieName = 'cookie-notice-dismissed-{{ site.url }}';
+      const isCookieConsent = '{{ site.cookie_consent }}';
+      const analyticsName = '{{ site.google_analytics }}';
+    </script>
+
     {% if site.cookie_consent %}
-        {% include cookie-consent.html %}
-    {% elsif site.google_analytics and !%}
+        <div id="cookie-notice"><span>{{ site.data.language.str_cookie_disclaimer | default: "We would like to use third party cookies and scripts to improve the functionality of this website." }}
+          </span><a id="cookie-notice-accept" class="button">{{ site.data.language.str_cookie_approve | default: "Approve" }}</a>
+        </div>
+    {% endif %}
+    {% if site.google_analytics %}
         <!-- Global site tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '{{ site.google_analytics }}');
-        </script>
-
         <!-- Page analysis (analytics.js) -->
         <script async src='https://www.google-analytics.com/analytics.js'></script>
-        <script>
-          window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-          ga('create', '{{ site.google_analytics }}', 'auto');
-          ga('send', 'pageview');
-        </script>
-        <!-- End Google Analytics -->
     {% endif %}
 
     <!-- seo tags -->
