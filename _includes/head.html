@@ -55,8 +55,11 @@
     {% endif %}
 
     <!-- seo tags -->
-    {% seo %}
     <meta property="og:image" content="{{ '/' | absolute_url }}{% if page.thumbnail %}{{ page.thumbnail }}{% else %}{{ page.feature-img | default: site.header_feature_image }}{% endif %}">
+    {% seo %}
+
+    <!-- RSS -->
+    {% feed_meta %}
 
     <!-- Twitter Cards -->
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.theme_settings.title }}{% endif %}">
