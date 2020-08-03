@@ -94,6 +94,24 @@ function helloWorld(param1, param2) {
 }
 ```
 
+### Python
+
+```python
+import os
+
+def some_function(param_one="", param_two=0):
+    r'''A docstring'''
+    if param_one > param_two: # interesting
+        print("Greater")
+    return (param_two - param_one + 1 + 0b10) or None
+
+class SomeClass:
+    """ dunno what I am doing """
+    
+    def __init__(self):
+        pass
+```
+
 ### YAML
 
 You can also render some yaml, like this `_config.yml`:
