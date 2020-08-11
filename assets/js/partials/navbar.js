@@ -18,6 +18,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
    */
   window.addEventListener('scroll', function () {
     var offset = -(window.scrollY || window.pageYOffset || document.body.scrollTop) / 3;
-    document.getElementById("main").style.backgroundPosition = '100% ' + offset + 'px' + ', 0%, center top';
+    document.getElementById("main").style.backgroundPosition = '100% ' + (offset - 50) + 'px' + ', 0%, center top';
   });
 });
