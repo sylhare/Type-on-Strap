@@ -14,7 +14,6 @@
 }
 
 .site-header {
-  //padding-bottom: 1%;
   padding: 2% 2% 1% 2%;
   background: $brand-color;
   display: inline-block;
@@ -51,43 +50,43 @@
     font-family: $font-family-logo;
     font-size: 1.3em;
   }
+}
 
-  nav {
-    list-style: none;
+nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  ul {
     margin: 0;
     padding: 0;
+    list-style: none;
+    line-height: 1.5;
+    float: right;
+    text-align: right;
+    display: block;
+  }
 
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      line-height: 1.5;
-      float: right;
-      text-align: right;
-      display: block;
+  li {
+    display: inline;
+    float: left;
+    margin-right: 0.4em;
+  }
+
+  a {
+    &:hover {
+      color: $link-color;
     }
 
-    li {
-      display: inline;
-      float: left;
-      margin-right: 0.4em;
-    }
-
-    a {
-      &:hover {
-        color: $link-color;
-      }
-
-      &#pull {
-        i {
-          margin-top: 13px;
-          margin-right: 10px;
-          float: right;
-        }
-
+    &#pull {
+      i {
+        margin-top: 13px;
+        margin-right: 10px;
+        float: right;
       }
 
     }
+
   }
 }
 
