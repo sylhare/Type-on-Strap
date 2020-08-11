@@ -20,16 +20,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.post_install_message =  <<~MSG
-                                -------------------------------------------------------------------------------------
-                                Type on strap v2+ is using Jekyll 4.0:
-
-                                  * Please make sure you have updated your _config.yml.
-
-                                  * Use _data/ for social and language customization
-
-                                  * Visit https://github.com/sylhare/Type-on-Strap for more info.
-
-                                -------------------------------------------------------------------------------------
+                               Thanks for using Type on strap v2+!
                                MSG
 
   spec.required_ruby_version   = '>= 2.4.0'
