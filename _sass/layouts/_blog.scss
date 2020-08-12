@@ -9,6 +9,7 @@
   color: $header-text-color;
   background: $header-background-color no-repeat;
   background-size: $feature-image-size;
+  background-position: 100% -50px 0% center top;
 
   /* --- Responsive --- */
   @media screen and (min-width: $break) {
