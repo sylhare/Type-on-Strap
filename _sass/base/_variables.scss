@@ -37,7 +37,7 @@ $selection-color: #D4D4D4; // visible when highlighting text
 $blockquote-color: #EEF7FA; // $background-color;
 
 // Header
-$header-background-color: $theme-color; // Only used when no header image
+$header-background-color: darken($theme-color, 50%); // Only used when no header image
 $header-text-color: #fff;
 $header-link-color: #383838;
 $navbar-separator-opacity: 0;
