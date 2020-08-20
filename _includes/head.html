@@ -31,7 +31,8 @@
     <!-- KaTeX 0.12.0 -->
     <!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
     {% if site.katex or site.theme_settings.katex %}
-    <script src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/js/vendor/auto-render.min.js' | relative_url }}" onload="renderMathInElement(document.body);"></script>
     {% endif %}
 
     <!-- Google Analytics / Cookie Consent -->
