@@ -159,9 +159,9 @@ footer *:last-child {
 }
 
 table {
+  word-wrap: break-word;
   table-layout: fixed;
   width: 100%;
-  word-wrap: break-word;
   display: inline-block;
 }
 

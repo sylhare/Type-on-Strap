@@ -53,9 +53,10 @@ code.highlighter-rouge {
   font-family: $monospace;
 }
 
-.highlight table {
+table.rouge-table {
   margin-bottom: 0;
   font-size: 1em;
+  width: 100%;
   border: 0;
 
   td {
