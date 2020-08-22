@@ -8,7 +8,11 @@ layout: default
          style="background-image: url('{{ site.header_feature_image | relative_url }}')">
         <h1> {{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
     </div>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="MKkuJIS2"></script>
+
 
     {% include blog.html %}
 
 </div>
+
