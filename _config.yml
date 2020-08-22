@@ -10,7 +10,7 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 
 # Header and footer text
 header_text: ALU  Discrete Mathematics Blog  # Change Blog header text
-header_feature_image: assets/img/pexels/ALU.jpg
+header_feature_image: assets/img/ALU.jpg
 footer_text: >
    <a href="https://www.alueducation.com/">African Leadership University Rwanda</a> 
 # Blog
