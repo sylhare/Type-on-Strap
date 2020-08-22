@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Why study Discrete Mathematics?
+feature-img: "assets/img/background.jpg"
+thumbnail: "assets/thumbnails/background.jpg"
 tags: [Test, Color, Markdown]
 color: brown
 author: Wendy
