@@ -1,81 +1,10 @@
-{% if page.comment_issue_id %}
-<script type="text/javascript">
-    
-    document.querySelector("{{ include.element }}").innerHTML = document.querySelector("{{ include.element }}").innerHTML + "<div id='comments'></div>";
-    document.getElementById("comments").innerHTML = "<h3>Comments</h3><p>You can <a href='https://github.com/{{ include.github_account }}/issues/{{page.comment_issue_id}}' target='_blank'>view the comments</a> on GitHub.</p>";
 
-    function reloadComments() {
-        var elements = document.querySelectorAll('.comment');
-        Array.prototype.forEach.call(elements, function(el, i){
-            el.remove();
-        });
-        $.ajax("https://api.github.com/repos/{{ include.github_account }}/issues/{{page.comment_issue_id}}/comments?per_page=100", {
-            headers: {Accept: "application/vnd.github.full+json"},
-            dataType: "json",
-            success: function(msg){
-                localStorage.setItem('comments_{{ include.github_account }}_{{page.comment_issue_id}}',JSON.stringify(msg));
-                loadComments(msg);
-            },
-            error: function() { 
-                document.getElementById("comments").innerHTML = "<h3>Comments</h3><p>You can <a href='https://github.com/{{ include.github_account }}/issues/{{page.comment_issue_id}}' target='_blank'>view the comments</a> on GitHub. The comments cannot be shown inline because we have hit the rate limit of Github.</p>";
-            }
-        });
-        return false;
-    }
-    function loadComments(data) {
-        $("#comments").html("<h3>Comments</h3><p>You can <a href='https://github.com/{{ include.github_account }}/issues/{{page.comment_issue_id}}' target='_blank'>leave a comment</a> through GitHub, or <a onclick=' reloadComments();' style='cursor: pointer;'>refresh</a> the comments below.</p>");
-        for (var i=0; i<data.length; i++) {
-            var cuser = data[i].user.login;
-            var cuserlink = "https://www.github.com/" + data[i].user.login;
-            var clink = "https://github.com/{{ include.github_account }}/issues/{{page.comment_issue_id}}#issuecomment-" + data[i].url.substring(data[i].url.lastIndexOf("/")+1);
-            var cbody = data[i].body_html;
-            {% if include.require_cookie_consent == 'true' %}
-                if(readCookie('cookie-notice-dismissed')=='true') {
-                    var cavatarlink = data[i].user.avatar_url;
-                } else {
-                    var cavatarlink = '/img/emptyavatar.png';
-                    cbody = cbody.replace(/<img src=/g,"<img data-src=");
-                }
-            {% else %}
-                var cavatarlink = data[i].user.avatar_url;
-            {% endif %}
-            var cdate = data[i].created_at;
-            document.getElementById("comments").innerHTML = document.getElementById("comments").innerHTML + "<div class='comment'><div class='commentgravatar'>" + '<img src="' + cavatarlink + '" alt="' + cuser + '">' + "</div><div class='commentheader'><a class='commentuser' href=\""+ cuserlink + "\">" + cuser + "</a> commented <a class='commentdate' href=\"" + clink + "\">on " + cdate.substring(0, 10) + "</a></div><div class='commentbody'>" + cbody + "</div></div>";
-            $('img[data-src]').replaceWith( "[Image blocked] " );
-        }
-    }
-    var data = localStorage.getItem('comments_{{ include.github_account }}_{{page.comment_issue_id}}');
-    if(data) {
-        loadComments(JSON.parse(data));
-    } else {
-        {% if include.require_cookie_consent == 'true' %}
-            if(readCookie('cookie-notice-dismissed')=='true') reloadComments();
-            else document.getElementById("comments").innerHTML = "<h3>Comments</h3><p>You can <a href='https://github.com/{{ include.github_account }}/issues/{{page.comment_issue_id}}' target='_blank'>view the comments</a> on GitHub (approve third party scripts to view them inline).</p>";
-        {% else %}
-            reloadComments();
-        {% endif %}
-    }
-</script>
-<style>
-.comment {padding: 5px 0 15px;}
-.comment P:last-child {margin-bottom: 0;}
-.commentgravatar {position: absolute; width: 40px; border: 1px solid #e5e5e5;}
-.commentheader, .commentbody {padding: 5px 10px; margin-left: 55px; border: 1px solid #e5e5e5; background: white;}
-.commentheader {position: relative; background: #f4f4f4; border-bottom: 0;}
-.commentbody {padding: 10px 10px 13px;}
-.commentheader a {color: #777777;}
-.commentheader::before {
-    position: absolute;
-    content: "";
-    display: block;
-    width: 9px;
-    height: 9px;
-    background: #f4f4f4;
-    transform: rotate(-45deg);
-    left: 0;
-    margin-left: -4px;
-    margin-top: 4px;
-    box-shadow: -1px -1px 0px 0px rgba(0, 0, 0, 0.15);
-}
-</style>
-{% endif %}
+
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="MKkuJIS2"></script>
+
+<div class="fb-comments" data-href="https://wendy123-4.github.io/Type-on-Strap/"
+     data-numposts="5" data-width=""></div>
+
