@@ -1,5 +1,6 @@
 ---
 layout: post
+comment_issue_id: 228
 title: Why study Discrete Mathematics?
 feature-img: "assets/img/background.jpg"
 thumbnail: "assets/thumbnails/pexels/background.jpg"
