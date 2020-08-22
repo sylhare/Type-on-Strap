@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Computer Science
-feature-img: "assets/img/pexels/pic1.jpg"
+feature-img: "assets/img/pic1.jpg"
 thumbnail: "assets/thumbnails/pexels/pic1.jpg"
 
 ---
