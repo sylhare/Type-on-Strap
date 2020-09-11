@@ -29,6 +29,7 @@ pre .rouge-table,
 .highlight pre,
 .code pre {
   margin: 0;
+  overflow: auto;
 }
 
 .rouge-table * {
