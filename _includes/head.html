@@ -59,9 +59,13 @@
     {% feed_meta %}
 
     <!-- Twitter Cards -->
-    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.theme_settings.title }}{% endif %}">
-    <meta name="twitter:description" content="{{ page.content | strip_html | strip_newlines | truncate: 160 }}">
-    {% if site.theme_settings.twitter %}<meta name="twitter:creator" content="@{{ site.theme_settings.twitter }}">{% endif %}
+    <meta name="twitter:title" content="{{ page.title | default: site.title }}">
+    <meta name="twitter:description" content="{{ page.content | strip_html | strip_newlines | truncate: 160 | default: site.header_text}}">
+    {% if site.data.social.twitter %}
+    <meta name="twitter:creator" content="@{{ site.data.social.twitter }}">
+    <meta name="twitter:site" content="@{{ site.data.social.twitter }}">
+    {% endif %}
     <meta name="twitter:card" content="{% unless page.thumbnail %}summary{% else %}summary_large_image{% endunless %}">
     <meta name="twitter:image" content="{{ '/' | absolute_url }}{% if page.thumbnail %}{{ page.thumbnail }}{% else %}{{ page.feature-img | default: site.header_feature_image }}{% endif %}">
+    <meta name="twitter:image:alt" content="{{ page.title | default: site.title }}">
 </head>

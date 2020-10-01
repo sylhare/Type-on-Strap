@@ -118,6 +118,8 @@ description: My blog posts            # Short description, primarily used by sea
 favicon: assets/favicon.ico           # Icon displayed in the tab
 ```
 
+You can also customize the seo tags default option following the jekyll-seo-tag plugin [documentation](http://jekyll.github.io/jekyll-seo-tag/advanced-usage/).
+
 ### Theme customization 🎨
 
 #### Footer and Header's text
