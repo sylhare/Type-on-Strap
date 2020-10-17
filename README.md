@@ -141,6 +141,28 @@ You can find all the properties in `_data/language.yml`.
 
 By default it is in english, but you can easily add your own language.
 
+### Date Format
+
+With the date_format string you can define how the date is displayed on the homepage and in posts. There are different shorthand formats you can use:
+- **%Y**: Year with century, if provided, will pad result at least 4 digits, e.g. 0000, 0001, 1995, 2009, 14292
+- **%C**: year /100 (rounded down such as 20 in 2009)
+- **%y**: year % 100 (00 ... 99)
+- **%m**: Month of the year, zero padded (01 ... 12)
+  - **%_m**: blank-padded ( 1 ... 12)
+  - **%-m**: no-padded (1 ... 12)
+- **%B**: Full month name (January)
+- **%b**: The abbreviated month name (Jan)
+- **%h**: Equivalent to %b
+- **%d**: Day of the month, zero padded (01 ... 31)
+  - **%-d**: no padded (1 ... 31)
+- **%e**: Day of the month, blank padded ( 1 ... 31)
+- **%j**: Day of the Year (001 ... 366)
+- **%A**: Full day of the week (Sunday)
+- **%a**: Abbreviated day of the week (Sun)
+- **%D**: Date (Short for '%M/%d/%y')
+- **%F**: The ISO 8601 date format '%Y-%m-%d'
+That should be all relevant shorthands for your blog, but you can finde a full list [here](https://ruby-doc.org/core-2.7.2/Time.html#method-i-strftime)
+
 ### Google Analytics
 
 To enable Google Analytics, add your [tracking ID](https://support.google.com/analytics/answer/1032385) 
