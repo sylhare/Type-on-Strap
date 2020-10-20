@@ -32,6 +32,13 @@
     <script defer src="{{ '/assets/js/vendor/auto-render.min.js' | relative_url }}" onload="renderMathInElement(document.body);"></script>
     {% endif %}
 
+    <!-- Mermaid 8.8.2 -->
+    <!-- if you have any issue check https://github.com/mermaid-js/mermaid/ -->
+    {% if site.mermaid %}
+    <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
+    <script src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}" onload="mermaid.initialize({startOnLoad:true});"></script>
+    {% endif %}
+
     <!-- Google Analytics / Cookie Consent -->
     <script>
       const cookieName = 'cookie-notice-dismissed-{{ site.url }}';

@@ -146,3 +146,37 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 
 remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
 ```
+
+### Mermaid
+
+Diagrams with mermaid.
+
+Here is a simple example using:
+
+```html
+<div class="mermaid">
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+</div>
+```
+
+That will be rendered into this:
+
+{% include aligner.html images="mermaid-example.png" column=1 %}
+
+But you can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
+
+<div class="mermaid">
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+</div>

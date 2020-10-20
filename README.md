@@ -14,6 +14,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * Handle Bootstrap'ed pages: [Get Bootstrap](http://getbootstrap.com/)
 * 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
+* Diagram Rendering: [Mermaid-js](https://github.com/mermaid-js/mermaid)
 * 🖋 Nice fonts: [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
 * Seo Tags: [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
 * 🛠 Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
@@ -162,7 +163,7 @@ to your project's `_config.yml` file:
 disqus_shortname: my_disqus_shortname
 ```
 
-### Math typesetting
+### Math typesetting with KateX
 
 When KateX is set in `_config.yml`:
 
@@ -186,6 +187,31 @@ $$
   \bar{y} = {1 \over n} \sum_{i = 1}^{n}y_i
 $$
 ```
+
+### Diagrams with Mermaid
+
+Enable the [mermaid-js](https://github.com/mermaid-js/mermaid) diagram rendering by setting mermaid to true in the `_config.yml`.
+This will load and init the [mermaid.min.js](https://mermaid-js.github.io/mermaid/getting-started/n00b-gettingStarted.html#4-calling-mermaid-from-a-relative-link).
+
+```yml
+mermaid: true # to Enable it
+```
+
+Find all the help you need on the official [mermaid documentation](https://mermaid-js.github.io/mermaid/).
+You can create with ease diagrams. Add your mermaid script inside two mermaid divs (default Kramdown does not yet support mermaid).
+With the `class="mermaid"` inside the `<div>`:
+
+```html
+<div class="mermaid">
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+</div>
+```
+
+That will be rendered into:
+
+![mermaid example](./assets/img/mermaid-example.png)
 
 ### Social icons
 
