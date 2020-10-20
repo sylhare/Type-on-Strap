@@ -209,10 +209,6 @@ sequenceDiagram
 </div>
 ```
 
-That will be rendered into:
-
-![mermaid example](./assets/img/mermaid-example.png)
-
 ### Social icons
 
 In `_data/social.yml` you can customize the social icons from other wbesite you wish to display in the blog.
