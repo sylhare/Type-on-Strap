@@ -26,7 +26,6 @@
     {% endif %}
 
     <!-- KaTeX 0.12.0 -->
-    <!-- if you have any issue check https://github.com/KaTeX/KaTeX -->
     {% if site.katex or site.theme_settings.katex %}
     <script defer src="{{ '/assets/js/vendor/katex.min.js' | relative_url }}"></script>
     <script defer src="{{ '/assets/js/vendor/auto-render.min.js' | relative_url }}" onload="renderMathInElement(document.body);"></script>
@@ -37,6 +36,9 @@
     <!-- <script src=”https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.2/mermaid.min.js" onload="mermaid.initialize({startOnLoad:true});"></script> -->
     <script defer src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}" onload="mermaid.initialize({startOnLoad:true});"></script>
     {% endif %}
+
+    <!-- Simple-Jekyll-Search 1.17.12 -->
+    <script src="{{ '/assets/js/vendor/simple-jekyll-search.min.js' | relative_url }}" type="text/javascript"></script>
 
     <!-- Google Analytics / Cookie Consent -->
     <script>
