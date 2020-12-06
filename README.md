@@ -18,7 +18,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * 🖋 Nice fonts: [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
 * Seo Tags: [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
 * 🛠 Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
-* Free of rights images from [pexels](https://www.pexels.com/)
+* Find free of rights images on [pexels](https://www.pexels.com/)
 
 > [Demo Site](https://sylhare.github.io/Type-on-Strap/)
 
