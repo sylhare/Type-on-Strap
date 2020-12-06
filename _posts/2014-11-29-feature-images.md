@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Feature images
-feature-img: "assets/img/pexels/desk-messy.jpeg"
-thumbnail: "assets/thumbnails/pexels/desk-messy.jpeg"
+feature-img: "assets/img/feature-img/desk-messy.jpeg"
+thumbnail: "assets/img/thumbnails/feature-img/desk-messy.jpeg"
 tags: [Test, Lorem]
 ---
 
@@ -11,8 +11,8 @@ This is an example of a post which includes a feature image specified in the fro
 The feature image spans the full-width of the page, and is shown with the title on permalink pages:
 
 ```yaml
-feature-img: "assets/img/pexels/desk-messy.jpeg"
-thumbnail: "assets/img/thumbnails/desk-messy.jpeg" 
+feature-img: "assets/img/feature-img/desk-messy.jpeg"
+thumbnail: "assets/img/thumbnails/feature-img/desk-messy.jpeg" 
 ```
 
 You can also use a thumbnail, a smaller version of the same image to improve loading of the page.
@@ -30,7 +30,7 @@ It by default look into `assets/img/` so give the path from there, example:
 {% endraw %}
 {% endhighlight %}
 
-{% include aligner.html images="pexels/book-glass.jpeg,pexels/desk-messy.jpeg" %}
+{% include aligner.html images="pexels/book-glass.jpeg,feature-img/desk-messy.jpeg" %}
 
 
 Here you have two images side by side, but you can set more and set the amount per columns 
@@ -50,10 +50,10 @@ However you can just use the Markdown way of doing it to get the image normal si
 {% highlight ruby %}
 {% raw %}
 # Markdown way (bigger)
-![Travel]({{ "/assets/img/pexels/story.jpeg" | relative_url}})
+![Travel]({{ "/assets/img/pexels/computer.jpeg" | relative_url}})
 # Aligner with only One (50% of width)
-{% include aligner.html images="pexels/story.jpeg" %}
+{% include aligner.html images="pexels/computer.jpeg" %}
 {% endraw %}
 {% endhighlight %}
 
-{% include aligner.html images="pexels/story.jpeg" %}
+{% include aligner.html images="pexels/computer.jpeg" %}
