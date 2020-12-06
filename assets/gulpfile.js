@@ -50,12 +50,27 @@ gulp.task('thumbnails', function () {
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return gulp.src('img/**/*.{png,jpg,webp,jpeg}')
+  return gulp.src('img/feature-img/*')
     .pipe(responsive({
       '**/*.*': settings,
       '*.*': settings,
     }))
-    .pipe(gulp.dest('thumbnails'))
+    .pipe(gulp.dest('img/thumbnails/feature-img'))
+});
+
+
+gulp.task('thumbnails-all', function () {
+  let settings = {
+    width: '50%',
+    //format: 'jpeg', // convert to jpeg format
+  };
+
+  return gulp.src('img/*.{png,jpg,webp,jpeg}')
+    .pipe(responsive({ '*.*': settings }))
+    .pipe(gulp.dest('img/thumbnails')) &&
+  gulp.src('img/!(thumbnails)/*.{png,jpg,webp,jpeg}')
+    .pipe(responsive({ '**/*.*': settings }))
+    .pipe(gulp.dest('img/thumbnails'))
 });
 
 gulp.task('webp', () =>

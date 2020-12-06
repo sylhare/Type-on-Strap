@@ -261,7 +261,7 @@ layout: post
 title: Hello World                                # Title of the page
 hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
 feature-img: "assets/img/sample.png"              # Add a feature-image to the post
-thumbnail: "assets/thumbnails/sample-th.png"      # Add a thumbnail image on blog view
+thumbnail: "assets/img/thumbnails/sample-th.png"  # Add a thumbnail image on blog view
 color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
 bootstrap: true                                   # Add bootstrap to the page
 tags: [sample, markdown, html]
@@ -511,7 +511,8 @@ formats:
 ```bash
 cd assets/
 gulp default
-gulp thumbnails # to create all of the images thumbnails
+gulp thumbnails-all # to create all of the images thumbnails
+gulp thumbnails     # to create thumbnails for the feature-img/ only
 # tip: run a git status to see the changes
 git status
 ```
