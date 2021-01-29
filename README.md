@@ -188,6 +188,8 @@ $$
 $$
 ```
 
+You can find a cheat sheet of the compatible LaTex symbols [online](https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols).
+
 ### Diagrams with Mermaid
 
 Enable the [mermaid-js](https://github.com/mermaid-js/mermaid) diagram rendering by setting mermaid to true in the `_config.yml`.
