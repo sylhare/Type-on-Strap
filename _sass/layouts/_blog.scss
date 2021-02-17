@@ -33,7 +33,7 @@
   h4,
   h5 {
     font-family: $font-family-logo;
-    @extend .header-txt-shadow;
+    @extend .txt-shadow;
   }
 
   p:last-child {

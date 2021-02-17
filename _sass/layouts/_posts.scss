@@ -61,7 +61,7 @@ header {
   border-radius: 1em;
   padding-right: 0.5em;
   display: inline-flex;
-
+  
   a {
     display: flex;
     align-items: center;
@@ -77,6 +77,10 @@ header {
     height: 100%;
     margin-right: 0.5em;
   }
+}
+
+.feature-image .post-info {
+    @extend .txt-shadow;
 }
 
 /* --- Feature image --- */
