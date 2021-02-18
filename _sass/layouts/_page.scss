@@ -6,8 +6,12 @@ h1.title {
   padding: 0.5em 0;
 }
 
-.feature-image {
+h1.feature-image {
   @extend .txt-shadow;
+}
+
+h1:not(.feature-image) {
+  @extend .subtle-txt-shadow;
 }
 
 .subtitle {
