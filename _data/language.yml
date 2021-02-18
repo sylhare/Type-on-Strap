@@ -14,18 +14,5 @@ str_javascript_required_disqus: "Please enable JavaScript to view comments."
 str_no_result_found: "No result found"
 str_cookie_approve: "Approve"
 str_cookie_disclaimer: "We would like to use third party cookies and scripts to improve the functionality of this website."
-str_months:
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
-
+str_months: [January, February, March, April, May, June, July, August, September, October, November, December]
 
