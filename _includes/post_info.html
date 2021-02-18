@@ -4,7 +4,7 @@
 <div class="post-info">
   {%- if author.url -%}<a href="{{ author.url | relative_url }}" target="_blank">{%- endif -%}
     {% if author.avatar  %}
-      <img src="{{ author.avatar | relative_url }}">
+      <img alt="Author's avatar" src="{{ author.avatar | relative_url }}">
     {% endif %}
     <p class="meta">
       {% if author.name %}{{ author.name }} - {% endif %}{{ date | date: "%B %-d, %Y" }}
