@@ -7,7 +7,9 @@
       <img alt="Author's avatar" src="{{ author.avatar | relative_url }}">
     {% endif %}
     <p class="meta">
-      {% if author.name %}{{ author.name }} - {% endif %}{{ date | date: "%B %-d, %Y" }}
+      {% if author.name %}{{ author.name }} - {% endif %}
+      {% assign x = date | date: "%m" | minus: 1 %}
+      {{ site.data.language.str_months[x] | default: date | date: "%B" }} {{ date | date: "%d, %Y" }}
     </p>
   {%- if author.url -%}</a>{%- endif -%}
 </div>
