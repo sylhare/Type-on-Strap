@@ -3,8 +3,11 @@
 }
 
 h1.title {
-  @extend .txt-shadow;
   padding: 0.5em 0;
+}
+
+.feature-image {
+  @extend .txt-shadow;
 }
 
 .subtitle {
