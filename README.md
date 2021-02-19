@@ -491,7 +491,9 @@ Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually repre
 These are useful to render your jekyll files. 
 You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
-### Minimizing and optimizing: css, js and images
+### Gulp toolbox
+
+#### Requirements
 
 Before you need to have *node* and `npm` installed:
 
@@ -507,6 +509,8 @@ sudo npm install gulp-cli -g
 npm install
 ```
 
+#### Minimizing and optimizing: css, js and images
+
 You can run the default task that will compress the js, css and images and create the thumbnails for the supported image
 formats:
 
@@ -519,7 +523,16 @@ gulp thumbnails     # to create thumbnails for the feature-img/ only
 git status
 ```
 
-You can find more about the gulp tasks in the [gulpfile.js](assets/gulpfile.js)
+You can find more about the gulp tasks in the [gulpfile.js](assets/gulpfile.js).
+
+#### Create a post
+
+To create a `.md` file in the *_posts/* section with the jekyll format of today's date.
+Use this command with the title you'd like to create the very basic post.
+
+```bash
+gulp post -n <title of the post>
+```
 
 ### Use as Ruby Gem 💎
 

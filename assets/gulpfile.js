@@ -11,24 +11,45 @@ const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
 const replace = require('gulp-replace');
 const webp = require('gulp-webp');
-const responsive = require('gulp-responsive'); // Supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
+const responsive = require('gulp-responsive');
+const fs = require('fs');
+
+// Use it gulp post -n <title of the post>
+gulp.task('post', function (callback) {
+  let args = process.argv;
+  let title = args[args.length - 1];
+  let filename = new Date().toLocaleDateString('en-CA') + '-' + title + '.md';
+  let content = '---\n' +
+    'layout: post\n' +
+    'title: ' + title + '\n' +
+    //'feature-img: "assets/img/"\n' +
+    //'thumbnail: "assets/img/thumbnails/"\n' +
+    'tags: []\n' +
+    '---';
+  console.log('[' + new Date().toLocaleTimeString('en-CA', {hour12: false}) + '] File created: _posts/' + filename);
+  fs.writeFile(__dirname + '/../_posts/' + filename, content, callback);
+});
 
 gulp.task('js', function minijs() {
   return gulp.src(['js/partials/**.js'])
     .pipe(concat('main.min.js'))
     .pipe(uglify())
-    .on('error', (err) => { console.log(err.toString()) })
+    .on('error', (err) => {
+      console.log(err.toString())
+    })
     .pipe(gulp.dest("js/"))
 });
 
 gulp.task("img", function imging() {
   return gulp.src('img/**/*.{png,svg,jpg,webp,jpeg,gif}')
     .pipe(imagemin())
-    .on('error', (err) => { console.log(err.toString()) })
+    .on('error', (err) => {
+      console.log(err.toString())
+    })
     .pipe(gulp.dest('img/'))
 });
 
-// Alternative using "sharp" in case "imagemin" does not work
+// Alternative using "sharp" in case "imagemin" does not work, supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
 gulp.task('sharp_img', function () {
   let settings = {
     quality: 85,
@@ -66,11 +87,11 @@ gulp.task('thumbnails-all', function () {
   };
 
   return gulp.src('img/*.{png,jpg,webp,jpeg}')
-    .pipe(responsive({ '*.*': settings }))
-    .pipe(gulp.dest('img/thumbnails')) &&
-  gulp.src('img/!(thumbnails)/*.{png,jpg,webp,jpeg}')
-    .pipe(responsive({ '**/*.*': settings }))
-    .pipe(gulp.dest('img/thumbnails'))
+      .pipe(responsive({'*.*': settings}))
+      .pipe(gulp.dest('img/thumbnails')) &&
+    gulp.src('img/!(thumbnails)/*.{png,jpg,webp,jpeg}')
+      .pipe(responsive({'**/*.*': settings}))
+      .pipe(gulp.dest('img/thumbnails'))
 });
 
 gulp.task('webp', () =>
@@ -86,7 +107,9 @@ gulp.task('webp', () =>
 gulp.task('css', function minicss() {
   return gulp.src('css/vendor/bootstrap-iso.css')
     .pipe(cleanCSS())
-    .on('error', (err) => { console.log(err.toString()) })
+    .on('error', (err) => {
+      console.log(err.toString())
+    })
     .pipe(concat('bootstrap-iso.min.css'))
     .pipe(gulp.dest('css/vendor/'));
 });
