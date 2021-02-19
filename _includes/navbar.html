@@ -15,7 +15,7 @@
     <!-- Toggle menu -->
     <nav class="clear">
     <a aria-label="pull" id="pull" class="toggle" href="#">
-    <i class="fa fa-bars fa-lg"></i>
+    <i class="fas fa-bars fa-lg"></i>
     </a>
 
     <!-- Menu -->
@@ -27,7 +27,7 @@
             <li class="separator"> | </li>
             <li>
                 <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
-                    {% if page.icon %} <i class="fa {{ page.icon }}" aria-hidden="true"></i>
+                    {% if page.icon %} <i class="{{ page.icon }}" aria-hidden="true"></i>
                     {% else %} {{ page.title }} {% endif%}
                 </a>
             </li>
