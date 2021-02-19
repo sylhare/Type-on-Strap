@@ -1,6 +1,7 @@
 /*
  * Here are all of the gulp tasks you can use to help manage your blog
- * Use `npm install` to install all the dependencies located in package.json 
+ * Use `npm install` to install all the dependencies located in package.json
+ * If you have an issue with sharp, try: `npm rebuild`.
  * Then `gulp default` to minimize css and images.
  */
 const gulp = require('gulp');
@@ -18,7 +19,7 @@ const fs = require('fs');
 gulp.task('post', function (callback) {
   let args = process.argv;
   let title = args[args.length - 1];
-  let filename = new Date().toLocaleDateString('en-CA') + '-' + title + '.md';
+  let filename = new Date().toLocaleDateString('en-CA') + '-' + title.replaceAll(' ', '-') + '.md';
   let content = '---\n' +
     'layout: post\n' +
     'title: ' + title + '\n' +

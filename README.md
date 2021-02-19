@@ -531,8 +531,11 @@ To create a `.md` file in the *_posts/* section with the jekyll format of today'
 Use this command with the title you'd like to create the very basic post.
 
 ```bash
-gulp post -n <title of the post>
+gulp post -n 'title of the post'
 ```
+
+A file will be create following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.
+Nothing will happen if the file exists already.
 
 ### Use as Ruby Gem 💎
 
