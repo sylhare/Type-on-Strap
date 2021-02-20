@@ -3,16 +3,10 @@
 }
 
 h1.title {
+  @extend .subtle-txt-shadow;
   padding: 0.5em 0;
 }
 
-h1.feature-image {
-  @extend .txt-shadow;
-}
-
-h1:not(.feature-image) {
-  @extend .subtle-txt-shadow;
-}
 
 .subtitle {
   font-weight: normal;

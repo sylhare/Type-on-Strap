@@ -79,16 +79,16 @@ header {
   }
 }
 
-.feature-image .post-info {
-    @extend .txt-shadow;
-}
-
 /* --- Feature image --- */
 .feature-image {
   padding: 0;
 
   .post-link {
     color: $feature-image-text-color;
+  }
+
+  h1.title, .post-info {
+    @extend .txt-shadow;
   }
 
   header {
