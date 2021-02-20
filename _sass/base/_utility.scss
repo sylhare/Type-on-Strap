@@ -41,7 +41,11 @@
   }
 }
 
-.header-txt-shadow {
+.txt-shadow {
+  text-shadow: 0.07em 0.10em 0.15em $text-shadow;
+}
+
+.subtle-txt-shadow {
   text-shadow: 1px 1px 2px $text-shadow;
 }
 

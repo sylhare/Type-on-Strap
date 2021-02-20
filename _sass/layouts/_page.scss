@@ -3,9 +3,10 @@
 }
 
 h1.title {
-  @extend .header-txt-shadow;
+  @extend .subtle-txt-shadow;
   padding: 0.5em 0;
 }
+
 
 .subtitle {
   font-weight: normal;

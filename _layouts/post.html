@@ -43,17 +43,24 @@ layout: default
 
 <!-- To change color of links in the page -->
 <style>
+  header#main {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  }
+  
   {% if page.color %}
   .feature-image a { color: {{ page.color }} !important; }
   div#post-nav a { color: {{ page.color }} !important; }
   footer a { color: {{ page.color }} !important; }
   .site-header nav a:hover {  color: {{ page.color }} !important; }
-  header#main { background-color: {{ page.color }} !important; }
-  {% endif %}
-
-  header#main {
-    background-repeat:no-repeat;
-  {% if page.feature-img %} background-image: url('{{ page.feature-img | relative_url }}');
-  {% elsif page.color %}background-image: url('{{ site.color_image | relative_url }}');  {% endif %}
+  header#main { 
+      background-color: {{ page.color }} !important;
+      background-image: url('{{ site.color_image | relative_url }}');
   }
+  {% endif %}
+  
+  {% if page.feature-img %}
+  header#main { background-image: url('{{ page.feature-img | relative_url }}'); }
+  {% endif %}
 </style>

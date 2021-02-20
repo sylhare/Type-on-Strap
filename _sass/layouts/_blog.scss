@@ -9,6 +9,8 @@
   color: $header-text-color;
   background: no-repeat $header-background-color;
   background-size: $feature-image-size;
+  font-family: $font-family-logo;
+  @extend .subtle-txt-shadow;
 
   /* --- Responsive --- */
   @media screen and (min-width: $break) {
@@ -21,19 +23,6 @@
 
   @media screen and (max-width: $sm-break) {
     background-size: 400% auto;
-  }
-
-  //For white images
-  p,
-  a,
-  li,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    font-family: $font-family-logo;
-    @extend .header-txt-shadow;
   }
 
   p:last-child {
