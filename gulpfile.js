@@ -15,7 +15,8 @@ const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const fs = require('fs');
 
-// Use it gulp post -n <title of the post>
+// Create an empty post with today's date
+// usage: gulp post -n <title of the post>
 gulp.task('post', function (callback) {
   let args = process.argv;
   let title = args[args.length - 1];
@@ -31,6 +32,7 @@ gulp.task('post', function (callback) {
   fs.writeFile(__dirname + '/../_posts/' + filename, content, callback);
 });
 
+// Minify JS
 gulp.task('js', function minijs() {
   return gulp.src(['js/partials/**.js'])
     .pipe(concat('main.min.js'))
@@ -41,6 +43,27 @@ gulp.task('js', function minijs() {
     .pipe(gulp.dest("js/"))
 });
 
+// Minify CSS
+gulp.task('css', function minicss() {
+  return gulp.src('css/vendor/bootstrap-iso.css')
+    .pipe(cleanCSS())
+    .on('error', (err) => {
+      console.log(err.toString())
+    })
+    .pipe(concat('bootstrap-iso.min.css'))
+    .pipe(gulp.dest('css/vendor/'));
+});
+
+// Isolate Bootstrap
+gulp.task('isolate', function isolateBootstrap() {
+  return gulp.src('css/bootstrap-iso.less')
+    .pipe(less({strictMath: 'on'}))
+    .pipe(replace('.bootstrap-iso html', ''))
+    .pipe(replace('.bootstrap-iso body', ''))
+    .pipe(gulp.dest('css/vendor/'));
+});
+
+// Optimize IMGs
 gulp.task("img", function imging() {
   return gulp.src('img/**/*.{png,svg,jpg,webp,jpeg,gif}')
     .pipe(imagemin())
@@ -50,14 +73,15 @@ gulp.task("img", function imging() {
     .pipe(gulp.dest('img/'))
 });
 
-// Alternative using "sharp" in case "imagemin" does not work, supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
+// Alternative using "sharp" in case "imagemin" does not work.
+// Supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
 gulp.task('sharp_img', function () {
   let settings = {
     quality: 85,
     progressive: true,
     compressionLevel: 6,
   };
-
+  
   return gulp.src('img/**/*.{png,jpg,webp,jpeg}')
     .pipe(responsive({
       '**/*.*': settings,
@@ -66,6 +90,18 @@ gulp.task('sharp_img', function () {
     .pipe(gulp.dest('img'))
 });
 
+// Convert IMGs to WEBP
+gulp.task('webp', () =>
+  gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
+    .pipe(webp({
+      quality: 85,
+      preset: 'photo',
+      method: 6
+    }))
+    .pipe(gulp.dest('img'))
+);
+
+// Generate thumbnails
 gulp.task('thumbnails', function () {
   let settings = {
     width: '50%',
@@ -79,7 +115,6 @@ gulp.task('thumbnails', function () {
     }))
     .pipe(gulp.dest('img/thumbnails/feature-img'))
 });
-
 
 gulp.task('thumbnails-all', function () {
   let settings = {
@@ -95,34 +130,7 @@ gulp.task('thumbnails-all', function () {
       .pipe(gulp.dest('img/thumbnails'))
 });
 
-gulp.task('webp', () =>
-  gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
-    .pipe(webp({
-      quality: 85,
-      preset: 'photo',
-      method: 6
-    }))
-    .pipe(gulp.dest('img'))
-);
-
-gulp.task('css', function minicss() {
-  return gulp.src('css/vendor/bootstrap-iso.css')
-    .pipe(cleanCSS())
-    .on('error', (err) => {
-      console.log(err.toString())
-    })
-    .pipe(concat('bootstrap-iso.min.css'))
-    .pipe(gulp.dest('css/vendor/'));
-});
-
-gulp.task('isolate', function isolateBootstrap() {
-  return gulp.src('css/bootstrap-iso.less')
-    .pipe(less({strictMath: 'on'}))
-    .pipe(replace('.bootstrap-iso html', ''))
-    .pipe(replace('.bootstrap-iso body', ''))
-    .pipe(gulp.dest('css/vendor/'));
-});
-
-
+// Tasks
 gulp.task("isolate-bootstrap-css", gulp.series('isolate', 'css'));
 gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));
+
