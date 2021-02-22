@@ -29,10 +29,15 @@ gulp.task('post', function (callback) {
     'tags: []\n' +
     '---';
   console.log('[' + new Date().toLocaleTimeString('en-CA', {hour12: false}) + '] File created: _posts/' + filename);
-  fs.writeFile(__dirname + '/../_posts/' + filename, content, callback);
+  fs.writeFile(__dirname + '/_posts/' + filename, content, callback);
 });
 
 // Minify JS
+//TODO: Preserve license and version comments using uglifyJS --comments
+//TODO: Minify vendor.js
+//FIXME: Update vendor JS. Use npm and script to do that.
+//FIXME: Use readable-stream as recommended by gulp-uglify
+//TODO: Use Grunt if Gulp is not enough
 gulp.task('js', function minijs() {
   return gulp.src(['js/partials/**.js'])
     .pipe(concat('main.min.js'))
@@ -43,34 +48,34 @@ gulp.task('js', function minijs() {
     .pipe(gulp.dest("js/"))
 });
 
-// Minify CSS
+// Minify Bootstrap CSS
 gulp.task('css', function minicss() {
-  return gulp.src('css/vendor/bootstrap-iso.css')
+  return gulp.src('assets/css/vendor/bootstrap-iso.css')
     .pipe(cleanCSS())
     .on('error', (err) => {
       console.log(err.toString())
     })
     .pipe(concat('bootstrap-iso.min.css'))
-    .pipe(gulp.dest('css/vendor/'));
+    .pipe(gulp.dest('assets/css/vendor/'));
 });
 
 // Isolate Bootstrap
 gulp.task('isolate', function isolateBootstrap() {
-  return gulp.src('css/bootstrap-iso.less')
+  return gulp.src('assets/css/bootstrap-iso.less')
     .pipe(less({strictMath: 'on'}))
     .pipe(replace('.bootstrap-iso html', ''))
     .pipe(replace('.bootstrap-iso body', ''))
-    .pipe(gulp.dest('css/vendor/'));
+    .pipe(gulp.dest('assets/css/vendor/'));
 });
 
 // Optimize IMGs
 gulp.task("img", function imging() {
-  return gulp.src('img/**/*.{png,svg,jpg,webp,jpeg,gif}')
+  return gulp.src('assets/img/**/*.{png,svg,jpg,webp,jpeg,gif}')
     .pipe(imagemin())
     .on('error', (err) => {
       console.log(err.toString())
     })
-    .pipe(gulp.dest('img/'))
+    .pipe(gulp.dest('assets/img/'))
 });
 
 // Alternative using "sharp" in case "imagemin" does not work.
@@ -82,23 +87,23 @@ gulp.task('sharp_img', function () {
     compressionLevel: 6,
   };
   
-  return gulp.src('img/**/*.{png,jpg,webp,jpeg}')
+  return gulp.src('assets/img/**/*.{png,jpg,webp,jpeg}')
     .pipe(responsive({
       '**/*.*': settings,
       '*.*': settings,
     }))
-    .pipe(gulp.dest('img'))
+    .pipe(gulp.dest('assets/img'))
 });
 
 // Convert IMGs to WEBP
 gulp.task('webp', () =>
-  gulp.src('img/**/*.{png,svg,jpg,jpeg,gif}')
+  gulp.src('assets/img/**/*.{png,svg,jpg,jpeg,gif}')
     .pipe(webp({
       quality: 85,
       preset: 'photo',
       method: 6
     }))
-    .pipe(gulp.dest('img'))
+    .pipe(gulp.dest('assets/img'))
 );
 
 // Generate thumbnails
@@ -108,12 +113,12 @@ gulp.task('thumbnails', function () {
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return gulp.src('img/feature-img/*')
+  return gulp.src('assets/img/feature-img/*')
     .pipe(responsive({
       '**/*.*': settings,
       '*.*': settings,
     }))
-    .pipe(gulp.dest('img/thumbnails/feature-img'))
+    .pipe(gulp.dest('assets/img/thumbnails/feature-img'))
 });
 
 gulp.task('thumbnails-all', function () {
@@ -122,12 +127,12 @@ gulp.task('thumbnails-all', function () {
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return gulp.src('img/*.{png,jpg,webp,jpeg}')
+  return gulp.src('assets/img/*.{png,jpg,webp,jpeg}')
       .pipe(responsive({'*.*': settings}))
-      .pipe(gulp.dest('img/thumbnails')) &&
-    gulp.src('img/!(thumbnails)/*.{png,jpg,webp,jpeg}')
+      .pipe(gulp.dest('assets/img/thumbnails')) &&
+    gulp.src('assets/img/!(thumbnails)/*.{png,jpg,webp,jpeg}')
       .pipe(responsive({'**/*.*': settings}))
-      .pipe(gulp.dest('img/thumbnails'))
+      .pipe(gulp.dest('assets/img/thumbnails'))
 });
 
 // Tasks
