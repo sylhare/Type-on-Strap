@@ -75,8 +75,8 @@ const bsMinify = function(cb) {
 
 // Resize and Minify IMG
 const paths = {
-    logo: {
-        src: 'assets/_img/logo.{gif,jpg,jpeg,png,svg}',
+    avatar: {
+        src: 'assets/_img/avatar.{gif,jpg,jpeg,png,svg}',
         dest: 'assets/img/'
     },
     featured: {
@@ -125,7 +125,7 @@ const imgThumbnails = function(cb) {
   pump([
      src(paths.thumbnails.src),
      changed(paths.thumbnails.dest),
-     responsive({'*': {width: '30%'}}),
+     responsive({'*': {width: 1024}}),
      dest(paths.thumbnails.dest)
   ],
   cb()
