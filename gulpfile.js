@@ -39,7 +39,7 @@ gulp.task('post', function (callback) {
 //TODO: Use Grunt if Gulp is not enough
 gulp.task('js', function() {
   return pipeline(
-     gulp.src('assets/js/partials/*.js'),
+     gulp.src('assets/_js/*.js'),
      concat('main.min.js'),
      uglify({output: {comments: 'some'}}), //will preserve multi-line comments w/ @preserve, @license or @cc_on
      gulp.dest('assets/js')
