@@ -72,35 +72,59 @@ gulp.task('bsMinify', function(cb) {
   );
 });
 
-// Resize IMGs
+// Resize and Minify IMG
 const paths = {
+    logo: {
+        src: 'assets/_img/logo.{gif,jpg,jpeg,png,svg}',
+        dest: 'assets/img/'
+    },
     featured: {
         src: 'assets/_img/featured/*.{gif,jpg,jpeg,png,svg}',
         dest: 'assets/img/featured/'
-    }
+    },
+    thumbnails: {
+        src: 'assets/img/featured/*.{gif,jpg,jpeg,png,svg}',
+        dest: 'assets/img/thumbnails/'
+    },
+
 }
 
-gulp.task("featured", function(cb) {
-  pump([
-     gulp.src(paths.featured.src),
-     changed(paths.featured.dest),
-     responsive({'*': {width: 1920}}),
-     gulp.dest(paths.featured.dest)
-  ],
-  cb
-  );
-})
 
-// Minify IMGs
-gulp.task("imgMinify", function(cb) {
+gulp.task("imgLogo", function(cb) {
   pump([
-     gulp.src('assets/img/featured/*.{gif,jpg,jpeg,png,svg}'),
+     gulp.src(paths.logo.src),
+     changed(paths.logo.dest),
+     responsive({'*': {width: 512}}),
      imagemin({verbose: true}),
-     gulp.dest('assets/img/featured')
+     gulp.dest(paths.logo.dest)
   ],
   cb
   );
 });
+
+gulp.task("imgFeatured", function(cb) {
+  pump([
+     gulp.src(paths.featured.src),
+     changed(paths.featured.dest),
+     responsive({'*': {width: 1920}}),
+     imagemin({verbose: true}),
+     gulp.dest(paths.featured.dest)
+  ],
+  cb
+  );
+});
+
+gulp.task("imgThumbnails", function(cb) {
+  pump([
+     gulp.src(paths.thumbnails.src),
+     changed(paths.thumbnails.dest),
+     responsive({'*': {width: '30%'}}),
+     gulp.dest(paths.thumbnails.dest)
+  ],
+  cb
+  );
+});
+
 
 // Convert IMGs to WEBP
 gulp.task('webp', function(cb) {
@@ -113,42 +137,10 @@ gulp.task('webp', function(cb) {
   );
 });
 
-// Generate thumbnails
-gulp.task('thumbnails', function(cb) {
-  let settings = {
-    width: '50%', //FIXME: Relative size of a non-absolute
-    //format: 'jpeg', // convert to jpeg format
-  };
-
-  pump([
-    gulp.src('assets/_img/feature-img/*'),
-    responsive({
-      '**/*.*': settings,
-      '*.*': settings,
-    }),
-    gulp.dest('assets/img/thumbnails/feature-img')
-  ],
-  cb
-  );
-});
-
-gulp.task('thumbnails-all', function () {
-  let settings = {
-      width: '50%', //FIXME: Relative size of a non-absolute
-    //format: 'jpeg', // convert to jpeg format
-  };
-
-  pump([ 
-      gulp.src('assets/_img/*.{png,jpg,webp,jpeg}'),
-      responsive({'*.*': settings}),
-      gulp.dest('assets/img/thumbnails')
-  ],
-  cb
-  );
-});
 
 // Tasks
 gulp.task("bootstrap", gulp.series('bsIsolate', 'bsMinify'));
-//gulp.task("img", gulp.series('imgResize', 'imgMinify'));
+// FIXME: img series will fail due to gulp-responsive bug dealing with 0 imgs
+gulp.task("img", gulp.series('imgLogo', 'imgFeatured', 'imgThumbnails'));
 gulp.task("default", gulp.series(gulp.parallel('js', 'bootstrap')));
 
