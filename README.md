@@ -53,22 +53,25 @@ Here are the main files of the template
 
 ```bash
 Type-on-Strap
-├── _includes	               # theme includes
-├── _layouts                   # theme layouts (see below for details)
-├── _portfolio	               # collection of article to be populated in the portfolio page
+├── _includes	               # Theme includes
+├── _layouts                   # Theme layouts (see below for details)
+├── _portfolio	               # Collection of articles to be populated in the portfolio page
 ├── _posts                     # Blog posts
 ├── _sass                      # Sass partials 
 ├── assets
-|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
-|  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
-|  ├── fonts		       # Font-Awesome, and other fonts
-|  └── img		       # Images used for the template
+|  ├── _js	                   # JavaScipt sources *(edit those)*
+|  ├── js	                   # JS compiled for distribution 
+|  ├── _css                    # CSS sources, bootstrap, font-awesome,etc *(edit those)*
+|  ├── css                     # CSS compiled for distribution
+|  ├── fonts		           # Font-Awesome, and other fonts
+|  ├── _img		               # Images used for the template
+|  └── img		               # Images used for the template
 ├── pages
-|   ├── 404.md		       # To be displayed when url is wrong
+|   ├── 404.md		           # To be displayed when url is wrong
 |   ├── about.md               # About example page
 |   ├── gallery.md             # Gallery page for your photos
 |   ├── portfolio.md	       # Portfolio page for your projects
-|   ├── search.html	       # Search page
+|   ├── search.html	           # Search page
 |   └── tags.md                # The tag page
 ├── _config.yml                # sample configuration
 ├── _data.yml
@@ -504,26 +507,29 @@ Before you need to have *node* and `npm` installed:
 Then you need to install [`gulp-cli`](https://gulpjs.com/) and its dependencies:
 
 ```bash
-cd assets/
 sudo npm install gulp-cli -g
 npm install
 ```
 
 #### Minimizing and optimizing: css, js and images
 
-You can run the default task that will compress the js, css and images and create the thumbnails for the supported image
-formats:
+You can run the default task that will compress the js, css, resize and compress images and create thumbnails for the featured dir.
 
 ```bash
-cd assets/
 gulp default
-gulp thumbnails-all # to create all of the images thumbnails
-gulp thumbnails     # to create thumbnails for the feature-img/ only
+gulp post -n "Title"    # create a empty post with today's date and the parsed title
+gulp js    # merge and uglify js src files
+gulp bootstrap    # isolate and uglify bootstrap css
+gulp logo   # resize logo to 512x and compress
+gulp featured   # resize featured to 1920x and compress
+gulp thumbs    # generate thumbnails of the featured imgs
+gulp webp   # generate webps copies of the featured imgs
+
 # tip: run a git status to see the changes
 git status
 ```
 
-You can find more about the gulp tasks in the [gulpfile.js](assets/gulpfile.js).
+You can find more about the gulp tasks in the [gulpfile.js](gulpfile.js).
 
 #### Create a post
 

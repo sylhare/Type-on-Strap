@@ -144,11 +144,10 @@ exports.post = post;
 exports.js = js;
 exports.bootstrap = series(bsIsolate, bsMinify);
 
-exports.imgLogo = imgLogo;
-exports.imgFeatured = imgFeatured;
-exports.imgThumbnails = imgThumbnails;
-exports.imgWebp = imgWebp;
-exports.imgThumbnails = imgThumbnails;
+exports.logo = imgLogo;
+exports.featured = imgFeatured;
+exports.thumbs = imgThumbnails;
+exports.webp = imgWebp;
 exports.img = parallel(imgLogo, series(imgFeatured, imgThumbnails));
 
-exports.all = parallel(js, series(bsIsolate, bsMinify), parallel(imgLogo, series(imgFeatured, imgThumbnails)));
+exports.default = parallel(js, series(bsIsolate, bsMinify), parallel(imgLogo, series(imgFeatured, imgThumbnails)));
