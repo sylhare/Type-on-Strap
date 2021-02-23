@@ -16,7 +16,6 @@ const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const fs = require('fs');
 const changed = require('gulp-changed');
-
 //TODO: Update docs
 
 // Create an empty post with today's date
@@ -32,7 +31,7 @@ const post = function(callback) {
     //'thumbnail: "assets/img/thumbnails/"\n' +
     'tags: []\n' +
     '---';
-  console.log('[' + new Date().toLocaleTimeString('en-CA', {hour12: false}) + '] File created: _posts/' + filename);
+  log('[' + new Date().toLocaleTimeString('en-CA', {hour12: false}) + '] File created: _posts/' + filename);
   fs.writeFile(__dirname + '/_posts/' + filename, content, callback);
 }
 
@@ -44,7 +43,7 @@ const js = function(cb) {
      uglify({output: {comments: 'some'}}), //will preserve multi-line comments w/ @preserve, @license or @cc_on
      dest('assets/js')
   ],
-  cb
+  cb()
   );
 }
 
@@ -58,7 +57,7 @@ const bsIsolate = function(cb) {
      replace('.bootstrap-iso body', ''),
      dest('assets/_css/')
   ],
-  cb
+  cb()
   );
 }
 
@@ -70,7 +69,7 @@ const bsMinify = function(cb) {
      concat('bootstrap-iso.min.css'),
      dest('assets/css/')
   ],
-  cb
+  cb()
   );
 }
 
@@ -102,7 +101,7 @@ const imgLogo = function(cb) {
      imagemin({verbose: true}),
      dest(paths.logo.dest)
   ],
-  cb
+  cb()
   );
 }
 
@@ -114,7 +113,7 @@ const imgFeatured = function(cb) {
      imagemin({verbose: true}),
      dest(paths.featured.dest)
   ],
-  cb
+  cb()
   );
 }
 
@@ -125,7 +124,7 @@ const imgThumbnails = function(cb) {
      responsive({'*': {width: '30%'}}),
      dest(paths.thumbnails.dest)
   ],
-  cb
+  cb()
   );
 }
 
@@ -136,7 +135,7 @@ const imgWebp = function(cb) {
      webp({quality: 85, preset: 'photo', method: 6}),
      dest(paths.webp.dest)
   ],
-  cb
+  cb()
   );
 }
 
@@ -144,7 +143,12 @@ const imgWebp = function(cb) {
 exports.post = post;
 exports.js = js;
 exports.bootstrap = series(bsIsolate, bsMinify);
-// FIXME: img series will fail due to gulp-responsive bug dealing with 0 imgs
-exports.img = parallel(imgLogo, series(imgFeatured, imgThumbnails));
-exports.all = parallel(js, series(bsIsolate, bsMinify));
 
+exports.imgLogo = imgLogo;
+exports.imgFeatured = imgFeatured;
+exports.imgThumbnails = imgThumbnails;
+exports.imgWebp = imgWebp;
+exports.imgThumbnails = imgThumbnails;
+exports.img = parallel(imgLogo, series(imgFeatured, imgThumbnails));
+
+exports.all = parallel(js, series(bsIsolate, bsMinify), parallel(imgLogo, series(imgFeatured, imgThumbnails)));
