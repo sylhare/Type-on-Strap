@@ -1,3 +1,4 @@
+/* @preserve Cookie Consent Init */
 function createCookie(name, value, days) {
   var expires = "";
   if (days) {

@@ -32,5 +32,7 @@
     "gulp-uglify": "^3.0.2",
     "gulp-webp": "^4.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "readable-stream": "^3.6.0"
+  }
 }

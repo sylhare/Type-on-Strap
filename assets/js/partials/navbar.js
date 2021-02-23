@@ -1,3 +1,4 @@
+/* @preserve Navbar */
 document.addEventListener("DOMContentLoaded", function (event) {
 
   /*

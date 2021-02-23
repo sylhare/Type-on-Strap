@@ -7,6 +7,7 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const pipeline = require('readable-stream').pipeline;
 const imagemin = require('gulp-imagemin');
 const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
@@ -33,19 +34,16 @@ gulp.task('post', function (callback) {
 });
 
 // Minify JS
-//TODO: Preserve license and version comments using uglifyJS --comments
 //TODO: Minify vendor.js
 //FIXME: Update vendor JS. Use npm and script to do that.
-//FIXME: Use readable-stream as recommended by gulp-uglify
 //TODO: Use Grunt if Gulp is not enough
-gulp.task('js', function minijs() {
-  return gulp.src(['js/partials/**.js'])
-    .pipe(concat('main.min.js'))
-    .pipe(uglify())
-    .on('error', (err) => {
-      console.log(err.toString())
-    })
-    .pipe(gulp.dest("js/"))
+gulp.task('js', function() {
+  return pipeline(
+     gulp.src('assets/js/partials/*.js'),
+     concat('main.min.js'),
+     uglify({output: {comments: 'some'}}), //will preserve multi-line comments w/ @preserve, @license or @cc_on
+     gulp.dest('assets/js')
+    );
 });
 
 // Minify Bootstrap CSS
