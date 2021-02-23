@@ -7,7 +7,7 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
-const pipeline = require('readable-stream').pipeline;
+const pump = require('pump');
 const imagemin = require('gulp-imagemin');
 const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
@@ -15,6 +15,7 @@ const replace = require('gulp-replace');
 const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const fs = require('fs');
+const changed = require('gulp-changed');
 
 // Create an empty post with today's date
 // usage: gulp post -n <title of the post>
@@ -34,74 +35,100 @@ gulp.task('post', function (callback) {
 });
 
 // Minify JS
-gulp.task('js', function() {
-  return pipeline(
+gulp.task('js', function(cb) {
+  pum([
      gulp.src('assets/_js/*.js'),
      concat('main.min.js'),
      uglify({output: {comments: 'some'}}), //will preserve multi-line comments w/ @preserve, @license or @cc_on
      gulp.dest('assets/js')
+  ],
+  cb
   );
 });
 
 //FIXME: Updated Bootstrap to 4.6
 // Isolate Bootstrap
-gulp.task('isolate', function() {
-  return pipeline(
+gulp.task('bsIsolate', function(cb) {
+  pump([
      gulp.src('assets/_css/bootstrap-iso.less'),
      less({strictMath: 'on'}),
      replace('.bootstrap-iso html', ''),
      replace('.bootstrap-iso body', ''),
-     gulp.dest('assets/css/')
+     gulp.dest('assets/_css/')
+  ],
+  cb
   );
 });
 
 // Minify Bootstrap CSS
-gulp.task('css', function() {
-  return pipeline(
-     gulp.src('assets/css/bootstrap-iso.css'),
+gulp.task('bsMinify', function(cb) {
+  pump([
+     gulp.src('assets/_css/bootstrap-iso.css'),
      cleanCSS(),
      concat('bootstrap-iso.min.css'),
      gulp.dest('assets/css/')
+  ],
+  cb
   );
 });
 
-// Compress IMGs
-gulp.task("img", function() {
-  return pipeline(
-     gulp.src('assets/_img/featured/*.{gif,jpg,jpeg,png,svg}'),
-     responsive({'*': {width: 1440}}),
+// Resize IMGs
+const paths = {
+    featured: {
+        src: 'assets/_img/featured/*.{gif,jpg,jpeg,png,svg}',
+        dest: 'assets/img/featured/'
+    }
+}
+
+gulp.task("featured", function(cb) {
+  pump([
+     gulp.src(paths.featured.src),
+     changed(paths.featured.dest),
+     responsive({'*': {width: 1920}}),
+     gulp.dest(paths.featured.dest)
+  ],
+  cb
+  );
+})
+
+// Minify IMGs
+gulp.task("imgMinify", function(cb) {
+  pump([
+     gulp.src('assets/img/featured/*.{gif,jpg,jpeg,png,svg}'),
      imagemin({verbose: true}),
-     gulp.dest('assets/featured/img/')
+     gulp.dest('assets/img/featured')
+  ],
+  cb
   );
 });
 
 // Convert IMGs to WEBP
-gulp.task('webp', function() {
-  return pipeline(
+gulp.task('webp', function(cb) {
+  pump([
     gulp.src('assets/_img/**/*.{png,svg,jpg,jpeg,gif}'),
-    webp({
-      quality: 85,
-      preset: 'photo',
-      method: 6
-    }),
+    webp({quality: 85, preset: 'photo', method: 6}),
     gulp.dest('assets/img')
+  ],
+  cb
   );
 });
 
 // Generate thumbnails
-gulp.task('thumbnails', function() {
+gulp.task('thumbnails', function(cb) {
   let settings = {
     width: '50%', //FIXME: Relative size of a non-absolute
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return pipeline(
+  pump([
     gulp.src('assets/_img/feature-img/*'),
     responsive({
       '**/*.*': settings,
       '*.*': settings,
     }),
     gulp.dest('assets/img/thumbnails/feature-img')
+  ],
+  cb
   );
 });
 
@@ -111,14 +138,17 @@ gulp.task('thumbnails-all', function () {
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return pipeline( 
+  pump([ 
       gulp.src('assets/_img/*.{png,jpg,webp,jpeg}'),
       responsive({'*.*': settings}),
       gulp.dest('assets/img/thumbnails')
+  ],
+  cb
   );
 });
 
 // Tasks
-gulp.task("isolate-bootstrap-css", gulp.series('isolate', 'css'));
-gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));
+gulp.task("bootstrap", gulp.series('bsIsolate', 'bsMinify'));
+//gulp.task("img", gulp.series('imgResize', 'imgMinify'));
+gulp.task("default", gulp.series(gulp.parallel('js', 'bootstrap')));
 
