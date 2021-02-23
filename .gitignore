@@ -15,7 +15,7 @@ _development_tool/*
 *.css.map
 *.scssc
 .bundle/*
-vendor/
+/vendor/
 
 # Theme Gem files
 Gemfile.lock
