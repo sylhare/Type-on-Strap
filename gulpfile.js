@@ -87,19 +87,23 @@ const paths = {
         src: 'assets/img/featured/*.{gif,jpg,jpeg,png,svg,webp}',
         dest: 'assets/img/thumbnails/'
     },
-    webp: {
+    portfolio: {
+        src: 'assets/_img/portfolio/*.{gif,jpg,jpeg,png,svg}',
+        dest: 'assets/img/portfolio/'
+    },
+     webp: {
         src: 'assets/img/featured/*.{jpg,jpeg,png}',
         dest: 'assets/img/featured/webp/'
     },
 }
 
-const imgLogo = function(cb) {
+const imgAvatar = function(cb) {
   pump([
-     src(paths.logo.src),
-     changed(paths.logo.dest),
+     src(paths.avatar.src),
+     changed(paths.avatar.dest),
      responsive({'*': {width: 512}}),
      imagemin({verbose: true}),
-     dest(paths.logo.dest)
+     dest(paths.avatar.dest)
   ],
   cb()
   );
@@ -128,6 +132,18 @@ const imgThumbnails = function(cb) {
   );
 }
 
+const imgPortfolio = function(cb) {
+  pump([
+     src(paths.portfolio.src),
+     changed(paths.portfolio.dest),
+     responsive({'*': {width: 900}}),
+     imagemin({verbose: true}),
+     dest(paths.portfolio.dest)
+  ],
+  cb()
+  );
+}
+
 const imgWebp = function(cb) {
   pump([
      src(paths.webp.src),
@@ -144,10 +160,11 @@ exports.post = post;
 exports.js = js;
 exports.bootstrap = series(bsIsolate, bsMinify);
 
-exports.logo = imgLogo;
+exports.avatar = imgAvatar;
 exports.featured = imgFeatured;
 exports.thumbs = imgThumbnails;
+exports.portfolio = imgPortfolio;
 exports.webp = imgWebp;
-exports.img = parallel(imgLogo, series(imgFeatured, imgThumbnails));
+exports.img = parallel(imgAvatar, imgPortfolio, series(imgFeatured, imgThumbnails));
 
-exports.default = parallel(js, series(bsIsolate, bsMinify), parallel(imgLogo, series(imgFeatured, imgThumbnails)));
+exports.default = parallel(js, series(bsIsolate, bsMinify), imgAvatar, imgPortfolio, series(imgFeatured, imgThumbnails));
