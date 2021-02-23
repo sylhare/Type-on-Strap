@@ -16,6 +16,8 @@ const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const fs = require('fs');
 
+//TODO: Use Grunt if Gulp isn't enough
+
 // Create an empty post with today's date
 // usage: gulp post -n <title of the post>
 gulp.task('post', function (callback) {
@@ -34,103 +36,106 @@ gulp.task('post', function (callback) {
 });
 
 // Minify JS
-//TODO: Minify vendor.js
-//FIXME: Update vendor JS. Use npm and script to do that.
-//TODO: Use Grunt if Gulp is not enough
 gulp.task('js', function() {
   return pipeline(
      gulp.src('assets/_js/*.js'),
      concat('main.min.js'),
      uglify({output: {comments: 'some'}}), //will preserve multi-line comments w/ @preserve, @license or @cc_on
      gulp.dest('assets/js')
-    );
+  );
+});
+
+//FIXME: Updated Bootstrap to 4.6
+// Isolate Bootstrap
+gulp.task('isolate', function() {
+  return pipeline(
+     gulp.src('assets/_css/bootstrap-iso.less'),
+     less({strictMath: 'on'}),
+     replace('.bootstrap-iso html', ''),
+     replace('.bootstrap-iso body', ''),
+     gulp.dest('assets/css/')
+  );
 });
 
 // Minify Bootstrap CSS
-gulp.task('css', function minicss() {
-  return gulp.src('assets/css/vendor/bootstrap-iso.css')
-    .pipe(cleanCSS())
-    .on('error', (err) => {
-      console.log(err.toString())
-    })
-    .pipe(concat('bootstrap-iso.min.css'))
-    .pipe(gulp.dest('assets/css/vendor/'));
-});
-
-// Isolate Bootstrap
-gulp.task('isolate', function isolateBootstrap() {
-  return gulp.src('assets/css/bootstrap-iso.less')
-    .pipe(less({strictMath: 'on'}))
-    .pipe(replace('.bootstrap-iso html', ''))
-    .pipe(replace('.bootstrap-iso body', ''))
-    .pipe(gulp.dest('assets/css/vendor/'));
+gulp.task('css', function() {
+  return pipeline(
+     gulp.src('assets/css/bootstrap-iso.css'),
+     cleanCSS(),
+     concat('bootstrap-iso.min.css'),
+     gulp.dest('assets/css/')
+  );
 });
 
 // Optimize IMGs
-gulp.task("img", function imging() {
-  return gulp.src('assets/img/**/*.{png,svg,jpg,webp,jpeg,gif}')
-    .pipe(imagemin())
-    .on('error', (err) => {
-      console.log(err.toString())
-    })
-    .pipe(gulp.dest('assets/img/'))
+gulp.task("img", function() {
+  return pipeline(
+     gulp.src('assets/_img/**/*.{png,svg,jpg,webp,jpeg,gif}'),
+     imagemin(),
+     gulp.dest('assets/img/')
+  );
 });
 
 // Alternative using "sharp" in case "imagemin" does not work.
 // Supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
-gulp.task('sharp_img', function () {
+gulp.task('sharp_img', function() {
   let settings = {
     quality: 85,
     progressive: true,
     compressionLevel: 6,
   };
   
-  return gulp.src('assets/img/**/*.{png,jpg,webp,jpeg}')
-    .pipe(responsive({
+  return pipeline(
+    gulp.src('assets/_img/**/*.{png,jpg,webp,jpeg}'),
+    responsive({
       '**/*.*': settings,
       '*.*': settings,
-    }))
-    .pipe(gulp.dest('assets/img'))
+    }),
+    gulp.dest('assets/img')
+  );
 });
 
 // Convert IMGs to WEBP
-gulp.task('webp', () =>
-  gulp.src('assets/img/**/*.{png,svg,jpg,jpeg,gif}')
-    .pipe(webp({
+gulp.task('webp', function() {
+  return pipeline(
+    gulp.src('assets/_img/**/*.{png,svg,jpg,jpeg,gif}'),
+    webp({
       quality: 85,
       preset: 'photo',
       method: 6
-    }))
-    .pipe(gulp.dest('assets/img'))
-);
+    }),
+    gulp.dest('assets/img')
+  );
+});
 
 // Generate thumbnails
-gulp.task('thumbnails', function () {
+gulp.task('thumbnails', function() {
   let settings = {
-    width: '50%',
+    width: '50%', //FIXME: Relative size of a non-absolute
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return gulp.src('assets/img/feature-img/*')
-    .pipe(responsive({
+  return pipeline(
+    gulp.src('assets/_img/feature-img/*'),
+    responsive({
       '**/*.*': settings,
       '*.*': settings,
-    }))
-    .pipe(gulp.dest('assets/img/thumbnails/feature-img'))
+    }),
+    gulp.dest('assets/img/thumbnails/feature-img')
+  );
 });
 
 gulp.task('thumbnails-all', function () {
   let settings = {
-    width: '50%',
+      width: '50%', //FIXME: Relative size of a non-absolute
     //format: 'jpeg', // convert to jpeg format
   };
 
-  return gulp.src('assets/img/*.{png,jpg,webp,jpeg}')
-      .pipe(responsive({'*.*': settings}))
-      .pipe(gulp.dest('assets/img/thumbnails')) &&
-    gulp.src('assets/img/!(thumbnails)/*.{png,jpg,webp,jpeg}')
-      .pipe(responsive({'**/*.*': settings}))
-      .pipe(gulp.dest('assets/img/thumbnails'))
+  return pipeline( 
+      gulp.src('assets/_img/*.{png,jpg,webp,jpeg}'),
+      responsive({'*.*': settings}),
+      gulp.dest('assets/img/thumbnails')
+  );
 });
 
 // Tasks
