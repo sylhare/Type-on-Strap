@@ -16,8 +16,6 @@ const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const fs = require('fs');
 
-//TODO: Use Grunt if Gulp isn't enough
-
 // Create an empty post with today's date
 // usage: gulp post -n <title of the post>
 gulp.task('post', function (callback) {
@@ -67,31 +65,13 @@ gulp.task('css', function() {
   );
 });
 
-// Optimize IMGs
+// Compress IMGs
 gulp.task("img", function() {
   return pipeline(
-     gulp.src('assets/_img/**/*.{png,svg,jpg,webp,jpeg,gif}'),
-     imagemin(),
-     gulp.dest('assets/img/')
-  );
-});
-
-// Alternative using "sharp" in case "imagemin" does not work.
-// Supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
-gulp.task('sharp_img', function() {
-  let settings = {
-    quality: 85,
-    progressive: true,
-    compressionLevel: 6,
-  };
-  
-  return pipeline(
-    gulp.src('assets/_img/**/*.{png,jpg,webp,jpeg}'),
-    responsive({
-      '**/*.*': settings,
-      '*.*': settings,
-    }),
-    gulp.dest('assets/img')
+     gulp.src('assets/_img/featured/*.{gif,jpg,jpeg,png,svg}'),
+     responsive({'*': {width: 1440}}),
+     imagemin({verbose: true}),
+     gulp.dest('assets/featured/img/')
   );
 });
 
