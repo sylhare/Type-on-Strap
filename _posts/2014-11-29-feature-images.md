@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Feature images
-feature-img: "assets/img/feature-img/desk-messy.jpeg"
-thumbnail: "assets/img/thumbnails/feature-img/desk-messy.jpeg"
+feature-img: "assets/img/featured/desk-messy.jpeg"
+thumbnail: "assets/img/thumbnails/desk-messy.jpeg"
 tags: [Test, Lorem]
 ---
 
@@ -11,8 +11,8 @@ This is an example of a post which includes a feature image specified in the fro
 The feature image spans the full-width of the page, and is shown with the title on permalink pages:
 
 ```yaml
-feature-img: "assets/img/feature-img/desk-messy.jpeg"
-thumbnail: "assets/img/thumbnails/feature-img/desk-messy.jpeg" 
+feature-img: "assets/img/featured/desk-messy.jpeg"
+thumbnail: "assets/img/thumbnails/desk-messy.jpeg" 
 ```
 
 You can also use a thumbnail, a smaller version of the same image to improve loading of the page.

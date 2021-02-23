@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Tech Stuff example
-feature-img: "assets/img/feature-img/circuit.jpeg"
-thumbnail: "assets/img/thumbnails/feature-img/circuit.jpeg"
+feature-img: "assets/img/featured/circuit.jpeg"
+thumbnail: "assets/img/thumbnails/circuit.jpeg"
 tags: [Test, Markdown]
 ---
 

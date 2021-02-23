@@ -117,9 +117,9 @@ Change these variables in `_config.yml`:
 
 ```yml
 title: My Jekyll Blog                 # Name of website
-avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
+avatar: assets/img/avatar.png         # Path of avatar image, to be displayed in the theme's header
 description: My blog posts            # Short description, primarily used by search engines
-favicon: assets/favicon.ico           # Icon displayed in the tab
+favicon: assets/img/favicon.ico       # Icon displayed in the tab
 ```
 
 You can also customize the seo tags default option following the jekyll-seo-tag plugin [documentation](http://jekyll.github.io/jekyll-seo-tag/advanced-usage/).
@@ -132,7 +132,7 @@ Customize your site header/footer with these variables in `_config.yml`:
 
 ```yml
 header_text: Welcome to my Jekyll blog
-header_feature_image: assets/img/sample3.png
+header_feature_image: assets/img/featured/webp/triangular.webp
 footer_text: Copyright 2017
 ```
 
@@ -520,7 +520,8 @@ gulp default
 gulp post -n "Title"    # create a empty post with today's date and the parsed title
 gulp js    # merge and uglify js src files
 gulp bootstrap    # isolate and uglify bootstrap css
-gulp logo   # resize logo to 512x and compress
+gulp avatar   # resize avatar to 512x and compress
+gulp portfolio   # resize portfolio to 512x and compress
 gulp featured   # resize featured to 1920x and compress
 gulp thumbs    # generate thumbnails of the featured imgs
 gulp webp   # generate webps copies of the featured imgs
