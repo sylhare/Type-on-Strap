@@ -17,6 +17,8 @@ const responsive = require('gulp-responsive');
 const fs = require('fs');
 const changed = require('gulp-changed');
 
+//TODO: Update docs
+
 // Create an empty post with today's date
 // usage: gulp post -n <title of the post>
 gulp.task('post', function (callback) {
@@ -46,7 +48,7 @@ gulp.task('js', function(cb) {
   );
 });
 
-//FIXME: Updated Bootstrap to 4.6
+// TODO: Updated Bootstrap to 4.6
 // Isolate Bootstrap
 gulp.task('bsIsolate', function(cb) {
   pump([
@@ -83,12 +85,14 @@ const paths = {
         dest: 'assets/img/featured/'
     },
     thumbnails: {
-        src: 'assets/img/featured/*.{gif,jpg,jpeg,png,svg}',
+        src: 'assets/img/featured/*.{gif,jpg,jpeg,png,svg,webp}',
         dest: 'assets/img/thumbnails/'
     },
-
+    webp: {
+        src: 'assets/img/featured/*.{jpg,jpeg,png}',
+        dest: 'assets/img/featured/webp/'
+    },
 }
-
 
 gulp.task("imgLogo", function(cb) {
   pump([
@@ -125,18 +129,16 @@ gulp.task("imgThumbnails", function(cb) {
   );
 });
 
-
-// Convert IMGs to WEBP
-gulp.task('webp', function(cb) {
+gulp.task("imgWebp", function(cb) {
   pump([
-    gulp.src('assets/_img/**/*.{png,svg,jpg,jpeg,gif}'),
-    webp({quality: 85, preset: 'photo', method: 6}),
-    gulp.dest('assets/img')
+     gulp.src(paths.webp.src),
+     changed(paths.webp.dest),
+     webp({quality: 85, preset: 'photo', method: 6}),
+     gulp.dest(paths.webp.dest)
   ],
   cb
   );
 });
-
 
 // Tasks
 gulp.task("bootstrap", gulp.series('bsIsolate', 'bsMinify'));
