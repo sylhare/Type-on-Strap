@@ -16,7 +16,6 @@ const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const fs = require('fs');
 const changed = require('gulp-changed');
-//TODO: Update docs
 
 // Create an empty post with today's date
 // usage: gulp post -n <title of the post>
@@ -167,4 +166,5 @@ exports.portfolio = imgPortfolio;
 exports.webp = imgWebp;
 exports.img = parallel(imgAvatar, imgPortfolio, series(imgFeatured, imgThumbnails));
 
+// FIXME: Gulp will generate thumbnails only on 2nd run
 exports.default = parallel(js, series(bsIsolate, bsMinify), imgAvatar, imgPortfolio, series(imgFeatured, imgThumbnails));

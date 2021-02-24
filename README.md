@@ -23,15 +23,53 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 > [Demo Site](https://sylhare.github.io/Type-on-Strap/)
 
 ## Table of Contents
+<!-- TOC GFM -->
 
-  - [Usage](#usage)
-  - [Structure](#structure)
-  - [Configure Type on Strap](#configure-type-on-strap)
-  - [Other Layouts](#other-layouts)
-  - [Feature pages](#feature-pages)
-  - [Advanced](#advanced)
-  - [License](#license)
+- [Usage](#usage)
+    - [As a ruby gem 💎](#as-a-ruby-gem-)
+    - [As a github page 📋](#as-a-github-page-)
+- [Structure](#structure)
+- [Configure Type on Strap 🛠](#configure-type-on-strap-)
+    - [Site configuration](#site-configuration)
+    - [Meta and Branding](#meta-and-branding)
+    - [Theme customization 🎨](#theme-customization-)
+        - [Footer and Header's text](#footer-and-headers-text)
+        - [Localisation string](#localisation-string)
+    - [Google Analytics](#google-analytics)
+    - [Comments (via Disqus)](#comments-via-disqus)
+    - [Math typesetting with KateX](#math-typesetting-with-katex)
+    - [Diagrams with Mermaid](#diagrams-with-mermaid)
+    - [Social icons](#social-icons)
+    - [Cookie consent](#cookie-consent)
+        - [Share in article](#share-in-article)
+        - [Footer](#footer)
+    - [Personalize your Blog Posts 📝](#personalize-your-blog-posts-)
+        - [Layout: Post](#layout-post)
+        - [Post excerpt](#post-excerpt)
+        - [Image aligner](#image-aligner)
+        - [Code highlight](#code-highlight)
+- [Feature pages and layouts](#feature-pages-and-layouts)
+    - [Layout: Default](#layout-default)
+    - [Layout: Home 🏡](#layout-home-)
+    - [Layout: Page 📄](#layout-page-)
+    - [Feature: Portfolio 🗂](#feature-portfolio-)
+        - [Portfolio posts](#portfolio-posts)
+        - [Portfolio in gem](#portfolio-in-gem)
+    - [Feature: Gallery 🖼](#feature-gallery-)
+    - [Feature: Search 🔍](#feature-search-)
+    - [Feature: Tags 🏷](#feature-tags-)
+- [Advanced](#advanced)
+    - [Liquid tags](#liquid-tags)
+    - [Gulp toolbox](#gulp-toolbox)
+        - [Requirements](#requirements)
+        - [Minimizing and optimizing: css, js and images](#minimizing-and-optimizing-css-js-and-images)
+        - [Create a post](#create-a-post)
+    - [Git hooks](#git-hooks)
+    - [Use as Ruby Gem 💎](#use-as-ruby-gem-)
+    - [Remote Theme](#remote-theme)
+- [License](#license)
 
+<!-- /TOC -->
 ## Usage
 
 ### As a ruby gem 💎
@@ -543,6 +581,14 @@ gulp post -n 'title of the post'
 
 A file will be create following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.
 Nothing will happen if the file exists already.
+
+
+### Git hooks
+Git hooks are provided in `hooks/`. The pre-commit hook, when enabled, will check for Gulp and gulpfile.js and auto-optimize assets every time you commit.
+
+To install the hook:
+
+`ln hooks/pre-commit .git/hooks/pre-commit`
 
 ### Use as Ruby Gem 💎
 

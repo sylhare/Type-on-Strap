@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Called by "git commit" with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+
+# Automatic pre-commit hook to optimize and stage assets.
+if ! [ -f "gulpfile.js" ] || ! command -v gulp; then  
+    printf "gulpfile.js not found or gulp-cli not installed!\n"
+    exit 1
+fi
+
+if git status --porcelain | grep assets/_ >/dev/null; then
+    gulp
+    git add assets/
+fi
+
+exit 0
+
