@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Gallery
-subtitle: From the pexels folder
+subtitle: From the featured folder
 permalink: /gallery/
 gallery_path: "assets/img/featured"
 tags: [Gallery, Photo]

@@ -473,7 +473,7 @@ It will take all of the picture under that directory. Then use the `include` to 
 ---
 layout: page
 title: Gallery
-gallery: "assets/img/pexels"
+gallery: "assets/img/featured"
 ---
 
 {% include gallery.html gallery_path=page.gallery %}

@@ -163,7 +163,7 @@ sequenceDiagram
 
 That will be rendered into this:
 
-{% include aligner.html images="mermaid-example.png" column=1 %}
+{% include aligner.html images="posts/mermaid-example.png" column=1 %}
 
 But you can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
 
