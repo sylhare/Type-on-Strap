@@ -5,7 +5,7 @@
 # it wants to stop the commit.
 
 # Automatic pre-commit hook to optimize and stage assets.
-if ! [ -f "gulpfile.js" ] || ! command -v gulp; then  
+if ! [ -f "lib/gulpfile.js" ] || ! command -v gulp; then  
     printf "gulpfile.js not found or gulp-cli not installed!\n"
     exit 1
 fi
