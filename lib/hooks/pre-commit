@@ -1,19 +1,32 @@
 #!/bin/sh
 #
-# Called by "git commit" with no arguments.  The hook should
-# exit with non-zero status after issuing an appropriate message if
-# it wants to stop the commit.
+# Called by "git commit" with no arguments.
+# The hook should run gulp to optimize assets.
+# Will exit with non-zero status if it wants to stop the commit.
 
-# Automatic pre-commit hook to optimize and stage assets.
-if ! [ -f "lib/gulpfile.js" ] || ! command -v gulp; then  
+# Detect if it's on the right dir and try to fix. Abort commit otherwise.
+if [ ${PWD##*/} != "lib" ] ; then
+    cd lib || exit 1
+fi 
+
+# Detect if gulp is intalled and gulpfile.js is present. Abort commit otherwise.
+if ! [ -f "gulpfile.js" ] || ! command -v gulp; then  
     printf "gulpfile.js not found or gulp-cli not installed!\n"
     exit 1
 fi
 
+# Detect if there are assets to optimize and, then, run gulp default task.
 if git status --porcelain | grep assets/_ >/dev/null; then
-    gulp
-    git add assets/
+    gulp 
+    # Asks if user wants to aboort the commit. 
+    printf "Do you want to abort the commit and stage more files? (Y/n) "
+    read -r answer
+        case ${answer:0:1} in
+        n|N) exit 0;;
+        *) exit 1;;
+    esac
 fi
 
+# Proceed with the commit.
 exit 0
 
