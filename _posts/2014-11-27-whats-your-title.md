@@ -2,7 +2,7 @@
 layout: post
 title: What's your title
 hide_title: true
-feature-img: assets/img/feature-img/story.jpeg
+feature-img: assets/img/featured/story.jpeg
 author: mhagnumdw
 tags: [Test, Lorem]
 ---
@@ -17,7 +17,7 @@ Here is how the yaml looks inside the post:
 ```yml
 title: What's your title
 hide_title: true
-feature-img: assets/img/feature-img/story.jpeg
+feature-img: assets/img/featured/story.jpeg
 author: mhagnumdw
 tags: [Test, Lorem]
 ```
