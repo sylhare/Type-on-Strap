@@ -1,4 +1,6 @@
 # Assets
+- `_css`              source CSS
+- `css`               destination CSS
 - `_img`              source images
 - `img`               destination images
     - `featured`      are images than will be used as featured images at posts or pages.
@@ -9,8 +11,9 @@
 - `js`                destinantion JS scripts
 - `js/main.js`        result of concatenation and uglifying of scripts at `_js` 
 
+# CSS
+
 # Images
 Put at `_img` source images. They will be optimized by gulp tasks and exported to `img`.
 
-# JS
-
+# JavaScript
