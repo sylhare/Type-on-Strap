@@ -1,4 +1,4 @@
-// init Masonry
+/* @preserve Masonry Init */
 try {
   var elem = document.querySelector('.grid');
   var msnry = new Masonry(elem, {
