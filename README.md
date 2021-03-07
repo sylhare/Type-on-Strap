@@ -540,14 +540,6 @@ gulp post -n 'title of the post'
 A file will be create following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.
 Nothing will happen if the file exists already.
 
-
-### Git hooks
-Git hooks are provided in `hooks/`. The pre-commit hook, when enabled, will check for Gulp and gulpfile.js and auto-optimize assets every time you commit.
-
-To install the hook:
-
-`ln lib/hooks/pre-commit .git/hooks/pre-commit`
-
 ### Use as Ruby Gem 💎
 
 You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). 
