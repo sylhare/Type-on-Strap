@@ -58,12 +58,9 @@ Type-on-Strap
 ├── _posts                     # Blog posts
 ├── _sass                      # Sass partials 
 ├── assets
-|  ├── _js	                   # JavaScipt sources *(edit those)*
 |  ├── js	                   # JS compiled for distribution 
-|  ├── _css                    # CSS sources, bootstrap, font-awesome,etc *(edit those)*
 |  ├── css                     # CSS compiled for distribution
 |  ├── fonts		           # Font-Awesome, and other fonts
-|  ├── _img		               # Images used for the template
 |  └── img		               # Images used for the template
 ├── pages
 |   ├── 404.md		           # To be displayed when url is wrong
