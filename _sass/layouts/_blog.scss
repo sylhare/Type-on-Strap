@@ -9,8 +9,11 @@
   color: $header-text-color;
   background: no-repeat $header-background-color;
   background-size: $feature-image-size;
-  font-family: $font-family-logo;
-  @extend .subtle-txt-shadow;
+
+  h1 {
+    font-family: $font-family-logo;
+    @extend .subtle-txt-shadow;
+  }
 
   /* --- Responsive --- */
   @media screen and (min-width: $break) {
