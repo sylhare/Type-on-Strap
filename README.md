@@ -324,7 +324,7 @@ Use it in any markdown file. There are two fields in the include you need to loo
 
 #### Code highlight
 
-Like all CSS variables in the theme, you can edit the color of the code highlight in _sass > base > _variables.scss.
+Like all CSS variables in the theme, you can edit the color of the code highlight in `_sass > base > _variables.scss`.
 The code highlighting works with [base16](https://github.com/chriskempson/base16-html-previews/tree/master/css) you can find existing example 
 of your favourite highlight color scheme on this format.
 
