@@ -47,9 +47,9 @@
     </script>
 
     {% if site.cookie_consent %}
-        <div id="cookie-notice"><span>{{ site.data.language.str_cookie_disclaimer | default: "We would like to use third party cookies and scripts to improve the functionality of this website." }}
+        <span id="cookie-notice"><span>{{ site.data.language.str_cookie_disclaimer | default: "We would like to use third party cookies and scripts to improve the functionality of this website." }}
           </span><a id="cookie-notice-accept" class="button">{{ site.data.language.str_cookie_approve | default: "Approve" }}</a>
-        </div>
+        </span>
     {% endif %}
     {% if site.google_analytics %}
         <!-- Global site tag (gtag.js) -->
