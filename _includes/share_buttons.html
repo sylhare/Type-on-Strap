@@ -42,7 +42,10 @@
         {% endif %} {% if site.data.social.share.pocket or site.theme_settings.pocket %}
         <li>
             <a href="https://getpocket.com/save?url={{ page.url | absolute_url }}&title={{ page.title | url_encode }}%20%7C%20{{ site.title | url_encode }}" target="_blank" title="{{ site.data.social.language.str_add_to }} Pocket">
-			<i class="fab fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+            <span class="fa-stack fa-1x" style="vertical-align: top">
+              <i class="fas fa-square fa-stack-2x" aria-hidden="true"></i>
+              <i class="fab fa-get-pocket fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            </span>
 			<span class="sr-only">{{ site.data.social.language.str_add_to | default: "Add to" }} Pocket</span>
 		</a>
         </li>
