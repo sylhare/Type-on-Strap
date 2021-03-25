@@ -15,6 +15,10 @@
       li {
         display: inline;
       }
+    
+      a {
+        color: $gray5;
+      }
 
       a:hover {
         color: darken($link-color, 15%);
