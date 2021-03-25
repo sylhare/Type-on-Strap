@@ -134,3 +134,10 @@ header {
     background-size: 400% auto;
   }
 }
+
+.post-content {
+  h2 { color: $red; }
+  h3 { color: $magenta; }
+  h4 { color: $cyan; }
+  h5 { color: $green; }
+}
