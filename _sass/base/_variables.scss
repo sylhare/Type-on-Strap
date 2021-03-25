@@ -1,3 +1,4 @@
+/* GENERAL */
 // Typography
 $font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
@@ -11,7 +12,7 @@ $padding-medium: 6%;
 $padding-small: 4%;
 $padding-x-small: 3%;
 
-// Sepcific Padding
+// Specific Padding
 $title-padding: 1%;
 $feature-image-padding: 10%;
 
@@ -23,62 +24,110 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 300px;
 
-// base16 Supernova
-$base00: #373e47 !default; // Default Background
-$base01: #444c56 !default; // Lighter Background (Used for status bars, line number and folding marks)
-$base02: #545d68 !default; // Selection Background
-$base03: #909dab !default; // Comments, Invisibles, Line Highlighting
-$base04: #adbac7 !default; // Dark Foreground (Used for status bars)
-$base05: #cdd9e5 !default; // Default Foreground, Caret, Delimiters, Operators
-$base06: #e7f3f4 !default; // Light Foreground (Not often used)
-$base07: #f2feff !default; // Light Background (Not often used)
-$base08: #d40059 !default; // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-$base09: #ff5c00 !default; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
-$base0a: #d9b600 !default; // Classes, Markup Bold, Search Text Background
-$base0b: #6bac00 !default; // Strings, Inherited Class, Markup Code, Diff Inserted
-$base0c: #00a8e0 !default; // Support, Regular Expressions, Escape Characters, Markup Quotes
-$base0d: #b37eff !default; // Functions, Methods, Attribute IDs, Headings
-$base0e: #00af9e !default; // Keywords, Storage, Selector, Markup Italic, Diff Changed
-$base0f: #ff66c2 !default; // Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+/* COLOUR SCHEME */
+// Supernova Theme
+$gray0:   #22272e !default;
+$gray1:   #2d333b !default;
+$gray2:   #373e47 !default;
+$gray3:   #444c56 !default;
+$gray4:   #545d68 !default;
+$gray5:   #909dab !default;
+$gray6:   #adbac7 !default;
+$gray7:   #cdd9e5 !default;
+$gray8:   #e7f3f4 !default;
+$gray9:   #fff    !default;
+$red:     #d40059 !default;
+$orange:  #ff5c00 !default;
+$yellow:  #d9b600 !default;
+$green:   #6bac00 !default;
+$blue:    #00a8e0 !default;
+$magenta: #b37eff !default;
+$cyan:    #00af9e !default;
+$pink:    #ff66c2 !default;
 
-// Default colors
-$base0: #22272e  !default; // Darker background
-$base1: #2d333b  !default; // Lighter background
-$base2: #569bd2  !default; // Theme color
-
-// Brand colours
-$theme-color: #337ab7;
-$brand-color: #fff;
-$background-color: #fff;
+/* DARK MODE */
+/*
+// Brand colors
+$theme-color: #569bd2;
+$brand-color: $gray0;
+$background-color: $gray1;
 $border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
 
-// Typography colours
-$text-color: #262626;
-$meta: #595959; //lowest gray for accessible color
+// Typography colors
+$text-color: $gray7;
+$meta: $gray5; //lowest gray for accessible color
 $link-color: $theme-color;
-$selection-color: #D4D4D4; // visible when highlighting text
-$blockquote-color: #EEF7FA; // $background-color;
+$selection-color: $gray4; // visible when highlighting text
+$blockquote-color: $gray2; // $background-color;
 
 // Header
 $header-background-color: darken($theme-color, 50%); // Only used when no header image
-$header-text-color: #fff;
-$header-link-color: #383838;
+$header-text-color: $gray6;
+$header-link-color: $theme-color;
 $navbar-separator-opacity: 0;
 
 // Feature image for articles
-$feature-image-text-color: #fff;
+$feature-image-text-color: $gray9;
 $feature-image-size: cover; // options include "cover", "contain", "auto"
 
-//Search colours
+// Search colors
 $link-shadow: transparentize($link-color, .6); //rgba(26, 188, 156, 0.6);
-$text-shadow: #3f3f3f;
-$search-color: #999;
+$text-shadow: $gray1;
+$search-color: $gray6;
+*/
 
+/* Light Mode (Default) */
+// Brand colors
+$theme-color: #337ab7 !default;
+$brand-color: $gray9 !default;
+$background-color: $gray9 !default;
+$border-color: rgba(0, 0, 0, 0.1) !default; // rgba recommended if using feature images
 
-/*  Syntax highlighting  */
-// Syntax typography
+// Typography colors
+$text-color: #262626 !default;
+$meta: #595959 !default; //lowest gray for accessible color
+$link-color: $theme-color !default;
+$selection-color: #D4D4D4 !default; // visible when highlighting text
+$blockquote-color: #EEF7FA !default; // $background-color;
+
+// Header
+$header-background-color: darken($theme-color, 50%) !default; // Only used when no header image
+$header-text-color: $gray9 !default;
+$header-link-color: #383838 !default;
+$navbar-separator-opacity: 0 !default;
+
+// Feature image for articles
+$feature-image-text-color: $gray9 !default;
+$feature-image-size: cover !default; // options include "cover", "contain", "auto"
+
+// Search colors
+$link-shadow: transparentize($link-color, .6) !default; //rgba(26, 188, 156, 0.6);
+$text-shadow: #3f3f3f !default;
+$search-color: #999 !default;
+
+/* SYNTAX HIGHLIGHTING  */
+// Typography
 $monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
 $font-size-code: 0.85em !default;
 $font-height-code: 1.3em !default;
 $border-radius: 4px !default;
+
+// Colors
+// base16 Supernova
+$base00: $gray2;   // Default Background
+$base01: $gray3;   // Lighter Background (Used for status bars, line number and folding marks)
+$base02: $gray4;   // Selection Background
+$base03: $gray5;   // Comments, Invisibles, Line Highlighting
+$base04: $gray6;   // Dark Foreground (Used for status bars)
+$base05: $gray7;   // Default Foreground, Caret, Delimiters, Operators
+$base06: $gray8;   // Light Foreground (Not often used)
+$base07: $gray9;   // Light Background (Not often used)
+$base08: $red;     // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+$base09: $orange;  // Integers, Boolean, Constants, XML Attributes, Markup Link Url
+$base0a: $yellow;  // Classes, Markup Bold, Search Text Background
+$base0b: $green;   // Strings, Inherited Class, Markup Code, Diff Inserted
+$base0c: $blue;    // Support, Regular Expressions, Escape Characters, Markup Quotes
+$base0d: $magenta; // Functions, Methods, Attribute IDs, Headings
+$base0e: $cyan;    // Keywords, Storage, Selector, Markup Italic, Diff Changed
+$base0f: $pink;    // Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 
