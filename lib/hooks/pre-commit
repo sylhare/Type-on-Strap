@@ -17,18 +17,10 @@ if ! [ -f "gulpfile.js" ] || ! command -v gulp; then
 fi
 END
 
-# Detect if there are assets to optimize and, then, run gulp default task.
-if git status --porcelain | grep assets/_ >/dev/null; then
-    gulp 
-    # Asks if user wants to abort the commit. 
-    # FIXME: Git overrides STDIN, this is fundamentally flawed.
-    # TODO: Husky may be an alternative, https://github.com/typicode/husky 
-    printf "Do you want to abort the commit and stage more files? (Y/n) "
-    read -r answer
-    case ${answer:0:1} in
-        y|Y) exit 1;;
-        *) exit 0;;
-    esac
+# If there are non-staged assets, abort commit.
+if git status --porcelain | grep -E '^(\?\?|AM|\nM).*assets/.*$' >/dev/null; then
+    printf "There are non-staged assets, be sure to run gulp before commiting changes!\n"
+    exit 1
 fi
 
 # Proceed with the commit.
