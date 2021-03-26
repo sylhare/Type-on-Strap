@@ -7,6 +7,7 @@ ul.share-buttons {
   div.meta {
     display: inline;
     margin-right: 0.5em;
+    vertical-align: super;
   }
 
   li {
@@ -26,5 +27,14 @@ ul.share-buttons {
     height: 1px;
     width: 1px;
     overflow: hidden;
+  }
+
+  .fa-stack {
+    vertical-align: top;
+    width: 1.75em;
+
+    .fab {
+      font-size: 30px;
+    }
   }
 }
