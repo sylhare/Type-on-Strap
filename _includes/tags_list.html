@@ -4,13 +4,13 @@
   <div class="tag-list">
     <ul>
       {% if tags.size == 1 %}
-        <div class="meta">Tag</div>
+        <li class="meta">Tag</li>
       {% else %}
-        <div class="meta">Tags</div>
+        <li class="meta">Tags</li>
       {% endif %}
 
       {% for tag in tags %}
-        <li><a class="button" href="{{ "/tags" | relative_url }}#{{ tag | cgi_escape }}">
+        <li><a class="button" href="{{ '/tags' | relative_url }}#{{ tag | cgi_escape }}">
           <p><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag }}</p>
         </a></li>
       {% endfor %}
