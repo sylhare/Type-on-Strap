@@ -42,11 +42,11 @@
 }
 
 .txt-shadow {
-  text-shadow: 0.07em 0.10em 0.15em $text-shadow;
+  text-shadow: 0.07em 0.10em 0.15em var(--gray1);
 }
 
 .subtle-txt-shadow {
-  text-shadow: 1px 1px 2px $text-shadow;
+  text-shadow: 1px 1px 2px var(--gray1);
 }
 
 // Buttons
@@ -64,9 +64,9 @@ a.button {
 
 .button-link {
   &:hover {
-    background: $link-color;
-    border: 1px solid $link-color;
-    color: $background-color;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    color: var(--gray0);
     text-decoration: none;
   }
 }
@@ -74,14 +74,16 @@ a.button {
 .body-link {
   &:hover {
     text-decoration: underline;
-    color: darken($link-color, 15%);
+    color: var(--blue);
+    filter: brightness(0.85);
   }
 }
 
 .post-link {
   &:hover {
     text-decoration: none;
-    color: lighten($link-color, 10%);
+    color: var(--blue);
+    filter: brightness(1.1);
   }
 }
 

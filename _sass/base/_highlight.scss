@@ -48,8 +48,8 @@ figure.highlight {
 code.highlighter-rouge {
   padding: 0.2em 0.4em;
   font-size: $font-size-code;
-  background-color: transparentize($blockquote-color, 0.85);
-  color: $background-color;
+  background-color: rgba(var(--gray2), 0.85);
+  color: var(--gray0);
   border-radius: 2px;
   font-family: $monospace;
   filter: invert(100%) contrast(200%);
@@ -290,6 +290,6 @@ table.rouge-table {
 }
 
 table.dataframe {
-  border: 0 solid $border-color;
+  border: 0 solid var(--border);
   border-collapse: collapse;
 }

@@ -4,7 +4,7 @@
   display: inline-block;
   text-align: center;
   width: 100%;
-  color: $meta;
+  color: var(--gray5);
   font-size: 0.9em;
 
   .footer-icons {
@@ -17,11 +17,12 @@
       }
     
       a {
-        color: $gray5;
+        color: var(--gray5);
       }
 
       a:hover {
-        color: darken($link-color, 15%);
+        color: var(--blue);
+        filter: brightness(0.85);
       }
     }
   }

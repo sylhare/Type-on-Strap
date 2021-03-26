@@ -1,6 +1,6 @@
 .comments {
   @extend %padding-post;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--border);
   float: left;
   width: 100%;
 }
@@ -46,7 +46,7 @@ header {
 }
 
 .meta {
-  color: $meta; // rgba($text-color, .65);
+  color: var(--gray5); // rgba(var(--gray7), .65);
   letter-spacing: 0.1em;
   margin: 0;
   text-transform: uppercase;
@@ -55,7 +55,7 @@ header {
 /* --- Post info --- */
 .post-info {
   /* For border in author
-  border: 1px solid $border-color;
+  border: 1px solid var(--border);
   padding-left: 0.5em;
   */
   border-radius: 1em;
@@ -84,7 +84,7 @@ header {
   padding: 0;
 
   .post-link {
-    color: $feature-image-text-color;
+    color: var(--gray8);
   }
 
   h1.title, .post-info {
@@ -92,12 +92,12 @@ header {
   }
 
   header {
-    color: $feature-image-text-color;
+    color: var(--gray8);
     margin-bottom: 0;
     padding: $padding-large/2.5 $padding-large;
 
     .meta {
-      color: rgba($feature-image-text-color, .7);
+      color: rgba(var(--gray8), .7);
     }
   }
 
@@ -136,8 +136,8 @@ header {
 }
 
 .post-content {
-  h2 { color: $red; }
-  h3 { color: $magenta; }
-  h4 { color: $cyan; }
-  h5 { color: $green; }
+  h2 { color: var(--red); }
+  h3 { color: var(--magenta); }
+  h4 { color: var(--cyan); }
+  h5 { color: var(--green); }
 }

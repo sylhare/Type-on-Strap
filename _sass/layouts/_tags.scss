@@ -22,7 +22,7 @@
   margin-bottom: $padding-x-small;
 
   a {
-    color: $link-color;
+    color: var(--blue);
 
     &:hover {
       text-decoration: none;
