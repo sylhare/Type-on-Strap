@@ -1,22 +1,24 @@
-/* GENERAL */
-// Typography
+/* TYPOGRAPHY */
 $font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-logo: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
-// Padding
+$monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
+$font-size-code: 0.85em !default;
+$font-height-code: 1.3em !default;
+$border-radius: 4px !default;
+
+/* PADDING */
 $padding-x-large: 23%;
 $padding-large: 9%;
 $padding-medium: 6%;
 $padding-small: 4%;
 $padding-x-small: 3%;
-
-// Specific Padding
 $title-padding: 1%;
 $feature-image-padding: 10%;
 
-// Mobile display
+/* MOBILE */
 $xl-break: 2000px;
 $l-break: 1400px;
 $m-break: 1000px;
@@ -24,110 +26,70 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 300px;
 
-/* COLOUR SCHEME */
-// Supernova Theme
-$gray0:   #22272e !default;
-$gray1:   #2d333b !default;
-$gray2:   #373e47 !default;
-$gray3:   #444c56 !default;
-$gray4:   #545d68 !default;
-$gray5:   #909dab !default;
-$gray6:   #adbac7 !default;
-$gray7:   #cdd9e5 !default;
-$gray8:   #e7f3f4 !default;
-$gray9:   #fff    !default;
-$red:     #d40059 !default;
-$orange:  #ff5c00 !default;
-$yellow:  #d9b600 !default;
-$green:   #6bac00 !default;
-$blue:    #00a8e0 !default;
-$magenta: #b37eff !default;
-$cyan:    #00af9e !default;
-$pink:    #ff66c2 !default;
+/* COLORS */
+// Light Mode (Default)
+:root {
+    --gray0:   #e7f3f4; //
+    --gray1:   #2d333b; //
+    --gray2:   #373e47; //
+    --gray3:   #444c56; //
+    --gray4:   #d4d4d4; //
+    --gray5:   #909dab; //
+    --gray6:   #383838; //
+    --gray7:   #cdd9e5; //
+    --gray8:   #595959; //
+    --gray9:   #ffffff; //
+    --red:     #d40059; //
+    --orange:  #3f3f3f; //
+    --yellow:  #d9b600; //
+    --green:   #6bac00; //
+    --blue:    #00a8e0; //
+    --magenta: #b37eff; //
+    --cyan:    #00af9e; //
+    --pink:    #ff66c2; //
+    --border:  rgba(0, 0, 0, 0.1); //
+}
 
-/* DARK MODE */
-/*
-// Brand colors
-$theme-color: #569bd2;
-$brand-color: $gray0;
-$background-color: $gray0;
-$border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
+// Dark Mode
+@media (prefers-color-scheme: dark) {
+    :root {
+        --gray0:   #22272e; // brand, background
+        --gray1:   #2d333b; // text shadow
+        --gray2:   #373e47; // blockquote
+        --gray3:   #444c56; //
+        --gray4:   #545d68; // selection
+        --gray5:   #909dab; // meta
+        --gray6:   #adbac7; // header link, search color
+        --gray7:   #cdd9e5; // text
+        --gray8:   #e7f3f4; // header text, feature img text
+        --gray9:   #ffffff; //
+        --red:     #d40059; //
+        --orange:  #ff5c00; //
+        --yellow:  #d9b600; //
+        --green:   #6bac00; //
+        --blue:    #00a8e0; // theme, link, link shadow header bg
+        --magenta: #b37eff; //
+        --cyan:    #00af9e; //
+        --pink:    #ff66c2; //
+        --border: rgba(0, 0, 0, 0.1); // border
+        --navbar-opacity: 0; // navbar separator opacity
+    }
+}
 
-// Typography colors
-$text-color: $gray7;
-$meta: $gray5; //lowest gray for accessible color
-$link-color: $theme-color;
-$selection-color: $gray4; // visible when highlighting text
-$blockquote-color: $gray2; // $background-color;
-
-// Header
-$header-background-color: darken($theme-color, 50%); // Only used when no header image
-$header-text-color: $gray8;
-$header-link-color: $gray6;
-$navbar-separator-opacity: 0;
-
-// Feature image for articles
-$feature-image-text-color: $gray9;
-$feature-image-size: cover; // options include "cover", "contain", "auto"
-
-// Search colors
-$link-shadow: transparentize($link-color, .6); //rgba(26, 188, 156, 0.6);
-$text-shadow: $gray1;
-$search-color: $gray6;
-*/
-
-/* Light Mode (Default) */
-// Brand colors
-$theme-color: #337ab7 !default;
-$brand-color: $gray9 !default;
-$background-color: $gray9 !default;
-$border-color: rgba(0, 0, 0, 0.1) !default; // rgba recommended if using feature images
-
-// Typography colors
-$text-color: #262626 !default;
-$meta: #595959 !default; //lowest gray for accessible color
-$link-color: $theme-color !default;
-$selection-color: #D4D4D4 !default; // visible when highlighting text
-$blockquote-color: #EEF7FA !default; // $background-color;
-
-// Header
-$header-background-color: darken($theme-color, 50%) !default; // Only used when no header image
-$header-text-color: $gray9 !default;
-$header-link-color: #383838 !default;
-$navbar-separator-opacity: 0 !default;
-
-// Feature image for articles
-$feature-image-text-color: $gray9 !default;
-$feature-image-size: cover !default; // options include "cover", "contain", "auto"
-
-// Search colors
-$link-shadow: transparentize($link-color, .6) !default; //rgba(26, 188, 156, 0.6);
-$text-shadow: #3f3f3f !default;
-$search-color: #999 !default;
-
-/* SYNTAX HIGHLIGHTING  */
-// Typography
-$monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
-$font-size-code: 0.85em !default;
-$font-height-code: 1.3em !default;
-$border-radius: 4px !default;
-
-// Colors
-// base16 Supernova
-$base00: $gray2;   // Default Background
-$base01: $gray3;   // Lighter Background (Used for status bars, line number and folding marks)
-$base02: $gray4;   // Selection Background
-$base03: $gray5;   // Comments, Invisibles, Line Highlighting
-$base04: $gray6;   // Dark Foreground (Used for status bars)
-$base05: $gray7;   // Default Foreground, Caret, Delimiters, Operators
-$base06: $gray8;   // Light Foreground (Not often used)
-$base07: $gray9;   // Light Background (Not often used)
-$base08: $red;     // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-$base09: $orange;  // Integers, Boolean, Constants, XML Attributes, Markup Link Url
-$base0a: $yellow;  // Classes, Markup Bold, Search Text Background
-$base0b: $green;   // Strings, Inherited Class, Markup Code, Diff Inserted
-$base0c: $blue;    // Support, Regular Expressions, Escape Characters, Markup Quotes
-$base0d: $magenta; // Functions, Methods, Attribute IDs, Headings
-$base0e: $cyan;    // Keywords, Storage, Selector, Markup Italic, Diff Changed
-$base0f: $pink;    // Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-
+// Base16 Highlight
+$base00: #373e47; // Default Background
+$base01: #444c56; // Lighter Background (Used for status bars, line number and folding marks)
+$base02: #545d68; // Selection Background
+$base03: #909dab; // Comments, Invisibles, Line Highlighting
+$base04: #adbac7; // Dark Foreground (Used for status bars)
+$base05: #cdd9e5; // Default Foreground, Caret, Delimiters, Operators
+$base06: #e7f3f4; // Light Foreground (Not often used)
+$base07: #ffffff; // Light Background (Not often used)
+$base08: #d40059; // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+$base09: #ff5c00; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
+$base0a: #d9b600; // Classes, Markup Bold, Search Text Background
+$base0b: #6bac00; // Strings, Inherited Class, Markup Code, Diff Inserted
+$base0c: #00a8e0; // Support, Regular Expressions, Escape Characters, Markup Quotes
+$base0d: #b37eff; // Functions, Methods, Attribute IDs, Headings
+$base0e: #00af9e; // Keywords, Storage, Selector, Markup Italic, Diff Changed
+$base0f: #ff66c2; // Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
