@@ -17,7 +17,13 @@
       }
     
       a {
-        color: var(--gray5);
+        color: var(--blue);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        a {
+         color: var(--gray5);
+        }
       }
 
       a:hover {

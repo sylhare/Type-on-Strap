@@ -22,7 +22,7 @@
 
   .separator {
     user-select: none;
-    opacity: var(--navbar-opacity);
+    opacity: 0;
 
     &:first-child {
       display: none;

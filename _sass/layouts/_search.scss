@@ -24,13 +24,14 @@
   }
 
   &::-moz-placeholder {
-    color: var(--gray6);
-    opacity: 1;
+    color: var(--gray5);
+    opacity: 0.7;
   }
 
   &:-ms-input-placeholder,
   &::-webkit-input-placeholder {
-    color: var(--gray6);
+    color: var(--gray5);
+    opacity: 0.7;
   }
 
   input {
