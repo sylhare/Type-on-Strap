@@ -34,6 +34,8 @@
             {% endunless %}
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
+        <li class="separator"> | </li>
+        <li><a id="theme-toggle" onclick="modeSwitcher()"></a></li>
     </ul>
 
 	</nav>

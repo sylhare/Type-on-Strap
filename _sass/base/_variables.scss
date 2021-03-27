@@ -26,9 +26,10 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 300px;
 
-/* COLORS */
-// Light Mode (Default)
-:root {
+/* COLOR SCHEMES */
+/* Load by default dark scheme in systems supporting 'prefers-colors-scheme: dark'
+and load light theme otherwise. Also support switching through schemes by a button. */
+html, html[data-theme="light"] {
     --gray0:   #ffffff; //
     --gray1:   #3f3f3f; //
     --gray2:   #373e47; //
@@ -50,32 +51,75 @@ $x-sm-break: 300px;
     --border:  rgba(0, 0, 0, 0.1); //
 }
 
-// Dark Mode
+html[data-theme="dark"] {
+    --gray0:   #22272e; // brand, background
+    --gray1:   #2d333b; // text shadow
+    --gray2:   #373e47; // blockquote
+    --gray3:   #444c56; //
+    --gray4:   #545d68; // selection
+    --gray5:   #909dab; // meta
+    --gray6:   #adbac7; // header link, search color
+    --gray7:   #cdd9e5; // text
+    --gray8:   #e7f3f4; // header text, feature img text
+    --gray9:   #ffffff; //
+    --red:     #d40059; //
+    --orange:  #ff5c00; //
+    --yellow:  #d9b600; //
+    --green:   #6bac00; //
+    --blue:    #00a8e0; // theme, link, link shadow header bg
+    --magenta: #b37eff; //
+    --cyan:    #00af9e; //
+    --pink:    #ff66c2; //
+    --border: rgba(0, 0, 0, 0.1); // border
+}
+
 @media (prefers-color-scheme: dark) {
-    :root {
-        --gray0:   #22272e; // brand, background
-        --gray1:   #2d333b; // text shadow
-        --gray2:   #373e47; // blockquote
-        --gray3:   #444c56; //
-        --gray4:   #545d68; // selection
-        --gray5:   #909dab; // meta
-        --gray6:   #adbac7; // header link, search color
-        --gray7:   #cdd9e5; // text
-        --gray8:   #e7f3f4; // header text, feature img text
-        --gray9:   #ffffff; //
-        --red:     #d40059; //
-        --orange:  #ff5c00; //
-        --yellow:  #d9b600; //
-        --green:   #6bac00; //
-        --blue:    #00a8e0; // theme, link, link shadow header bg
-        --magenta: #b37eff; //
-        --cyan:    #00af9e; //
-        --pink:    #ff66c2; //
-        --border: rgba(0, 0, 0, 0.1); // border
+    html[data-theme="dark"] {
+        --gray0:   #22272e;
+        --gray1:   #2d333b;
+        --gray2:   #373e47;
+        --gray3:   #444c56;
+        --gray4:   #545d68;
+        --gray5:   #909dab;
+        --gray6:   #adbac7;
+        --gray7:   #cdd9e5;
+        --gray8:   #e7f3f4;
+        --gray9:   #ffffff;
+        --red:     #d40059;
+        --orange:  #ff5c00;
+        --yellow:  #d9b600;
+        --green:   #6bac00; 
+        --blue:    #00a8e0;
+        --magenta: #b37eff;
+        --cyan:    #00af9e;
+        --pink:    #ff66c2;
+        --border: rgba(0, 0, 0, 0.1);
+    }
+
+    html, html[data-theme="light"] {
+        --gray0:   #ffffff;
+        --gray1:   #3f3f3f;
+        --gray2:   #373e47;
+        --gray3:   #444c56;
+        --gray4:   #d4d4d4;
+        --gray5:   #595959;
+        --gray6:   #383838;
+        --gray7:   #262626;
+        --gray8:   #ffffff;
+        --gray9:   #ffffff;
+        --red:     #d40059;
+        --orange:  #3f3f3f;
+        --yellow:  #d9b600;
+        --green:   #6bac00;
+        --blue:    #337ab7;
+        --magenta: #b37eff;
+        --cyan:    #00af9e;
+        --pink:    #ff66c2;
+        --border:  rgba(0, 0, 0, 0.1);
     }
 }
 
-// Base16 Highlight
+/* BASE16 HIGHLIGHT*/
 $base00: #373e47; // Default Background
 $base01: #444c56; // Lighter Background (Used for status bars, line number and folding marks)
 $base02: #545d68; // Selection Background
