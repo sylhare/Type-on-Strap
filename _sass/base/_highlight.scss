@@ -88,6 +88,10 @@ table.rouge-table {
 
 .highlight pre {
   width: 100%
+
+  ::selection {
+    background-color: $base02
+  }
 }
 
 .highlight .hll {
@@ -98,15 +102,15 @@ table.rouge-table {
   .bp{ /* Name.Builtin.Pseudo */
     color: $base0c  }
   .c { /* Comment */
-    color: $base04 }
+    color: $base03 }
   .cm{ /* Comment.Multiline */
-    color: $base04  }
+    color: $base03  }
   .cp{ /* Comment.Preproc */
-    color: $base04  }
+    color: $base03  }
   .c1{ /* Comment.Single */
-    color: $base04  }
+    color: $base03  }
   .cs{ /* Comment.Special */
-    color: $base04  }
+    color: $base03  }
   .dl{ /* String.Quotes 8 */
     color: $base0a  }
   .err { /* Error */
