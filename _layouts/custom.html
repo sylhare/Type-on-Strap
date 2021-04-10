@@ -8,28 +8,27 @@ layout: default
         <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
         {% endunless %}
         {% if page.is_post %}
-        {% include post_info.html author=page.author date=page.date %}
+        {% include blog/post_info.html author=page.author date=page.date %}
         {% endif %}
     </header>
     <section class="post-content">{{ content }}</section>
 
     <div style="display: inline-block;">
         <!-- Social media shares -->
-        {% if include.is_post %} {% include share_buttons.html %} {% endif %}
+        {% if include.is_post %} {% include social/share_buttons.html %} {% endif %}
 
         <!-- Tag list -->
         {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-        {% include tags_list.html tags=tag_list %}
+        {% include default/tags_list.html tags=tag_list %}
     </div>
 
 </article>
 
 <!-- Disqus -->
 {% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
-{% include disqus.html %}
-{% endif %}
+{% include social/disqus.html %}{% endif %}
 
 <!-- Post navigation -->
 {% if site.post_navigation %}
-{% include post_nav.html %}
+{% include blog/post_nav.html %}
 {% endif %}

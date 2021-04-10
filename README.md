@@ -403,7 +403,7 @@ layout: page
 title : Portfolio 
 ---
 
-{% include portfolio.html %}
+{% include default/portfolio.html %}
 ```
 
 #### Portfolio posts
@@ -452,7 +452,7 @@ title: Gallery
 gallery: "assets/img/pexels"
 ---
 
-{% include gallery.html gallery_path=page.gallery %}
+{% include default/gallery.html gallery_path=page.gallery %}
 ```
 
 
