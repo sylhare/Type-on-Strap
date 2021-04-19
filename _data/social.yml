@@ -31,10 +31,10 @@ feed:
 share:
   facebook: true
   twitter: true
-  tumblr:
-  pinterest:
+  tumblr: true
+  pinterest: true
   pocket: true
   reddit: true
-  linkedin:
-  wordpress:
+  linkedin: true
+  wordpress: true
   email: true
