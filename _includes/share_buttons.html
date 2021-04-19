@@ -34,7 +34,7 @@
         </li>
         {% endif %} {% if site.data.social.share.pinterest or site.theme_settings.pinterest %}
         <li>
-            <a href="http://pinterest.com/pin/create/button/?url={{ page.url | absolute_url }}&description={{ page.excerpt }}" target="_blank" title="{{ site.data.social.language.str_pin_it }}">
+            <a href="https://pinterest.com/pin/create/button/?url={{ page.url | absolute_url }}&media={{ page.feature-img | absolute_url }}$description={{ page.excerpt | strip_html | url_encode }}" target="_blank" title="{{ site.data.social.language.str_pin_it }}">
 			<i class="fab fa-pinterest-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">{{ site.data.social.language.str_pin_it | default: "Pin it" }}</span>
 		</a>
