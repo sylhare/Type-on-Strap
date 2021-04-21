@@ -1,4 +1,7 @@
 <div class="posts">
+    {% unless paginator.posts %}
+    <article><section class="post-content"><p>There are no blog posts</p></section></article>
+    {% endunless %}
     {% for post in paginator.posts %}
     <div class="post-teaser">
         {% if post.thumbnail %}

@@ -1,20 +1,29 @@
 .tag-list {
   width: 100%;
-  font-size: 0.9em;
   padding-bottom: $padding-x-small;
-
-  div.meta {
-    margin-right: 0.5em;
-  }
 
   a.button {
     margin: 0.1em;
     padding: 0.2em 0.4em;
+    font-size: 0.9em;
   }
 
   p {
     margin: 0;
     padding: 0 0.2em 0 0;
+  }
+
+  ul {
+    text-align: center;
+    list-style: none;
+
+    li, div {
+      display: inline;
+    }
+
+    div.meta {
+      margin-right: 0.5em;
+    }
   }
 }
 
