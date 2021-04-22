@@ -1,7 +1,7 @@
 {% if site.data.social.rss or site.theme_settings.rss %}
 <li>
     <a feed.xml href="{{ site.data.social.feed.path | default: 'feed.xml' | relative_url }}"
-       title="{{ site.data.language.str_rss_follow | default: "Follow RSS feed" }}">
+       title="{{ site.data.language.str_rss_follow | default: 'Follow RSS feed' }}">
         <span class="fa-stack fa-lg">
             <i class="fas fa-circle fa-stack-2x"></i>
             <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -22,254 +22,86 @@
 </li>
 {% endif %}
 
-{% if site.data.social.behance or site.theme_settings.behance %}
-<li>
-    <a href="https://www.behance.net/{{ site.data.social.behance }}"
-       title="{{ site.data.language.str_follow_on }} Behance">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-behance fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign bh_url = "https://www.behance.net/" | append: site.data.social.behance %}
+{% assign bh_on = site.data.social.behance or site.theme_settings.behance %}
+{% include social/icon_partial.html isDisplayed=bh_on url=bh_url social="Behance" %}
 
-{% if site.data.social.bitbucket or site.theme_settings.bitbucket %}
-<li>
-    <a href="https://bitbucket.org/{{ site.data.social.bitbucket }}"
-       title="{{ site.data.language.str_follow_on }} Bitbucket">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-bitbucket fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign bb_url = "https://bitbucket.org/" | append: site.data.social.bitbucket %}
+{% assign bb_on = site.data.social.bitbucket or site.theme_settings.bitbucket %}
+{% include social/icon_partial.html isDisplayed=bb_on url=bb_url social="Bitbucket" %}
 
-{% if site.data.social.dribbble or site.theme_settings.dribbble %}
-<li>
-    <a href="https://dribbble.com/{{ site.data.social.dribbble }}"
-       title="{{ site.data.language.str_follow_on }} Dribbble">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-dribbble fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign db_url = "https://www.dribbble.com/" | append: site.data.social.dribbble %}
+{% assign db_on = site.data.social.dribbble or site.theme_settings.dribbble %}
+{% include social/icon_partial.html isDisplayed=db_on url=db_url social="Dribbble" %}
 
-{% if site.data.social.facebook or site.theme_settings.facebook %}
-<li>
-    <a href="https://www.facebook.com/{{ site.data.social.facebook }}"
-       title="{{ site.data.language.str_follow_on }} Facebook">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign fb_url = "https://www.facebook.com/" | append: site.data.social.facebook %}
+{% assign fb_on = site.data.social.facebook or site.theme_settings.facebook %}
+{% include social/icon_partial.html isDisplayed=fb_on url=fb_url social="Facebook" %}
 
-{% if site.data.social.flickr or site.theme_settings.flickr %}
-<li>
-    <a href="https://www.flickr.com/photos/{{ site.data.social.flickr }}"
-       title="{{ site.data.language.str_follow_on }} Flickr">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-flickr fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign fk_url = "https://flickr.com/photos/" | append: site.data.social.flickr %}
+{% assign fk_on = site.data.social.flickr or site.theme_settings.flickr %}
+{% include social/icon_partial.html isDisplayed=fk_on url=fk_url social="Flickr" %}
 
-{% if site.data.social.github or site.theme_settings.github %}
-<li>
-    <a href="https://github.com/{{ site.data.social.github }}"
-       title="{{ site.data.language.str_follow_on }} GitHub">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign gh_url = "https://github.com/" | append: site.data.social.github %}
+{% assign gh_on = site.data.social.github or site.theme_settings.github %}
+{% include social/icon_partial.html isDisplayed=gh_on url=gh_url social="GitHub" %}
 
-{% if site.data.social.instagram or site.theme_settings.instagram %}
-<li>
-    <a href="http://instagram.com/{{ site.data.social.instagram }}"
-       title="{{ site.data.language.str_follow_on }} Instagram">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign ig_url = "https://instagram.com/" | append: site.data.social.instagram %}
+{% assign ig_on = site.data.social.instagram or site.theme_settings.instagram %}
+{% include social/icon_partial.html isDisplayed=ig_on url=ig_url social="instagram" %}
 
-{% if site.data.social.keybase or site.theme_settings.keybase %}
-<li>
-    <a href="https://keybase.io/{{ site.data.social.keybase }}"
-       title="{{ site.data.language.str_follow_on }} Keybase">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-keybase fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign kb_url = "https://keybase.io/" | append: site.data.social.keybase %}
+{% assign kb_on = site.data.social.keybase or site.theme_settings.keybase %}
+{% include social/icon_partial.html isDisplayed=kb_on url=kb_url social="Keybase" %}
 
-{% if site.data.social.linkedin or site.theme_settings.linkedin %}
-<li>
-    <a href="{{ site.data.social.linkedin }}"
-       title="{{ site.data.language.str_follow_on }} LinkedIn">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign se_url = site.data.social.linkedin %}
+{% assign se_on = site.data.social.linkedin or site.theme_settings.linkedin %}
+{% include social/icon_partial.html isDisplayed=se_on url=se_url social="Linkedin" %}
 
-{% if site.data.social.pinterest or site.theme_settings.pinterest %}
-<li>
-    <a href="http://www.pinterest.com/{{ site.data.social.pinterest }}"
-       title="{{ site.data.language.str_follow_on }} Pinterest">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-pinterest fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign pi_url = "https://www.pinterest.com/" | append: site.data.social.pinterest %}
+{% assign pi_on = site.data.social.pinterest or site.theme_settings.pinterest %}
+{% include social/icon_partial.html isDisplayed=pi_on url=pi_url social="Pinterest" %}
 
-{% if site.data.social.reddit or site.theme_settings.reddit %}
-<li>
-    <a href="https://www.reddit.com/user/{{ site.data.social.reddit }}"
-       title="{{ site.data.language.str_follow_on }} Reddit">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-reddit fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign rd_url = "https://www.reddit.com/user/" | append: site.data.social.reddit %}
+{% assign rd_on = site.data.social.reddit or site.theme_settings.reddit %}
+{% include social/icon_partial.html isDisplayed=rd_on url=rd_url social="Reddit" %}
 
-{% if site.data.social.soundcloud or site.theme_settings.soundcloud %}
-<li>
-    <a href="https://soundcloud.com/{{ site.data.social.soundcloud }}"
-       title="{{ site.data.language.str_follow_on }} SoundCloud">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-soundcloud fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign sc_url = "https://soundcloud.com/" | append: site.data.social.soundcloud %}
+{% assign sc_on = site.data.social.soundcloud or site.theme_settings.soundcloud %}
+{% include social/icon_partial.html isDisplayed=sc_on url=sc_url social="SoundCloud" %}
 
-{% if site.data.social.stack_exchange or site.theme_settings.stack_exchange %}
-<li>
-    <a href="{{ site.data.social.stack_exchange }}"
-       title="{{ site.data.language.str_follow_on }} Stack Exchange">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-stack-exchange fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign se_url = site.data.social.stack_exchange %}
+{% assign se_on = site.data.social.stack_exchange or site.theme_settings.stack_exchange %}
+{% include social/icon_partial.html isDisplayed=se_on url=se_url social="Stack-Exchange" %}
 
-{% if site.data.social.stack_overflow or site.theme_settings.stack_overflow %}
-<li>
-    <a href="{{ site.data.social.stack_overflow }}"
-       title="{{ site.data.language.str_follow_on }} Stack Overflow">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign so_url = site.data.social.stack_overflow %}
+{% assign so_on = site.data.social.stack_overflow or site.theme_settings.stack_overflow %}
+{% include social/icon_partial.html isDisplayed=so_on url=so_url social="Stack-Overflow" %}
 
-{% if site.data.social.steam or site.theme_settings.steam %}
-<li>
-    <a href="http://steamcommunity.com/id/{{ site.data.social.steam }}"
-       title="{{ site.data.language.str_follow_on }} Steam">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-steam fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign st_url = "http://steamcommunity.com/id/" | append: site.data.social.steam %}
+{% assign st_on = site.data.social.steam or site.theme_settings.steam %}
+{% include social/icon_partial.html isDisplayed=st_on url=st_url social="Steam" %}
 
-{% if site.data.social.tumblr or site.theme_settings.tumblr %}
-<li>
-    <a href="http://{{ site.data.social.tumblr }}.tumblr.com/"
-       title="{{ site.data.language.str_follow_on }} Tumblr">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-tumblr fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign tb_url = "https://" | append: site.data.social.tumblr | append: ".tumblr.com/" %}
+{% assign tb_on = site.data.social.tumblr or site.theme_settings.tumblr %}
+{% include social/icon_partial.html isDisplayed=tb_on url=tb_url social="Tumblr" %}
 
-{% if site.data.social.gitlab or site.theme_settings.gitlab %}
-<li>
-    <a href="https://gitlab.com/{{ site.data.social.gitlab }}"
-       title="{{ site.data.language.str_follow_on }} Gitlab">
-        <span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-gitlab fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign gl_url = "https://gitlab.com/" | append: site.data.social.gitlab %}
+{% assign gl_on = site.data.social.gitlab or site.theme_settings.gitlab %}
+{% include social/icon_partial.html isDisplayed=gl_on url=gl_url social="Gitlab" %}
 
-{% if site.data.social.twitter or site.theme_settings.twitter %}
-<li>
-    <a class="type" href="https://twitter.com/{{ site.data.social.twitter }}"
-       title="{{ site.data.language.str_follow_on }} Twitter">
-        <span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign tw_url = "https://twitter.com/" | append: site.data.social.twitter %}
+{% assign tw_on = site.data.social.twitter or site.theme_settings.twitter %}
+{% include social/icon_partial.html isDisplayed=tw_on url=tw_url social="Twitter" %}
 
-{% if site.data.social.vimeo or site.theme_settings.vimeo %}
-<li>
-    <a class="type" href="https://vimeo.com/{{ site.data.social.vimeo }}"
-       title="{{ site.data.language.str_follow_on }} Vimeo">
-        <span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-vimeo fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign v_url = "https://vimeo.com/" | append: site.data.social.vimeo %}
+{% assign v_on = site.data.social.vimeo or site.theme_settings.vimeo %}
+{% include social/icon_partial.html isDisplayed=v_on url=v_url social="Vimeo" %}
 
-{% if site.data.social.wordpress or site.theme_settings.wordpress %}
-<li>
-    <a href="https://{{ site.data.social.wordpress }}.wordpress.com/"
-       title="{{ site.data.language.str_follow_on }} WordPress">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-wordpress fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign wp_url = "https://" | append: site.data.social.wordpress | append: ".wordpress.com/" %}
+{% assign wp_on = site.data.social.wordpress or site.theme_settings.wordpress %}
+{% include social/icon_partial.html isDisplayed=wp_on url=wp_url social="WordPress" %}
 
-{% if site.data.social.youtube or site.theme_settings.youtube %}
-<li>
-    <a href="https://www.youtube.com/channel/{{ site.data.social.youtube }}"
-       title="{{ site.data.language.str_follow_on }} YouTube">
-		<span class="fa-stack fa-lg">
-            <i class="fas fa-circle fa-stack-2x"></i>
-            <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
-        </span>
-    </a>
-</li>
-{% endif %}
+{% assign yt_url = "https://www.youtube.com/channel/" | append: site.data.social.youtube %}
+{% assign yt_on = site.data.social.youtube or site.theme_settings.youtube %}
+{% include social/icon_partial.html isDisplayed=yt_on url=yt_url social="Youtube" %}
