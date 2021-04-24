@@ -35,7 +35,7 @@
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
         
-        {% if site.dark_mode %}
+        {% if site.color_theme == 'auto' %}
         <li class="separator"> | </li>
         <li><a id="theme-toggle" onclick="themeToggle()"></a></li>
         {% endif %}

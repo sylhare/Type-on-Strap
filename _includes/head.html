@@ -15,8 +15,12 @@
     <link rel="alternate" type="application/atom+xml" title="{{ site.title | default: 'Title' }}" href="{{ 'feed.xml' | absolute_url }}"/>
 
     <!-- Dark Mode -->
-    {% if site.dark_mode %}
-    <script src="{{ '/assets/js/vendor/dark-mode.min.js' | relative_url }}" type="text/javascript"></script> 
+    {% if site.color_theme == 'auto' %}
+    <script src="{{ '/assets/js/vendor/dark-mode.js' | relative_url }}" type="text/javascript"></script> 
+    {% elsif site.color_theme == 'light' %}
+    <script>document.documentElement.setAttribute('data-theme', 'light')</script>
+    {% elsif site.color_theme == 'dark' %}
+    <script>document.documentElement.setAttribute('data-theme', 'dark')</script>
     {% endif %}
 
     {% if page.bootstrap %}
