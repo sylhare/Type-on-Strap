@@ -53,28 +53,29 @@ function themeToggle() {
 
 /* MAIN
    ---- */
+window.onload = function bootstrapTheme() {
+    // check for session stored preference (string)
+    let sessionPrefers = sessionStorage.getItem('theme')
 
-// check for session stored preference (string)
-let sessionPrefers = sessionStorage.getItem('theme')
+    // check if browser prefers dark theme (boolean)
+    // FIXME: method is deprecated but still working
+    // https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/addListener
+    let browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)'); 
 
-// check if browser prefers dark theme (boolean)
-// FIXME: method is deprecated but still working
-// https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/addListener
-let browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)'); 
+    // if there's no session preference check if browser prefers dark
+    if (!sessionPrefers) {
+        browserPrefersDark.addListener(browserPrefers)
+    }
 
-// if there's no session preference check if browser prefers dark
-if (!sessionPrefers) {
-    browserPrefersDark.addListener(browserPrefers)
-}
+    // if still no preference is found, set it to light (default)
+    if (!sessionPrefers) {
+        sessionPrefers = 'light'
+    }
 
-// if still no preference is found, set it to light (default)
-if (!sessionPrefers) {
-    sessionPrefers = 'light'
-}
-
-// check what the session prefers
-if (sessionPrefers === 'dark') {
-    setMode('dark')
-} else if (sessionPrefers === 'light') {
-    setMode('light')
+    // check what the session prefers
+    if (sessionPrefers === 'dark') {
+        setMode('dark')
+    } else if (sessionPrefers === 'light') {
+        setMode('light')
+    }
 }
