@@ -26,6 +26,7 @@ katex: true                                             # Enable if using math m
 mermaid: true                                           # Enable mermaid-js for sequence and diagrams
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
+dark_mode: true                                         # Enable dark mode feature ('toggleable') 
 disqus_shortname:                                       # Your discus shortname for comments
 
 # PAGINATION

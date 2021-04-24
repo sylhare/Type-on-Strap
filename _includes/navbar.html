@@ -34,8 +34,11 @@
             {% endunless %}
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
+        
+        {% if site.dark_mode %}
         <li class="separator"> | </li>
         <li><a id="theme-toggle" onclick="themeToggle()"></a></li>
+        {% endif %}
     </ul>
 
 	</nav>
