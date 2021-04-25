@@ -4,7 +4,7 @@
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
 
-[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
+[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily cusomizable:
 
