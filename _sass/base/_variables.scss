@@ -86,40 +86,34 @@ $base0f: #FF5370 !default; // Deprecated, Opening/Closing Embedded Language Tags
 and load light theme otherwise. Also support switching through schemes by a button. */
 html, html[data-theme="light"] {
     --background:   #ffffff; //
-    --text-shadow:   #3f3f3f; //
     --blockquote:   #eef7fa; //
     --selection:   #d4d4d4; //
     --meta:   #595959; //
-    --link-header:   #383838; //
-    --text:   #262626; //
     --text-header:   #ffffff; //
-    --red:     #d40059; //
-    --orange:  #3f3f3f; //
-    --yellow:  #d9b600; //
-    --green:   #6bac00; //
-    --link-text:    #337ab7; //
-    --magenta: #b37eff; //
-    --cyan:    #00af9e; //
-    --pink:    #ff66c2; //
+    --text-shadow:   #3f3f3f; //
+    --text:   #262626; //
+    --link-header:   #383838; //
+    --link:    #337ab7; //
+    --h2:     #262626; //
+    --h3:#262626; //
+    --h4:    #262626; //
+    --h5:   #262626; //
     --border:  rgba(0, 0, 0, 0.1); //
 }
 
 html[data-theme="dark"] {
     --background:   #22272e; // brand, background
-    --text-shadow:   #2d333b; // text shadow
     --blockquote:   #373e47; // blockquote
     --selection:   #545d68; // selection
     --meta:   #909dab; // meta
-    --link-header:   #adbac7; // header link, search color
-    --text:   #cdd9e5; // text
     --text-header:   #e7f3f4; // header text, feature img text
-    --red:     #d40059; //
-    --orange:  #ff5c00; //
-    --yellow:  #d9b600; //
-    --green:   #6bac00; //
-    --link-text:    #00a8e0; // theme, link, link shadow header bg
-    --magenta: #b37eff; //
-    --cyan:    #00af9e; //
-    --pink:    #ff66c2; //
+    --text-shadow:   #2d333b; // text shadow
+    --text:   #cdd9e5; // text
+    --link-header:   #adbac7; // header link, search color
+    --link:    #00a8e0; // theme, link, link shadow header bg
+    --h2:     #d40059; //
+    --h3: #ff66c2; //
+    --h4:    #00af9e; //
+    --h5:   #6bac00; //
     --border: rgba(0, 0, 0, 0.1); // border
 }

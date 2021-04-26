@@ -64,8 +64,8 @@ a.button {
 
 .button-link {
   &:hover {
-    background: var(--link-text);
-    border: 1px solid var(--link-text);
+    background: var(--link);
+    border: 1px solid var(--link);
     color: var(--background);
     text-decoration: none;
   }
@@ -74,7 +74,7 @@ a.button {
 .body-link {
   &:hover {
     text-decoration: underline;
-    color: var(--link-text);
+    color: var(--link);
     filter: brightness(0.85);
   }
 }
@@ -82,7 +82,7 @@ a.button {
 .post-link {
   &:hover {
     text-decoration: none;
-    color: var(--link-text);
+    color: var(--link);
     filter: brightness(1.1);
   }
 }
