@@ -46,7 +46,7 @@ header {
 }
 
 .meta {
-  color: var(--meta); // rgba(var(--gray7), .65);
+  color: var(--meta);
   letter-spacing: 0.1em;
   margin: 0;
   text-transform: uppercase;
@@ -97,7 +97,8 @@ header {
     padding: $padding-large/2.5 $padding-large;
 
     .meta {
-      color: rgba(var(--header-text), .7);
+      color: var(--header-text);
+      filter: opacity(0.7);
     }
   }
 
