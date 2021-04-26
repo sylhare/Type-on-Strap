@@ -4,10 +4,14 @@
 
     <!-- Theme Mode-->
     {% if site.color_theme == 'auto' %}
-    <script>var isAutoTheme = true</script>
+    <script>
+        const isAutoTheme = true;
+        document.documentElement.setAttribute('data-theme', sessionStorage.getItem('theme'))
+    </script>
     {% else %}
-    <script>var isAutoTheme = false
-        document.documentElement.setAttribute('data-theme', '{{ site.color_theme }}')
+    <script>
+        const isAutoTheme = false;
+        document.documentElement.setAttribute('data-theme', "{{ site.color_theme | default: 'light' }}")
     </script>
     {% endif %}
 
