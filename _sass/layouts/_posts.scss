@@ -84,7 +84,7 @@ header {
   padding: 0;
 
   .post-link {
-    color: var(--text-header);
+    color: var(--header-text);
   }
 
   h1.title, .post-info {
@@ -92,12 +92,12 @@ header {
   }
 
   header {
-    color: var(--text-header);
+    color: var(--header-text);
     margin-bottom: 0;
     padding: $padding-large/2.5 $padding-large;
 
     .meta {
-      color: rgba(var(--text-header), .7);
+      color: rgba(var(--header-text), .7);
     }
   }
 

@@ -26,7 +26,7 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 300px;
 
-/* BASE16 HIGHLIGHT*/
+/* BASE16 HIGHLIGHT */
 // base16 Material Theme
 $base00: #302f2d !default; // Default Background
 $base01: #2E3C43 !default; // Lighter Background (Used for status bars) - NOT USED
@@ -81,19 +81,18 @@ $base0f: #FF5370 !default; // Deprecated, Opening/Closing Embedded Language Tags
 //$base0e: #ae81ff !default; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
 //$base0f: #cc6633 !default; // Deprecated, Opening/Closing Embedded Language Tags e.g.
 
-/* COLOR SCHEMES */
-/* Load by default dark scheme in systems supporting 'prefers-colors-scheme: dark'
-and load light theme otherwise. Also support switching through schemes by a button. */
+/* THEME COLOR SCHEMES */
 html, html[data-theme="light"] {
   --background: #ffffff;
   --blockquote: #eef7fa;
   --selection: #d4d4d4;
   --meta: #595959;
-  --link-header: #383838;
   --link: #337ab7;
+  --header-background: #24292e;
+  --header-text: #ffffff;
+  --header-link: #383838;
   --code-background: #E0E0E0;
-  --text-code: #24292e;
-  --text-header: #ffffff;
+  --code-inline: #24292e;
   --text-shadow: #3f3f3f;
   --text: #262626;
   --h2: #262626;
@@ -108,11 +107,12 @@ html[data-theme="dark"] {
   --blockquote: #373e47; // blockquote
   --selection: #545d68; // selection
   --meta: #909dab; // meta
-  --link-header: #adbac7; // header link, search color
   --link: #00a8e0; // theme, link, link shadow header bg
+  --header-background: #2A3444; // Color before header image load
+  --header-text: #e7f3f4; // header text, feature img text
+  --header-link: #adbac7; // header link, search color
   --code-background: #2A3444;
-  --text-code: #d9b600;
-  --text-header: #e7f3f4; // header text, feature img text
+  --code-inline: #d9b600;
   --text-shadow: #2d333b; // text shadow
   --text: #cdd9e5; // text
   --h2: #d40059;
