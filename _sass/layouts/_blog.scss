@@ -6,9 +6,10 @@
   height: 100%;
   font-size: 1.2em;
   text-align: center;
-  color: $header-text-color;
-  background: no-repeat $header-background-color;
-  background-size: $feature-image-size;
+  color: var(--header-text);
+  background: no-repeat var(--header-background);
+  backdrop-filter: brightness(0.5);
+  background-size: cover;
 
   h1 {
     font-family: $font-family-logo;
@@ -44,8 +45,8 @@
     width: 100%;
     margin-bottom: 0;
     display: inline-block;
-    background-size: $feature-image-size;
-    border-bottom: 1px solid $border-color;
+    background-size: cover;
+    border-bottom: 1px solid var(--border);
 
     p a {
       @extend .body-link;

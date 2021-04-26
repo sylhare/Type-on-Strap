@@ -14,20 +14,20 @@ figure {
 }
 
 html {
-  background: $background-color;
+  background: var(--background);
 }
 
 // Typography
 ::selection {
-  background: $selection-color;
+  background: var(--selection);
 }
 
 ::-moz-selection {
-  background: $selection-color;
+  background: var(--selection);
 }
 
 body {
-  color: $text-color;
+  color: var(--text);
   font-family: $font-family-main;
   font-size: $font-size;
   word-wrap: break-word;
@@ -44,7 +44,7 @@ h6 {
   margin: 0.67em 0;
 
   a {
-    color: $text-color;
+    color: var(--text);
   }
 
 }
@@ -142,11 +142,11 @@ img[align=right] {
 }
 
 blockquote {
-  border-left: 2px solid darken($blockquote-color, 20%);
+  border-left: 2px solid #9fd2e3;
   margin: 1em 1em;
   padding: 0.75em 1em;
-  background-color: $blockquote-color;
-  box-shadow: 0 2px 2px $border-color;
+  background-color: var(--blockquote);
+  box-shadow: 0 2px 2px var(--border);
 }
 
 blockquote *:last-child,
@@ -164,7 +164,7 @@ table {
 td,
 th {
   padding: 0.5em 1em;
-  border: 1px solid $border-color;
+  border: 1px solid var(--border);
   text-align: left;
 }
 
@@ -220,13 +220,13 @@ ul {
 
 hr {
   border: 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border);
   border-bottom: 1px solid #fff;
   margin: 1em 0;
 }
 
 a {
-  color: $link-color;
+  color: var(--link);
   text-decoration: none;
 }
 

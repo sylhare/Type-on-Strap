@@ -1,21 +1,24 @@
-// Typography
+/* TYPOGRAPHY */
 $font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-logo: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
-// Padding
+$monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
+$font-size-code: 0.85em !default;
+$font-height-code: 1.3em !default;
+$border-radius: 4px !default;
+
+/* PADDING */
 $padding-x-large: 23%;
 $padding-large: 9%;
 $padding-medium: 6%;
 $padding-small: 4%;
 $padding-x-small: 3%;
-
-// Sepcific Padding
 $title-padding: 1%;
 $feature-image-padding: 10%;
 
-// Mobile display
+/* MOBILE */
 $xl-break: 2000px;
 $l-break: 1400px;
 $m-break: 1000px;
@@ -23,42 +26,7 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 300px;
 
-// Brand colours
-$theme-color: #337ab7;
-$brand-color: #fff;
-$background-color: #fff;
-$border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
-
-// Typography colours
-$text-color: #262626;
-$meta: #595959; //lowest gray for accessible color
-$link-color: $theme-color;
-$selection-color: #D4D4D4; // visible when highlighting text
-$blockquote-color: #EEF7FA; // $background-color;
-
-// Header
-$header-background-color: darken($theme-color, 50%); // Only used when no header image
-$header-text-color: #fff;
-$header-link-color: #383838;
-$navbar-separator-opacity: 0;
-
-// Feature image for articles
-$feature-image-text-color: #fff;
-$feature-image-size: cover; // options include "cover", "contain", "auto"
-
-//Search colours
-$link-shadow: transparentize($link-color, .6); //rgba(26, 188, 156, 0.6);
-$text-shadow: #3f3f3f;
-$search-color: #999;
-
-
-/*  Syntax highlighting  */
-// Syntax typography
-$monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
-$font-size-code: 0.85em !default;
-$font-height-code: 1.3em !default;
-$border-radius: 4px !default;
-
+/* BASE16 HIGHLIGHT */
 // base16 Material Theme
 $base00: #302f2d !default; // Default Background
 $base01: #2E3C43 !default; // Lighter Background (Used for status bars) - NOT USED
@@ -76,6 +44,24 @@ $base0c: #89DDFF !default; // Support, Regular Expressions, Escape Characters, M
 $base0d: #82AAFF !default; // Keywords, Storage, Selector, Markup Italic, Diff Changed
 $base0e: #C792EA !default; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
 $base0f: #FF5370 !default; // Deprecated, Opening/Closing Embedded Language Tags e.g.
+
+// base16 Supernova Theme
+//$base00: #373e47; // Default Background
+//$base01: #444c56; // Lighter Background (Used for status bars, line number and folding marks)
+//$base02: #545d68; // Selection Background
+//$base03: #909dab; // Comments, Invisible, Line Highlighting
+//$base04: #adbac7; // Dark Foreground (Used for status bars)
+//$base05: #cdd9e5; // Default Foreground, Caret, Delimiters, Operators
+//$base06: #e7f3f4; // Light Foreground (Not often used)
+//$base07: #ffffff; // Light Background (Not often used)
+//$base08: #d40059; // Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+//$base09: #ff5c00; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
+//$base0a: #d9b600; // Classes, Markup Bold, Search Text Background
+//$base0b: #6bac00; // Strings, Inherited Class, Markup Code, Diff Inserted
+//$base0c: #00a8e0; // Support, Regular Expressions, Escape Characters, Markup Quotes
+//$base0d: #b37eff; // Functions, Methods, Attribute IDs, Headings
+//$base0e: #00af9e; // Keywords, Storage, Selector, Markup Italic, Diff Changed
+//$base0f: #ff66c2; // Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 
 // base16 Monokai
 //$base00: #272822 !default; // Default Background
@@ -95,3 +81,43 @@ $base0f: #FF5370 !default; // Deprecated, Opening/Closing Embedded Language Tags
 //$base0e: #ae81ff !default; // Integers, Boolean, Constants, XML Attributes, Markup Link Url
 //$base0f: #cc6633 !default; // Deprecated, Opening/Closing Embedded Language Tags e.g.
 
+/* THEME COLOR SCHEMES */
+html, html[data-theme="light"] {
+  --background: #ffffff;
+  --blockquote: #eef7fa;
+  --selection: #d4d4d4;
+  --meta: #595959;
+  --link: #337ab7;
+  --header-background: #24292e;
+  --header-text: #ffffff;
+  --header-link: #383838;
+  --code-background: #E0E0E0;
+  --code-inline: #24292e;
+  --text-shadow: #3f3f3f;
+  --text: #262626;
+  --h2: #262626;
+  --h3: #262626;
+  --h4: #262626;
+  --h5: #262626;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="dark"] {
+  --background: #22272e; // brand, background
+  --blockquote: #373e47; // blockquote
+  --selection: #545d68; // selection
+  --meta: #909dab; // meta
+  --link: #00a8e0; // theme, link, link shadow header bg
+  --header-background: #2A3444; // Color before header image load
+  --header-text: #e7f3f4; // header text, feature img text
+  --header-link: #adbac7; // header link, search color
+  --code-background: #2A3444;
+  --code-inline: #d9b600;
+  --text-shadow: #2d333b; // text shadow
+  --text: #cdd9e5; // text
+  --h2: #d40059;
+  --h3: #ff66c2;
+  --h4: #00af9e;
+  --h5: #6bac00;
+  --border: rgba(0, 0, 0, 0.1); // border
+}

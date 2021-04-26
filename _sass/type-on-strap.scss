@@ -1,11 +1,11 @@
+// Variables
+@import 'base/variables';
 // External
 @import 'external/reset';
 @import 'external/font-awesome';
 @import 'external/pacifico';
 @import 'external/katex';
 @import 'external/source-sans-pro';
-// Variables
-@import 'base/variables';
 // Base
 @import 'base/global';
 @import 'base/highlight';
@@ -19,6 +19,7 @@
 @import 'includes/share_buttons';
 @import 'includes/blog_nav';
 @import 'includes/cookie_consent';
+@import 'includes/mermaid';
 // Posts
 @import 'layouts/posts';
 @import 'layouts/blog';

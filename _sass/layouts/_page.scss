@@ -11,7 +11,7 @@ h1.title {
 .subtitle {
   font-weight: normal;
   margin-top: 5px;
-  text-shadow: 1px 1px 2px $text-shadow;
+  text-shadow: 1px 1px 2px var(--text-shadow);
 }
 
 //Shared css in _post.scss

@@ -18,6 +18,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * 🖋 Nice fonts: [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
 * Seo Tags: [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
 * 🛠 Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
+* 💡 Light and dark theme supported
 * Find free of rights images on [pexels](https://www.pexels.com/)
 
 > [Demo Site](https://sylhare.github.io/Type-on-Strap/)
@@ -44,7 +45,7 @@ Check out this tutorial: [Use as Ruby Gem](https://github.com/Sylhare/Type-on-St
 2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
 3. Install the theme's dependencies: `bundle install`
 4. Customize the theme
-	- Github Page: [update `_config.yml`](https://github.com/Sylhare/Type-on-Strap#site-configuration)
+	- GitHub Page: [update `_config.yml`](https://github.com/Sylhare/Type-on-Strap#site-configuration)
 5. Run the Jekyll server: `bundle exec jekyll serve`
 
 ## Structure
@@ -87,7 +88,7 @@ If a variable in this document is marked as "optional", disable the feature by r
 
 ### Site configuration
 
-Configure Jekyll as your own blog or with a "baseurl" in in `_config.yml`:
+Configure Jekyll as your own blog or with a "baseurl" in `_config.yml`:
 
 Jekyll website *without* a "baseurl" (such as a GitHub Pages website for a given username):
 
@@ -117,9 +118,12 @@ title: My Jekyll Blog                 # Name of website
 avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
 description: My blog posts            # Short description, primarily used by search engines
 favicon: assets/favicon.ico           # Icon displayed in the tab
+color_theme: auto                     # color theme auto, dark or light
 ```
 
 You can also customize the seo tags default option following the jekyll-seo-tag plugin [documentation](http://jekyll.github.io/jekyll-seo-tag/advanced-usage/).
+The color theme can be set to dark or light (customize it in _variables.scss_). 
+Using _auto_ you'll have a tiny icon in the navbar allowing the use to manually switch from dark to light theme.
 
 ### Theme customization 🎨
 
@@ -140,7 +144,7 @@ If you don't want anything, replace the value by `" "`.
 Localization string is a way to quickly change the template language for text like *Next Post* or *Follow on*, ...
 You can find all the properties in `_data/language.yml`.
 
-By default it is in english, but you can easily add your own language.
+By default, it is in english, but you can easily add your own language.
 
 ### Google Analytics
 
@@ -168,7 +172,7 @@ disqus_shortname: my_disqus_shortname
 When KateX is set in `_config.yml`:
 
 ```yml
-katex: true # to Enable it
+katex: true # to enable it
 ```
 
 You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable 
@@ -254,7 +258,7 @@ Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/po
 
 #### Layout: Post
 
-This are the basic features you can use with the  `post` layout.
+These are the basic features you can use with the `post` layout.
 
 ```yml
 
@@ -305,7 +309,7 @@ some text in the excerpt
 ... rest of the text not shown in the excerpt ...
 ```
 
-The html is stripped out of the excerpt so it only display text.
+The html is stripped out of the excerpt, so it only displays text.
 
 #### Image aligner
 
@@ -315,8 +319,8 @@ To easily add align images side by side in your article using the `aligner.html`
 {% include aligner.html images="path/to/img1.png,path/to/img2.png,path/to/img3.png" column=3 %}
 ```
 
-Use it in any markdown file. There are two fields in the include you need to look into:
-  - _images_: Takes a string separated with `,` of all the images path. 
+Use it in any markdown file. There are two fields in the _include_ you need to look into:
+  - _images_: Takes a string separated with `,` of all the images' path. 
     - It by default look into `assets/img/` so give the path from there.
   - _column_: (OPTIONAL) Set the number of column you want your imaged displayed in.
     - default is 2 columns

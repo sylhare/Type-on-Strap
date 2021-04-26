@@ -15,14 +15,14 @@
 
 .site-header {
   padding: 2% 2% 1% 2%;
-  background: $brand-color;
+  background: var(--background);
   display: inline-block;
   float: left;
   width: 100%;
 
   .separator {
     user-select: none;
-    opacity: $navbar-separator-opacity;
+    opacity: 0;
 
     &:first-child {
       display: none;
@@ -30,7 +30,7 @@
   }
 
   a {
-    color: $header-link-color;
+    color: var(--header-link);
   }
 
   .avatar {
@@ -75,7 +75,7 @@ nav {
 
   a {
     &:hover {
-      color: $link-color;
+      color: var(--link);
     }
 
     &#pull {
@@ -137,10 +137,11 @@ nav {
       text-align: center;
       font-size: 1em;
       position: relative;
-      background-color: darken($background-color, 2%);
+      background-color: var(--background);
+      backdrop-filter: brightness(0.98);
 
       &:nth-of-type(4n) {
-        background-color: $background-color;
+        background-color: var(--background);
       }
 
       a {
