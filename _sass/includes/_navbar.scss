@@ -15,7 +15,7 @@
 
 .site-header {
   padding: 2% 2% 1% 2%;
-  background: var(--gray0);
+  background: var(--background);
   display: inline-block;
   float: left;
   width: 100%;
@@ -30,7 +30,7 @@
   }
 
   a {
-    color: var(--gray6);
+    color: var(--link-header);
   }
 
   .avatar {
@@ -75,7 +75,7 @@ nav {
 
   a {
     &:hover {
-      color: var(--blue);
+      color: var(--link-text);
     }
 
     &#pull {
@@ -137,11 +137,11 @@ nav {
       text-align: center;
       font-size: 1em;
       position: relative;
-      background-color: var(--gray0);
+      background-color: var(--background);
       backdrop-filter: brightness(0.98);
 
       &:nth-of-type(4n) {
-        background-color: var(--gray0);
+        background-color: var(--background);
       }
 
       a {

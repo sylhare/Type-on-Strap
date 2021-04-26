@@ -14,20 +14,20 @@ figure {
 }
 
 html {
-  background: var(--gray0);
+  background: var(--background);
 }
 
 // Typography
 ::selection {
-  background: var(--gray4);
+  background: var(--selection);
 }
 
 ::-moz-selection {
-  background: var(--gray4);
+  background: var(--selection);
 }
 
 body {
-  color: var(--gray7);
+  color: var(--text);
   font-family: $font-family-main;
   font-size: $font-size;
   word-wrap: break-word;
@@ -44,7 +44,7 @@ h6 {
   margin: 0.67em 0;
 
   a {
-    color: var(--gray7);
+    color: var(--text);
   }
 
 }
@@ -142,10 +142,10 @@ img[align=right] {
 }
 
 blockquote {
-  border-left: 2px solid var(--gray2);
+  border-left: 2px solid #9fd2e3;
   margin: 1em 1em;
   padding: 0.75em 1em;
-  background-color: var(--gray2);
+  background-color: var(--blockquote);
   box-shadow: 0 2px 2px var(--border);
 }
 
@@ -226,7 +226,7 @@ hr {
 }
 
 a {
-  color: var(--blue);
+  color: var(--link-text);
   text-decoration: none;
 }
 

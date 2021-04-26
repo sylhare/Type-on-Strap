@@ -5,8 +5,8 @@
   padding: 6px 12px;
   font-size: 18px;
   line-height: 1.43;
-  color: var(--gray7);
-  background: var(--gray0) none;
+  color: var(--text);
+  background: var(--background) none;
   border: 1px solid #ccc;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -17,20 +17,20 @@
 
   &:focus,
   &:hover {
-    border-color: var(--blue);
+    border-color: var(--link-text);
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--blue), .6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--blue), .6);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--link-text), .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--link-text), .6);
   }
 
   &::-moz-placeholder {
-    color: var(--gray5);
+    color: var(--meta);
     opacity: 0.7;
   }
 
   &:-ms-input-placeholder,
   &::-webkit-input-placeholder {
-    color: var(--gray5);
+    color: var(--meta);
     opacity: 0.7;
   }
 

@@ -4,7 +4,7 @@
   display: inline-block;
   text-align: center;
   width: 100%;
-  color: var(--gray5);
+  color: var(--meta);
   font-size: 0.9em;
 
   .footer-icons {
@@ -17,17 +17,17 @@
       }
     
       a {
-        color: var(--blue);
+        color: var(--link-text);
       }
 
       @media (prefers-color-scheme: dark) {
         a {
-         color: var(--gray5);
+         color: var(--meta);
         }
       }
 
       a:hover {
-        color: var(--blue);
+        color: var(--link-text);
         filter: brightness(0.85);
       }
     }

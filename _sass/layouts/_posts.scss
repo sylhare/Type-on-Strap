@@ -46,7 +46,7 @@ header {
 }
 
 .meta {
-  color: var(--gray5); // rgba(var(--gray7), .65);
+  color: var(--meta); // rgba(var(--gray7), .65);
   letter-spacing: 0.1em;
   margin: 0;
   text-transform: uppercase;
@@ -84,7 +84,7 @@ header {
   padding: 0;
 
   .post-link {
-    color: var(--gray8);
+    color: var(--text-header);
   }
 
   h1.title, .post-info {
@@ -92,12 +92,12 @@ header {
   }
 
   header {
-    color: var(--gray8);
+    color: var(--text-header);
     margin-bottom: 0;
     padding: $padding-large/2.5 $padding-large;
 
     .meta {
-      color: rgba(var(--gray8), .7);
+      color: rgba(var(--text-header), .7);
     }
   }
 

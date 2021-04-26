@@ -85,21 +85,19 @@ $base0f: #FF5370 !default; // Deprecated, Opening/Closing Embedded Language Tags
 /* Load by default dark scheme in systems supporting 'prefers-colors-scheme: dark'
 and load light theme otherwise. Also support switching through schemes by a button. */
 html, html[data-theme="light"] {
-    --gray0:   #ffffff; //
-    --gray1:   #3f3f3f; //
-    --gray2:   #373e47; //
-    --gray3:   #444c56; //
-    --gray4:   #d4d4d4; //
-    --gray5:   #595959; //
-    --gray6:   #383838; //
-    --gray7:   #262626; //
-    --gray8:   #ffffff; //
-    --gray9:   #ffffff; //
+    --background:   #ffffff; //
+    --text-shadow:   #3f3f3f; //
+    --blockquote:   #eef7fa; //
+    --selection:   #d4d4d4; //
+    --meta:   #595959; //
+    --link-header:   #383838; //
+    --text:   #262626; //
+    --text-header:   #ffffff; //
     --red:     #d40059; //
     --orange:  #3f3f3f; //
     --yellow:  #d9b600; //
     --green:   #6bac00; //
-    --blue:    #337ab7; //
+    --link-text:    #337ab7; //
     --magenta: #b37eff; //
     --cyan:    #00af9e; //
     --pink:    #ff66c2; //
@@ -107,21 +105,19 @@ html, html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
-    --gray0:   #22272e; // brand, background
-    --gray1:   #2d333b; // text shadow
-    --gray2:   #373e47; // blockquote
-    --gray3:   #444c56; //
-    --gray4:   #545d68; // selection
-    --gray5:   #909dab; // meta
-    --gray6:   #adbac7; // header link, search color
-    --gray7:   #cdd9e5; // text
-    --gray8:   #e7f3f4; // header text, feature img text
-    --gray9:   #ffffff; //
+    --background:   #22272e; // brand, background
+    --text-shadow:   #2d333b; // text shadow
+    --blockquote:   #373e47; // blockquote
+    --selection:   #545d68; // selection
+    --meta:   #909dab; // meta
+    --link-header:   #adbac7; // header link, search color
+    --text:   #cdd9e5; // text
+    --text-header:   #e7f3f4; // header text, feature img text
     --red:     #d40059; //
     --orange:  #ff5c00; //
     --yellow:  #d9b600; //
     --green:   #6bac00; //
-    --blue:    #00a8e0; // theme, link, link shadow header bg
+    --link-text:    #00a8e0; // theme, link, link shadow header bg
     --magenta: #b37eff; //
     --cyan:    #00af9e; //
     --pink:    #ff66c2; //
