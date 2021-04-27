@@ -137,8 +137,19 @@ header {
 }
 
 .post-content {
-  h2 { color: var(--h2); }
-  h3 { color: var(--h3); }
-  h4 { color: var(--h4); }
-  h5 { color: var(--h5); }
+  h1 { color: var(--h1) !important; }
+  h2 { color: var(--h2) !important; }
+  h3 { color: var(--h3) !important; }
+  h4 { color: var(--h4) !important; }
+  h5 { color: var(--h5) !important; }
+  h6 { color: var(--h6) !important; }
+
+  a {
+    color: inherit;
+    filter: hue-rotate(20deg);
+
+    :visited {
+      filter: saturate(0.7);  
+    }
+  }
 }
