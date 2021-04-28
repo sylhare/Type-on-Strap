@@ -27,6 +27,7 @@ mermaid: true                                           # Enable mermaid-js for 
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
 disqus_shortname:                                       # Your discus shortname for comments
+cusdis_app_id:                                          # Your cusdis data-app-id
 color_theme: auto                                       # auto, dark or light
 
 # PAGINATION
