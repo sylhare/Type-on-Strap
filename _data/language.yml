@@ -16,3 +16,5 @@ str_cookie_approve: "Approve"
 str_cookie_disclaimer: "We would like to use third party cookies and scripts to improve the functionality of this website."
 str_months: [January, February, March, April, May, June, July, August, September, October, November, December]
 
+# Localization settings 
+cusdis_lang: # zh-cn, es, tr, pt-BR
