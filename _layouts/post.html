@@ -32,6 +32,10 @@ layout: default
 
 </article>
 
+<!-- Cusdis -->
+{% if site.cusdis_shortname or site.theme_settings.cusdis_shortname %}
+{% include cusdis.html %}{% endif %}
+
 <!-- Disqus -->
 {% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
 {% include disqus.html %}{% endif %}
