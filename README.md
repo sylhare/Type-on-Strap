@@ -155,7 +155,9 @@ to `_config.yml` like so:
 google_analytics: UA-NNNNNNNN-N
 ```
 
-### Comments (via Disqus)
+### Comments 
+
+#### Disqus
 
 Optionally, if you have a [Disqus](https://disqus.com/) account, you can show a 
 comments section below each post.
@@ -165,6 +167,17 @@ to your project's `_config.yml` file:
 
 ```yml
 disqus_shortname: my_disqus_shortname
+```
+
+#### Cusdis
+
+[Cusdis](https://cusdis.com/) is an open source alternative to Disqus.
+You can read more about it in the [documentation](https://cusdis.com/doc#/)
+
+To enable it, set your cusdis name in `_config.yml`:
+
+```yaml
+cusdis_app_id: my_data-app-id                                     
 ```
 
 ### Math typesetting with KateX
