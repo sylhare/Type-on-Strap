@@ -6,8 +6,8 @@ div.highlighter-rouge,
 figure.highlight,
 .highlight code {
   position: relative;
-  background: $base00;
-  color: $base05;
+  background: var(--base00);
+  color: var(--base05);
   font-family: $monospace;
   font-size: $font-size-code;
   line-height: $font-height-code;
@@ -70,8 +70,8 @@ table.rouge-table {
     &.rouge-gutter {
       padding-right: 1em;
       width: 2em;
-      color: $base04;
-      border-right: 1px solid $base04;
+      color: var(--base04);
+      border-right: 1px solid --var(base04);
       text-align: right
     }
 
@@ -91,145 +91,145 @@ table.rouge-table {
   width: 100%;
 
   ::selection {
-    background-color: $base02
+    background-color: var(--base02)
   }
 }
 
 .highlight .hll {
-  background-color: $base06
+  background-color: var(--base06)
 }
 
 .highlight {
   .bp{ /* Name.Builtin.Pseudo */
-    color: $base0c  }
+    color: var(--base0c)  }
   .c { /* Comment */
-    color: $base03 }
+    color: var(--base03) }
   .cm{ /* Comment.Multiline */
-    color: $base03  }
+    color: var(--base03)  }
   .cp{ /* Comment.Preproc */
-    color: $base03  }
+    color: var(--base03)  }
   .c1{ /* Comment.Single */
-    color: $base03  }
+    color: var(--base03)  }
   .cs{ /* Comment.Special */
-    color: $base03  }
+    color: var(--base03)  }
   .dl{ /* String.Quotes 8 */
-    color: $base0a  }
+    color: var(--base0a)  }
   .err { /* Error */
-    color: $base0c }
+    color: var(--base0c) }
   .gd{ /* Generic.Deleted */
-    color: $base0c  }
+    color: var(--base0c)  }
   .ge{ /* Generic.Emph */
     font-style: italic  }
   .gh{ /* Generic.Heading */
-    color: $base05;font-weight: bold  }
+    color: var(--base05);font-weight: bold  }
   .gi{ /* Generic.Inserted */
-    color: $base0a  }
+    color: var(--base0a)  }
   .gp{ /* Generic.Prompt */
-    color: $base04;font-weight: bold  }
+    color: var(--base04);font-weight: bold  }
   .gs{ /* Generic.Strong */
     font-weight: bold  }
   .gu{ /* Generic.Subheading */
-    color: $base08;font-weight: bold  }
+    color: var(--base08);font-weight: bold  }
   .il{ /* Literal.Number.Integer.Long */
-    color: $base0e  }
+    color: var(--base0e)  }
   .k { /* Keyword */
-    color: $base0d }
+    color: var(--base0d) }
   .kc{ /* Keyword.Constant */
-    color: $base0d  }
+    color: var(--base0d)  }
   .kd{ /* Keyword.Declaration */
-    color: $base0d  }
+    color: var(--base0d)  }
   .kn{ /* Keyword.Namespace */
-    color: $base0d  }
+    color: var(--base0d)  }
   .kp{ /* Keyword.Pseudo */
-    color: $base0d  }
+    color: var(--base0d)  }
   .kr{ /* Keyword.Reserved */
-    color: $base0d  }
+    color: var(--base0d)  }
   .kt{ /* Keyword.Type */
-    color: $base09  }
+    color: var(--base09)  }
   .l{ /* Literal */
-    color: $base0e  }
+    color: var(--base0e)  }
   .ld{ /* Literal.Date */
-    color: $base0a  }
+    color: var(--base0a)  }
   .m{ /* Literal.Number */
-    color: $base0e  }
+    color: var(--base0e)  }
   .mb{ /* Literal.Bytes */
-    color: $base0e  }
+    color: var(--base0e)  }
   .mf{ /* Literal.Number.Float */
-    color: $base0e  }
+    color: var(--base0e)  }
   .mh{ /* Literal.Number.Hex */
-    color: $base0e  }
+    color: var(--base0e)  }
   .mi{ /* Literal.Number.Integer */
-    color: $base0e  }
+    color: var(--base0e)  }
   .mo{ /* Literal.Number.Oct */
-    color: $base0e  }
+    color: var(--base0e)  }
   .n{ /* Name */
-    color: $base05  }
+    color: var(--base05)  }
   .na{ /* Name.Attribute */
-    color: $base0b  }
+    color: var(--base0b)  }
   .nb{ /* Name.Builtin */
-    color: $base05  }
+    color: var(--base05)  }
   .nc{ /* Name.Class */
-    color: $base05  }
+    color: var(--base05)  }
   .no{ /* Name.Constant */
-    color: $base05  }
+    color: var(--base05)  }
   .nd{ /* Name.Decorator */
-    color: $base0f  }
+    color: var(--base0f)  }
   .ni{ /* Name.Entity */
-    color: $base05  }
+    color: var(--base05)  }
   .ne{ /* Name.Exception */
-    color: $base0c  }
+    color: var(--base0c)  }
   .nf{ /* Name.Function */
-    color: $base0b  }
+    color: var(--base0b)  }
   .nl{ /* Name.Label */
-    color: $base05  }
+    color: var(--base05)  }
   .nn{ /* Name.Namespace */
-    color: $base05  }
+    color: var(--base05)  }
   .nt{ /* Name.Tag */
-    color: $base08  }
+    color: var(--base08)  }
   .nv{ /* Name.Variable */
-    color: $base0c  }
+    color: var(--base0c)  }
   .nx{ /* Name.Other */
-    color: $base0b  }
+    color: var(--base0b)  }
   .o{ /* Operator */
-    color: $base08  }
+    color: var(--base08)  }
   .ow{ /* Operator.Word */
-    color: $base0d  }
+    color: var(--base0d)  }
   .p{ /* Punctuation */
-    color: $base05  }
+    color: var(--base05)  }
   .py{ /* Name.Property */
-    color: $base05  }
+    color: var(--base05)  }
   .s{ /* Literal.String */
-    color: $base0a  }
+    color: var(--base0a)  }
   .sb{ /* Literal.String.Backtick */
-    color: $base0a  }
+    color: var(--base0a)  }
   .sc{ /* Literal.String.Char */
-    color: $base05  }
+    color: var(--base05)  }
   .sd{ /* Literal.String.Doc */
-    color: $base04  }
+    color: var(--base04)  }
   .s2{ /* Literal.String.Double */
-    color: $base0a  }
+    color: var(--base0a)  }
   .se{ /* Literal.String.Escape */
-    color: $base0e  }
+    color: var(--base0e)  }
   .sh{ /* Literal.String.Heredoc */
-    color: $base0a  }
+    color: var(--base0a)  }
   .si{ /* Literal.String.Interpol */
-    color: $base0e  }
+    color: var(--base0e)  }
   .sx{ /* Literal.String.Other */
-    color: $base0a  }
+    color: var(--base0a)  }
   .sr{ /* Literal.String.Regex */
-    color: $base0a  }
+    color: var(--base0a)  }
   .s1{ /* Literal.String.Single */
-    color: $base0a  }
+    color: var(--base0a)  }
   .ss{ /* Literal.String.Symbol */
-    color: $base0a  }
+    color: var(--base0a)  }
   .vc{ /* Name.Variable.Class */
-    color: $base0c  }
+    color: var(--base0c)  }
   .vg{ /* Name.Variable.Global */
-    color: $base0c  }
+    color: var(--base0c)  }
   .vi{ /* Name.Variable.Instance */
-    color: $base0c  }
+    color: var(--base0c)  }
   .w{ /* Text.Whitespace */
-    color: $base05  }
+    color: var(--base05)  }
 }
 
 // Fix Github syntax display
