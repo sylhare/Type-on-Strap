@@ -24,6 +24,9 @@ layout: default
 
 </article>
 
+<!-- Cusdis -->
+{% if site.cusdis_app_id %}{% include social/cusdis.html %}{% endif %}
+
 <!-- Disqus -->
 {% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
 {% include social/disqus.html %}{% endif %}
