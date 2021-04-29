@@ -101,10 +101,12 @@ html, html[data-theme="light"] {
   --code-inline: #24292e;
   --text-shadow: #3f3f3f;
   --text: #262626;
+  --h1: #262626;
   --h2: #262626;
   --h3: #262626;
   --h4: #262626;
   --h5: #262626;
+  --h6: #262626;
   --border: rgba(0, 0, 0, 0.1);
 }
 
@@ -121,9 +123,11 @@ html[data-theme="dark"] {
   --code-inline: #d9b600;
   --text-shadow: #2d333b; // text shadow
   --text: #cdd9e5; // text
-  --h2: #d40059;
+  --h1: #d40059; // headers
+  --h2: #b37eff;
   --h3: #ff66c2;
   --h4: #00af9e;
   --h5: #6bac00;
+  --h6: #ff5c00;
   --border: rgba(0, 0, 0, 0.1); // border
 }
