@@ -145,9 +145,6 @@ header {
   h6 { color: var(--h6); }
 
   a {
-    color: inherit;
-    filter: hue-rotate(20deg);
-
     :visited {
       filter: saturate(0.7);  
     }
