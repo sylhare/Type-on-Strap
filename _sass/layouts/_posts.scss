@@ -145,15 +145,8 @@ header {
   h6 { color: var(--h6); }
 
   a {
-    color: inherit;
-    filter: hue-rotate(20deg);
-
     :visited {
       filter: saturate(0.7);  
     }
   }
-}
-
-td, th {
-  border: 1px solid var(--td-border);
 }
