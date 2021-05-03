@@ -6,12 +6,12 @@
 
 [![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
-A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily cusomizable:
+A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily customizable:
 
 * Responsive design on all devices (🖥, 💻, 📱, ...)
 * Portfolio 🗂, Gallery 🖼 pages for your projects
 * Tags compatibility 🏷
-* Handle Bootstrap'ed pages: [Get Bootstrap](http://getbootstrap.com/)
+* Handle _Bootstrap_'ed pages: [Get Bootstrap](http://getbootstrap.com/)
 * 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
 * Diagram Rendering: [Mermaid-js](https://github.com/mermaid-js/mermaid)
@@ -23,21 +23,11 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 > [Demo Site](https://sylhare.github.io/Type-on-Strap/)
 
-## Table of Contents
-
-  - [Usage](#usage)
-  - [Structure](#structure)
-  - [Configure Type on Strap](#configure-type-on-strap)
-  - [Other Layouts](#other-layouts)
-  - [Feature pages](#feature-pages)
-  - [Advanced](#advanced)
-  - [License](#license)
-
 ## Usage
 
 ### As a ruby gem 💎
 
-Check out this tutorial: [Use as Ruby Gem](https://github.com/Sylhare/Type-on-Strap#use-as-ruby-gem)
+Check out this tutorial: [Use as Ruby Gem](#use-as-ruby-gem-)
 
 ### As a github page 📋
 
@@ -45,7 +35,7 @@ Check out this tutorial: [Use as Ruby Gem](https://github.com/Sylhare/Type-on-St
 2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
 3. Install the theme's dependencies: `bundle install`
 4. Customize the theme
-	- GitHub Page: [update `_config.yml`](https://github.com/Sylhare/Type-on-Strap#site-configuration)
+	- GitHub Page: [update `_config.yml`](#site-configuration)
 5. Run the Jekyll server: `bundle exec jekyll serve`
 
 ## Structure
@@ -230,13 +220,13 @@ sequenceDiagram
 
 ### Social icons
 
-In `_data/social.yml` you can customize the social icons from other wbesite you wish to display in the blog.
+In `_data/social.yml` you can customize the social icons from other website you wish to display in the blog.
 The site icons come from [Font Awesome](https://fontawesome.com/).
 
 ### Cookie consent
 
 You can add a cookie consent with a disclaimer if you use Google Analytics while respecting the [GDPR](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation).
-Set to true, there will be a banner at the bottom of the page with the disclaimer and a approve button.
+Set to true, there will be a banner at the bottom of the page with the disclaimer, and an _approve_ button.
 Once the user clicks on "Approve" the cookies will be created for Google Analytics.
 
 #### Share in article
@@ -342,7 +332,7 @@ Use it in any markdown file. There are two fields in the _include_ you need to l
 
 #### Code highlight
 
-Like all CSS variables in the theme, you can edit the color of the code highlight in _sass > base > _variables.scss.
+Like all CSS variables in the theme, you can edit the color of the code highlight in *_sass > base > _variables.scss*.
 The code highlighting works with [base16](https://github.com/chriskempson/base16-html-previews/tree/master/css) you can find existing example 
 of your favourite highlight color scheme on this format.
 
@@ -435,14 +425,14 @@ collections:
     permalink: /:collection/:name
 ```    
 
-This creates the collection for Jekyll so it can find and display your portfolio posts.
+This creates the collection for Jekyll, so it can find and display your portfolio posts.
 
 ### Feature: Gallery 🖼
 
 You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position 
 based on available vertical space. 
 You need to specify the `gallery_path` which will be used to find the pictures to render. 
-It will take all of the picture under that directory. Then use the `include` to add it in your page. 
+It will take all the pictures under that directory. Then use the `include` to add it in your page. 
 
 ```yml
 
@@ -459,7 +449,7 @@ gallery: "assets/img/pexels"
 ### Feature: Search 🔍
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
-there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
+there is a `search.json` file that will create a list of all the site posts, pages and portfolios. 
 
 Then there's a `search.js` displaying the formatted results entered in the `search.html` page.
 
@@ -490,7 +480,7 @@ tags: [sample, markdown, html]
 ---
 ```
 
-> Tags are case sensitive `Tag_nAme` ≠ `tag_name`
+> Tags are case-sensitive `Tag_nAme` ≠ `tag_name`
 
 All the tags will be listed in `tags.html` with a link toward the pages or posts.
 The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
@@ -551,7 +541,7 @@ Use this command with the title you'd like to create the very basic post.
 gulp post -n 'title of the post'
 ```
 
-A file will be create following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.
+A file will be created following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.
 Nothing will happen if the file exists already.
 
 ### Use as Ruby Gem 💎
@@ -584,7 +574,7 @@ Then you can start adding content like:
 
 ### Remote Theme
 
-Now you can use any theme gem with github pages with [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
+Now you can use any theme gem with GitHub pages with [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
 For that remove all `theme:` attributes from `_config.yml` and add instead:
 
 ```yml
@@ -593,7 +583,7 @@ remote_theme: sylhare/Type-on-Strap
 
 ## License
 
-This theme is licensed under the [The MIT License (MIT)](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/master/LICENSE)
+This theme is licensed under the [The MIT License (MIT)](/LICENSE)
 
 - Pictures from [Pexels](https://www.pexels.com/) are under Creative Commons Zero (CC0) license
 - Fonts are licensed under the [SIL Open Font License (OFL)](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL) 
