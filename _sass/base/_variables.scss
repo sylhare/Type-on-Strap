@@ -130,4 +130,6 @@ html[data-theme="dark"] {
   --h5: #6bac00;
   --h6: #ff5c00;
   --border: rgba(0, 0, 0, 0.1); // border
+  --cusdis--color-text-default: var(--text);
+  --cusdis--color-comment-username-text: var(--link);
 }
