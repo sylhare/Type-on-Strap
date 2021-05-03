@@ -108,6 +108,7 @@ html, html[data-theme="light"] {
   --h5: #262626;
   --h6: #262626;
   --border: rgba(0, 0, 0, 0.1);
+  --td-border: rgba(0, 0, 0, 0.1);
 }
 
 html[data-theme="dark"] {
@@ -130,4 +131,5 @@ html[data-theme="dark"] {
   --h5: #6bac00;
   --h6: #ff5c00;
   --border: rgba(0, 0, 0, 0.1); // border
+  --td-border: rgba(255, 255, 255, 0.5); // table border
 }
