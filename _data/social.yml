@@ -33,8 +33,8 @@ share:
   twitter: true
   tumblr: true
   pinterest: true
-  pocket: true
+  pocket:
   reddit: true
   linkedin: true
-  wordpress: true
+  wordpress:
   email: true
