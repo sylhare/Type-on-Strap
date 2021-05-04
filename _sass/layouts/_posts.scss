@@ -144,9 +144,12 @@ header {
   h5 { color: var(--h5); }
   h6 { color: var(--h6); }
 
-  a {
-    :visited {
-      filter: saturate(0.7);  
+  h1, h2, h3, h4, h5, h6 {
+    a {
+      color: var(--link);
+      :visited {
+        filter: saturate(0.7);
+      }
     }
   }
 }
