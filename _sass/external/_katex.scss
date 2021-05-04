@@ -1,6 +1,11 @@
-/*! KaTeX - license MIT */
+/* Custom */
 $katex-font-path: "../../assets/fonts/katex" !default;
+.katex-display {
+  overflow-x: auto;
+  padding-bottom: 3px;
+}
 
+/*! KaTeX - license MIT */
 /* stylelint-disable font-family-no-missing-generic-family-keyword */
 @font-face {
   font-family: 'KaTeX_AMS';
