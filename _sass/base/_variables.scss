@@ -132,4 +132,6 @@ html[data-theme="dark"] {
   --h6: #ff5c00;
   --border: rgba(0, 0, 0, 0.1); // border
   --td-border: rgba(255, 255, 255, 0.5); // table border
+  --cusdis--color-text-default: var(--text);
+  --cusdis--color-comment-username-text: var(--link);
 }
