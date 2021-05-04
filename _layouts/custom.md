@@ -24,14 +24,14 @@ layout: default
 
 </article>
 
+<!-- Post navigation -->
+{% if site.post_navigation %}
+{% include blog/post_nav.html %}
+{% endif %}
+
 <!-- Cusdis -->
 {% if site.cusdis_app_id %}{% include social/cusdis.html %}{% endif %}
 
 <!-- Disqus -->
 {% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
 {% include social/disqus.html %}{% endif %}
-
-<!-- Post navigation -->
-{% if site.post_navigation %}
-{% include blog/post_nav.html %}
-{% endif %}
