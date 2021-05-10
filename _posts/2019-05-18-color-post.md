@@ -10,9 +10,9 @@ excerpt_separator: <!--more-->
 # What a colorful post!
 
 This is an idea that came from [xukimseven/HardCandy-Jekyll](https://github.com/xukimseven/HardCandy-Jekyll) 
-looking at this cheerful and colorful them, I wanted to enable something similar for mine.
+looking at this cheerful and colorful theme, I wanted to enable something similar for Type-on-Strap.
 
-You can go fork and star hers too! 😉
+You can go fork and star _HardCandy-Jekyll_ too! 😉
 
 <!--more-->
 
@@ -40,4 +40,5 @@ color: rgb(165,42,42)
 
 The background used is `lineart.png` from [xukimseven](https://github.com/xukimseven) you can edit it in the config file. 
 If you want another one, put it in `/assets/img` as well. 
+
 > ⚠️ It's a bit hacking the css in the `post.html`

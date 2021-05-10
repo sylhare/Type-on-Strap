@@ -10,7 +10,7 @@ tags: [Test, Markdown]
 Because if you put some code in your blog, you would at least make it:
 
 1. Searchable
-2. Good looking
+2. Good-looking
 
 ## Search on code
 
@@ -28,9 +28,8 @@ find /etc -type f -exec cat '{}' \; | tr -c '.[:digit:]' '\n' | grep '^[^.][^.]*
 
 ## Code highlighting examples
 
-Because you might put code in your blog post and you want to make sure 
-it will look good in here.
-And that the search function is working!
+Because you might put code in your blog post, and you want to make sure it will look good in here.
+Plus that the search function will still be working!
 
 ### Java
 
@@ -165,7 +164,7 @@ That will be rendered into this:
 
 {% include aligner.html images="mermaid-example.png" column=1 %}
 
-But you can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
+You can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
 
 <div class="mermaid">
 sequenceDiagram
