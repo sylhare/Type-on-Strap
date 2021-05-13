@@ -25,7 +25,24 @@ color_image: /assets/img/lineart.png                    # A bit transparent for 
 katex: true                                             # Enable if using math markup
 mermaid: true                                           # Enable mermaid-js for sequence and diagrams
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
-cookie_consent: false                                   # To respect the usage of cookies
+cookie_consent: false               # To respect the usage of cookies
+
+# Set which comment system to use
+comments:
+  # 'disqus' or 'utterances' are available
+  provider:            #utterances # or disqus or cusdis
+  
+  
+# You must install utterances github app before use.(https://github.com/apps/utterances)
+# Make sure all variables are set properly. Check below link for detail.
+# https://utteranc.es/
+utterances:
+  repo:                "sylhare/Type-on-Strap"
+  issue-term:          "pathname"
+  label:               "Comments"
+  theme:               "dark-blue"
+  
+  
 disqus_shortname:                                       # Your discus shortname for comments
 cusdis_app_id:                                          # Your cusdis data-app-id
 color_theme: auto                                       # auto, dark or light
