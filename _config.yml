@@ -29,7 +29,7 @@ cookie_consent: false               # To respect the usage of cookies
 
 # Set which comment system to use
 comments:
-  # 'disqus' or 'utterances' are available
+  # 'disqus' or 'cusdis' or also 'utterances' are available
   provider:            #utterances # or disqus or cusdis
   
   
