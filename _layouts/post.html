@@ -44,6 +44,9 @@ layout: default
 {% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
 {% include social/disqus.html %}{% endif %}
 
+<!--utterances-->
+{% if site.utterances %}{% include social/utternaces.html %}{% endif %}
+
 <!-- To change color of links in the page -->
 <style>
   header#main {

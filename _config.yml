@@ -36,8 +36,11 @@ comments:
 # You must install utterances github app before use.(https://github.com/apps/utterances)
 # Make sure all variables are set properly. Check below link for detail.
 # https://utteranc.es/
+# for your information, 
+# utterances is open source and free.
+# no ads at all where disqus provides ads and no permission needed when you are using cusdis
 utterances:
-  repo:                "sylhare/Type-on-Strap"
+  repo:                "[your repo name here]"
   issue-term:          "pathname"
   label:               "Comments"
   theme:               "dark-blue"
