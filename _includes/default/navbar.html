@@ -1,4 +1,10 @@
 <header class="site-header">
+    {% comment %}Multilingual site title (if `multilingual: true` in `_config.yml`){% endcomment %}
+    {% if site.multilingual %}
+        {% assign site_title = site.title[site.active_lang] %}     
+    {% else %}
+        {% assign site_title = site.title %}
+    {% endif %}
 
     <!-- Logo and title -->
 	<div class="branding">
@@ -7,8 +13,8 @@
 			<img alt="logo img" class="avatar" src="{{ site.avatar | relative_url }}" />
 		</a>
         {% endif %}
-        <a class="site-title" aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
-        {{ site.title }}
+        <a class="site-title" aria-label="{{ site_title }}" href="{{ '/' | relative_url }}">
+        {{ site_title }}
 		</a>
 	</div>
 
@@ -42,12 +48,15 @@
         {% endif %}
 
         <!-- Language switcher -->
-        {% for lang in site.languages %}
-            <li class="separator"> | </li>
-            <li>
-                <a {% if lang == site.active_lang %}style="font-weight: bold;"{% endif %} href="{% if lang == site.default_lang %} {{ site.baseurl }}{{ page.url }} {% else %} {{ site.baseurl }}/{{ lang }}{{ page.url }} {% endif %}">{{ site.data.lang-names[lang] }}</a>
-            </li>
-        {% endfor %}
+        {% if site.multilingual %}
+            {% comment %}Takes language names from _data/lang-names.yml{% endcomment %}
+            {% for lang in site.languages %}
+                <li class="separator"> | </li>
+                <li>
+                    <a {% if lang == site.active_lang %}style="font-weight: bold;"{% endif %} href="{% if lang == site.default_lang %} {{ site.baseurl }}{{ page.url }} {% else %} {{ site.baseurl }}/{{ lang }}{{ page.url }} {% endif %}">{{ site.data.lang-names[lang] }}</a>
+                </li>
+            {% endfor %}
+        {% endif %}
     </ul>
 
 	</nav>
