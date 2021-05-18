@@ -35,10 +35,19 @@
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
         
+        <!-- Light/Dark mode switcher -->
         {% if site.color_theme == 'auto' %}
         <li class="separator"> | </li>
-        <li><a id="theme-toggle" title="{{ page.title }} " aria-label="{{ page.title }}" onclick="themeToggle()"></a></li>
+        <li><a id="theme-toggle" title="{{ page.title }} "aria-label="{{ page.title }}" onclick="themeToggle()"></a></li>
         {% endif %}
+
+        <!-- Language switcher -->
+        {% for lang in site.languages %}
+            <li class="separator"> | </li>
+            <li>
+                <a {% if lang == site.active_lang %}style="font-weight: bold;"{% endif %} href="{% if lang == site.default_lang %} {{ site.baseurl }}{{ page.url }} {% else %} {{ site.baseurl }}/{{ lang }}{{ page.url }} {% endif %}">{{ site.data.lang-names[lang] }}</a>
+            </li>
+        {% endfor %}
     </ul>
 
 	</nav>
