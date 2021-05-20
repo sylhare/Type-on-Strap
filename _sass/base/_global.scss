@@ -146,7 +146,7 @@ blockquote {
   margin: 1em 1em;
   padding: 0.75em 1em;
   background-color: var(--blockquote);
-  box-shadow: 0 2px 2px var(--border);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 blockquote *:last-child,
@@ -164,7 +164,7 @@ table {
 td,
 th {
   padding: 0.5em 1em;
-  border: 1px solid var(--td-border);
+  border: 1px solid var(--border);
   text-align: left;
 }
 

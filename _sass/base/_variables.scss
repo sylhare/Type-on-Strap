@@ -107,8 +107,7 @@ html, html[data-theme="light"] {
   --h4: #262626;
   --h5: #262626;
   --h6: #262626;
-  --border: rgba(0, 0, 0, 0.1);
-  --td-border: rgba(0, 0, 0, 0.1);
+  --border: rgba(0, 0, 0, 0.2);
 }
 
 html[data-theme="dark"] {
@@ -130,8 +129,7 @@ html[data-theme="dark"] {
   --h4: #00af9e;
   --h5: #6bac00;
   --h6: #ff5c00;
-  --border: rgba(0, 0, 0, 0.1); // border
-  --td-border: rgba(255, 255, 255, 0.5); // table border
+  --border: rgba(255, 255, 255, 0.5); // border
   --cusdis--color-text-default: var(--text);
   --cusdis--color-comment-username-text: var(--link);
 }
