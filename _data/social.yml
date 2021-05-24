@@ -15,12 +15,15 @@ gitlab:
 instagram:
 keybase:
 linkedin: # full url
+mastodon: # full url
+matrix: # @user:server
 pinterest:
 reddit:
 soundcloud:
 stack_exchange: # full url
 stack_overflow:
 steam:
+telegram: # username
 tumblr:
 twitter: # username
 vimeo:
