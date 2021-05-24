@@ -22,13 +22,13 @@
 </li>
 {% endif %}
 
-{% assign bh_url = "https://www.behance.net/" | append: site.data.social.behance %}
-{% assign bh_on = site.data.social.behance or site.theme_settings.behance %}
-{% include social/icon_partial.html isDisplayed=bh_on url=bh_url social="Behance" %}
-
 {% assign bb_url = "https://bitbucket.org/" | append: site.data.social.bitbucket %}
 {% assign bb_on = site.data.social.bitbucket or site.theme_settings.bitbucket %}
 {% include social/icon_partial.html isDisplayed=bb_on url=bb_url social="Bitbucket" %}
+
+{% assign bh_url = "https://www.behance.net/" | append: site.data.social.behance %}
+{% assign bh_on = site.data.social.behance or site.theme_settings.behance %}
+{% include social/icon_partial.html isDisplayed=bh_on url=bh_url social="Behance" %}
 
 {% assign db_url = "https://www.dribbble.com/" | append: site.data.social.dribbble %}
 {% assign db_on = site.data.social.dribbble or site.theme_settings.dribbble %}
@@ -46,6 +46,10 @@
 {% assign gh_on = site.data.social.github or site.theme_settings.github %}
 {% include social/icon_partial.html isDisplayed=gh_on url=gh_url social="GitHub" %}
 
+{% assign gl_url = "https://gitlab.com/" | append: site.data.social.gitlab %}
+{% assign gl_on = site.data.social.gitlab or site.theme_settings.gitlab %}
+{% include social/icon_partial.html isDisplayed=gl_on url=gl_url social="Gitlab" %}
+
 {% assign ig_url = "https://instagram.com/" | append: site.data.social.instagram %}
 {% assign ig_on = site.data.social.instagram or site.theme_settings.instagram %}
 {% include social/icon_partial.html isDisplayed=ig_on url=ig_url social="instagram" %}
@@ -53,10 +57,6 @@
 {% assign kb_url = "https://keybase.io/" | append: site.data.social.keybase %}
 {% assign kb_on = site.data.social.keybase or site.theme_settings.keybase %}
 {% include social/icon_partial.html isDisplayed=kb_on url=kb_url social="Keybase" %}
-
-{% assign se_url = site.data.social.linkedin %}
-{% assign se_on = site.data.social.linkedin or site.theme_settings.linkedin %}
-{% include social/icon_partial.html isDisplayed=se_on url=se_url social="Linkedin" %}
 
 {% assign pi_url = "https://www.pinterest.com/" | append: site.data.social.pinterest %}
 {% assign pi_on = site.data.social.pinterest or site.theme_settings.pinterest %}
@@ -69,6 +69,10 @@
 {% assign sc_url = "https://soundcloud.com/" | append: site.data.social.soundcloud %}
 {% assign sc_on = site.data.social.soundcloud or site.theme_settings.soundcloud %}
 {% include social/icon_partial.html isDisplayed=sc_on url=sc_url social="SoundCloud" %}
+
+{% assign se_url = site.data.social.linkedin %}
+{% assign se_on = site.data.social.linkedin or site.theme_settings.linkedin %}
+{% include social/icon_partial.html isDisplayed=se_on url=se_url social="Linkedin" %}
 
 {% assign se_url = site.data.social.stack_exchange %}
 {% assign se_on = site.data.social.stack_exchange or site.theme_settings.stack_exchange %}
@@ -86,10 +90,6 @@
 {% assign tb_on = site.data.social.tumblr or site.theme_settings.tumblr %}
 {% include social/icon_partial.html isDisplayed=tb_on url=tb_url social="Tumblr" %}
 
-{% assign gl_url = "https://gitlab.com/" | append: site.data.social.gitlab %}
-{% assign gl_on = site.data.social.gitlab or site.theme_settings.gitlab %}
-{% include social/icon_partial.html isDisplayed=gl_on url=gl_url social="Gitlab" %}
-
 {% assign tw_url = "https://twitter.com/" | append: site.data.social.twitter %}
 {% assign tw_on = site.data.social.twitter or site.theme_settings.twitter %}
 {% include social/icon_partial.html isDisplayed=tw_on url=tw_url social="Twitter" %}
@@ -105,3 +105,4 @@
 {% assign yt_url = "https://www.youtube.com/channel/" | append: site.data.social.youtube %}
 {% assign yt_on = site.data.social.youtube or site.theme_settings.youtube %}
 {% include social/icon_partial.html isDisplayed=yt_on url=yt_url social="Youtube" %}
+

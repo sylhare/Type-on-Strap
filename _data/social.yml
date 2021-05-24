@@ -1,40 +1,40 @@
+# RSS specify feed path
+feed:
+  path: feed.xml
+
 # Icons on the footer
 rss: true
-email_address:    # Full email address, e.g. "sam@example.com"
+email_address: # full email address, e.g. "sam@example.com"
 behance:
 bitbucket:
 dribbble:
 facebook:
 flickr:
-gitlab:
 github: "sylhare"
+gitlab:
 instagram:
 keybase:
-linkedin:         # Full URL
+linkedin: # full url
 pinterest:
 reddit:
 soundcloud:
+stack_exchange: # full url
 stack_overflow:
-stack_exchange:   # Full URL
 steam:
 tumblr:
-twitter:          # "twitter username"
+twitter: # username
 vimeo:
 wordpress:
-youtube:          # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
-
-# rss specify feed path
-feed:
-  path: feed.xml
+youtube: # channel token, e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
 
 # Share button options
 share:
+  email: true
   facebook: true
-  twitter: true
-  tumblr: true
+  linkedin: true
   pinterest: true
   pocket:
   reddit: true
-  linkedin: true
+  tumblr: true
+  twitter: true
   wordpress:
-  email: true
