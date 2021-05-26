@@ -40,6 +40,11 @@ instagram:
   id: "sam" # e.g. "sam"
   pos:
   icon:
+hacker-news:
+  pre: "https://news.ycombinator.com/user?id="
+  id: "sam" #e.g. "sam"
+  pos:
+  icon:
 keybase:
   pre: "https://keybase.io/"
   id: "sam" # e.g. "sam"
