@@ -1,5 +1,5 @@
 # Icons on the footer
-# Usage: Modify 'id' for the icon to show up. 'icon' is an optional FontAwesome alternative.
+# Usage: Modify 'id' for the icon to show up.
 behance:
   pre: "https://www.behance.net/" 
   id: "sam" # e.g. "sam"
@@ -10,6 +10,11 @@ bitbucket:
   id: "sam" # e.g. "sam"
   pos:
   icon:
+calendly:
+  pre: "https://calendly.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon: "far fa-calendar-plus" 
 dribbble:
   pre: "https://www.dribbble.com/"
   id: "sam" # e.g. "sam"
@@ -35,6 +40,11 @@ gitlab:
   id: "sam" # e.g. "sam"
   pos:
   icon:
+google-scholar:
+  pre: "https://scholar.google.com/citations?hl=en&user="
+  id: "WXAAOb0AAAAJ" # e.g. "AAAAAAAAAAAA"
+  pos:
+  icon: "fas fa-user-graduate"
 instagram:
   pre: "https://instagram.com/"
   id: "sam" # e.g. "sam"
@@ -60,6 +70,11 @@ mail:
   id: "sam@gmail.com" # e.g. "sam@example.com"
   pos:
   icon: "fas fa-envelope"
+map:
+  pre: "https://www.openstreetmap.org/#map=15/"
+  id: "34.0886/-118.3191" # e.g. "34.0886/-118.3191"
+  pos:
+  icon: "fas fa-map-marked"
 mastodon:
   pre: "https://"
   id: "fostodon.org/@sam" # full url
@@ -67,9 +82,24 @@ mastodon:
   icon:
 matrix:
   pre: "https://matrix.to/#/"
-  id: "@sam:matrix.org" # e.g. @sam:matrix.org
+  id: "@sam:matrix.org" # e.g. "@sam:matrix.org"
   pos:
   icon: "fab fa-connectdevelop" 
+medium:
+  pre: "https://medium.com/@"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+patreon:
+  pre: "https://www.patreon.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+phone:
+  pre: "tel:"
+  id: "+1111111111"
+  pos:
+  icon: "fas fa-phone"
 pinterest:
   pre: "https://www.pinterest.com/"
   id: "sam" # e.g. "sam"
@@ -85,6 +115,11 @@ soundcloud:
   id: "sam" # e.g. "sam"
   pos:
   icon:
+sms:
+  pre: "sms:" 
+  id: "+11111111111"
+  pos: "?body=Hi"
+  icon: "fas fa-sms"
 stack-exchange:
   pre: "https://stackexchange.com/users/"
   id: "1" # e.g. 1
@@ -110,6 +145,11 @@ tumblr:
   id: "sam" # e.g. "sam"
   pos: ".tumblr.com/"
   icon:
+twitch:
+  pre: "https://twitch.tv/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
 twitter:
   pre: "https://twitter.com/"
   id: "sam" # e.g. "sam"
@@ -117,6 +157,11 @@ twitter:
   icon:
 vimeo:
   pre: "https://vimeo.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+vk:
+  pre: "https://vk.com/"
   id: "sam" # e.g. "sam"
   pos:
   icon:
