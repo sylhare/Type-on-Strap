@@ -1,0 +1,127 @@
+# Icons on the footer
+# Usage: Modify 'id' for the icon to show up. 'icon' is an optional FontAwesome alternative.
+behance:
+  pre: "https://www.behance.net/" 
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+bitbucket:
+  pre: "https://bitbucket.org/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+dribbble:
+  pre: "https://www.dribbble.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+facebook:
+  pre: "https://www.facebook.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+flickr:
+  pre: "https://flickr.com/photos/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+github:
+  pre: "https://github.com/"
+  id: "sam" # e.g. sam
+  pos:
+  icon:
+gitlab:
+  pre: "https://gitlab.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+instagram:
+  pre: "https://instagram.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+keybase:
+  pre: "https://keybase.io/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+linkedin:
+  pre: "https://www.linkedin.com/in/"
+  id: # e.g. "sam"
+  pos:
+  icon:
+mail:
+  pre: "mailto://"
+  id: "sam@gmail.com" # e.g. "sam@example.com"
+  pos:
+  icon: "fas fa-envelope"
+mastodon:
+  pre: "https://"
+  id: "fostodon.org/@sam" # full url
+  pos:
+  icon:
+matrix:
+  pre: "https://matrix.to/#/"
+  id: "@sam:matrix.org" # e.g. @sam:matrix.org
+  pos:
+  icon: "fab fa-connectdevelop" 
+pinterest:
+  pre: "https://www.pinterest.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+reddit:
+  pre: "https://www.reddit.com/user/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+soundcloud:
+  pre: "https://soundcloud.com/" 
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+stack-exchange:
+  pre: "https://stackexchange.com/users/"
+  id: "1" # e.g. 1
+  pos:
+  icon:
+stack-overflow:
+  pre: "https://stackoverflow.com/users/"
+  id: "1" # e.g. 1
+  pos:
+  icon:
+steam:
+  pre: "https://steamcommunity.com/id/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+telegram:
+  pre: "https://t.me/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+tumblr:
+  pre: "https://"
+  id: "sam" # e.g. "sam"
+  pos: ".tumblr.com/"
+  icon:
+twitter:
+  pre: "https://twitter.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+vimeo:
+  pre: "https://vimeo.com/"
+  id: "sam" # e.g. "sam"
+  pos:
+  icon:
+wordpress:
+  pre: "https://"
+  id: "sam" # e.g. "sam"
+  pos: ".wordpress.com/"
+  icon:
+youtube:
+  pre: "https://www.youtube.com/channel/"
+  id: "sam" # e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
+  pos:
+  icon:

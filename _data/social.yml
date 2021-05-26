@@ -4,31 +4,6 @@ feed:
 
 # Icons on the footer
 rss: true
-email_address: # full email address, e.g. "sam@example.com"
-behance:
-bitbucket:
-dribbble:
-facebook:
-flickr:
-github: "sylhare"
-gitlab:
-instagram:
-keybase:
-linkedin: # full url
-mastodon: # full url
-matrix: # @user:server
-pinterest:
-reddit:
-soundcloud:
-stack_exchange: # full url
-stack_overflow:
-steam:
-telegram: # username
-tumblr:
-twitter: # username
-vimeo:
-wordpress:
-youtube: # channel token, e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
 
 # Share button options
 share:

@@ -1,0 +1,34 @@
+{% if site.data.social.rss or site.theme_settings.rss %}
+<li>
+    <a feed.xml href="{{ site.data.social.feed.path | default: 'feed.xml' | relative_url }}"
+       title="{{ site.data.language.str_rss_follow | default: 'Follow RSS feed' }}">
+        <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+{% endif %}
+
+{% for social in site.data.icons %}
+    {% if social[1].id != nil %}
+
+      {% if social[1].icon != nil %}
+        {% assign icon = social[1].icon %}
+      {% else %}
+        {% assign icon = "fab fa-" | append: social[0] %} 
+      {% endif %}
+
+      <li>
+        <a href="{{ social[1].pre | append: social[1].id | append: social[1].pos }}"
+             title="{{ site.data.language.str_follow_on }} {{ social[0] | remove: '-' | capitalize }}"
+             rel="me">
+          <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
+              </span>
+          </a>
+      </li>
+
+    {% endif %}
+{% endfor %}
