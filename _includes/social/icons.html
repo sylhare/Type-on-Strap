@@ -10,25 +10,23 @@
 </li>
 {% endif %}
 
-{% for social in site.data.icons %}
-    {% if social[1].id != nil %}
+{% for me in site.me %}
+{% assign name = me[0] %}
+{% assign data = site.data.icons[name] %}
+{% if data.icon == nil %}
+  {% assign icon = "fab fa-" | append: name %} 
+{% else %}
+  {% assign icon = data.icon %}
+{% endif %}
 
-      {% if social[1].icon != nil %}
-        {% assign icon = social[1].icon %}
-      {% else %}
-        {% assign icon = "fab fa-" | append: social[0] %} 
-      {% endif %}
-
-      <li>
-        <a href="{{ social[1].pre | append: social[1].id | append: social[1].pos }}"
-             title="{{ site.data.language.str_follow_on }} {{ social[0] | remove: '-' | capitalize }}"
-             rel="me">
-          <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
-              </span>
-          </a>
-      </li>
-
-    {% endif %}
+<li>
+  <a href="{{ data.pre | append: data.id | append: data.pos }}"
+     title="{{ site.data.language.str_follow_on }} {{ name | remove: '-' | capitalize }}"
+     rel="me">
+    <span class="fa-stack fa-lg">
+      <i class="fas fa-circle fa-stack-2x"></i>
+      <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+</li>
 {% endfor %}
