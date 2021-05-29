@@ -1,177 +1,141 @@
 # Icons on the footer
-# Usage: Modify 'id' for the icon to show up.
-behance:
+behance: # e.g. "sam"
   pre: "https://www.behance.net/" 
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-bitbucket:
+bitbucket: # e.g. "sam"
   pre: "https://bitbucket.org/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-calendly:
+calendly: # e.g. "sam"
   pre: "https://calendly.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon: "far fa-calendar-plus" 
-dribbble:
+dribbble: # e.g. "sam"
   pre: "https://www.dribbble.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-facebook:
+facebook: # e.g. "sam"
   pre: "https://www.facebook.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-flickr:
+flickr: # e.g. "sam"
   pre: "https://flickr.com/photos/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-github:
+github: # e.g. "sam"
   pre: "https://github.com/"
-  id: "sam" # e.g. sam
   pos:
   icon:
-gitlab:
+gitlab: # e.g. "sam"
   pre: "https://gitlab.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-google-scholar:
+google-scholar: # e.g. "WXAAOb0AAAAJ"
   pre: "https://scholar.google.com/citations?hl=en&user="
-  id: "WXAAOb0AAAAJ" # e.g. "AAAAAAAAAAAA"
   pos:
   icon: "fas fa-user-graduate"
-instagram:
+instagram: # e.g. "sam"
   pre: "https://instagram.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-hacker-news:
+hacker-news: # e.g. "sam"
   pre: "https://news.ycombinator.com/user?id="
-  id: "sam" #e.g. "sam"
   pos:
   icon:
-keybase:
+keybase: # e.g. "sam"
   pre: "https://keybase.io/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-linkedin:
+linkedin: # e.g. "sam"
   pre: "https://www.linkedin.com/in/"
-  id: # e.g. "sam"
   pos:
   icon:
-mail:
+mail: # e.g. "sam@mail.com"
   pre: "mailto://"
-  id: "sam@gmail.com" # e.g. "sam@example.com"
   pos:
   icon: "fas fa-envelope"
-map:
+map: # e.g. "34.0886/-118.3191"
   pre: "https://www.openstreetmap.org/#map=15/"
-  id: "34.0886/-118.3191" # e.g. "34.0886/-118.3191"
   pos:
   icon: "fas fa-map-marked"
-mastodon:
+mastodon: # e.g. "fostodon.org/@sam"
   pre: "https://"
-  id: "fostodon.org/@sam" # full url
   pos:
   icon:
-matrix:
+matrix: # e.g. "@sam:matrix.org"
   pre: "https://matrix.to/#/"
-  id: "@sam:matrix.org" # e.g. "@sam:matrix.org"
   pos:
   icon: "fab fa-connectdevelop" 
-medium:
+medium: # e.g. "sam"
   pre: "https://medium.com/@"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-patreon:
+patreon: # e.g. "sam"
   pre: "https://www.patreon.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-phone:
+phone: # e.g. "+11111111111"
   pre: "tel:"
-  id: "+1111111111"
   pos:
   icon: "fas fa-phone"
-pinterest:
+pinterest:  # e.g. "sam"
   pre: "https://www.pinterest.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-reddit:
+reddit: # e.g. "sam"
   pre: "https://www.reddit.com/user/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-soundcloud:
+soundcloud: # e.g. "sam"
   pre: "https://soundcloud.com/" 
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-sms:
+sms: # e.g. "+11111111111"
   pre: "sms:" 
-  id: "+11111111111"
   pos: "?body=Hi"
   icon: "fas fa-sms"
-stack-exchange:
+stack-exchange: # e.g. "1"
   pre: "https://stackexchange.com/users/"
-  id: "1" # e.g. 1
   pos:
   icon:
-stack-overflow:
+  stack-overflow: # e.g. "1"
   pre: "https://stackoverflow.com/users/"
-  id: "1" # e.g. 1
   pos:
   icon:
-steam:
+steam: # e.g. "sam"
   pre: "https://steamcommunity.com/id/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-telegram:
+telegram: # e.g. "sam"
   pre: "https://t.me/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-tumblr:
+tumblr: # e.g. "sam"
   pre: "https://"
-  id: "sam" # e.g. "sam"
   pos: ".tumblr.com/"
   icon:
-twitch:
+twitch: # e.g. "sam"
   pre: "https://twitch.tv/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-twitter:
+twitter: # e.g. "sam"
   pre: "https://twitter.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-vimeo:
+vimeo: # e.g. "sam"
   pre: "https://vimeo.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-vk:
+vk: # e.g. "sam"
   pre: "https://vk.com/"
-  id: "sam" # e.g. "sam"
   pos:
   icon:
-wordpress:
+wordpress: # e.g. "sam"
   pre: "https://"
-  id: "sam" # e.g. "sam"
   pos: ".wordpress.com/"
   icon:
-youtube:
+youtube: # e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
   pre: "https://www.youtube.com/channel/"
-  id: "sam" # e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
   pos:
   icon:
