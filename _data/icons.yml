@@ -1,141 +1,81 @@
 # Icons on the footer
 behance: # e.g. "sam"
   pre: "https://www.behance.net/" 
-  pos:
-  icon:
 bitbucket: # e.g. "sam"
   pre: "https://bitbucket.org/"
-  pos:
-  icon:
 calendly: # e.g. "sam"
   pre: "https://calendly.com/"
-  pos:
   icon: "far fa-calendar-plus" 
 dribbble: # e.g. "sam"
   pre: "https://www.dribbble.com/"
-  pos:
-  icon:
 facebook: # e.g. "sam"
   pre: "https://www.facebook.com/"
-  pos:
-  icon:
 flickr: # e.g. "sam"
   pre: "https://flickr.com/photos/"
-  pos:
-  icon:
 github: # e.g. "sam"
   pre: "https://github.com/"
-  pos:
-  icon:
 gitlab: # e.g. "sam"
   pre: "https://gitlab.com/"
-  pos:
-  icon:
 google-scholar: # e.g. "WXAAOb0AAAAJ"
   pre: "https://scholar.google.com/citations?hl=en&user="
-  pos:
   icon: "fas fa-user-graduate"
 instagram: # e.g. "sam"
   pre: "https://instagram.com/"
-  pos:
-  icon:
 hacker-news: # e.g. "sam"
   pre: "https://news.ycombinator.com/user?id="
-  pos:
-  icon:
 keybase: # e.g. "sam"
   pre: "https://keybase.io/"
-  pos:
-  icon:
 linkedin: # e.g. "sam"
   pre: "https://www.linkedin.com/in/"
-  pos:
-  icon:
 mail: # e.g. "sam@mail.com"
   pre: "mailto://"
-  pos:
   icon: "fas fa-envelope"
 map: # e.g. "34.0886/-118.3191"
   pre: "https://www.openstreetmap.org/#map=15/"
-  pos:
   icon: "fas fa-map-marked"
 mastodon: # e.g. "fostodon.org/@sam"
   pre: "https://"
-  pos:
-  icon:
 matrix: # e.g. "@sam:matrix.org"
   pre: "https://matrix.to/#/"
-  pos:
   icon: "fab fa-connectdevelop" 
 medium: # e.g. "sam"
   pre: "https://medium.com/@"
-  pos:
-  icon:
 patreon: # e.g. "sam"
   pre: "https://www.patreon.com/"
-  pos:
-  icon:
 phone: # e.g. "+11111111111"
   pre: "tel:"
-  pos:
   icon: "fas fa-phone"
 pinterest:  # e.g. "sam"
   pre: "https://www.pinterest.com/"
-  pos:
-  icon:
 reddit: # e.g. "sam"
   pre: "https://www.reddit.com/user/"
-  pos:
-  icon:
 soundcloud: # e.g. "sam"
   pre: "https://soundcloud.com/" 
-  pos:
-  icon:
 sms: # e.g. "+11111111111"
   pre: "sms:" 
   pos: "?body=Hi"
   icon: "fas fa-sms"
 stack-exchange: # e.g. "1"
   pre: "https://stackexchange.com/users/"
-  pos:
-  icon:
-  stack-overflow: # e.g. "1"
+stack-overflow: # e.g. "1"
   pre: "https://stackoverflow.com/users/"
-  pos:
-  icon:
 steam: # e.g. "sam"
   pre: "https://steamcommunity.com/id/"
-  pos:
-  icon:
 telegram: # e.g. "sam"
   pre: "https://t.me/"
-  pos:
-  icon:
 tumblr: # e.g. "sam"
   pre: "https://"
   pos: ".tumblr.com/"
-  icon:
 twitch: # e.g. "sam"
   pre: "https://twitch.tv/"
-  pos:
-  icon:
 twitter: # e.g. "sam"
   pre: "https://twitter.com/"
-  pos:
-  icon:
 vimeo: # e.g. "sam"
   pre: "https://vimeo.com/"
-  pos:
-  icon:
 vk: # e.g. "sam"
   pre: "https://vk.com/"
-  pos:
-  icon:
 wordpress: # e.g. "sam"
   pre: "https://"
   pos: ".wordpress.com/"
-  icon:
 youtube: # e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
   pre: "https://www.youtube.com/channel/"
-  pos:
-  icon:
