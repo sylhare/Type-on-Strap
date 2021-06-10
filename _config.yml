@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
+baseurl: ""
 url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
@@ -26,10 +26,17 @@ katex: true                                             # Enable if using math m
 mermaid: true                                           # Enable mermaid-js for sequence and diagrams
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
-disqus_shortname:                                       # Your discus shortname for comments
-cusdis_app_id:                                          # Your cusdis data-app-id
 color_theme: auto                                       # auto, dark or light
 
+# Comments
+comments:
+  disqus_shortname: mainblog-disqus                                      # Your discus shortname for comments
+  cusdis_app_id: a18e5bf1-59c8-49e0-aa2b-155600619e27                                         # Your cusdis data-app-id
+  utterances:                                             # just fill out the below parts, and this is important. you MUST give a repo name like sylhare/Type-on-Strap. For more info, go to https://utteranc.es
+    repo: coder-lg/my-blog-comments                                            # your comments repo name
+    issue-term: title                                          # your issue term. for info, go to https://utteranc.es
+    theme: github-dark                                               # GitHub Light/Dark, type it as github-[light/dark] and choose only one of them.
+  
 # PAGINATION
 paginate: 5
 paginate_path: "/blog/page:num"

@@ -170,6 +170,12 @@ To enable it, set your cusdis name in `_config.yml`:
 cusdis_app_id: my_data-app-id                                     
 ```
 
+#### Utterances
+[Utterances](https://utteranc.es) is a very good alternative to Cusdis and Disqus. It has GitHub login, rather than Google/Twitter login and doesn't ask permission. It is open source and the code is on GitHub.
+
+To install Utterances, fill out the utterances lines in config.yml and install the app from [here](https://github.com/apps/utterances) to your repo. If you don't, Utterances will post a comment to install the app.
+
+
 ### Math typesetting with KateX
 
 When KateX is set in `_config.yml`:
