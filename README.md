@@ -178,7 +178,7 @@ To install Utterances, fill out the utterances lines in config.yml and install t
 It also has support for labels, which is exactly GitHub Issue labels. And, it supports emojis.
 
 After installing, fill out these lines under the `comments:` line:
-```
+```yaml
 utterances:
 	repo:
 	issue-term:
