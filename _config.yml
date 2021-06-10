@@ -36,6 +36,7 @@ comments:
     repo:                                                 # your comments repo name
     issue-term:                                           # your issue term. for info, go to https://utteranc.es
     theme:                                                # GitHub Light/Dark, type it as github-[light/dark] and choose only one of them.
+    label:                                                # this is optional, but advised if you have two blogs
   
 # PAGINATION
 paginate: 5
