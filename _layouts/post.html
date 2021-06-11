@@ -38,13 +38,7 @@ layout: default
 {% endif %}
 
 <!--Utterances-->
-{% if site.comments.utterances.repo %}
-{% if site.comments.utterances.issue-term %}
-{% if site.comments.utterances.theme %}
-{% include social/utterances.html %}
-{% endif %}
-{% endif %}
-{% endif %}
+{% if site.comments.utterances.repo and site.comments.utterances.issue-term and site.comments.utterances.theme %} {% include social/utterances.html %} {% endif %}
 
 <!-- Cusdis -->
 {% if site.comments.cusdis_app_id %}{% include social/cusdis.html %}{% endif %}
