@@ -41,10 +41,10 @@ layout: default
 {% if site.comments.utterances.repo and site.comments.utterances.issue-term and site.comments.utterances.theme %} {% include social/utterances.html %} {% endif %}
 
 <!-- Cusdis -->
-{% if site.comments.cusdis_app_id %}{% include social/cusdis.html %}{% endif %}
+{% if site.comments.cusdis_app_id or site.cusdis_app_id %}{% include social/cusdis.html %}{% endif %}
 
 <!-- Disqus -->
-{% if site.comments.disqus_shortname or site.theme_settings.disqus_shortname %}
+{% if site.comments.disqus_shortname or site.theme_settings.disqus_shortname or site.disqus_shortname %}
 {% include social/disqus.html %}{% endif %}
 
 <!-- To change color of links in the page -->

@@ -1,6 +1,6 @@
-<div class="comments" id="cusdis"
+<div class="comments" id="cusdis_thread"
   data-host="https://cusdis.com"
-  data-app-id="{{ site.comments.cusdis_app_id }}"
+  data-app-id="{% if site.comments.cusdis_app_id %}{{ site.comments.cusdis_app_id }}{% else %}{{ site.cusdis_app_id }}{% endif %}"
   data-page-id="{{ page.relative_path }}"
   data-page-url="{{ page.url }}"
   data-page-title="{{ page.title }}"

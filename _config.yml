@@ -30,14 +30,12 @@ color_theme: auto                                       # auto, dark or light
 
 # Comments
 comments:
-  disqus_shortname:                                       # Your discus shortname for comments
-  cusdis_app_id:                                          # Your cusdis data-app-id
-  utterances:                                             # just fill out the below parts, and this is important. you MUST give a repo name like sylhare/Type-on-Strap. For more info, go to https://utteranc.es
-    repo:                                                 # your comments repo name
-    issue-term:                                           # your issue term. for info, go to https://utteranc.es
-    theme:                                                # GitHub Light/Dark, type it as github-[light/dark] and choose only one of them.
-    label:                                                # this is optional, but advised if you have two blogs
-  
+  disqus_shortname:                                     # Your discus shortname for comments
+  cusdis_app_id:                                        # Your cusdis data-app-id
+  utterances:                                           # Enable by filling below information. For more info, go to https://utteranc.es
+    repo:                                               # your public comments repository (e.g. owner/repo)
+    issue-term:                                         # Issue term (e.g. "comment" consider issues with this word in the title as comments)
+
 # PAGINATION
 paginate: 5
 paginate_path: "/blog/page:num"
