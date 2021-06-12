@@ -4,5 +4,10 @@
 }
 
 .mermaid > svg {
-    margin: 20px;
+    margin: auto;
+    display: block;
+    height: auto;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    max-width: 100%;
 }
