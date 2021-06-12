@@ -170,6 +170,24 @@ To enable it, set your cusdis name in `_config.yml`:
 cusdis_app_id: my_data-app-id                                     
 ```
 
+#### Utterances
+[Utterances](https://utteranc.es) is a very good alternative to Cusdis and Disqus. It has GitHub login, rather than Google/Twitter login and doesn't ask permission. It is open source and the code is on GitHub. It stores the comments as GitHub issues for a page.
+
+To install Utterances, fill out the utterances lines in config.yml and install the app from [here](https://github.com/apps/utterances) to your repo. If you don't, Utterances will post a comment to install the app.
+
+It also has support for labels, which is exactly GitHub Issue labels. And, it supports emojis.
+
+After installing, fill out these lines under the `comments:` line:
+```yaml
+utterances:                                             # just fill out the below parts, and this is important. you MUST give a repo name like sylhare/Type-on-Strap. For more info, go to https://utteranc.es
+    repo:                                                 # your comments repo name
+    issue-term:                                           # your issue term. for info, go to https://utteranc.es
+    theme:                                                # GitHub Light/Dark, type it as github-[light/dark] and choose only one of them.
+    label:                                                # this is optional, but advised if you have two blogs
+```
+Label is optional. But fill the first three to activate Utterances after installing the app on your repo
+
+
 ### Math typesetting with KateX
 
 When KateX is set in `_config.yml`:
