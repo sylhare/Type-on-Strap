@@ -3,7 +3,7 @@ layout: post
 title: Tech Stuff example
 feature-img: "assets/img/feature-img/circuit.jpeg"
 thumbnail: "assets/img/thumbnails/feature-img/circuit.jpeg"
-tags: [Test, Markdown]
+tags: [Mermaid, Highlight, Markdown]
 ---
 
 

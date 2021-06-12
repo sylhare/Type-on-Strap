@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Generate a table of content
-tags: [toc.js, kramdown, Markdown, Customization]
+tags: [Kramdown, Customization]
 author: sylhare
 excerpt_separator: <!--more-->
 ---
@@ -13,7 +13,6 @@ excerpt_separator: <!--more-->
 {:toc}
 
 ## Basic Usage
-
 
 You need to put this at the beginning of the page where you want the table of content to be displayed
 
