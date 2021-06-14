@@ -3,7 +3,7 @@ layout: post
 title: Feature images
 feature-img: "assets/img/feature-img/desk-messy.jpeg"
 thumbnail: "assets/img/thumbnails/feature-img/desk-messy.jpeg"
-tags: [Test, Lorem]
+tags: [Test, Image]
 ---
 
 Hopefully you will find enough information about how to set images in your blog here.

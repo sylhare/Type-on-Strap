@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Markdown and HTML
-tags: [Test, Markdown]
+tags: [Katex, Markdown]
 author: rohanchandra
 ---
 

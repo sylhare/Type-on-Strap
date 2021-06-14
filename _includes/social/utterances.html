@@ -1,0 +1,8 @@
+<script src="https://utteranc.es/client.js"
+        repo='{{ site.comments.utterances.repo }}'
+        issue-term="{{ site.comments.utterances.issue-term}}"
+        theme="{% if site.comments.utterances.theme %}{{ site.comments.utterances.theme }}{% elsif site.color_theme == 'dark' %}github-dark{% else %}github-light{% endif %}"
+		label="{{ site.comments.utterances.label }}"
+        crossorigin="anonymous"
+        async>
+</script>

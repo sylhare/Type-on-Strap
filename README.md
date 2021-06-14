@@ -156,7 +156,8 @@ To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/c
 to your project's `_config.yml` file:
 
 ```yml
-disqus_shortname: my_disqus_shortname
+comments:
+  disqus_shortname: my_disqus_shortname
 ```
 
 #### Cusdis
@@ -167,7 +168,27 @@ You can read more about it in the [documentation](https://cusdis.com/doc#/)
 To enable it, set your cusdis name in `_config.yml`:
 
 ```yaml
-cusdis_app_id: my_data-app-id                                     
+comments:
+  cusdis_app_id: my_data-app-id                                     
+```
+
+#### Utterances
+
+[Utterances](https://utteranc.es) is another open source alternative. 
+It has GitHub login, rather than Google/Twitter login and doesn't ask permission. 
+It stores the comments as GitHub issues on a repository for each page.
+
+Install the utterance [app](https://github.com/apps/utterances) to your repo.
+
+After installing, add your info in the `_config.yml`:
+
+```yaml
+comments:
+  utterances:              # Enable by filling below information. For more info, go to https://utteranc.es
+    repo:                  # your public comments repository (e.g. owner/repo)
+    issue-term:            # Issue term (e.g. "comment" consider issues with this word in the title as comments)
+    theme:                 # OPTIONAL: Take the `color_theme` by default, or set a custome one like github-dark-orange
+    label:                 # OPTIONAL: Adds an issue label in the issue
 ```
 
 ### Math typesetting with KateX
