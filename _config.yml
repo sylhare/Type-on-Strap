@@ -35,10 +35,6 @@ comments:
   utterances:                                           # Enable by filling below information. For more info, go to https://utteranc.es
     repo:                                               # your public comments repository (e.g. owner/repo)
     issue-term:                                         # Issue term (e.g. "comment" consider issues with this word in the title as comments)
-# Social icons
-me:
-  github: "sylhare"
-  stack-overflow: "7747942/sylhare"
 
 # PAGINATION
 paginate: 5

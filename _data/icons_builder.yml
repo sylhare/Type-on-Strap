@@ -1,0 +1,82 @@
+# Default data to build the footer icons
+# DO NOT MODIFY, use the "icons.yml" instead.
+behance:
+  pre: "https://www.behance.net/"
+bitbucket:
+  pre: "https://bitbucket.org/"
+calendly:
+  pre: "https://calendly.com/"
+  icon: "far fa-calendar-plus"
+dribbble:
+  pre: "https://www.dribbble.com/"
+facebook:
+  pre: "https://www.facebook.com/"
+flickr:
+  pre: "https://flickr.com/photos/"
+github:
+  pre: "https://github.com/"
+gitlab:
+  pre: "https://gitlab.com/"
+google-scholar:
+  pre: "https://scholar.google.com/citations?hl=en&user="
+  icon: "fas fa-user-graduate"
+instagram:
+  pre: "https://instagram.com/"
+hacker-news:
+  pre: "https://news.ycombinator.com/user?id="
+keybase:
+  pre: "https://keybase.io/"
+linkedin:
+  pre: "https://www.linkedin.com/in/"
+mail:
+  pre: "mailto://"
+  icon: "fas fa-envelope"
+map:
+  pre: "https://www.openstreetmap.org/#map=15/"
+  icon: "fas fa-map-marked"
+mastodon:
+  pre: "https://"
+matrix:
+  pre: "https://matrix.to/#/"
+  icon: "fab fa-connectdevelop"
+medium:
+  pre: "https://medium.com/@"
+patreon:
+  pre: "https://www.patreon.com/"
+phone:
+  pre: "tel:"
+  icon: "fas fa-phone"
+pinterest:
+  pre: "https://www.pinterest.com/"
+reddit:
+  pre: "https://www.reddit.com/user/"
+soundcloud:
+  pre: "https://soundcloud.com/"
+sms:
+  pre: "sms:"
+  pos: "?body=Hi"
+  icon: "fas fa-sms"
+stack-exchange:
+  pre: "https://stackexchange.com/users/"
+stack-overflow:
+  pre: "https://stackoverflow.com/users/"
+steam:
+  pre: "https://steamcommunity.com/id/"
+telegram:
+  pre: "https://t.me/"
+tumblr:
+  pre: "https://"
+  pos: ".tumblr.com/"
+twitch:
+  pre: "https://twitch.tv/"
+twitter:
+  pre: "https://twitter.com/"
+vimeo:
+  pre: "https://vimeo.com/"
+vk:
+  pre: "https://vk.com/"
+wordpress:
+  pre: "https://"
+  pos: ".wordpress.com/"
+youtube:
+  pre: "https://www.youtube.com/channel/"
