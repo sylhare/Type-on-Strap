@@ -13,6 +13,7 @@
 {% for footer in site.data.icons %}
     {% unless footer[1] == nil %}
         {% assign brand = footer[0] %}
+        {% assign id = footer[1] %}
         {% assign data = site.data.icons_builder[brand] %}
         {% if data.icon == nil %}
             {% assign icon = "fab fa-" | append: brand %}
@@ -20,7 +21,7 @@
             {% assign icon = data.icon %}
         {% endif %}
         <li>
-            <a href="{{ data.pre | append: data.id | append: data.pos }}"
+            <a href="{{ data.pre | append: id | append: data.pos }}"
                title="{{ site.data.language.str_follow_on }} {{ brand | remove: '-' | capitalize }}"
                rel="me">
             <span class="fa-stack fa-lg">
