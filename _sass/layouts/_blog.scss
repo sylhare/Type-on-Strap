@@ -26,7 +26,11 @@
   }
 
   @media screen and (max-width: $sm-break) {
-    background-size: 400% auto;
+    background-size: 250% auto;
+  }
+
+  @media screen and (max-width: $x-sm-break) {
+    background-size: 300% auto;
   }
 
   p:last-child {
