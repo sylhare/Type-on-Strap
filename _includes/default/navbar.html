@@ -2,7 +2,21 @@
     {% comment %}Multilingual site title (if `multilingual: true` in `_config.yml`){% endcomment %}
     {% if site.multilingual %}
         {% if site.plugins contains "jekyll-polyglot" %}
-            {% I18n_Headers %}{% comment %}Activate polyglot's Seo features---but only if polyglot is installed{% endcomment %}
+            <link rel="alternate"
+                hreflang="{{site.default_lang}}"
+                href="http://yoursite.com{{page.permalink}}" />
+            {% for lang in site.languages %}
+            {% if lang == site.default_lang %}
+                {% continue %}
+            {% endif %}
+            <link rel="alternate"
+                hreflang="{{lang}}"
+                href="http://yoursite.com/{{lang}}{{page.permalink}}" />
+            {% endfor %}
+            {% comment %}
+                Activate polyglot's Seo features---according to https://polyglot.untra.io/seo/
+                Unfortunately, the I18n_Headers tag will throw an error, even if I add a conditional check for the presence of jekyll-polyglot. Too bad.
+            {% endcomment %}
         {% endif %}
         {% assign site_title = site.title[site.active_lang] %}     
     {% else %}
