@@ -3,7 +3,8 @@ published: true
 tag:
   - networking
 ---
-#outline
+Scanning port, TCP & UDP, reliable data transfer, improvement in tcp  
+# Outline
 ---
 - [Theory : 4 tubles value](#theory:-4-tuples-value)
 - [Scanning port](#scanning-port)
