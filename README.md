@@ -10,6 +10,7 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 
 * Responsive design on all devices (🖥, 💻, 📱, ...)
 * Portfolio 🗂, Gallery 🖼 pages for your projects
+* Multi comments 💬 options  
 * Tags compatibility 🏷
 * Handle _Bootstrap_'ed pages: [Get Bootstrap](http://getbootstrap.com/)
 * 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
@@ -65,7 +66,8 @@ Type-on-Strap
 ├── _data.yml
 |  ├── authors.yml             # Update the post authors configurations 
 |  ├── language.yml            # Localization configuration
-|  └── social.yml              # Social configurations (RSS, Twitter, ...)
+|  ├── social.yml              # Social configurations to share posts (RSS, shares, ...)
+|  └── icons.yml               # Footer icons (Twitter, Github, Stackoverflow, ...)
 └── index.html                 # sample home page (blog page paginated)
 ```
 	
@@ -74,7 +76,6 @@ Type-on-Strap
 Open `_config.yml` in a text editor to change most of the blog's settings.
 
 If a variable in this document is marked as "optional", disable the feature by removing all text from the variable. 
-
 
 ### Site configuration
 
@@ -145,12 +146,11 @@ to `_config.yml` like so:
 google_analytics: UA-NNNNNNNN-N
 ```
 
-### Comments 
+### Comments 💬
 
 #### Disqus
 
-Optionally, if you have a [Disqus](https://disqus.com/) account, you can show a 
-comments section below each post.
+If you have a [Disqus](https://disqus.com/) account, you can show a comments section below each post.
 
 To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) 
 to your project's `_config.yml` file:
@@ -174,12 +174,10 @@ comments:
 
 #### Utterances
 
-[Utterances](https://utteranc.es) is another open source alternative. 
-It has GitHub login, rather than Google/Twitter login and doesn't ask permission. 
+[Utterances](https://utteranc.es) is another open source alternative linked to one's GitHub account.
 It stores the comments as GitHub issues on a repository for each page.
 
 Install the utterance [app](https://github.com/apps/utterances) to your repo.
-
 After installing, add your info in the `_config.yml`:
 
 ```yaml
@@ -187,7 +185,7 @@ comments:
   utterances:              # Enable by filling below information. For more info, go to https://utteranc.es
     repo:                  # your public comments repository (e.g. owner/repo)
     issue-term:            # Issue term (e.g. "comment" consider issues with this word in the title as comments)
-    theme:                 # OPTIONAL: Take the `color_theme` by default, or set a custome one like github-dark-orange
+    theme:                 # OPTIONAL: Take the `color_theme` by default, or set a custom one like github-dark-orange
     label:                 # OPTIONAL: Adds an issue label in the issue
 ```
 
@@ -241,8 +239,12 @@ sequenceDiagram
 
 ### Social icons
 
-In `_data/social.yml` you can customize the social icons from other website you wish to display in the blog.
+In `_data/social.yml` you can customize the social icons that will be displayed in the post to share your post.
+You can also enable RSS.
 The site icons come from [Font Awesome](https://fontawesome.com/).
+
+In `_data/icons.yml` you can set the footer icon that will appear at the bottom of the page.
+They will redirect the user on your profile on the other platform like Twitter, GitHub and so many more!
 
 ### Cookie consent
 

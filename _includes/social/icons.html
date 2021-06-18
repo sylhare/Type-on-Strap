@@ -1,0 +1,47 @@
+{% if site.data.social.rss or site.theme_settings.rss %}
+<li>
+    <a feed.xml href="{{ site.data.social.feed.path | default: 'feed.xml' | relative_url }}"
+       title="{{ site.data.language.str_rss_follow | default: 'Follow RSS feed' }}">
+        <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+{% endif %}
+
+{% for footer in site.data.icons %}
+    {% unless footer[1] == nil %}
+        {% assign brand = footer[0] %}
+        {% assign id = footer[1] %}
+        {% assign data = site.data.icons_builder[brand] %}
+        {% if data.icon == nil %}
+            {% assign icon = "fab fa-" | append: brand %}
+        {% else %}
+            {% assign icon = data.icon %}
+        {% endif %}
+
+        {% comment %}
+        #############
+            The following is for localization of word order (can be customized with %s
+        {% endcomment %}
+
+        {% assign social_tag = brand | remove: '-' | capitalize %}
+
+        {% if site.data.language.str_follow_on contains "%s" %}
+            {% assign a_title = site.data.language.str_follow_on | replace: "%s", social_tag %}
+        {% else %}
+            {% assign a_title = site.data.language.str_follow_on | default: "Follow on" | append: " " | append: social_tag %}
+        {% endif %}
+        <li>
+            <a href="{{ data.pre | append: id | append: data.pos }}"
+               title="{{ a_title }}"
+               rel="me">
+            <span class="fa-stack fa-lg">
+              <i class="fas fa-circle fa-stack-2x"></i>
+              <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
+            </span>
+            </a>
+        </li>
+    {% endunless %}
+{% endfor %}

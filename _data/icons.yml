@@ -1,0 +1,36 @@
+# Icons on the footer
+behance:
+bitbucket:
+calendly:
+dribbble:
+facebook:
+flickr:
+github: sylhare
+gitlab:
+google-scholar:   # e.g. "WXAAOb0AAAAJ"
+instagram:
+hacker-news:
+keybase:
+linkedin:
+mail:             # e.g. "sam@mail.com"
+map:              # e.g. "34.0886/-118.3191"
+mastodon:         # e.g. "fostodon.org/@sam"
+matrix:           # e.g. "@sam:matrix.org"
+medium:
+patreon:
+phone:            # e.g. "+11111111111"
+pinterest:
+reddit:
+soundcloud:
+sms:              # e.g. "+11111111111"
+stack-exchange:   # e.g. "123456789"
+stack-overflow:   # e.g. "123456789"
+steam:
+telegram:
+tumblr:
+twitch:
+twitter:
+vimeo:
+vk:
+wordpress:
+youtube:          # e.g. "UCqECaJ8Gagnn7YCbPEzWH6g"
