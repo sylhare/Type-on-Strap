@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 tags:
   - networking
 layout: post
@@ -32,4 +32,4 @@ in his point . there are 3 way to Router can switch message from input to output
 
 ### Output processing 
 
-At this point. Router selecting and de-queueing packet for tranmission and performing the needed link-layer and physical-layer transmission functions 
+At this point. Router selecting and de-queueing packet for tranmission and performing the needed link-layer and physical-layer transmission functions
