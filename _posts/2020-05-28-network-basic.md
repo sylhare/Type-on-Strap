@@ -109,4 +109,4 @@ when in the ESTABLISHED state , the tCP client can send and receive TCP segments
 In the case client want to disconnect with server . it need to wait : 
 + FIN_WAIT1 for ACK from server 
 + FIN_WAIT2 for FIN from server 
-+ TIME_WAIT for prepare for resend ack if ack is lost ( to server when server resend FIN) 
++ TIME_WAIT for prepare for resend ack if ack is lost ( to server when server resend FIN)
