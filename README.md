@@ -1,4 +1,4 @@
-# Type on Strap 🎨
+# Type on Strap (modified for multilingual use) 🎨
 
 [![Build Status](https://travis-ci.org/sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/sylhare/Type-on-Strap)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
@@ -13,7 +13,7 @@
 
 This is a modified version of the original [Type-on-Strap](https://github.com/sylhare/Type-on-Strap) which has  specially adapted features to support multilingual use, particularly with the [Jekyll Polyglot plugin](https://github.com/untra/polyglot)
 
-[Continue to original README](#original-readme-file)
+[Continue to original README portion](#original-readme-file)
 
 ## Multilingual support
 
