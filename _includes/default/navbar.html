@@ -1,7 +1,9 @@
 <header class="site-header">
     {% comment %}Multilingual site title (if `multilingual: true` in `_config.yml`){% endcomment %}
     {% if site.multilingual %}
-        {% I18n_Headers %}{% comment %}Activate polyglot's Seo features{% endcomment %}
+        {% if site.plugins contains "jekyll-polyglot" %}
+            {% I18n_Headers %}{% comment %}Activate polyglot's Seo features---but only if polyglot is installed{% endcomment %}
+        {% endif %}
         {% assign site_title = site.title[site.active_lang] %}     
     {% else %}
         {% assign site_title = site.title %}
