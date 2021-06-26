@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 ## Theory, API, Example  
 
@@ -32,8 +32,8 @@ struct platform_device {
 1. Device provisioning - the old and deprecated way.  
 this method is to be used with the kernel version that does not support a device tree.  
 **Resources**  
-```
 
+```
 struct resource {        
 	resource_size_t start;        
 	resource_size_t end;        
@@ -42,7 +42,7 @@ struct resource {
 }
 ```
 
-resource type 
+Resource type 
 
 ```
 #define IORESOURCE_IO  0x00000100  /* PCI/ISA I/O ports */
@@ -54,10 +54,19 @@ resource type
 
 ```
 
-
-
-
-
-
+defined resource like this 
+```
+* Our resource array 
+static struct resource needed_resources[] = {   
+[0] = {        
+    .start = JZ4740_UDC_BASE_ADDR,         
+    .end   = JZ4740_UDC_BASE_ADDR + 0x10000 - 1,         
+    .flags = IORESOURCE_MEM,         
+    .name  = "mem1",   
+},   
+[1] = {         
+	.start = JZ4740_UDC_BASE_ADDR2,
+    [....],
+```
 
 
