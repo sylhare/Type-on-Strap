@@ -56,3 +56,4 @@ exclude: [".jekyll-cache", ".idea", "vendor/*", "assets/node_modules/*"]
 remote_theme: rundocs/jekyll-rtd-theme
 #theme: jekyll-theme-minimal
 theme: jekyll-rtd-theme
+google_analytics: G-8Y0N86DYNR
