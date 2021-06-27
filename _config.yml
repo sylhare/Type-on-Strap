@@ -55,3 +55,4 @@ exclude: [".jekyll-cache", ".idea", "vendor/*", "assets/node_modules/*"]
 #remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
 remote_theme: rundocs/jekyll-rtd-theme
 #theme: jekyll-theme-minimal
+theme: jekyll-rtd-theme
