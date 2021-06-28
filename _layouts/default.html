@@ -13,22 +13,18 @@
 	<ul id="results-container"></ul>
 
 	<!-- or without installing anything -->
-	<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js">
-
-    var input = document.getElementById("search-input");
-    input.addEventListener("keyup", function(event) {
-      if (event.keyCode === 13) {
-          event.preventDefault();
-          var sjs = SimpleJekyllSearch({
-          searchInput: document.getElementById('search-input'),
-          resultsContainer: document.getElementById('results-container'),
-          json: '/search.json'})
-   	    sjs.search('Hello')
-       
-    }
-       console.log("test")
-});
-      
+	<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+    <script>
+      window.simpleJekyllSearch = new SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('results-container'),
+        json: '{{ site.baseurl }}/search.json',
+        searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
+        noResultsText: 'No results found',
+        limit: 10,
+        fuzzy: false,
+        exclude: ['Welcome']
+      })
     </script>
     <div class="content">
       {{ content }}
