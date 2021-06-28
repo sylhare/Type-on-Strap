@@ -1,5 +1,6 @@
 ---
 published: true
+tag: embedded linux
 ---
 ## Theory, API, Example  
 
@@ -68,5 +69,3 @@ static struct resource needed_resources[] = {
 	.start = JZ4740_UDC_BASE_ADDR2,
     [....],
 ```
-
-
