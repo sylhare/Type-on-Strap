@@ -52,8 +52,8 @@ plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
 exclude: [".jekyll-cache", ".idea", "vendor/*", "assets/node_modules/*"]
 
 # theme: type-on-strap                                  # if using the theme as a jekyll theme gem
-#remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
-remote_theme: rundocs/jekyll-rtd-theme
-#theme: jekyll-theme-minimal
-theme: jekyll-rtd-theme
+remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
+
+theme: jekyll-theme-minimal
+
 google_analytics: G-8Y0N86DYNR
