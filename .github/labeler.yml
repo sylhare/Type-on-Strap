@@ -1,0 +1,8 @@
+critical:
+    - '(critical|urgent)'
+
+bug:
+    - '(bug|issue|problem)'
+
+triage:
+    - '(bug|issue|problem)'

@@ -1,0 +1,38 @@
+name: Issue comments and project triage adding
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment-and-project-adding:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Comment on new issue
+        uses: actions/github-script@0.8.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+             const fs = require('fs')
+             const issueBody = fs.readFileSync(".github/ISSUE_RESPONSES/comment.md", "utf8")
+             github.issues.createComment({
+             issue_number: context.issue.number,
+             owner: context.repo.owner,
+             repo: context.repo.repo,
+             body: issueBody
+             })
+
+      - name: Add issue to project board
+        if: contains(github.event.issue.labels.*.name, 'bug', 'triage')
+        uses: actions/github-script@0.8.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.projects.createCard({
+            column_id: 15021397, # make the project so that i add the column id here.
+            content_id: context.payload.issue.id,
+            content_type: "Issue"
+            });
