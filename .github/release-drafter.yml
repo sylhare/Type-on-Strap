@@ -10,7 +10,11 @@ categories:
     labels:
       - 'fix'
       - 'bug'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'devops'
+      - 'custom'
 template: |
-  ## What’s:
+  ## What’s new:
 
   $CHANGES
