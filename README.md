@@ -177,7 +177,9 @@ comments:
 [Utterances](https://utteranc.es) is another open source alternative linked to one's GitHub account.
 It stores the comments as GitHub issues on a repository for each page.
 
-Install the utterance [app](https://github.com/apps/utterances) to your repo.
+Do **NOT** use double quotes in the `_config.yml` because it confuses the Utterances part.
+
+Install the utterances [app](https://github.com/apps/utterances) to your repo.
 After installing, add your info in the `_config.yml`:
 
 ```yaml
@@ -185,10 +187,10 @@ comments:
   utterances:              # Enable by filling below information. For more info, go to https://utteranc.es
     repo:                  # your public comments repository (e.g. owner/repo)
     issue-term:            # Issue term (e.g. "comment" consider issues with this word in the title as comments)
-    theme:                 # OPTIONAL: Take the `color_theme` by default, or set a custom one like github-dark-orange
+    theme:                 # Take the `color_theme` by default, or set a custom one like github-dark-orange
     label:                 # OPTIONAL: Adds an issue label in the issue
 ```
-
+Make sure that theme is filled or it won't work.
 ### Math typesetting with KateX
 
 When KateX is set in `_config.yml`:
