@@ -35,7 +35,8 @@ comments:
   utterances:                                           # Enable by filling below information. For more info, go to https://utteranc.es
     repo:                                               # your public comments repository (e.g. owner/repo)
     issue-term:                                         # Issue term (e.g. "comment" consider issues with this word in the title as comments)
-
+    theme:                                              # Theme (e.g. "github-dark" applies the dark theme for GitHub.)
+    label:                                              # OPTIONAL: adds a label for the issue. Useful for multiple blogs.
 # PAGINATION
 paginate: 5
 paginate_path: "/blog/page:num"
