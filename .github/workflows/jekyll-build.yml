@@ -1,4 +1,4 @@
-name: Jekyll site CI
+name: Build
 
 on:
   push:
@@ -10,6 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [ '2.6', '2.7', '3.0' ]
 
     steps:
     - uses: actions/checkout@v2
@@ -18,3 +21,5 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+
+
