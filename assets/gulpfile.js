@@ -19,7 +19,7 @@ const fs = require('fs');
 gulp.task('post', function (callback) {
   let args = process.argv;
   let title = args[args.length - 1];
-  let filename = new Date().toLocaleDateString('en-CA') + '-' + title.replaceAll(' ', '-') + '.md';
+  let filename = new Date().toLocaleDateString('en-CA') + '-' + title.replace(/ /g, '-') + '.md';
   let content = '---\n' +
     'layout: post\n' +
     'title: ' + title + '\n' +
