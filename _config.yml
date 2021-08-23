@@ -4,7 +4,7 @@ url: "https://jhancuch.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: Joe Hancuch                                    # site's title
-description: "Joe Hancuch's personal website that hosts open source projects"      # used by search engines
+description: "Personal website that hosts open source projects"      # used by search engines
 avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
