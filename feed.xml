@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Wed, 13 Oct 2021 11:30:20 -0700</pubDate>
+        <pubDate>Wed, 13 Oct 2021 14:37:19 -0700</pubDate>
         
           
           <item>
@@ -244,6 +244,15 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kaichunm@stanford.edu
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2101.02692&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://cs.stanford.edu/~kaichun/where2act/&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: 3d computer vision, robotic vision, affordance learning, robot learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;low-shot-validation-active-importance-sampling-for-estimating-classifier-performance-on-rare-categories&quot;&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content/ICCV2021/papers/Poms_Low-Shot_Validation_Active_Importance_Sampling_for_Estimating_Classifier_Performance_on_ICCV_2021_paper.pdf&quot;&gt;Low-Shot Validation: Active Importance Sampling for Estimating Classifier Performance on Rare Categories&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-10-08-iccv-2021/img12.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Fait Poms, Vishnu Sarukkai, Ravi Teja Mullapudi, Nimit S. Sohoni, William R. Mark, Deva Ramanan, Kayvon Fatahalian
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sarukkai@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/ICCV2021/papers/Poms_Low-Shot_Validation_Active_Importance_Sampling_for_Estimating_Classifier_Performance_on_ICCV_2021_paper.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://vsanimator.github.io/acis/&quot;&gt;Blog&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=x_dly8dKC6I&amp;amp;feature=youtu.be&quot;&gt;Video&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: model evaluation, active learning&lt;/p&gt;
+&lt;hr /&gt;
 
 &lt;hr /&gt;
 
