@@ -1,0 +1,40 @@
+# Now, on every start of a workspace, you need Gitpod to load your image, not the default one. The `image:` syntax helps us to do just that.
+image:
+  file: .gitpod.Dockerfile
+  
+  
+# Task(s)
+tasks:
+  - name: Jekyll server
+    before: gem install jekyll bundle
+    init: bundl install
+    command: bundle exec jekyll serve
+    
+# In case the user is trying to make a pull request, he needs GitLens, which by default is not installed. This code will help us install it.
+
+vscode:
+  extensions:
+    - eamodio.gitlens
+    
+# Ports configuration, since Gitpod needs to open Type on Strap on a new tab when the server loads up.
+ports:
+  - port: 4000
+    onOpen: open-browser
+
+# For opening workspaces faster than ever, prebuilds are suggested
+github:
+  prebuilds:
+    # enable for the master/default branch (defaults to true)
+    master: true
+# enable for all branches in this repo (defaults to false)
+    branches: true
+# enable for pull requests coming from this repo (defaults to true)
+    pullRequests: true
+# enable for pull requests coming from forks (defaults to false)
+    pullRequestsFromForks: true
+# add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
+    addComment: true
+# add a "Review in Gitpod" button to pull requests (defaults to false)
+    addBadge: true
+# add a label once the prebuild is ready to pull requests (defaults to false)
+    addLabel: prebuilt-in-gitpod
