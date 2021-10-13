@@ -7,7 +7,7 @@ image:
 tasks:
   - name: Jekyll server
     before: gem install jekyll bundle
-    init: bundl install
+    init: bundle install
     command: bundle exec jekyll serve
     
 # In case the user is trying to make a pull request, he needs GitLens, which by default is not installed. This code will help us install it.
