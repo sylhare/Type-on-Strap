@@ -8,8 +8,10 @@ tasks:
   - name: Jekyll server
     before: gem install jekyll bundle
     init: bundle install
-    command: bundle exec jekyll serve
-    
+    command: |
+        bundle install
+        bundle exec jekyll serve
+    # Reason for doubled `bundle install`s: So that the "missing gems" get installed.
 # In case the user is trying to make a pull request, he needs GitLens, which by default is not installed. This code will help us install it.
 
 vscode:
