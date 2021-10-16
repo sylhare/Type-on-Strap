@@ -1,6 +1,5 @@
 # Now, on every start of a workspace, you need Gitpod to load your image, not the default one. The `image:` syntax helps us to do just that.
-image:
-  file: .gitpod.Dockerfile
+image: gitpod/workspace-full
   
   
 # Task(s)
