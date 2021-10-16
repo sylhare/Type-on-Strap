@@ -25,7 +25,7 @@ ports:
 # For opening workspaces faster than ever, prebuilds are suggested
 github:
   prebuilds:
-    # enable for the master/default branch (defaults to true)
+# enable for the master/default branch (defaults to true)
     master: true
 # enable for all branches in this repo (defaults to false)
     branches: true
