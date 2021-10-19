@@ -81,9 +81,11 @@ If a variable in this document is marked as "optional", disable the feature by r
 
 ### Site configuration
 
+#### Base url
+
 Configure Jekyll as your own blog or with a "baseurl" in `_config.yml`:
 
-Jekyll website *without* a "baseurl" (such as a GitHub Pages website for a given username):
+Jekyll website *without* a "baseurl" (such as a **GitHub Pages website** with your username as the repository name):
 
 ```yml
 baseurl: ""
@@ -94,15 +96,27 @@ Jekyll website *with* "baseurl" (like the Type on Strap [demo](https://sylhare.g
 
 ```yml
 baseurl: "/sub-directory"
-url: "https://username.github.io/"
+url: "https://username.github.io"
 ```
 
-Please configure this  before using the theme.
+#### Jekyll blog configuration 
 
-### Meta and Branding
+And here is the basic information you will need in your `_config.yml` for it to work properly:
+
+```yaml
+# BLOG CONFIGURATION
+post_navigation: true
+paginate: 10
+paginate_path: "blog/page:num"
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
+```
+
+To configure the blog part and default pluginshose plugins are validated by GitHub page.
+
+#### Meta and Branding
 
 Meta variables hold basic information about your Jekyll site which will be used throughout the site 
-and as meta properties for search engines, browsers, and the site's RSS feed.
+and as meta properties that are used for search engines, browsers, and the site's RSS feed.
 
 Change these variables in `_config.yml`:
 
