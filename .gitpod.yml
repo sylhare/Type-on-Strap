@@ -1,22 +1,20 @@
-# Now, on every start of a workspace, you need Gitpod to load your image, not the default one. The `image:` syntax helps us to do just that.
+# Now, on every start of a workspace.
 image: gitpod/workspace-full
-  
-  
+
 # Task(s)
 tasks:
   - name: Jekyll server
     before: gem install jekyll bundle
     init: bundle install
     command: |
-        bundle install
-        bundle exec jekyll serve
-    # Reason for doubled `bundle install`s: So that the "missing gems" get installed.
-# In case the user is trying to make a pull request, he needs GitLens, which by default is not installed. This code will help us install it.
+      bundle install
+      bundle exec jekyll serve
 
+# In case the user is trying to make a pull request, he needs GitLens, which by default is not installed. This code will help us install it.
 vscode:
   extensions:
     - eamodio.gitlens
-    
+
 # Ports configuration, since Gitpod needs to open Type on Strap on a new tab when the server loads up.
 ports:
   - port: 4000
@@ -25,17 +23,17 @@ ports:
 # For opening workspaces faster than ever, prebuilds are suggested
 github:
   prebuilds:
-# enable for the master/default branch (defaults to true)
+    # enable for the master/default branch (defaults to true)
     master: true
-# enable for all branches in this repo (defaults to false)
+    # enable for all branches in this repo (defaults to false)
     branches: true
-# enable for pull requests coming from this repo (defaults to true)
+    # enable for pull requests coming from this repo (defaults to true)
     pullRequests: true
-# enable for pull requests coming from forks (defaults to false)
+    # enable for pull requests coming from forks (defaults to false)
     pullRequestsFromForks: true
-# add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
     addComment: true
-# add a "Review in Gitpod" button to pull requests (defaults to false)
+    # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: true
-# add a label once the prebuild is ready to pull requests (defaults to false)
+    # add a label once the prebuild is ready to pull requests (defaults to false)
     addLabel: prebuilt-in-gitpod

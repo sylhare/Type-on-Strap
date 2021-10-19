@@ -3,7 +3,7 @@
 [![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#/https://github.com/sylhare/Type-On-Strap)
+
 [![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
 A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily customizable:
@@ -22,13 +22,15 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * 💡 Light and dark theme supported
 * Find free of rights images on [pexels](https://www.pexels.com/)
 
-> [Demo Site](https://sylhare.github.io/Type-on-Strap/)
+> [Demo Site](https://sylhare.github.io/Type-on-Strap/) 
 
 ## Usage
 
 ### As a ruby gem 💎
 
 Check out this tutorial: [Use as Ruby Gem](#use-as-ruby-gem-)
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#/https://github.com/sylhare/Type-On-Strap)
 
 ### As a github page 📋
 
