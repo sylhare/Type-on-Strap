@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Fri, 05 Nov 2021 01:08:20 -0400</pubDate>
+        <pubDate>Fri, 05 Nov 2021 17:47:31 -0400</pubDate>
         
           
           <item>
@@ -40,7 +40,16 @@
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: koreeda@stanford.edu
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2110.01799&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://stanfordnlp.github.io/contract-nli/&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: natural language inference, contract, law, legal, dataset
-&lt;br /&gt;&lt;strong&gt;Conference&lt;/strong&gt;: The Findings of EMNLP 2021&lt;/p&gt;
+&lt;br /&gt;&lt;strong&gt;Venue&lt;/strong&gt;: The Findings of EMNLP 2021&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;the-emergence-of-the-shape-bias-results-from-communicative-efficiency&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2109.06232&quot;&gt;The Emergence of the Shape Bias Results from Communicative Efficiency&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-11-05-emnlp-2021/img11.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Eva Portelance, Michael C. Frank, Dan Jurafsky, Alessandro Sordoni, Romain Laroche
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: portelan@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2109.06232&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/evaportelance/emergent-shape-bias&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: emergent communication, shape bias, multi-agent reinforcement learning, language learning, language acquisition
+&lt;br /&gt;&lt;strong&gt;Conference&lt;/strong&gt;: CoNLL&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;h4 id=&quot;lm-critic-language-models-for-unsupervised-grammatical-error-correction&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2109.06822&quot;&gt;LM-Critic: Language Models for Unsupervised Grammatical Error Correction&lt;/a&gt;&lt;/h4&gt;
@@ -259,6 +268,144 @@
         
           
           <item>
+              <title>Selective Classification Can Magnify Disparities Across Groups</title>
+              <link>/blog/sc-magnifies-disparities/</link>
+              <guid isPermaLink="true">/blog/sc-magnifies-disparities/</guid>
+              <description>&lt;p&gt;Selective classification, where models are allowed to “abstain” when they are uncertain about a prediction, is a useful approach for deploying models in settings where errors are costly. For example, in medicine, model errors can have life-or-death ramifications, but abstentions can be easily handled by backing off to a doctor, who then makes a diagnosis. Across a range of applications from vision &lt;sup id=&quot;fnref:liu2015&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:liu2015&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:sagawagroupdro&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:sagawagroupdro&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:irvinchexpert&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:irvinchexpert&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; and NLP &lt;sup id=&quot;fnref:borkan2019&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:borkan2019&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:williams2018&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:williams2018&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;, even simple selective classifiers, relying only on model logits, routinely and often dramatically improve accuracy by abstaining. This makes selective classification a compelling tool for ML practitioners &lt;sup id=&quot;fnref:selectivenet&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:selectivenet&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:mozannar2020&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:mozannar2020&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, in our recent ICLR paper, we find that despite reliably improving average accuracy, &lt;strong&gt;selective classification can fail to improve and even hurt the accuracy over certain subpopulations of the data&lt;/strong&gt;. As a motivating example, consider the task of diagnosing pleural effusion, or fluid in the lungs, from chest X-rays. Pleural effusion is often treated with a chest drain, so many pleural effusion cases also have chest drains, while most cases without pleural effusion do not have chest drains &lt;sup id=&quot;fnref:oakdenrayner2020&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:oakdenrayner2020&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;. While selective classification improves average accuracy for this task, we find that it does not appreciably improve accuracy on the most clinically relevant subgroup, or subpopulation, of the data: those that have pleural effusion but don’t yet have a chest drain, i.e. those that have pleural effusion but have not yet been treated for it. Practitioners, thus, should be wary of these potential failure modes of using selective classification in the wild.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_95&quot; src=&quot;/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image2.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Example of the spurious correlation setup. This patient has a pleural effusion (excess fluid in the lung), but does not yet have a chest drain. The model, relying on the presence of a chest drain to make a prediction, incorrectly predicts negative.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;To further outline this critical failure mode of selective classification, we’ll first provide an overview of selective classification. We then demonstrate empirically that selective classification can hurt or fail to significantly improve accuracy on certain subgroups of the data. We next outline our theoretical results, which suggest that selective classification is rarely a good tool to resolve differences in accuracy between subgroups. And finally, suggest methods for building more equitable selective classifiers.&lt;/p&gt;
+
+&lt;h3 id=&quot;selective-classification-basics&quot;&gt;Selective classification basics&lt;/h3&gt;
+
+&lt;p&gt;Imagine you are trying to build a model that classifies X-rays as either pleural effusion positive or negative. With standard classification, the model is required to either output positive or negative on each input. In contrast, a selective classifier can additionally abstain from making a prediction when it is not sufficiently confident in any class &lt;sup id=&quot;fnref:chow1957&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:chow1957&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:gal2016&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:gal2016&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:geifman2017&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:geifman2017&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt;. By abstaining, selective classifiers aim to avoid making predictions on examples they are likely to classify incorrectly, say a corrupted or difficult-to-classify X-ray, which increases their average accuracy.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_95&quot; src=&quot;/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image5.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Selective classification pipeline. The model makes the incorrect prediction of negative. However, the outputted confidence of 0.7 is less than the confidence threshold of 0.8, so the selective classifier abstains. Selective classifiers increase accuracy by abstaining on examples they would get wrong.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;One key question in selective classification is how to choose which examples to abstain on. Selective classifiers can be viewed as two models: one that outputs a prediction (say, negative), and another that outputs a &lt;em&gt;confidence&lt;/em&gt; in that prediction (say, 0.7 out of 1.) Whenever the confidence is above a certain (confidence) threshold, the selective classifier outputs the original prediction; for example, if the threshold were 0.6, the selective classifier would predict negative. Otherwise, the selective classifier abstains. In our work, we primarily use &lt;em&gt;softmax response&lt;/em&gt; &lt;sup id=&quot;fnref:geifman2017:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:geifman2017&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt; to extract confidences: the confidence in a prediction is simply the maximum softmax probability over the possible classes.&lt;/p&gt;
+
+&lt;p&gt;Selective classifiers are typically measured in terms of the &lt;em&gt;accuracy&lt;/em&gt; (also called &lt;em&gt;selective accuracy&lt;/em&gt;) on predicted examples, and the &lt;em&gt;coverage&lt;/em&gt;, or fraction of examples the selective classifier makes predictions on &lt;sup id=&quot;fnref:elyaniv2010&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:elyaniv2010&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt;. We can tweak both coverage and accuracy by adjusting the &lt;em&gt;confidence threshold&lt;/em&gt;: a lower threshold for making predictions increases the coverage, since the model’s confidence for more examples is sufficiently high. However, this tends to lower average accuracy, as the model is less confident on average in its predictions. In contrast, higher thresholds increase confidence required to make a prediction, reducing the coverage but generally increasing average accuracy.&lt;/p&gt;
+
+&lt;p&gt;Typically, researchers measure the performance of selective classifiers by plotting accuracy as a function of coverage. In particular, for each possible coverage (ranging from 0: abstain on everything to 1: predict on everything) they compute the maximum threshold that achieves that coverage, and then plot the accuracy at that threshold. One particularly useful reference point is the &lt;em&gt;full-coverage accuracy&lt;/em&gt;: the accuracy of the selective classifier at coverage 1, which is the accuracy of the regular classifier.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_95&quot; src=&quot;/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image3.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+For five datasets, we plot the average accuracy as a function of the coverage. Reading from high coverages to low coverages (right to left), as the confidence threshold increases, accuracy reliably increases. This is expected, since the model is more confident on average in its predictions at lower coverage, so more of them tend to be correct.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;selective-classification-can-magnify-accuracy-disparities-between-subgroups&quot;&gt;Selective classification can magnify accuracy disparities between subgroups&lt;/h3&gt;
+
+&lt;p&gt;While prior work mostly focuses on average accuracy for selective classifiers, we instead focus on the accuracy of different &lt;em&gt;subgroups&lt;/em&gt; of the data. In particular, we focus on datasets where models often latch onto &lt;em&gt;spurious correlations&lt;/em&gt;. For example, in the above pleural effusion task, the model might learn to predict whether or not there is a chest drain, instead of directly diagnosing pleural effusion, because chest drains are highly correlated with pleural effusion; this correlation is spurious because not all pleural effusions have a chest drain. We consider subgroups that highlight this spurious correlation: two groups for when the spurious correlation gives the correct result (positive pleural effusion with chest drain, negative pleural effusion without a chest drain), and two groups when it does not (positive pleural effusion with no chest drain, negative pleural effusion with a chest drain). As a result, a model that learns this spurious correlation obtains high accuracy for the first two subgroups, but low accuracy for the latter two.&lt;/p&gt;
+
+&lt;p&gt;In principle, selective classification seems like a reasonable approach towards resolving these accuracy discrepancies between different subgroups of the data. Since we empirically see that selective classification reliably improves average accuracy, it must be more likely to cause a model to abstain when an example would be classified incorrectly. Incorrect examples disproportionately come from the lowest-accuracy subgroups of the data, suggesting that without bias in the confidence function, worst-group accuracy should increase faster than average accuracy.&lt;/p&gt;
+
+&lt;p&gt;To test this, we plot the accuracy-coverage curves over a range of tasks, including hair color classification (CelebA), bird type classification (Waterbirds), pleural effusion classification (CheXpert-device), toxicity classification (CivilComments) and natural language inference (MultiNLI). CelebA, Waterbirds, and MultiNLI use the same spurious correlation setup presented in &lt;sup id=&quot;fnref:sagawagroupdro:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:sagawagroupdro&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. CivilComments exhibits the same spurious correlations as described in the WILDS benchmark &lt;sup id=&quot;fnref:kohwilds&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:kohwilds&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt;. Finally, we created the CheXpert-device dataset by subsampling the original CheXpert dataset &lt;sup id=&quot;fnref:irvinchexpert:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:irvinchexpert&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; such that the presence of a chest drain even more strongly correlates with pleural effusion.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_95&quot; src=&quot;/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image4.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Reading from right to left, while we see that as the coverage decreases the average accuracy reliably increases, &lt;strong&gt;the worst-group accuracies do not always increase, and exhibit a range of undesirable behaviors&lt;/strong&gt;. On CelebA, worst-group accuracy actually decreases: this means the more confident predictions are more likely to be incorrect. For Waterbirds, CheXpert-device, and CivilComments, worst-group accuracy sometimes increases, but never by more than 10 points until the noisy low-coverage regime, and sometimes decreases. For MultiNLI, worst-group accuracy does slowly improve, but can’t even reach 80% until very low coverages.&lt;/p&gt;
+
+&lt;p&gt;These results highlight that practitioners should be wary: even if selective classification reliably increases average accuracy, it will not necessarily improve the accuracy of different subgroups.&lt;/p&gt;
+
+&lt;h3 id=&quot;selective-classification-rarely-overcomes-accuracy-disparities&quot;&gt;Selective classification rarely overcomes accuracy disparities&lt;/h3&gt;
+
+&lt;p&gt;To better understand why selective classification can sometimes hurt worst-group accuracy and does not reduce full-coverage accuracy disparities, we theoretically characterize for a broad class of distributions: (1) when does selective classification improve accuracy as the confidence threshold decreases and (2) when does selective classification disproportionately help the worst group.&lt;/p&gt;
+
+&lt;p&gt;At a high level, our analysis focuses on the &lt;em&gt;margin&lt;/em&gt;, or the model’s confidence for a given prediction multiplied by -1 if that prediction was incorrect. Intuitively, the more negative the margin, the “worse” the prediction. Using only the margin distribution, we can recreate the accuracy-coverage curve by abstaining on density between the negative and positive threshold, and computing the fraction of remaining density that is correct.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_90&quot; src=&quot;/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image1.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The key result of our theoretical analysis is that &lt;strong&gt;the &lt;em&gt;full-coverage accuracy&lt;/em&gt; of a subgroup dramatically impacts how well selective classification performs&lt;/strong&gt; on that subgroup, which amplifies disparities. For a wide range of margin distributions, full-coverage accuracy and a property of the margin distribution we call &lt;em&gt;left-log-concavity&lt;/em&gt; completely determine whether or not the accuracy of a selective classifier monotonically increases or decreases. When a margin distribution is left-log-concave, which many standard distributions (e.g. gaussians) are, accuracy monotonically increases when full-coverage accuracy is at least 50% and decreases otherwise.&lt;/p&gt;
+
+&lt;h3 id=&quot;next-steps&quot;&gt;Next steps&lt;/h3&gt;
+
+&lt;p&gt;So far, we have painted a fairly bleak picture of selective classification: even though it reliably improves average accuracy, it can, both theoretically and empirically, exacerbate accuracy disparities between subgroups. There are still, however, mechanisms to improve selective classification, which we outline below.&lt;/p&gt;
+
+&lt;p&gt;One natural step towards improving selective classification is to develop confidence functions that allow selective classifiers to overcome accuracy disparities between groups. In our paper, we test the two most widely used methods: softmax response and Monte Carlo dropout &lt;sup id=&quot;fnref:gal2016:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:gal2016&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;. We consistently find that both are disproportionately overconfident on incorrect examples from the worst-groups. However, new confidence functions that are better calibrated across groups would likely resolve disparities &lt;sup id=&quot;fnref:wald2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:wald2021&quot; class=&quot;footnote&quot;&gt;14&lt;/a&gt;&lt;/sup&gt;, and is an important direction for future work.&lt;/p&gt;
+
+&lt;p&gt;In the short term, however, we find that the most promising method to improve worst-group accuracy with selective classification is to &lt;strong&gt;build selective classifiers on top of already-equitable models&lt;/strong&gt;, or models that achieve similar full-coverage accuracies across the relevant subgroups. One method to train such models is group DRO, which minimizes the maximum loss over subgroups &lt;sup id=&quot;fnref:sagawagroupdro:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:sagawagroupdro&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. We find empirically that selective classifiers trained with group DRO improve the accuracy of subgroups at roughly the same rate when they have the same accuracy at full coverage. However, group DRO is far from a perfect fix – it requires a priori knowledge of the relevant subgroups, and subgroup labels for each training example which may be costly to obtain. Nevertheless, it is a promising start, and developing more broadly applicable methods for training already-equitable models is a critical area for future work.&lt;/p&gt;
+
+&lt;p&gt;To conclude, despite the intuition that selective classification should improve worst-group accuracy, and selective classification’s ability to consistently improve average accuracy, common selective classifiers can severely exacerbate accuracy discrepancies between subgroups. We hope our work encourages practitioners to apply selective classification with caution, and in general focus on how different methods affect different subgroups of the data.&lt;/p&gt;
+
+&lt;h3 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h3&gt;
+
+&lt;p&gt;Thanks to the SAIL blog editors, Pang Wei Koh, and Shiori Sagawa for their helpful feedback on this blog post. This post is based off our &lt;a href=&quot;https://arxiv.org/abs/2010.14134&quot;&gt;ICLR 2021 paper&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Selective Classification Can Magnify Disparities Across Groups. Erik Jones*, Shiori Sagawa* Pang Wei Koh*, Ananya Kumar, and Percy Liang. ICLR 2021.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:liu2015&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of the IEEE International Conference on Computer Vision, pp. 3730–3738, 2015. &lt;a href=&quot;#fnref:liu2015&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:sagawagroupdro&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, and Percy Liang. Distributionally robust neural networks for group shifts: On the importance of regularization for worst-case generalization. In International Conference on Learning Representations (ICLR), 2020. &lt;a href=&quot;#fnref:sagawagroupdro&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:sagawagroupdro:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; &lt;a href=&quot;#fnref:sagawagroupdro:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:irvinchexpert&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Chris Chute, Henrik Marklund, Behzad Haghgoo, Robyn Ball, Katie Shpanskaya, et al. Chexpert: A large chest radiograph dataset with uncertainty labels and expert comparison. In Association for the Advancement of Artificial Intelligence (AAAI), volume 33, pp. 590–597, 2019. &lt;a href=&quot;#fnref:irvinchexpert&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:irvinchexpert:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:borkan2019&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Daniel Borkan, Lucas Dixon, Jeffrey Sorensen, Nithum Thain, and Lucy Vasserman. Nuanced metrics for measuring unintended bias with real data for text classification. In World Wide Web (WWW), pp. 491–500, 2019. &lt;a href=&quot;#fnref:borkan2019&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:williams2018&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Adina Williams, Nikita Nangia, and Samuel Bowman. A broad-coverage challenge corpus for sentence understanding through inference. In Association for Computational Linguistics (ACL), pp. 1112–1122, 2018. &lt;a href=&quot;#fnref:williams2018&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:selectivenet&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Yonatan Giefman and Ran El-Yaniv. SelectiveNet: A deep neural network with an integrated reject option. In International Conference on Machine Learning (ICML), 2019. &lt;a href=&quot;#fnref:selectivenet&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:mozannar2020&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Hussein Mozannar and David Sontag. Consistent estimators for learning to defer to an expert. In International Conference on Machine Learning (ICML), 2020. &lt;a href=&quot;#fnref:mozannar2020&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:oakdenrayner2020&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Luke Oakden-Rayner, Jared Dunnmon, Gustavo Carneiro, and Christopher Ré. Hidden stratification causes clinically meaningful failures in machine learning for medical imaging. In Proceedings of the ACM Conference on Health, Inference, and Learning, pp. 151–159, 2020. &lt;a href=&quot;#fnref:oakdenrayner2020&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:chow1957&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;C. K. Chow. An optimum character recognition system using decision functions. In IRE Transactions on Electronic Computers, 1957. &lt;a href=&quot;#fnref:chow1957&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:gal2016&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Yarin Gal and Zoubin Ghahramani. Dropout as a Bayesian approximation: Representing model uncertainty in deep learning. In International Conference on Machine Learning (ICML), 2016. &lt;a href=&quot;#fnref:gal2016&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:gal2016:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:geifman2017&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Yonatan Geifman and Ran El-Yaniv. Selective classification for deep neural networks. In Advances in Neural Information Processing Systems (NeurIPS), 2017. &lt;a href=&quot;#fnref:geifman2017&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:geifman2017:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:elyaniv2010&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Ran El-Yaniv and Yair Wiener. On the foundations of noise-free selective classification. Journal of Machine Learning Research (JMLR), 11, 2010. &lt;a href=&quot;#fnref:elyaniv2010&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:kohwilds&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Pang Wei Koh, Shiori Sagawa, Henrik Marklund, Sang Michael Xie, Marvin Zhang, Akshay Balsubramani, Weihua Hu, Michihiro Yasunaga, Richard Lanas Phillips, Irena Gao, Tony Lee, Etienne David, Ian Stavness, Wei Guo, Berton A. Earnshaw, Imran S. Haque, Sara Beery, Jure Leskovec, Anshul Kundaje, Emma Pierson, Sergey Levine, Chelsea Finn, and Percy Liang. WILDS: A benchmark of in-the-wild distribution shifts. arXiv, 2020. &lt;a href=&quot;#fnref:kohwilds&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:wald2021&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Yoav Wald, Amir Feder, Daniel Greenfeld, and Uri Shalit. On Calibration and Out-of-domain Generalization. arXiv preprint arXiv:2102.10395, 2021. &lt;a href=&quot;#fnref:wald2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+              <pubDate>Wed, 13 Oct 2021 00:00:00 -0400</pubDate>
+          </item>
+          
+        
+          
+          <item>
               <title>Stanford AI Lab Papers at ICCV 2021</title>
               <link>/blog/iccv-2021/</link>
               <guid isPermaLink="true">/blog/iccv-2021/</guid>
@@ -356,6 +503,15 @@
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kaichunm@stanford.edu
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2101.02692&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://cs.stanford.edu/~kaichun/where2act/&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: 3d computer vision, robotic vision, affordance learning, robot learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;low-shot-validation-active-importance-sampling-for-estimating-classifier-performance-on-rare-categories&quot;&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content/ICCV2021/papers/Poms_Low-Shot_Validation_Active_Importance_Sampling_for_Estimating_Classifier_Performance_on_ICCV_2021_paper.pdf&quot;&gt;Low-Shot Validation: Active Importance Sampling for Estimating Classifier Performance on Rare Categories&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-10-08-iccv-2021/img12.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Fait Poms*, Vishnu Sarukkai*, Ravi Teja Mullapudi, Nimit S. Sohoni, William R. Mark, Deva Ramanan, Kayvon Fatahalian
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sarukkai@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/ICCV2021/papers/Poms_Low-Shot_Validation_Active_Importance_Sampling_for_Estimating_Classifier_Performance_on_ICCV_2021_paper.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://vsanimator.github.io/acis/&quot;&gt;Blog&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=x_dly8dKC6I&amp;amp;feature=youtu.be&quot;&gt;Video&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: model evaluation, active learning&lt;/p&gt;
+&lt;hr /&gt;
 
 &lt;hr /&gt;
 
@@ -3018,103 +3174,6 @@ Figure 6 - Humans perform consistently as question complexity increases, but mod
 &lt;p&gt;Find our benchmark data &lt;a href=&quot;https://cs.stanford.edu/people/ranjaykrishna/agqa/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
               <pubDate>Mon, 21 Jun 2021 00:00:00 -0400</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Stanford AI Lab Papers and Talks at CVPR 2021</title>
-              <link>/blog/cvpr-2021/</link>
-              <guid isPermaLink="true">/blog/cvpr-2021/</guid>
-              <description>&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/logo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;http://cvpr2021.thecvf.com/&quot;&gt;Conference on Computer Vision and Pattern Recognition&lt;/a&gt; (CVPR) 2021 is being hosted virtually from June 19th - June 25th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!&lt;/p&gt;
-
-&lt;h2 id=&quot;list-of-accepted-papers&quot;&gt;List of Accepted Papers&lt;/h2&gt;
-&lt;h4 id=&quot;geosim-realistic-video-simulation-via-geometry-aware-composition-for-self-driving&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2101.06543&quot;&gt;GeoSim: Realistic Video Simulation via Geometry-Aware Composition for Self-Driving&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img0&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Yun Chen*, Frieda Rong*, Shivam Duggal*, Shenlong Wang, Xinchen Yan, Sivabalan Manivasagam, Shangjie Xue, Ersin Yumer, Raquel Urtasun
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: chenyuntc@gmail.com
-&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Oral, Best Paper Finalist
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2101.06543&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=_VLXc_VN0fE&amp;amp;feature=youtu.be&amp;amp;ab_channel=YunChen&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://tmux.top/publication/geosim/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: computer vision, simulation, image simulation, video simulation, self-driving, autonomous driving, 3d vision, computer graphics, robotics&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;greedy-hierarchical-variational-autoencoders-for-large-scale-video-prediction&quot;&gt;Greedy hierarchical variational autoencoders for large-scale video prediction&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img8&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Bohan Wu, Suraj Nair, Roberto Martin-Martin, Li Fei-Fei*, Chelsea Finn*
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: bohanwu@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: variational autoencoders, video prediction&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;agqa-a-benchmark-for-compositional-spatio-temporal-reasoning&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2103.16002.pdf&quot;&gt;AGQA: A Benchmark for Compositional Spatio-Temporal Reasoning&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img3&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Madeleine Grunde-McLaughlin
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: mgrund@sas.upenn.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2103.16002.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=6Rw1QF9Hono&amp;amp;t=1s&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://cs.stanford.edu/people/ranjaykrishna/agqa/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: visual question answering, compositionality, computer vision, benchmark&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;artemis-affective-language-for-visual-art&quot;&gt;&lt;a href=&quot;https://openaccess.thecvf.com/content/CVPR2021/papers/Achlioptas_ArtEmis_Affective_Language_for_Visual_Art_CVPR_2021_paper.pdf&quot;&gt;ArtEmis: Affective Language for Visual Art&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img7&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Panos Achlioptas, Maks Ovsjanikov, Kilichbek Haydarov, Mohamed Elhoseiny, Leonidas Guibas
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: panos@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Oral
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/CVPR2021/papers/Achlioptas_ArtEmis_Affective_Language_for_Visual_Art_CVPR_2021_paper.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/RZ5AS0pnEtc&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://artemisdataset.org&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: affective-computing, wikiart, neural-speakers, emotions&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;darcnn-domain-adaptive-region-based-convolutional-neural-network-for-unsupervised-instance-segmentation-in-biomedical-images&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.01325&quot;&gt;DARCNN: Domain Adaptive Region-based Convolutional Neural Network for Unsupervised Instance Segmentation in Biomedical Images&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img1&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Joy Hsu, Wah Chiu, Serena Yeung
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: joycj@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.01325&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;http://web.stanford.edu/~joycj/project.html&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: unsupervised domain adaptation, instance segmentation&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;hierarchical-motion-understanding-via-motion-programs&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.11216&quot;&gt;Hierarchical Motion Understanding via Motion Programs&lt;/a&gt;&lt;/h4&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;video class=&quot;postimage_75&quot; autoplay=&quot;&quot; muted=&quot;&quot; loop=&quot;&quot; playsinline=&quot;&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img5&quot; type=&quot;video/mp4&quot; /&gt;
-    &lt;p&gt;Your browser doesn't support HTML5 video. Here is a &lt;a href=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img5&quot;&gt;link to the video&lt;/a&gt; instead, which you can download and run with a player like &lt;a href=&quot;https://www.videolan.org/vlc/index.html&quot;&gt;VLC&lt;/a&gt;&lt;/p&gt;
-&lt;/video&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Authors&lt;/strong&gt;: Sumith Kulal*, Jiayuan Mao*, Alex Aiken, Jiajun Wu
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sumith@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.11216&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=EKP2BIRlaXQ&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://sumith1896.github.io/motion2prog/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: neuro-symbolic, motion, primitives, programs&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;home-action-genome-cooperative-compositional-action-understanding&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2105.05226&quot;&gt;Home Action Genome: Cooperative Compositional Action Understanding&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img2&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Nishant Rai
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: nishantr018@gmail.com
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2105.05226&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://homeactiongenome.org/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: multi modal, multi camera view, multi perspective, action recognition, action localization, atomic actions, scene graphs, contrastive learning, audio-visual, large scale dataset&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;joint-learning-of-3d-shape-retrieval-and-deformation&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2101.07889.pdf&quot;&gt;Joint Learning of 3D Shape Retrieval and Deformation&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img4&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Mikaela Angelina Uy, Vladimir G. Kim, Minhyuk Sung, Noam Aigerman, Siddhartha Chaudhuri, Leonidas Guibas
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: mikacuy@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2101.07889.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=ZeDJLHdCpUQ&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://joint-retrieval-deformation.github.io&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: joint learning, retrieval, deformation&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;metadata-normalization&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.09052&quot;&gt;Metadata Normalization&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-06-20-cvpr-2021/img6&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Mandy Lu, Qingyu Zhao, Jiequan Zhang, Kilian M. Pohl, Li Fei-Fei, Juan Carlos Niebles, Ehsan Adeli
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: mlu@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.09052&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://mml.stanford.edu/MDN/#video&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: metadata, normalization, bias, deep learning, bias-free feature learning&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;We look forward to seeing you at CVPR 2021!&lt;/p&gt;
-</description>
-              <pubDate>Sun, 20 Jun 2021 00:00:00 -0400</pubDate>
           </item>
           
         
