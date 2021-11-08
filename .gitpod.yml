@@ -3,13 +3,15 @@ image: gitpod/workspace-full
 
 # Task(s)
 tasks:
-  - before: gem install bundle
-    init: | 
+  - before: |
+      gem install bundle
+      bundle config set --local deployment 'true'
+    init: |
       bundle update
       bundle install
-  - name: Jekyll server 
-    init: bundle install 
-    command: bundle exec jekyll serve 
+  - name: Run type on strap
+    init: bundle install
+    command: bundle exec jekyll serve
 
 # In case the user is trying to make a pull request, he needs GitLens, which by default is not installed. This code will help us install it.
 vscode:
