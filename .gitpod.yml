@@ -1,11 +1,11 @@
-# Now, on every start of a workspace.
+# Documentation: https://www.gitpod.io/docs/references/gitpod-yml
 image: gitpod/workspace-full
 
 # Task(s)
 tasks:
   - before: |
       gem install bundle
-      bundle config set --local deployment 'true'
+      bundle config set --local path 'vendor/bundle'
     init: |
       bundle update
       bundle install
