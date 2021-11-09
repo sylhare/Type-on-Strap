@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Fri, 05 Nov 2021 17:47:31 -0400</pubDate>
+        <pubDate>Tue, 09 Nov 2021 14:23:25 -0500</pubDate>
         
           
           <item>
@@ -117,7 +117,7 @@
 
 &lt;h4 id=&quot;behavior-benchmark-for-everyday-household-activities-in-virtual-interactive-and-ecological-environments-&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2108.03332&quot;&gt;BEHAVIOR: Benchmark for Everyday Household Activities in Virtual, Interactive, and Ecological Environments &lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-11-05-corl-2021/img9.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Sanjana Srivastava, Chengshu Li, Michael Lingelbach, Roberto Martín-Martín, Fei Xia, Kent Vainio, Zheng Lian, Cem Gokmen, Shyamal Buch, C. Karen Liu, Silvio Savarese, Hyowon Gweon, Jiajun Wu, Li Fei-Fei
+&lt;strong&gt;Authors&lt;/strong&gt;: Sanjana Srivastava*, Chengshu Li*, Michael Lingelbach*, Roberto Martín-Martín*, Fei Xia, Kent Vainio, Zheng Lian, Cem Gokmen, Shyamal Buch, C. Karen Liu, Silvio Savarese, Hyowon Gweon, Jiajun Wu, Li Fei-Fei
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sanjana2@stanford.edu
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2108.03332&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://behavior.stanford.edu/&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: embodied ai, benchmarking, household activities&lt;/p&gt;
