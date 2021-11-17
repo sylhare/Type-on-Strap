@@ -176,7 +176,8 @@ That will be rendered into this:
 {% include aligner.html images="mermaid-example.png" column=1 %}
 
 You can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
-
+<details>
+<summary>▶ More complex diagram</summary>
 <div class="mermaid">
 sequenceDiagram
     participant Alice
@@ -190,3 +191,4 @@ sequenceDiagram
     John->>Bob: How about you?
     Bob-->>John: Jolly good!
 </div>
+</details>
