@@ -479,7 +479,7 @@ gallery: "assets/img/pexels"
 ### Feature: Search 🔍
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
-there is a `search.json` file that will create a list of all the site posts, pages and portfolios. 
+there is a `search.liquid` file that will create a list of all the site posts, pages and portfolios. 
 
 Then there's a `search.js` displaying the formatted results in the "search page".
 
