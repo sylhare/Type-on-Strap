@@ -83,18 +83,17 @@ Indentation matters. Be sure the indent of the code block aligns with the first 
 
 An example of a Gist embed below:
 
-<script defer=true src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js"></script>
+<script src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js"></script>
 
-You can use `defer=true` so that the loading of the gist doesn't prevent the loading of the page.
+Here is how it looks like:
 
 {% highlight html %}
 {% raw %}
-   <script defer=true 
-           src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js">
+   <script src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js">
    </script>
 {% endraw %}
 {% endhighlight %}
 
+<br>
 
-[^1]: 
-    {% include citation.html key="highlight" %}
+[^1]: {% include citation.html key="highlight" %}

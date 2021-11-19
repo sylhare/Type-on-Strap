@@ -51,9 +51,9 @@ Type-on-Strap
 ├── _layouts                   # theme layouts (see below for details)
 ├── _portfolio	               # collection of article to be populated in the portfolio page
 ├── _posts                     # Blog posts
-├── _sass                      # Sass partials 
+├── _sass                      # Sass partials (compiled into css at runtime)
 ├── assets
-|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
+|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search 
 |  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
 |  ├── fonts		       # Font-Awesome, and other fonts
 |  └── img		       # Images used for the template
@@ -62,12 +62,13 @@ Type-on-Strap
 |   ├── about.md               # About example page
 |   ├── gallery.md             # Gallery page for your photos
 |   ├── portfolio.md	       # Portfolio page for your projects
-|   ├── search.html	       # Search page
+|   ├── search.md	       # Search page
 |   └── tags.md                # The tag page
 ├── _config.yml                # sample configuration
 ├── _data.yml
 |  ├── authors.yml             # Update the post authors configurations 
 |  ├── language.yml            # Localization configuration
+|  ├── biblio.yml              # To create a reference bibliography
 |  ├── social.yml              # Social configurations to share posts (RSS, shares, ...)
 |  └── icons.yml               # Footer icons (Twitter, Github, Stackoverflow, ...)
 └── index.html                 # sample home page (blog page paginated)
@@ -111,7 +112,7 @@ paginate_path: "blog/page:num"
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
 ```
 
-To configure the blog part and default pluginshose plugins are validated by GitHub page.
+To configure the blog part and default plugins. Those plugins are validated by GitHub page.
 
 #### Meta and Branding
 
@@ -401,7 +402,7 @@ layout: page
 title: "About" 
 subtitle: "This is a subtitle"   
 feature-img: "assets/img/sample.png" 
-permalink: /about.html               # Set a permalink your your page
+permalink: /about/                   # Set a permalink your your page
 hide: true                           # Prevent the page title to appear in the navbar
 icon: "fa-search"                    # Will Display only the fontawesome icon (here: fa-search) and not the title
 tags: [sample, markdown, html]
@@ -480,7 +481,7 @@ gallery: "assets/img/pexels"
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
 there is a `search.json` file that will create a list of all the site posts, pages and portfolios. 
 
-Then there's a `search.js` displaying the formatted results entered in the `search.html` page.
+Then there's a `search.js` displaying the formatted results in the "search page".
 
 The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
 
@@ -511,7 +512,7 @@ tags: [sample, markdown, html]
 
 > Tags are case-sensitive `Tag_nAme` ≠ `tag_name`
 
-All the tags will be listed in `tags.html` with a link toward the pages or posts.
+All the tags will be listed the tags page with a link toward the pages or posts.
 The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
 
 ## Advanced
