@@ -2,7 +2,7 @@
 {% assign date = include.date | default: "today" | date: "%B %-d, %Y" %}
 
 <div class="post-info">
-  {%- if author.url -%}<a href="{{ author.url | relative_url }}" target="_blank">{%- endif -%}
+  {%- if author.url -%}<a href="{{ author.url | relative_url }}" target="_blank" rel="noopener">{%- endif -%}
     {% if author.avatar  %}
       <img alt="Author's avatar" src="{{ author.avatar | relative_url }}">
     {% endif %}
