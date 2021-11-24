@@ -282,3 +282,13 @@ kbd {
   padding-top: 2em;
   max-width: 100%;
 }
+
+.actor, .labelBox {
+  fill: lighten($actor, 25%) !important;
+  stroke: $actor !important;
+}
+
+.note {
+  fill: lighten($note, 25%) !important;
+  stroke: $note !important;
+}
