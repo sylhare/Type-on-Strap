@@ -1,3 +1,4 @@
+/* @preserve Navbar */
 document.addEventListener("DOMContentLoaded", function (event) {
 
   /*
@@ -5,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
    */
   var pull = document.getElementById('pull');
   var menu = document.querySelector('nav ul');
-
 
   ['click', 'touch'].forEach(function (e) {
     pull.addEventListener(e, function () {

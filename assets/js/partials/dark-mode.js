@@ -1,8 +1,9 @@
+/* @preserve Dark mode Init */
 /*
  * There are two color palettes on CSS for the data-theme: 'light' and 'dark'.
- * Initially the script check if a theme is set in session storage and alternatively listens to a MediaQuery callback looking for "prefers-color-scheme: dark".
+ * Initially the script check if a theme is set in session storage and
+ * alternatively listens to a MediaQuery callback looking for "prefers-color-scheme: dark".
  */
-
 
 const themeButton = {
     'light': '<i class="fas fa-adjust" aria-hidden="true"></i>',
