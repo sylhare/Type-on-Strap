@@ -17,15 +17,12 @@
 
     <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
     <script defer src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
-    
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.favicon | relative_url }}" type="image/x-icon">
-
-    <!-- RSS -->
-    <link rel="alternate" type="application/atom+xml" title="{{ site.title | default: 'Title' }}" href="{{ 'feed.xml' | absolute_url }}"/>
 
     {% if page.bootstrap %}
     <!-- Bootstrap-4.1.3 isolation CSS -->
@@ -79,6 +76,7 @@
     {% seo %}
 
     <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title | default: 'Title' }}" href="{{ 'feed.xml' | absolute_url }}"/>
     {% feed_meta %}
 
     <!-- Twitter Cards -->
