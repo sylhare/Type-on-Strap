@@ -45,16 +45,16 @@ Check out this tutorial: [Use as Ruby Gem](#use-as-ruby-gem-)
 
 Here are the main files of the template
 
-```bash
+```shell
 Type-on-Strap
-├── _includes	               # theme includes
-├── _layouts                   # theme layouts (see below for details)
-├── _portfolio	               # collection of article to be populated in the portfolio page
+├── _includes	               # Theme includes
+├── _layouts                   # Theme layouts (see below for details)
+├── _portfolio	               # Collection of articles for the portfolio page
 ├── _posts                     # Blog posts
 ├── _sass                      # Sass partials (compiled into css at runtime)
 ├── assets
-|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search 
-|  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
+|  ├── js	               # JS compiled for distribution + raw sources
+|  ├── css                     # CSS compiled for distribution
 |  ├── fonts		       # Font-Awesome, and other fonts
 |  └── img		       # Images used for the template
 ├── pages
@@ -123,7 +123,7 @@ Change these variables in `_config.yml`:
 
 ```yml
 title: My Jekyll Blog                 # Name of website
-avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
+avatar: assets/img/avatar.png         # Path of avatar image, to be displayed in the theme's header
 description: My blog posts            # Short description, primarily used by search engines
 favicon: assets/favicon.ico           # Icon displayed in the tab
 color_theme: auto                     # color theme auto, dark or light
@@ -363,7 +363,7 @@ Use it in any markdown file. There are two fields in the _include_ you need to l
 
 #### Code highlight
 
-Like all CSS variables in the theme, you can edit the color of the code highlight in *_sass > base > _variables.scss*.
+Like all CSS variables in the theme, you can edit the color of the code highlight in `_sass > base > _variables.scss`.
 The code highlighting works with [base16](https://github.com/chriskempson/base16-html-previews/tree/master/css) you can find existing example 
 of your favourite highlight color scheme on this format.
 
@@ -379,7 +379,7 @@ Non-standard features are documented below.
 ### Layout: Default
 
 This layout includes the head, navigation bar and footer around your content. 
-Unless you're making a custom layout you won't need it.
+Unless you are making a custom layout you won't need it.
 
 ### Layout: Home 🏡
 
