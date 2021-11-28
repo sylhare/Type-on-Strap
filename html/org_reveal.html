@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="(longkl)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/moon.css" id="theme"/>
+
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2 class="author">longkl</h2><p class="date">Created: 2021-11-28 Sun 10:41</p>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-org660ce92">1. Installing org-reveal</a></li>
+<li><a href="#/slide-orge615463">2. First export</a>
+<ul>
+<li><a href="#/slide-org94dfd65">2.1. Basic Header</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org75eb209">3. Improving your export</a></li>
+<li><a href="#/slide-org89a6cae">4. #+ATTR<sub>HTMLs</sub></a>
+<ul>
+<li><a href="#/slide-orgf2406ff">4.1. Step-by-step elements</a></li>
+<li><a href="#/slide-orgad2efa8">4.2. Images</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org41b1b2c">5. Notes</a></li>
+<li><a href="#/slide-orgb0e83a4">6. Links</a></li>
+</ul>
+</div>
+</div>
+</section>
+<p>
+:REVEAL<sub>PROPERTIES</sub>:
+</p>
+
+<section>
+<section id="slide-org660ce92">
+<h2 id="org660ce92"><span class="section-number-2">1.</span> Installing org-reveal</h2>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"   ><code trim>  <span style="color: #AB9DF2;">(</span><span style="color: #FF6188;">use-package</span> ox-reveal<span style="color: #AB9DF2;">)</span>
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orge615463">
+<h2 id="orge615463"><span class="section-number-2">2.</span> First export</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+</section>
+<section id="slide-org94dfd65">
+<h3 id="org94dfd65"><span class="section-number-3">2.1.</span> Basic Header</h3>
+<pre  class="example" >
+
+:REVEAL_PROPERTIES:
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_REVEAL_JS_VERSION: 4
+:END:
+
+#+TITLE: Reveal JS Presentation
+#+SUBTITLE: Straightforward Emacs - org-reveal
+#+AUTHOR: Jake B
+
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org75eb209">
+<h2 id="org75eb209"><span class="section-number-2">3.</span> Improving your export</h2>
+<ol>
+<li><code>#+REVEAL_THEME:</code>
+<ul>
+<li><a href="https://revealjs.com/themes/">https://revealjs.com/themes/</a></li>
+
+</ul></li>
+<li><code>#+OPTIONS: timestamp:nil toc:1 num:nil</code></li>
+<li><code>#+REVEAL_INIT_OPTIONS: slideNumber:true</code>
+<ul>
+<li><a href="https://revealjs.com/config/">https://revealjs.com/config/</a></li>
+
+</ul></li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-org89a6cae">
+<h2 id="org89a6cae"><span class="section-number-2">4.</span> #+ATTR<sub>HTMLs</sub></h2>
+<div class="outline-text-2" id="text-4">
+</div>
+</section>
+<section id="slide-orgf2406ff">
+<h3 id="orgf2406ff"><span class="section-number-3">4.1.</span> Step-by-step elements</h3>
+<p>
+<a href="https://revealjs.com/fragments/">https://revealjs.com/fragments/</a>
+<code>#+ATTR_REVEAL: :frag (appear)</code>
+</p>
+</section>
+<section id="slide-orgad2efa8">
+<h3 id="orgad2efa8"><span class="section-number-3">4.2.</span> Images</h3>
+<div class="org-src-container">
+
+<pre  class="src src-org"   ><code trim><span style="color: #FFD866;">  #+ATTR_HTML: :width 45% :align center</span>
+  <span style="color: #FCFCFA; font-weight: bold; text-decoration: underline;"><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/1024px-EmacsIcon.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/1024px-EmacsIcon.svg.png</a></span>
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org41b1b2c">
+<h2 id="org41b1b2c"><span class="section-number-2">5.</span> Notes</h2>
+<p>
+You can write speaker notes within org-reveal using the <code>#+BEGIN_NOTES</code> and <code>#+END_NOTES</code> lines. These notes can be seen in a speaker window. You open this window by pressing the <code>s</code> key on your reveal.js presentation, like so.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb0e83a4">
+<h2 id="orgb0e83a4"><span class="section-number-2">6.</span> Links</h2>
+<ul>
+<li><a href="https://github.com/yjwen/org-reveal">https://github.com/yjwen/org-reveal</a></li>
+<li><a href="https://revealjs.com/">https://revealjs.com/</a>
+<ul>
+<li><a href="https://revealjs.com/config/">https://revealjs.com/config/</a></li>
+<li><a href="https://revealjs.com/themes/">https://revealjs.com/themes/</a></li>
+<li><a href="https://revealjs.com/fragments/">https://revealjs.com/fragments/</a></li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes]
+});
+
+</script>
+</body>
+</html>
