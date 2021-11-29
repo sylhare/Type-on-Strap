@@ -1,0 +1,38 @@
+---
+published: true
+tag:
+  - tools
+  - dev-log
+---
+
+* where did I start ? what problems are ?
++ c/c++ programmer (embedded)
++ Work with huge code base which located on a server (strong cpu, ram, disk, ...)
++ Try to navigate source code at local machine with moderm text editor, ide.
+  - Pull a part of code from remote, build. VScode, sublime text seem slow when try to indexing definition, reference
+  - Using text editor, ide to navigate huge source doesn't seem a good idea.
+  - don't have enough header for libraries. trying to get all header to local in case of huge source also isn't good idea. I tried that with header (7xx MB), vscode is tired with the header :( .
++ Maping source code to local from remote (NFS) also painful
++ Without support from ide, text editor for flychecking
+  - re-built when syntax errors, don't realize potential bugs which can be alerted from compiler
+
+* Solution
++ Use tool for indexing huge source code
+  - rtags, cscope, ctags, ...
++ Use flychecking which save me much time.
+  - syntax
+  - warning from compiler (init, cast, miss header, ....). this reduce time for sanity tasks.
+
++ navigate code on built server instead of local machine
+  - local machine weak than built server
+  - local machine take time when try to sync code from the repotories
+  - if built environment isn't docker, try to navigate code in local might get incorect result
+
++ with emacs
+  - [rtags](https://github.com/Andersbakken/rtags)
+  - flychecking with rtags
+
+* Note
++ a file should be independence. Otherwise flychecking might meet many problems
+  - header is independent
+  - source code is independent
