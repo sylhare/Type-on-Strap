@@ -29,7 +29,7 @@ layout: page
     {% endfor %}
 
     <!-- Displays the list of tags-->
-    {% include default/tags_list.html tags=rawtags %}
+    {% include default/tags_list.liquid tags=rawtags %}
 
     <!-- Displays the posts and pages that contains the tag-->
     <div class="posts">
@@ -51,7 +51,7 @@ layout: page
                     <i class="far fa-file-image" aria-hidden="true"></i>
                     {{ page.title }}
                 </a>
-                {% include blog/post_info.html date=page.date %}
+                {% include blog/post_info.liquid date=page.date %}
             </h5>
             {% endif %}
             {% endfor %}
@@ -65,7 +65,7 @@ layout: page
                     {{ post.title }}
                 </a>
 
-                {% include blog/post_info.html date=post.date %}
+                {% include blog/post_info.liquid date=post.date %}
             </h5>
             {% endif %}
             {% endfor %}
@@ -79,7 +79,7 @@ layout: page
                     {{ note.title }}
                 </a>
 
-                {% include blog/post_info.html date=note.date %}
+                {% include blog/post_info.liquid date=note.date %}
             </h5>
             {% endif %}
             {% endfor %}

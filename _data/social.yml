@@ -26,7 +26,7 @@ youtube:          # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
 feed:
   path: feed.xml  # RSS feed path
 
-# Share button options
+# For the share button options at the bottom of the articles
 share:
   email: true
   facebook: true

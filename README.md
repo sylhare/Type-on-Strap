@@ -1,6 +1,6 @@
 # Type on Strap 🎨
 
-[![Build Status](https://travis-ci.org/sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/sylhare/Type-on-Strap)
+[![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
 
@@ -22,13 +22,15 @@ A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chan
 * 💡 Light and dark theme supported
 * Find free of rights images on [pexels](https://www.pexels.com/)
 
-> [Demo Site](https://sylhare.github.io/Type-on-Strap/)
+> [Demo Site](https://sylhare.github.io/Type-on-Strap/) 
 
 ## Usage
 
 ### As a ruby gem 💎
 
 Check out this tutorial: [Use as Ruby Gem](#use-as-ruby-gem-)
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#/https://github.com/sylhare/Type-On-Strap)
 
 ### As a github page 📋
 
@@ -49,9 +51,9 @@ Type-on-Strap
 ├── _layouts                   # theme layouts (see below for details)
 ├── _portfolio	               # collection of article to be populated in the portfolio page
 ├── _posts                     # Blog posts
-├── _sass                      # Sass partials 
+├── _sass                      # Sass partials (compiled into css at runtime)
 ├── assets
-|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
+|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search 
 |  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
 |  ├── fonts		       # Font-Awesome, and other fonts
 |  └── img		       # Images used for the template
@@ -60,12 +62,13 @@ Type-on-Strap
 |   ├── about.md               # About example page
 |   ├── gallery.md             # Gallery page for your photos
 |   ├── portfolio.md	       # Portfolio page for your projects
-|   ├── search.html	       # Search page
+|   ├── search.md	       # Search page
 |   └── tags.md                # The tag page
 ├── _config.yml                # sample configuration
 ├── _data.yml
 |  ├── authors.yml             # Update the post authors configurations 
 |  ├── language.yml            # Localization configuration
+|  ├── biblio.yml              # To create a reference bibliography
 |  ├── social.yml              # Social configurations to share posts (RSS, shares, ...)
 |  └── icons.yml               # Footer icons (Twitter, Github, Stackoverflow, ...)
 └── index.html                 # sample home page (blog page paginated)
@@ -79,9 +82,11 @@ If a variable in this document is marked as "optional", disable the feature by r
 
 ### Site configuration
 
+#### Base url
+
 Configure Jekyll as your own blog or with a "baseurl" in `_config.yml`:
 
-Jekyll website *without* a "baseurl" (such as a GitHub Pages website for a given username):
+Jekyll website *without* a "baseurl" (such as a **GitHub Pages website** with your username as the repository name):
 
 ```yml
 baseurl: ""
@@ -92,15 +97,27 @@ Jekyll website *with* "baseurl" (like the Type on Strap [demo](https://sylhare.g
 
 ```yml
 baseurl: "/sub-directory"
-url: "https://username.github.io/"
+url: "https://username.github.io"
 ```
 
-Please configure this  before using the theme.
+#### Jekyll blog configuration 
 
-### Meta and Branding
+And here is the basic information you will need in your `_config.yml` for it to work properly:
+
+```yaml
+# BLOG CONFIGURATION
+post_navigation: true
+paginate: 10
+paginate_path: "blog/page:num"
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
+```
+
+To configure the blog part and default plugins. Those plugins are validated by GitHub page.
+
+#### Meta and Branding
 
 Meta variables hold basic information about your Jekyll site which will be used throughout the site 
-and as meta properties for search engines, browsers, and the site's RSS feed.
+and as meta properties that are used for search engines, browsers, and the site's RSS feed.
 
 Change these variables in `_config.yml`:
 
@@ -259,20 +276,11 @@ to share the article on those platform.
 
 #### Footer
 
-Display in the footer. 
-All icon variables should be your username enclosed in quotes (e.g. "username") in `_data/social.yml`, 
-except for the following variables:
-
-```yml
-rss: true                                                   
-email_address: type@example.com
-linkedin: https://www.linkedin.com/in/FirstLast
-stack_exchange: https://stackexchangecom/users/0000/first-last
-stack_overflow: https://stackoverflow.com/users/0000/first-last
-youtube: UCqECaJ8Gagnn7YCbPEzWH6g  # Youtube token of your channel in the url 
-```
+Display icons in the footer. 
+All icon variables should be your username enclosed in quotes (e.g. "username") in `_data/icons.yml`.
 
 You can update the RSS settings in `_data/social` to change the default feed path (generated by [jekyll-feel](https://github.com/jekyll/jekyll-feed)).
+To enable the share icons at the bottom of each article set to true the one you'd like under `share` in the `_data/social.yml` file.
 
 ### Personalize your Blog Posts 📝
 
@@ -394,7 +402,7 @@ layout: page
 title: "About" 
 subtitle: "This is a subtitle"   
 feature-img: "assets/img/sample.png" 
-permalink: /about.html               # Set a permalink your your page
+permalink: /about/                   # Set a permalink your your page
 hide: true                           # Prevent the page title to appear in the navbar
 icon: "fa-search"                    # Will Display only the fontawesome icon (here: fa-search) and not the title
 tags: [sample, markdown, html]
@@ -468,13 +476,12 @@ gallery: "assets/img/pexels"
 {% include default/gallery.html gallery_path=page.gallery %}
 ```
 
-
 ### Feature: Search 🔍
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
-there is a `search.json` file that will create a list of all the site posts, pages and portfolios. 
+there is a `search.liquid` file that will create a list of all the site posts, pages and portfolios. 
 
-Then there's a `search.js` displaying the formatted results entered in the `search.html` page.
+Then there's a `search.js` displaying the formatted results in the "search page".
 
 The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
 
@@ -505,7 +512,7 @@ tags: [sample, markdown, html]
 
 > Tags are case-sensitive `Tag_nAme` ≠ `tag_name`
 
-All the tags will be listed in `tags.html` with a link toward the pages or posts.
+All the tags will be listed the tags page with a link toward the pages or posts.
 The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
 
 ## Advanced
@@ -571,7 +578,7 @@ Nothing will happen if the file exists already.
 
 You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). 
 
-Ruby Gem Method
+Using the [Ruby Gem Method](https://sylhare.github.io/2021/03/25/Run-type-on-strap-jekyll-theme-locally.html).
 Add this line to your Jekyll site's Gemfile (or create one):
 
 ```ruby

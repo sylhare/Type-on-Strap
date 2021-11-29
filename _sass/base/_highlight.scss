@@ -71,7 +71,7 @@ table.rouge-table {
       padding-right: 1em;
       width: 2em;
       color: var(--base04);
-      border-right: 1px solid --var(base04);
+      border-right: 1px solid var(--base04);
       text-align: right
     }
 
@@ -167,7 +167,7 @@ table.rouge-table {
   .na{ /* Name.Attribute */
     color: var(--base0b)  }
   .nb{ /* Name.Builtin */
-    color: var(--base05)  }
+    color: var(--base0c)  }
   .nc{ /* Name.Class */
     color: var(--base05)  }
   .no{ /* Name.Constant */
@@ -181,7 +181,7 @@ table.rouge-table {
   .nf{ /* Name.Function */
     color: var(--base0b)  }
   .nl{ /* Name.Label */
-    color: var(--base05)  }
+    color: var(--base0c)  }
   .nn{ /* Name.Namespace */
     color: var(--base05)  }
   .nt{ /* Name.Tag */
@@ -189,7 +189,7 @@ table.rouge-table {
   .nv{ /* Name.Variable */
     color: var(--base0c)  }
   .nx{ /* Name.Other */
-    color: var(--base0b)  }
+    color: var(--base05)  }
   .o{ /* Operator */
     color: var(--base08)  }
   .ow{ /* Operator.Word */

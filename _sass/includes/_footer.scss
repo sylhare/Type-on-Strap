@@ -15,14 +15,14 @@
       li {
         display: inline;
       }
-    
+
       a {
         color: var(--link);
       }
 
       @media (prefers-color-scheme: dark) {
         a {
-         color: var(--meta);
+          color: var(--meta);
         }
       }
 

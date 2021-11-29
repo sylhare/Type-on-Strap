@@ -8,7 +8,7 @@ layout: default
         <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
         {% endunless %}
         {% if page.is_post %}
-        {% include blog/post_info.html author=page.author date=page.date %}
+        {% include blog/post_info.liquid author=page.author date=page.date %}
         {% endif %}
     </header>
     <section class="post-content">{{ content }}</section>
@@ -19,19 +19,19 @@ layout: default
 
         <!-- Tag list -->
         {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-        {% include default/tags_list.html tags=tag_list %}
+        {% include default/tags_list.liquid tags=tag_list %}
     </div>
 
 </article>
 
 <!-- Post navigation -->
 {% if site.post_navigation %}
-{% include blog/post_nav.html %}
+{% include blog/post_nav.liquid %}
 {% endif %}
 
 <!-- Cusdis -->
-{% if site.cusdis_app_id %}{% include social/cusdis.html %}{% endif %}
+{% if site.cusdis_app_id %}{% include social/cusdis.liquid %}{% endif %}
 
 <!-- Disqus -->
 {% if site.disqus_shortname or site.theme_settings.disqus_shortname %}
-{% include social/disqus.html %}{% endif %}
+{% include social/disqus.liquid %}{% endif %}

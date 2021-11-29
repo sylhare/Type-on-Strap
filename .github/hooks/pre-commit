@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# Called by "git commit" with no arguments.
+# The hook should run gulp to optimize assets.
+# Will exit with non-zero status if it wants to stop the commit.
+
+: << 'END' # Ancillary code to ensure environment before running gulp
+# If it's on the right directory, proceed. Else, try to fix it. If fail, abort commit.
+if [ ${PWD##*/} != "lib" ] ; then
+    cd lib || exit 1
+fi 
+
+# If gulp is intalled and gulpfile.js is present, then proceed. Else, abort commit.
+if ! [ -f "gulpfile.js" ] || ! command -v gulp; then  
+    printf "gulpfile.js not found or gulp-cli not installed!\n"
+    exit 1
+fi
+END
+
+# If there are non-staged assets, abort commit.
+if git status --porcelain | grep -E '^(\?\?|AM|\nM).*assets/.*$' >/dev/null; then
+    printf "There are non-staged assets, be sure to run gulp before commiting changes!\n"
+    exit 1
+fi
+
+# Proceed with the commit.
+exit 0
+

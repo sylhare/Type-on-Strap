@@ -48,6 +48,8 @@ collections:
     permalink: /:collection/:name
 
 # BUILD SETTINGS
+sass:
+  style: compressed
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
 exclude: [".jekyll-cache", ".idea", "vendor/*", "assets/node_modules/*"]
 
