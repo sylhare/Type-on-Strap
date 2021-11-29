@@ -1,19 +1,15 @@
+---
+published: true
+tag:
+  - dev-log
+  - tools
+---
 
 # Table of Contents
 
 1.  [where did I start ? what problems are ?](#orgcc86f88)
 2.  [Solution](#orgde7d8fb)
 3.  [Note](#orge865e86)
-
-&#x2014;
-published: true
-tag:
-
--   tools
--   dev-log
-
-&#x2014;
-
 
 <a id="orgcc86f88"></a>
 
