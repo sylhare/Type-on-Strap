@@ -79,6 +79,10 @@ img[align=right] {
   margin-left: 3%;
 }
 
+summary {
+  cursor: pointer;
+}
+
 /* ---- Responsive ---- */
 
 @media screen and (max-width: $break) {

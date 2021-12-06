@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Tech Stuff example
+color: rgb(250, 50, 50)
 feature-img: "assets/img/feature-img/circuit.jpeg"
 thumbnail: "assets/img/thumbnails/feature-img/circuit.jpeg"
 tags: [Mermaid, Highlight, Markdown]
@@ -28,8 +29,8 @@ find /etc -type f -exec cat '{}' \; | tr -c '.[:digit:]' '\n' | grep '^[^.][^.]*
 
 ## Code highlighting examples
 
-Because you might put code in your blog post, and you want to make sure it will look good in here.
-Plus that the search function will still be working!
+Because you might put code in your blog post, and you want to make sure it will look good in here. Plus that the search
+function will still be working!
 
 ### Java
 
@@ -58,38 +59,47 @@ public class Demo {
 }
 ```
 
-### HTML
-
-html example
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <body>
-    <div class="content">
-        This is an example
-    </div>
-  </body>
-</html>
-```
-
 ### Javascript
 
-```js
+```javascript
 /**
  * Does a thing
  */
 function helloWorld(param1, param2) {
-  var something = 0;
+    var something = {
+        key: "value",
+        number: 1
+    };
 
-  // Do something
-  if (2.0 % 2 == something) {
-    console.log('Hello, world!');
-  } else {
-    return null;
+    // Do something
+    if (2.0 % 2 == something) {
+        console.log('Hello, world!');
+    } else {
+        return null;
+    }
+
+    // @TODO comment
+}
+```
+
+### JSON
+
+```json
+  {
+  "animals": {
+    "tiger": {
+      "name": "tiger",
+      "images": ["🐯", "🐅", "⻁"]
+    },
+    "turtle": {
+      "age": 126,
+      "image": "🐢"
+    },
+    "unicorn": {
+      "doesExist": true,
+      "image": "🦄"
+    }
   }
-
-  // @TODO comment
 }
 ```
 
@@ -98,15 +108,17 @@ function helloWorld(param1, param2) {
 ```python
 import os
 
+
 def some_function(param_one="", param_two=0):
     r'''A docstring'''
-    if param_one > param_two: # interesting
+    if param_one > param_two:  # interesting
         print("Greater")
     return (param_two - param_one + 1 + 0b10) or None
 
+
 class SomeClass:
     """ dunno what I am doing """
-    
+
     def __init__(self):
         pass
 ```
@@ -148,11 +160,11 @@ remote_theme: sylhare/Type-on-Strap                     # If using as a remote_t
 
 ### Mermaid
 
-Diagrams with mermaid.
-
-Here is a simple example using:
+Diagrams with mermaid, make sure it is enabled in the `_config.yml`.
+Here is a simple example:
 
 ```html
+<!-- To generate a diagram -->
 <div class="mermaid">
 sequenceDiagram
     Alice->>John: Hello John, how are you?
@@ -165,7 +177,8 @@ That will be rendered into this:
 {% include aligner.html images="mermaid-example.png" column=1 %}
 
 You can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
-
+<details>
+<summary>▶ More complex diagram</summary>
 <div class="mermaid">
 sequenceDiagram
     participant Alice
@@ -174,8 +187,9 @@ sequenceDiagram
     loop Healthcheck
         John->>John: Fight against hypochondria
     end
-    Note right of John: Rational thoughts <br/>prevail!
+    Note right of John: Rational thoughts prevail!
     John-->>Alice: Great!
     John->>Bob: How about you?
     Bob-->>John: Jolly good!
 </div>
+</details>
