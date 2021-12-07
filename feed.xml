@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Mon, 06 Dec 2021 19:42:28 -0500</pubDate>
+        <pubDate>Mon, 06 Dec 2021 19:49:16 -0500</pubDate>
         
           
           <item>
@@ -193,7 +193,7 @@
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img20.png&quot; /&gt;
 &lt;strong&gt;Authors&lt;/strong&gt;: Joshua Rozner, Christopher Potts, Kyle Mahowald
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: rozner@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.08620&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;github.com/jsrozner/decrypt&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.08620&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/jsrozner/decrypt&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: compositionality in language, curriculum learning, meta-linguistics, systematicity, generalization&lt;/p&gt;
 &lt;hr /&gt;
 
@@ -493,7 +493,7 @@
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.04260&quot;&gt;&lt;strong&gt;Personalized Benchmarking with the Ludwig Benchmarking Toolkit&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://github.com/hazyresearch/ludwig-benchmarking-toolkit&quot;&gt;Website&lt;/a&gt; by Avanika Narayan, Piero Molino, Karan Goel, Willie Neiswanger, Christopher Ré&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=YDMFgD_qJuA&quot;&gt;&lt;strong&gt;SKM-TEA: A Dataset for Accelerated MRI Reconstruction with Dense Image Labels for Quantitative Clinical Evaluation&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://github.com/StanfordMIMI/skm-tea&quot;&gt;Website&lt;/a&gt; by Arjun D Desai, Andrew M Schmidt, Elka B Rubin, Christopher M Sandino, Marianne S Black, Valentina Mazzoli, Kathryn J Stevens, Robert Boutin, Christopher Ré, Garry E Gold, Brian A Hargreaves, Akshay S Chaudhari&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=mPducS1MsEK&quot;&gt;&lt;strong&gt;Are We Learning Yet? A Meta Review of Evaluation Failures Across Machine Learning&lt;/strong&gt;&lt;/a&gt; by Thomas Liao, Rohan Taori, Inioluwa Deborah Raji, Ludwig Schmidt&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.12062&quot;&gt;&lt;strong&gt;DABS: a Domain-Agnostic Benchmark for Self-Supervised Learning&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;dabs.stanford.edu&quot;&gt;Website&lt;/a&gt; by Alex Tamkin, Vincent Liu, Rongfei Lu, Daniel Fein, Colin Schultz, Noah Goodman&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.12062&quot;&gt;&lt;strong&gt;DABS: a Domain-Agnostic Benchmark for Self-Supervised Learning&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://dabs.stanford.edu&quot;&gt;Website&lt;/a&gt; by Alex Tamkin, Vincent Liu, Rongfei Lu, Daniel Fein, Colin Schultz, Noah Goodman&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://openreview.net/forum?id=5HR3vCylqD&quot;&gt;&lt;strong&gt;SustainBench: Benchmarks for Monitoring the Sustainable Development Goals with Machine Learning&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/pKOwSV-gWng&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://sustainlab-group.github.io/sustainbench/&quot;&gt;Website&lt;/a&gt; by Christopher Yeh, Chenlin Meng, Sherrie Wang, Anne Driscoll, Erik Rozi, Patrick Liu, Jihyeon Lee, Marshall Burke, David Lobell, Stefano Ermon&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/2103.09430.pdf&quot;&gt;&lt;strong&gt;OGB-LSC: A Large-Scale Challenge for Machine Learning on Graphs&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://ogb.stanford.edu/docs/lsc/&quot;&gt;Website&lt;/a&gt; by Weihua Hu&lt;/li&gt;
 &lt;/ul&gt;
