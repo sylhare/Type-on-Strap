@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Mon, 06 Dec 2021 19:57:40 -0500</pubDate>
+        <pubDate>Tue, 07 Dec 2021 11:56:22 -0500</pubDate>
         
           
           <item>
@@ -59,6 +59,14 @@
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: muj@stanford.edu
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.02668&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=LVW_t7p42X0&quot;&gt;Video&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: emergent communication, multi-agent communication, language grounding, compositionality&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;deep-learning-on-a-data-diet-finding-important-examples-early-in-training&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.07075&quot;&gt;Deep Learning on a Data Diet: Finding Important Examples Early in Training&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img123.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Mansheej Paul, Surya Ganguli, Gintare Karolina Dziugaite
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: mansheej@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.07075&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: data pruning&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;h4 id=&quot;ella-exploration-through-learned-language-abstraction&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2103.05825&quot;&gt;ELLA: Exploration through Learned Language Abstraction&lt;/a&gt;&lt;/h4&gt;
@@ -524,7 +532,7 @@
   &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=de1kSNxv5BQ&quot;&gt;&lt;strong&gt;Optimal Representations for Covariate Shifts&lt;/strong&gt;&lt;/a&gt; by Yann Dubois, Yangjun Ruan, Chris J. Maddison (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Correct-N-Contrast: a Contrastive Approach for Improving Robustness to Spurious Correlations&lt;/strong&gt; by Michael Zhang, Nimit S. Sohoni, Hongyang R. Zhang, Chelsea Finn, Christopher Ré (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Extending the WILDS Benchmark for Unsupervised Adaptation&lt;/strong&gt; by Shiori Sagawa*, Pang Wei Koh*, Tony Lee*, Irena Gao*, Sang Michael Xie, Kendrick Shen, Ananya Kumar, Weihua Hu, Michihiro Yasunaga, Henrik Marklund, Sara Beery, Etienne David, Ian Stavness, Wei Guo, Jure Leskovec, Kate Saenko, Tatsunori Hashimoto, Sergey Levine, Chelsea Finn, Percy Liang (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
-  &lt;li&gt;Calibrated Ensembles: A Simple Way to Mitigate ID-OOD Accuracy Tradeoffs by Ananya Kumar, Aditi Raghunathan, Tengyu Ma, Percy Liang (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Calibrated Ensembles: A Simple Way to Mitigate ID-OOD Accuracy Tradeoffs&lt;/strong&gt; by Ananya Kumar, Aditi Raghunathan, Tengyu Ma, Percy Liang (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.03741&quot;&gt;&lt;strong&gt;Sharp Bounds for Federated Averaging (Local SGD) and Continuous Perspective&lt;/strong&gt;&lt;/a&gt; by Margalit Glasgow*, Honglin Yuan*, Tengyu Ma (&lt;em&gt;New Frontiers in Federated Learning&lt;/em&gt;)&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2108.03298&quot;&gt;&lt;strong&gt;What Matters in Learning from Offline Human Demonstrations for Robot Manipulation&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://ai.stanford.edu/blog/robomimic/&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=qg_IVo4rB8k&amp;amp;ab_channel=AnonymousAnonymous&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://arise-initiative.github.io/robomimic-web/&quot;&gt;Website&lt;/a&gt; by Ajay Mandlekar, Danfei Xu, Josiah Wong, Soroush Nasiriany, Chen Wang, Rohun Kulkarni, Li Fei-Fei, Silvio Savarese, Yuke Zhu, Roberto Martín-Martín (&lt;em&gt;Offline Reinforcement Learning Workshop&lt;/em&gt;)&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://rylanschaeffer.github.io/content/research/2021_neurips_workshop_metacognition/paper.pdf&quot;&gt;&lt;strong&gt;An Algorithmic Theory of Metacognition in Minds and Machines&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://rylanschaeffer.github.io/content/research/2021_neurips_workshop_metacognition/main.html&quot;&gt;Blog Post&lt;/a&gt; by Rylan Schaeffer (&lt;em&gt;Metacognition in the Age of AI: Challenges and Opportunities&lt;/em&gt;)&lt;/li&gt;
