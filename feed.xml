@@ -5,7 +5,545 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Tue, 09 Nov 2021 14:23:25 -0500</pubDate>
+        <pubDate>Mon, 06 Dec 2021 19:11:24 -0500</pubDate>
+        
+          
+          <item>
+              <title>Stanford AI Lab Papers and Talks at NeurIPS 2021</title>
+              <link>/blog/neurips-2021/</link>
+              <guid isPermaLink="true">/blog/neurips-2021/</guid>
+              <description>&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/logo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://neurips.cc&quot;&gt;Thirty-fifth Conference on Neural Information Processing Systems&lt;/a&gt; (NeurIPS) 2021 is being hosted virtually from Dec 6th - 14th. We’re excited to share all the work from SAIL that’s being presented at the &lt;a href=&quot;#main-conference&quot;&gt;&lt;strong&gt;main conference&lt;/strong&gt;&lt;/a&gt;, at the &lt;a href=&quot;#datasets-and-benchmarks-track&quot;&gt;&lt;strong&gt;Datasets and Benchmarks track&lt;/strong&gt;&lt;/a&gt; and the various &lt;a href=&quot;#workshop-papers&quot;&gt;&lt;strong&gt;workshops&lt;/strong&gt;&lt;/a&gt;, and you’ll find links to papers, videos and blogs below.&lt;/p&gt;
+
+&lt;p&gt;Some of the members in our SAIL community also serve as &lt;a href=&quot;#workshops&quot;&gt;&lt;strong&gt;co-organizers of several exciting workshops&lt;/strong&gt;&lt;/a&gt; that will take place on Dec 13-14, so we hope you will check them out!&lt;/p&gt;
+
+&lt;p&gt;Feel free to reach out to the contact authors and the workshop organizers directly to learn more about the work that’s happening at Stanford!&lt;/p&gt;
+
+&lt;h2 id=&quot;main-conference&quot;&gt;Main Conference&lt;/h2&gt;
+&lt;h4 id=&quot;improving-compositionality-of-neural-networks-by-decoding-representations-to-inputs&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.00769&quot;&gt;Improving Compositionality of Neural Networks by Decoding Representations to Inputs&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img0.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Mike Wu, Noah Goodman, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: wumike@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.00769&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: generative models, compositionality, decoder&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;reverse-engineering-recurrent-neural-networks-with-jacobian-switching-linear-dynamical-systems&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.01256&quot;&gt;Reverse engineering recurrent neural networks with Jacobian switching linear dynamical systems&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img41.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Jimmy T.H. Smith, Scott W. Linderman, David Sussillo
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: jsmith14@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2111.01256&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/jimmysmith1919/JSLDS_public&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: recurrent neural networks, switching linear dynamical systems, interpretability, fixed points&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;compositional-transformers-for-scene-generation&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.08960&quot;&gt;Compositional Transformers for Scene Generation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/overview.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Drew A. Hudson, C. Lawrence Zitnick
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: dorarad@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2111.08960&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/dorarad/gansformer&quot;&gt;Github&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: GANs, transformers, compositionality, scene synthesis&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;combining-recurrent-convolutional-and-continuous-time-models-with-linear-state-space-layers&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2110.13985&quot;&gt;Combining Recurrent, Convolutional, and Continuous-time Models with Linear State Space Layers&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img2.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Albert Gu, Isys Johnson, Karan Goel, Khaled Saab, Tri Dao, Atri Rudra, Chris Ré
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: albertgu@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2110.13985&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: recurrent neural networks, rnn, continuous models, state space, long range dependencies, sequence modeling&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;emergent-communication-of-generalizations&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.02668&quot;&gt;Emergent Communication of Generalizations&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img3.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Jesse Mu, Noah Goodman
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: muj@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.02668&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=LVW_t7p42X0&quot;&gt;Video&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: emergent communication, multi-agent communication, language grounding, compositionality&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;ella-exploration-through-learned-language-abstraction&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2103.05825&quot;&gt;ELLA: Exploration through Learned Language Abstraction&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img4.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Suvir Mirchandani, Siddharth Karamcheti, Dorsa Sadigh
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: suvir@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2103.05825&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/7iDeF5eiyIA&quot;&gt;Video&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: instruction following, reward shaping, reinforcement learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;csdi-conditional-score-based-diffusion-models-for-probabilistic-time-series-imputation&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.03502&quot;&gt;CSDI: Conditional Score-based Diffusion Models for Probabilistic Time Series Imputation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img5.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yusuke Tashiro, Jiaming Song, Yang Song, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: ytashiro@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.03502&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/ermongroup/CSDI&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: score-based generative modeling, time series imputation&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;confidence-aware-imitation-learning-from-demonstrations-with-varying-optimality&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2110.14754.pdf&quot;&gt;Confidence-Aware Imitation Learning from Demonstrations with Varying Optimality&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img6.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Songyuan Zhang, Zhangjie Cao, Dorsa Sadigh, Yanan Sui
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: szhang21@mit.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2110.14754.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=Qe_Ov65-M0U&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://sites.google.com/view/cail&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: imitation learning, learning from demonstration, learning from suboptimal demonstrations&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;explaining-heterogeneity-in-medial-entorhinal-cortex-with-task-driven-neural-networks&quot;&gt;&lt;a href=&quot;https://www.biorxiv.org/content/10.1101/2021.10.30.466617&quot;&gt;Explaining heterogeneity in medial entorhinal cortex with task-driven neural networks&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img7.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Aran Nayebi, Alexander Attinger, Malcolm G. Campbell, Kiah Hardcastle, Isabel I.C. Low, Caitlin S. Mallory, Gabriel C. Mel, Ben Sorscher, Alex H. Williams, Surya Ganguli, Lisa M. Giocomo, Daniel L.K. Yamins
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: anayebi@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight Presentation
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://www.biorxiv.org/content/10.1101/2021.10.30.466617&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/neuroailab/mec&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: neural coding, medial entorhinal cortex, grid cells, biologically-inspired navigation, path integration, recurrent neural networks&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;on-the-theory-of-reinforcement-learning-with-once-per-episode-feedback&quot;&gt;On the theory of reinforcement learning with once-per-episode feedback&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img8.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Niladri Chatterji, Aldo Pacchiano, Peter Bartlett, Michael Jordan
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: niladri@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: theoretical reinforcement learning, binary rewards, non-markovian rewards&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;hyperspns-compact-and-expressive-probabilistic-circuits&quot;&gt;&lt;a href=&quot;https://openreview.net/pdf?id=31NfehDva-h&quot;&gt;HyperSPNs: Compact and Expressive Probabilistic Circuits&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img9.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Andy Shih, Dorsa Sadigh, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: andyshih@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openreview.net/pdf?id=31NfehDva-h&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=8W48CqNELCM&amp;amp;ab_channel=StanfordILIAD&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/ermongroup/HyperSPN&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: generative models, tractable probabilistic models, sum product networks, probabilistic circuits&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;combo-conservative-offline-model-based-policy-optimization&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2102.08363.pdf&quot;&gt;COMBO: Conservative Offline Model-Based Policy Optimization&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img10.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Tianhe Yu*, Aviral Kumar*, Rafael Rafailov, Aravind Rajeswaran, Sergey Levine, Chelsea Finn
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: tianheyu@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2102.08363.pdf&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: offline reinforcement learning, model-based reinforcement learning, deep reinforcement learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;conservative-data-sharing-for-multi-task-offline-reinforcement-learning&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2109.08128.pdf&quot;&gt;Conservative Data Sharing for Multi-Task Offline Reinforcement Learning&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img11.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Tianhe Yu*, Aviral Kumar*, Yevgen Chebotar, Karol Hausman, Sergey Levine, Chelsea Finn
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: tianheyu@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2109.08128.pdf&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: offline reinforcement learning, multi-task reinforcement learning, deep reinforcement learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;autonomous-reinforcement-learning-via-subgoal-curricula&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.12931&quot;&gt;Autonomous Reinforcement Learning via Subgoal Curricula&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img12.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Archit Sharma, Abhishek Gupta, Sergey Levine, Karol Hausman, Chelsea Finn
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: architsh@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.12931&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://sites.google.com/view/vaprl/home&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, curriculum, autonomous learning, reset-free reinforcement learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;lossy-compression-for-lossless-prediction-&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.10800&quot;&gt;Lossy Compression for Lossless Prediction &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img13.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yann Dubois, Benjamin Bloem-Reddy, Karen Ullrich Chris J. Maddison
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: yanndubs@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight Presentation
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.10800&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://slideslive.at/38955214/lossy-compression-for-lossless-prediction?ref=search&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/YannDubs/lossyless&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: compression, invariances, information theory, machine learning, self-supervised learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;capturing-implicit-hierarchical-structure-in-3d-biomedical-images-with-self-supervised-hyperbolic-representations&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2012.01644&quot;&gt;Capturing implicit hierarchical structure in 3D biomedical images with self-supervised hyperbolic representations&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img14.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Joy Hsu, Jeffrey Gu, Gong-Her Wu, Wah Chiu, Serena Yeung
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: joycj@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2012.01644&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: hyperbolic representations, hierarchical structure, biomedical&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;estimating-high-order-gradients-of-the-data-distribution-by-denoising&quot;&gt;Estimating High Order Gradients of the Data Distribution by Denoising&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img15.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Chenlin Meng, Yang Song, Wenzhe Li, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: chenlin@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: score matching, langevin dynamics, denoising, generative modeling&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;universal-off-policy-evaluation&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.12820&quot;&gt;Universal Off-Policy Evaluation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img16.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yash Chandak, Scott Niekum, Bruno Castro da Silva, Erik Learned-Miller, Emma Brunskill, Philip Thomas
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: ychandak@cs.umass.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.12820&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/yashchandak/UnO&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: metrics, risk, distribution, cdf, off-policy evaluation, ope, reinforcement learning, counterfactuals, high-confidence bounds, confidence intervals&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;evidential-softmax-for-sparse-multimodal-distributions-in-deep-generative-models&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2110.14182&quot;&gt;Evidential Softmax for Sparse Multimodal Distributions in Deep Generative Models&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img17.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Phil Chen, Masha Itkina, Ransalu Senanayake, Mykel J. Kochenderfer
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: philhc@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2110.14182&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: deep learning or neural networks, sparsity and feature selection, variational inference, (application) natural language and text processing&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;provable-guarantees-for-self-supervised-deep-learning-with-spectral-contrastive-loss&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;Provable Guarantees for Self-Supervised Deep Learning with Spectral Contrastive Loss&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img18.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Jeff Z. HaoChen, Colin Wei, Adrien Gaidon, Tengyu Ma
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: jhaochen@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: deep learning theory, unsupervised learning theory, representation learning theory&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;provable-model-based-nonlinear-bandit-and-reinforcement-learning-shelve-optimism-embrace-virtual-curvature&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2102.04168&quot;&gt;Provable Model-based Nonlinear Bandit and Reinforcement Learning: Shelve Optimism, Embrace Virtual Curvature&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img19.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Kefan Dong, Jiaqi Yang, Tengyu Ma
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kefandong@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2102.04168&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/rlug_YXt5yo&quot;&gt;Video&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: nonlinear bandits, online learning, deep reinforcement learning theory, sequential rademacher complexity&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;decrypting-cryptic-crosswords-semantically-complex-wordplay-puzzles-as-a-target-for-nlp&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.08620&quot;&gt;Decrypting Cryptic Crosswords: Semantically Complex Wordplay Puzzles as a Target for NLP&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img20.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Joshua Rozner, Christopher Potts, Kyle Mahowald
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: rozner@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.08620&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;github.com/jsrozner/decrypt&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: compositionality in language, curriculum learning, meta-linguistics, systematicity, generalization&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;design-of-experiments-for-stochastic-contextual-linear-bandits&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.09912&quot;&gt;Design of Experiments for Stochastic Contextual Linear Bandits&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img21.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Andrea Zanette*, Kefan Dong*, Jonathan Lee*, Emma Brunskill
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: zanette@berkeley.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.09912&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: linear bandits, design of experiments&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;provable-benefits-of-actor-critic-methods-for-offline-reinforcement-learning&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2108.08812&quot;&gt;Provable Benefits of Actor-Critic Methods for Offline Reinforcement Learning&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img22.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Andrea Zanette, Martin J. Wainwright, Emma Brunskill
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: zanette@berkeley.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2108.08812&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: offline rl, mirror descent, bellman closure&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;a-topological-perspective-on-causal-inference&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.08558&quot;&gt;A Topological Perspective on Causal Inference&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img23.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Duligur Ibeling, Thomas Icard
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: icard@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.08558&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: causal inference, topological learning theory&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;adversarial-training-helps-transfer-learning-via-better-representations&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.10189&quot;&gt;Adversarial Training Helps Transfer Learning via Better Representations&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img24.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Zhun Deng, Linjun Zhang, Kailas Vodrahalli, Kenji Kawaguchi, James Zou
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: jamesyzou@gmail.com
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.10189&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: transfer learning, adversarial training&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;widening-the-pipeline-in-human-guided-reinforcement-learning-with-explanation-and-context-aware-data-augmentation&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2006.14804&quot;&gt;Widening the Pipeline in Human-Guided Reinforcement Learning with Explanation and Context-Aware Data Augmentation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img25.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Lin Guan,Mudit Verma,Sihang Guo,Ruohan Zhang,Subbarao Kambhampati
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: zharu@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2006.14804&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://yochan-lab.github.io/paper_webpages/expand/index.html&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: human-in-the-loop reinforcement learning, evaluative feedback, saliency map, visual explanation&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;machine-versus-human-attention-in-deep-reinforcement-learning-tasks&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2010.15942.pdf&quot;&gt;Machine versus Human Attention in Deep Reinforcement Learning Tasks&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img26.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Sihang Guo, Ruohan Zhang, Bo Liu, Yifeng Zhu, Dana Ballard, Mary Hayhoe, Peter Stone
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: zharu@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2010.15942.pdf&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: deep reinforcement learning, interpretability, attention, eye tracking&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;play-to-grade-testing-coding-games-as-classifying-markov-decision-process&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2110.14615&quot;&gt;Play to Grade: Testing Coding Games as Classifying Markov Decision Process&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img27.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Allen Nie, Emma Brunskill, Chris Piech
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: anie@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2110.14615&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/windweller/play-to-grade&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, computational education, collaborative training, markov decision process&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;the-value-of-information-when-deciding-what-to-learn&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2110.13973&quot;&gt;The Value of Information When Deciding What to Learn&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img1.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Dilip Arumugam, Benjamin Van Roy
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: dilip@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2110.13973&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: exploration, information theory, multi-armed bandits, reinforcement learning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;diversity-matters-when-learning-from-ensembleshttpspapersnipsccpaper2021hash466473650870501e3600d9a1b4ee5d44-abstracthtml&quot;&gt;[Diversity Matters When Learning From Ensembles](https://papers.nips.cc/paper/2021/hash/466473650870501e3600d9a1b4ee5d44-Abstract.html&lt;/h4&gt;
+
+&lt;p&gt;https://arxiv.org/abs/2110.14149)
+&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img28.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Giung Nam*, Jongmin Yoon*, Yoonho Lee, Juho Lee
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: yoonho@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; [Paper](https://papers.nips.cc/paper/2021/hash/466473650870501e3600d9a1b4ee5d44-Abstract.html&lt;/p&gt;
+
+&lt;p&gt;https://arxiv.org/abs/2110.14149) | &lt;a href=&quot;https://github.com/cs-giung/giung2/tree/main/projects/Diversity-Matters&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: deep ensembles, knowledge distillation, calibration, output diversified sampling, batchensemble&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;reinforcement-learning-with-state-observation-costs-in-action-contingent-noiselessly-observable-markov-decision-processes&quot;&gt;&lt;a href=&quot;https://proceedings.neurips.cc/paper/2021/hash/83e8fe6279ad25f15b23c6298c6a3584-Abstract.html&quot;&gt;Reinforcement Learning with State Observation Costs in Action-Contingent Noiselessly Observable Markov Decision Processes&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img29.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: HyunJi Nam, Scott Fleming, Emma Brunskill
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: scottyf@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://proceedings.neurips.cc/paper/2021/hash/83e8fe6279ad25f15b23c6298c6a3584-Abstract.html&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/nam630/acno_mdp&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, observation cost, markov decision process, mdp, partially observable markov decision process, pomdp, probably approximately correct, pac, healthcare, health care&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;meta-learning-with-an-adaptive-task-scheduler&quot;&gt;&lt;a href=&quot;https://openreview.net/forum?id=MTs2adH_Qq&quot;&gt;Meta-learning with an Adaptive Task Scheduler&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img30.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Huaxiu Yao, Yu Wang, Ying Wei, Peilin Zhao, Mehrdad Mahdavi, Defu Lian, Chelsea Finn
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: huaxiu@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openreview.net/forum?id=MTs2adH_Qq&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: adaptive task scheduler, meta-learning, sampling&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;spatial-temporal-super-resolution-of-satellite-imagery-via-conditional-pixel-synthesis&quot;&gt;&lt;a href=&quot;https://openreview.net/pdf?id=IKz9uYkf3vZ&quot;&gt;Spatial-Temporal Super-Resolution of Satellite Imagery via Conditional Pixel Synthesis&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img31.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yutong He, Dingjie Wang, Nicholas Lai, William Zhang, Chenlin Meng, Marshall Burke, David B. Lobell, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kellyyhe@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openreview.net/pdf?id=IKz9uYkf3vZ&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://recorder-v3.slideslive.com/?share=52340&amp;amp;s=f403374f-9c27-4fab-91d1-27daf7f78084&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://satellite-pixel-synthesis.github.io/&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: remote sensing, super-resolution, generative models&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;scatterbrain-unifying-sparse-and-low-rank-attention&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2110.15343&quot;&gt;Scatterbrain: Unifying Sparse and Low-rank Attention&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img32.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Beidi Chen*, Tri Dao*, Eric Winsor, Zhao Song, Atri Rudra, Christopher Ré.
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: trid@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2110.15343&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: efficient attention, sparse, low-rank&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;bcd-nets-scalable-variational-approaches-for-bayesian-causal-discovery&quot;&gt;BCD Nets: Scalable Variational Approaches for Bayesian Causal Discovery&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img33.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Chris Cundy, Aditya Grover, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: cundy@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: causal inference, variational inference&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;calibrating-predictions-to-decisions-a-novel-approach-to-multi-class-calibration&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.05719&quot;&gt;Calibrating Predictions to Decisions: A Novel Approach to Multi-Class Calibration&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img34.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Shengjia Zhao, Michael P Kim, Roshni Sahoo, Tengyu Ma, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sjzhao@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.05719&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: calibration, decision making under uncertainty&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;beyond-pinball-loss-quantile-methods-for-calibrated-uncertainty-quantification&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2011.09588&quot;&gt;Beyond Pinball Loss: Quantile Methods for Calibrated Uncertainty Quantification&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img35.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Youngseog Chung, Willie Neiswanger, Ian Char, Jeff Schneider
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: youngsec@andrew.cmu.edu, neiswanger@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2011.09588&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/YoungseogChung/calibrated-quantile-uq, https://github.com/uncertainty-toolbox/uncertainty-toolbox&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: uncertainty quantification, uq, quantile regression, pinball loss&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;causal-abstractions-of-neural-networks&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.02997&quot;&gt;Causal Abstractions of Neural Networks&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img36.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Atticus Geiger*, Hanson Lu*, Thomas Icard, Christopher Potts
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: atticusg@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.02997&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: interpretability, analysis, nlp, causality&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;generalized-shape-metrics-on-neural-representations&quot;&gt;Generalized Shape Metrics on Neural Representations&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img37.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Alex H Williams,  Erin Kunz, Simon Kornblith, Scott Linderman
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: alex.h.willia@gmail.com
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: representational similarity analysis, neural representations, shape analysis, metric space&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;d2c-diffusion-denoising-models-for-few-shot-conditional-generation&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.06819&quot;&gt;D2C: Diffusion-Denoising Models for Few-shot Conditional Generation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img38.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Abhishek Sinha*, Jiaming Song*, Chenlin Meng, Stefano Ermon 
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: tsong@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.06819&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://d2c-model.github.io/&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: generative modeling, contrastive learning, conditional generation&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;combiner-full-attention-transformer-with-sparse-computation-cost&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.05768&quot;&gt;Combiner: Full Attention Transformer with Sparse COmputation Cost&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img39.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Hongyu Ren, Hanjun Dai, Zihang Dai, Mengjiao Yang, Jure Leskovec, Dale Schuurmans, Bo Dai
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: hyren@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.05768&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: efficient transformer&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;maximum-likelihood-training-of-score-based-diffusion-models&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2101.09258&quot;&gt;Maximum Likelihood Training of Score-Based Diffusion Models&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img40.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yang Song, Conor Durkan, Iain Murray, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: yangsong@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight presentation
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2101.09258&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: score-based generative models, denoising score matching, diffusion models, maximum likelihood training&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;contrastive-reinforcement-learning-of-symbolic-reasoning-domains&quot;&gt;Contrastive Reinforcement Learning of Symbolic Reasoning Domains&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img42.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Gabriel Poesia, WenXin Dong, Noah Goodman
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: poesia@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, education, contrastive learning, symbolic reasoning&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;equivariant-manifold-flows&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.08596&quot;&gt;Equivariant Manifold Flows&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img43.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Isay Katsman, Aaron Lou, Derek Lim, Qingxuan Jiang, Ser Nam Lim, Christopher M. De Sa
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: aaronlou@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.08596&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/CUAI/Equivariant-Manifold-Flows&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: manifold, normalizing flow, equivariant, invariant&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;lower-bounds-on-metropolized-sampling-methods-for-well-conditioned-distributions&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.05480&quot;&gt;Lower Bounds on Metropolized Sampling Methods for Well-Conditioned Distributions&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img44.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yin Tat Lee, Ruoqi Shen, Kevin Tian
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kjtian@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Oral presentation
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.05480&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=u57jdge-uEw&quot;&gt;Video&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: sampling, lower bounds, langevin dynamics, hamiltonian monte carlo&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;list-decodable-mean-estimation-in-nearly-pca-time&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2011.09973&quot;&gt;List-Decodable Mean Estimation in Nearly-PCA Time&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img45.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Ilias Diakonikolas, Daniel M. Kane, Daniel Kongsgaard, Jerry Li, Kevin Tian
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kjtian@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight presentation
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2011.09973&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: robust statistics, semidefinite programming, mixture models&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;robust-regression-revisited-acceleration-and-improved-estimation-rates&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.11938&quot;&gt;Robust Regression Revisited: Acceleration and Improved Estimation Rates&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img46.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Arun Jambulapati, Jerry Li, Tselil Schramm, Kevin Tian
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kjtian@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.11938&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: robust statistics, regression, generalized linear models, acceleration, sum of squares methods&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;learning-with-user-level-privacy&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2102.11845&quot;&gt;Learning with User-Level Privacy&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img47.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Daniel Levy*, Ziteng Sun*, Kareem Amin, Satyen Kale, Alex Kulesza, Mehryar Mohri, Ananda Theertha Suresh
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: danilevy@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2102.11845&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: differential privacy user-level&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;adapting-to-function-difficulty-and-growth-conditions-in-private-optimization&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2108.02391&quot;&gt;Adapting to Function Difficulty and Growth Conditions in Private Optimization&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img48.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Hilal Asi*, Daniel Levy*, John C. Duchi
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: asi@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2108.02391&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: differential privacy adaptivity optimization&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;imitation-with-neural-density-models&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2010.09808&quot;&gt;Imitation with Neural Density Models&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img49.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Kuno Kim, Akshat Jindal, Yang Song, Jiaming Song, Yanan Sui, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: khkim@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2010.09808&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: rl; imitation learning; density estimation&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;why-do-pretrained-language-models-help-in-downstream-tasks-an-analysis-of-head-and-prompt-tuning&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.09226&quot;&gt;Why Do Pretrained Language Models Help in Downstream Tasks? An Analysis of Head and Prompt Tuning&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img50.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Colin Wei, Sang Michael Xie, Tengyu Ma
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: colinwei@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.09226&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: nlp pretraining, theoretical analysis&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;safe-reinforcement-learning-by-imagining-the-near-future&quot;&gt;&lt;a href=&quot;https://proceedings.neurips.cc/paper/2021/file/73b277c11266681122132d024f53a75b-Paper.pdf&quot;&gt;Safe Reinforcement Learning by Imagining the Near Future&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img51.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Garrett Thomas, Yuping Luo, Tengyu Ma
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: gwthomas@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://proceedings.neurips.cc/paper/2021/file/73b277c11266681122132d024f53a75b-Paper.pdf&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: safe exploration, model-based rl&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;pseudo-spherical-contrastive-divergence&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2111.00780.pdf&quot;&gt;Pseudo-Spherical Contrastive Divergence&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img52.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Lantao Yu, Jiaming Song, Yang Song, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: lantaoyu@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2111.00780.pdf&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: deep generative models, energy-based models, proper scoring rules&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;iq-learn-inverse-soft-q-learning-for-imitation&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.12142&quot;&gt;IQ-Learn: Inverse soft-Q Learning for Imitation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img53.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Divyansh Garg, Shuvam Chakraborty, Chris Cundy, Jiaming Song, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: divgarg@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.12142&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://div99.github.io/IQ-Learn&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, imitation learning, inverse reinforcement learning, statistical learning, energy-based models&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;intrinsic-dimension-persistent-homology-and-generalization-in-neural-networks-&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.13171&quot;&gt;Intrinsic Dimension, Persistent Homology and Generalization in Neural Networks &lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img54.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Tolga Birdal ~Tolga_Birdal3 , Aaron Lou, Leonidas Guibas, Umut Simsekli
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: aaronlou@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2111.13171&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/tolgabirdal/PHDimGeneralization&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: generalization, persistent homology, intrinsic dimension, deep networks&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;baleen-robust-multi-hop-reasoning-at-scale-via-condensed-retrieval&quot;&gt;&lt;a href=&quot;https://openreview.net/forum?id=Ghk0AJ8XtVx&amp;amp;noteId=N81OLQoxLq&quot;&gt;Baleen: Robust Multi-Hop Reasoning at Scale via Condensed Retrieval&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/img55.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Omar Khattab, Christopher Potts, Matei Zaharia
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: okhattab@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Spotlight paper
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://openreview.net/forum?id=Ghk0AJ8XtVx&amp;amp;noteId=N81OLQoxLq&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://ai.stanford.edu/blog/retrieval-based-NLP/&quot;&gt;Blog Post&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: neural retrieval, multi-hop question answering, claim verification, reasoning, colbert&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;datasets-and-benchmarks-track&quot;&gt;Datasets and Benchmarks Track&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=Rtquf4Jk0jN&quot;&gt;&lt;strong&gt;ReaSCAN: Compositional Reasoning in Language Grounding&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://reascan.github.io/&quot;&gt;Website&lt;/a&gt; by Zhengxuan Wu*, Elisa Kreiss*, Desmond Ong, Christopher Potts&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2012.04035&quot;&gt;&lt;strong&gt;ATOM3D: Tasks on Molecules in Three Dimensions&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://www.atom3d.ai/&quot;&gt;Website&lt;/a&gt; by Raphael J.L. Townshend, Martin Vögele, Patricia Suriana, Alexander Derry, Alexander S. Powers, Yianni Laloudakis, Sidhika Balachandar, Bowen Jing, Brandon Anderson, Stephan Eismann, Risi Kondor, Russ B. Altman, Ron O. Dror&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openreview.net/forum?id=WcY35wjmCBA&quot;&gt;&lt;strong&gt;Dynamic Environments with Deformable Objects&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=5eA8z80c9Zc&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/contactrika/dedo&quot;&gt;Website&lt;/a&gt; by Rika Antonova, Peiyang Shi, Hang Yin, Zehang Weng, Danica Kragic&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.04260&quot;&gt;&lt;strong&gt;Personalized Benchmarking with the Ludwig Benchmarking Toolkit&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://github.com/hazyresearch/ludwig-benchmarking-toolkit&quot;&gt;Website&lt;/a&gt; by Avanika Narayan, Piero Molino, Karan Goel, Willie Neiswanger, Christopher Ré&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=YDMFgD_qJuA&quot;&gt;&lt;strong&gt;SKM-TEA: A Dataset for Accelerated MRI Reconstruction with Dense Image Labels for Quantitative Clinical Evaluation&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://github.com/StanfordMIMI/skm-tea&quot;&gt;Website&lt;/a&gt; by Arjun D Desai, Andrew M Schmidt, Elka B Rubin, Christopher M Sandino, Marianne S Black, Valentina Mazzoli, Kathryn J Stevens, Robert Boutin, Christopher Ré, Garry E Gold, Brian A Hargreaves, Akshay S Chaudhari&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=mPducS1MsEK&quot;&gt;&lt;strong&gt;Are We Learning Yet? A Meta Review of Evaluation Failures Across Machine Learning&lt;/strong&gt;&lt;/a&gt; by Thomas Liao, Rohan Taori, Inioluwa Deborah Raji, Ludwig Schmidt&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.12062&quot;&gt;&lt;strong&gt;DABS: a Domain-Agnostic Benchmark for Self-Supervised Learning&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;dabs.stanford.edu&quot;&gt;Website&lt;/a&gt; by Alex Tamkin, Vincent Liu, Rongfei Lu, Daniel Fein, Colin Schultz, Noah Goodman&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openreview.net/forum?id=5HR3vCylqD&quot;&gt;&lt;strong&gt;SustainBench: Benchmarks for Monitoring the Sustainable Development Goals with Machine Learning&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/pKOwSV-gWng&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://sustainlab-group.github.io/sustainbench/&quot;&gt;Website&lt;/a&gt; by Christopher Yeh, Chenlin Meng, Sherrie Wang, Anne Driscoll, Erik Rozi, Patrick Liu, Jihyeon Lee, Marshall Burke, David Lobell, Stefano Ermon&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/2103.09430.pdf&quot;&gt;&lt;strong&gt;OGB-LSC: A Large-Scale Challenge for Machine Learning on Graphs&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://ogb.stanford.edu/docs/lsc/&quot;&gt;Website&lt;/a&gt; by Weihua Hu&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;workshops&quot;&gt;Workshops&lt;/h2&gt;
+&lt;p&gt;This year, multiple members of the SAIL community are also involved in great workshops that will take place on Dec 13-14. We hope you’ll check them out!&lt;/p&gt;
+
+&lt;h4 id=&quot;machine-learning-for-structural-biology-workshop-dec-13&quot;&gt;&lt;a href=&quot;https://www.mlsb.io/&quot;&gt;&lt;strong&gt;Machine Learning for Structural Biology Workshop&lt;/strong&gt;&lt;/a&gt; (Dec 13)&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/mlsb.png&quot; /&gt;
+&lt;br /&gt; &lt;strong&gt;Organizers&lt;/strong&gt;: Namrata Anand, Bonnie Berger, Wouter Boomsma, Erika DeBenedictis, Stephan Eismann, John Ingraham, Sergey Ovchinnikov, Roshan Rao, Raphael Townshend and Ellen Zhong&lt;/p&gt;
+
+&lt;h4 id=&quot;controllable-generative-modeling-in-language-and-vision-ctrlgen-workshop-dec-13&quot;&gt;&lt;a href=&quot;https://ctrlgenworkshop.github.io/&quot;&gt;&lt;strong&gt;Controllable Generative Modeling in Language and Vision (CtrlGen Workshop)&lt;/strong&gt;&lt;/a&gt; (Dec 13)&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/ctrl.png&quot; /&gt;
+&lt;br /&gt; &lt;strong&gt;Organizers&lt;/strong&gt;: Steven Y. Feng, Drew A. Hudson, Anusha Balakrishnan, Varun Gangal, Dongyeop Kang, Tatsunori Hashimoto and Joel Tetreault&lt;/p&gt;
+
+&lt;h4 id=&quot;distshift-workshop-dec-13&quot;&gt;&lt;a href=&quot;https://sites.google.com/view/distshift2021&quot;&gt;&lt;strong&gt;DistShift Workshop&lt;/strong&gt;&lt;/a&gt; (Dec 13)&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/dist.png&quot; /&gt;
+&lt;br /&gt; &lt;strong&gt;Organizers&lt;/strong&gt;: Shiori Sagawa, Pang Wei Koh, Fanny Yang, Hongseok Namkoong, Jiashi Feng, Kate Saenko, Percy Liang, Sarah Bird and Sergey Levine&lt;/p&gt;
+
+&lt;h4 id=&quot;data-centric-ai-workshop-dec-14&quot;&gt;&lt;a href=&quot;https://datacentricai.org/&quot;&gt;&lt;strong&gt;Data-centric AI Workshop&lt;/strong&gt;&lt;/a&gt; (Dec 14)&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/data.png&quot; /&gt;
+&lt;br /&gt; &lt;strong&gt;Organizers&lt;/strong&gt;: Andrew Ng, Lora Aroyo, Cody Coleman, Greg Diamos, Vijay Janapa Reddi, Joaquin Vanschoren,Carole-Jean Wu and Sharon Zhou&lt;/p&gt;
+
+&lt;h4 id=&quot;physical-reasoning-and-inductive-biases-for-the-real-world-workshop-dec-14&quot;&gt;&lt;a href=&quot;https://physical-reasoning.github.io/&quot;&gt;&lt;strong&gt;Physical Reasoning and Inductive Biases for the Real World Workshop&lt;/strong&gt;&lt;/a&gt; (Dec 14)&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-12-06-neurips-2021/phys.png&quot; /&gt;
+&lt;br /&gt; &lt;strong&gt;Organizers&lt;/strong&gt;: Krishna Murthy Jatavallabhula, Rika Antonova, Kevin Smith, Hsiao-Yu (Fish) Tung, Florian Shkurti, Jeannette Bohg and Josh Tenenbaum&lt;/p&gt;
+
+&lt;h2 id=&quot;workshop-papers&quot;&gt;Workshop Papers&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;How Does Contrastive Pre-training Connect Disparate Domains?&lt;/strong&gt; by Kendrick Shen*, Robbie Jones*, Ananya Kumar*, Sang Michael Xie*, Percy Liang (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://openreview.net/pdf?id=de1kSNxv5BQ&quot;&gt;&lt;strong&gt;Optimal Representations for Covariate Shifts&lt;/strong&gt;&lt;/a&gt; by Yann Dubois, Yangjun Ruan, Chris J. Maddison (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;[&lt;strong&gt;Correct-N-Contrast: a Contrastive Approach for Improving Robustness to Spurious Correlations&lt;/strong&gt;] by Michael Zhang, Nimit S. Sohoni, Hongyang R. Zhang, Chelsea Finn, Christopher Ré (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;Calibrated Ensembles: A Simple Way to Mitigate ID-OOD Accuracy Tradeoffs by Ananya Kumar, Aditi Raghunathan, Tengyu Ma, Percy Liang (&lt;em&gt;DistShift Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2111.03741&quot;&gt;&lt;strong&gt;Sharp Bounds for Federated Averaging (Local SGD) and Continuous Perspective&lt;/strong&gt;&lt;/a&gt; by Margalit Glasgow*, Honglin Yuan*, Tengyu Ma (&lt;em&gt;New Frontiers in Federated Learning&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2108.03298&quot;&gt;&lt;strong&gt;What Matters in Learning from Offline Human Demonstrations for Robot Manipulation&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://ai.stanford.edu/blog/robomimic/&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=qg_IVo4rB8k&amp;amp;ab_channel=AnonymousAnonymous&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://arise-initiative.github.io/robomimic-web/&quot;&gt;Website&lt;/a&gt; by Ajay Mandlekar, Danfei Xu, Josiah Wong, Soroush Nasiriany, Chen Wang, Rohun Kulkarni, Li Fei-Fei, Silvio Savarese, Yuke Zhu, Roberto Martín-Martín (&lt;em&gt;Offline Reinforcement Learning Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rylanschaeffer.github.io/content/research/2021_neurips_workshop_metacognition/paper.pdf&quot;&gt;&lt;strong&gt;An Algorithmic Theory of Metacognition in Minds and Machines&lt;/strong&gt;&lt;/a&gt; | &lt;a href=&quot;https://rylanschaeffer.github.io/content/research/2021_neurips_workshop_metacognition/main.html&quot;&gt;Blog Post&lt;/a&gt; by Rylan Schaeffer (&lt;em&gt;Metacognition in the Age of AI: Challenges and Opportunities&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Beyond Ads: Sequential Decision-Making Algorithms in Public Policy&lt;/strong&gt; by Peter Henderson, Ben Chugg, Brandon Anderson, Daniel E. Ho (&lt;em&gt;Workshop on Causal Inference Challenges in Sequential Decision Making&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Tracking Urbanization in Developing Regions withRemote Sensing Spatial-Temporal Super-Resolution&lt;/strong&gt; by Yutong He*, William Zhang*, Chenlin Meng, Marshall Burke, David B. Lobell, Stefano Ermon (&lt;em&gt;Workshop on Machine Learning for the Developing World (ML4D)&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bayesiandeeplearning.org/2021/papers/56.pdf&quot;&gt;&lt;strong&gt;Likelihood-free Density Ratio Acquisition Functions are not Equivalent to Expected Improvements&lt;/strong&gt;&lt;/a&gt; by Jiaming Song, Stefano Ermon (&lt;em&gt;Bayesian Deep Learning Workshop&lt;/em&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Exploiting Proximity Search and Easy Examples to Select Rare Events&lt;/strong&gt; by Daniel Kang, Alex Derhacobian, Kaoru Tsuji, Trevor Hebert, Peter Bailis, Tadashi Fukami, Tatsunori Hashimoto, Yi Sun, Matei Zaharia (&lt;em&gt;Data Centric AI workshop&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;We look forward to seeing you at NeurIPS 2021!&lt;/p&gt;
+</description>
+              <pubDate>Mon, 06 Dec 2021 00:00:00 -0500</pubDate>
+          </item>
+          
         
           
           <item>
@@ -3061,119 +3599,6 @@ Let’s look at several question-answering examples in the CommonsenseQA benchma
 &lt;/div&gt;
 </description>
               <pubDate>Mon, 12 Jul 2021 00:00:00 -0400</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>AGQA: A Benchmark for Compositional, Spatio-Temporal Reasoning</title>
-              <link>/blog/agqa/</link>
-              <guid isPermaLink="true">/blog/agqa/</guid>
-              <description>&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/introvideo.gif&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/introvideo.gif&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Take a look at the video above and the associated question – &lt;em&gt;What did they hold before opening the closet?&lt;/em&gt;. After looking at the video, you can easily answer that the person is holding a phone. People have a remarkable ability to comprehend visual events in new videos and to answer questions about that video. We can decompose visual events and &lt;span style=&quot;color:#e69138&quot;&gt;actions&lt;/span&gt; into &lt;span style=&quot;color:#6aa84f&quot;&gt;individual interactions&lt;/span&gt; between the &lt;span style=&quot;color:#a61c00&quot;&gt;person&lt;/span&gt; and other &lt;span style=&quot;color:#a61c00&quot;&gt;objects&lt;/span&gt;. For instance, the &lt;span style=&quot;color:#a61c00&quot;&gt;person&lt;/span&gt; initially &lt;span style=&quot;color:#6aa84f&quot;&gt;holds&lt;/span&gt; a &lt;span style=&quot;color:#a61c00&quot;&gt;phone&lt;/span&gt; and then &lt;span style=&quot;color:#e69138&quot;&gt;opens the closet&lt;/span&gt; and &lt;span style=&quot;color:#e69138&quot;&gt;takes out a picture&lt;/span&gt;. To answer this question, we need to recognize the action “&lt;span style=&quot;color:#e69138&quot;&gt;opening the closet&lt;/span&gt;” and then understand how “&lt;span style=&quot;color:#8e7cc3&quot;&gt;before&lt;/span&gt;” should restrict our search for the answer to events before this action. Next, we need to detect the interaction “&lt;span style=&quot;color:#6aa84f&quot;&gt;holding&lt;/span&gt;” and identify the object being held as a “&lt;span style=&quot;color:#a61c00&quot;&gt;phone&lt;/span&gt;” to finally arrive at the answer. We understand questions as a composition of individual reasoning steps and videos as a composition of individual interactions over time.&lt;/p&gt;
-
-&lt;p&gt;Designing machines that can similarly exhibit compositional understanding of visual events has been a core goal of the computer vision community. To measure progress towards this goal, the community has released numerous video question answering benchmarks (&lt;a href=&quot;https://arxiv.org/pdf/1704.04497.pdf&quot;&gt;TGIF-QA&lt;/a&gt;, &lt;a href=&quot;http://staff.ustc.edu.cn/~hexn/papers/mm17-videoQA.pdf&quot;&gt;MSVD/MSRVTT&lt;/a&gt;, &lt;a href=&quot;https://mitibmwatsonailab.mit.edu/research/blog/clevrer-the-first-video-dataset-for-neuro-symbolic-reasoning/&quot;&gt;CLEVRER&lt;/a&gt;, &lt;a href=&quot;http://activity-net.org/&quot;&gt;ActivityNet-QA&lt;/a&gt;). These benchmarks evaluate models by asking questions about videos and measure the models’ answer accuracy. Over the last few years, model performance on such benchmarks have been encouraging:&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/performanceincrease.jpg&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/performanceincrease.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Figure 1 - Benchmarks measure improvements in model performance over time.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;However, it is unclear why models are improving. Simple questions like “What did they &lt;span style=&quot;color:#6aa84f&quot;&gt;hold&lt;/span&gt; &lt;span style=&quot;color:#8e7cc3&quot;&gt;before&lt;/span&gt; &lt;span style=&quot;color:#e69138&quot;&gt;opening the closet&lt;/span&gt;?” require a composition of many different reasoning capabilities. Are the models improving at recognizing &lt;span style=&quot;color:#e69138&quot;&gt;actions&lt;/span&gt;? On understanding &lt;span style=&quot;color:#6aa84f&quot;&gt;interactions&lt;/span&gt;? Or are they just improving on exploiting linguistic and visual biases in the dataset? Since these benchmarks primarily offer a single “overall accuracy” metric as an evaluation measure, we have a limited view of each model’s strengths and weaknesses.&lt;/p&gt;
-
-&lt;p&gt;To better answer these questions, we introduce the benchmark Action Genome Question Answering (AGQA). AGQA measures spatial, temporal, and compositional reasoning through nearly two hundred million question answering pairs. AGQA’s questions are complex, compositional, and annotated to allow for explicit tests that find the types of questions that models can and cannot answer.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/agqaexamples.gif&quot;&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/agqaexamples.gif&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Figure 2 - Example question answer pairs from AGQA.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Creating a benchmark at this scale is prohibitively expensive to scale with human annotators. Instead, we design a synthetic generation process using rules-based question templates to generate questions from scene information, which represents what occurs in the video using symbols (Figure 3: spatio-temporal scene graphs from &lt;a href=&quot;https://www.actiongenome.org/&quot;&gt;Action Genome&lt;/a&gt;). Synthetic generation allows us to control the content, structure, and compositional reasoning steps required to answer each generated question.&lt;/p&gt;
-
-&lt;p&gt;We ran state of the art models on our benchmark and found that they performed poorly, relied heavily on linguistic biases, and struggled to generalize to more complex tasks. In fact, all the models performed barely above an ablation where the video was not presented as an input at all.&lt;/p&gt;
-
-&lt;h1 id=&quot;action-genome-question-answering-agqa&quot;&gt;Action Genome Question Answering (AGQA)&lt;/h1&gt;
-
-&lt;p&gt;Action Genome Question Answering has &lt;strong&gt;192 Million&lt;/strong&gt; complex and compositional question-answer pairs. We also sample &lt;strong&gt;3.9 Million&lt;/strong&gt; question-answer pairs such that this subset has a more even distribution of answers and a wider diversity of questions. Each question has detailed annotations about the content in and structure of the question. These annotations include a program of the reasoning steps needed to answer the question and a mapping of items in the question to the relevant part of the video (Figure 4). AGQA also provides detailed metrics, including test splits to measure performance on different question types and three new metrics designed to measure compositional reasoning.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/scenegraph.jpg&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/scenegraph.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Figure 3 - Scene information about a video in a scene graph.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;To synthetically generate questions, we first represent the video through scene graphs (Figure 3). We take a sample of frames from the video in which each frame annotates the actions, objects, and relationships that occur in that frame. Second, we built 28 templates. These templates include a natural language frame referencing types of items within the scene graphs. In Figure 4, the template provides a general natural language frame asking if the subject did a &lt;span style=&quot;color:#6aa84f&quot;&gt;relationship&lt;/span&gt; on an &lt;span style=&quot;color:#a61c00&quot;&gt;object&lt;/span&gt; during a specified &lt;span style=&quot;color:#8e7cc3&quot;&gt;time period&lt;/span&gt;. Each template also has a program outlining a series of steps to follow in order to answer the question. The example in Figure 4 iterates over the &lt;span style=&quot;color:#8e7cc3&quot;&gt;time period&lt;/span&gt;, finds all the objects on which they had that &lt;span style=&quot;color:#6aa84f&quot;&gt;relationship&lt;/span&gt;, then determines if the specified &lt;span style=&quot;color:#a61c00&quot;&gt;object&lt;/span&gt; exists within that list.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/programs.jpg&quot;&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/programs.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Figure 4 - Question templates include a natural language frame and a program to reason over a scene graph. These basic templates (left) provide the framework to interact with scene graphs (Figure 3) and generate natural language question-answer pairs (right).
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Third, we combine the scene graphs and the templates to generate natural language question-answer pairs. For example, the above template could use the scene graph from Figure 3 to generate the natural language question “Did they &lt;span style=&quot;color:#6aa84f&quot;&gt;watch&lt;/span&gt; &lt;span style=&quot;color:#a61c00&quot;&gt;a phone&lt;/span&gt; &lt;span style=&quot;color:#8e7cc3&quot;&gt;before&lt;/span&gt; &lt;span style=&quot;color:#e69138&quot;&gt;lying down&lt;/span&gt;?”. The associated program then automatically generates the answer by iterating over the time &lt;span style=&quot;color:#8e7cc3&quot;&gt;before&lt;/span&gt; they were &lt;span style=&quot;color:#e69138&quot;&gt;lying down&lt;/span&gt;, finding all the items they were  &lt;span style=&quot;color:#6aa84f&quot;&gt;watching&lt;/span&gt; , and determining that they do not  &lt;span style=&quot;color:#6aa84f&quot;&gt;watch&lt;/span&gt;  &lt;span style=&quot;color:#a61c00&quot;&gt;a phone&lt;/span&gt; during that time. Combining the scene graphs and templates creates a wide variety of natural language question-answer pairs. Each pair in our benchmark includes a reference to the program of reasoning steps used to generate the answer, as well as a mapping that grounds words in the question to the scene graph annotations. Finally, we take the generated pairs and balance the distributions of answer and question types. We smooth answer distributions for different categories then sample questions such that the dataset has a diversity of question structures.&lt;/p&gt;
-
-&lt;h1 id=&quot;agqa-evaluation&quot;&gt;AGQA evaluation&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;Human evaluation.&lt;/strong&gt; We validate our question-answer pairs through human validation and find that annotators agree with 86.02% of our answers. To put this number in context, &lt;a href=&quot;https://cs.stanford.edu/people/dorarad/gqa/index.html&quot;&gt;GQA&lt;/a&gt;
-and &lt;a href=&quot;https://cs.stanford.edu/people/jcjohns/clevr/&quot;&gt;CLEVR&lt;/a&gt;
-, two recent automated benchmarks, report 89.30% and 92.60% human accuracy, respectively. Some scene graphs have inconsistent, incorrect, or missing information in the scene graphs that propagate into incorrect questions. There may also be differences between the ontologies of the scene graph and human understood definitions. For example, there are 36 objects in the scene graphs, but humans may consider objects that appear in the video but are not within the model’s purview.&lt;/p&gt;
-
-&lt;p&gt;We provide further detail on the human tasks, each of these error sources, and recommendations for future video representations in the supplementary section of our paper.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Model performance depends on linguistic biases.&lt;/strong&gt; We run three state of the art models on our benchmark (&lt;a href=&quot;https://arxiv.org/pdf/2002.10698.pdf&quot;&gt;HCRN&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/pdf/1904.04357.pdf&quot;&gt;HME&lt;/a&gt;, and &lt;a href=&quot;https://ojs.aaai.org//index.php/AAAI/article/view/4887&quot;&gt;PSAC&lt;/a&gt;), and find that the models struggle on our benchmark. If the model only chose the most likely answer (“No”) it would achieve a 10.35% accuracy. The highest scoring model, HME, achieved a 47.74% accuracy, which at first glance appears to be a big improvement. However, further investigation found that much of the gain in accuracy comes from just exploiting linguistic biases instead of from visual reasoning. Although HCRN achieved 47.42% accuracy overall, it still achieved a 47% accuracy without seeing the videos. The fact that the model is so dependent on linguistic biases instead of visual reasoning reduces the ability of our other test splits to effectively measure visual reasoning for these particular models.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Measurement of different question attributes.&lt;/strong&gt; We provide splits in the test set to measure model performance on different types of reasoning skills, semantic categories, and question structures.&lt;/p&gt;
-
-&lt;p&gt;To understand model performance on different types of questions, we split the test set by the reasoning skills needed to answer the question. For example, some questions test superlative concepts like first and last (&lt;em&gt;What did they pick up first, a dish or a picture?&lt;/em&gt;), some compare the duration of multiple actions (&lt;em&gt;Was the person eating some food or sitting on the floor for longer?&lt;/em&gt;), and others require activity recognition (&lt;em&gt;What were they doing last?&lt;/em&gt;). Different models achieved the highest accuracy in each category. Model performance also varied widely among these categories, with all three models performing the worst on activity recognition.&lt;/p&gt;
-
-&lt;p&gt;AGQA also splits questions by if their semantic focus is on objects, relationships, or actions. Only choosing the most common answer would lead to a 9.38%, 50%, and 32.91% accuracy on questions about objects, relationships, and actions respectively. The highest performing models achieved a 42.48% accuracy for object-oriented questions, while the blind model achieved a 40.74% accuracy. The blind model outperformed all other models with a 67.40% accuracy for relationship-oriented questions, and a 60.95% accuracy on action-oriented questions.&lt;/p&gt;
-
-&lt;p&gt;Finally, we annotate each question by its structure. Query questions are open-answered (&lt;em&gt;What did they hold?&lt;/em&gt;). Verify questions verify if a question is true (&lt;em&gt;Did they hold a dish?&lt;/em&gt;). Logic questions use a logical operator (&lt;em&gt;Did they hold a dish but not a blanket?&lt;/em&gt;). Choose questions offer a choice between two options (&lt;em&gt;Did they hold a dish or a blanket?&lt;/em&gt;). Compare questions compare the attributes of two options (&lt;em&gt;Compared to holding a dish, were they sitting for longer?&lt;/em&gt;). Every model performed the worst on open-answered questions and best on verify and logic questions.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;New compositionality metrics.&lt;/strong&gt; We also provide three new metrics that specifically measure compositional reasoning. These split the training and test sets to test the model’s ability to generalize to novel compositions of previously seen ideas, to indirect references, and to more compositional steps.&lt;/p&gt;
-
-&lt;p&gt;First, we measure a model’s ability to generalize to novel compositions. We consider a composition to be two discrete ideas, composed together into one instance. For example “before” and “standing up” are a composition in the question “What did they take before standing up?”. To ensure these compositions are novel in the test set, we include the ideas of before and standing up in the training set when they are composed with other items. However, we do not include questions in the training set in which the before-standing up composition occurs. The models struggle to generalize to the compositions they see for the first time in the test set. The best performing model barely achieves more than 50% accuracy on binary questions that have only two answers. On open answer questions that have more than two possible answers, the highest performing model achieves 23.72% accuracy.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/novelcomp.jpg&quot;&gt;&lt;img class=&quot;postimagesmaller&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/novelcomp.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Figure 5 - This metric measures performance on novel compositions in the test set.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Our second metric measures generalization to indirect references. Direct references state what they are referring to (a phone), while indirect references refer to something by its attributes or other relationships (the first thing they held). We use indirect references to increase the complexity of our questions. This metric compares how well models answer a question with indirect references if they can answer it with the direct reference. Models can answer approximately 80% of questions using indirect references if they could answer it with the direct reference.&lt;/p&gt;
-
-&lt;p&gt;The third compositionality metric measures generalization to more complex questions. A training and test split divides the questions such that the training set contains simpler questions with fewer compositional steps, while the test set includes questions with more compositional steps. The models struggle on this task, as none of them outperform 50% on binary questions, which have only two answers.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Question complexity and accuracy.&lt;/strong&gt; Finally, we annotate the number of compositional steps needed to answer each question. We find that although humans remain consistent as questions become more complex, models decrease in accuracy.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-06-21-agqa/composteps.jpg&quot;&gt;&lt;img class=&quot;postimagesmaller&quot; src=&quot;/blog/assets/img/posts/2021-06-21-agqa/composteps.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Figure 6 - Humans perform consistently as question complexity increases, but models perform worse.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h1 id=&quot;future-work&quot;&gt;Future work&lt;/h1&gt;
-
-&lt;p&gt;AGQA opens avenues for progress in several directions. Neuro-symbolic and meta learning modeling approaches could improve compositional reasoning. The programmatic breakdown of questions could also inform work on generating explanations. We also invite exploration into employing and generating different symbolic representations of video.&lt;/p&gt;
-
-&lt;p&gt;Our benchmark highlights the weak points of existing models, including overreliance on linguistic biases and a difficulty generalizing to novel and more complex tasks. However, its balanced dataset of question answer pairs and detailed metrics provide a baseline for exploring multiple exciting new directions.&lt;/p&gt;
-
-&lt;p&gt;Find our paper &lt;a href=&quot;https://arxiv.org/pdf/2103.16002.pdf&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Find our benchmark data &lt;a href=&quot;https://cs.stanford.edu/people/ranjaykrishna/agqa/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-</description>
-              <pubDate>Mon, 21 Jun 2021 00:00:00 -0400</pubDate>
           </item>
           
         
