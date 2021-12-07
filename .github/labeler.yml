@@ -1,11 +1,8 @@
-critical:
-    - '(critical|urgent)'
+question:
+  - '(?)'
 
 bug:
-    - '(bug|issue|problem)'
+  - '(bug|issue|problem)'
 
-triage:
-    - '(bug|issue|problem)'
-
-pullrequest:
-    - '(enhancement|pr-idea)'
+enhancement:
+  - '(enhancement|feature)'
