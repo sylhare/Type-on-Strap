@@ -5,7 +5,128 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Tue, 07 Dec 2021 11:56:22 -0500</pubDate>
+        <pubDate>Fri, 17 Dec 2021 21:13:03 -0800</pubDate>
+        
+          
+          <item>
+              <title>BanditPAM: Almost Linear-Time k-medoids Clustering via Multi-Armed Bandits</title>
+              <link>/blog/banditpam/</link>
+              <guid isPermaLink="true">/blog/banditpam/</guid>
+              <description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/feature.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;tldr&quot;&gt;TL;DR&lt;/h1&gt;
+
+&lt;p&gt;Want something better than \(k\)-means? Our state-of-the-art \(k\)-medoids algorithm from NeurIPS, BanditPAM, is now publicly available! \(\texttt{pip install banditpam}\) and you&apos;re good to go!&lt;/p&gt;
+
+&lt;p&gt;Like the \(k\)-means problem, the \(k\)-medoids problem is a clustering problem in which our objective is to partition a dataset into disjoint subsets. In \(k\)-medoids, however, we require that the cluster centers must be actual datapoints, which permits greater interpretability of the cluster centers. \(k\)-medoids also works better with arbitrary distance metrics, so your clustering can be more robust to outliers if you&apos;re using metrics like \(L_1\).&lt;/p&gt;
+
+&lt;p&gt;Despite these advantages, most people don&apos;t use \(k\)-medoids because prior algorithms were too slow. In our NeurIPS paper, BanditPAM, we sped up the best known algorithm from \(O(n^2)\) to \(O(n\text{log}n)\).&lt;/p&gt;
+
+&lt;p&gt;We&apos;ve released our implementation, which is pip-installable. It&apos;s written in C++ for speed and supports parallelization and intelligent caching, at no extra complexity to end users. Its interface also matches the \(\texttt{sklearn.cluster.KMeans}\) interface, so minimal changes are necessary to existing code.&lt;/p&gt;
+
+&lt;h4 id=&quot;useful-links&quot;&gt;&lt;strong&gt;Useful Links:&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://crossminds.ai/video/bandit-pam-almost-linear-time-k-medoids-clustering-via-multi-armed-bandits-5fb88782b0a3f6412973b646/&quot;&gt;3-minute video summary&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://pypi.org/project/banditpam/&quot;&gt;PyPI&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/ThrunGroup/BanditPAM&quot;&gt;Github Repository&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://proceedings.neurips.cc/paper/2020/file/73b817090081cef1bca77232f4532c5d-Paper.pdf&quot;&gt;Full Paper&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;k-means-vs-k-medoids&quot;&gt;\(k\)-means vs. \(k\)-medoids&lt;/h1&gt;
+
+&lt;p&gt;If you&apos;re an ML practitioner, you&apos;re probably familiar with the \(k\)-means problem. In fact, you may know some of the common algorithms for the \(k\)-means problem. You&apos;re much less likely, however, familiar with the \(k\)-&lt;em&gt;medoids&lt;/em&gt; problem.&lt;/p&gt;
+
+&lt;p&gt;The \(k\)-medoids problem is a clustering problem similar to \(k\)-means. Given a dataset, we want to partition our dataset into subsets where the points in each cluster are closer to a single cluster center than all other \(k-1\) cluster centers. Unlike in \(k\)-means, however, the \(k\)-medoids problem requires cluster centers to be &lt;em&gt;actual datapoints&lt;/em&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image3.png&quot; style=&quot;border:black; border-style:solid&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image7.png&quot; style=&quot;border:black; border-style:solid&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; The \(k\)-medoids solution (left) forces the cluster centers to be actual datapoints. This solution is often different from the \(k\)-means solution (right).&lt;/p&gt;
+
+&lt;p&gt;The \(k\)-medoids problem has several advantages over \(k\)-means. By forcing the cluster centers -- dubbed the &lt;em&gt;medoids&lt;/em&gt; -- to be actual datapoints, solutions tend to be more interpretable since you can determine exactly which datapoint is the cluster center for each cluster. When clustering images from the ImageNet dataset, for example, the mean of a solution to the \(k\)-means problem with \(k = 1\) are usually nondescript blobs (Figure 2, left), whereas the medoids of a corresponding solution to the \(k\)-medoids problem are actual images (Figure 2, right).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image4.png&quot; style=&quot;width:35%; border:black; border-style:solid&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image2.png&quot; style=&quot;width:35%; border:black; border-style:solid&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; The cluster centers in \(k\)-means are often not easily interpretable, whereas they are actual datapoints in \(k\)-medoids. Shown are cluster centers for a subset of ImageNet with \(k = 1\) with \(k\)-means (top) and \(k\)-medoids (bottom). The mean of the dataset is the average per-pixel color, whereas the medoid is an image of a bee.&lt;/p&gt;
+
+&lt;p&gt;The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) distance for efficiency. In fact, you&apos;re allowed to use &lt;em&gt;any pairwise dissimilarity function&lt;/em&gt; with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of &quot;exotic&quot; objects like strings, natural language, trees, graphs, and more -- &lt;em&gt;without&lt;/em&gt; needing to embed these objects in a vector space first.&lt;/p&gt;
+
+&lt;p&gt;The advantages of \(k\)-medoids don&apos;t stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you&apos;re using robust distance metrics. The \(L_1\) distance metric, for example, is more robust to outliers than the \(L_2\) distance metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.&lt;/p&gt;
+
+&lt;p&gt;Despite all of these advantages, \(k\)-means is much more widely used than \(k\)-medoids, largely due to its much more favorable runtime. The best \(k\)-means algorithms scale linearly in dataset size, i.e., have \(O(n)\) complexity, whereas, until now, the best \(k\)-medoids algorithms scaled quadratically in dataset size, i.e., had \(O(n^2)\) complexity.&lt;/p&gt;
+
+&lt;p&gt;In our NeurIPS paper, BanditPAM, we reduced the complexity of the best known \(k\)-medoids algorithm from \(O(n^2)\) to \(O(n\text{log}n)\). This complexity almost matches the complexity of standard \(k\)-means algorithms -- and now, you get all the benefits of \(k\)-medoids on top. We&apos;ve also released a high-performance implementation of our algorithm written in C++ for speed but callable from Python via python bindings; \(\texttt{pip install banditpam}\) and you&apos;re ready to go! Our algorithm&apos;s interface matches that of \(\texttt{sklearn.cluster.KMeans}\) and can be used with a simple 2-line change. You can also implement your own distance metrics, interpret cluster centers, and cluster structured data!&lt;/p&gt;
+
+&lt;h1 id=&quot;banditpam-almost-linear-time-k-medoids-clustering-via-multi-armed-bandits&quot;&gt;BanditPAM: Almost Linear Time \(k\)-medoids Clustering via Multi-Armed Bandits&lt;/h1&gt;
+
+&lt;p&gt;How does our algorithm, BanditPAM, work? Our claim is that we &lt;em&gt;match&lt;/em&gt; the prior state-of-the-art solutions in clustering quality by recovering the exact same solution and reduce the complexity from \(O(n^2)\) to \(O(n\text{log}n)\). But is this reduction in complexity just &quot;for free&quot;?&lt;/p&gt;
+
+&lt;p&gt;To discuss how BanditPAM works, we first need to discuss its predecessor, the Partitioning Around Medoids (PAM) algorithm. The PAM algorithm, first proposed in 1990&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, is a greedy solution to the \(k\)-medoids problem. PAM is broken into two steps: the BUILD step and the SWAP step.&lt;/p&gt;
+
+&lt;p&gt;In the BUILD step, each of the \(k\) medoids is greedily initialized one by one. More concrete, PAM considers all possible datapoints as &quot;candidate&quot; medoids. For every candidate medoid, we compute the change in the overall loss if we were to add that candidate to the set of medoids conditioned on the previously assigned medoids being fixed. This results in an \(O(n^2)\) computational complexity since we need to compute every pairwise distance.&lt;/p&gt;
+
+&lt;p&gt;[In the SWAP step, we consider all \(kn\) (medoid, non-medoid) pairs and the change in loss that would be induced if we were to swap the first element of the pair out of the medoid set in favor of the second. Again, this procedure incurs an \(O(n^2)\) time complexity (really \(O(kn^2))\).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;https://imgur.com/Iy7YN8E.gif&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; The \(k\)-medoids algorithm in action. In the BUILD step, each medoid is assigned greedily, one-by-one. In the SWAP step, we consider swapping medoid assignments to see if we can lower the overall loss.&lt;/p&gt;
+
+&lt;p&gt;Our fundamental insight was that for each step of the PAM algorithm, we don&apos;t actually need to compute the distance from each point to &lt;em&gt;all&lt;/em&gt; other \(n\) points. Instead, we can just sample these distances!&lt;/p&gt;
+
+&lt;p&gt;Consider, for example, the problem of assigning the first medoid at the beginning of the BUILD step. PAM would go through all \(n\) points and, for each point, compute its distance to every other point. We realized that, for each candidate, we only needed to compute the distance to \(O(\text{log}n)\) other points. By intelligently choosing which distances to compute, we can save a lot of unnecessary computation. Formally, we reduce the problem of assigning the first medoid to a multi-armed bandit problem, as demonstrated in Figure 4. In multi-armed bandit problems, our objective is to identify the best action to take -- also referred to as the best arm to pull -- when actions are independent and have stochastic returns.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image5.png&quot; style=&quot;border:black; border-style:solid&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image6.png&quot; style=&quot;width:47.8%; border:black; border-style:solid&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 4:&lt;/strong&gt; PAM (top) computes every pairwise distance for each candidate medoid. BanditPAM (bottom) only &lt;em&gt;samples&lt;/em&gt; the pairwise distances. With just a few samples, we see that the purple point is a better candidate than the green point since the purple arrows are, on average, shorter than the green ones.&lt;/p&gt;
+
+&lt;p&gt;It turns out that &lt;em&gt;all&lt;/em&gt; steps of the PAM algorithm can also be reduced to multi-armed bandit problems. In each part of the BUILD step, we still view each candidate datapoint as an arm. Now, however, pulling an arm corresponds to computing the induced change in loss for a random datapoint if we were to add the candidate to the set of medoids, conditioned on the previous medoids already being assigned. In each SWAP step, we view each (medoid, non-medoid) pair as an arm and pulling an arm corresponds to computing the induced change in loss on a random datapoint if we were to perform the swap. With these modifications, the original PAM algorithm is now reformulated as a sequence of best-arm identification problems. This reformulation reduces every step of the PAM algorithm from \(O(n^2)\) to \(O(nlogn)\).&lt;/p&gt;
+
+&lt;p&gt;Now, if you&apos;re familiar with multi-armed bandits, you might protest. Our algorithm is a randomized algorithm and can sometimes return an incorrect result. In the full paper, we show that the probability of getting a &quot;wrong&quot; answer is very small. In practice, this means that users of our algorithm don&apos;t have to worry and will almost always get the same answer as the original PAM algorithm.&lt;/p&gt;
+
+&lt;p&gt;The BanditPAM algorithm is an \(O(n\text{log}n)\) algorithm that matches prior state-of-the-art algorithms in clustering quality and almost matches the complexity of popular \(k\)-means algorithms. Want to try out BanditPAM? Run \(\texttt{pip3 install banditpam}\) and jump to our &lt;a href=&quot;https://github.com/ThrunGroup/BanditPAM\#example-1-synthetic-data-from-a-gaussian-mixture-model&quot;&gt;examples&lt;/a&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image1.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Figure 5:&lt;/strong&gt; A formal proof that \(k\)-medoids is superior to \(k\)-means in every way.&lt;/p&gt;
+
+&lt;h3 id=&quot;acknowledgments&quot;&gt;&lt;strong&gt;Acknowledgments&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;This blog post is based on the paper: &lt;a href=&quot;https://arxiv.org/abs/2006.06856&quot;&gt;BanditPAM: Almost Linear Time \(k\)-medoids Clustering via Multi-Armed Bandits&lt;/a&gt;. NeurIPS 2021.&lt;/p&gt;
+
+&lt;p&gt;A special thanks to my collaborators on this project, Martin Jinye Zhang, James Mayclin, Sebastian Thrun, Chris Piech, and Ilan Shomorony, as well as the reviewers of this blog post, Drew A. Hudson and Sidd Karamcheti.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Kaufman, Leonard; Rousseeuw, Peter J. (1990-03-08), &quot;Partitioning Around Medoids (Program PAM)&quot;, Wiley Series in Probability and Statistics, Hoboken, NJ, USA: John Wiley &amp;amp; Sons, Inc., pp. 68–125] &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+              <pubDate>Fri, 17 Dec 2021 00:00:00 -0800</pubDate>
+          </item>
+          
         
           
           <item>
@@ -546,7 +667,7 @@
 
 &lt;p&gt;We look forward to seeing you at NeurIPS 2021!&lt;/p&gt;
 </description>
-              <pubDate>Mon, 06 Dec 2021 00:00:00 -0500</pubDate>
+              <pubDate>Mon, 06 Dec 2021 00:00:00 -0800</pubDate>
           </item>
           
         
@@ -636,7 +757,7 @@
 
 &lt;p&gt;We look forward to seeing you at EMNLP/CoNLL 2021!&lt;/p&gt;
 </description>
-              <pubDate>Fri, 05 Nov 2021 00:00:00 -0400</pubDate>
+              <pubDate>Fri, 05 Nov 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -805,7 +926,7 @@
 
 &lt;p&gt;We look forward to seeing you at CoRL 2021!&lt;/p&gt;
 </description>
-              <pubDate>Fri, 05 Nov 2021 00:00:00 -0400</pubDate>
+              <pubDate>Fri, 05 Nov 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -943,7 +1064,7 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Wed, 13 Oct 2021 00:00:00 -0400</pubDate>
+              <pubDate>Wed, 13 Oct 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1061,7 +1182,7 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
 &lt;p&gt;We look forward to seeing you at ICCV 2021!&lt;/p&gt;
 
 </description>
-              <pubDate>Fri, 08 Oct 2021 00:00:00 -0400</pubDate>
+              <pubDate>Fri, 08 Oct 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1463,7 +1584,7 @@ We continue to actively maintain
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 05 Oct 2021 00:00:00 -0400</pubDate>
+              <pubDate>Tue, 05 Oct 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1624,7 +1745,7 @@ Let’s look at how our fixer performs through examples too. The left side of th
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 21 Sep 2021 00:00:00 -0400</pubDate>
+              <pubDate>Tue, 21 Sep 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1684,7 +1805,7 @@ An engineer and their training data in the wild. &lt;it&gt;Credit: Vickie Shelto
 
 &lt;p&gt;&lt;em&gt;A more informal version of this blog can be found &lt;a href=&quot;https://hazyresearch.stanford.edu/data-centric-ai&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 </description>
-              <pubDate>Wed, 15 Sep 2021 00:00:00 -0400</pubDate>
+              <pubDate>Wed, 15 Sep 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1782,7 +1903,7 @@ Illustration of our approach. We integrate many data sources to run, evaluate, a
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Mon, 16 Aug 2021 00:00:00 -0400</pubDate>
+              <pubDate>Mon, 16 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2105,7 +2226,7 @@ Proficient-Human datasets generated by 1 proficient operator (with the exception
 &lt;/figure&gt;
 
 &lt;figcaption&gt;
-Multi-Human Lift dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
+Multi-Human Lift dataset. The videos show three operators - one that&apos;s &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
 &lt;/figcaption&gt;
 
 &lt;/div&gt;&lt;/figure&gt;
@@ -2139,7 +2260,7 @@ Multi-Human Lift dataset. The videos show three operators - one that's &quot;wor
 &lt;/figure&gt;
 
 &lt;figcaption&gt;
-Multi-Human Can dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
+Multi-Human Can dataset. The videos show three operators - one that&apos;s &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
 &lt;/figcaption&gt;
 
 &lt;/div&gt;&lt;/figure&gt;
@@ -2173,7 +2294,7 @@ Multi-Human Can dataset. The videos show three operators - one that's &quot;wors
 &lt;/figure&gt;
 
 &lt;figcaption&gt;
-Multi-Human Square dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
+Multi-Human Square dataset. The videos show three operators - one that&apos;s &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
 &lt;/figcaption&gt;
 
 &lt;/div&gt;&lt;/figure&gt;
@@ -2496,7 +2617,7 @@ Without wrist observations (left) the success rate decreases from 73.3% to 43.3%
 &lt;/ul&gt;
 
 </description>
-              <pubDate>Sun, 08 Aug 2021 00:00:00 -0400</pubDate>
+              <pubDate>Sun, 08 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2600,7 +2721,7 @@ Without wrist observations (left) the success rate decreases from 73.3% to 43.3%
 &lt;p&gt;We look forward to seeing you at ACL-IJCNLP 2021!&lt;/p&gt;
 
 </description>
-              <pubDate>Mon, 02 Aug 2021 00:00:00 -0400</pubDate>
+              <pubDate>Mon, 02 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2669,7 +2790,7 @@ volunteer teachers.&lt;/p&gt;
 
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
 &lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image3.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;Heatmap of the population of students for Code in Place '20.
+&lt;figcaption&gt;Heatmap of the population of students for Code in Place &apos;20.
 &lt;/figcaption&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
@@ -2995,7 +3116,7 @@ June, Code in Place ‘21 was gearing up for its diagnostic assessment.&lt;/p&gt
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
 &lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image4.png&quot; /&gt;&lt;/p&gt;
 &lt;figcaption&gt;
-Meta-learned feedback deployed to Code in Place '21.
+Meta-learned feedback deployed to Code in Place &apos;21.
 &lt;/figcaption&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
@@ -3118,7 +3239,7 @@ that the AI was able to learn from. Thank you to the Stanford Institute
 for Human-Centered Artificial Intelligence (in particular the Hoffman-Yee Research Grant) and the Stanford
 Interdisciplinary Graduate Fellowship for their support.&lt;/p&gt;
 </description>
-              <pubDate>Tue, 20 Jul 2021 00:00:00 -0400</pubDate>
+              <pubDate>Tue, 20 Jul 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -3262,7 +3383,7 @@ In domain generalization, the training and test distributions comprise data from
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Mon, 19 Jul 2021 00:00:00 -0400</pubDate>
+              <pubDate>Mon, 19 Jul 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -3445,165 +3566,7 @@ In domain generalization, the training and test distributions comprise data from
 
 &lt;p&gt;We look forward to seeing you at ICML 2021!&lt;/p&gt;
 </description>
-              <pubDate>Sat, 17 Jul 2021 00:00:00 -0400</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Reasoning with Language Models and Knowledge Graphs for Question Answering</title>
-              <link>/blog/qagnn/</link>
-              <guid isPermaLink="true">/blog/qagnn/</guid>
-              <description>&lt;h3 id=&quot;question-answering-with-knowledge&quot;&gt;&lt;strong&gt;Question Answering with Knowledge&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;From search engines to personal assistants, we use question-answering systems every day. When we ask a question (“Where was the painter of the Mona Lisa born?”), the system needs to gather background knowledge (“The Mona Lisa was painted by Leonardo da Vinci”, “Leonardo da Vinci was born in Italy”) and reason over it to produce the answer (“Italy”).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Knowledge sources&lt;/strong&gt;&lt;br /&gt;
-In recent AI research, such background knowledge is commonly available in the forms of knowledge graphs (KGs) and language models (LMs) pre-trained on a large set of documents. In KGs, entities are represented as nodes and relations between them as edges, e.g. [Leonardo da Vinci — born in — Italy]. Examples of KGs include Freebase (general-purpose facts)&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, ConceptNet (commonsense)&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, and UMLS (biomedical facts)&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;. Examples of pre-trained LMs include BERT (trained on Wikipedia articles and 10,000 books)&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;, RoBERTa (extending BERT)&lt;sup id=&quot;fnref:5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;, BioBERT (trained on biomedical publications)&lt;sup id=&quot;fnref:6&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;, and GPT-3 (the largest public LM to date)&lt;sup id=&quot;fnref:7&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:7&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/knowledge.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/knowledge.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;The two knowledge sources have complementary strengths. LMs can be pre-trained on any unstructured text and thus have a broad coverage of knowledge. On the other hand, KGs are more structured and help for logical reasoning by providing paths between entities. KGs also include knowledge that may not be commonly stated in text: for instance, people do not often state obvious facts like “people breathe” and compositional sentences like “The birthplace of the painter of the Mona Lisa is Italy”.&lt;/p&gt;
-
-&lt;p&gt;In &lt;a href=&quot;https://arxiv.org/abs/2104.06378&quot;&gt;our recent work&lt;/a&gt;&lt;sup id=&quot;fnref:8&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt; published at NAACL 2021, we study how to effectively combine both sources of knowledge, LMs and KGs, to perform question answering.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Problem setup and Challenges&lt;/strong&gt;&lt;br /&gt;
-We consider a question answering setup illustrated in the figure below, where given a question and answer choices if any (combined, we call them the QA context) the system predicts an answer. Using LMs and KGs for question answering presents two challenges. Given a QA context (purple box in the figure), the system needs to first identify informative knowledge from a large KG (green box), and then capture the nuance of the QA context and the structure of the KG to jointly reason over them.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/task.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/task.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;In existing systems that use LMs and KGs, such as RelationNet&lt;sup id=&quot;fnref:9&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:9&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;, KagNet&lt;sup id=&quot;fnref:10&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:10&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt; and MHGRN&lt;sup id=&quot;fnref:11&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:11&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt;, extracted KG subgraphs tended to be noisy, and the interactions between the QA context and KG were not modeled. In this work, we introduce promising solutions to the aforementioned two challenges: i) KG relevance scoring, where we estimate the relevance of KG nodes conditioned on the QA context, and ii) Joint graph, where we connect the QA context and KG as a joint graph to model their interactions.&lt;/p&gt;
-
-&lt;h3 id=&quot;approach&quot;&gt;&lt;strong&gt;Approach&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;We design an end-to-end question answering model that uses a pre-trained LM and KG. First, as commonly done in existing systems, we use an LM to obtain a vector representation for the QA context, and retrieve a KG subgraph by entity linking. Then, in order to identify informative knowledge from the KG, we estimate the relevance of KG nodes conditioned on the QA context (see the “&lt;strong&gt;KG Relevance Scoring&lt;/strong&gt;” section below). Next, to jointly reason with the QA context and KG, we connect them as a joint graph and update their representations (see the “&lt;strong&gt;Joint Reasoning&lt;/strong&gt;” section below). Finally, we combine the representations of the QA context and KG to predict the answer.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/overview.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/overview.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;KG Relevance Scoring&lt;/strong&gt;&lt;br /&gt;
-Real-world KGs are huge, with millions of entities. How can we effectively extract a KG subgraph that is most relevant to the given question? Let’s consider an example question in the figure: “A revolving door is convenient for two direction travel, but also serves as a security measure at what?”. Common methods for extracting a KG subgraph link entities in the QA context such as “travel”, “door”, “security” and “bank” (topic entities; blue and red nodes in the figure left) and retrieve their 1- or 2-hop neighbors from the KG (gray nodes in the figure left). However, this may introduce many entity nodes that are semantically irrelevant to the QA context, especially when the number of hops or entities in the QA context increases. In this example, 1-hop neighbors may include nodes like “holiday”, “riverbank”, “human” and “place”, but they are off-topic or too generic.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/score.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/score.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Joint Reasoning&lt;/strong&gt;&lt;br /&gt;
-Now we have the QA context and the retrieved KG ready. How can we jointly reason over them to obtain the answer? To create a joint reasoning space, we explicitly connect them in a graph, where we view the QA context as a node (purple node in the figure) and connect it to each topic entity in the KG (blue and red nodes in the figure). As this joint graph intuitively provides a working memory for reasoning, we call it the &lt;strong&gt;&lt;em&gt;working graph&lt;/em&gt;&lt;/strong&gt;. Each node in the working graph is associated with one of the four types: purple is the QA context node, blue is an entity in the question, orange is an entity in the answer choices, and gray is any other entity. The representation of each node is initialized as the LM representation of the QA context (for the QA context node) or entity name (for KG nodes). The working graph essentially unifies the two modalities, text and KG, into one graph.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/message.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/message.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;To reason on the working graph, we mutually update the representation of the QA context node and the KG via graph attention networks (GAT). The basic idea of GAT is to update the representation of each node by letting neighboring nodes send message vectors to each other for multiple layers. Concretely, in our model, we update the representation of each node t by the rule shown on the figure right, where m is the message vector from the neighbor node &lt;em&gt;s&lt;/em&gt;, &lt;em&gt;α&lt;/em&gt; is the attention weight between the current node &lt;em&gt;t&lt;/em&gt; and neighbor node &lt;em&gt;s&lt;/em&gt;. For more details about GAT, we refer readers to &lt;sup id=&quot;fnref:12&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:12&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt;. Below are examples of how the message passing can look like, where a thicker edge indicates a higher attention weight.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/visualize.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/visualize.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;lets-use-our-question-answering-model&quot;&gt;&lt;strong&gt;Let’s use our question answering model!&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;We apply and evaluate our question answering model (we call &lt;strong&gt;&lt;em&gt;QA-GNN&lt;/em&gt;&lt;/strong&gt;) on two QA benchmarks that require reasoning with knowledge:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;CommonsenseQA&lt;sup id=&quot;fnref:13&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:13&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt;: contains questions that test commonsense knowledge (e.g. “What do people typically do while playing guitar?”)&lt;/li&gt;
-  &lt;li&gt;OpenBookQA&lt;sup id=&quot;fnref:14&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:14&quot; class=&quot;footnote&quot;&gt;14&lt;/a&gt;&lt;/sup&gt;: contains questions that test elementary science knowledge (e.g. “Which of the following objects would let the most heat travel through?”)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For our LM component, we use RoBERTa, which was pre-trained on Wikipedia articles, books and other popular web documents. For our KG component, we use ConceptNet, which contains a million entities and covers commonsense facts such as [round brush — used for — painting].&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;QA-GNN improves on existing methods of using LMs and KGs for question answering&lt;/strong&gt;&lt;br /&gt;
-We compare with a baseline that only uses the LM (RoBERTa) without the KG, and existing LM+KG models (RelationNet, KagNet and MHGRN). The main innovations we made in QA-GNN are that we perform the KG relevance scoring w.r.t. questions and that we mutually update the text and KG representations on the joint graph, while existing methods combined text and KG representations at later stages. We find that these two techniques provide improvement on the question answering accuracy e.g. 71%→73% on CommonsenseQA and 67%→70% on OpenBookQA (figure below).&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/result.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/result.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Case studies: When is KG helpful and when is LM?&lt;/strong&gt;&lt;br /&gt;
-Let’s look at several question-answering examples in the CommonsenseQA benchmark, and see when/how the KG component or the LM component of our model is helpful. In each figure below, blue nodes are entities in the question, and red nodes are answer choices, where the bolded entity is the correct answer and the entity with (P) is the prediction by our model. As shown in the next two figures, we find that the KG component is especially useful when the KG provides concrete facts (e.g. [postpone — antonym — hasten] in the first figure) or paths (e.g. [chicken egg — egg — chicken — barn] in the second figure) that help for answering the questions.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/example1.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/example1.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;On the other hand, we find that the LM component is especially helpful when the question requires language nuance and commonsense that are not available in the KG. For instance, in the next two figures, if we simply follow the paths in the KG, we may reach answers like “night sky” or “water” in the first and second questions respectively. While they are not completely wrong answers, “universe” and “soup” are better collocations.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-07-12-qagnn/example2.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-12-qagnn/example2.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;In this work, we studied how to combine two sources of background knowledge (pre-trained LM and KG) to do better in question answering. To solve this problem, we introduced a new model QA-GNN, which has two innovations:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;KG relevance scoring: We use a pre-trained LM to score KG nodes conditioned on a question. This is a general framework to weight information on KGs.&lt;/li&gt;
-  &lt;li&gt;Joint reasoning over text and KGs: We connect the QA context and KG to form a joint graph, and mutually update their representations via a LM and graph neural network.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Through case studies we also identified the complementary strengths of pre-trained LMs and KGs as knowledge sources.&lt;/p&gt;
-
-&lt;p&gt;You can check out our full paper &lt;a href=&quot;https://arxiv.org/pdf/2104.06378.pdf&quot;&gt;here&lt;/a&gt; and our source code/data on &lt;a href=&quot;https://github.com/michiyasunaga/qagnn&quot;&gt;GitHub&lt;/a&gt;. If you have questions, please feel free to email us.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Michihiro Yasunaga: &lt;a href=&quot;mailto:myasu@cs.stanford.edu&quot;&gt;myasu@cs.stanford.edu&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;acknowledgments&quot;&gt;&lt;strong&gt;Acknowledgments&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;This blog post is based on the paper:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.06378&quot;&gt;QA-GNN: Reasoning with Language Models and Knowledge Graphs for Question Answering&lt;/a&gt;. &lt;a href=&quot;https://michiyasunaga.github.io/&quot;&gt;Michihiro Yasunaga&lt;/a&gt;, &lt;a href=&quot;http://hyren.me/&quot;&gt;Hongyu Ren&lt;/a&gt;, &lt;a href=&quot;https://atcbosselut.github.io/&quot;&gt;Antoine Bosselut&lt;/a&gt;, &lt;a href=&quot;https://cs.stanford.edu/people/pliang/&quot;&gt;Percy Liang&lt;/a&gt;, and &lt;a href=&quot;https://cs.stanford.edu/people/jure/&quot;&gt;Jure Leskovec&lt;/a&gt;. NAACL 2021.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Many thanks to my collaborators and advisors, Hongyu Ren, Antoine Bosselut, Percy Liang and Jure Leskovec for their help. Many thanks to Megha Srivastava and Sidd Karamcheti for edits on this blog post.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://www.semanticscholar.org/paper/Freebase%3A-a-collaboratively-created-graph-database-Bollacker-Evans/1976c9eeccc7115d18a04f1e7fb5145db6b96002&quot;&gt;Freebase: a collaboratively created graph database for structuring human knowledge&lt;/a&gt;. Kurt Bollacker, Colin Evans, Praveen Paritosh, Tim Sturge, and Jamie Taylor. 2008. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1612.03975&quot;&gt;Conceptnet 5.5: An open multilingual graph of general knowledge&lt;/a&gt;. Robyn Speer, Joshua Chin, and Catherine Havasi. 2017. Website &lt;a href=&quot;https://conceptnet.io/&quot;&gt;here&lt;/a&gt;. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC308795/pdf/gkh061.pdf&quot;&gt;The unified medical language system (UMLS): integrating biomedical terminology&lt;/a&gt;. Olivier Bodenreider. 2004 &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1810.04805&quot;&gt;BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding&lt;/a&gt;. Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova. 2019 &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:5&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1907.11692&quot;&gt;RoBERTa: A Robustly Optimized BERT Pretraining Approach&lt;/a&gt;. Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, Veselin Stoyanov. 2019 &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:6&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1901.08746&quot;&gt;BioBERT: a pre-trained biomedical language representation model for biomedical text mining&lt;/a&gt;. Jinhyuk Lee, Wonjin Yoon, Sungdong Kim, Donghyeon Kim, Sunkyu Kim, Chan Ho So, Jaewoo Kang. 2019. &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:7&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2005.14165&quot;&gt;Language Models are Few-Shot Learners&lt;/a&gt;. Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, Dario Amodei. 2020 &lt;a href=&quot;#fnref:7&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:8&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.06378&quot;&gt;QA-GNN: Reasoning with Language Models and Knowledge Graphs for Question Answering&lt;/a&gt;. Michihiro Yasunaga, Hongyu Ren, Antoine Bosselut, Percy Liang, and Jure Leskovec. 2021. &lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:9&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1706.01427&quot;&gt;A Simple Neural Network Module for Relational Reasoning&lt;/a&gt;. Adam Santoro, David Raposo, David G Barrett, Mateusz Malinowski, Razvan Pascanu, Peter Battaglia, and Timothy Lillicrap. 2017. &lt;a href=&quot;#fnref:9&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:10&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1909.02151&quot;&gt;Kagnet: Knowledge-aware Graph Networks for Commonsense Reasoning&lt;/a&gt;. Bill Yuchen Lin, Xinyue Chen, Jamin Chen, and Xiang Ren. 2019. &lt;a href=&quot;#fnref:10&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:11&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2005.00646&quot;&gt;Scalable multi-hop relational reasoning for knowledge-aware question answering&lt;/a&gt;. Yanlin Feng, Xinyue Chen, Bill Yuchen Lin, Peifeng Wang, Jun Yan, and Xiang Ren. 2020. &lt;a href=&quot;#fnref:11&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:12&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1710.10903&quot;&gt;Graph Attention Networks&lt;/a&gt;. Petar Veličković, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Liò, Yoshua Bengio. 2018. &lt;a href=&quot;#fnref:12&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:13&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1811.00937&quot;&gt;CommonsenseQA: A Question Answering Challenge Targeting Commonsense Knowledge&lt;/a&gt;. Alon Talmor, Jonathan Herzig, Nicholas Lourie, Jonathan Berant. 2019. Dataset website &lt;a href=&quot;https://www.tau-nlp.org/csqa-leaderboard&quot;&gt;here&lt;/a&gt;. &lt;a href=&quot;#fnref:13&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:14&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1809.02789&quot;&gt;Can a Suit of Armor Conduct Electricity? A New Dataset for Open Book Question Answering&lt;/a&gt;. Todor Mihaylov, Peter Clark, Tushar Khot, Ashish Sabharwal. 2018. Dataset website &lt;a href=&quot;https://leaderboard.allenai.org/open_book_qa/submissions/public&quot;&gt;here&lt;/a&gt;.s &lt;a href=&quot;#fnref:14&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-              <pubDate>Mon, 12 Jul 2021 00:00:00 -0400</pubDate>
+              <pubDate>Sat, 17 Jul 2021 00:00:00 -0700</pubDate>
           </item>
           
         
