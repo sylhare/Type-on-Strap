@@ -3,9 +3,9 @@
     <channel>
         <title>The Stanford AI Lab Blog</title>
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
-        <link>http://ai.stanford.edu/blog/</link>
+        <link>http://0.0.0.0:4000/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Fri, 17 Dec 2021 21:13:03 -0800</pubDate>
+        <pubDate>Sat, 18 Dec 2021 07:48:57 -0800</pubDate>
         
           
           <item>
@@ -56,18 +56,18 @@
 
 &lt;p&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; The \(k\)-medoids solution (left) forces the cluster centers to be actual datapoints. This solution is often different from the \(k\)-means solution (right).&lt;/p&gt;
 
-&lt;p&gt;The \(k\)-medoids problem has several advantages over \(k\)-means. By forcing the cluster centers -- dubbed the &lt;em&gt;medoids&lt;/em&gt; -- to be actual datapoints, solutions tend to be more interpretable since you can determine exactly which datapoint is the cluster center for each cluster. When clustering images from the ImageNet dataset, for example, the mean of a solution to the \(k\)-means problem with \(k = 1\) are usually nondescript blobs (Figure 2, left), whereas the medoids of a corresponding solution to the \(k\)-medoids problem are actual images (Figure 2, right).&lt;/p&gt;
+&lt;p&gt;The \(k\)-medoids problem has several advantages over \(k\)-means. By forcing the cluster centers -- dubbed the &lt;em&gt;medoids&lt;/em&gt; -- to be actual datapoints, solutions tend to be more interpretable since you can determine exactly which datapoint is the cluster center for each cluster. When clustering images from the ImageNet dataset, for example, the mean of a solution to the \(k\)-means problem with \(k = 1\) is usually a nondescript blob (Figure 2, left), whereas the medoid of a corresponding solution to the \(k\)-medoids problem is an actual image (Figure 2, right).&lt;/p&gt;
 
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
 &lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image4.png&quot; style=&quot;width:35%; border:black; border-style:solid&quot; /&gt;
 &lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image2.png&quot; style=&quot;width:35%; border:black; border-style:solid&quot; /&gt;&lt;/p&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
-&lt;p&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; The cluster centers in \(k\)-means are often not easily interpretable, whereas they are actual datapoints in \(k\)-medoids. Shown are cluster centers for a subset of ImageNet with \(k = 1\) with \(k\)-means (top) and \(k\)-medoids (bottom). The mean of the dataset is the average per-pixel color, whereas the medoid is an image of a bee.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; The cluster centers in \(k\)-means are often not easily interpretable, whereas they are actual datapoints in \(k\)-medoids. Shown are cluster centers for a subset of ImageNet with \(k = 1\) with \(k\)-means (left) and \(k\)-medoids (right). The mean of the dataset is the average per-pixel color, whereas the medoid is an image of a bee.&lt;/p&gt;
 
-&lt;p&gt;The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) distance for efficiency. In fact, you&apos;re allowed to use &lt;em&gt;any pairwise dissimilarity function&lt;/em&gt; with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of &quot;exotic&quot; objects like strings, natural language, trees, graphs, and more -- &lt;em&gt;without&lt;/em&gt; needing to embed these objects in a vector space first.&lt;/p&gt;
+&lt;p&gt;The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) for efficiency. In fact, you&apos;re allowed to use &lt;em&gt;any pairwise dissimilarity function&lt;/em&gt; with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of &quot;exotic&quot; objects like strings, natural language, trees, graphs, and more -- &lt;em&gt;without&lt;/em&gt; needing to embed these objects in a vector space first.&lt;/p&gt;
 
-&lt;p&gt;The advantages of \(k\)-medoids don&apos;t stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you&apos;re using robust distance metrics. The \(L_1\) distance metric, for example, is more robust to outliers than the \(L_2\) distance metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.&lt;/p&gt;
+&lt;p&gt;The advantages of \(k\)-medoids don&apos;t stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you&apos;re using robust distance metrics. The \(L_1\) metric, for example, is more robust to outliers than the \(L_2\) metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.&lt;/p&gt;
 
 &lt;p&gt;Despite all of these advantages, \(k\)-means is much more widely used than \(k\)-medoids, largely due to its much more favorable runtime. The best \(k\)-means algorithms scale linearly in dataset size, i.e., have \(O(n)\) complexity, whereas, until now, the best \(k\)-medoids algorithms scaled quadratically in dataset size, i.e., had \(O(n^2)\) complexity.&lt;/p&gt;
 
@@ -77,28 +77,28 @@
 
 &lt;p&gt;How does our algorithm, BanditPAM, work? Our claim is that we &lt;em&gt;match&lt;/em&gt; the prior state-of-the-art solutions in clustering quality by recovering the exact same solution and reduce the complexity from \(O(n^2)\) to \(O(n\text{log}n)\). But is this reduction in complexity just &quot;for free&quot;?&lt;/p&gt;
 
-&lt;p&gt;To discuss how BanditPAM works, we first need to discuss its predecessor, the Partitioning Around Medoids (PAM) algorithm. The PAM algorithm, first proposed in 1990&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, is a greedy solution to the \(k\)-medoids problem. PAM is broken into two steps: the BUILD step and the SWAP step.&lt;/p&gt;
+&lt;p&gt;To discuss BanditPAM, we first need to discuss its predecessor, the Partitioning Around Medoids (PAM) algorithm. The PAM algorithm, first proposed in 1990&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, is a greedy solution to the \(k\)-medoids problem. PAM is broken into two steps: the BUILD step and the SWAP step.&lt;/p&gt;
 
-&lt;p&gt;In the BUILD step, each of the \(k\) medoids is greedily initialized one by one. More concrete, PAM considers all possible datapoints as &quot;candidate&quot; medoids. For every candidate medoid, we compute the change in the overall loss if we were to add that candidate to the set of medoids conditioned on the previously assigned medoids being fixed. This results in an \(O(n^2)\) computational complexity since we need to compute every pairwise distance.&lt;/p&gt;
+&lt;p&gt;In the BUILD step, each of the \(k\) medoids is greedily initialized one by one. More concretely, PAM considers all possible datapoints as &quot;candidate&quot; medoids. For every candidate medoid, we compute the change in the overall loss if we were to add that candidate to the set of medoids, conditioned on the previously assigned medoids being fixed. This results in \(O(n^2)\) computational complexity since we need to compute every pairwise distance.&lt;/p&gt;
 
-&lt;p&gt;[In the SWAP step, we consider all \(kn\) (medoid, non-medoid) pairs and the change in loss that would be induced if we were to swap the first element of the pair out of the medoid set in favor of the second. Again, this procedure incurs an \(O(n^2)\) time complexity (really \(O(kn^2))\).&lt;/p&gt;
+&lt;p&gt;In the SWAP step, we consider all \(kn\) (medoid, non-medoid) pairs and the change in loss that would be induced if we were to swap the first element of the pair out of the medoid set in favor of the second. Again, this procedure incurs an \(O(n^2)\) time complexity (really \(O(kn^2))\).&lt;/p&gt;
 
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
 &lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;https://imgur.com/Iy7YN8E.gif&quot; /&gt;&lt;/p&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
-&lt;p&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; The \(k\)-medoids algorithm in action. In the BUILD step, each medoid is assigned greedily, one-by-one. In the SWAP step, we consider swapping medoid assignments to see if we can lower the overall loss.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; The \(k\)-medoids algorithm in action. In the BUILD step, each medoid is assigned greedily, one by one. In the SWAP step, we consider swapping medoid assignments to see if we can lower the overall loss.&lt;/p&gt;
 
 &lt;p&gt;Our fundamental insight was that for each step of the PAM algorithm, we don&apos;t actually need to compute the distance from each point to &lt;em&gt;all&lt;/em&gt; other \(n\) points. Instead, we can just sample these distances!&lt;/p&gt;
 
-&lt;p&gt;Consider, for example, the problem of assigning the first medoid at the beginning of the BUILD step. PAM would go through all \(n\) points and, for each point, compute its distance to every other point. We realized that, for each candidate, we only needed to compute the distance to \(O(\text{log}n)\) other points. By intelligently choosing which distances to compute, we can save a lot of unnecessary computation. Formally, we reduce the problem of assigning the first medoid to a multi-armed bandit problem, as demonstrated in Figure 4. In multi-armed bandit problems, our objective is to identify the best action to take -- also referred to as the best arm to pull -- when actions are independent and have stochastic returns.&lt;/p&gt;
+&lt;p&gt;Consider, for example, the problem of assigning the first medoid at the beginning of the BUILD step. PAM would go through all \(n\) points and, for each point, compute its distance to every other point. We realized that for each candidate, we only needed to compute the distance to \(O(\text{log}n)\) other points. By intelligently choosing which distances to compute, we can save a lot of unnecessary computation. Formally, we reduce the problem of assigning the first medoid to a multi-armed bandit problem, as demonstrated in Figure 4. In multi-armed bandit problems, our objective is to identify the best action to take -- also referred to as the best arm to pull -- when actions are independent and have stochastic returns.&lt;/p&gt;
 
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
 &lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image5.png&quot; style=&quot;border:black; border-style:solid&quot; /&gt;
 &lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2021-12-17-banditpam/image6.png&quot; style=&quot;width:47.8%; border:black; border-style:solid&quot; /&gt;&lt;/p&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
-&lt;p&gt;&lt;strong&gt;Figure 4:&lt;/strong&gt; PAM (top) computes every pairwise distance for each candidate medoid. BanditPAM (bottom) only &lt;em&gt;samples&lt;/em&gt; the pairwise distances. With just a few samples, we see that the purple point is a better candidate than the green point since the purple arrows are, on average, shorter than the green ones.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 4:&lt;/strong&gt; PAM (left) computes every pairwise distance for each candidate medoid. BanditPAM (right) only &lt;em&gt;samples&lt;/em&gt; the pairwise distances. With just a few samples, we see that the purple point is a better candidate than the green point since the purple arrows are, on average, shorter than the green ones.&lt;/p&gt;
 
 &lt;p&gt;It turns out that &lt;em&gt;all&lt;/em&gt; steps of the PAM algorithm can also be reduced to multi-armed bandit problems. In each part of the BUILD step, we still view each candidate datapoint as an arm. Now, however, pulling an arm corresponds to computing the induced change in loss for a random datapoint if we were to add the candidate to the set of medoids, conditioned on the previous medoids already being assigned. In each SWAP step, we view each (medoid, non-medoid) pair as an arm and pulling an arm corresponds to computing the induced change in loss on a random datapoint if we were to perform the swap. With these modifications, the original PAM algorithm is now reformulated as a sequence of best-arm identification problems. This reformulation reduces every step of the PAM algorithm from \(O(n^2)\) to \(O(nlogn)\).&lt;/p&gt;
 

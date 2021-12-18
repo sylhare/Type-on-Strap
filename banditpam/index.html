@@ -16,10 +16,10 @@
     <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="http://ai.stanford.edu/blog/banditpam/">
+    <link rel="canonical" href="http://0.0.0.0:4000/blog/banditpam/">
 
     <!-- RSS -->
-    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://0.0.0.0:4000/blog/feed.xml"/>
 
     <!-- Font Awesome -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
@@ -127,15 +127,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="The official Stanford AI Lab blog" />
 <meta property="og:description" content="The official Stanford AI Lab blog" />
-<link rel="canonical" href="http://ai.stanford.edu/blog/banditpam/" />
-<meta property="og:url" content="http://ai.stanford.edu/blog/banditpam/" />
+<link rel="canonical" href="http://0.0.0.0:4000/blog/banditpam/" />
+<meta property="og:url" content="http://0.0.0.0:4000/blog/banditpam/" />
 <meta property="og:site_name" content="SAIL Blog" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-12-17T00:00:00-08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="BanditPAM: Almost Linear-Time k-medoids Clustering via Multi-Armed Bandits" />
 <script type="application/ld+json">
-{"datePublished":"2021-12-17T00:00:00-08:00","description":"The official Stanford AI Lab blog","dateModified":"2021-12-17T00:00:00-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/banditpam/"},"url":"http://ai.stanford.edu/blog/banditpam/","author":{"@type":"Person","name":"<a href=\"https://motiwari.com\">Mo Tiwari</a>"},"@type":"BlogPosting","headline":"BanditPAM: Almost Linear-Time k-medoids Clustering via Multi-Armed Bandits","@context":"https://schema.org"}</script>
+{"datePublished":"2021-12-17T00:00:00-08:00","description":"The official Stanford AI Lab blog","dateModified":"2021-12-17T00:00:00-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/blog/banditpam/"},"url":"http://0.0.0.0:4000/blog/banditpam/","author":{"@type":"Person","name":"<a href=\"https://motiwari.com\">Mo Tiwari</a>"},"@type":"BlogPosting","headline":"BanditPAM: Almost Linear-Time k-medoids Clustering via Multi-Armed Bandits","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -151,8 +151,8 @@
     <meta name="twitter:creator" content="@StanfordAILab">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-12-17-banditpam/feature.png">
-    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-12-17-banditpam/feature.png">
+    <meta name="twitter:image" content="http://0.0.0.0:4000/blog/assets/img/posts/2021-12-17-banditpam/feature.png">
+    <meta name="og:image" content="http://0.0.0.0:4000/blog/assets/img/posts/2021-12-17-banditpam/feature.png">
     
 </head>
 
@@ -288,18 +288,18 @@
 
 <p><strong>Figure 1:</strong> The \(k\)-medoids solution (left) forces the cluster centers to be actual datapoints. This solution is often different from the \(k\)-means solution (right).</p>
 
-<p>The \(k\)-medoids problem has several advantages over \(k\)-means. By forcing the cluster centers -- dubbed the <em>medoids</em> -- to be actual datapoints, solutions tend to be more interpretable since you can determine exactly which datapoint is the cluster center for each cluster. When clustering images from the ImageNet dataset, for example, the mean of a solution to the \(k\)-means problem with \(k = 1\) are usually nondescript blobs (Figure 2, left), whereas the medoids of a corresponding solution to the \(k\)-medoids problem are actual images (Figure 2, right).</p>
+<p>The \(k\)-medoids problem has several advantages over \(k\)-means. By forcing the cluster centers -- dubbed the <em>medoids</em> -- to be actual datapoints, solutions tend to be more interpretable since you can determine exactly which datapoint is the cluster center for each cluster. When clustering images from the ImageNet dataset, for example, the mean of a solution to the \(k\)-means problem with \(k = 1\) is usually a nondescript blob (Figure 2, left), whereas the medoid of a corresponding solution to the \(k\)-medoids problem is an actual image (Figure 2, right).</p>
 
 <figure class="figure"><div class="figure__main">
 <p><img class="postimagehalf" src="/blog/assets/img/posts/2021-12-17-banditpam/image4.png" style="width:35%; border:black; border-style:solid" />
 <img class="postimagehalf" src="/blog/assets/img/posts/2021-12-17-banditpam/image2.png" style="width:35%; border:black; border-style:solid" /></p>
 </div></figure>
 
-<p><strong>Figure 2:</strong> The cluster centers in \(k\)-means are often not easily interpretable, whereas they are actual datapoints in \(k\)-medoids. Shown are cluster centers for a subset of ImageNet with \(k = 1\) with \(k\)-means (top) and \(k\)-medoids (bottom). The mean of the dataset is the average per-pixel color, whereas the medoid is an image of a bee.</p>
+<p><strong>Figure 2:</strong> The cluster centers in \(k\)-means are often not easily interpretable, whereas they are actual datapoints in \(k\)-medoids. Shown are cluster centers for a subset of ImageNet with \(k = 1\) with \(k\)-means (left) and \(k\)-medoids (right). The mean of the dataset is the average per-pixel color, whereas the medoid is an image of a bee.</p>
 
-<p>The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) distance for efficiency. In fact, you're allowed to use <em>any pairwise dissimilarity function</em> with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of "exotic" objects like strings, natural language, trees, graphs, and more -- <em>without</em> needing to embed these objects in a vector space first.</p>
+<p>The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) for efficiency. In fact, you're allowed to use <em>any pairwise dissimilarity function</em> with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of "exotic" objects like strings, natural language, trees, graphs, and more -- <em>without</em> needing to embed these objects in a vector space first.</p>
 
-<p>The advantages of \(k\)-medoids don't stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you're using robust distance metrics. The \(L_1\) distance metric, for example, is more robust to outliers than the \(L_2\) distance metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.</p>
+<p>The advantages of \(k\)-medoids don't stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you're using robust distance metrics. The \(L_1\) metric, for example, is more robust to outliers than the \(L_2\) metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.</p>
 
 <p>Despite all of these advantages, \(k\)-means is much more widely used than \(k\)-medoids, largely due to its much more favorable runtime. The best \(k\)-means algorithms scale linearly in dataset size, i.e., have \(O(n)\) complexity, whereas, until now, the best \(k\)-medoids algorithms scaled quadratically in dataset size, i.e., had \(O(n^2)\) complexity.</p>
 
@@ -309,28 +309,28 @@
 
 <p>How does our algorithm, BanditPAM, work? Our claim is that we <em>match</em> the prior state-of-the-art solutions in clustering quality by recovering the exact same solution and reduce the complexity from \(O(n^2)\) to \(O(n\text{log}n)\). But is this reduction in complexity just "for free"?</p>
 
-<p>To discuss how BanditPAM works, we first need to discuss its predecessor, the Partitioning Around Medoids (PAM) algorithm. The PAM algorithm, first proposed in 1990<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>, is a greedy solution to the \(k\)-medoids problem. PAM is broken into two steps: the BUILD step and the SWAP step.</p>
+<p>To discuss BanditPAM, we first need to discuss its predecessor, the Partitioning Around Medoids (PAM) algorithm. The PAM algorithm, first proposed in 1990<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>, is a greedy solution to the \(k\)-medoids problem. PAM is broken into two steps: the BUILD step and the SWAP step.</p>
 
-<p>In the BUILD step, each of the \(k\) medoids is greedily initialized one by one. More concrete, PAM considers all possible datapoints as "candidate" medoids. For every candidate medoid, we compute the change in the overall loss if we were to add that candidate to the set of medoids conditioned on the previously assigned medoids being fixed. This results in an \(O(n^2)\) computational complexity since we need to compute every pairwise distance.</p>
+<p>In the BUILD step, each of the \(k\) medoids is greedily initialized one by one. More concretely, PAM considers all possible datapoints as "candidate" medoids. For every candidate medoid, we compute the change in the overall loss if we were to add that candidate to the set of medoids, conditioned on the previously assigned medoids being fixed. This results in \(O(n^2)\) computational complexity since we need to compute every pairwise distance.</p>
 
-<p>[In the SWAP step, we consider all \(kn\) (medoid, non-medoid) pairs and the change in loss that would be induced if we were to swap the first element of the pair out of the medoid set in favor of the second. Again, this procedure incurs an \(O(n^2)\) time complexity (really \(O(kn^2))\).</p>
+<p>In the SWAP step, we consider all \(kn\) (medoid, non-medoid) pairs and the change in loss that would be induced if we were to swap the first element of the pair out of the medoid set in favor of the second. Again, this procedure incurs an \(O(n^2)\) time complexity (really \(O(kn^2))\).</p>
 
 <figure class="figure"><div class="figure__main">
 <p><img class="postimage" src="https://imgur.com/Iy7YN8E.gif" /></p>
 </div></figure>
 
-<p><strong>Figure 3:</strong> The \(k\)-medoids algorithm in action. In the BUILD step, each medoid is assigned greedily, one-by-one. In the SWAP step, we consider swapping medoid assignments to see if we can lower the overall loss.</p>
+<p><strong>Figure 3:</strong> The \(k\)-medoids algorithm in action. In the BUILD step, each medoid is assigned greedily, one by one. In the SWAP step, we consider swapping medoid assignments to see if we can lower the overall loss.</p>
 
 <p>Our fundamental insight was that for each step of the PAM algorithm, we don't actually need to compute the distance from each point to <em>all</em> other \(n\) points. Instead, we can just sample these distances!</p>
 
-<p>Consider, for example, the problem of assigning the first medoid at the beginning of the BUILD step. PAM would go through all \(n\) points and, for each point, compute its distance to every other point. We realized that, for each candidate, we only needed to compute the distance to \(O(\text{log}n)\) other points. By intelligently choosing which distances to compute, we can save a lot of unnecessary computation. Formally, we reduce the problem of assigning the first medoid to a multi-armed bandit problem, as demonstrated in Figure 4. In multi-armed bandit problems, our objective is to identify the best action to take -- also referred to as the best arm to pull -- when actions are independent and have stochastic returns.</p>
+<p>Consider, for example, the problem of assigning the first medoid at the beginning of the BUILD step. PAM would go through all \(n\) points and, for each point, compute its distance to every other point. We realized that for each candidate, we only needed to compute the distance to \(O(\text{log}n)\) other points. By intelligently choosing which distances to compute, we can save a lot of unnecessary computation. Formally, we reduce the problem of assigning the first medoid to a multi-armed bandit problem, as demonstrated in Figure 4. In multi-armed bandit problems, our objective is to identify the best action to take -- also referred to as the best arm to pull -- when actions are independent and have stochastic returns.</p>
 
 <figure class="figure"><div class="figure__main">
 <p><img class="postimagehalf" src="/blog/assets/img/posts/2021-12-17-banditpam/image5.png" style="border:black; border-style:solid" />
 <img class="postimagehalf" src="/blog/assets/img/posts/2021-12-17-banditpam/image6.png" style="width:47.8%; border:black; border-style:solid" /></p>
 </div></figure>
 
-<p><strong>Figure 4:</strong> PAM (top) computes every pairwise distance for each candidate medoid. BanditPAM (bottom) only <em>samples</em> the pairwise distances. With just a few samples, we see that the purple point is a better candidate than the green point since the purple arrows are, on average, shorter than the green ones.</p>
+<p><strong>Figure 4:</strong> PAM (left) computes every pairwise distance for each candidate medoid. BanditPAM (right) only <em>samples</em> the pairwise distances. With just a few samples, we see that the purple point is a better candidate than the green point since the purple arrows are, on average, shorter than the green ones.</p>
 
 <p>It turns out that <em>all</em> steps of the PAM algorithm can also be reduced to multi-armed bandit problems. In each part of the BUILD step, we still view each candidate datapoint as an arm. Now, however, pulling an arm corresponds to computing the induced change in loss for a random datapoint if we were to add the candidate to the set of medoids, conditioned on the previous medoids already being assigned. In each SWAP step, we view each (medoid, non-medoid) pair as an arm and pulling an arm corresponds to computing the induced change in loss on a random datapoint if we were to perform the swap. With these modifications, the original PAM algorithm is now reformulated as a sequence of best-arm identification problems. This reformulation reduces every step of the PAM algorithm from \(O(n^2)\) to \(O(nlogn)\).</p>
 
@@ -359,7 +359,7 @@
   
   </section>
   <hr>
-  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://0.0.0.0:4000/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
@@ -390,35 +390,35 @@
         <div class="meta">Share</div>
         
         <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/banditpam/" target="_blank" title="Share on Facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://0.0.0.0:4000/blog/banditpam/" target="_blank" title="Share on Facebook">
 			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">Share on Facebook</span>
 		</a>
         </li>
          
         <li>
-            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/banditpam/&text=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/banditpam/" target="_blank" title="Tweet">
+            <a href="https://twitter.com/intent/tweet?source=http://0.0.0.0:4000/blog/banditpam/&text=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog:%20http://0.0.0.0:4000/blog/banditpam/" target="_blank" title="Tweet">
 			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">Tweet</span>
 		</a>
         </li>
             
         <li>
-            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/banditpam/&title=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+            <a href="https://getpocket.com/save?url=http://0.0.0.0:4000/blog/banditpam/&title=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
 			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">Add to Pocket</span>
 		</a>
         </li>
          
         <li>
-            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/banditpam/&title=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+            <a href="http://www.reddit.com/submit?url=http://0.0.0.0:4000/blog/banditpam/&title=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
 			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">Share on Reddit</span>
 		</a>
         </li>
            
         <li>
-            <a href="mailto:?subject=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/banditpam/" target="_blank" title="Email">
+            <a href="mailto:?subject=BanditPAM%3A+Almost+Linear-Time+k-medoids+Clustering+via+Multi-Armed+Bandits%20%7C%20SAIL+Blog&body=:%20http://0.0.0.0:4000/blog/banditpam/" target="_blank" title="Email">
 			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
 			<span class="sr-only">Email</span>
 		</a>
@@ -504,7 +504,7 @@
         <!-- Social icons from Font Awesome, if enabled -->
         
 <li>
-	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+	<a href="http://0.0.0.0:4000/blog/feed.xml" title="Follow RSS feed">
 		<span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
