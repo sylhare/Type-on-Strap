@@ -248,12 +248,12 @@ kbd {
   background: rgba(2, 2, 2, 0.85);
   color: lightgray;
   z-index: 1000;
-}
 
-#cookie-notice a {
-  display: inline-block;
-  cursor: pointer;
-  margin-left: 0.6rem;
+  & a {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 0.6rem;
+  }
 }
 
 /* Vendor tweaks */
@@ -272,13 +272,13 @@ kbd {
 .mermaid {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 2%;
-}
 
-.mermaid > svg {
-  margin: auto;
-  display: block;
-  height: auto;
-  padding-bottom: 2em;
-  padding-top: 2em;
-  max-width: 100%;
+  & > svg {
+    margin: auto;
+    display: block;
+    height: auto;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    max-width: 100%;
+  }
 }
