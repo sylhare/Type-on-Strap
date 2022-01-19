@@ -123,6 +123,5 @@ gulp.task('isolate', function isolateBootstrap() {
     .pipe(gulp.dest('css/vendor/'));
 });
 
-
 gulp.task("isolate-bootstrap-css", gulp.series('isolate', 'css'));
 gulp.task("default", gulp.series(gulp.parallel('js', 'css', 'img')));
