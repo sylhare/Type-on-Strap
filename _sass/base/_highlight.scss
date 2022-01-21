@@ -243,6 +243,11 @@ table.rouge-table {
   }
 }
 
+// For correct line number width in Github Gists
+.gist table tbody tr td {
+  box-sizing: content-box;
+}
+
 // Fix nbconvert dataframe
 .dataframe tbody {
   font-size: 0.8em;

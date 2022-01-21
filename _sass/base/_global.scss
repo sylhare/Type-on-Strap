@@ -256,18 +256,6 @@ kbd {
   }
 }
 
-/* Vendor tweaks */
-// For correct line number width in Github Gists
-.gist table tbody tr td {
-  box-sizing: content-box;
-}
-
-// KaTeX math display
-.math-display {
-  display: inline-block;
-  width: 100%;
-}
-
 // Mermaid
 .mermaid {
   background-color: rgba(255, 255, 255, 0.9);

@@ -5,6 +5,11 @@ $katex-font-path: "../../assets/fonts/katex" !default;
   padding-bottom: 3px;
 }
 
+.math-display {
+  display: inline-block;
+  width: 100%;
+}
+
 /*! KaTeX - license MIT */
 /* stylelint-disable font-family-no-missing-generic-family-keyword */
 @font-face {
