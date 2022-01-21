@@ -3,9 +3,191 @@
     <channel>
         <title>The Stanford AI Lab Blog</title>
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
-        <link>http://0.0.0.0:4000/blog/</link>
+        <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Sat, 18 Dec 2021 07:48:57 -0800</pubDate>
+        <pubDate>Thu, 20 Jan 2022 18:18:20 -0800</pubDate>
+        
+          
+          <item>
+              <title>Reward Isn&apos;t Free: Supervising Robot Learning with Language and Video from the Web</title>
+              <link>/blog/reward-isnt-free/</link>
+              <guid isPermaLink="true">/blog/reward-isnt-free/</guid>
+              <description>&lt;p&gt;&lt;em&gt;This work was conducted as part of &lt;a href=&quot;https://ai.stanford.edu/&quot;&gt;SAIL&lt;/a&gt; and &lt;a href=&quot;https://crfm.stanford.edu/&quot;&gt;CRFM&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Deep learning has enabled improvements in the capabilities of robots on a range of problems such as grasping &lt;sup id=&quot;fnref:qtopt&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:qtopt&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; and locomotion &lt;sup id=&quot;fnref:rma&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:rma&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; in recent years. However, building the quintessential home robot that can perform a range of interactive tasks, from cooking to cleaning, in novel environments has remained elusive. While a number of hardware and software challenges remain, a necessary component is robots that can generalize their prior knowledge to new environments, tasks, and objects in a zero or few shot manner. For example, a home robot tasked with setting the dining table cannot afford lengthy re-training for every new dish, piece of cutlery, or dining room it may need to interact with.&lt;/p&gt;
+
+&lt;p&gt;A natural way to enable such generalization in our robots is to train them on rich data sources that contain a wide range of different environments, tasks, and objects. Indeed, this recipe of massive, diverse datasets combined with scalable offline learning algorithms (e.g. self-supervised or cheaply supervised learning) has been the backbone of the many recent successes of foundation models &lt;sup id=&quot;fnref:fm&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fm&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; in NLP &lt;sup id=&quot;fnref:elmo&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:elmo&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:bert&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:bert&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:roberta&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:roberta&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:t5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:t5&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:xmlr&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:xmlr&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:gpt3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:gpt3&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt; and vision &lt;sup id=&quot;fnref:imagenet&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:imagenet&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:clip&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:clip&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:florence&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:florence&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Replicating these impressive generalization and adaptation capabilities in robot learning algorithms would certainly be a step toward robots that can be used in unstructured, real world environments. However, directly extending this recipe to robotics is nontrivial, as we neither have sufficiently large and diverse datasets of robot interaction, nor is it obvious what type of supervision can enable us to scalably learn useful skills from these datasets. On one hand, the popular imitation learning approach relies on expert data which can be expensive to obtain at scale. On the other hand, offline reinforcement learning, which can be performed using non-expert and autonomously-collected data, requires us to define a suitable reward function. Hard-coded reward functions are often task-specific and difficult to design, particularly in high-dimensional observation spaces. Getting rewards annotated post-hoc by humans is one approach to tackling this, but even with flexible annotation interfaces &lt;sup id=&quot;fnref:scaling&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:scaling&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt;, manually annotating scalar rewards for each timestep for all the possible tasks we might want a robot to complete is a daunting task. For example, for even a simple task like opening a cabinet, defining a hardcoded reward that balances the robot’s motion to the handle, grasping the handle, and gradually rewarding opening the cabinet is difficult, and even more so when it needs to be done in a way that is general across cabinets.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;So how can we scalably supervise the reward learning process?&lt;/strong&gt; In this blog post I’ll share some recent work that explores using data and supervision that can be easily collected through the web as a way of learning rewards for robots. Specifically, I’ll begin by discussing how we can leverage tools like crowdsourcing natural language descriptions of videos of robots as a scalable way to learn rewards for many tasks within a single environment. Then, I’ll explore how training rewards with a mix of robot data and diverse “in-the-wild” human videos (e.g. YouTube) can enable the learned reward functions to generalize zero-shot to unseen environments and tasks.&lt;/p&gt;
+
+&lt;h2 id=&quot;reward-learning-via-crowd-sourced-natural-language&quot;&gt;Reward Learning via Crowd-Sourced Natural Language&lt;/h2&gt;
+
+&lt;p&gt;What if all we needed to learn a reward was a description of what is happening in a video? Such an approach could be easily applied to large datasets with many tasks using crowdsourcing. Note that this is much simpler than obtaining crowdsourced annotations of scalar rewards, which requires annotators to have some intuition for what actions deserve a high reward or follow a consistent labeling scheme.&lt;/p&gt;
+
+&lt;p&gt;In our &lt;a href=&quot;https://www.google.com/url?q=https://arxiv.org/abs/2109.01115&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1642408114274939&amp;amp;usg=AOvVaw2ASAvXTq__21fYdU90tdKH&quot;&gt;recent paper&lt;/a&gt;, we studied this problem by reusing a non-expert dataset of robot interaction, and crowdsourcing language descriptions of the behavior happening in each video. Specifically, each video is annotated with a single natural language description describing what task (if any) the robot completes. For our experiments we used Amazon Mechanical Turk (AMT) to crowdsource natural language descriptions of each episode in a replay buffer of a Franka Emika Panda robot operating over a desk &lt;sup id=&quot;fnref:embr&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:embr&quot; class=&quot;footnote&quot;&gt;14&lt;/a&gt;&lt;/sup&gt; (See Figure 1). The dataset consisted of a mix of successful and unsuccessful attempts at many tasks like picking up objects and opening or closing the drawers.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image9.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 1: We use Amazon Mechanical Turk to crowdsource descriptions of the dataset from Wu et al. 2021 with natural language descriptions for each video.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;We then used these annotations to train a model (starting with a pre-trained DistilBert &lt;sup id=&quot;fnref:distilbert&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:distilbert&quot; class=&quot;footnote&quot;&gt;15&lt;/a&gt;&lt;/sup&gt; model) to predict if the robot’s behavior completes a language-specified command (See Figure 2). Specifically, our method, &lt;strong&gt;L&lt;/strong&gt;anguage-conditioned &lt;strong&gt;O&lt;/strong&gt;ffline &lt;strong&gt;Re&lt;/strong&gt;ward &lt;strong&gt;L&lt;/strong&gt;earning (LOReL), simply learns a classifier which takes as input text, and a pair of states (images), and predicts if transitioning between the states completes the text instruction. We can easily generate positives for training this classifier by taking state transitions in our annotated data, and can generate negatives by randomly permuting the human provided annotations.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image8.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 2: LOReL uses crowdsourcing to collect natural language descriptions of non-expert, autonomously-collected robot data. It then uses these annotated videos to learn a language-conditioned reward function for reinforcement learning.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Given this procedure for generating rewards, policies can be learned using any off-the-shelf reinforcement learning algorithm. In our case, we use Visual Model-Predictive Control (VMPC) &lt;sup id=&quot;fnref:vf&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:vf&quot; class=&quot;footnote&quot;&gt;16&lt;/a&gt;&lt;/sup&gt;, which learns a task-agnostic visual dynamics model, and performs model-predictive control with it to maximize the LOReL reward (see Figure 3).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image4.gif&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image1.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 3: LOReL executing on the physical robot (left), is able to complete 5 tasks specified by natural language with a 66% success rate (right). 
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Thus, we were able to supervise reward learning in robots with simple crowdsourcing of natural language descriptions. However much is left to be desired. Although we found that LOReL enabled robots to successfully complete tasks seen in the training set with some robustness to rephrasing, it did not yet generalize well to instructions for tasks that were not in the training set. Thinking back to our original goals, we’d like our learned rewards to generalize broadly to new tasks and environments.&lt;/p&gt;
+
+&lt;p&gt;How might we learn a reward that can generalize across tasks and environments instead of just different formulations of the same command? We hypothesized that an important step in achieving this goal was to leverage data with scale and diversity. Unfortunately, even using methods that can learn from non-expert, autonomously-collected data, we still have limited physical robot datasets with diversity across behaviors and environments. &lt;strong&gt;Until we have robot datasets of sufficient diversity, how can we learn to generalize across environments and tasks?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;boosting-generalization-with-diverse-human-videos&quot;&gt;Boosting Generalization with Diverse Human Videos&lt;/h2&gt;
+
+&lt;p&gt;Sticking with the theme of supervision that exists on the web, “in-the-wild” human videos like those that exist on YouTube are diverse, plentiful, and require little effort to collect. Of course there are numerous challenges in working with such data, from the visual domain shift to the robots environment, to the lack of a shared action space. But if we could learn from a massive number of “in-the-wild” videos, could we generalize better akin to large language and vision models?&lt;/p&gt;
+
+&lt;p&gt;We investigate this question in another &lt;a href=&quot;https://www.google.com/url?q=https://arxiv.org/pdf/2103.16817.pdf&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1642408114278064&amp;amp;usg=AOvVaw2dWMH3fQjJe8a1kDZUzbrs&quot;&gt;recent work&lt;/a&gt;, where we examine the extent to which “in-the-wild” human videos can enable learned reward functions to better generalize to unseen tasks and environments. Specifically, we consider the setting where during training the agent learns from a small amount of robot data of a few tasks in one environment and a large amount of diverse human video data, and at test time tries to use the reward on unseen robot tasks and environments (See Figure 4).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image2.gif&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 4: We consider a paradigm where the robot learns from limited robot data and many diverse human videos, and aims to generalize to unseen environments and tasks.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Our approach to learning from these human videos (in this case the Something-Something &lt;sup id=&quot;fnref:sthsth&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:sthsth&quot; class=&quot;footnote&quot;&gt;17&lt;/a&gt;&lt;/sup&gt; dataset) is simple. We train a classifier, which we call Domain-Agnostic Video Discriminator (DVD), from scratch on a mix of robot and human videos to predict if two videos are completing the same task or not (See Figure 5).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image7.gif&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 5: The DVD reward model is trained to two videos (including diverse human data and videos of robots), and predict if they are completing the same task or not.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Conditioned on a task specification (human video of a task) as one video, and the robot behavior as the other video, the DVD score acts as a reward function that can be used for reinforcement learning. Like in LOReL, we combined the DVD reward with visual model predictive control (VMPC) to learn human video conditioned behavior (See Figure 6).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image3.gif&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 6: Using the DVD reward to complete manipulation tasks conditioned a human video demonstration. 
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Now, we would like to understand - does training with diverse human videos enable improved generalization?&lt;/strong&gt; To test this, we designed a number of held out environments, with different viewpoints, colors, and object arrangement (See Figure 7).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image6.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 7: We evaluate the robots success rate in three held out environments, to assess how training with human videos influences DVD&apos;s ability to generalize.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;We then measured the learned DVD success rate on these unseen environments (See Figure 8 (left)) as well as unseen tasks (See Figure 8 (right)) when training with and without human videos. We found that using human videos enabled over a 20+% improvement in success rate in the unseen environments and on unseen tasks over using only robot data.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image10.png&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/dvd_table.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Figure 8: We compare the success rate using DVD in seen and unseen environments (left) when training with only robot data (green), and training with a mix of human and robot data (red). We observe adding human data boosts generalization by 20+%. We similarly compare DVD success rate on unseen tasks (right), and observe again that training with human videos yields a 20+% improvement in success rate.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Despite the massive domain shift between the human videos and robot domain, our results suggest that training with diverse, “in-the-wild” human videos can enable learned reward functions to generalize more effectively across tasks and environments.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In order to move towards broad generalization in robotics, we need to be able to learn from scalable sources of supervision and diverse data. While most current robot learning methods depend on costly sources of supervision, such as expert demonstrations or manually engineered reward functions, this can be a limiting factor in scaling to the amount of data we need to achieve broad generalization.&lt;/p&gt;
+
+&lt;p&gt;I’ve discussed two works that use supervision that is easily acquired through the web, specifically (1) crowd-sourced natural language descriptions of robot behavior, and (2) “in-the-wild” human video datasets. Our results suggest these approaches can be an effective way of supervising reward learning and boosting generalization to unseen environments and tasks at low cost. To learn more about these projects check out the &lt;a href=&quot;https://www.google.com/url?q=https://sites.google.com/view/robotlorel&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1642408114280703&amp;amp;usg=AOvVaw1mhbywm4xx6LS6LysNmdUB&quot;&gt;LOReL&lt;/a&gt; and &lt;a href=&quot;https://www.google.com/url?q=https://sites.google.com/view/dvd-human-videos&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1642408114280947&amp;amp;usg=AOvVaw2JZvyg83HUo5IeBHow3H9B&quot;&gt;DVD&lt;/a&gt; project pages which include videos and links to the code.&lt;/p&gt;
+
+&lt;p&gt;This blog post is based on the following papers:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;“Learning Language-Conditioned Robot Behavior from Offline Data and Crowd-Sourced Annotation” Suraj Nair, Eric Mitchell, Kevin Chen, Brian Ichter, Silvio Savarese, Chelsea Finn. CoRL 2021.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;“Learning Generalizable Robotic Reward Functions from “In-The-Wild” Human Videos” Annie S. Chen, Suraj Nair, Chelsea Finn. RSS 2021.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Finally, I would like to thank Ashwin Balakrishna, Annie Chen, as well as the SAIL editors Jacob Schreiber and Sidd Karamcheti and CRFM editor Shibani Santurkar for their helpful feedback on this post.&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:qtopt&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Kalashnikov, D., Irpan, A., Pastor, P., Ibarz, J., Herzog, A., Jang, E., Quillen, D., Holly, E., Kalakrishnan, M., Vanhoucke, V., Levine, S.  (2018). QT-Opt: Scalable Deep Reinforcement Learning for Vision-Based Robotic Manipulation. Conference on Robot Learning. &lt;a href=&quot;#fnref:qtopt&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:rma&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Kumar, A., Fu, Z., Pathak, D., Malik, J. (2021). RMA: Rapid Motor Adaptation for Legged Robots. Robotics Science and Systems. &lt;a href=&quot;#fnref:rma&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fm&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Bommasanimi, R. et al. (2021). On the Opportunities and Risks of Foundation Models. arXiv preprint arXiv:2108.07258. &lt;a href=&quot;#fnref:fm&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:elmo&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Peters, M., Neumann, M., Iyyer, M., Gardner, M., Clark, C., Lee, K., Zettlemoyer, L. (2018). Deep contextualized word representations. Conference of the North American Chapter of the Association for Computational Linguistics. &lt;a href=&quot;#fnref:elmo&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:bert&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Devlin, J.,  Chang, M., Lee, K., Toutanova, K. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. arXiv preprint arXiv:1810.04805. &lt;a href=&quot;#fnref:bert&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:roberta&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Liu, Y., Ott, M., Goyal, N., Du, J., Joshi, M., Chen, D., Levy, O., Lewis, M., Zettlemoyer, L., Stoyanov, V. (2019). RoBERTa: A Robustly Optimized BERT Pretraining Approach. arXiv preprint arXiv:1907.11692. &lt;a href=&quot;#fnref:roberta&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:t5&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Raffel, C., Shazeer, N., Roberts, A., Lee, K, Narang, S, Matena, M., Zhou, Y., Li, W, Liu, P. (2019). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. Journal of Machine Learning Research. &lt;a href=&quot;#fnref:t5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:xmlr&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Conneau, A., Khandelwal, K., Goyal, N., Chaudhary, V., Wenzek, G., Guzmán, F., Grave, E., Ott, M., Zettlemoyer, L., Stoyanov, V. (2020). Unsupervised Cross-lingual Representation Learning at Scale. Annual Meeting of the Association for Computational Linguistics. &lt;a href=&quot;#fnref:xmlr&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:gpt3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Brown et al. (2020). Language Models are Few-Shot Learners. arXiv preprint arXiv:2005.14165 &lt;a href=&quot;#fnref:gpt3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:imagenet&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Deng, J., Dong, W., Socher, R., Li, L., Li, K, Fei-Fei, L. (2009). ImageNet: A large-scale hierarchical image database. IEEE International Conference on Computer Vision and Pattern Recognition. &lt;a href=&quot;#fnref:imagenet&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:clip&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Radford, A., Kim, J., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., Sutskever, I. (2021). Learning Transferable Visual Models From Natural Language Supervision. arXiv preprint arXiv:2103.00020. &lt;a href=&quot;#fnref:clip&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:florence&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Yuan, L. et al. (2021). Florence: A New Foundation Model for Computer Vision. arXiv preprint arXiv:2111.11432. &lt;a href=&quot;#fnref:florence&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:scaling&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Cabi, S. et al. (2020). Scaling data-driven robotics with reward sketching and batch reinforcement learning. Robotics Science and Systems. &lt;a href=&quot;#fnref:scaling&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:embr&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Wu, B., Nair, S., Fei-Fei, L., Finn, C. (2021). Example-Driven Model-Based Reinforcement Learning for Solving Long-Horizon Visuomotor Tasks. Conference on Robot Learning. &lt;a href=&quot;#fnref:embr&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:distilbert&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Sanh, V., Debut, L., Chaumond, J., Wolf, T. (2019). DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter. Neural Information Processing Systems. &lt;a href=&quot;#fnref:distilbert&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:vf&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Finn, C., Levine, S. (2017). Deep Visual Foresight for Planning Robot Motion. IEEE International Conference on Robotics and Automation. &lt;a href=&quot;#fnref:vf&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:sthsth&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Goyal, R. et al. (2017). The “something something” video database for learning and evaluating visual common sense. International Conference on Computer Vision. &lt;a href=&quot;#fnref:sthsth&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+              <pubDate>Fri, 21 Jan 2022 00:00:00 -0800</pubDate>
+          </item>
+          
         
           
           <item>
@@ -3384,189 +3566,6 @@ In domain generalization, the training and test distributions comprise data from
 &lt;/div&gt;
 </description>
               <pubDate>Mon, 19 Jul 2021 00:00:00 -0700</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Stanford AI Lab Papers and Talks at ICML 2021</title>
-              <link>/blog/icml-2021/</link>
-              <guid isPermaLink="true">/blog/icml-2021/</guid>
-              <description>&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/logo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://icml.cc&quot;&gt;International Conference on Machine Learning&lt;/a&gt; (ICML) 2021 is being hosted virtually from July 18th - July 24th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!&lt;/p&gt;
-
-&lt;h2 id=&quot;list-of-accepted-papers&quot;&gt;List of Accepted Papers&lt;/h2&gt;
-&lt;h4 id=&quot;deep-reinforcement-learning-amidst-continual-structured-non-stationarity&quot;&gt;Deep Reinforcement Learning amidst Continual Structured Non-Stationarity&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img1&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Annie Xie, James Harrison, Chelsea Finn
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: anniexie@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: deep reinforcement learning, non-stationarity&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;just-train-twice-improving-group-robustness-without-training-group-information&quot;&gt;Just Train Twice: Improving Group Robustness without Training Group Information&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img15&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Evan Zheran Liu*, Behzad Haghgoo*, Annie S. Chen*, Aditi Raghunathan, Pang Wei Koh, Shiori Sagawa, Percy Liang, Chelsea Finn
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: evanliu@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.09044&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=hzrfsbM1I48&quot;&gt;Video&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: robustness, spurious correlations&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;a-theory-of-high-dimensional-regression-with-arbitrary-correlations-between-input-features-and-target-functions-sample-complexity-multiple-descent-curves-and-a-hierarchy-of-phase-transitions&quot;&gt;&lt;a href=&quot;http://proceedings.mlr.press/v139/mel21a.html&quot;&gt;A theory of high dimensional regression with arbitrary correlations between input features and target functions: sample complexity, multiple descent curves and a hierarchy of phase transitions&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img12&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Gabriel Mel, Surya Ganguli
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sganguli@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://proceedings.mlr.press/v139/mel21a.html&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: high dimensional statistics, random matrix theory, regularization&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;accelerating-feedforward-computation-via-parallel-nonlinear-equation-solving&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2002.03629&quot;&gt;Accelerating Feedforward Computation via Parallel Nonlinear Equation Solving&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img17&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Yang Song, Chenlin Meng, Renjie Liao, Stefano Ermon
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: songyang@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2002.03629&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/ermongroup/fast_feedforward_computation&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: parallel computing, autoregressive models, densenets, rnns&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;accuracy-on-the-line-on-the-strong-correlation-between-out-of-distribution-and-in-distribution-generalization&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2107.04649&quot;&gt;Accuracy on the Line: on the Strong Correlation Between Out-of-Distribution and In-Distribution Generalization&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img5&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: John Miller, Rohan Taori, Aditi Raghunathan, Shiori Sagawa, Pang Wei Koh, Vaishaal Shankar, Percy Liang, Yair Carmon, Ludwig Schmidt
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: rtaori@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.04649&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: out of distribution, generalization, robustness, distribution shift, machine learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;bayesian-algorithm-execution-estimating-computable-properties-of-black-box-functions-using-mutual-information&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2104.09460&quot;&gt;Bayesian Algorithm Execution: Estimating Computable Properties of Black-box Functions Using Mutual Information&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img8&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Willie Neiswanger, Ke Alexander Wang, Stefano Ermon
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: neiswanger@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2104.09460&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://twitter.com/willieneis/status/1412818015230464001&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://stanford.zoom.us/rec/share/1ASiyhRzE34CVbW3-2oiwJqBc69RnDe6QlVuwVxY6hui_mJDBV3_5rkD-j7zirWD.tF6pyVfWGcbpa_5C&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://willieneis.github.io/bax-website&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: bayesian optimization, experimental design, algorithm execution, information theory&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;break-it-fix-it-unsupervised-learning-for-program-repair&quot;&gt;&lt;a href=&quot;http://arxiv.org/abs/2106.06600&quot;&gt;Break-It-Fix-It: Unsupervised Learning for Program Repair&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img4&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Michihiro Yasunaga, Percy Liang
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: myasu@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://arxiv.org/abs/2106.06600&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/michiyasunaga/BIFI&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: program repair, unsupervised learning, translation, domain adaptation, self-supervised learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;composed-fine-tuning-freezing-pre-trained-denoising-autoencoders-for-improved-generalization&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2006.16205&quot;&gt;Composed Fine-Tuning: Freezing Pre-Trained Denoising Autoencoders for Improved Generalization&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img14&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Sang Michael Xie, Tengyu Ma, Percy Liang
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: xie@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2006.16205&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://recorder-v3.slideslive.com/?share=37998&amp;amp;s=739fa95e-53f4-4980-86d6-69bb996b5838&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/p-lambda/composed_finetuning&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: fine-tuning, adaptation, freezing, ood generalization, structured prediction, semi-supervised learning, unlabeled outputs&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;decoupling-exploration-and-exploitation-for-meta-reinforcement-learning-without-sacrifices&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2008.02790&quot;&gt;Decoupling Exploration and Exploitation for Meta-Reinforcement Learning without Sacrifices&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img3&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Evan Zheran Liu, Aditi Raghunathan, Percy Liang, Chelsea Finn
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: evanliu@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2008.02790&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://ai.stanford.edu/blog/meta-exploration/&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=ZzJI7O3IzyY&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://ezliu.github.io/dream/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: meta-reinforcement learning, exploration&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;exponential-lower-bounds-for-batch-reinforcement-learning-batch-rl-can-be-exponentially-harder-than-online-rl&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2012.08005&quot;&gt;Exponential Lower Bounds for Batch Reinforcement Learning: Batch RL can be Exponentially Harder than Online RL&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img6&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Andrea Zanette
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: zanette@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2012.08005&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=YktnEdsxYfc&quot;&gt;Video&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, lower bounds, linear value functions, off-policy evaluation, policy learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;federated-composite-optimization&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2011.08474&quot;&gt;Federated Composite Optimization&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img11&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Honglin Yuan, Manzil Zaheer, Sashank Reddi
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: yuanhl@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2011.08474&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=tKDbc60XJks&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/hongliny/FCO-ICML21&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: federated learning, distributed optimization, convex optimization&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;generative-adversarial-transformers-&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2103.01209&quot;&gt;Generative Adversarial Transformers &lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img0&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Drew A. Hudson, C. Lawrence Zitnick
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: dorarad@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2103.01209&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/dorarad/gansformer&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: gans, transformers, compositionality, attention, bottom-up, top-down, disentanglement, object-oriented, representation learning, scenes&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;improving-generalization-in-meta-learning-via-task-augmentation&quot;&gt;&lt;a href=&quot;http://proceedings.mlr.press/v139/yao21b/yao21b.pdf&quot;&gt;Improving Generalization in Meta-learning via Task Augmentation&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img16&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Huaxiu Yao, Longkai Huang, Linjun Zhang, Ying Wei, Li Tian, James Zou, Junzhou Huang, Zhenhui Li
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: huaxiu@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://proceedings.mlr.press/v139/yao21b/yao21b.pdf&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: meta-learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;mandoline-model-evaluation-under-distribution-shift&quot;&gt;&lt;a href=&quot;http://proceedings.mlr.press/v139/chen21i/chen21i.pdf&quot;&gt;Mandoline: Model Evaluation under Distribution Shift&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img2&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Mayee Chen, Karan Goel, Nimit Sohoni, Fait Poms, Kayvon Fatahalian, Christopher Ré
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: mfchen@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://proceedings.mlr.press/v139/chen21i/chen21i.pdf&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: evaluation, distribution shift, importance weighting&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;memory-efficient-pipeline-parallel-dnn-training&quot;&gt;&lt;a href=&quot;http://proceedings.mlr.press/v139/narayanan21a/narayanan21a.pdf&quot;&gt;Memory-Efficient Pipeline-Parallel DNN Training&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img19&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Deepak Narayanan
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: deepakn@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://proceedings.mlr.press/v139/narayanan21a/narayanan21a.pdf&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: distributed training, pipeline model parallelism, large language model training&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;offline-meta-reinforcement-learning-with-advantage-weighting&quot;&gt;&lt;a href=&quot;http://proceedings.mlr.press/v139/mitchell21a/mitchell21a.pdf&quot;&gt;Offline Meta-Reinforcement Learning with Advantage Weighting&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img20&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Eric Mitchell, Rafael Rafailov, Xue Bin Peng, Sergey Levine, Chelsea Finn
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: em7@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://proceedings.mlr.press/v139/mitchell21a/mitchell21a.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://sites.google.com/view/macaw-metarl/home&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: meta-rl offline rl batch meta-learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;secant-self-expert-cloning-for-zero-shot-generalization-of-visual-policies&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.09678&quot;&gt;SECANT: Self-Expert Cloning for Zero-Shot Generalization of Visual Policies&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img9&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Linxi Fan, Guanzhi Wang, De-An Huang, Zhiding Yu, Li Fei-Fei, Yuke Zhu, Anima Anandkumar
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: jimfan@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.09678&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://linxifan.github.io/secant-site/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, computer vision, sim-to-real, robotics, simulation&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;targeted-data-acquisition-for-evolving-negotiation-agents&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2106.07728.pdf&quot;&gt;Targeted Data Acquisition for Evolving Negotiation Agents&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img13&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Minae Kwon, Siddharth Karamcheti, Mariano-Florentino Cuéllar, Dorsa Sadigh
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: minae@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2106.07728.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=xxCSim8YOVM&amp;amp;feature=youtu.be&quot;&gt;Video&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: negotiation, targeted data acquisition, active learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;understanding-self-supervised-learning-dynamics-without-contrastive-pairs&quot;&gt;&lt;a href=&quot;http://proceedings.mlr.press/v139/tian21a.html&quot;&gt;Understanding self-supervised Learning Dynamics without Contrastive Pairs&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img10&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Yuandong Tian, Xinlei Chen, Surya Ganguli
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: sganguli@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;http://proceedings.mlr.press/v139/tian21a.html&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: self-supervised learning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;wilds-a-benchmark-of-in-the-wild-distribution-shifts&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2012.07421.pdf&quot;&gt;WILDS: A Benchmark of in-the-Wild Distribution Shifts&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img7&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Pang Wei Koh*, Shiori Sagawa*, Henrik Marklund, Sang Michael Xie, Marvin Zhang, Akshay Balsubramani, Weihua Hu, Michihiro Yasunaga, Richard Lanas Phillips, Irena Gao, Tony Lee, Etienne David, Ian Stavness, Wei Guo, Berton A. Earnshaw, Imran S. Haque, Sara Beery, Jure Leskovec, Anshul Kundaje, Emma Pierson, Sergey Levine, Chelsea Finn, Percy Liang
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: pangwei@cs.stanford.edu, ssagawa@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2012.07421.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://wilds.stanford.edu/&quot;&gt;Website&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: robustness, distribution shifts, benchmark&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;lego-latent-execution-guided-reasoning-for-multi-hop-question-answering-on-knowledge-graphs&quot;&gt;LEGO: Latent Execution-Guided Reasoning for Multi-Hop Question Answering on Knowledge Graphs&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-17-icml-2021/img21&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Hongyu Ren, Hanjun Dai, Bo Dai, Xinyun Chen, Michihiro Yasunaga, Haitian Sun, Dale Schuurmans, Jure Leskovec, Denny Zhou
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: hyren@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: knowledge graphs, question answering, multi-hop reasoning&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;We look forward to seeing you at ICML 2021!&lt;/p&gt;
-</description>
-              <pubDate>Sat, 17 Jul 2021 00:00:00 -0700</pubDate>
           </item>
           
         
