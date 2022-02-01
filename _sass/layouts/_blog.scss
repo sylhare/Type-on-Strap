@@ -17,20 +17,20 @@
   }
 
   /* --- Responsive --- */
-  @media screen and (min-width: $break) {
-    background-size: 120% auto;
+  @media screen and (max-width: $m-break) {
+    background-size: 170% auto;
   }
 
-  @media screen and (max-width: $break) {
+  @media screen and (max-width: 450px) {
     background-size: 200% auto;
   }
 
-  @media screen and (max-width: $sm-break) {
+  @media screen and (max-width: 400px) {
     background-size: 250% auto;
   }
 
-  @media screen and (max-width: $x-sm-break) {
-    background-size: 300% auto;
+  @media screen and (max-width: 380px) {
+    background-size: 280% auto;
   }
 
   p:last-child {
