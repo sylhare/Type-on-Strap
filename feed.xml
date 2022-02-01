@@ -5,7 +5,253 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Thu, 20 Jan 2022 18:18:20 -0800</pubDate>
+        <pubDate>Mon, 31 Jan 2022 17:36:31 -0800</pubDate>
+        
+          
+          <item>
+              <title>How to Improve User Experience (and Behavior): Three Papers from Stanford&apos;s Alexa Prize Team</title>
+              <link>/blog/alexa-sigdial/</link>
+              <guid isPermaLink="true">/blog/alexa-sigdial/</guid>
+              <description>&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;In 2019, Stanford entered the &lt;a href=&quot;https://developer.amazon.com/alexaprize/challenges/past-challenges/challenge3&quot;&gt;Alexa Prize Socialbot Grand Challenge 3&lt;/a&gt; for the first time, with its bot &lt;a href=&quot;https://stanfordnlp.github.io/chirpycardinal/&quot;&gt;Chirpy Cardinal&lt;/a&gt;, which went on to win 2nd place in the competition. In &lt;a href=&quot;http://ai.stanford.edu/blog/chirpy-cardinal/&quot;&gt;our previous post&lt;/a&gt;, we discussed the technical structure of our socialbot and how developers can use our &lt;a href=&quot;https://github.com/stanfordnlp/chirpycardinal&quot;&gt;open-source code&lt;/a&gt; to develop their own. In this post we share further research conducted while developing Chirpy Cardinal to discover common pain points that users encounter when interacting with socialbots, and strategies for addressing them.&lt;/p&gt;
+
+&lt;p&gt;The Alexa Prize is a unique research setting, as it allows researchers to study how users interact with a bot when doing so solely for their own motivations. During the competition, US-based Alexa users can say the phrase “let’s chat” to speak in English to an anonymous and randomly-selected competing bot. They are free to end the conversation at any time. Since Alexa Prize socialbots are intended to create as natural an experience as possible, they should be capable of long, open-domain social conversations with high coverage of topics. We observed that Chirpy users were interested in many different subjects, from current events (e.g., the coronavirus) to pop culture (e.g., the movie &lt;em&gt;Frozen 2&lt;/em&gt;) to personal interests (e.g,. their pets). Chirpy achieves its coverage of these diverse topics by using a modular design that combines both neural generation and scripted dialogue, as described in our &lt;a href=&quot;https://ai.stanford.edu/blog/chirpy-cardinal/&quot;&gt;previous post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We used this setting to study three questions about socialbot conversations:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#1-understanding-and-predicting-user-dissatisfaction&quot;&gt;What do users complain about, and how can we learn from the complaints to improve neurally generated dialogue?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#2-handling-offensive-users&quot;&gt;What strategies are effective and ineffective in handling and deterring offensive user behavior?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#3-increasing-user-initiative&quot;&gt;How can we shift the balance of power, such that both users and the bot are meaningfully controlling the conversation?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We’ve published papers on each of these topics at &lt;a href=&quot;https://www.sigdial.org/files/workshops/conference22/&quot;&gt;SIGDIAL 2021&lt;/a&gt; and in this post, we’ll share key findings which provide practical insights for both chatbot researchers and developers.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-understanding-and-predicting-user-dissatisfaction&quot;&gt;1. Understanding and Predicting User Dissatisfaction&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://sigdial.org/sites/default/files/workshops/conference22/Proceedings/pdf/2021.sigdial-1.1.pdf&quot;&gt;paper&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://drive.google.com/file/d/1MLBT54DTM2qwXoOi-ZYR0z5TrbPnL_oz/view?usp%3Dsharing&quot;&gt;video&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Neural generative dialogue models like DialoGPT&lt;sup id=&quot;fnref:dialogpt&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:dialogpt&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, Meena&lt;sup id=&quot;fnref:meena&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:meena&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, and BlenderBot&lt;sup id=&quot;fnref:blender&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:blender&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; use large pretrained neural language models to generate responses given a dialogue history. These models perform well when evaluated by crowdworkers in carefully-controlled settings–typically written conversations with certain topical or length constraints.&lt;/p&gt;
+
+&lt;p&gt;However, real-life settings like the Alexa Prize are not so tidy. Users have widely varying expectations and personalities, and require fast response times as they speak with the bot in home environments that might feature cross-talk and background noise. Through Chirpy Cardinal, we have a unique opportunity to investigate how modern neural generative dialogue models hold up in this kind of environment.&lt;/p&gt;
+
+&lt;p&gt;Chirpy Cardinal uses a GPT2-medium model fine-tuned on the EmpatheticDialogues&lt;sup id=&quot;fnref:empatheticdialogues&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:empatheticdialogues&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; dataset to hold short discussions with users about their everyday experiences and emotions. Particularly during the pandemic, we found it was important for Chirpy to ask users about these issues. Though larger and more powerful pretrained generative models are available, we used GPT2-medium due to budget and latency constraints.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image8.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;While the GPT2-medium model is capable of chatting about these simple topics for a few utterances, discussions that extend longer tend to derail. Sooner or later, the bot gives a response that doesn&apos;t quite make sense, and it&apos;s hard for the user or the model to recover the conversation.&lt;/p&gt;
+
+&lt;p&gt;To understand how these conversations are derailing, we defined 7 types of errors made by the neural generative model – repetition, redundant questions, unclear utterances, hallucination, ignoring, logical errors, and insulting utterances. After annotating a sample of user conversations, we found that bot errors were common, with over half (53%) of neural-generated utterances containing some kind of error.&lt;/p&gt;
+
+&lt;p&gt;We also found that due to the challenging noisy environment (which may involve background noise, cross-talk, and ASR errors), almost a quarter (22%) of user utterances were incomprehensible, even to a human annotator. This accounts for some of the more basic bot errors, such as ignoring, hallucination, unclear and repetitive utterances.&lt;/p&gt;
+
+&lt;p&gt;Of the remaining bot errors, redundant questions and logical errors are particularly common, indicating that better reasoning and use of the conversational history are a priority for neural generative model development.&lt;/p&gt;
+
+&lt;p&gt;We also tracked 9 ways that users express dissatisfaction, such as asking for clarification, criticising the bot, and ending the conversation. Though there is a relationship between bot errors and user dissatisfaction, the correlation is noisy. Even after a bot error, many users do not express dissatisfaction, instead attempting to continue the conversation. This is particularly true after logical errors, in which the bot shows a lack of real-world knowledge or commonsense – some kind-hearted users even take this as an opportunity to educate the bot. Conversely, some users express dissatisfaction unrelated to any obvious bot error – for example, users have widely differing expectations regarding what kinds of personal questions are appropriate from the bot.&lt;/p&gt;
+
+&lt;p&gt;Having better understood how and why users express dissatisfaction, we asked: can we learn to predict dissatisfaction, and thus prevent it before it happens?&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image1.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;With the user conversations collected during the competition, we trained a model to predict the probability that a certain bot utterance would lead the user to express dissatisfaction. Given the noisy correlation between bot errors and user dissatisfaction, this is inherently challenging. Despite this noise, our predictor model was able to find signal in the users’ dissatisfaction.&lt;/p&gt;
+
+&lt;p&gt;Once trained, our dissatisfaction predictor can be used mid-conversation to choose between multiple alternative neural-generated bot utterances. Through human evaluation, we found that the bot responses chosen by the predictor – i.e., those judged least likely to cause user dissatisfaction – are overall better quality than randomly chosen responses.&lt;/p&gt;
+
+&lt;p&gt;Though we have not yet incorporated this feedback loop into Chirpy Cardinal, our method demonstrates one viable way to implement a semi-supervised online learning method to continuously improve a neural generative dialogue system.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-handling-offensive-users&quot;&gt;2. Handling Offensive Users&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://sigdial.org/sites/default/files/workshops/conference22/Proceedings/pdf/2021.sigdial-1.58.pdf&quot;&gt;paper&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://drive.google.com/file/d/12ePMS49YoNtFgy_uoQhP2DeL7w85PvL_/view?usp%3Dsharing&quot;&gt;video&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Voice assistants are becoming increasingly popular, and with their popularity, they are subject to growing abuse from their user populations. We estimate that more than 10% of user conversations with our bot, Chirpy Cardinal, contain profanity and overtly offensive language. While there is a large body of prior work attempting to address this issue, most prior approaches use qualitative metrics based on surveys conducted in lab settings. In this work, we conduct a large-scale quantitative evaluation of response strategies against offensive users in-the-wild. In our experiments, we found that politely rejecting the user’s offense while redirecting the user to an alternative topic is the best strategy in curbing offenses.&lt;/p&gt;
+
+&lt;p&gt;Informed by prior work, we test the following 4 hypotheses:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Redirect&lt;/strong&gt; - Inspired by Brahnam&lt;sup id=&quot;fnref:brahnam05&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:brahnam05&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;, we hypothesize that using explicit redirection when responding to an offensive user utterance is an effective strategy. For example, “I’d rather not talk about that. So, who’s your favorite musician?”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt; - Inspired by Suler&lt;sup id=&quot;fnref:suler04&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:suler04&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; and Chen and Williams&lt;sup id=&quot;fnref:chenwilliams20&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:chenwilliams20&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;, we hypothesize that including the user’s name in the bot’s response is an effective strategy. For example, “I’d rather not talk about that, Peter.”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Why&lt;/strong&gt; - Inspired by Shapiro et al.&lt;sup id=&quot;fnref:shapiro14&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:shapiro14&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;, we hypothesize that politely asking the user the reason why they made an offensive remark invites them to reflect on their behavior, reducing future offenses. For example, “Why would you say that?”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Empathetic &amp;amp; Counter&lt;/strong&gt; - Inspired by Chin et al.&lt;sup id=&quot;fnref:chin20&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:chin20&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;, we hypothesize that empathetic responses are more effective than generic avoidance responses, while counter-attack responses make no difference. For example, an empathetic response would be “If I could talk about it I would, but I really can’t. Sorry to disappoint”, and a counter-attack response would be “That’s a very suggestive thing to say. I don’t think we should be talking about that.”&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We constructed the responses crossing multiple factors listed above. For example, avoidance + name + redirect would yield the utterance “I’d rather not talk about that (&lt;em&gt;avoidance&lt;/em&gt;), Peter (&lt;em&gt;name&lt;/em&gt;). So, who’s your favorite musician? (&lt;em&gt;redirect&lt;/em&gt;)”&lt;/p&gt;
+
+&lt;p&gt;To measure the effectiveness of a response strategy, we propose 3 metrics:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Re-offense&lt;/strong&gt; - measured as the number of conversations that contained another offensive utterance after the initial bot response.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;End&lt;/strong&gt; - measured as the length of the conversation after bot response assuming no future offenses.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Next&lt;/strong&gt; - measured as the number of turns passed until the user offends again.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We believe that these metrics measure the effectiveness of a response strategy more directly than user ratings as done in Cohn et al.&lt;sup id=&quot;fnref:cohn19&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:cohn19&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt; which measure the overall quality of the conversation.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image9.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The figure above shows the differences of strategies on the Re-offense ratio. As we can see, strategies with (&lt;em&gt;redirects&lt;/em&gt;) performed significantly better than strategies without redirects, reducing re-offense rate by as much as 53%. Our pairwise hypothesis tests further shows that using user’s name with a redirect further reduces re-offense rate by about 6%, and that asking the user why they made an offensive remark had a 3% &lt;strong&gt;increase&lt;/strong&gt; in re-offense rate which shows that asking the user why only invites user re-offenses instead of self-reflection. Empathetic responses also reduced re-offense rate by 3%, while counter responses did not have any significant effect.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image7.png&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image3.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The figure on the left shows the differences in average number of turns until the next re-offense (&lt;em&gt;Next&lt;/em&gt;), and the figure on the right shows the differences in average number of turns until the end of the conversation (&lt;em&gt;End&lt;/em&gt;). We again see that strategies with (&lt;em&gt;redirects&lt;/em&gt; are able to significantly prolong a non-offensive conversation. This further shows that redirection is incredibly effective method to curb user offenses.&lt;/p&gt;
+
+&lt;p&gt;The main takeaway from this is that &lt;strong&gt;the bot should always empathetically respond to user offenses with a redirection, and use the user&apos;s name whenever possible.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Despite the empirical effectiveness of the passive avoidance and redirection strategy, we would like to remind researchers of the societal dangers of adopting similar strategies. Since most voice-based agents have a default female voice, these strategies could further gender stereotypes and set unreasonable expectations of how women would react to verbal abuse in the real world &lt;sup id=&quot;fnref:curryreiser19&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:curryreiser19&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&quot;fnref:west19&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:west19&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&quot;fnref:curry20&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:curry20&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt;. Thus, caution must be taken when deploying these strategies.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-increasing-user-initiative&quot;&gt;3. Increasing User Initiative&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;https://sigdial.org/sites/default/files/workshops/conference22/Proceedings/pdf/2021.sigdial-1.11.pdf&quot;&gt;paper&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://drive.google.com/file/d/1jZPThbl6Y7uHGP0HKX8n3Uroflkb_74O/view?usp%3Dsharing&quot;&gt;video&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Conversations are either controlled by the user (for example, bots such as Apple’s Siri, which passively waits for user commands) or the bot (for example, CVS’s customer service bot, which repeatedly prompts the user for specific pieces of information).&lt;/p&gt;
+
+&lt;p&gt;This property - which agent has control at a given moment - is called initiative.&lt;/p&gt;
+
+&lt;p&gt;It wouldn’t be fun to go to a cocktail party and have a single person choose every topic, never giving you the opportunity to share your own interests. It’s also tedious to talk to someone who forces you to carry the conversation by refusing to bring up their own subjects. Ideally, everyone would take turns responding to prompts, sharing information about themselves, and introducing new topics. We call this pattern of dialogue &lt;strong&gt;mixed initiative&lt;/strong&gt; and hypothesize that just as it’s an enjoyable type of human-human social conversation, it’s also a more engaging and desirable form of human-bot dialogue.&lt;/p&gt;
+
+&lt;p&gt;We designed our bot, Chirpy Cardinal, to keep conversations moving forward by asking questions on every turn. Although this helped prevent conversations from stagnating, it also made it difficult for users to take initiative. In our data, we observe users complaining about this, with comments such as &lt;em&gt;you ask too many questions&lt;/em&gt;, or &lt;em&gt;that’s not what I wanted to talk about&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since our goal in studying initiative was to make human-bot conversations more like human-human ones, we looked to research on human dialogue for inspiration.&lt;/p&gt;
+
+&lt;p&gt;Based on this research, we formed three hypotheses for how to increase user initiative.&lt;/p&gt;
+
+&lt;p&gt;The images below show the types of utterances we experimented with as well as representative user utterances. Per Alexa Prize competition rules, these are not actual user utterances received by our bot.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image6.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;1-giving-statements-instead-of-questions&quot;&gt;1. Giving statements instead of questions&lt;/h4&gt;
+
+&lt;p&gt;In human dialogue research &lt;sup id=&quot;fnref:whittakerwalker90&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:whittakerwalker90&quot; class=&quot;footnote&quot;&gt;14&lt;/a&gt;&lt;/sup&gt;, the person asking a question has initiative, since they are giving a direction that the person answering follows. By contrast, an open-ended statement gives the listener an opportunity to take initiative. This was the basis of our first strategy: &lt;strong&gt;using statements instead of questions&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image2.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;2-sharing-personal-information&quot;&gt;2. Sharing personal information&lt;/h4&gt;
+
+&lt;p&gt;Work on both human-human &lt;sup id=&quot;fnref:collinsmiller94&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:collinsmiller94&quot; class=&quot;footnote&quot;&gt;15&lt;/a&gt;&lt;/sup&gt; and human-bot &lt;sup id=&quot;fnref:lee20&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:lee20&quot; class=&quot;footnote&quot;&gt;16&lt;/a&gt;&lt;/sup&gt; dialogue has found that personal self disclosure has a reciprocal effect. If one participant shares about themself, then the other person is more likely to do the same. We hypothesized that &lt;strong&gt;if Chirpy gave personal statements rather than general ones, then users would take initiative and reciprocate&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image4.png&quot; /&gt; 
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image5.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The figure on the left is an example of a conversation with back-channeling, the right, without. In this case, back-channeling allows the user to direct the conversation towards what they want (getting suggestions) rather than forcing them to talk about something they’re not interested in (hobbies).&lt;/p&gt;
+
+&lt;h4 id=&quot;3-introducing-back-channeling&quot;&gt;3. Introducing back-channeling&lt;/h4&gt;
+
+&lt;p&gt;Back-channels, such as “hmm”, “I see”, and “mm-hmm”, are brief utterances which are used as a signal from the listener to the speaker that the speaker should continue taking initiative. Our final hypothesis was that they could be used in human-bot conversation to the same effect, i.e. that &lt;strong&gt;if our bot back-channeled, then the user would direct the conversation&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;experiments-and-results&quot;&gt;Experiments and results&lt;/h4&gt;
+&lt;p&gt;To test these strategies, we altered different components of our bot. We conducted small experiments, only altering a single turn of conversation, to test questions vs statements and personal vs general statements. To test the effect of replacing statements with questions on a larger number of turns, we altered components of our bot that used neurally generated dialogue, since these were more flexible to changing user inputs. Finally, we experimented with back-channeling in a fully neural module of our bot.&lt;/p&gt;
+
+&lt;p&gt;Using a set of automated metrics, which we validated using manual annotations, we found the following results, which provide direction for future conversational design:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Using statements alone outperformed questions or combined statements and questions&lt;/li&gt;
+  &lt;li&gt;Giving personal opinion statements (e.g. “I like Bojack Horseman”) was more effective than both personal experience statements (e.g. “I watched Bojack Horseman yesterday”) and general statements (e.g. “Bojack Horseman was created by Raphael Bob-Waksberg and Lisa Hanawalt”)&lt;/li&gt;
+  &lt;li&gt;As the number of questions decreased, user initiative increased&lt;/li&gt;
+  &lt;li&gt;User initiative was greatest when we back-channeled 33% of the time (as opposed to 0%, 66%, or 100%)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Since these experiments were conducted in a limited environment, we do not expect that they would transfer perfectly to all social bots; however, we believe that these simple yet effective strategies are a promising direction for building more natural conversational AI.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-listen-with-empathy&quot;&gt;4. Listen with empathy&lt;/h2&gt;
+
+&lt;p&gt;Each of our projects began with dissatisfied users who told us, in their own words, what our bot could do better. By conducting a systematic analysis of these complaints, we gained a more precise understanding of what specifically was bothering users about our neurally generated responses. Using this feedback, we trained a model which was able to successfully predict when a generated response might lead the conversation astray. At times, it was the users who would make an offensive statement. We studied these cases and determined that an empathetic redirection, which incorporated the users name, was most effective at keeping the conversation on track. Finally, we experimented with simply saying less and creating greater opportunities for the user to lead the conversation. When presented with that chance, many took it, leading to longer and more informative dialogues.&lt;/p&gt;
+
+&lt;p&gt;Across all of our work, the intuitive principles of human conversation apply to socialbots: be a good listener, respond with empathy, and when you’re given feedback and the opportunity to learn, take it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:dialogpt&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Zhang, Yizhe, Siqi Sun, Michel Galley, Yen-Chun Chen, Chris Brockett, Xiang Gao, Jianfeng Gao, Jingjing Liu, and Bill Dolan. Dialogpt: Large-scale generative pre-training for conversational response generation](https://www.google.com/url?q=https://arxiv.org/abs/1911.00536&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1643077986262380&amp;amp;usg=AOvVaw1khQv7HglJrP1gK8dkiE3n).&quot; arXiv preprint arXiv:1911.00536 (2019). &lt;a href=&quot;#fnref:dialogpt&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:meena&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Adiwardana, Daniel, Minh-Thang Luong, David R. So, Jamie Hall, Noah Fiedel, Romal Thoppilan, Zi Yang et al. &lt;a href=&quot;https://www.google.com/url?q=https://arxiv.org/abs/2001.09977&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1643077986262944&amp;amp;usg=AOvVaw3Pbae_MvzxjvmdBhHJ9KzL&quot;&gt;Towards a human-like open-domain chatbot&lt;/a&gt; arXiv preprint arXiv:2001.09977 (2020). &lt;a href=&quot;#fnref:meena&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:blender&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Roller, Stephen, Emily Dinan, Naman Goyal, Da Ju, Mary Williamson, Yinhan Liu, Jing Xu et al. &lt;a href=&quot;https://www.google.com/url?q=https://arxiv.org/abs/2004.13637&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1643077986263477&amp;amp;usg=AOvVaw2YmyyrWz7jQOkz8JkXDwjz&quot;&gt;Recipes for building an open-domain chatbot&lt;/a&gt; arXiv preprint arXiv:2004.13637 (2020). &lt;a href=&quot;#fnref:blender&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:empatheticdialogues&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Hannah Raskin, Eric Michael Smith, Margaret Li, and Y-Lan Boureau. 2019. &lt;a href=&quot;https://www.google.com/url?q=https://arxiv.org/pdf/1811.00207.pdf&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1643077986264028&amp;amp;usg=AOvVaw32mtRQhV_DhtjxHkvAS8Jw&quot;&gt;Towards empathetic open-domain conversation models: A new benchmark and dataset.&lt;/a&gt; In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, pages 5370-5381, Florence, Italy. Association for Computational Linguistics. &lt;a href=&quot;#fnref:empatheticdialogues&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:brahnam05&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Sheryl Brahnam. 2005. Strategies for handling cus- tomer abuse of ECAs. In &lt;em&gt;Proc. Interact 2005 work- shop Abuse: The darker side of Human-Computer Interaction&lt;/em&gt;, pages 62–67. &lt;a href=&quot;#fnref:brahnam05&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:suler04&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;John Suler. 2004. The online disinhibition effect. &lt;em&gt;Cyberpsychology &amp;amp; behavior&lt;/em&gt;, 7(3):321–326. &lt;a href=&quot;#fnref:suler04&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:chenwilliams20&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Xiangyu Chen and Andrew Williams. 2020. &lt;a href=&quot;https://doi.org/10.1145/3371382.3378355&quot;&gt;Improving Engagement by Letting Social Robots Learn and Call Your Name&lt;/a&gt;. In &lt;em&gt;Companion of the 2020 ACM/IEEE International Conference on Human-Robot Interaction&lt;/em&gt;, HRI ’20, page 160–162, New York, NY, USA. Association for Computing Machinery. &lt;a href=&quot;#fnref:chenwilliams20&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:shapiro14&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Shauna Shapiro, Kristen Lyons, Richard Miller, Britta Butler, Cassandra Vieten, and Philip Zelazo. 2014. &lt;a href=&quot;https://link.springer.com/article/10.1007%2Fs10648-014-9265-3&quot;&gt;Contemplation in the Classroom: a New Direction for Improving Childhood Education&lt;/a&gt;. &lt;em&gt;Educational Psychology Review&lt;/em&gt;, 27. &lt;a href=&quot;#fnref:shapiro14&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:chin20&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Hyojin Chin, Lebogang Wame Molefi, and Mun Yong Yi. 2020. Empathy Is All You Need: How a Conversational Agent Should Sespond to Verbal Abuse. In &lt;em&gt;Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems&lt;/em&gt;, pages 1–13. &lt;a href=&quot;#fnref:chin20&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:cohn19&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Michelle Cohn, Chun-Yen Chen, and Zhou Yu. 2019. &lt;a href=&quot;https://aclanthology.org/W19-5935/&quot;&gt;A large-scale user study of an Alexa Prize chatbot: Effect of TTS dynamism on perceived quality of social dialog&lt;/a&gt;. In &lt;em&gt;Proceedings of the 20th Annual SIGdial Meeting on Discourse and Dialogue&lt;/em&gt;, pages 293– 306, Stockholm, Sweden. Association for Computational Linguistics. &lt;a href=&quot;#fnref:cohn19&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:curryreiser19&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Amanda Cercas Curry and Verena Rieser. 2019. &lt;a href=&quot;https://aclanthology.org/W19-5942/&quot;&gt;A crowd-based evaluation of abuse response strategies in conversational agents&lt;/a&gt;. In &lt;em&gt;Proceedings of the 20th Annual SIGdial Meeting on Discourse and Dialogue&lt;/em&gt;, pages 361–366, Stockholm, Sweden. Association for Computational Linguistics. &lt;a href=&quot;#fnref:curryreiser19&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:west19&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Mark West, Rebecca Kraut, and Han Ei Chew. 2019. I’d blush if i could: closing gender divides in digital skills through education. &lt;a href=&quot;#fnref:west19&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:curry20&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Amanda Cercas Curry, Judy Robertson, and Verena Rieser. 2020. &lt;a href=&quot;https://aclanthology.org/2020.gebnlp-1.7/&quot;&gt;Conversational assistants and gender stereotypes: Public perceptions and desiderata for voice personas&lt;/a&gt;. In &lt;em&gt;Proceedings of the Second Work- shop on Gender Bias in Natural Language Processing&lt;/em&gt;, pages 72–78, Barcelona, Spain (Online). Association for Computational Linguistics. &lt;a href=&quot;#fnref:curry20&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:whittakerwalker90&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Marilyn Walker and Steve Whittaker. 1990. &lt;a href=&quot;https://dl.acm.org/doi/10.3115/981823.981833&quot;&gt;Mixed initiative in dialogue: An investigation into discourse segmentation&lt;/a&gt;.    In &lt;em&gt;Proceedings of the 28th Annual Meeting on Association for Computational Linguistics&lt;/em&gt;,  ACL  ’90, page 70–78, USA. Association for Computational Linguistics. &lt;a href=&quot;#fnref:whittakerwalker90&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:collinsmiller94&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Nancy Collins and Lynn Miller. 1994. &lt;a href=&quot;https://doi.apa.org/doiLanding?doi=10.1037%2F0033-2909.116.3.457&quot;&gt;Self-disclosure and liking: A meta-analytic review&lt;/a&gt;. &lt;em&gt;Psychological bulletin&lt;/em&gt;, 116:457–75. &lt;a href=&quot;#fnref:collinsmiller94&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:lee20&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Yi-Chieh Lee, Naomi Yamashita, Yun Huang, and Wai Fu. 2020. “I hear you, I feel you”: Encouraging deep self-disclosure through a chatbot. In &lt;em&gt;Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems&lt;/em&gt;, CHI ’20, page 1–12, New York, NY, USA. Association for Computing Machinery. &lt;a href=&quot;#fnref:lee20&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+              <pubDate>Tue, 01 Feb 2022 00:00:00 -0800</pubDate>
+          </item>
+          
         
           
           <item>
@@ -3422,150 +3668,6 @@ for Human-Centered Artificial Intelligence (in particular the Hoffman-Yee Resear
 Interdisciplinary Graduate Fellowship for their support.&lt;/p&gt;
 </description>
               <pubDate>Tue, 20 Jul 2021 00:00:00 -0700</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>WILDS: A Benchmark of in-the-Wild Distribution Shifts</title>
-              <link>/blog/wilds/</link>
-              <guid isPermaLink="true">/blog/wilds/</guid>
-              <description>&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-19-wilds/image3.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;One of the most common assumptions in machine learning (ML) is that the training and test data are independently and identically distributed (i.i.d.). For example, we might collect some number of data points and then randomly split them, assigning half to the training set and half to the test set.&lt;/p&gt;
-
-&lt;p&gt;However, this assumption is often broken in ML systems deployed in the wild. In real-world applications, distribution shifts— instances where a model is trained on data from one distribution but then deployed on data from a different distribution— are ubiquitous. For example, in medical applications, we might train a diagnosis model on patients from a few hospitals, and then deploy it more broadly to hospitals outside the training set &lt;sup id=&quot;fnref:zech2018&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:zech2018&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;; and in wildlife monitoring, we might train an animal recognition model on images from one set of camera traps and then deploy it to new camera traps &lt;sup id=&quot;fnref:beery2018&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:beery2018&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;A large body of prior work has shown that these distribution shifts can significantly degrade model performance in a variety of real-world ML applications: models can perform poorly out-of-distribution, despite achieving high in-distribution performance &lt;sup id=&quot;fnref:quinonero2009&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:quinonero2009&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;. To be able to reliably deploy ML models in the wild, we urgently need to develop methods for training models that are robust to real-world distribution shifts.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-wilds-benchmark&quot;&gt;The WILDS benchmark&lt;/h2&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-07-19-wilds/image2.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;To facilitate the development of ML models that are robust to real-world distribution shifts, our &lt;a href=&quot;https://www.google.com/url?q=https://arxiv.org/abs/2012.07421&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1626558949287000&amp;amp;usg=AOvVaw3L_bSKdMpjGZlKj9K4839a&quot;&gt;ICML 2021 paper&lt;/a&gt; presents WILDS, a curated benchmark of 10 datasets that reflect natural distribution shifts arising from different cameras, hospitals, molecular scaffolds, experiments, demographics, countries, time periods, users, and codebases.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-07-19-wilds/image4.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;The WILDS datasets cover two common types of distribution shifts: domain generalization and subpopulation shift.
-In domain generalization, the training and test distributions comprise data from related but distinct domains. The figure shows an example from the OGB-MolPCBA dataset &lt;sup id=&quot;fnref:hu2020&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:hu2020&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; in WILDS, where the task is to predict the biochemical properties of molecules, and the goal is to generalize to molecules with different molecular scaffolds that have not been seen in the training set.&lt;/p&gt;
-
-&lt;p&gt;In subpopulation shift, we consider test distributions that are subpopulations of the training distribution, and seek to perform well even on the worst-case subpopulation. As an example, consider the CivilComments-WILDS dataset &lt;sup id=&quot;fnref:borkan2019&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:borkan2019&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;, where the task is toxicity classification on online text comments. Standard models perform well on average but poorly on comments that mention certain minority demographic groups (e.g., they might be likely to erroneously flag innocuous comments mentioning Black people as toxic), and we seek to train models that can perform equally well on comments that correspond to different demographic subpopulations.&lt;/p&gt;
-
-&lt;p&gt;Finally, some datasets exhibit both types of distribution shifts. For example, the second example in the figure above is from the FMoW-WILDS dataset &lt;sup id=&quot;fnref:christie2018&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:christie2018&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;, where there is both a domain generalization problem over time (the training set consists of satellite images taken before 2013, while the test images were taken after 2016) as well as a subpopulation shift problem over different geographical regions (we seek to do well over all regions).&lt;/p&gt;
-
-&lt;h2 id=&quot;selection-criteria-for-wilds-datasets&quot;&gt;Selection criteria for WILDS datasets&lt;/h2&gt;
-
-&lt;p&gt;WILDS builds on extensive data collection efforts by domain experts working on applying ML methods in their application areas, and who are often forced to grapple with distribution shifts to make progress in their applications. To design WILDS, we worked with these experts to identify, select, and adapt datasets that fulfilled the following criteria:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Real-world relevance.&lt;/strong&gt; The training/test splits and evaluation metrics are motivated by real-world scenarios and chosen in conjunction with domain experts. By focusing on realistic distribution shifts, WILDS complements existing distribution shift benchmarks, which have largely studied shifts that are cleanly characterized but are not likely to arise in real-world deployments. For example, many recent papers have studied datasets with shifts induced by synthetic transformations, such as changing the color of MNIST digits &lt;sup id=&quot;fnref:kim2019&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:kim2019&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;. Though these are important testbeds for systematic studies, model robustness need not transfer across shifts—e.g., a method that improves robustness on a standard vision dataset can consistently harm robustness on real-world satellite imagery datasets &lt;sup id=&quot;fnref:xie2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:xie2021&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;. So, in order to evaluate and develop methods for real-world distribution shifts, benchmarks like WILDS that capture shifts in the wild serve as an important complement to more synthetic benchmarks.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Distribution shifts with large performance gaps.&lt;/strong&gt; The train/test splits reflect shifts that substantially degrade model performance, i.e., with a large gap between in-distribution and out-of-distribution performance. Measuring the in-distribution versus out-of-distribution gap is an important but subtle problem, as it relies on carefully constructing an appropriate in-distribution setting. We discuss its complexities and our approach in more detail in the paper.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-19-wilds/image1.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Apart from the 10 datasets in WILDS, we also survey distribution shifts that occur in other application areas—algorithmic fairness and policing, medicine and healthcare, genomics, natural language and speech processing, education, and robotics—and discuss examples of datasets from these areas that we considered but did not include in WILDS. We investigated datasets in autonomous driving, fairness in policing, and computational biology, but either did not observe substantial performance drops or found that performance disparities arose from factors beyond distribution shifts.&lt;/p&gt;
-
-&lt;h2 id=&quot;using-wilds&quot;&gt;Using WILDS&lt;/h2&gt;
-
-&lt;p&gt;To make it easy to work with WILDS and to enable systematic comparisons between approaches, we developed an open-source Python package that fully automates data loading and evaluation. This package also contains default models and hyperparameters that can easily reproduce all of the baseline numbers we have in our paper. The package is simple to install—just run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pip install wilds&lt;/code&gt;—and straightforward to use with any PyTorch-based algorithms and models:&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-07-19-wilds/image5.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;We are also hosting a public leaderboard at &lt;a href=&quot;https://www.google.com/url?q=https://wilds.stanford.edu/leaderboard/&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1626558949290000&amp;amp;usg=AOvVaw0VSnjWmDCRZKw2mBo0U0_v&quot;&gt;https://wilds.stanford.edu/leaderboard/&lt;/a&gt; to track the state of the art in algorithms for learning robust models. In our paper, we benchmarked several existing algorithms for learning robust models, but found that they did not consistently improve upon standard models trained with empirical risk minimization (i.e., minimizing the average loss). We thus believe that there is substantial room for developing algorithms and model architectures that can close the gaps between in-distribution and out-of-distribution performance on the WILDS datasets.&lt;/p&gt;
-
-&lt;p&gt;Just in the past few months, WILDS has been used to develop methods for domain generalization—such as Fish, which introduces an inter-domain gradient matching objective and is currently state-of-the-art on our leaderboard for several datasets &lt;sup id=&quot;fnref:shi2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:shi2021&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;, and a Model-Based Domain Generalization (MBDG) approach that uses generative modeling &lt;sup id=&quot;fnref:robey2020&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:robey2020&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;—as well as for subpopulation shift settings through environment inference &lt;sup id=&quot;fnref:creager2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:creager2021&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt; or a variant of distributionally robust optimization &lt;sup id=&quot;fnref:liu2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:liu2021&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt;. WILDS has also been used to develop methods for out-of-distribution calibration &lt;sup id=&quot;fnref:wald2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:wald2021&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt;, uncertainty measurement &lt;sup id=&quot;fnref:daxberger2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:daxberger2021&quot; class=&quot;footnote&quot;&gt;14&lt;/a&gt;&lt;/sup&gt;, gradual domain adaptation &lt;sup id=&quot;fnref:abnar2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:abnar2021&quot; class=&quot;footnote&quot;&gt;15&lt;/a&gt;&lt;/sup&gt;, and self-training &lt;sup id=&quot;fnref:chen2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:chen2021&quot; class=&quot;footnote&quot;&gt;16&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;Finally, it has also been used to study out-of-distribution selective classification &lt;sup id=&quot;fnref:jones2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:jones2021&quot; class=&quot;footnote&quot;&gt;17&lt;/a&gt;&lt;/sup&gt;, and to investigate the relationship between in-distribution and out-of-distribution generalization &lt;sup id=&quot;fnref:miller2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:miller2021&quot; class=&quot;footnote&quot;&gt;18&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;However, we have only just begun to scratch the surface of how we can train models that are robust to the distribution shifts that are unavoidable in real-world applications, and we’re excited to see what the ML research community will come up with. If you’re interested in trying WILDS out, please check out &lt;a href=&quot;https://www.google.com/url?q=https://wilds.stanford.edu&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1626558949292000&amp;amp;usg=AOvVaw0ZOnNBBq4QL3rjUfIny-Or&quot;&gt;https://wilds.stanford.edu&lt;/a&gt;, and &lt;a href=&quot;https://www.google.com/url?q=https://wilds.stanford.edu/team/&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1626558949292000&amp;amp;usg=AOvVaw1tMOP09W1tTYSY7bZ58zae&quot;&gt;let us know&lt;/a&gt; if you have any questions or feedback.&lt;/p&gt;
-
-&lt;p&gt;We’ll be presenting WILDS at ICML at 6pm Pacific Time on Thursday, July 22, 2021, with the poster session from 9pm to 11pm Pacific Time on the same day. If you’d like to find out more, please drop by &lt;a href=&quot;https://www.google.com/url?q=https://icml.cc/virtual/2021/poster/10117&amp;amp;sa=D&amp;amp;source=editors&amp;amp;ust=1626558949292000&amp;amp;usg=AOvVaw3BjM1BMTA8AoJNq9wgmGio&quot;&gt;https://icml.cc/virtual/2021/poster/10117&lt;/a&gt;! (The link requires ICML registration.)&lt;/p&gt;
-
-&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
-
-&lt;p&gt;WILDS is a large collaborative effort by researchers from Stanford, UC Berkeley, Cornell, INRAE, the University of Saskatchewan, the University of Tokyo, Recursion, Caltech, and Microsoft Research. This blog post is based on the WILDS paper:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;WILDS: A Benchmark of in-the-Wild Distribution Shifts. Pang Wei Koh*, Shiori Sagawa*, Henrik Marklund, Sang Michael Xie, Marvin Zhang, Akshay Balsubramani, Weihua Hu, Michihiro Yasunaga, Richard Lanas Phillips, Irena Gao, Tony Lee, Etienne David, Ian Stavness, Wei Guo, Berton A. Earnshaw, Imran S. Haque, Sara Beery, Jure Leskovec, Anshul Kundaje, Emma Pierson, Sergey Levine, Chelsea Finn, and Percy Liang. ICML 2021.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We are grateful to the &lt;a href=&quot;https://wilds.stanford.edu/team/#thanks&quot;&gt;many people&lt;/a&gt; who generously volunteered their time and expertise to advise us on WILDS.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:zech2018&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;J. R. Zech, M. A. Badgeley, M. Liu, A. B. Costa, J. J. Titano, and E. K. Oermann. Variable generalization performance of a deep learning model to detect pneumonia in chest radiographs: A cross-sectional study. In PLOS Medicine, 2018. &lt;a href=&quot;#fnref:zech2018&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:beery2018&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;S. Beery, G. V. Horn, and P. Perona. Recognition in terra incognita. In European Conference on Computer Vision (ECCV), pages 456–473, 2018. &lt;a href=&quot;#fnref:beery2018&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:quinonero2009&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;J. Quiñonero-Candela, M. Sugiyama, A. Schwaighofer, and N. D. Lawrence. Dataset shift in machine learning. The MIT Press, 2009. &lt;a href=&quot;#fnref:quinonero2009&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:hu2020&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;W. Hu, M. Fey, M. Zitnik, Y. Dong, H. Ren, B. Liu, M. Catasta, and J. Leskovec. Open Graph Benchmark: Datasets for machine learning on graphs. In Advances in Neural Information Processing Systems (NeurIPS), 2020. &lt;a href=&quot;#fnref:hu2020&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:borkan2019&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;D. Borkan, L. Dixon, J. Sorensen, N. Thain, and L. Vasserman. Nuanced metrics for measuring unintended bias with real data for text classification. In WWW, pages 491–500, 2019. &lt;a href=&quot;#fnref:borkan2019&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:christie2018&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;G. Christie, N. Fendley, J. Wilson, and R. Mukherjee. Functional map of the world. In Computer Vision and Pattern Recognition (CVPR), 2018. &lt;a href=&quot;#fnref:christie2018&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:kim2019&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;B. Kim, H. Kim, K. Kim, S. Kim, and J. Kim, 2019. Learning not to learn: Training deep neural networks with biased data. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 9012-9020). &lt;a href=&quot;#fnref:kim2019&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:xie2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;S. M. Xie, A. Kumar, R. Jones, F. Khani, T. Ma, and P. Liang. In-N-Out: Pre-training and self-training using auxiliary information for out-of-distribution robustness. In International Conference on Learning Representations (ICLR), 2021. &lt;a href=&quot;#fnref:xie2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:shi2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Y. Shi, J. Seely, P. H. Torr, N. Siddharth, A. Hannun, N. Usunier, and G. Synnaeve. Gradient Matching for Domain Generalization. arXiv preprint arXiv:2104.09937, 2021. &lt;a href=&quot;#fnref:shi2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:robey2020&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;A Robey, H. Hassani, and G. J. Pappas. Model-Based Robust Deep Learning. arXiv preprint arXiv:2005.10247, 2020. &lt;a href=&quot;#fnref:robey2020&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:creager2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;E. Creager, J. H. Jacobsen, and R. Zemel. Environment inference for invariant learning. In International Conference on Machine Learning, 2021. &lt;a href=&quot;#fnref:creager2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:liu2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;E. Liu, B. Haghgoo, A. Chen, A. Raghunathan, P. W. Koh, S. Sagawa, P. Liang, and C. Finn. Just Train Twice: Improving group robustness without training group information. In International Conference on Machine Learning (ICML), 2021. &lt;a href=&quot;#fnref:liu2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:wald2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Y. Wald, A. Feder, D. Greenfeld, and U. Shalit. On calibration and out-of-domain generalization. arXiv preprint arXiv:2102.10395, 2021. &lt;a href=&quot;#fnref:wald2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:daxberger2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;E. Daxberger, A., Kristiadi, A., Immer, R., Eschenhagen, M., Bauer, and P. Hennig. Laplace Redux–Effortless Bayesian Deep Learning. arXiv preprint arXiv:2106.14806, 2021. &lt;a href=&quot;#fnref:daxberger2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:abnar2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;S. Abnar, R. V. D. Berg, G. Ghiasi, M. Dehghani, N., Kalchbrenner, and H. Sedghi. Gradual Domain Adaptation in the Wild: When Intermediate Distributions are Absent. arXiv preprint arXiv:2106.06080, 2021. &lt;a href=&quot;#fnref:abnar2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:chen2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;J. Chen, F. Liu, B. Avci, X. Wu, Y. Liang, and S. Jha. Detecting Errors and Estimating Accuracy on Unlabeled Data with Self-training Ensembles. arXiv preprint arXiv:2106.15728, 2021. &lt;a href=&quot;#fnref:chen2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:jones2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;E. Jones, S. Sagawa, P. W. Koh, A. Kumar, and P. Liang. Selective classification can magnify disparities across groups. In International Conference on Learning Representations (ICLR), 2021. &lt;a href=&quot;#fnref:jones2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:miller2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;J. Miller, R. Taori, A. Raghunathan, S. Sagawa, P. W. Koh, V. Shankar, P. Liang, Y. Carmon, and L. Schmidt. Accuracy on the line: on the strong correlation between out-of-distribution and in-distribution generalization. In International Conference on Machine Learning (ICML), 2021. &lt;a href=&quot;#fnref:miller2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-              <pubDate>Mon, 19 Jul 2021 00:00:00 -0700</pubDate>
           </item>
           
         
