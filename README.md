@@ -141,11 +141,23 @@ Customize your site header/footer with these variables in `_config.yml`:
 
 ```yml
 header_text: Welcome to my Jekyll blog
-header_feature_image: assets/img/sample3.png
 footer_text: Copyright 2017
 ```
 
 If you don't want anything, replace the value by `" "`.
+
+#### Header's image
+
+The header's image (tested with 2480x1280) can be set as one image with `header_feature_image`
+but can also be responsive:
+
+```yml
+header_feature_image: assets/img/header/my-header-image.png
+header_feature_image_responsive: true
+```
+
+By setting `header_feature_image_responsive` to true, it will look for images 
+with suffix `-small` (620x320) and `-medium` (1240x640) to display on smaller screen.
 
 #### Localisation string
 
