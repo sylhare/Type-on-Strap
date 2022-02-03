@@ -8,7 +8,7 @@ layout: default
         .call-out_img {
             background-image: url('{{ image | join: '.' }}');
         }
-        {% if header_feature_image_responsive %}
+        {% if site.header_feature_image_responsive %}
         @media screen and (max-width: 768px) {
             .call-out_img {
                 background-image: url('{{ image[0] | append: '-medium.' | append: image[1] | default: image}}');
