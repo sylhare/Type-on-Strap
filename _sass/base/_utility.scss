@@ -68,13 +68,13 @@ a.button {
     border: 1px solid var(--link);
     color: var(--background);
     text-decoration: none;
+    filter: none;
   }
 }
 
 .body-link {
   &:hover {
     text-decoration: underline;
-    color: var(--link);
     filter: brightness(0.85);
   }
 }
@@ -83,7 +83,6 @@ a.button {
   &:hover {
     text-decoration: none;
     color: var(--link);
-    filter: brightness(1.1);
   }
 }
 
