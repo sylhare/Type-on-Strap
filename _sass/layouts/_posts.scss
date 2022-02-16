@@ -69,6 +69,11 @@ header {
     img {
       height: auto;
     }
+
+    &:hover {
+      text-decoration: none;
+      filter: brightness(0.65);
+    }
   }
 
   img {
