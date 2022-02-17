@@ -62,10 +62,10 @@
     font-size: 0.8em;
     line-height: normal;
   }
-}
 
-@media screen and (max-width: $sm-break) {
-  .tag-posts .meta {
-    display: none;
+  @media screen and (max-width: $sm-break) {
+    .meta {
+      display: none;
+    }
   }
 }

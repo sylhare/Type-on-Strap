@@ -69,6 +69,10 @@ header {
     img {
       height: auto;
     }
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   img {

@@ -20,12 +20,6 @@
         color: var(--link);
       }
 
-      @media (prefers-color-scheme: dark) {
-        a {
-          color: var(--meta);
-        }
-      }
-
       a:hover {
         .fa-circle {
           filter: brightness(0.85);
