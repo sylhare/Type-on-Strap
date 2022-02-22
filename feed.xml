@@ -5,11 +5,66 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Mon, 31 Jan 2022 17:36:31 -0800</pubDate>
+        <pubDate>Tue, 22 Feb 2022 15:31:02 -0500</pubDate>
         
           
           <item>
-              <title>How to Improve User Experience (and Behavior): Three Papers from Stanford&apos;s Alexa Prize Team</title>
+              <title>Stanford AI Lab Papers and Talks at AAAI 2022</title>
+              <link>/blog/aaai-2022/</link>
+              <guid isPermaLink="true">/blog/aaai-2022/</guid>
+              <description>&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/logo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://aaai.org/Conferences/AAAI-22/&quot;&gt;36th AAAI Conference on Artificial Intelligence&lt;/a&gt; (AAAI 2022) is being hosted virtually from February 22th - March 1st. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford.&lt;/p&gt;
+
+&lt;h2 id=&quot;list-of-accepted-papers&quot;&gt;List of Accepted Papers&lt;/h2&gt;
+&lt;h4 id=&quot;partner-aware-algorithms-in-decentralized-cooperative-bandit-teams&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2110.00751.pdf&quot;&gt;Partner-Aware Algorithms in Decentralized Cooperative Bandit Teams&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img0.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Erdem Bıyık, Anusha Lalitha, Rajarshi Saha, Andrea Goldsmith, Dorsa Sadigh
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: ebiyik@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2110.00751.pdf&quot;&gt;Paper&lt;/a&gt; | [Video](https://www.youtube.com/watch?v=MCHXAYvaB5Y | &lt;a href=&quot;https://www.youtube.com/watch?v=-ruZxCQclcw&quot;&gt;2nd Video&lt;/a&gt; | &lt;a href=&quot;https://sites.google.com/view/partner-aware-ucb&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: bandits, multi-agent systems, collaboration, human-robot interaction, partner-awareness&lt;/p&gt;
+&lt;h4 id=&quot;constraint-sampling-reinforcement-learning-incorporating-expertise-for-faster-learning&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2112.15221&quot;&gt;Constraint Sampling Reinforcement Learning: Incorporating Expertise For Faster Learning&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img1.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Tong Mu, Georgios Theocharous, David Arbour, Emma Brunskill
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: tongm@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2112.15221&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: reinforcement learning, constraints&lt;/p&gt;
+&lt;h4 id=&quot;is-count-large-scale-object-counting-from-satellite-images-with-covariate-based-importance-sampling&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2112.09126&quot;&gt;IS-Count: Large-scale Object Counting from Satellite Images with Covariate-based Importance Sampling&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img2.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Chenlin Meng*, Enci Liu*, Willie Neiswanger, Jiaming Song, Marshall Burke, David Lobell, Stefano Ermon
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: jesslec@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Oral presentation
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2112.09126&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.marktechpost.com/2022/01/06/efficient-large-scale-object-counting-in-satellite-images-with-importance-sampling/&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://is-count.github.io/&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: remote sensing, sampling&lt;/p&gt;
+&lt;h4 id=&quot;pantheonrl&quot;&gt;&lt;a href=&quot;https://iliad.stanford.edu/pdfs/publications/sarkar2022pantheonrl.pdf&quot;&gt;PantheonRL&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img3.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Bidipta Sarkar, Aditi Talati, Andy Shih, Dorsa Sadigh
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: bidiptas@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://iliad.stanford.edu/pdfs/publications/sarkar2022pantheonrl.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/3-Pf3zh_Hpo&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/Stanford-ILIAD/PantheonRL&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: multiagent reinforcement learning; software package; web user interface; adaptive marl; dynamic training interactions&lt;/p&gt;
+&lt;h4 id=&quot;synthetic-disinformation-attacks-on-automated-fact-verification-systems&quot;&gt;Synthetic Disinformation Attacks on Automated Fact Verification Systems&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img4.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Yibing Du, Antoine Bosselut, Christopher D Manning
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: antoineb@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: fact checking, fact verification, disinformation, synthetic text&lt;/p&gt;
+&lt;h4 id=&quot;similarity-search-for-efficient-active-learning-and-search-of-rare-concepts&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2007.00077&quot;&gt;Similarity Search for Efficient Active Learning and Search of Rare Concepts&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img5.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Cody Coleman, Edward Chou, Julian Katz-Samuels, Sean Culatana, Peter Bailis, Alexander C. Berg, Robert Nowak, Roshan Sumbaly, Matei Zaharia, I. Zeki Yalniz
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: cody@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2007.00077&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: active learning, computer vision, active search, large-scale, data-centric ai&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;We look forward to seeing you at AAAI 2022.&lt;/p&gt;
+</description>
+              <pubDate>Tue, 22 Feb 2022 00:00:00 -0500</pubDate>
+          </item>
+          
+        
+          
+          <item>
+              <title>How to Improve User Experience (and Behavior): Three Papers from Stanford's Alexa Prize Team</title>
               <link>/blog/alexa-sigdial/</link>
               <guid isPermaLink="true">/blog/alexa-sigdial/</guid>
               <description>&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
@@ -49,7 +104,7 @@
 &lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-02-01-alexa-sigdial/images/image8.png&quot; /&gt;&lt;/p&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
-&lt;p&gt;While the GPT2-medium model is capable of chatting about these simple topics for a few utterances, discussions that extend longer tend to derail. Sooner or later, the bot gives a response that doesn&apos;t quite make sense, and it&apos;s hard for the user or the model to recover the conversation.&lt;/p&gt;
+&lt;p&gt;While the GPT2-medium model is capable of chatting about these simple topics for a few utterances, discussions that extend longer tend to derail. Sooner or later, the bot gives a response that doesn't quite make sense, and it's hard for the user or the model to recover the conversation.&lt;/p&gt;
 
 &lt;p&gt;To understand how these conversations are derailing, we defined 7 types of errors made by the neural generative model – repetition, redundant questions, unclear utterances, hallucination, ignoring, logical errors, and insulting utterances. After annotating a sample of user conversations, we found that bot errors were common, with over half (53%) of neural-generated utterances containing some kind of error.&lt;/p&gt;
 
@@ -118,7 +173,7 @@
 
 &lt;p&gt;The figure on the left shows the differences in average number of turns until the next re-offense (&lt;em&gt;Next&lt;/em&gt;), and the figure on the right shows the differences in average number of turns until the end of the conversation (&lt;em&gt;End&lt;/em&gt;). We again see that strategies with (&lt;em&gt;redirects&lt;/em&gt; are able to significantly prolong a non-offensive conversation. This further shows that redirection is incredibly effective method to curb user offenses.&lt;/p&gt;
 
-&lt;p&gt;The main takeaway from this is that &lt;strong&gt;the bot should always empathetically respond to user offenses with a redirection, and use the user&apos;s name whenever possible.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The main takeaway from this is that &lt;strong&gt;the bot should always empathetically respond to user offenses with a redirection, and use the user's name whenever possible.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Despite the empirical effectiveness of the passive avoidance and redirection strategy, we would like to remind researchers of the societal dangers of adopting similar strategies. Since most voice-based agents have a default female voice, these strategies could further gender stereotypes and set unreasonable expectations of how women would react to verbal abuse in the real world &lt;sup id=&quot;fnref:curryreiser19&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:curryreiser19&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&quot;fnref:west19&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:west19&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt; &lt;sup id=&quot;fnref:curry20&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:curry20&quot; class=&quot;footnote&quot;&gt;13&lt;/a&gt;&lt;/sup&gt;. Thus, caution must be taken when deploying these strategies.&lt;/p&gt;
 
@@ -249,13 +304,13 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 01 Feb 2022 00:00:00 -0800</pubDate>
+              <pubDate>Tue, 01 Feb 2022 00:00:00 -0500</pubDate>
           </item>
           
         
           
           <item>
-              <title>Reward Isn&apos;t Free: Supervising Robot Learning with Language and Video from the Web</title>
+              <title>Reward Isn't Free: Supervising Robot Learning with Language and Video from the Web</title>
               <link>/blog/reward-isnt-free/</link>
               <guid isPermaLink="true">/blog/reward-isnt-free/</guid>
               <description>&lt;p&gt;&lt;em&gt;This work was conducted as part of &lt;a href=&quot;https://ai.stanford.edu/&quot;&gt;SAIL&lt;/a&gt; and &lt;a href=&quot;https://crfm.stanford.edu/&quot;&gt;CRFM&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
@@ -340,7 +395,7 @@ Figure 6: Using the DVD reward to complete manipulation tasks conditioned a huma
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
 &lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-01-21-reward-isnt-free/image6.png&quot; /&gt;&lt;/p&gt;
 &lt;figcaption&gt;
-Figure 7: We evaluate the robots success rate in three held out environments, to assess how training with human videos influences DVD&apos;s ability to generalize.
+Figure 7: We evaluate the robots success rate in three held out environments, to assess how training with human videos influences DVD's ability to generalize.
 &lt;/figcaption&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
@@ -431,7 +486,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Fri, 21 Jan 2022 00:00:00 -0800</pubDate>
+              <pubDate>Fri, 21 Jan 2022 00:00:00 -0500</pubDate>
           </item>
           
         
@@ -446,13 +501,13 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;h1 id=&quot;tldr&quot;&gt;TL;DR&lt;/h1&gt;
 
-&lt;p&gt;Want something better than \(k\)-means? Our state-of-the-art \(k\)-medoids algorithm from NeurIPS, BanditPAM, is now publicly available! \(\texttt{pip install banditpam}\) and you&apos;re good to go!&lt;/p&gt;
+&lt;p&gt;Want something better than \(k\)-means? Our state-of-the-art \(k\)-medoids algorithm from NeurIPS, BanditPAM, is now publicly available! \(\texttt{pip install banditpam}\) and you're good to go!&lt;/p&gt;
 
-&lt;p&gt;Like the \(k\)-means problem, the \(k\)-medoids problem is a clustering problem in which our objective is to partition a dataset into disjoint subsets. In \(k\)-medoids, however, we require that the cluster centers must be actual datapoints, which permits greater interpretability of the cluster centers. \(k\)-medoids also works better with arbitrary distance metrics, so your clustering can be more robust to outliers if you&apos;re using metrics like \(L_1\).&lt;/p&gt;
+&lt;p&gt;Like the \(k\)-means problem, the \(k\)-medoids problem is a clustering problem in which our objective is to partition a dataset into disjoint subsets. In \(k\)-medoids, however, we require that the cluster centers must be actual datapoints, which permits greater interpretability of the cluster centers. \(k\)-medoids also works better with arbitrary distance metrics, so your clustering can be more robust to outliers if you're using metrics like \(L_1\).&lt;/p&gt;
 
-&lt;p&gt;Despite these advantages, most people don&apos;t use \(k\)-medoids because prior algorithms were too slow. In our NeurIPS paper, BanditPAM, we sped up the best known algorithm from \(O(n^2)\) to \(O(n\text{log}n)\).&lt;/p&gt;
+&lt;p&gt;Despite these advantages, most people don't use \(k\)-medoids because prior algorithms were too slow. In our NeurIPS paper, BanditPAM, we sped up the best known algorithm from \(O(n^2)\) to \(O(n\text{log}n)\).&lt;/p&gt;
 
-&lt;p&gt;We&apos;ve released our implementation, which is pip-installable. It&apos;s written in C++ for speed and supports parallelization and intelligent caching, at no extra complexity to end users. Its interface also matches the \(\texttt{sklearn.cluster.KMeans}\) interface, so minimal changes are necessary to existing code.&lt;/p&gt;
+&lt;p&gt;We've released our implementation, which is pip-installable. It's written in C++ for speed and supports parallelization and intelligent caching, at no extra complexity to end users. Its interface also matches the \(\texttt{sklearn.cluster.KMeans}\) interface, so minimal changes are necessary to existing code.&lt;/p&gt;
 
 &lt;h4 id=&quot;useful-links&quot;&gt;&lt;strong&gt;Useful Links:&lt;/strong&gt;&lt;/h4&gt;
 
@@ -473,7 +528,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;h1 id=&quot;k-means-vs-k-medoids&quot;&gt;\(k\)-means vs. \(k\)-medoids&lt;/h1&gt;
 
-&lt;p&gt;If you&apos;re an ML practitioner, you&apos;re probably familiar with the \(k\)-means problem. In fact, you may know some of the common algorithms for the \(k\)-means problem. You&apos;re much less likely, however, familiar with the \(k\)-&lt;em&gt;medoids&lt;/em&gt; problem.&lt;/p&gt;
+&lt;p&gt;If you're an ML practitioner, you're probably familiar with the \(k\)-means problem. In fact, you may know some of the common algorithms for the \(k\)-means problem. You're much less likely, however, familiar with the \(k\)-&lt;em&gt;medoids&lt;/em&gt; problem.&lt;/p&gt;
 
 &lt;p&gt;The \(k\)-medoids problem is a clustering problem similar to \(k\)-means. Given a dataset, we want to partition our dataset into subsets where the points in each cluster are closer to a single cluster center than all other \(k-1\) cluster centers. Unlike in \(k\)-means, however, the \(k\)-medoids problem requires cluster centers to be &lt;em&gt;actual datapoints&lt;/em&gt;.&lt;/p&gt;
 
@@ -493,13 +548,13 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; The cluster centers in \(k\)-means are often not easily interpretable, whereas they are actual datapoints in \(k\)-medoids. Shown are cluster centers for a subset of ImageNet with \(k = 1\) with \(k\)-means (left) and \(k\)-medoids (right). The mean of the dataset is the average per-pixel color, whereas the medoid is an image of a bee.&lt;/p&gt;
 
-&lt;p&gt;The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) for efficiency. In fact, you&apos;re allowed to use &lt;em&gt;any pairwise dissimilarity function&lt;/em&gt; with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of &quot;exotic&quot; objects like strings, natural language, trees, graphs, and more -- &lt;em&gt;without&lt;/em&gt; needing to embed these objects in a vector space first.&lt;/p&gt;
+&lt;p&gt;The \(k\)-medoids problem also supports arbitrary distance metrics, in contrast with \(k\)-means which usually requires \(L_2\) for efficiency. In fact, you're allowed to use &lt;em&gt;any pairwise dissimilarity function&lt;/em&gt; with \(k\)-medoids -- your dissimilarity function need not even satisfy the properties of a metric. It can be asymmetric, negative, and violate the triangle inequality. In practice, allowing for arbitrary dissimilarity metrics enables the clustering of &quot;exotic&quot; objects like strings, natural language, trees, graphs, and more -- &lt;em&gt;without&lt;/em&gt; needing to embed these objects in a vector space first.&lt;/p&gt;
 
-&lt;p&gt;The advantages of \(k\)-medoids don&apos;t stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you&apos;re using robust distance metrics. The \(L_1\) metric, for example, is more robust to outliers than the \(L_2\) metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.&lt;/p&gt;
+&lt;p&gt;The advantages of \(k\)-medoids don't stop there. Because the \(k\)-medoids problem supports arbitrary distance functions, the clustering can often be more robust to outliers if you're using robust distance metrics. The \(L_1\) metric, for example, is more robust to outliers than the \(L_2\) metric; in one dimension, the \(L_1\) minimizer is the median of your datapoints whereas the \(L_2\) minimizer is the mean.&lt;/p&gt;
 
 &lt;p&gt;Despite all of these advantages, \(k\)-means is much more widely used than \(k\)-medoids, largely due to its much more favorable runtime. The best \(k\)-means algorithms scale linearly in dataset size, i.e., have \(O(n)\) complexity, whereas, until now, the best \(k\)-medoids algorithms scaled quadratically in dataset size, i.e., had \(O(n^2)\) complexity.&lt;/p&gt;
 
-&lt;p&gt;In our NeurIPS paper, BanditPAM, we reduced the complexity of the best known \(k\)-medoids algorithm from \(O(n^2)\) to \(O(n\text{log}n)\). This complexity almost matches the complexity of standard \(k\)-means algorithms -- and now, you get all the benefits of \(k\)-medoids on top. We&apos;ve also released a high-performance implementation of our algorithm written in C++ for speed but callable from Python via python bindings; \(\texttt{pip install banditpam}\) and you&apos;re ready to go! Our algorithm&apos;s interface matches that of \(\texttt{sklearn.cluster.KMeans}\) and can be used with a simple 2-line change. You can also implement your own distance metrics, interpret cluster centers, and cluster structured data!&lt;/p&gt;
+&lt;p&gt;In our NeurIPS paper, BanditPAM, we reduced the complexity of the best known \(k\)-medoids algorithm from \(O(n^2)\) to \(O(n\text{log}n)\). This complexity almost matches the complexity of standard \(k\)-means algorithms -- and now, you get all the benefits of \(k\)-medoids on top. We've also released a high-performance implementation of our algorithm written in C++ for speed but callable from Python via python bindings; \(\texttt{pip install banditpam}\) and you're ready to go! Our algorithm's interface matches that of \(\texttt{sklearn.cluster.KMeans}\) and can be used with a simple 2-line change. You can also implement your own distance metrics, interpret cluster centers, and cluster structured data!&lt;/p&gt;
 
 &lt;h1 id=&quot;banditpam-almost-linear-time-k-medoids-clustering-via-multi-armed-bandits&quot;&gt;BanditPAM: Almost Linear Time \(k\)-medoids Clustering via Multi-Armed Bandits&lt;/h1&gt;
 
@@ -517,7 +572,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; The \(k\)-medoids algorithm in action. In the BUILD step, each medoid is assigned greedily, one by one. In the SWAP step, we consider swapping medoid assignments to see if we can lower the overall loss.&lt;/p&gt;
 
-&lt;p&gt;Our fundamental insight was that for each step of the PAM algorithm, we don&apos;t actually need to compute the distance from each point to &lt;em&gt;all&lt;/em&gt; other \(n\) points. Instead, we can just sample these distances!&lt;/p&gt;
+&lt;p&gt;Our fundamental insight was that for each step of the PAM algorithm, we don't actually need to compute the distance from each point to &lt;em&gt;all&lt;/em&gt; other \(n\) points. Instead, we can just sample these distances!&lt;/p&gt;
 
 &lt;p&gt;Consider, for example, the problem of assigning the first medoid at the beginning of the BUILD step. PAM would go through all \(n\) points and, for each point, compute its distance to every other point. We realized that for each candidate, we only needed to compute the distance to \(O(\text{log}n)\) other points. By intelligently choosing which distances to compute, we can save a lot of unnecessary computation. Formally, we reduce the problem of assigning the first medoid to a multi-armed bandit problem, as demonstrated in Figure 4. In multi-armed bandit problems, our objective is to identify the best action to take -- also referred to as the best arm to pull -- when actions are independent and have stochastic returns.&lt;/p&gt;
 
@@ -530,7 +585,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;It turns out that &lt;em&gt;all&lt;/em&gt; steps of the PAM algorithm can also be reduced to multi-armed bandit problems. In each part of the BUILD step, we still view each candidate datapoint as an arm. Now, however, pulling an arm corresponds to computing the induced change in loss for a random datapoint if we were to add the candidate to the set of medoids, conditioned on the previous medoids already being assigned. In each SWAP step, we view each (medoid, non-medoid) pair as an arm and pulling an arm corresponds to computing the induced change in loss on a random datapoint if we were to perform the swap. With these modifications, the original PAM algorithm is now reformulated as a sequence of best-arm identification problems. This reformulation reduces every step of the PAM algorithm from \(O(n^2)\) to \(O(nlogn)\).&lt;/p&gt;
 
-&lt;p&gt;Now, if you&apos;re familiar with multi-armed bandits, you might protest. Our algorithm is a randomized algorithm and can sometimes return an incorrect result. In the full paper, we show that the probability of getting a &quot;wrong&quot; answer is very small. In practice, this means that users of our algorithm don&apos;t have to worry and will almost always get the same answer as the original PAM algorithm.&lt;/p&gt;
+&lt;p&gt;Now, if you're familiar with multi-armed bandits, you might protest. Our algorithm is a randomized algorithm and can sometimes return an incorrect result. In the full paper, we show that the probability of getting a &quot;wrong&quot; answer is very small. In practice, this means that users of our algorithm don't have to worry and will almost always get the same answer as the original PAM algorithm.&lt;/p&gt;
 
 &lt;p&gt;The BanditPAM algorithm is an \(O(n\text{log}n)\) algorithm that matches prior state-of-the-art algorithms in clustering quality and almost matches the complexity of popular \(k\)-means algorithms. Want to try out BanditPAM? Run \(\texttt{pip3 install banditpam}\) and jump to our &lt;a href=&quot;https://github.com/ThrunGroup/BanditPAM\#example-1-synthetic-data-from-a-gaussian-mixture-model&quot;&gt;examples&lt;/a&gt;.&lt;/p&gt;
 
@@ -552,7 +607,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Fri, 17 Dec 2021 00:00:00 -0800</pubDate>
+              <pubDate>Fri, 17 Dec 2021 00:00:00 -0500</pubDate>
           </item>
           
         
@@ -1095,7 +1150,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;We look forward to seeing you at NeurIPS 2021!&lt;/p&gt;
 </description>
-              <pubDate>Mon, 06 Dec 2021 00:00:00 -0800</pubDate>
+              <pubDate>Mon, 06 Dec 2021 00:00:00 -0500</pubDate>
           </item>
           
         
@@ -1185,7 +1240,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;We look forward to seeing you at EMNLP/CoNLL 2021!&lt;/p&gt;
 </description>
-              <pubDate>Fri, 05 Nov 2021 00:00:00 -0700</pubDate>
+              <pubDate>Fri, 05 Nov 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -1354,7 +1409,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;We look forward to seeing you at CoRL 2021!&lt;/p&gt;
 </description>
-              <pubDate>Fri, 05 Nov 2021 00:00:00 -0700</pubDate>
+              <pubDate>Fri, 05 Nov 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -1492,7 +1547,7 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Wed, 13 Oct 2021 00:00:00 -0700</pubDate>
+              <pubDate>Wed, 13 Oct 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -1610,7 +1665,7 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
 &lt;p&gt;We look forward to seeing you at ICCV 2021!&lt;/p&gt;
 
 </description>
-              <pubDate>Fri, 08 Oct 2021 00:00:00 -0700</pubDate>
+              <pubDate>Fri, 08 Oct 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -2012,7 +2067,7 @@ We continue to actively maintain
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 05 Oct 2021 00:00:00 -0700</pubDate>
+              <pubDate>Tue, 05 Oct 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -2173,7 +2228,7 @@ Let’s look at how our fixer performs through examples too. The left side of th
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 21 Sep 2021 00:00:00 -0700</pubDate>
+              <pubDate>Tue, 21 Sep 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -2233,7 +2288,7 @@ An engineer and their training data in the wild. &lt;it&gt;Credit: Vickie Shelto
 
 &lt;p&gt;&lt;em&gt;A more informal version of this blog can be found &lt;a href=&quot;https://hazyresearch.stanford.edu/data-centric-ai&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 </description>
-              <pubDate>Wed, 15 Sep 2021 00:00:00 -0700</pubDate>
+              <pubDate>Wed, 15 Sep 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -2331,7 +2386,7 @@ Illustration of our approach. We integrate many data sources to run, evaluate, a
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Mon, 16 Aug 2021 00:00:00 -0700</pubDate>
+              <pubDate>Mon, 16 Aug 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -2654,7 +2709,7 @@ Proficient-Human datasets generated by 1 proficient operator (with the exception
 &lt;/figure&gt;
 
 &lt;figcaption&gt;
-Multi-Human Lift dataset. The videos show three operators - one that&apos;s &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
+Multi-Human Lift dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
 &lt;/figcaption&gt;
 
 &lt;/div&gt;&lt;/figure&gt;
@@ -2688,7 +2743,7 @@ Multi-Human Lift dataset. The videos show three operators - one that&apos;s &quo
 &lt;/figure&gt;
 
 &lt;figcaption&gt;
-Multi-Human Can dataset. The videos show three operators - one that&apos;s &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
+Multi-Human Can dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
 &lt;/figcaption&gt;
 
 &lt;/div&gt;&lt;/figure&gt;
@@ -2722,7 +2777,7 @@ Multi-Human Can dataset. The videos show three operators - one that&apos;s &quot
 &lt;/figure&gt;
 
 &lt;figcaption&gt;
-Multi-Human Square dataset. The videos show three operators - one that&apos;s &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
+Multi-Human Square dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
 &lt;/figcaption&gt;
 
 &lt;/div&gt;&lt;/figure&gt;
@@ -3045,7 +3100,7 @@ Without wrist observations (left) the success rate decreases from 73.3% to 43.3%
 &lt;/ul&gt;
 
 </description>
-              <pubDate>Sun, 08 Aug 2021 00:00:00 -0700</pubDate>
+              <pubDate>Sun, 08 Aug 2021 00:00:00 -0400</pubDate>
           </item>
           
         
@@ -3149,525 +3204,7 @@ Without wrist observations (left) the success rate decreases from 73.3% to 43.3%
 &lt;p&gt;We look forward to seeing you at ACL-IJCNLP 2021!&lt;/p&gt;
 
 </description>
-              <pubDate>Mon, 02 Aug 2021 00:00:00 -0700</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Meta-Learning Student Feedback to 16,000 Solutions</title>
-              <link>/blog/prototransformer/</link>
-              <guid isPermaLink="true">/blog/prototransformer/</guid>
-              <description>&lt;p&gt;&lt;strong&gt;[July 20, 2021]&lt;/strong&gt; &lt;em&gt;Our work was recently covered by the New York Times &lt;a href=&quot;https://www.nytimes.com/2021/07/20/technology/ai-education-neural-networks.html&quot;&gt;here&lt;/a&gt;. You can also find a technical preprint &lt;a href=&quot;https://drive.google.com/file/d/1BPzSmk01mtLG8bVQxOzBUdqGqqu7Vk3R/view?usp=sharing&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;tl;dr.&lt;/strong&gt;
-With the rise of large online computer science courses, there
-is an abundance of high-quality content. At the same time, the sheer
-size of these courses makes high-quality feedback to student work more
-and more difficult. Talk to any educator, and they will tell you how
-instrumental instructor feedback is to a student’s learning process.
-Unfortunately, giving personalized feedback isn’t cheap: for a large
-online coding course, this could take months of labor. Today, large
-online courses either don’t offer feedback at all or take shortcuts that
-sacrifice the quality of the feedback given.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image4.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-&lt;p&gt;Several computational approaches have been proposed to automatically
-produce personalized feedback, but each falls short: they either require
-too much upfront work by instructors or are limited to very simple
-assignments. A scalable algorithm for feedback to student code that
-works for university-level content remains to be seen. Until now, that
-is. In a recent paper, we proposed a new AI system based on
-meta-learning that trains a neural network to ingest student code and
-output feedback. Given a new assignment, this AI system can quickly
-adapt with little instructor work. On a dataset of student solutions to
-Stanford’s CS106A exams, we found the AI system to match human
-instructors in feedback quality.  &lt;/p&gt;
-
-&lt;p&gt;To test the approach in a real-world setting, we deployed the AI system
-at Code in Place 2021, a large online computer science course spun out
-of Stanford with over 12,000 students, to provide feedback to an
-end-of-course diagnostic assessment. The students’ reception to the
-feedback was overwhelmingly positive: across 16,000 pieces of feedback
-given, students agreed with the AI feedback 97.9% of the time, compared
-to 96.7% agreement to feedback provided by human instructors. This is,
-to the best of our knowledge, the first successful deployment of machine
-learning based feedback to open-ended student work.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image10.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;In the middle of the pandemic, while everyone is forced to social
-distance in the confines of their own homes, thousands of people across
-the world were hard at work figuring out why their code was stuck in an
-infinite loop.  Stanford CS106A, one of the university’s most popular
-courses and its largest introductory programming offering with nearly
-1,600 students every year, grew even bigger.  Dubbed &lt;a href=&quot;https://codeinplace.stanford.edu&quot;&gt;Code in Place&lt;/a&gt;,
-CS106A instructors Chris Piech, Mehran Sahami and Julie Zelenski wanted
-to make the curriculum and teaching philosophy of CS106A publicly
-available as an uplifting learning experience for students and adults
-alike during a difficult time. In its inaugural showing in April ‘20,
-Code in Place pulled together 908 volunteer teachers to run an online
-course for 10,428 students from around the world. One year later, with
-the pandemic still in full force in many areas of the world, Code in
-Place kicked off again, growing to over 12,000 students and 1,120
-volunteer teachers.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image3.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;Heatmap of the population of students for Code in Place &apos;20.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;While crowd-sourcing a teaching team did make a lot of things possible
-for Code in Place that usual online courses lack, there are still limits
-to what can be done with a class of this scale.  In particular, one of
-the most challenging hurdles was providing &lt;strong&gt;high-quality feedback&lt;/strong&gt; to
-10,000 students.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-feedback&quot;&gt;What is feedback?&lt;/h2&gt;
-&lt;p&gt;Everyone knows high quality content is an important
-ingredient for learning, but another equally important but more subtle
-ingredient is getting high quality feedback. Knowing the breakdown of
-what you did well and what the areas for improvement are, is fundamental
-to understanding.  Think back to when you first got started programming:
-for me, small errors that might be obvious to someone more experienced,
-cause a lot of frustration. This is where feedback comes in, helping
-students overcome this initial hurdle with instructor guidance.
-Unfortunately, feedback is something online code education has struggled
-with. With popular “massively open online courses” (MOOCs), feedback on
-student code boils down to compiler error messages, standardized
-tooltips, or multiple-choice quizzes.&lt;/p&gt;
-
-&lt;p&gt;You can find an example of each below. On the left, multiple choice
-quizzes are simple to grade and can easily assign numeric scores to
-student work. However, feedback is limited to showing the right answer,
-which does little to help students understand their underlying
-misconceptions. The middle picture shows an example of an opaque
-compiler error complaining about a syntax issue. As a beginner learning
-to code, error messages are very intimidating and difficult to
-interpret. Finally, on the right, we see an example of a standardized
-tooltip: upon making a mistake, a pre-specified message is shown.
-Pre-specified messages tend to be very vague: here, the tooltip just
-tells us our solution is wrong and to try something different.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image6.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;Examples of student feedback in three different MOOCS.&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;It makes a lot of sense why MOOCs settle for subpar feedback: it’s
-really difficult to do otherwise! Even for Stanford CS106A, the teaching
-team is constantly fighting the clock in office hours in an attempt to
-help everyone. Outside of Stanford, where classes may be more
-understaffed, instructors are already unable to provide this level of
-individualized support. With large online courses, the sheer size makes
-any hope of providing feedback unimaginable. Last year, Code in Place
-gave a diagnostic assessment during the course for students to summarize
-what they have learned. However, there was no way to give feedback
-scalably to all these student solutions. The only option was to release
-the correct solutions online for students to compare to their own work,
-displacing the burden of feedback onto the students.&lt;/p&gt;
-
-&lt;p&gt;Code in Place and its MOOC cousins are examples of a trend of education
-moving online, which might only grow given the lasting effects of the
-pandemic. This shift surfaces a very important challenge: can we provide
-feedback at scale?&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image5.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-A coding exercise on Code.org. There are four blocks to choose from to assemble a program.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;the-feedback-challenge&quot;&gt;The feedback challenge.&lt;/h2&gt;
-
-&lt;p&gt;In 2014, Code.org, one
-of the largest online platforms for code education, launched an
-initiative to crowdsource thousands of instructors to provide feedback
-to student solutions [1,2]. The hope of the initiative was to tag enough
-student solutions with feedback so that for a new student, Code.org
-could automatically provide feedback by matching the student’s solution
-to a bank of solutions already annotated with feedback by an instructor.
-Unfortunately, Code.org quickly found that even after thousands of
-aggregate hours spent providing feedback, instructors were only
-scratching the surface. New students were constantly coming up with new
-mistakes and new strategies. The initiative was cancelled after two
-years and has not been reproduced since.  &lt;/p&gt;
-
-&lt;p&gt;We might ask: why did this happen? What is it about feedback that makes
-it so difficult to scale? In our research, we came up with two parallel
-explanations.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image7.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Distribution of student solutions in four settings: block programs (Code.org), free response (Power), CS1 university assignments (Liftoff and Pyramid). The dotted line represents a Zipf distribution.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;First, &lt;strong&gt;providing feedback to student code is hard work&lt;/strong&gt;.  As an
-instructor, every student solution requires me to reason about the
-student’s thought process to uncover what misconceptions they might have
-had. If you have ever had to debug someone else’s code, providing
-feedback is at least as hard as that. In a previous &lt;a href=&quot;https://arxiv.org/abs/1809.01357&quot;&gt;research paper&lt;/a&gt;, we found that producing
-feedback for only 800 block-based programs took a teaching team a
-collective 24.9 hours. If we were to do that for all of Code in Place,
-it would take 8 months of work.&lt;/p&gt;
-
-&lt;p&gt;Second, &lt;strong&gt;students approach the same programming problem in an exponential
-number of ways&lt;/strong&gt;. Almost every new student solution will be unique, and a
-single misconception can manifest itself in seemingly infinite ways. As
-a concrete example, even after seeing a million solutions to a Code.org
-problem, there is still a 15% chance that a new student generates a
-solution never seen before. Perhaps not coincidentally, it turns out the
-distribution of student code closely follows the famous Zipf
-distribution, which reveals an extremely “long tail” of rare solutions
-that only one student will ever submit. Moreover, this close
-relationship to Zipf doesn’t just apply to Code.org; it is a much more
-general phenomenon. We see similar patterns for student work for
-university level programming assignments in Python and Java, as well as
-free response solutions to essay-like prompts.&lt;/p&gt;
-
-&lt;p&gt;So, if asking instructors to manually provide feedback at scale is
-nearly impossible, what else can we do?&lt;/p&gt;
-
-&lt;h2 id=&quot;automating-feedback-&quot;&gt;Automating feedback.  &lt;/h2&gt;
-
-&lt;p&gt;“If humans can’t do it, maybe machines
-can” (famous last words).  After all, machines process information a lot
-faster than humans do. There have been several approaches applying
-computational techniques to provide feedback, the simplest of which is
-unit tests. An instructor can write a collection of unit tests for the
-core concepts and use them to evaluate student solutions. However, unit
-tests expect student code to compile and, often, student code does not
-due to errors. If we wish to give feedback on partially complete
-solutions, we need to be able to handle non-compiling code. Given the
-successes of AI and deep learning in computer vision and natural
-language, there have been attempts of designing AI systems to
-automatically provide feedback, even when student code does not compile.&lt;/p&gt;
-
-&lt;h3 id=&quot;supervised-learning&quot;&gt;Supervised Learning&lt;/h3&gt;
-&lt;p&gt;Given a dataset of student code, we can ask an
-instructor to provide feedback for each of the solutions, creating a
-labeled dataset. This can be used to train a deep learning model to
-predict feedback for a new student solution.  While this is great in
-theory, in practice, compiling a sufficiently large and diverse dataset
-is difficult.  In machine learning, we are accustomed to datasets with
-millions of labeled examples since annotating an image is both cheap and
-requires no domain knowledge.  On the other hand, annotating student
-code with feedback is both time-consuming and needs expertise, limiting
-datasets to be a few thousand examples in size.  Given the Zipf-like
-nature of student code, it is very unlikely that a dataset of this size
-can capture all the different ways students approach a problem. This is
-reflected in practice as supervised attempts perform poorly on new
-student solutions.&lt;/p&gt;
-
-&lt;h3 id=&quot;generative-grading&quot;&gt;Generative Grading&lt;/h3&gt;
-
-&lt;p&gt;While annotating student code is difficult work,
-instructors are really good at thinking about how students would tackle
-a coding problem and what mistakes they might make along the way.
-Generative grading [2,3] asks instructors to distill this intuition
-about student cognition into an algorithm called a probabilistic
-grammar. Instructors specify what misconceptions a student might make
-and how that translates to code. For example, if a student forgets a
-stopping criterion resulting in an infinite loop, their program likely
-contains a “while” statement with no “break” condition. Given such an
-algorithm, we can run it forward to generate a full student solution
-with all misconceptions already labeled. Doing this repeatedly, we
-curate a large dataset to train a supervised model. This approach was
-very successful on block-based code, where performance rivaled human
-instructors.  However, the success of it hinges on a good algorithm.
-While tractable for block-based programs, it became exceedingly
-difficult to build a good algorithm for university level assignments
-where student code is much more complex.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image8.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-The supervised approach requires the instructor to curate a dataset of student solutions with feedback where as the generative grading approach requires the instructor to build an algorithm to generate annotated data. In contrast, the meta-learning approach requires the instructor to annotate feedback for K examples across N programming problems. K is typically very small (~10) and N not much larger (~100).
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;The supervised approach requires the instructor to curate a dataset of
-student solutions with feedback where as the generative grading approach
-requires the instructor to build an algorithm to generate annotated
-data. In contrast, the meta-learning approach requires the instructor to
-annotate feedback for K examples across N programming problems. K is
-typically very small (~10) and N not much larger (~100).&lt;/p&gt;
-
-&lt;h2 id=&quot;meta-learning-how-to-give-feedback&quot;&gt;Meta-learning how to give feedback.&lt;/h2&gt;
-
-&lt;p&gt;So far, neither approach is quite
-right. In different ways, supervised learning and generative grading
-both expect too much from the instructor. As they stand, for every new
-coding exercise, the instructor would have to put in days, if not weeks
-to months of effort. In an ideal world, we would shift more of the
-burden of feedback onto the AI system. While we would still like
-instructors to play a role, the AI system should bear the onus of
-quickly adapting to every new exercise. To accomplish this, we built an
-AI system to “learn how to learn” to give feedback.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image2.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-An example rubric used to provide feedback for a string insertion task.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Meta-learning is an old idea from the 1990s [9, 10] that has seen a
-resurgence in the last five years. Recall that in supervised learning a
-model is trained to solve a single task; in meta-learning, we solve many
-tasks at once. The catch is that we are limited to a handful of labeled
-examples for every task. Whereas supervised learning gets lots of labels
-for one task, we spread the annotation effort evenly across many tasks,
-leaving us with a few labels per task. In research literature, this is
-called the few-shot classification problem. The upside to meta-learning
-is that after training, if your model is presented with a new task that
-it has not seen before, it can quickly adapt to solve it with only a
-“few shots” (i.e., a few annotations from the new task).&lt;/p&gt;
-
-&lt;p&gt;So, &lt;strong&gt;what does meta-learning for feedback look like?&lt;/strong&gt; To answer that, we
-first need to describe what composes a “task” in the world of
-educational feedback. Last year, we compiled a dataset of student
-solutions from eight CS106A exams collected over the last three academic
-years.  Each exam consists of four to six programming exercises in which
-the student must write code (but is unable to run or compile it for
-testing). Every student solution is annotated by an instructor using a
-&lt;strong&gt;feedback rubric&lt;/strong&gt; containing a list of misconceptions tailored to a single
-problem. As an example, consider a coding exercise that asks the student
-to write a Python program that requires string insertion. A potential
-feedback rubric is shown in the left image: possible misconceptions are
-inserting at the wrong location or inserting the wrong string. So, we
-can treat every misconception as its own task. The string insertion
-example would comprise of four tasks.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image9.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Examples of predictions made by the AI system.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;One of the key ideas of this approach is to frame
-the &lt;strong&gt;feedback challenge as a few-shot classification problem&lt;/strong&gt;. Remember
-that the reasons why previous methods for automated feedback struggled
-were the (1) high cost of annotation and (2) diversity of student
-solutions. Casting feedback as a few-shot problem cleverly circumvents
-both challenges. First, meta-learning can leverage previous data on old
-exams to learn to provide feedback to a new exercise with very little
-upfront cost. We only need to label a few examples for the new exercise
-to adapt the meta-learner and importantly, do not need to train a new
-model from scratch. Second, there are two ways to handle diversity: you
-can go for “depth” by training on a lot of student solutions for a
-single problem to see different strategies, or you can go for “breadth”
-and get sense of diverse strategies through student solutions on a lot
-of different problems. Meta-learning focuses its efforts on capturing
-“breadth”, accumulating more generalizable knowledge that can be shared
-across problems.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image1.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Comparison of the average precision of the meta-learner to human instructors and a supervised baseline.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;We will leave the details of the meta-learner to the technical report.
-In short, we propose a new deep neural network called a &lt;strong&gt;ProtoTransformer
-Network&lt;/strong&gt; that combines the strengths of BERT from natural language
-processing and Prototypical Networks from few-shot learning literature.
-This architecture, in tandem with technical innovations – creating
-synthetic tasks for code, self-supervised pretraining on unlabeled code,
-careful encoding of variable and function names, and adding question and
-rubric descriptions as side information – together produce a highly
-performant AI system for feedback. To help ground this in context, we
-include three examples on the bottom of the last page of the AI system
-predicting feedback to student code. The predictions were taken from
-actual model output on student submissions.&lt;/p&gt;
-
-&lt;h3 id=&quot;main-results&quot;&gt;Main Results&lt;/h3&gt;
-&lt;p&gt;Aside from looking at qualitative examples, we can
-measure its performance quantitatively by evaluating the correctness of
-the feedback an AI system gave on exercises not used in training. A
-piece of feedback is considered correct if a human instructor annotated
-the student solution with it.&lt;/p&gt;
-
-&lt;p&gt;We consider two experimental settings for evaluation:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Held-out Questions&lt;/strong&gt;: we randomly pick 10% of questions across all exams
-to evaluate the meta-learner. This simulates instructors providing
-feedback for part of every exam, leaving a few questions for the AI to
-give feedback for.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Held-out Exams&lt;/strong&gt;: we hold out an entire exam for evaluation. This is a
-much harder setting as we know nothing about the new exam but also most
-faithfully represents an autonomous feedback system.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We measure the performance of human instructors by asking several
-teaching assistants to grade the same student solution and recording
-agreement. We also compare the meta-learner to a supervised baseline. As
-shown in the graph on the previous page, the meta-learner outperforms
-the supervised baseline by up to 24 percentage points, showcasing the
-utility of meta-learning. More surprisingly, we find that the
-meta-learner surpasses human performance by 6% in held-out questions.
- However, there is still room for improvement as we fall short 8% to
-human performance on held-out exams – a harder challenge. Despite this,
-we find these results encouraging: previous methods for feedback could
-not handle the complexity of university assignments, let alone approach,
-or match the performance of instructors.&lt;/p&gt;
-
-&lt;h2 id=&quot;automated-feedback-for-code-in-place&quot;&gt;Automated feedback for Code in Place.&lt;/h2&gt;
-&lt;p&gt;Taking a step back, we began
-with the challenge of feedback, an important ingredient to a student’s
-learning process that is frustratingly difficult to scale, especially
-for large online courses. Many attempts have been made towards this,
-some based on crowdsourcing human effort and others based on
-computational approaches with and without AI, but all of which have
-faced roadblocks. In late May ‘21, we built and tested an approach based
-on meta-learning, showing surprisingly strong results on university
-level content. But admittedly, the gap between ML research and
-deployment can be large, and it remained to be shown that our approach
-can give high quality feedback at scale in &lt;strong&gt;a live application&lt;/strong&gt;. Come
-June, Code in Place ‘21 was gearing up for its diagnostic assessment.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image4.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Meta-learned feedback deployed to Code in Place &apos;21.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;In an amazing turnout, Code in Place ‘21 had 12,000 students. But
-grading 12,000 students each solving 5 problems would be beyond
-intractable. To put it into numbers, it would take &lt;strong&gt;8 months&lt;/strong&gt; of human
-labor, or more than &lt;strong&gt;400 teaching assistants&lt;/strong&gt; working standard
-nine-to-five shifts to manually grade all 60,000 solutions.&lt;/p&gt;
-
-&lt;p&gt;The Code in Place ‘21 diagnostic contained five new questions that were
-not in the CS106A dataset used to train the AI system. However, the
-questions were similar in difficulty and scope, and correct solutions
-were roughly the same length as those in CS106A. Because the AI system
-was trained with meta-learning, it could quickly adapt to these new
-questions. Volunteers from the teaching team helped annotate a small
-portion of the student solutions that the AI meta-learning algorithm
-requires.&lt;/p&gt;
-
-&lt;p&gt;To showcase feedback to students, we were joined by Alan Chang and together we built an application for students
-to see their solutions and AI feedback (see image above). We were
-transparent in informing students that an AI was providing feedback. For
-each predicted misconception, we associated it with a message (shown in
-the blue box) to the student. We carefully crafted the language of these
-messages to be helpful and supportive of the student’s learning. We also
-provided finer grained feedback by highlighting portions of the code
-that the AI system weighted more strongly in making its prediction. In
-the image above, the student forgot to cast the height to an integer. In
-fact, the highlighted line should be height = int(input(…)), which the
-AI system picked up on.&lt;/p&gt;
-
-&lt;h3 id=&quot;human-versus-ai-feedback&quot;&gt;Human versus AI Feedback&lt;/h3&gt;
-
-&lt;p&gt;For each question, we asked the student to
-rate the correctness of the feedback provided by clicking either a
-“thumbs up” or a “thumbs down” before they can proceed to the next
-question (see lower left side of the image above). Additionally, after a
-student reviewed all their feedback, we asked them to rate the AI system
-holistically on a five-point scale.  As part of the deployment, some of
-the student solutions were given feedback by humans but students did not
-know which ones. So, we can compare students’ holistic and per-question
-rating when given AI feedback versus instructor feedback.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_actual&quot; src=&quot;/blog/assets/img/posts/2021-07-20-prototransformer/image11.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Results from deploying AI feedback to Code in Place 2021. (left) Comparison of student-rated correctness of human feedback versus AI feedback. (right) Comparison of ai feedback quality across different genders and countries of origin.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Here’s what we found:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;1,096&lt;/strong&gt; students responded to a survey after receiving &lt;strong&gt;15,134&lt;/strong&gt; pieces
-of feedback. The reception was overwhelmingly positive: Across all
-15k pieces of feedback, students agreed with AI suggestions &lt;strong&gt;97.9% ±
-0.001&lt;/strong&gt; of the time.&lt;/li&gt;
-  &lt;li&gt;We compared student agreement with AI feedback against agreement
-with instructor feedback, where we surprisingly found the AI system
-surpass human instructors: &lt;strong&gt;97.9% &amp;gt; 96.7%&lt;/strong&gt; (p-value 0.02). The
-improvement was driven by higher student ratings on &lt;em&gt;constructive
-feedback&lt;/em&gt; – times when the algorithm suggested an improvement.&lt;/li&gt;
-  &lt;li&gt;On the five-point scale, the average holistic rating of usefulness
-by students was &lt;strong&gt;4.6 ± 0.018 out of 5&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Given the wide diversity of students participating in Code in Place,
-we segmented the quality of AI feedback by gender and country, where
-we found no statistically significant difference across
-groups.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To the best of our knowledge, this was both the first successful
-deployment of AI-driven feedback to open-ended student work and the
-first successful deployment of prototype networks in a live application.
-With promising results in both a research and a real-world setting, we
-are optimistic about the future of artificial intelligence in code
-education and beyond.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-could-ai-feedback-impact-teaching&quot;&gt;How could AI feedback impact teaching?&lt;/h2&gt;
-
-&lt;p&gt;A successful deployment of an
-automated feedback system raises several important questions about the
-role of AI in education and more broadly, society.&lt;/p&gt;
-
-&lt;p&gt;To start, we emphasize that what makes Code in Place so successful is
-its amazing teaching team made up of over 1,000 section leaders. While
-feedback is an important part of the learning experience, it is one
-component of a larger ecosystem. We should not incorrectly conclude from
-our results that AI can automate teaching or replace instructors – nor
-should the system be used for high-stakes grading. Instead, we should
-view AI feedback as another tool in the toolkit for instructors to
-better shape an amazing learning experience for students.&lt;/p&gt;
-
-&lt;p&gt;Further, we should evaluate our AI systems with a double bottom line of
-both performance and fairness. Our initial experiments suggest that the
-AI is not biased but our initial results are being supplemented by a
-more thorough audit. To minimize the chance of providing incorrect
-feedback to student work, future research should encourage AI systems to
-learn to say: “I don’t know”.&lt;/p&gt;
-
-&lt;p&gt;Third, we find it important that progress in education research be
-public and available for others to critique and build upon.&lt;/p&gt;
-
-&lt;p&gt;Finally, this research opens so many directions moving forward. We hope
-to use this work to enable teachers to better reach their potential.
-Moreover, an AI feedback makes it scalable to study not just students’
-final solutions, but the process of how students solve their
-assignments. Finally, there is a novel opportunity for computational
-approaches towards unraveling the science of how students learn.&lt;/p&gt;
-
-&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
-
-&lt;p&gt;Many thanks to Chelsea Finn, Chris Piech, and Noah
-Goodman for their guidance. Special thanks to Chris for his support the
-last three years through the successes and failures towards AI feedback
-prediction. Also, thanks to Alan Cheng, Milan Mosse, Ali Malik, Yunsung
-Kim, Juliette Woodrow, Vrinda Vasavada, Jinpeng Song, and John Mitchell
-for great collaborations. Thank you to Mehran Sahami, Julie Zelenki,
-Brahm Capoor and the Code in Place team who supported this project.
-Thank you to the section leaders who provided all the human feedback
-that the AI was able to learn from. Thank you to the Stanford Institute
-for Human-Centered Artificial Intelligence (in particular the Hoffman-Yee Research Grant) and the Stanford
-Interdisciplinary Graduate Fellowship for their support.&lt;/p&gt;
-</description>
-              <pubDate>Tue, 20 Jul 2021 00:00:00 -0700</pubDate>
+              <pubDate>Mon, 02 Aug 2021 00:00:00 -0400</pubDate>
           </item>
           
         
