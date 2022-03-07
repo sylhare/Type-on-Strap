@@ -7,7 +7,7 @@ figure.highlight,
 .highlight code {
   position: relative;
   background: var(--base00);
-  color: var(--base05);
+  color: var(--base07);
   font-family: $monospace;
   font-size: $font-size-code;
   line-height: $font-height-code;
@@ -121,7 +121,7 @@ table.rouge-table {
   .ge{ /* Generic.Emph */
     font-style: italic  }
   .gh{ /* Generic.Heading */
-    color: var(--base05);font-weight: bold  }
+    color: var(--base07);font-weight: bold  }
   .gi{ /* Generic.Inserted */
     color: var(--base0a)  }
   .gp{ /* Generic.Prompt */
@@ -135,7 +135,7 @@ table.rouge-table {
   .k { /* Keyword */
     color: var(--base0d) }
   .kc{ /* Keyword.Constant */
-    color: var(--base0d)  }
+    color: var(--base0f)  }
   .kd{ /* Keyword.Declaration */
     color: var(--base0d)  }
   .kn{ /* Keyword.Namespace */
@@ -163,19 +163,19 @@ table.rouge-table {
   .mo{ /* Literal.Number.Oct */
     color: var(--base0e)  }
   .n{ /* Name */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .na{ /* Name.Attribute */
-    color: var(--base0b)  }
+    color: var(--base0c)  }
   .nb{ /* Name.Builtin */
     color: var(--base0c)  }
   .nc{ /* Name.Class */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .no{ /* Name.Constant */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .nd{ /* Name.Decorator */
     color: var(--base0f)  }
   .ni{ /* Name.Entity */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .ne{ /* Name.Exception */
     color: var(--base0c)  }
   .nf{ /* Name.Function */
@@ -183,27 +183,27 @@ table.rouge-table {
   .nl{ /* Name.Label */
     color: var(--base0c)  }
   .nn{ /* Name.Namespace */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .nt{ /* Name.Tag */
     color: var(--base08)  }
   .nv{ /* Name.Variable */
     color: var(--base0c)  }
   .nx{ /* Name.Other */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .o{ /* Operator */
     color: var(--base08)  }
   .ow{ /* Operator.Word */
     color: var(--base0d)  }
   .p{ /* Punctuation */
-    color: var(--base05)  }
+    color: var(--base08)  }
   .py{ /* Name.Property */
-    color: var(--base05)  }
+    color: var(--base0d)  }
   .s{ /* Literal.String */
     color: var(--base0a)  }
   .sb{ /* Literal.String.Backtick */
     color: var(--base0a)  }
   .sc{ /* Literal.String.Char */
-    color: var(--base05)  }
+    color: var(--base07)  }
   .sd{ /* Literal.String.Doc */
     color: var(--base04)  }
   .s2{ /* Literal.String.Double */
@@ -229,7 +229,7 @@ table.rouge-table {
   .vi{ /* Name.Variable.Instance */
     color: var(--base0c)  }
   .w{ /* Text.Whitespace */
-    color: var(--base05)  }
+    color: var(--base07)  }
 }
 
 // Fix Github syntax display

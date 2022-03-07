@@ -48,7 +48,7 @@ public class Demo {
    * @param o The object to demonstrate.
    */
   public Demo(Object o) {
-    this.o = o;
+    this.o = o !== null ? o : new Object();
     String s = CONSTANT + "Other example of text";
     int i = 123 - 33 % 11;
   }
@@ -66,6 +66,7 @@ public class Demo {
  * Does a thing
  */
 function helloWorld(param1, param2) {
+    const example = `hello ${param1}`
     var something = {
         key: "value",
         number: 1
@@ -85,7 +86,7 @@ function helloWorld(param1, param2) {
 ### JSON
 
 ```json
-  {
+{
   "animals": {
     "tiger": {
       "name": "tiger",
