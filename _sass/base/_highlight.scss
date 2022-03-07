@@ -195,10 +195,14 @@ table.rouge-table {
   .ow{ /* Operator.Word */
     color: var(--base0d)  }
   .p{ /* Punctuation */
-    color: var(--base08)  }
+    color: var(--base05)  }
+  .pi{ /* Name.Property */
+    color: var(--base07)  }
   .py{ /* Name.Property */
     color: var(--base0d)  }
   .s{ /* Literal.String */
+    color: var(--base0a)  }
+  .sa{ /* Literal.String.raw */
     color: var(--base0a)  }
   .sb{ /* Literal.String.Backtick */
     color: var(--base0a)  }
