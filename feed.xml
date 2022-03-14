@@ -5,7 +5,139 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Tue, 22 Feb 2022 15:31:02 -0500</pubDate>
+        <pubDate>Mon, 14 Mar 2022 13:42:27 -0700</pubDate>
+        
+          
+          <item>
+              <title>Understanding Deep Learning Algorithms that Leverage Unlabeled Data, Part 1: Self-training</title>
+              <link>/blog/understanding-self-training/</link>
+              <guid isPermaLink="true">/blog/understanding-self-training/</guid>
+              <description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Deep models require a lot of training examples, but labeled data is difficult to obtain. This motivates an important line of research on leveraging unlabeled data, which is often more readily available. For example, large quantities of unlabeled image data can be obtained by crawling the web, whereas labeled datasets such as &lt;a href=&quot;https://www.image-net.org/&quot;&gt;ImageNet&lt;/a&gt; require expensive labeling procedures. In recent empirical developments, models trained with unlabeled data have begun to approach fully-supervised performance (e.g., &lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;Chen et al., 2020&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2001.07685&quot;&gt;Sohn et al., 2020&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;This series of blog posts will discuss our theoretical work which seeks to analyze recent empirical methods which use unlabeled data. In this first post, we’ll analyze &lt;strong&gt;self-training&lt;/strong&gt;, which is a very impactful algorithmic paradigm for &lt;a href=&quot;https://arxiv.org/abs/1911.04252&quot;&gt;semi-supervised learning&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/2106.04732&quot;&gt;domain adaptation&lt;/a&gt;. In Part 2, we will use related theoretical ideas to analyze self-supervised contrastive learning algorithms, which have been very effective for &lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;unsupervised representation learning&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;background-self-training&quot;&gt;Background: self-training&lt;/h3&gt;
+
+&lt;p&gt;We will first provide a basic overview of self-training algorithms, which are the main focus of this blog post. The core idea is to use some pre-existing classifier \(F_{pl}\) (referred to as the “pseudo-labeler”) to make predictions (referred to as “pseudo-labels”) on a large unlabeled dataset, and then retrain a new model with the pseudo-labels. For example, in semi-supervised learning, the pseudo-labeler is obtained from training on a small labeled dataset, and is then used to predict pseudo-labels on a larger unlabeled dataset. A new classifier \(F\) is then retrained from scratch to fit the pseudo-labels, using additional regularization. In practice, \(F\) will often be more accurate than the original pseudo-labeler \(F_{pl}\) (&lt;a href=&quot;https://www.semanticscholar.org/paper/Pseudo-Label-%253A-The-Simple-and-Efficient-Learning-Lee/798d9840d2439a0e5d47bcf5d164aa46d5e7dc26&quot;&gt;Lee 2013&lt;/a&gt;). The self-training procedure is depicted below.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image2.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;It is quite surprising that self-training can work so well in practice, given that we retrain on our &lt;em&gt;own predictions&lt;/em&gt;, i.e. the pseudo-labels, but not the true labels. In the rest of this blogpost, we’ll share our theoretical analysis explaining why this is the case, showing that retraining in self-training &lt;em&gt;provably&lt;/em&gt; improves accuracy compared to the original pseudo-labeler.&lt;/p&gt;
+
+&lt;p&gt;Our theoretical analysis focuses on pseudo-label-based self-training, but there are also other variants. For example, &lt;a href=&quot;https://papers.nips.cc/paper/2004/file/96f2b50b5d3613adf9c27049b2a888c7-Paper.pdf&quot;&gt;entropy minimization&lt;/a&gt;, which essentially trains on changing pseudo-labels produced by \(F\), rather than fixed pseudo-labels from \(F_{pl}\), can also be interpreted as self-training. Related analysis techniques apply to these algorithms (&lt;a href=&quot;https://arxiv.org/abs/2102.11203&quot;&gt;Cai et al. ‘21&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h4 id=&quot;the-importance-of-regularization-for-self-training&quot;&gt;The importance of regularization for self-training&lt;/h4&gt;
+
+&lt;p&gt;Before discussing core parts of our theory, we’ll first set up the analysis by demonstrating that regularization during the retraining phase is necessary for self-training to work well.&lt;/p&gt;
+
+&lt;p&gt;Let’s consider the retraining step of the self-training algorithm described above. Suppose we minimize the cross-entropy loss to fit the pseudo-labels, as is the case for deep networks. It’s possible to drive the unregularized cross-entropy loss to 0 by scaling up the predictions of \(F_{pl}\) to infinity. As depicted in Figure 2 below, this means that the retraining step won’t achieve any improvement over \(F_{pl}\) because the decision boundary will not change. This suggests that regularization might be necessary to have in our analysis if self-training is to lead to provable improvements over the pseudo-labeler.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image7.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Empirically, one technique which leads to substantial improvements after the retraining step is to encourage the classifier to have consistent predictions on neighboring pairs of examples. We refer to such methods as forms of &lt;strong&gt;input consistency regularization&lt;/strong&gt;. In the literature, there are various ways to define “neighboring pairs”, for example, examples close in \(\ell_2\) distance (&lt;a href=&quot;https://arxiv.org/abs/1704.03976&quot;&gt;Miyato et al., 2017&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/1802.08735&quot;&gt;Shu et al., 2018&lt;/a&gt;), or examples which are different strong data augmentations of the same image (&lt;a href=&quot;https://arxiv.org/abs/1904.12848&quot;&gt;Xie et al., 2019&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/1905.02249&quot;&gt;Berthelot et al., 2019&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/1911.04252&quot;&gt;Xie et al., 2019&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2001.07685&quot;&gt;Sohn et al., 2020&lt;/a&gt;). Strong data augmentation, which applies stronger alterations to the input image than traditionally used in supervised learning, is also very useful for self-supervised contrastive learning, which we will analyze in the follow-up blog post. Our theoretical analysis considers a regularizer which is inspired by empirical work on input consistency regularization.&lt;/p&gt;
+
+&lt;h3 id=&quot;key-formulations-for-theoretical-analysis&quot;&gt;Key formulations for theoretical analysis&lt;/h3&gt;
+
+&lt;p&gt;From the discussion above, it’s clear that in order to understand why self-training helps, we need a principled way to think about the regularizer for self-training. Input consistency regularization is effective in practice, but how do we abstract it so that the analysis is tractable? Furthermore, what properties of the data does the input consistency regularizer leverage in order to be effective? In the next section we’ll introduce the &lt;strong&gt;augmentation graph&lt;/strong&gt;, a key concept that allows us to cleanly resolve both challenges. Building upon the augmentation graph, subsequent sections will formally introduce the regularizer and assumptions on the data.&lt;/p&gt;
+
+&lt;h4 id=&quot;augmentation-graph-on-the-population-data&quot;&gt;Augmentation graph on the population data&lt;/h4&gt;
+
+&lt;p&gt;We introduce the augmentation graph on the population data, a key concept which allows us to formalize the input consistency regularizer and motivates natural assumptions on the data distribution.&lt;/p&gt;
+
+&lt;p&gt;Intuitively, the augmentation graph is a graph with data points as vertices with the property that semantically similar data points will be connected by sequences of edges. We will consider the bipartite graph \(G’\) displayed in Figure 3 below, whose vertex set consists of all natural images \(X\) as well as the set \(\tilde{X}\) of augmented versions of images in \(X\). The graph contains an edge (in pink) between \(x \in X\) and \(\tilde{x} \in \tilde{X}\) if \(\tilde{x}\) is obtained by applying data augmentation to \(x\).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image5.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The analysis will be slightly simpler if we work with the graph \(G\) obtained by collapsing \(G’\) onto the vertex set \(X\). Edges of \(G\) are shown in black and connect vertices \(x_1, x_2 \in X\) which share a common neighbor in \(G’\). Natural images \(x_1, x_2 \in X\) are neighbors in \(G\) if and only if they share a common neighbor in \(G’\). In our next post on self-supervised contrastive learning algorithms, we will also consider the graph obtained by collapsing \(G’\) onto \(\tilde{X}\), whose edges are shown in brown in the figure above.&lt;/p&gt;
+
+&lt;p&gt;For simplicity, we only consider unweighted graphs and focus on data augmentations which blur the image with small \(\ell_2\)-bounded noise, although the augmentation graph can be constructed based on arbitrary types of data augmentation. The figure above shows examples of neighboring images in \(G\), with paired colored arrows pointing to their common augmentations in \(\tilde{X}\). Note that by following edges in \(G\), it is possible to traverse a path between two rather different images, even though neighboring images in \(G\) are very similar and must have small \(\ell_2\) distance from each other. An important point to stress is that \(G\) is a graph on the &lt;em&gt;population&lt;/em&gt; data, not just the training set – this distinction is crucial for the type of assumptions we will make about \(G\).&lt;/p&gt;
+
+&lt;h4 id=&quot;formalizing-the-regularizer&quot;&gt;Formalizing the regularizer&lt;/h4&gt;
+
+&lt;p&gt;Now that we’ve defined the augmentation graph, let’s see how this concept helps us formulate our analysis. First, the augmentation graph motivates the following natural abstraction for the input consistency regularizer:&lt;/p&gt;
+
+\[R(F, x) = 1(F \text{ predicts the same class on all examples in neighborhood } N(x)) \tag{1}\]
+
+&lt;p&gt;In this definition, the neighborhood \(N(x)\) is the set of all \(x’\) such that \(x\) and \(x’\) are connected by an edge in the augmentation graph. The final population self-training objective which we will analyze is a sum of the regularizer and loss in fitting the pseudo-label and is closely related to empirically successful objectives such as in (&lt;a href=&quot;https://arxiv.org/abs/1911.04252&quot;&gt;Xie et al., 2019&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2001.07685&quot;&gt;Sohn et al., 2020&lt;/a&gt;).&lt;/p&gt;
+
+\[E_x[1(F(x) \ne G_{pl}(x))] + \lambda E_x[R(F, x)] \tag{2}\]
+
+&lt;h4 id=&quot;assumptions-on-the-data&quot;&gt;Assumptions on the data&lt;/h4&gt;
+
+&lt;p&gt;We will now perform a thought experiment to see why the regularizer is useful, and in doing so motivate two key assumptions for our analysis. Let’s consider an idealized case where the classifier has perfect input consistency, i.e., \(R(F, x) = 0\) for all \(x\). If the data satisfies an appropriate structure, enforcing perfect input consistency can be very advantageous, as visualized below.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_60&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image3.gif&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The figure above demonstrates that if the dog class is connected in \(G\), enforcing perfect input consistency will ensure that the classifier makes the same prediction on all dogs. This is because the perfect input consistency ensures that the same label propagates through all neighborhoods of dog examples, eventually covering the entire class. This is beneficial for avoiding overfitting to incorrectly pseudolabeled examples.&lt;/p&gt;
+
+&lt;p&gt;There were two implicit properties of the data distribution in Figure 4 which ensured that the perfect input consistency was beneficial: 1) The dog class was connected in \(G\), and 2) The dog and cat classes were far apart. Figure 5 depicts failure cases where these conditions don’t hold, so the perfect input consistency does not help. The left shows that if the dog class is not connected in \(G\), perfect input consistency may not guarantee that the classifier predicts the same label throughout the class. The right shows that if the dog and cat classes are too close together, perfect input consistency would imply that the classifier cannot distinguish between the two classes.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image4.png&quot; /&gt;
+&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image1.gif&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Our main assumptions, described below, are natural formalizations of the conditions above.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assumption 1 (Expansion within classes):&lt;/strong&gt; The augmentation graph has good connectivity within classes. Formally, for any subset \(S\) of images within a ground-truth class, \(P(N(S)) &amp;gt; cP(S)\) for some \(c &amp;gt; 1\).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimagehalf&quot; src=&quot;/blog/assets/img/posts/2022-02-24-understanding-self-training/image6.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The figure above illustrates Assumption 1. In Assumption 1, \(N(S)\) refers to the neighborhood of \(S\), which contains \(S\) and the union of neighborhoods of examples in \(S\). We refer to Assumption 1 as the “expansion” assumption because it requires that the neighborhood of \(S\) must expand by a constant factor \(c\) in probability relative to \(S\) itself. We refer to the coefficient \(c\) as the expansion coefficient. Intuitively, larger \(c\) implies better connectivity because it means each set has a larger neighborhood. Related notions of expansion have been studied in the past in settings such as spectral graph theory [2,3], sampling and mixing time [4], combinatorial optimization [5], and even semi-supervised learning in a different &lt;a href=&quot;https://en.wikipedia.org/wiki/Co-training&quot;&gt;co-training&lt;/a&gt; setting [1].&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assumption 2 (Separation between classes):&lt;/strong&gt; There is separation between classes: the graph \(G\) does contains a very limited number of edges between different classes.&lt;/p&gt;
+
+&lt;p&gt;In the paper, we provide examples of distributions satisfying expansion and separation, and we believe that they are realistic characterizations of real data. One key point to reiterate is that these assumptions and the graph \(G\) are defined for &lt;em&gt;population&lt;/em&gt; data. Indeed, it is not realistic to have properties such as expansion hold for the training set. If we were to attempt to build the graph \(G\) on only training examples, it would be completely disconnected because the probability of drawing two i.i.d. samples which happen to be neighbors (defined over \(\ell_2\) distance) is exponentially small in the input dimension.&lt;/p&gt;
+
+&lt;h3 id=&quot;main-theoretical-results&quot;&gt;Main theoretical results&lt;/h3&gt;
+
+&lt;p&gt;We now show that a model satisfying low self-training loss (2) will have good classification accuracy. Our main result is as follows:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Theorem 1 (informal):&lt;/strong&gt; There exists a choice of input consistency regularization strength \(\lambda\) such that if the pseudo-labeler satisfies a baseline level of accuracy, i.e., \(\text{Error}(G_{pl}) &amp;lt; 1/3\), the minimizer \(\hat{F}\) of the population objective (2) will satisfy:&lt;/p&gt;
+
+\[\text{Error}(\hat{F}) \le \frac{2}{c - 1} \text{Error}(G_{pl})\]
+
+&lt;p&gt;In other words, assuming expansion and separation, self training provably leads to a more accurate classifier than the original pseudo-labeler! One of the main advantages of Theorem 1 is that it does not depend on the parameterization of \(F\), and, in particular, holds when \(F\) is a deep network. Furthermore, in the domain adaptation setting, we do not require any assumptions about the relationship between the source and target domain, as long as the pseudo-labeler hits the baseline accuracy level. Prior analyses of self-training were restricted to linear models (e.g., &lt;a href=&quot;https://arxiv.org/abs/2002.11361&quot;&gt;Kumar et al. 2020&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2006.10032&quot;&gt;Chen et al. 2020&lt;/a&gt;), or domain adaptation settings where the domain shift is assumed to be very small (&lt;a href=&quot;https://arxiv.org/abs/2002.11361&quot;&gt;Kumar et al. 2020&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;An interesting property of the bound is that it improves as the coefficient \(c\) in the expansion assumption gets larger. Recall that \(c\) essentially serves as a quantifier for how connected the augmentation graph is within each class, and larger \(c\) indicates more connectivity. Intuitively, connectivity can improve the bound by strengthening the impact of the input consistency regularizer.&lt;/p&gt;
+
+&lt;p&gt;One way to improve the graph connectivity is to use stronger data augmentations. In fact, this approach has worked very well empirically: algorithms like &lt;a href=&quot;https://arxiv.org/abs/2001.07685&quot;&gt;FixMatch&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/1911.04252&quot;&gt;Noisy Student&lt;/a&gt; achieve state-of-the-art semi-supervised learning performance by using data augmentation which alters the images much more strongly than in standard supervised learning. Theorem 1 suggests an explanation for why strong data augmentation is so helpful: it leads to a larger \(c\) and a smaller bound. However, one does need to be careful to not increase augmentation strength by too much – using too strong data augmentation could make it so that our Assumption 2 that ground truth classes are separated would no longer hold.&lt;/p&gt;
+
+&lt;p&gt;The proof of Theorem 1 relies on the intuition conveyed in the previous subsection. Recall that the goal is to show that retraining on pseudo-labels can lead to a classifier which corrects some of the mistakes in the pseudo-labels. The reason why the classifier can ignore some incorrect pseudo-labels is that the input consistency regularization term in (2) encourages the classifier to predict the same label on neighboring examples. Thus, we can hope that the correctly pseudo-labeled examples will propagate their labels to incorrectly pseudo-labeled neighbors, leading to a denoising effect on these neighbors. We can make this intuition rigorous by leveraging the expansion assumption (Assumption 1).&lt;/p&gt;
+
+&lt;p&gt;The main result of Theorem 1 and our assumptions were phrased for population data, but it’s not too hard to transform Theorem 1 into accuracy guarantees for optimizing (2) on a finite training set. The key observation is that even if we only optimize the training version of (2), because of generalization, the population loss will also be small, which is actually sufficient for achieving the accuracy guarantees of Theorem 1.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;In this blog post, we discussed why self-training on unlabeled data provably improves accuracy. We built an augmentation graph on the data such that nearby examples are connected with an edge. We assumed that two examples in the same class can be connected via a sequence of edges in the graph. Under this assumption, we showed that self-training with regularization improves upon the accuracy of the pseudo-labeler by enforcing each connected subgraph to have the same label. One limitation is that the analysis only works when the classes are fine-grained, so that each class forms its own connected component in the augmentation graph. However, we can imagine scenarios where one large class is a union of smaller, sparsely connected subclasses. In these cases, our assumptions may not hold. Our follow-up blog post on contrastive learning will show how to deal with this case.&lt;/p&gt;
+
+&lt;p&gt;This blog post was based on the paper &lt;a href=&quot;https://arxiv.org/abs/2010.03622&quot;&gt;Theoretical Analysis of Self-Training with Deep Networks on Unlabeled Data&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;additional-references&quot;&gt;Additional references&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Balcan MF, Blum A, Yang K. Co-training and expansion: Towards bridging theory and practice. Advances in neural information processing systems; 2005.&lt;/li&gt;
+  &lt;li&gt;Cheeger J. A lower bound for the smallest eigenvalue of the Laplacian. Problems in analysis; 2015.&lt;/li&gt;
+  &lt;li&gt;Chung FR, Graham FC. Spectral graph theory. American Mathematical Soc.; 1997.&lt;/li&gt;
+  &lt;li&gt;Kannan R, Lovász L, Simonovits M. Isoperimetric problems for convex bodies and a localization lemma. Discrete &amp;amp; Computational Geometry; 1995.&lt;/li&gt;
+  &lt;li&gt;Mohar B, Poljak S. Eigenvalues and the max-cut problem. Czechoslovak Mathematical Journal; 1990.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+              <pubDate>Thu, 24 Feb 2022 00:00:00 -0800</pubDate>
+          </item>
+          
         
           
           <item>
@@ -21,7 +153,7 @@
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img0.png&quot; /&gt;
 &lt;strong&gt;Authors&lt;/strong&gt;: Erdem Bıyık, Anusha Lalitha, Rajarshi Saha, Andrea Goldsmith, Dorsa Sadigh
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: ebiyik@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2110.00751.pdf&quot;&gt;Paper&lt;/a&gt; | [Video](https://www.youtube.com/watch?v=MCHXAYvaB5Y | &lt;a href=&quot;https://www.youtube.com/watch?v=-ruZxCQclcw&quot;&gt;2nd Video&lt;/a&gt; | &lt;a href=&quot;https://sites.google.com/view/partner-aware-ucb&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2110.00751.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=MCHXAYvaB5Y&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=-ruZxCQclcw&quot;&gt;2nd Video&lt;/a&gt; | &lt;a href=&quot;https://sites.google.com/view/partner-aware-ucb&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: bandits, multi-agent systems, collaboration, human-robot interaction, partner-awareness&lt;/p&gt;
 &lt;h4 id=&quot;constraint-sampling-reinforcement-learning-incorporating-expertise-for-faster-learning&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2112.15221&quot;&gt;Constraint Sampling Reinforcement Learning: Incorporating Expertise For Faster Learning&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img1.png&quot; /&gt;
@@ -46,6 +178,7 @@
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img4.png&quot; /&gt;
 &lt;strong&gt;Authors&lt;/strong&gt;: Yibing Du, Antoine Bosselut, Christopher D Manning
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: antoineb@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2202.09381&quot;&gt;Paper&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: fact checking, fact verification, disinformation, synthetic text&lt;/p&gt;
 &lt;h4 id=&quot;similarity-search-for-efficient-active-learning-and-search-of-rare-concepts&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2007.00077&quot;&gt;Similarity Search for Efficient Active Learning and Search of Rare Concepts&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-02-22-aaai-2022/img5.png&quot; /&gt;
@@ -58,7 +191,7 @@
 
 &lt;p&gt;We look forward to seeing you at AAAI 2022.&lt;/p&gt;
 </description>
-              <pubDate>Tue, 22 Feb 2022 00:00:00 -0500</pubDate>
+              <pubDate>Tue, 22 Feb 2022 00:00:00 -0800</pubDate>
           </item>
           
         
@@ -304,7 +437,7 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 01 Feb 2022 00:00:00 -0500</pubDate>
+              <pubDate>Tue, 01 Feb 2022 00:00:00 -0800</pubDate>
           </item>
           
         
@@ -486,7 +619,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Fri, 21 Jan 2022 00:00:00 -0500</pubDate>
+              <pubDate>Fri, 21 Jan 2022 00:00:00 -0800</pubDate>
           </item>
           
         
@@ -607,7 +740,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Fri, 17 Dec 2021 00:00:00 -0500</pubDate>
+              <pubDate>Fri, 17 Dec 2021 00:00:00 -0800</pubDate>
           </item>
           
         
@@ -1150,7 +1283,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;We look forward to seeing you at NeurIPS 2021!&lt;/p&gt;
 </description>
-              <pubDate>Mon, 06 Dec 2021 00:00:00 -0500</pubDate>
+              <pubDate>Mon, 06 Dec 2021 00:00:00 -0800</pubDate>
           </item>
           
         
@@ -1240,7 +1373,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;We look forward to seeing you at EMNLP/CoNLL 2021!&lt;/p&gt;
 </description>
-              <pubDate>Fri, 05 Nov 2021 00:00:00 -0400</pubDate>
+              <pubDate>Fri, 05 Nov 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1409,7 +1542,7 @@ Figure 8: We compare the success rate using DVD in seen and unseen environments 
 
 &lt;p&gt;We look forward to seeing you at CoRL 2021!&lt;/p&gt;
 </description>
-              <pubDate>Fri, 05 Nov 2021 00:00:00 -0400</pubDate>
+              <pubDate>Fri, 05 Nov 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1547,7 +1680,7 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Wed, 13 Oct 2021 00:00:00 -0400</pubDate>
+              <pubDate>Wed, 13 Oct 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -1665,7 +1798,7 @@ For five datasets, we plot the average accuracy as a function of the coverage. R
 &lt;p&gt;We look forward to seeing you at ICCV 2021!&lt;/p&gt;
 
 </description>
-              <pubDate>Fri, 08 Oct 2021 00:00:00 -0400</pubDate>
+              <pubDate>Fri, 08 Oct 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2067,7 +2200,7 @@ We continue to actively maintain
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 05 Oct 2021 00:00:00 -0400</pubDate>
+              <pubDate>Tue, 05 Oct 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2228,7 +2361,7 @@ Let’s look at how our fixer performs through examples too. The left side of th
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Tue, 21 Sep 2021 00:00:00 -0400</pubDate>
+              <pubDate>Tue, 21 Sep 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2288,7 +2421,7 @@ An engineer and their training data in the wild. &lt;it&gt;Credit: Vickie Shelto
 
 &lt;p&gt;&lt;em&gt;A more informal version of this blog can be found &lt;a href=&quot;https://hazyresearch.stanford.edu/data-centric-ai&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 </description>
-              <pubDate>Wed, 15 Sep 2021 00:00:00 -0400</pubDate>
+              <pubDate>Wed, 15 Sep 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2386,7 +2519,7 @@ Illustration of our approach. We integrate many data sources to run, evaluate, a
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-              <pubDate>Mon, 16 Aug 2021 00:00:00 -0400</pubDate>
+              <pubDate>Mon, 16 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -3100,111 +3233,7 @@ Without wrist observations (left) the success rate decreases from 73.3% to 43.3%
 &lt;/ul&gt;
 
 </description>
-              <pubDate>Sun, 08 Aug 2021 00:00:00 -0400</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Stanford AI Lab Papers at ACL-IJCNLP 2021</title>
-              <link>/blog/acl-2021/</link>
-              <guid isPermaLink="true">/blog/acl-2021/</guid>
-              <description>&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/logo.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://2021.aclweb.org/&quot;&gt;Joint Conference of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th
- International Joint Conference on Natural Language Processing
-&lt;/a&gt; is being hosted virtually this week. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!&lt;/p&gt;
-
-&lt;h2 id=&quot;list-of-accepted-long-papers&quot;&gt;List of Accepted Long Papers&lt;/h2&gt;
-
-&lt;h4 id=&quot;neural-event-semantics-for-grounded-language-understanding&quot;&gt;Neural Event Semantics for Grounded Language Understanding&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img0.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Shyamal Buch, Li Fei-Fei, Noah D. Goodman
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: shyamal@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://neural-event-semantics.github.io//assets/nes_tacl21_buch_feifei_goodman_preprint-v0.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://neural-event-semantics.github.io/&quot;&gt;Project Webpage&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: grounded language, compositionality, modular networks, event semantics
-&lt;br /&gt;&lt;strong&gt;Notes&lt;/strong&gt;: Accepted as a paper to &lt;a href=&quot;https://transacl.org/index.php/tacl&quot;&gt;TACL 2021&lt;/a&gt;, presented at ACL-IJCNLP 2021!&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;measuring-conversational-update-a-case-study-on-student-teacher-interactions&quot;&gt;Measuring Conversational Update: A Case Study on Student-Teacher Interactions&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img1.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Dorottya Demszky, Jing Liu, Zid Mancenido, Julie Cohen, Heather Hill, Dan Jurafsky, Tatsunori Hashimoto
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: ddemszky@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.03873&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/ddemszky/conversational-uptake&quot;&gt;Code &amp;amp; Data&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: conversational uptake, education&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;mind-your-outliers-investigating-the-negative-impact-of-outliers-on-active-learning-for-visual-question-answering&quot;&gt;Mind Your Outliers! Investigating the Negative Impact of Outliers on Active Learning for Visual Question Answering&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img2.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Siddharth Karamcheti, Ranjay Krishna, Li Fei-Fei, Christopher D. Manning
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: skaramcheti@cs.stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2107.02331&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/siddk/vqa-outliers&quot;&gt;Code&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: active learning, visual question answering, interpretability
-&lt;br /&gt;&lt;strong&gt;Notes&lt;/strong&gt;: &lt;em&gt;Outstanding Paper Award&lt;/em&gt;&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;relevance-guided-supervision-for-openqa-with-colbert&quot;&gt;Relevance-guided Supervision for OpenQA with ColBERT&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img3.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Omar Khattab, Christopher Potts, Matei Zaharia
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: okhattab@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2007.00814&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/stanfordnlp/ColBERT-QA&quot;&gt;Code&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: open-domain question answering, neural retrieval, weak supervision
-&lt;br /&gt;&lt;strong&gt;Notes&lt;/strong&gt;: Accepted as a paper to &lt;a href=&quot;https://transacl.org/index.php/tacl&quot;&gt;TACL 2021&lt;/a&gt;, presented at ACL-IJCNLP 2021!&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;prefix-tuning-optimizing-continuous-prompts-for-generation&quot;&gt;Prefix Tuning: Optimizing Continuous Prompts for Generation&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img4.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Xiang Lisa Li, Percy Liang
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: xlisali@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2101.00190&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/XiangLi1999/PrefixTuning&quot;&gt;Code&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: prefix-tuning, fine-tuning for generation, large-scale fine-tuning&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;dynasent-a-dynamic-benchmark-for-sentiment-analysis&quot;&gt;DynaSent: A Dynamic Benchmark for Sentiment Analysis&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img5.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Christopher Potts*, Zhengxuan Wu*, Atticus Geiger, Douwe Kiela
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: cgpotts@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2012.15349&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/cgpotts/DynaSent&quot;&gt;Code&lt;/a&gt; | &lt;a href=&quot;https://youtu.be/bxvckgN43CU&quot;&gt;Video
-&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: sentiment analysis, crowdsourcing, adversarial datasets&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;list-of-accepted-short-papers&quot;&gt;List of Accepted Short Papers&lt;/h2&gt;
-
-&lt;h4 id=&quot;attention-flows-are-shapley-values&quot;&gt;Attention Flows are Shapley Values&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img6.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Kawin Ethyarajh, Dan Jurafsky
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kawin@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2105.14652&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: explainability; interpretability&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;question-generation-for-adaptive-education&quot;&gt;Question Generation for Adaptive Education&lt;/h4&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-08-02-acl-2021/img7.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Megha Srivastava, Noah D. Goodman
-&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: meghas@stanford.edu
-&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.04262&quot;&gt;Paper&lt;/a&gt;
-&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: education, nlp, language generation&lt;/p&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;We look forward to seeing you at ACL-IJCNLP 2021!&lt;/p&gt;
-
-</description>
-              <pubDate>Mon, 02 Aug 2021 00:00:00 -0400</pubDate>
+              <pubDate>Sun, 08 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
