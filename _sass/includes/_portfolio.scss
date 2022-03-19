@@ -11,12 +11,12 @@
     height: 100%;
     text-align: center;
     opacity: 0;
-    -webkit-transition: all ease .5s;
-    -moz-transition: all ease .5s;
-    transition: all ease .5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    transition: all ease 0.5s;
 
     &::before {
-      content: ' ';
+      content: " ";
       display: inline-block;
       vertical-align: middle;
       height: 100%;
@@ -27,9 +27,11 @@
     }
 
     .caption-content {
-      font-size: 15px;
-      color: white;
-      text-shadow: -1px 0 #ddd, 0 1px #ddd, 1px 0 #ddd, 0 -1px #ddd;
+      font-size: 35px;
+      font-family: $font-family-pacifico;
+      color: rgb(255, 255, 255);
+      text-shadow: -1px 0 rgb(219, 140, 140), 0 1px rgb(219, 140, 140),
+        1px 0 rgb(219, 140, 140), 0 -1px rgb(219, 140, 140);
       display: inline-block;
       vertical-align: middle;
 
@@ -44,7 +46,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
 
 .portfolio-cell {

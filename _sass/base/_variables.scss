@@ -1,10 +1,12 @@
 /* TYPOGRAPHY */
-$font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-$font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-$font-family-logo: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+$font-family-main: "Source Sans Pro", Helvetica, Arial, sans-serif;
+$font-family-headings: "Pacifico", cursive, Arial, sans-serif;
+$font-family-pacifico: "Pacifico", cursive, Arial, sans-serif;
+$font-family-logo: "Source Sans Pro", Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
-$monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
+$monospace: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
+  DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, sans-serif !default;
 $font-size-code: 0.85em !default;
 $font-height-code: 1.3em !default;
 $border-radius: 4px !default;
@@ -26,18 +28,18 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 320px;
 
-
 /* THEME COLOR SCHEMES */
-html, html[data-theme="light"] {
-  --background: #ffffff;
+html,
+html[data-theme="light"] {
+  --background: #9c8aff;
   --blockquote: #eef7fa;
   --selection: #d4d4d4;
   --meta: #595959;
-  --link: #0072B5;
+  --link: #0072b5;
   --header-background: #24292e;
   --header-text: #ffffff;
   --header-link: #383838;
-  --code-background: #E0E0E0;
+  --code-background: #e0e0e0;
   --code-inline: #24292e;
   --text-shadow: #3f3f3f;
   --text: #262626;
@@ -56,10 +58,10 @@ html[data-theme="dark"] {
   --selection: #545d68; // selection
   --meta: #909dab; // meta
   --link: #00a8e0; // theme, link, link shadow header bg
-  --header-background: #2A3444; // Color before header image load
+  --header-background: #2a3444; // Color before header image load
   --header-text: #e7f3f4; // header text, feature img text
   --header-link: #adbac7; // header link, search color
-  --code-background: #2A3444;
+  --code-background: #2a3444;
   --code-inline: #d9b600;
   --text-shadow: #2d333b; // text shadow
   --text: #cdd9e5; // text
@@ -76,7 +78,8 @@ html[data-theme="dark"] {
 
 /* BASE16 CODE HIGHLIGHT */
 // Material Theme
-html, html[data-theme="light"] {
+html,
+html[data-theme="light"] {
   --base00: #302f2d; // Default Background
   --base01: #2e3c43; // Lighter Background (Used for status bars) - NOT USED
   --base02: #314549; // Selection Background

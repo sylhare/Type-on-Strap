@@ -3,89 +3,90 @@ layout: page
 ---
 
 <div class="home">
+  <!-- cycles through posts to get tags -->
+  {% assign rawtags = "" %} {% for post in site.posts %} {% if post.tags.size >
+  0 %} {% assign post_tags = post.tags | join:'|' | append:'|' %} {% assign
+  rawtags = rawtags | append:post_tags %} {% endif %} {% endfor %}
 
-    <!-- cycles through posts to get tags -->
-    {% assign rawtags = "" %}
-    {% for post in site.posts %}
-    {% if post.tags.size > 0 %}
-    {% assign post_tags = post.tags | join:'|' | append:'|' %}
-    {% assign rawtags = rawtags | append:post_tags %}
-    {% endif %}
-    {% endfor %}
+  <!-- cycles through art collection to get tags -->
+  {% assign art = site.art | map: 'tags' | join: ',' | split: ',' | uniq %} {%
+  for tag in art %} {% assign art_tags = tag | join: '|' | append: '|' %} {%
+  assign rawtags = rawtags | append: art_tags %} {% endfor %}
 
-    <!-- cycles through portfolio collection to get tags -->
-    {% assign portfolio = site.portfolio | map: 'tags' | join: ',' | split: ',' | uniq %}
-    {% for tag in portfolio %}
-    {% assign portfolio_tags = tag | join: '|' | append: '|' %}
-    {% assign rawtags = rawtags | append: portfolio_tags %}
-    {% endfor %}
+  <!-- cycles through music collection to get tags -->
+  {% assign music = site.music | map: 'tags' | join: ',' | split: ',' | uniq %}
+  {% for tag in music %} {% assign music_tags = tag | join: '|' | append: '|' %}
+  {% assign rawtags = rawtags | append: music_tags %} {% endfor %}
 
-    <!-- cycles through pages to get tags -->
-    {% for page in site.pages %}
-    {% if page.tags.size > 0 %}
-    {% assign page_tags = page.tags | join:'|' | append:'|' %}
-    {% assign rawtags = rawtags | append:page_tags %}
-    {% endif %}
-    {% endfor %}
+  <!-- cycles through pages to get tags -->
+  {% for page in site.pages %} {% if page.tags.size > 0 %} {% assign page_tags =
+  page.tags | join:'|' | append:'|' %} {% assign rawtags = rawtags |
+  append:page_tags %} {% endif %} {% endfor %}
 
-    <!-- Displays the list of tags-->
-    {% include default/tags_list.liquid tags=rawtags %}
+  <!-- Displays the list of tags-->
+  {% include default/tags_list.liquid tags=rawtags %}
 
-    <!-- Displays the posts and pages that contains the tag-->
-    <div class="posts">
-        {% for tag in tags %}
-        <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
-            <a href="#{{ tag | cgi_escape }}"><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag }}</a>
-            <a href="#{{ page.title }}" style="float: right"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"> </i> </a>
+  <!-- Displays the posts and pages that contains the tag-->
+  <div class="posts">
+    {% for tag in tags %}
+    <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
+      <a href="#{{ tag | cgi_escape }}"
+        ><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag }}</a
+      >
+      <a href="#{{ page.title }}" style="float: right"
+        ><i class="fas fa-chevron-up fa-lg" aria-hidden="true"> </i>
+      </a>
+    </h3>
 
-        </h3>
+    <!-- Posts and collection for each tags -->
+    <div class="tag-posts">
+      <!-- Pages -->
+      {% for page in site.pages %} {% if page.tags contains tag %}
+      <h5 class="tag-title">
+        <a href="{{ page.url | relative_url }}">
+          <i class="far fa-file-image" aria-hidden="true"></i>
+          {{ page.title }}
+        </a>
+        {% include blog/post_info.liquid date=page.date %}
+      </h5>
+      {% endif %} {% endfor %}
 
-        <!-- Posts and collection for each tags -->
-        <div class="tag-posts">
+      <!-- Posts -->
+      {% for post in site.posts %} {% if post.tags contains tag %}
+      <h5 class="tag-title">
+        <a href="{{ post.url | relative_url }}">
+          <i class="far fa-file-alt" aria-hidden="true"></i>
+          {{ post.title }}
+        </a>
 
-            <!-- Pages -->
-            {% for page in site.pages %}
-            {% if page.tags contains tag %}
-            <h5 class="tag-title">
-                <a href="{{ page.url | relative_url }}">
-                    <i class="far fa-file-image" aria-hidden="true"></i>
-                    {{ page.title }}
-                </a>
-                {% include blog/post_info.liquid date=page.date %}
-            </h5>
-            {% endif %}
-            {% endfor %}
+        {% include blog/post_info.liquid date=post.date %}
+      </h5>
+      {% endif %} {% endfor %}
 
-            <!-- Posts -->
-            {% for post in site.posts %}
-            {% if post.tags contains tag %}
-            <h5 class="tag-title">
-                <a href="{{ post.url | relative_url }}">
-                    <i class="far fa-file-alt" aria-hidden="true"></i>
-                    {{ post.title }}
-                </a>
+      <!-- Portfolio -->
+      {% for note in site.art %} {% if note.tags contains tag %}
+      <h5 class="tag-title">
+        <a href="{{ note.url | relative_url }}">
+          <i class="far fa-file" aria-hidden="true"></i>
+          {{ note.title }}
+        </a>
 
-                {% include blog/post_info.liquid date=post.date %}
-            </h5>
-            {% endif %}
-            {% endfor %}
+        {% include blog/post_info.liquid date=note.date %}
+      </h5>
+      {% endif %} {% endfor %}
 
-            <!-- Portfolio -->
-            {% for note in site.portfolio %}
-            {% if note.tags contains tag %}
-            <h5 class="tag-title">
-                <a href="{{ note.url | relative_url }}">
-                    <i class="far fa-file" aria-hidden="true"></i>
-                    {{ note.title }}
-                </a>
+      <!-- Portfolio -->
+      {% for note in site.music %} {% if note.tags contains tag %}
+      <h5 class="tag-title">
+        <a href="{{ note.url | relative_url }}">
+          <i class="far fa-file" aria-hidden="true"></i>
+          {{ note.title }}
+        </a>
 
-                {% include blog/post_info.liquid date=note.date %}
-            </h5>
-            {% endif %}
-            {% endfor %}
-
-        </div>
-        {% endfor %}
-
+        {% include blog/post_info.liquid date=note.date %}
+      </h5>
+      {% endif %} {% endfor %}
     </div>
+    {% endfor %}
+  </div>
 </div>
