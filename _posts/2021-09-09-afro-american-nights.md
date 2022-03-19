@@ -6,11 +6,8 @@ author: VPN8en
 excerpt_separator: <!--more-->
 ---
 
-AFRO-AMERICAN NIGHT w/ DJ Rabeatz and k-schef
-
-TROPICO FM PRESENTS
-
-Saturday, July 31
+| :--- | ---: |
+| ![](/assets/img/music/posts/afronight.png) | TROPICO FM PRESENTS AFRO-AMERICAN NIGHT w/ DJ Rabeatz and k-schef Saturday, July 31 |
 
 Tickets $5
 

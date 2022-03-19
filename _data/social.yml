@@ -1,16 +1,17 @@
 # RSS specific
-rss: true         # Icons on the footer
+rss: true # Icons on the footer
 feed:
-  path: feed.xml  # RSS feed path
+  path: feed.xml # RSS feed path
 
 # For the share button options at the bottom of the articles
 share:
-  email: true
+  email: false
   facebook: true
-  linkedin: true
-  pinterest: true
-  pocket:
+  linkedin: false
+  pinterest: false
+  pocket: false
   reddit: true
-  tumblr: true
+  tumblr: false
   twitter: true
-  wordpress:
+  instagram: true
+  wordpress: false
