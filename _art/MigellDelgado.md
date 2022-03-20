@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Migell Delgado
-feature-img: "/assets/img/art/migell.delgado/img/bg.jpg"
-img: "assets/img/art/migell.delgado/img/portrait.png"
+title: Migel Delgado
+feature-img: "/assets/img/art/Migel.delgado/img/bg.jpg"
+img: "assets/img/art/Migel.delgado/img/portrait.png"
 date: 19 March 2022
-tags: [Migell Delgado]
+tags: [Migel Delgado]
 ---
 
-# Migell Delgado
+# Migel Delgado
 
 | :--- | ---: |
-| ![](/assets/img/art/migell.delgado/img/portrait.png) | BFA Drawing Boise State University 2007 <br> MFA Boise State University 2011|
+| ![](/assets/img/art/Migel.delgado/img/portrait.png) | BFA Drawing Boise State University 2007 <br> MFA Boise State University 2011|
 
 ## About Me
 
@@ -22,9 +22,9 @@ As a visual artist my focus is the human constructs of borders as areas of tensi
 
 <div class="portfolio-grid">
   <div class="portfolio-cell">
-      <img alt="" class="" src="/assets/img/art/migell.delgado/img/art1.jpg" />
+      <img alt="" class="" src="/assets/img/art/Migel.delgado/img/art1.jpg" />
   </div>
   <div class="portfolio-cell">
-      <img alt="" class="" src="/assets/img/art/migell.delgado/img/art2.jpg" />
+      <img alt="" class="" src="/assets/img/art/Migel.delgado/img/art2.jpg" />
   </div>
 </div>
