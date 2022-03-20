@@ -10,11 +10,15 @@ tags: [Migell Delgado]
 # Migell Delgado
 
 | :--- | ---: |
-| ![](/assets/img/art/migell.delgado/img/portrait.png) | Born in 1981, I grew up in rural Idaho among the farm lands of the Snake River valley, the historic land of the Shoshone people. I learned to speak English at age 7 or so – however this would remain with me until age 18. I earned my BFA in Illustration from Boise State in 2006 and an MFA from The New York Academy of Art in 2009. |
+| ![](/assets/img/art/migell.delgado/img/portrait.png) | BFA Drawing Boise State University 2007 <br> MFA Boise State University 2011|
 
-My art stems from my experiences of being of mixed race Hispano-Indigenous and an ESL person growing up in dominant culture geography. The isolation of the area where I grew up provided a binary opposition of preservation of traditional cultural practices while simultaneously creating more distance between dominant culture and myself.
+## About Me
 
-The land itself became incredibly important and spiritually linked in my upbringing and it continues to be a subject in my work. The liminal experiences have many times been the center of dialogue in my work.
+I was born in Idaho in 1979 and grew up navigating the farming communities between Florida and back to Southern Idaho. I was heavily influenced by visual culture, and it has had a heavy influence in my artwork. I earned a BFA in drawing with a secondary emphasis in Mesoamerican studies in 2007. Likewise, I earned my MFA from Boise State University in 2011.
+
+## Artist Statement
+
+As a visual artist my focus is the human constructs of borders as areas of tension and unrest. Utilizing various mixed mediums on panel I envision the border as a liminal space that serves as a literal transitory space between lands and also serves as a phenomenological space of contention. Concepts such as borders and “homelands” identifiably relate for me in a quest to envision and create a body of work that specifically alludes to these contemporary issues. My family's narrative has a direct relationship with so many other families as they transition through this space of contention. I foresee liminal spaces of transition as metaphors of past “hyphenated” culture to today's growing “plural society.”
 
 <div class="portfolio-grid">
   <div class="portfolio-cell">
