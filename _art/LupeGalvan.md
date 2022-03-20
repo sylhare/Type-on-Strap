@@ -17,3 +17,15 @@ My art stems from my experiences of being of mixed race Hispano-Indigenous and a
 The land itself became incredibly important and spiritually linked in my upbringing and it continues to be a subject in my work. The liminal experiences have many times been the center of dialogue in my work.
 
 ![](/assets/img/art/lupe.galvan/img/art1.jpg)
+
+<div class="portfolio-grid">
+  <div class="portfolio-cell">
+      <img alt="" class="" src="/assets/img/art/lupe.galvan/img/art2.png" />
+  </div>
+  <div class="portfolio-cell">
+      <img alt="" class="" src="/assets/img/art/lupe.galvan/img/art3.png" />
+  </div>
+  <div class="portfolio-cell">
+      <img alt="" class="" src="/assets/img/art/lupe.galvan/img/art4.png" />
+  </div>
+</div>
