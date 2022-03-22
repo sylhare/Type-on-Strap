@@ -25,7 +25,7 @@ color_image: /assets/img/tropico.png # A bit transparent for color posts.
 # For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
 katex: true # Enable if using math markup
 mermaid: true # Enable mermaid-js for sequence and diagrams
-google_analytics: # Tracking ID, e.g. "UA-000000-01"
+google_analytics: "G-N2Q3S4R064" # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false # To respect the usage of cookies
 color_theme: auto # auto, dark or light
 
