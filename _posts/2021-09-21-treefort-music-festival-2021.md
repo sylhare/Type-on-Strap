@@ -3,7 +3,7 @@ layout: post
 title: Treefort 2021
 author: kschef
 tags: [Treefort]
-thumbnail: /assets/img/posts/tmf2021/lobo-thumb.jpeg
+thumbnail: /assets/img/posts/tmf2021/tmf-2021-thumb.png
 ---
 
 # Treefort 9 was a blast!
@@ -38,5 +38,8 @@ We are very excited to be back in ’22 for another showcase!
   </div>
   <div class="portfolio-cell">
       <img alt="" class="" src="/assets/img/posts/tmf2021/show3.jpeg" />
+  </div>
+  <div class="portfolio-cell">
+      <img alt="" class="" src="/assets/img/posts/tmf2021/irvin-lobo.JPG" />
   </div>
 </div>
