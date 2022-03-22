@@ -6,18 +6,19 @@ url: "https://tropico.fm"
 title: Tropico.FM # site's title
 description: "Trópico 208 was formed as an artist collective of like minded individuals who celebrate the rich art & music of countries like Mexico, Brazil, Bahamas, Colombia, and more. From art showcases to music festivals, we seek to put local artists of color into the spotlight." # used by search engines
 avatar: # Empty for no avatar in navbar
-favicon: assets/favicon.ico # Icon displayed in the tab
+favicon: assets/favicon-96x96.png # Icon displayed in the tab
 
 # Header and footer text
-header_text: Tropico.FM # Change Blog header text
-header_feature_image: assets/img/header/triangular.jpeg
+header_text: Boise's Newest Community Radio Project! # Change Blog header text
+header_caption: 103.1 Tropico FM # Change Blog header text
+header_feature_image: assets/img/header/header.jpeg
 header_feature_image_responsive: true
 footer_text: ©2022 Tropico.FM
 
 # Blog
 excerpt: true # Or "truncate" (first 250 characters), "false" to disable
 post_navigation: true
-color_image: /assets/img/lineart.png # A bit transparent for color posts.
+color_image: /assets/img/tropico.png # A bit transparent for color posts.
 
 # Features
 # More in the _data folder for share buttons, author and language
