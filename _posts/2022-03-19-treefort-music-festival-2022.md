@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Treefort 10
+title: Treefort 10 - Tropico FM Showcase
 author: benw
+thumbnail: /assets/img/music/posts/tf10-thumb.jpeg
 tags:
   [
     Treefort,

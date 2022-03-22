@@ -2,8 +2,9 @@
 layout: post
 title: Afro-American Night at the Neurolux
 tags: [Neurolux, Afrobeat]
-author: VPN8en
+author: kschef
 excerpt_separator: <!--more-->
+thumbnail: /assets/img/music/posts/afronight-thumb.png
 ---
 
 | :--- | ---: |

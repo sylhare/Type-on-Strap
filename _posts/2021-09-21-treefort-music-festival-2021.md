@@ -3,6 +3,7 @@ layout: post
 title: Treefort 2021
 author: kschef
 tags: [Treefort]
+thumbnail: /assets/img/posts/tmf2021/lobo-thumb.jpeg
 ---
 
 # Treefort 9 was a blast!
