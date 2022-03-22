@@ -43,14 +43,70 @@
 }
 
 .player {
-  width: 20%;
+  width: 30%;
   float: right;
+
+  /* --- Responsive --- */
+  @media screen and (max-width: $m-break) {
+    width: 100%;
+    float: clear;
+
+    iframe {
+      height: 0%;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    float: clear;
+    iframe {
+      height: 0%;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    float: clear;
+    iframe {
+      height: 0%;
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    width: 100%;
+    float: clear;
+    iframe {
+      height: 0%;
+    }
+  }
 }
 
 /* --- Post listing --- */
 .posts {
-  width: 80%;
+  width: 70%;
   float: left;
+
+  /* --- Responsive --- */
+  @media screen and (max-width: $m-break) {
+    width: 100%;
+    float: clear;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    float: clear;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    float: clear;
+  }
+
+  @media screen and (max-width: 380px) {
+    width: 100%;
+    float: clear;
+  }
+
   .post-teaser {
     @extend %padding-post;
     width: 100%;
