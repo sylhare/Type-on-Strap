@@ -5,7 +5,238 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Mon, 14 Mar 2022 13:42:27 -0700</pubDate>
+        <pubDate>Wed, 30 Mar 2022 02:45:07 -0700</pubDate>
+        
+          
+          <item>
+              <title>Grading Complex Interactive Coding Programs with Reinforcement Learning</title>
+              <link>/blog/play-to-grade/</link>
+              <guid isPermaLink="true">/blog/play-to-grade/</guid>
+              <description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;[Summary] tl;dr:&lt;/strong&gt;
+A tremendous amount of effort has been poured into training AI algorithms to competitively play games that computers have traditionally had trouble with, such as the retro games published by Atari, Go, DotA, and StarCraft II. The practical machine learning knowledge accumulated in developing these algorithms  has paved the way for people to now routinely train game-playing AI agents for many games. Following this line of work, we focus on a specific category of games – those developed by students as part of a programming assignment.  Can the same algorithms that master Atari games help us grade these game assignments? In our recent NeurIPS 2021 &lt;a href=&quot;https://arxiv.org/abs/2110.14615&quot;&gt;paper&lt;/a&gt;, we illustrate the challenges in treating interactive coding assignment grading as game playing and introduce the Play to Grade Challenge.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Massive Online Coding Education has reached striking success over the past decade. Fast internet speed, improved UI design, code editors that are embedded in a browser window allow educational platforms such as &lt;a href=&quot;https://code.org&quot;&gt;Code.org&lt;/a&gt; to build a diverse set of courses tailored towards students of different coding experiences and interest levels (for example, Code.org offers “Star War-themed coding challenge,” and “Elsa/Frozen themed for-loop writing”). As a non-profit organization, Code.org claims to have reached over 60 million learners across the world &lt;sup id=&quot;fnref:codeorgstats&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:codeorgstats&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Such organizations typically provide a variety of carefully constructed teaching materials such as videos and programming challenges.&lt;/p&gt;
+
+&lt;p&gt;A challenge faced by these platforms is that of grading assignments. It is well known that grading is critical to student learning &lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, in part because it motivates students to complete their assignments. Sometimes manual grading can be feasible in small settings, or automated grading used in simple settings such as when assignments are multiple choice or adopt a fill-in-the-blink modular coding structure. Unfortunately, many of the most exciting assignments, such as developing games or interactive apps, are also much more difficult to automatically evaluate. For such assignments, human teachers are currently needed to provide feedback and grading. This requirement, and the corresponding difficulty with scaling up manual grading, is one of the biggest obstacles of online coding education. Without automated grading systems,  students who lack additional teacher resources cannot get useful  feedback to help them learn and advance through the materials provided.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_50&quot; src=&quot;https://media.giphy.com/media/LhC4oRHFahkxvryfQA/giphy.gif&quot; style=&quot;width:40%&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 1&lt;/b&gt;: This is a popular coding game offered by Code.org. A student would write a program to create this game.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Programming a game that is playable is exciting for students who are learning to code. &lt;a href=&quot;https://code.org&quot;&gt;Code.org&lt;/a&gt; provides many game development assignments in their curriculum. In these assignments, students write JavaScript programs in a code editor embedded in the web browser. Game assignments are great for teachers to examine student’s progress as well: students not only need to grasp basic concepts like if-conditionals and for-loops but use these concepts to write the physical rules of the game world — calculate the trajectories of objects, resolve inelastic collision of two objects, and keep track of game states. To deal with all of these complexities, students need to use abstraction (functions/class) to encapsulate each functionality in order to manage this complex set of logic.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure2.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 2&lt;/b&gt;: In Code.org, students program in an interactive code interface, where they can write the program in the coding area, hit run and play their game.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Automated grading on the code text alone can be an incredibly hard challenge, even for introductory level computer science assignments. As examples, two solutions which are only slightly different in text can have very different behaviors, and two solutions that are written in very different ways can have the same behaviors. As such, some models that people develop for grading code can be as complex as those used to understand paragraphs of natural language. But, sometimes, grading code can be even more difficult than grading an essay because coding submissions can be in different programming languages. In this situation, one must not only develop a program that can understand many programming languages, but guard against the potential that the grader is more accurate for some languages than others. A Finally, these programs must be able to generalize to new assignments because correct grading is just as necessary for the first student working on an assignment as the millionth – the collect-data, train, deploy cycle is not quite suitable in this context. We don’t have the luxury of collecting a massive amount of labeled dataset to train a fully supervised learning algorithm for each and every assignment.&lt;/p&gt;
+
+&lt;p&gt;In a &lt;a href=&quot;https://arxiv.org/abs/2110.14615&quot;&gt;recent paper&lt;/a&gt;, we circumvent these challenges by developing a method that grades assignments by playing them, without needing to look at the source code at all. Despite this different approach, our method still manages to provide scalable feedback that potentially can be deployed in a massively-online setting.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-play-to-grade-challenge&quot;&gt;The Play to Grade Challenge&lt;/h2&gt;
+
+&lt;p&gt;Our solution to these problems is to ignore the code text entirely and to grade an assignment by having a grading algorithm play it. We represent the underlying game of each program submission as a Markov Decision Process (MDP), which defines a state space, action space, reward function, and transition dynamics. By running each student’s program, we can build the MDP directly without needing to read or understand the underlying code. You can read more about the MDP framework here: &lt;sup id=&quot;fnref:lilianweng&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:lilianweng&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since all student programs are written for the same assignment, these programs should generate MDP with a lot of commonalities, such as shared state and action space. After playing the game and fully constructing the MDP for an assignment, all we need is to compare the MDP specified by the student’s program (student MDP) to the teacher’s solution (reference MDP) and determine &lt;strong&gt;if these two MDPs are the same&lt;/strong&gt;. What sets this challenge apart from any other reinforcement learning problems is the fact that a &lt;strong&gt;classification&lt;/strong&gt; needs to be made at the end of this agent’s interaction with this MDP — the decision of whether the MDP is the same as the reference MDP or not.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postfigurethird&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/distance.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 3&lt;/b&gt;: We need to build an approximate distance function D that determines the distance between the student program's underlying MDP (black dot) and correct MDPs (blue dots) and incorrect MDPs (red dots). Read more about how we build this distance function in our &lt;a href=&quot;https://arxiv.org/abs/2110.14615&quot;&gt;paper&lt;/a&gt;.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;In order to solve this challenge, we present an algorithm with two components: an agent that plays the game and can reliably reach bug states, and a classifier that can recognize bug states (i.e., provide the probability of the observed state being a bug). Both components are necessary for accurate grading: an agent that reaches all states but cannot determine if any represents bugs is just as bad as a perfect classifier paired with an agent that is bad at taking actions which might cause bugs. Imagine a non-optimal agent that never catches the ball (in the example above) – this agent will never be able to test if the wall, or paddle, or goal does not behave correctly.&lt;/p&gt;
+
+&lt;p&gt;An ideal agent needs to produce &lt;strong&gt;differential trajectories&lt;/strong&gt;, i.e., sequences of actions that can be used to differentiate two MDPs, and must contain at least one bug-triggering state if the trajectory is produced from the incorrect MDP. Therefore, we need both a correct MDP and a few incorrect MDPs to teach the agent and the classifier. These incorrect MDPs are incorrect solutions that can either be provided by the teacher, or come from manually grading a few student programs to find common issues. Although having to manually label incorrect MDPs is an annoyance, we show that the total amount of effort is generally significantly lower than grading each assignment: in fact, we show that for the task we solve in the paper, you only need 5 incorrect MDPs to reach a decent performance (see the appendix section of our paper).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure3_new.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 4&lt;/b&gt;: We build an MDP wrapper around the student program that allows the agent to interact with the program (while the original program might only allow human control, i.e., we override mouse / keyboard events.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;recognizing-bugs-from-scratch&quot;&gt;Recognizing Bugs from Scratch&lt;/h2&gt;
+
+&lt;p&gt;Here are three incorrect programs and what they look like when played. Each incorrect program behaves differently from the correct program:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;One program’s wall does not allow the ball to bounce on it.&lt;/li&gt;
+  &lt;li&gt;Another program’s goal post does not let the ball go through.&lt;/li&gt;
+  &lt;li&gt;The last program spawns 2 new balls whenever the ball bounces on the wall.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postfigurethird&quot; src=&quot;https://media.giphy.com/media/i8ITbB6QtNS67t9dk6/giphy.gif&quot; /&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;https://media.giphy.com/media/JuQn32VatSaW1vFCgi/giphy.gif&quot; /&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;https://media.giphy.com/media/gQKLJuq49sjjkEube9/giphy.gif&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 5&lt;/b&gt;: Different types of incorrect student programs.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;A challenge with building differential trajectories is that one must know which state is a bug triggering state. Previous works &lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt; have made the strong assumption that one would automatically know when they encountered a bug, potentially because they expect the game program to crash after encountering a bug. Because of this assumption, they focus their efforts on building pure-exploration agents that try to visit as many states as possible. However, in reality, bugs can be difficult to identify and do not all cause the game to crash. For example, a ball that is supposed to bounce off of a wall is now piercing through it and flying off into oblivion. These types of behavioral anomalies motivate the use of a predictive model that can take in the current game state and determine whether it is anomalous or not.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure4.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 6&lt;/b&gt;: The chicken-and-egg cold-start problem. The agent doesn't know how to reach bug state, and the classifier does not know what is a bug.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Unfortunately, training a model to predict if a state is a bug state is non-trivial. This is because, although we have labels for some MDPs, these labels are not on the state-level (i.e., not all states in an incorrect MDP are bug states). Put another way, our labels can tell us when a bug has been encountered but cannot tell us what specific action caused the bug. The determination of whether bugs exist in a program can be framed as a chicken-and-egg problem where, if bug states could be unambiguously determined one would only need to explore the state space, and if the exploration was optimal one would only need to figure out how to determine if the current state exhibited a bug.&lt;/p&gt;
+
+&lt;h2 id=&quot;collaborative-reinforcement-learning&quot;&gt;Collaborative Reinforcement Learning&lt;/h2&gt;
+
+&lt;p&gt;Fortunately, these types of problems can generally be solved through the expectation-maximization framework, which involves an intimate collaboration between the neural network classifier and the reinforcement learning agent. We propose &lt;strong&gt;collaborative reinforcement learning&lt;/strong&gt;, an expectation-maximization approach, where we use a random agent to produce a dataset of trajectories from the correct and incorrect MDP to teach the classifier. Then the classifier would assign a score to each state indicating how much the classifier believes the state is a bug-triggering state. We use this score as reward and train the agent to reach these states as often as possible for a new dataset of trajectories to train the classifier.&lt;/p&gt;
+
+&lt;p&gt;After using the RL agent to interact with the MDP to produce trajectories, we can try out  different ways to learn a classifier that can classify a state as a bug or not (a binary label). Choosing the right label  is important because this label will become the reward function for the agent, so it can learn to reach bug states more efficiently. However, we only know if the MDP (the submitted code) is correct or broken, but we don’t have labels for the underlying states. Learning state-level labels becomes a challenge!&lt;/p&gt;
+
+&lt;p&gt;We tested out several types of classifiers: (1) a noisy classifier that classifies all states in a broken MDP as broken, (2) a Gaussian Mixture Model that treats all states independently, (3) a Variational Autoencoder that also treats all states independently but directly models non-linear interactions among the features, or (4) an LSTM that jointly models the teacher program as an MDP (HoareLSTM) and an LSTM that models the student program as an MDP (Contrastive HoareLSTM) – with a distance function that compares the two MDPs, borrowing distance notions from literature in MDP homomorphism&lt;sup id=&quot;fnref:homomorph&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:homomorph&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:lihong&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:lihong&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:kipf&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:kipf&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:givan&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:givan&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this toy environment, the agent drives a car on a 2D plane. Whenever the agent drives the car into the outer rim of this area (space between the boundary and red dotted line), a bug will cause the car to get stuck (Leftmost panel in &lt;a href=&quot;#figure5&quot;&gt;Figure 5&lt;/a&gt;). Being stuck means the car’s physical movement is altered, resulting in back-and-forth movement around the same location. The bug classifier needs to recognize the resulting states (position and velocity) of the car being “stuck”, by correctly outputting a binary label (bug) for these states.&lt;/p&gt;
+
+&lt;p&gt;In this setting, there is only one type of bug. Most classifiers do well when the agent only drives a straight line (single-direction agent). However, when the agent randomly samples actions at each state, simpler classifiers can no longer differentiate between bug and non-bug states with high accuracy.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;figure5&quot;&gt;&lt;/a&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure5_env.png&quot; style=&quot;padding:0; width:25%&quot; /&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure5_single_direction_agent.png&quot; style=&quot;padding:0; width:35%&quot; /&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure5_random_agent.png&quot; style=&quot;padding:0;width:35%&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 7&lt;/b&gt;: Performance of different bug classification models with different RL agents.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can increase the difficulty of this setting to see if collaborative training can make the agent operate in the environment with an intention to trigger bugs. In this toy environment, now the bugs will only be triggered in red boxes (Leftmost panel in &lt;a href=&quot;#figure6&quot;&gt;Figure 6&lt;/a&gt; below). We can see that with only one round of collaborative training (“CT Round 1”), the performances of ALL classifiers are improved, including weaker classifiers. This is understandable, as the agent learns to gradually collect better datasets to train classifiers – and higher quality datasets lead to stronger classifiers. For example, variational auto-encoder started only with 32% precision, but it increased to 74.8% precision after 2 rounds of collaborative training.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;figure6&quot;&gt;&lt;/a&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure6_env.png&quot; style=&quot;padding:0; width:25%&quot; /&gt;
+&lt;img class=&quot;postfigurethird&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure6_training_improvement_with_CI.png&quot; style=&quot;padding:0; width:70%&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 8&lt;/b&gt;: Collaborative training improves bug classifier performance across different models. This shows how important it is for the RL agent to produce &lt;b&gt;differential trajectories&lt;/b&gt;, which will allow classifiers to obtain higher performance.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;We can also visualize how the collaborative training quickly allows the agent to learn to explore states that most-likely contain bugs by visualizing the trajectories (see figure below). Initially the agent just explores the space uniformly (blue curves), but after one round of collaborative training (CT), it learns to focus on visiting the potential bug areas (regions marked by red boxes) (red curves).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;figure7&quot;&gt;&lt;/a&gt;
+&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure7.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 9&lt;/b&gt;: Visualization of the paths taken by the RL agent (each line represents one trajectory). After collaborative training (CT), the agent quickly focuses only on visiting potentially bug states (relying on the signal provided by the bug classifiers).
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;grading-bounce&quot;&gt;Grading Bounce&lt;/h2&gt;
+
+&lt;p&gt;Next, we returned to the motivating example for this type of approach: grading real student submissions. With help from &lt;a href=&quot;https://code.org&quot;&gt;Code.org&lt;/a&gt;, we are able to verify the algorithm’s performance on a massive amount of unlabeled, ungraded student submissions. The game &lt;a href=&quot;https://studio.code.org/s/course3/lessons/15/levels/10&quot;&gt;Bounce&lt;/a&gt;, from Code.org’s &lt;a href=&quot;https://studio.code.org/s/course3/&quot;&gt;Course3&lt;/a&gt; for students in 4th and 5th grade, provides a real-life dataset of what variations of different bugs and behaviors in student programs should look like. The dataset is compiled of 453,211 students who made an attempt on this assignment. In total, this dataset consists of 711,274 programs.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;figure8&quot;&gt;&lt;/a&gt;
+&lt;img class=&quot;postimage_50&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure8_table.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 10&lt;/b&gt;: Each program has a binary label (correct or broken) associated with it. We only have 11 programs as our training data.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;We train our agent and classifier on 10 broken programs that we wrote without looking at any of the student’s submissions. The 10 programs contain bugs that we “guess” to be most likely to occur, and we use them to train 10 agents that learn to reach bug states in these 10 programs. This means that in our training dataset, we have 1 correct program and 10 broken programs. Even with only 11 labeled programs, our agent and classifier can get &lt;strong&gt;99.5%&lt;/strong&gt; precision at identifying a bug program and &lt;strong&gt;93.4-94%&lt;/strong&gt; accuracy overall – the agent is able to trigger most of the bugs and the classifier recognizes the bug states using only 10 broken programs. Though for other games, especially more complicated games, the number of training programs will vary. We strongly believe the number is still in magnitude smaller than training supervised code-as-text algorithms. This demonstration shows the promise of reformulating code assignment grading as the Play to Grade.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;figure9&quot;&gt;&lt;/a&gt;
+&lt;img class=&quot;postimage_50&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure9_table.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 11&lt;/b&gt;: We show superior performance compared to training a simple code-as-text classifier. &lt;b&gt;For complex, interactive programs, Play to Grade is the most data efficient solution.&lt;/b&gt;
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;what-is-next&quot;&gt;What is Next?&lt;/h2&gt;
+
+&lt;p&gt;We started this project by making the argument that sometimes it is far easier to grade a complex coding assignment not by looking at the code text but by playing it. Using Bounce, we demonstrated that in the simple task of identifying if a program has a bug or not (a binary task, nonetheless), we are able to achieve striking accuracy with only 11 labeled programs. We provide a simulator and all of the student’s programs on this &lt;a href=&quot;https://github.com/windweller/play-to-grade/&quot;&gt;Github repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-label-bounce&quot;&gt;Multi-label Bounce&lt;/h3&gt;
+
+&lt;p&gt;One promising direction for future work is to expand beyond pass/fail binary feedback, and actually identify which bug is in the student’s program and provide that information. Our Bounce dataset enables this by providing multi-error labels, as shown in the table below. The multi-error label setting was not solved by our current algorithm and remains an open challenge!&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;figure10&quot;&gt;&lt;/a&gt;
+&lt;img class=&quot;postimage_50&quot; src=&quot;/blog/assets/img/posts/2022-03-28-play-to-grade/figure10_multi.png&quot; style=&quot;padding:0;&quot; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+&lt;b&gt;Figure 12&lt;/b&gt;: Each program has a binary label (correct or broken) associated with it. We only have 11 programs as our training data.
+&lt;/figcaption&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;more-than-one-correct-solution&quot;&gt;More than One Correct Solution&lt;/h3&gt;
+
+&lt;p&gt;Oftentimes, students create solutions that are creative. Creative solutions are different, but not wrong. For example, students can change the texture pattern of the ball or paddle; or they can make the paddle move much faster. How to set the boundary between “being creative” and “being wrong”? This is not a discussion that happens often in AI, but is of huge importance in education. Though we didn’t use the Bounce dataset to focus on the problem of understanding creativity, our work can still use distance measures to set a “tolerance threshold” to account for creativity.&lt;/p&gt;
+
+&lt;h3 id=&quot;for-educators&quot;&gt;For Educators&lt;/h3&gt;
+
+&lt;p&gt;We are interested in collecting a suite of interactive coding assignments and creating a dataset for future researchers to work on this problem. Feel free to reach out to us and let us know what you would consider as important in grading and giving students feedback on their coding assignments!&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Providing automated feedback for coding is an important area of research in computational education, and an important area for building fully autonomous coding education pipeline (that can generate coding assignment, grade assignment, and teach interactively). Providing a generalizable algorithm that can play interactive student programs in order to give feedback is an important problem for education and an exciting intellectual challenge for the reinforcement learning community. In this work, we introduce the challenge and a dataset, set up the MDP distance framework that is highly data efficient, algorithms that achieve high accuracy, and demonstrate this is a promising direction of applying machine learning to assist education.&lt;/p&gt;
+
+&lt;p&gt;This blog post is based on the following paper:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“Play to Grade: Testing Coding Games as Classifying Markov Decision Process.” Allen Nie, Emma Brunskill, and Chris Piech. Advances in Neural Information Processing Systems 34 (2021). &lt;a href=&quot;https://arxiv.org/abs/2110.14615&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
+
+&lt;p&gt;Many thanks to Emma Brunskill, Chris Piech for their guidance on the project. Many thanks to Mike Wu, Ali Malik, Yunsung Kim, Lisa Yan, Tong Mu, and Henry Zhu for their discussion and feedback. Special thanks to &lt;a href=&quot;https://www.code.org&quot;&gt;code.org&lt;/a&gt;, and Baker Franke, for many years of collaboration and generously providing the research community with data. Thanks to Stanford Hoffman-Yee Human Centered AI grant for supporting AI in education. Thanks for the numerous rounds of edits from Megha Srivastava and Jacob Schreiber.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:codeorgstats&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Code.org displays this statistics on their landing webpage. &lt;a href=&quot;#fnref:codeorgstats&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;William G Bowen. The ‘cost disease’ in higher education: is technology the answer? The Tanner Lectures Stanford University, 2012. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:lilianweng&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html&quot;&gt;https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html&lt;/a&gt; &lt;a href=&quot;#fnref:lilianweng&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Gordillo, Camilo, Joakim Bergdahl, Konrad Tollmar, and Linus Gisslén. “Improving Playtesting Coverage via Curiosity Driven Reinforcement Learning Agents.” arXiv preprint arXiv:2103.13798 (2021). &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Zhan, Zeping, Batu Aytemiz, and Adam M. Smith. “Taking the scenic route: Automatic exploration for videogames.” arXiv preprint arXiv:1812.03125 (2018). &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Zheng, Yan, Xiaofei Xie, Ting Su, Lei Ma, Jianye Hao, Zhaopeng Meng, Yang Liu, Ruimin Shen, Yingfeng Chen, and Changjie Fan. “Wuji: Automatic online combat game testing using evolutionary deep reinforcement learning.” In 2019 34th IEEE/ACM International Conference on Automated Software Engineering (ASE), pp. 772-784. IEEE, 2019. &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:homomorph&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Pablo Samuel Castro, Prakash Panangaden, and Doina Precup. Equivalence relations in fully and partially observable markov decision processes. In Twenty-First International Joint Conference on Artificial Intelligence, 2009. &lt;a href=&quot;#fnref:homomorph&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:lihong&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Lihong Li, Thomas J Walsh, and Michael L Littman. Towards a unified theory of state abstraction for mdps. ISAIM, 4:5, 2006. &lt;a href=&quot;#fnref:lihong&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:kipf&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Elise van der Pol, Thomas Kipf, Frans A Oliehoek, and Max Welling. Plannable approximations to mdp homomorphisms: Equivariance under actions. arXiv preprint arXiv:2002.11963, 2020. &lt;a href=&quot;#fnref:kipf&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:givan&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Robert Givan, Thomas Dean, and Matthew Greig. Equivalence notions and model minimization in markov decision processes. Artificial Intelligence, 147(1-2):163–223, 2003. &lt;a href=&quot;#fnref:givan&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+              <pubDate>Mon, 28 Mar 2022 00:00:00 -0700</pubDate>
+          </item>
+          
         
           
           <item>
@@ -2520,720 +2751,6 @@ Illustration of our approach. We integrate many data sources to run, evaluate, a
 &lt;/div&gt;
 </description>
               <pubDate>Mon, 16 Aug 2021 00:00:00 -0700</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>What Matters in Learning from Offline Human Demonstrations for Robot Manipulation</title>
-              <link>/blog/robomimic/</link>
-              <guid isPermaLink="true">/blog/robomimic/</guid>
-              <description>&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
-
-&lt;p&gt;Imitation Learning is a promising approach to endow robots with various complex manipulation capabilities. By allowing robots to learn from datasets collected by humans, robots can learn to perform the same skills that were demonstrated by the human. Typically, these datasets are collected by having humans control robot arms, guiding them through different tasks. While this paradigm has proved effective, a lack of open-source human datasets and reproducible learning methods make assessing the state of the field difficult. In this paper, we conduct an extensive study of six offline learning algorithms for robot manipulation on five simulated and three real-world multi-stage manipulation tasks of varying complexity, and with datasets of varying quality. Our study analyzes the most critical challenges when learning from offline human data for manipulation.&lt;/p&gt;
-
-&lt;p&gt;Based on the study, we derive several lessons to understand the challenges in learning from human demonstrations, including the sensitivity to different algorithmic design choices, the dependence on the quality of the demonstrations, and the variability based on the stopping criteria due to the different objectives in training and evaluation. We also highlight opportunities for learning from human datasets, such as the ability to learn proficient policies on challenging, multi-stage tasks beyond the scope of current reinforcement learning methods, and the ability to easily scale to natural, real-world manipulation scenarios where only raw sensory signals are available.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;We have open-sourced our datasets and all algorithm implementations to facilitate future research and fair comparisons in learning from human demonstration data.&lt;/strong&gt; Please see the &lt;a href=&quot;https://arise-initiative.github.io/robomimic-web/&quot;&gt;robomimic website&lt;/a&gt; for more information.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/overview.png&quot; class=&quot;postimagetwothird&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-In this study, we investigate several challenges of offline learning from human datasets and extract lessons to guide future work.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;why-is-learning-from-human-labeled-datasets-difficult&quot;&gt;Why is learning from human-labeled datasets difficult?&lt;/h2&gt;
-
-&lt;p&gt;We explore five challenges in learning from human-labeled datasets.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/challenges.png&quot; class=&quot;postimagetwothird&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;(C1) Unobserved Factors in Human Decision Making.&lt;/strong&gt; Humans are not perfect Markovian agents. In addition to what they currently see, their actions may be influenced by other external factors - such as the device they are using to control the robot and the history of the actions that they have provided.
-&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;(C2) Mixed Demonstration Quality.&lt;/strong&gt; Collecting data from multiple humans can result in mixed quality data, since some people might be better quality supervisors than others. 
-&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;(C3) Dependence on dataset size.&lt;/strong&gt; When a robot learns from an offline dataset, it needs to understand how it should act (action) in every scenario that it might encounter (state). This is why the coverage of states and actions in the dataset matters. Larger datasets are likely to contain more situations, and are therefore likely to train better robots.
-&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;(C4) Train Objective ≠ Eval Objective.&lt;/strong&gt; Unlike traditional supervised learning, where validation loss is a strong indicator of how good a model is, policies are usually trained with surrogate losses. Consider an example where we train a policy via Behavioral Cloning from a set of demonstrations on a block lifting task. Here, the policy is trained to replicate the actions taken by the demonstrator, but this is not necessarily equivalent to optimizing the block lifting success rate (see &lt;a href=&quot;https://arxiv.org/abs/1011.0686&quot;&gt;the Dagger paper&lt;/a&gt; for a more precise explanation). This makes it hard to know which trained policy checkpoints are good without trying out each and every model directly on the robot – a time consuming process.
-&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;(C5) Sensitivity to Agent Design Decisions.&lt;/strong&gt; Performance can be very sensitive to important agent design decisions, like the observation space and hyperparameters used for learning.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;study-design&quot;&gt;Study Design&lt;/h2&gt;
-
-&lt;p&gt;In this section, we summarize the tasks (5 simulated and 3 real), datasets (3 different variants), algorithms (6 offline methods, including 3 imitation and 3 batch reinforcement), and observation spaces (2 main variants) that we explored in our study.&lt;/p&gt;
-
-&lt;h3 id=&quot;tasks&quot;&gt;Tasks&lt;/h3&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_lift.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_can.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_tool_hang.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Tool Hang
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_square.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Square
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_lift_real.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift (Real)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_can_real.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can (Real)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_tool_hang_real.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Tool Hang (Real)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/task_transport.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-We collect datasets across 6 operators of varying proficiency and evaluate offline policy learning methods on 8 challenging manipulation tasks that test a wide range of manipulation capabilities including pick-and-place, multi-arm coordination, and high-precision insertion and assembly.
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;task-reset-distributions&quot;&gt;Task Reset Distributions&lt;/h3&gt;
-
-&lt;p&gt;When measuring the task success rate of a policy, the policy is evaluated across several trials. At the start of each trial, the initial placement of all objects in the task are randomized from a task reset distribution. The videos below show this distribution for each task. This gives an impression of the range of different scenarios that a trained policy is supposed to be able to handle.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_lift.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Lift
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_can.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Can
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_tool_hang.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Tool Hang
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_square.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Square
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_lift_real.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Lift (Real)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_can_real.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Can (Real)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_tool_hang_real.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Tool Hang (Real)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/reset_transport.gif&quot; class=&quot;postimage_unpadded&quot; /&gt;
-  &lt;figcaption&gt;
-  Transport
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-We show the task reset distributions for each task, which governs the initial placement of all objects in the scene at the start of each episode. Initial states are sampled from this distribution at both train and evaluation time.
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;datasets&quot;&gt;Datasets&lt;/h3&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/dataset_overview.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-We collected 3 kinds of datasets in this study.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;machine-generated&quot;&gt;Machine-Generated&lt;/h4&gt;
-
-&lt;p&gt;These datasets consist of rollouts from a series of &lt;a href=&quot;https://arxiv.org/abs/1801.01290&quot;&gt;SAC&lt;/a&gt; agent checkpoints trained on Lift and Can, instead of humans. As a result, they contain random, suboptimal, and expert data due to the varied success rates of the agents that generated the data. This kind of mixed quality data is common in offline RL works (e.g. &lt;a href=&quot;https://github.com/rail-berkeley/d4rl/tree/master/d4rl&quot;&gt;D4RL&lt;/a&gt;, &lt;a href=&quot;https://github.com/deepmind/deepmind-research/tree/master/rl_unplugged&quot;&gt;RLUnplugged&lt;/a&gt;).&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_lift_rb_1.5k.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift (MG)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_can_rb_3.9k.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can (MG)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Lift and Can Machine-Generated datasets.
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;proficient-human&quot;&gt;Proficient-Human&lt;/h4&gt;
-
-&lt;p&gt;These datasets consist of 200 demonstrations collected from a single proficient human operator using &lt;a href=&quot;https://roboturk.stanford.edu/&quot;&gt;RoboTurk&lt;/a&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_lift_se.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift (PH)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_can_se.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can (PH)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_square_se.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Square (PH)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_se_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (PH)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_tool_hang_se_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Tool Hang (PH)
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Proficient-Human datasets generated by 1 proficient operator (with the exception of Transport, which had 2 proficient operators working together).
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;multi-human&quot;&gt;Multi-Human&lt;/h4&gt;
-
-&lt;p&gt;These datasets consist of 300 demonstrations collected from six human operators of varied proficiency using &lt;a href=&quot;https://roboturk.stanford.edu/&quot;&gt;RoboTurk&lt;/a&gt;. Each operator falls into one of 3 groups - “Worse”, “Okay”, and “Better” – each group contains two operators. Each operator collected 50 demonstrations per task. As a result, these datasets contain mixed quality human demonstration data. We show videos for a single operator from each group.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_lift_mh_worse_1.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift (MH) - Worse
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_lift_mh_okay_1.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift (MH) - Okay
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_lift_mh_better_1.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Lift (MH) - Better
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Multi-Human Lift dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_can_mh_worse_1_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can (MH) - Worse
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_can_mh_okay_1_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can (MH) - Okay
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_can_mh_better_1.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Can (MH) - Better
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Multi-Human Can dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_square_mh_worse_1_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Square (MH) - Worse
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_square_mh_okay_1_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Square (MH) - Okay
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_square_mh_better_1_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Square (MH) - Better
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Multi-Human Square dataset. The videos show three operators - one that's &quot;worse&quot; (left), &quot;okay&quot; (middle) and &quot;better&quot; (right).
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_mh_worse_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (MH) - Worse-Worse
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_mh_okay_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (MH) - Okay-Okay
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_mh_better_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (MH) - Better-Better
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_mh_worse_okay_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (MH) - Worse-Okay
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_mh_worse_better_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (MH) - Worse-Better
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/playback_transport_mh_okay_better_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport (MH) - Okay-Better
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Multi-Human Transport dataset. These were collected using pairs of operators with &lt;a href=&quot;https://arxiv.org/abs/2012.06738&quot;&gt;Multi-Arm RoboTurk&lt;/a&gt; (each one controlled 1 robot arm). We collected 50 demonstrations per combination of the operator subgroups.
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;algorithms&quot;&gt;Algorithms&lt;/h3&gt;
-
-&lt;p&gt;We evaluated 6 different offline learning algorithms in this study, including 3 imitation learning and 3 batch (offline) reinforcement learning algorithms.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/algo_overview.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-We evaluated 6 different offline learning algorithms in this study, including 3 imitation learning and 3 batch (offline) reinforcement learning algorithms.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;BC&lt;/strong&gt;: standard Behavioral Cloning, which is direct regression from observations to actions.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;BC-RNN&lt;/strong&gt;: Behavioral Cloning with a policy network that’s a recurrent neural network (RNN), which allows modeling temporal correlations in decision-making.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;HBC&lt;/strong&gt;: Hierarchical Behavioral Cloning, where a high-level subgoal planner is trained to predict future observations, and a low-level recurrent policy is conditioned on a future observation (subgoal) to predict action sequences (see &lt;a href=&quot;https://arxiv.org/abs/2003.06085&quot;&gt;Mandlekar*, Xu* et al. (2020)&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/2012.06738&quot;&gt;Tung*, Wong* et al. (2021)&lt;/a&gt; for more details).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;BCQ&lt;/strong&gt;: Batch-Constrained Q-Learning, a batch reinforcement learning method proposed in &lt;a href=&quot;https://arxiv.org/abs/1812.02900&quot;&gt;Fujimoto et al. (2019)&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CQL&lt;/strong&gt;: Conservative Q-Learning, a batch reinforcement learning method proposed in &lt;a href=&quot;https://arxiv.org/abs/2006.04779&quot;&gt;Kumar et al. (2020)&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;IRIS&lt;/strong&gt;: Implicit Reinforcement without Interaction, a batch reinforcement learning method proposed in &lt;a href=&quot;https://arxiv.org/abs/1911.05321&quot;&gt;Mandlekar et al. (2020)&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;observation-spaces&quot;&gt;Observation Spaces&lt;/h3&gt;
-
-&lt;p&gt;We study two different observation spaces in this work – low-dimensional observations and image observations.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/obs_overview.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-We study two different observation spaces in this work.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h4 id=&quot;image-observations&quot;&gt;Image Observations&lt;/h4&gt;
-
-&lt;p&gt;We provide examples of the image observations used in each task below.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurehalf&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/obs_can_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Most tasks have a front view and wrist view camera. The front view matches the view provided to the operator during data collection.
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurehalf&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/obs_tool_hang_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Tool Hang has a side view and wrist view camera. The side view matches the view provided to the operator during data collection.
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurefourfifths&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/obs_transport_trim.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Transport has a shoulder view and wrist view camera per arm. The shoulder view cameras match the views provided to each operator during data collection.
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;summary-of-lessons-learned&quot;&gt;Summary of Lessons Learned&lt;/h2&gt;
-
-&lt;p&gt;In this section, we briefly highlight the lessons we learned from our study. See the paper for more thorough results and discussion.&lt;/p&gt;
-
-&lt;h3 id=&quot;lesson-1-history-dependent-models-are-extremely-effective&quot;&gt;Lesson 1: History-dependent models are extremely effective.&lt;/h3&gt;
-
-&lt;p&gt;We found that there is a substantial performance gap between BC-RNN and BC, which highlights the benefits of history-dependence. This performance gap is larger for longer-horizon tasks (e.g. ~55% for the Transport (PH) dataset compared to ~5% for the Square (PH) dataset)) and also larger for multi-human data compared to single-human data (e.g.~25% for Square (MH) compared to ~5% for Square (PH)).&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/lesson_1.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Methods that make decisions based on history, such as BC-RNN and HBC, outperform other methods on human datasets.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;lesson-2-batch-offline-rl-struggles-with-suboptimal-human-data&quot;&gt;Lesson 2: Batch (Offline) RL struggles with suboptimal human data.&lt;/h3&gt;
-
-&lt;p&gt;Recent batch (offline) RL algorithms such as BCQ and CQL have demonstrated excellent results in learning from suboptimal and multi-modal machine-generated datasets. Our results confirm the capacity of such algorithms to work well – BCQ in particular performs strongly on our agent-generated MG datasets that consist of a diverse mixture of good and poor policies (for example, BCQ achieves 91.3% success rate on Lift (MG) compared to BC which achieves 65.3%).&lt;/p&gt;
-
-&lt;p&gt;Surprisingly though, neither BCQ nor CQL performs particularly well on these human-generated datasets. For example, BCQ and CQL achieve 62.7% and 22.0% success respectively on the Can (MH) dataset, compared to BC-RNN which achieves 100% success. This puts the ability of such algorithms to learn from more natural dataset distributions into question (instead of those collected via RL exploration or pre-trained agents). There is an opportunity for future work in batch RL to resolve this gap.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/lesson_2.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-While batch (offline) RL methods are proficient at dealing with mixed quality machine-generated data, they struggle to deal with mixed quality human data.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimagefourfifth&quot;&gt;
-  &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/can_paired.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-&lt;/video&gt;
-&lt;figcaption&gt;
-To further evaluate methods in a simpler setting, we collected the Can Paired dataset, where every task instance has two demonstrations, one success and one failure. Even this simple setting, where each start state has exactly one positive and one negative demonstration, poses a problem.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;lesson-3-improving-offline-policy-selection-is-important&quot;&gt;Lesson 3: Improving offline policy selection is important.&lt;/h3&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/lesson_3.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-The mismatch between train and evaluation objective causes problems for policy selection - unlike supervised learning, the best validation loss does not correspond to the best performing policy. We found that the best validation policy is 50 to 100% worse than the best performing policy. Thus, each policy checkpoint needs to be tried directly on the robot – this can be costly.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;lesson-4-observation-space-and-hyperparameters-play-a-large-role-in-policy-performance&quot;&gt;Lesson 4: Observation space and hyperparameters play a large role in policy performance.&lt;/h3&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/lesson_4.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-We found that observation space choice and hyperparameter selection is crucial for good performance. As an example, not including wrist camera observations can reduce performance by 10 to 45 percent
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;lesson-5-using-human-data-for-manipulation-is-promising&quot;&gt;Lesson 5: Using human data for manipulation is promising.&lt;/h3&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/lesson_5.png&quot; class=&quot;postimagefourfifth&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Studying how dataset size impacts performance made us realize that using human data holds much promise. For each task, the bar chart shows how performance changes going from 20% to 50% to 100% of the data. Simpler tasks like Lift and Can require just a fraction of our collected datasets to learn, while more complex tasks like Square and Transport benefit substantially from adding more human data, &lt;b&gt;suggesting that more complex tasks could be addressed by using large human datasets&lt;/b&gt;.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;lesson-6-study-results-transfer-to-real-world&quot;&gt;Lesson 6: Study results transfer to real world.&lt;/h3&gt;
-
-&lt;p&gt;We collected 200 demonstrations per task, and trained a BC-RNN policy &lt;b&gt;using identical hyperparameters to simulation, with no hyperparameter tuning&lt;/b&gt;. We see that in most cases, performance and insights on what works in simulation transfer well to the real world.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/raw_rollout_lift_eval_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  &lt;b&gt;Lift (Real).&lt;/b&gt; 96.7% success rate. Nearly matches performance in simulation (100%).
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/can_eval_success_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  &lt;b&gt;Can (Real).&lt;/b&gt; 73.3% success rate. Nearly matches performance in simulation (100%).
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/tool_hang_real_succ_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  &lt;b&gt;Tool Hang (Real).&lt;/b&gt; 3.3% success rate. Far from simulation (67.3%) - the real task is harder.
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Below, we present examples of policy failures on the Tool Hang task, which illustrate its difficulty, and the large room for improvement.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/tool_hang_insert_miss_5x_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Insertion Miss
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/tool_hang_fail_insert_5x_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Failed Insertion
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/tool_hang_fail_tool_grasp_2_5x_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Failed Tool Grasp
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurequarter&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/tool_hang_tool_drop_5x_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  Tool Drop
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Failures which illustrate the difficulty of the Tool Hang task.
-&lt;/figcaption&gt;
-
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;We also show that results from our observation space study hold true in the real world – visuomotor policies benefit strongly from wrist observations and pixel shift randomization.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/can_no_wrist_5x_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  &lt;b&gt;Can (no Wrist).&lt;/b&gt; 43.3% success rate (compared to 73.3% with wrist).
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figure class=&quot;postfigurethird&quot;&gt;
-  &lt;video autoplay=&quot;&quot; loop=&quot;&quot; muted=&quot;&quot; playsinline=&quot;&quot; controls=&quot;&quot; class=&quot;postimage_unpadded&quot;&gt;
-    &lt;source src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/can_no_rand_5x_bright.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-  &lt;/video&gt;
-  &lt;figcaption&gt;
-  &lt;b&gt;Can (no Rand).&lt;/b&gt; 26.7% success rate (compared to 73.3% with randomization).
-  &lt;/figcaption&gt;
-&lt;/figure&gt;
-
-&lt;figcaption&gt;
-Without wrist observations (left) the success rate decreases from 73.3% to 43.3%. Without pixel shift randomization (right), the success rate decreases from 73.3% to 26.7%.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;takeaways&quot;&gt;Takeaways&lt;/h2&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/posts/2021-08-08-robomimic/final_task_8.jpeg&quot; class=&quot;postimagethird&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Learning from large multi-human datasets can be challenging.&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Large multi-human datasets hold promise for endowing robots with dexterous manipulation capabilities.&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Studying this setting in simulation can enable reproducible evaluation and insights can transfer to real world.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Please see the &lt;a href=&quot;https://arise-initiative.github.io/robomimic-web/&quot;&gt;robomimic website&lt;/a&gt; for more information.&lt;/p&gt;
-
-&lt;p&gt;This blog post is based on the following paper:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2108.03298&quot;&gt;“What Matters in Learning from Offline Human Demonstrations for Robot Manipulation”&lt;/a&gt; by Ajay Mandlekar, Danfei Xu, Josiah Wong, Soroush Nasiriany, Chen Wang, Rohun Kulkarni, Li Fei-Fei, Silvio Savarese, Yuke Zhu, and Roberto Martín-Martín.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-              <pubDate>Sun, 08 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
