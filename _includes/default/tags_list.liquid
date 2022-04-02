@@ -10,7 +10,7 @@
       {% endif %}
 
       {% for tag in tags %}
-        <li><a class="button" href="#{{ tag | cgi_escape }}">
+        <li><a class="button" href="{% unless 'Tags' == page.title %}{{ site.baseurl }}/tags{% endunless %}#{{ tag | cgi_escape }}">
           <p><i class="fas fa-tag fa-fw fa-sm"></i> {{ tag }}</p>
         </a></li>
       {% endfor %}
