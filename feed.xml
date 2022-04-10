@@ -5,7 +5,113 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Wed, 30 Mar 2022 02:45:07 -0700</pubDate>
+        <pubDate>Sun, 10 Apr 2022 14:27:39 -0700</pubDate>
+        
+          
+          <item>
+              <title>Discovering the systematic errors made by machine learning models</title>
+              <link>/blog/domino/</link>
+              <guid isPermaLink="true">/blog/domino/</guid>
+              <description>&lt;h1 id=&quot;discovering-systematic-errors-with-cross-modal-embeddings&quot;&gt;Discovering systematic errors with cross-modal embeddings&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In this blog post, we introduce Domino, a new approach for discovering systematic errors made by machine learning models. We also discuss a framework for quantitatively evaluating methods like Domino.&lt;/p&gt;
+
+  &lt;p&gt;Links: 
+📄 &lt;a href=&quot;https://arxiv.org/abs/2203.14960&quot;&gt;Paper (ICLR 2022)&lt;/a&gt;
+🌍 &lt;a href=&quot;https://hazyresearch.stanford.edu/blog/2022-04-02-domino&quot;&gt;Longer Walkthrough&lt;/a&gt;
+💻 &lt;a href=&quot;https://github.com/HazyResearch/domino&quot;&gt;GitHub&lt;/a&gt;
+📘 &lt;a href=&quot;https://domino-slice.readthedocs.io/en/latest/&quot;&gt;Docs&lt;/a&gt;
+📒 &lt;a href=&quot;https://colab.research.google.com/github/HazyResearch/domino/blob/main/examples/01_intro.ipynb&quot;&gt;Google Colab&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Machine learning models that achieve high overall accuracy often make systematic errors on coherent slices of validation data.&lt;/p&gt;
+
+&lt;p&gt;What is a slice? A slice is a set of data samples that share a common characteristic. As an example, in large image datasets, photos of vintage cars comprise a slice (i.e. all images in the slice share a common subject). The term slice has a number of synonyms  that you might be more familiar with (e.g. subgroup, subpopulation, stratum). These terms are largely interchangeable, but we’ll stick with “slice” throughout this post. We say that a model underperforms on a slice if performance on the data samples in the slice is significantly worse than its overall performance.&lt;/p&gt;
+
+&lt;p&gt;The search for underperforming slices is a critical, but often overlooked, part of model evaluation. When practitioners are aware of the slices on which their models underperform, they can make more informed decisions around model deployment. This is particularly important in safety-critical settings like medicine: a diagnostic model that underperforms on younger patients should likely not be deployed at a pediatric hospital. Slice awareness can also help practitioners debug and improve models: after an underperforming slice is identified, we can improve model robustness by either updating the training dataset or using robust optimization techniques (&lt;em&gt;e.g.&lt;/em&gt;&lt;a href=&quot;https://arxiv.org/pdf/2011.12945.pdf&quot;&gt; Sohoni et al., 2020&lt;/a&gt;;&lt;a href=&quot;https://arxiv.org/pdf/1911.08731.pdf&quot;&gt; Sagawa et al., 2020&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Deploying models that underperform on critical data slices may have significant safety or fairness consequences. For example, models trained to detect collapsed lungs in chest X-rays have been shown to make predictions based on the presence of chest drains, a device typically used during treatment &lt;em&gt;(&lt;/em&gt;&lt;a href=&quot;https://arxiv.org/pdf/1909.12475.pdf&quot;&gt;Oakden-Rayner, 2019&lt;/a&gt;&lt;em&gt;)&lt;/em&gt;. As a result, these models often fail to detect collapsed lung in images without chest drains, a critical data slice where false negative predictions could be life-threatening.&lt;/p&gt;
+
+&lt;p&gt;However, in practice, some underperforming slices are hard to find. The examples in these “hidden” data slices are tied together by a concept not annotated in metadata or easily extracted from unstructured inputs (e.g. images, video, time-series data). Returning to our example from earlier, many chest X-ray datasets do not provide metadata indicating which patients’ images show chest tubes, making it difficult to evaluate performance on the slice. This raises the following question: &lt;em&gt;How can we automatically identify data slices on which our model underperforms?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;In this blog post, we discuss our recent exploration of this question. We introduce Domino, a novel method for identifying and describing underperforming slices. We also discuss an evaluation framework for rigorously evaluating our method across diverse slice types, tasks, and datasets.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-slice-discovery&quot;&gt;What is slice discovery?&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Slice discovery&lt;/strong&gt; is the task of mining unstructured input data (&lt;em&gt;e.g.&lt;/em&gt; images, videos, audio) for semantically meaningful subgroups on which a model performs poorly. We refer to automated techniques that mine input data for semantically meaningful slices as &lt;strong&gt;slice discovery methods (SDM).&lt;/strong&gt; Given a labeled validation dataset and a trained classifier, an SDM computes a set of slicing functions that partition the dataset into slices. This process is illustrated below.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_100&quot; src=&quot;/blog/assets/img/posts/2022-04-07-domino/image1.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;In order to be broadly useful across diverse settings, an ideal SDM should satisfy the following desiderata:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Identified slices should contain examples on which the model &lt;strong&gt;underperforms&lt;/strong&gt;, or has a high error rate.&lt;/li&gt;
+  &lt;li&gt;Identified slices should contain examples that are &lt;strong&gt;coherent&lt;/strong&gt;, or align closely with a human-understandable concept.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This second desideratum is particularly hard to achieve: existing evaluations have shown that discovered slices often do not align with concepts understandable to a domain expert. Further, even if slices do align well with concepts, it may be difficult for humans to identify the commonality.&lt;/p&gt;
+
+&lt;h2 id=&quot;domino-slice-discovery-with-cross-modal-embeddings&quot;&gt;Domino: Slice discovery with cross-modal embeddings&lt;/h2&gt;
+
+&lt;p&gt;In our work, we introduce Domino, a slice discovery method designed to identify coherent, underperforming data slices (&lt;em&gt;i.e.&lt;/em&gt; groups of similar validation data points on which the model makes errors). It leverages a powerful class of recently-developed cross-modal representation learning approaches, which yield semantically-meaningful representations by embedding images and text in the same latent space. We demonstrate that using cross-modal representations both improves slice coherence and enables Domino to generate natural language descriptions for identified slices!&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_100&quot; src=&quot;/blog/assets/img/posts/2022-04-07-domino/image3.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;Domino follows a three-step procedure illustrated in the figure above:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Embed:&lt;/strong&gt; Domino encodes the validation images alongside text in a shared embedding space using a cross-modal encoder. In many domains, such encoders are publicly available (&lt;em&gt;e.g&lt;/em&gt;.&lt;a href=&quot;https://openai.com/blog/clip/&quot;&gt; CLIP&lt;/a&gt; for natural images, &lt;a href=&quot;https://github.com/pytorch/fairseq/tree/main/examples/MMPT&quot;&gt;VideoCLIP&lt;/a&gt; for natural videos, &lt;a href=&quot;https://github.com/edreisMD/ConVIRT-pytorch&quot;&gt;ConVIRT&lt;/a&gt; for medical images, and &lt;a href=&quot;https://github.com/MicPie/clasp&quot;&gt;CLASP&lt;/a&gt; for amino acid sequences).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Slice:&lt;/strong&gt; Using an error-aware mixture model, Domino identifies regions in the embedding space with a high concentration of errors.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Describe:&lt;/strong&gt; Finally, to help practitioners understand the commonalities among the examples in each slice, Domino generates natural language descriptions of the slices. To do so, it leverages the cross-modal embeddings computed in Step 1, surfacing the text nearest to the slice in embedding space.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We now use Domino to audit a popular off-the-shelf classifier: a&lt;a href=&quot;https://pytorch.org/vision/stable/models.html&quot;&gt; ResNet18 pretrained on ImageNet&lt;/a&gt;. Specifically, we interrogate the model’s ability to detect cars, exploring whether there are any interesting slices on which the model underperforms. In the figure below we show a couple of the slices that Domino discovered. The gray boxes show the natural language descriptions of the two slices produced by Domino, the $X$ row shows the top six images predicted by domino to be in the slice, the $Y$ row shows the ground truth label assigned to the image, and the $\hat{Y}$ row shows the ResNet18’s predicted probability for the “car” class. Note that although we only include six images here, the complete slice includes dozens of images.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_100&quot; src=&quot;/blog/assets/img/posts/2022-04-07-domino/image2.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;From these slices, we might hypothesize that the model struggles to recognize photos of cars &lt;em&gt;taken from the inside&lt;/em&gt; and photos of &lt;em&gt;racecars.&lt;/em&gt; Both of these slices describe rare subclasses of the target class. Depending on the intended use case for the model, we may want to add more training examples to boost performance in these slices. For example, Waymo (an autonomous vehicle company) may not care much whether the model misses photos of car interiors, but ESPN (a broadcaster with the television rights for Formula 1) would care a lot if the model couldn’t recognize race cars! Clearly, it’s important to practitioners that discovered slices map onto coherent concepts.&lt;/p&gt;
+
+&lt;h2 id=&quot;evaluating-slice-discovery-methods&quot;&gt;Evaluating slice discovery methods&lt;/h2&gt;
+
+&lt;p&gt;In designing Domino, we were inspired by a number of really exciting slice discovery methods that were recently proposed. These include &lt;em&gt;The Spotlight&lt;/em&gt; (&lt;a href=&quot;https://arxiv.org/pdf/2107.00758.pdf&quot;&gt;D’Eon et al. 2022&lt;/a&gt;), &lt;em&gt;GEORGE&lt;/em&gt; (&lt;a href=&quot;https://proceedings.neurips.cc/paper/2020/hash/e0688d13958a19e087e123148555e4b4-Abstract.html&quot;&gt;Sohoni et al. 2020&lt;/a&gt;), and &lt;em&gt;MultiAccuracy Boost&lt;/em&gt; (&lt;a href=&quot;https://dl.acm.org/doi/10.1145/3306618.3314287&quot;&gt;Kim et al. 2018&lt;/a&gt;). These methods all have (1) an &lt;strong&gt;embed&lt;/strong&gt; step and (2) a &lt;strong&gt;slice&lt;/strong&gt; step, like Domino, but use different embeddings and slicing algorithms. In our experiments, we evaluate SDMs along these two axes, ablating both the choice of embedding and the slicing algorithm. Notably, these methods do not include a (3) &lt;strong&gt;describe&lt;/strong&gt; step, and generally require users to manually inspect examples and identify common attributes.&lt;/p&gt;
+
+&lt;p&gt;SDMs like Domino have traditionally been evaluated qualitatively, due to a lack of a simple quantitative approach. Typically, in these evaluations, the SDM is applied to a few different models and identified slices are visualized. Practitioners can then inspect the slices and judge whether the slices “make sense.” However, these qualitative evaluations are subjective and do not scale beyond more than a few settings. Moreover, they cannot tell us if the SDM has missed an important, coherent slice.&lt;/p&gt;
+
+&lt;p&gt;Ideally, we’d like to estimate the failure rate of an SDM: how often it fails to identify a coherent slice on which the model underperforms. Estimating this failure rate is very challenging because we don’t typically know the full set of slices on which a model underperforms. How could we possibly know if the SDM is missing any?&lt;/p&gt;
+
+&lt;p&gt;To solve this problem, we trained 1,235 deep classifiers that were specifically constrained to underperform on pre-defined slices. We did this across three domains: natural images, medical images and medical time-series. Our approach involved (1) obtaining a dataset with some annotated slices (&lt;em&gt;e.g.&lt;/em&gt; a dataset with interesting annotated attributes, like &lt;a href=&quot;https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html&quot;&gt;CelebA&lt;/a&gt; or &lt;a href=&quot;https://physionet.org/content/mimic-cxr/2.0.0/&quot;&gt;MIMIC-CXR&lt;/a&gt;), and (2) manipulating the dataset such that, with high probability, a model trained on it would exhibit poor performance on one or more of the annotated slices (&lt;em&gt;e.g.&lt;/em&gt; by subsampling the dataset to induce a spurious correlation between the label and a metadata field).&lt;/p&gt;
+
+&lt;p&gt;Using this evaluation framework, we were able to evaluate Domino quantitatively. We find that Domino accurately identifies 36% of the 1,235 slices in our framework. Further, the natural language description of the generated slice exactly matches the name of the slice in 35% of settings.&lt;/p&gt;
+
+&lt;p&gt;We were also able to compare SDMs and run ablation studies evaluating specific SDM design choices. Two key findings emerged from these experiments:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Cross-modal embeddings improve SDM performance.&lt;/strong&gt; We found that the choice of representation matters – a lot! Slice discovery methods based on cross-modal embeddings outperform those based on a single modality by at least 9 percentage-points in precision-at-10. When compared with using the activations of the trained model, the gap grows to 15 percentage points. This finding is of particular interest given that classifier activations are a popular embedding choice in existing SDMs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modeling both the prediction and class label enables accurate slice discovery.&lt;/strong&gt; Good embeddings alone do not suffice – the choice of algorithm for actually extracting the underperforming slices from the embedding space, is significant as well. We find that a simple mixture model that jointly models the embeddings, labels and predictions enables a 105% improvement over the next best slicing algorithm. We hypothesize that this is because this algorithm is unique in modeling the class labels and the model’s predictions as separate variables, which leads to slices which are “pure” in their error type (false positive vs. false negative).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;However, there’s still a long way to go: slice discovery is a challenging task, and &lt;em&gt;Domino,&lt;/em&gt; the best performing method in our experiments, still fails to recover over 60% of coherent slices. We see a number of exciting avenues for future work that could begin to close this gap.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;We suspect that improvements in the embeddings that power slice discovery will be driven by large &lt;strong&gt;cross modal datasets&lt;/strong&gt;, so work in dataset curation and management could help push the needle.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In this blog post, we described slice discovery as a fully automated process, while, in the future, we expect that effective slice discovery systems will be &lt;strong&gt;highly interactive&lt;/strong&gt;: practitioners will be able to quickly explore slices and provide feedback.&lt;a href=&quot;https://www.youtube.com/watch?v=qFzIgc5tc9s&quot;&gt; Forager&lt;/a&gt;, a system for rapid data exploration, is an exciting step in this direction.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We are really excited to continue working on this important problem and to collaborate with others as we seek to develop more reliable slice discovery methods. To facilitate this process, we are releasing 984 models and their associated slices as part of &lt;a href=&quot;https://github.com/data-centric-ai/dcbench&quot;&gt;dcbench&lt;/a&gt;, a suite of data centric benchmarks. This will allow others to reproduce our results and also develop new slice discovery methods. Additionally, we are also releasing &lt;a href=&quot;https://github.com/HazyResearch/domino&quot;&gt;domino&lt;/a&gt;, a Python package containing implementations of popular slice discovery methods. If you’ve developed a new slice discovery method and would like us to add it to the library please reach out!&lt;/p&gt;
+</description>
+              <pubDate>Thu, 07 Apr 2022 00:00:00 -0700</pubDate>
+          </item>
+          
         
           
           <item>
@@ -2653,104 +2759,6 @@ An engineer and their training data in the wild. &lt;it&gt;Credit: Vickie Shelto
 &lt;p&gt;&lt;em&gt;A more informal version of this blog can be found &lt;a href=&quot;https://hazyresearch.stanford.edu/data-centric-ai&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 </description>
               <pubDate>Wed, 15 Sep 2021 00:00:00 -0700</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Supporting COVID-19 policy response with large-scale mobility-based modeling</title>
-              <link>/blog/covid-policy-tool/</link>
-              <guid isPermaLink="true">/blog/covid-policy-tool/</guid>
-              <description>&lt;p&gt;Mobility restrictions, from &lt;a href=&quot;https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html&quot;&gt;stay-at-home orders&lt;/a&gt; to &lt;a href=&quot;https://www.washingtonpost.com/graphics/2020/national/states-reopening-coronavirus-map&quot;&gt;indoor occupancy caps&lt;/a&gt;, have been utilized extensively by policymakers during the COVID-19 pandemic. These reductions in mobility help to control the spread of the virus &lt;sup id=&quot;fnref:gao2020&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:gao2020&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:oh2021&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:oh2021&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, but they come at a heavy cost to &lt;a href=&quot;https://research.fb.com/blog/2020/08/population-mobility-small-business-closures-and-layoffs-during-the-covid-19-pandemic/&quot;&gt;businesses and employees&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To balance these competing demands, policymakers need analytical tools that can evaluate the &lt;strong&gt;tradeoffs&lt;/strong&gt; between mobility and COVID-19 infections. Furthermore, such tools should be &lt;strong&gt;fine-grained&lt;/strong&gt;, able to test out heterogeneous plans—for example, allowing one level of mobility at essential retail, another level at gyms, and yet another at restaurants—so that policymakers can tailor restrictions to the specific risks and needs of each sector. At the same time, the tool also needs to be &lt;strong&gt;scalable&lt;/strong&gt;, supporting analyses for a massive number of potential policies so that policymakers can find the best option for their jurisdiction.&lt;/p&gt;
-
-&lt;h2 id=&quot;our-tool&quot;&gt;Our tool&lt;/h2&gt;
-
-&lt;p&gt;To fulfill these needs, we developed a novel computational tool, which we built in collaboration with the Biocomplexity Institute &amp;amp; Initiative at UVA to support the Virginia Department of Health (VDH). Described in our award-winning &lt;a href=&quot;https://www.medrxiv.org/content/10.1101/2021.03.20.21254022v1&quot;&gt;KDD 2021 paper&lt;/a&gt;, our tool enables policymakers to assess the costs and benefits of thousands of different mobility measures, based on millions of simulations from our underlying epidemiological model. We designed our tool to fulfill VDH’s desire to have a quantitative and comprehensive analysis of a range of reopening policies. With their guidance, we developed an &lt;a href=&quot;https://nssac.bii.virginia.edu/covid-19/kdd-command/&quot;&gt;interactive dashboard&lt;/a&gt;, where policymakers can select various proposed changes in mobility and observe their predicted impacts on COVID-19 infections over time and across regions.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-08-16-covid-policy-tool/tool_screenshot.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Our dashboard focuses on mobility to five key categories of places: Restaurants, Gyms, Religious Organizations, Essential Retail (grocery stores, pharmacies, convenience stores), and Retail (clothing stores, book stores, hardware stores, etc.). For each category, the user can use sliders to choose a target level of mobility (e.g., 50% of normal levels, based on pre-pandemic mobility), or they can choose to continue current levels of mobility at these places. The other panels on the dashboard then visualize predicted COVID-19 infections under the selected mobility plan, and compare these outcomes to what would happen if all categories remained at their current levels of mobility.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-08-16-covid-policy-tool/tool_features.jpg&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Our tool enables policymakers to comprehensively analyze pandemic tradeoffs, by quantifying visits lost under each mobility plan as well as predicted infections. The sliders for each category allow them to test fine-grained, heterogeneous policies. Furthermore, the flexibility of our approach (i.e., allowing any combination of mobility levels) results in an exponential number of scenarios to test. To scale our modeling efforts, our tool features a robust computational infrastructure that compresses 2 years of compute time into the span of a few days.&lt;/p&gt;
-
-&lt;h2 id=&quot;our-approach&quot;&gt;Our approach&lt;/h2&gt;
-
-&lt;p&gt;At the heart of our tool is our &lt;a href=&quot;https://covid-mobility.stanford.edu/&quot;&gt;state-of-the-art epidemiological model&lt;/a&gt; which utilizes large-scale mobility networks to accurately capture the spread of COVID-19 in cities across the US.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-08-16-covid-policy-tool/network.jpg&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Our mobility networks encode the hourly movements of people from &lt;a href=&quot;https://en.wikipedia.org/wiki/Census_block_group&quot;&gt;census block groups&lt;/a&gt; (CBGs) to points of interest (POIs), which are non-residential locations such as restaurants, grocery stores, and churches. Using &lt;a href=&quot;https://en.wikipedia.org/wiki/Iterative_proportional_fitting&quot;&gt;iterative proportional fitting&lt;/a&gt;, we infer these networks from aggregated, anonymized location data provided by &lt;a href=&quot;https://www.safegraph.com/&quot;&gt;SafeGraph&lt;/a&gt;. In this work, we infer hourly networks for the Washington DC, Virginia Beach, and Richmond metropolitan areas, three of the largest metropolitan areas in Virginia. From November 1 to December 31, 2020, their resulting networks contain &lt;strong&gt;3.4 billion hourly edges&lt;/strong&gt; between CBGs and POIs.&lt;/p&gt;
-
-&lt;p&gt;We integrate the mobility networks, along with other data sources such as daily mask use, into our model. The key to our model is that it maintains the number of people in each CBG who are susceptible (S), exposed (E), infectious (I), or removed (R).&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-08-16-covid-policy-tool/seir.jpg&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;These CBG states are updated in each hour of the simulation, based on transmission dynamics that capture both household transmission and transmission occurring at POIs. That is, if there are susceptible and infectious individuals visiting a POI at the same time, then we model some probability of new infection occurring. That probability depends on the POI’s area in square feet, its median dwell time, the percentage of people wearing masks, and the number of susceptible and infectious visitors. Based on all of these factors, our model realistically captures &lt;strong&gt;who was infected where and when&lt;/strong&gt;, down to the individual POI and hour.&lt;/p&gt;
-
-&lt;p&gt;To validate our models, we compare its predictions against actual daily COVID-19 cases and deaths, as reported by &lt;em&gt;The New York Times&lt;/em&gt;. In our initial work &lt;sup id=&quot;fnref:chang2020&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:chang2020&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;, published in &lt;em&gt;Nature&lt;/em&gt; 2020, we showed that our dynamic mobility networks &lt;a href=&quot;https://www.nature.com/articles/d41586-020-02964-4&quot;&gt;enable even these relatively simple SEIR models&lt;/a&gt; with minimal free parameters to accurately fit real case trajectories and predict case counts in held-out time periods, despite substantial changes in population behavior during the pandemic. Integrating these networks furthermore allows us to capture the fine-grained spread of the virus, &lt;a href=&quot;https://www.nytimes.com/2020/11/10/health/covid-indoor-venues-infections.html&quot;&gt;enabling analyses&lt;/a&gt; of the riskiest venues to reopen and the most at-risk populations.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_unpadded&quot; src=&quot;/blog/assets/img/posts/2021-08-16-covid-policy-tool/pipeline.jpg&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-Illustration of our approach. We integrate many data sources to run, evaluate, and analyze our model. We pair our model output with an interactive dashboard, whose engineering architecture is described in the box on the right.
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;In this work, we sought to translate our model into a tool that can directly support COVID-19 decision-makers, motivated by our interactions with the Virginia Department of Health. This goal required many extensions to our &lt;a href=&quot;https://github.com/snap-stanford/covid-mobility-tool&quot;&gt;computational pipeline&lt;/a&gt;, including fitting the model to new regions and time periods, and improving our computational infrastructure to deploy the model at scale. Furthermore, to keep pace with developments in the pandemic, we introduced new real-world features to the model such as daily mask use, time-varying case and death detection rates, and model initialization based on historical reported cases/deaths. These additions allowed us to accurately fit real COVID-19 trajectories in Virginia, and we showed that the inclusion of our new features contributed substantially toward reducing model loss. Most importantly, we worked with VDH to design use cases of our model that were most relevant to their needs, and developed a new dashboard to effectively communicate thousands of results from our model. Our full pipeline—the extended model, the computational infrastructure, and the new dashboard—constitutes advancements in this work that allowed us to truly transform our scientific model into a tool for real-world impact.&lt;/p&gt;
-
-&lt;h2 id=&quot;using-our-model&quot;&gt;Using our model&lt;/h2&gt;
-
-&lt;p&gt;Our fitted model can be applied to a wide variety of use cases. First, we can use it for &lt;strong&gt;retrospective analyses&lt;/strong&gt;, by leveraging the model’s ability to capture who got infected where and when.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2021-08-16-covid-policy-tool/inequality.jpg&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;For example, we can use the model to compare the learned infection rates of lower-income and higher-income CBGs. What’s striking is that our model correctly predicts disparities from mobility data alone, even though we did not give our model any CBG demographics during runtime (only during analysis). In our prior work, we showed that two mechanisms in the mobility data explained these predicted disparities: lower-income CBGs were not able to reduce their mobility as much during the pandemic, and the POIs that they go to (even in the same category) tend to be more crowded with longer visits, and thus riskier. In this work, we show that this trend extends to both waves of the pandemic and to new metropolitan areas.&lt;/p&gt;
-
-&lt;p&gt;We can also use the model for &lt;strong&gt;forward-facing experiments&lt;/strong&gt;. Essentially, the model has many different interpretable inputs, so we can simply modify one of those inputs, run the model, and observe what happens to the model’s predicted infections. For example, to generate data for our dashboard, we modify the mobility networks to reflect the user’s selected levels of mobility for each category, and run the model forward to produce predicted infections. We can also use our model to analyze vaccination strategies; for example, by reducing transmission rates per CBG based on the percentage of the CBG that is vaccinated.&lt;/p&gt;
-
-&lt;h2 id=&quot;discussion--next-steps&quot;&gt;Discussion &amp;amp; next steps&lt;/h2&gt;
-
-&lt;p&gt;Our approach is not without its limitations, which we have discussed with policymakers. For instance, the mobility data from SafeGraph does not cover all POIs (e.g., limited coverage of nursing homes) or populations (e.g., children), and our model makes necessary but simplifying assumptions about the dynamics of disease transmission. Furthermore, in this work, we focused on how changes in mobility impact transmission, but where do these changes in mobility come from and how can we effect them? In future work, we plan to develop new models to answer these questions, to analyze and predict how complex mobility networks change in response to policy interventions and other pandemic events.&lt;/p&gt;
-
-&lt;p&gt;That said, in this work we’ve addressed a significant part of the puzzle, by introducing a tool that provides a quantitative and comprehensive near real-time assessment of the effects of mobility on transmission. Our underlying model is furthermore capable of many more types of analyses, from informing inequities to evaluating future vaccination strategies. In fact, we are now supporting the Virginia Department of Health on their vaccination efforts and extending our model to evaluate different vaccination policies. As the pandemic evolves, we will continue building decision-support tools and advancing the capabilities of our model, so that we can best support the needs of policymakers.&lt;/p&gt;
-
-&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
-
-&lt;p&gt;Special thanks to the SAIL blog editors, Emma Pierson, and Pang Wei Koh for their helpful feedback on this post. This blog post is based on &lt;a href=&quot;https://www.medrxiv.org/content/10.1101/2021.03.20.21254022v1&quot;&gt;our paper&lt;/a&gt; in KDD 2021:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Supporting COVID-19 policy response with large-scale mobility-based modeling. Serina Chang, Mandy L. Wilson, Bryan Lewis, Zakaria Mehrab, Komal K. Dudakiya, Emma Pierson, Pang Wei Koh, Jaline Gerardin, Beth Redbird, David Grusky, Madhav Marathe, and Jure Leskovec. KDD 2021 (Applied Data Science Track, Best Paper Award).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:gao2020&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;S. Gao, J. Rao, Y. Kang, et al. Association of mobile phone location data indications of travel and stay-at-home mandates with COVID-19 infection rates in the US. &lt;em&gt;JAMA Netw Open&lt;/em&gt; (2020). &lt;a href=&quot;#fnref:gao2020&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:oh2021&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;J. Oh, HY. Lee, Q. Khuong, et al. Mobility restrictions were associated with reductions in COVID-19 incidence early in the pandemic: evidence from a real-time evaluation in 34 countries. &lt;em&gt;Sci Rep&lt;/em&gt; 11, 13717 (2021). &lt;a href=&quot;#fnref:oh2021&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:chang2020&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;S. Chang, E. Pierson, P.W. Koh, et al. Mobility network models of COVID-19 explain inequities and inform reopening. &lt;em&gt;Nature&lt;/em&gt; 589, 82–87 (2020). &lt;a href=&quot;#fnref:chang2020&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-              <pubDate>Mon, 16 Aug 2021 00:00:00 -0700</pubDate>
           </item>
           
         
