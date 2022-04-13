@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Wed, 13 Apr 2022 15:21:19 -0700</pubDate>
+        <pubDate>Wed, 13 Apr 2022 15:42:22 -0700</pubDate>
         
           
           <item>
@@ -354,7 +354,7 @@ A tremendous amount of effort has been poured into training AI algorithms to com
 &lt;p&gt;Labels for large-scale datasets are expensive to curate, so leveraging abundant unlabeled data before fine-tuning them on the smaller, labeled, data sets is an important and promising direction for pre-training machine learning models. One popular and successful approach for developing pre-trained models is contrastive learning, (&lt;a href=&quot;https://arxiv.org/abs/1911.05722&quot;&gt;He et al., 2019&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;Chen et al., 2020&lt;/a&gt;). Contrastive learning is a powerful class of self-supervised visual representation learning methods that learn feature extractors by (1) minimizing the distance between the representations of positive pairs, or samples that are similar in some sense, and (2) maximizing the distance between representations of negative pairs, or samples that are different in some sense. Contrastive learning can be applied to unlabeled images by having positive pairs contain augmentations of the same image and negative pairs contain augmentations of different images.&lt;/p&gt;
 
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image3.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-understanding-contrastive-learning/image3.png&quot; /&gt;&lt;/p&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
 &lt;p&gt;In this blog post, we will propose a theoretical framework for understanding the success of this contrastive learning approach. Our theory motivates a novel contrastive loss with theoretical guarantees for downstream linear-probe performance. Our experiments suggest that representations learned by minimizing this objective achieve comparable performance to state-of-the-art methods.&lt;/p&gt;
@@ -363,7 +363,7 @@ A tremendous amount of effort has been poured into training AI algorithms to com
 
 &lt;p&gt;The key idea behind our work is the idea of a &lt;strong&gt;population&lt;/strong&gt; augmentation graph, which also appeared in our &lt;a href=&quot;https://ai.stanford.edu/blog/understanding-self-training&quot;&gt;previous blog post&lt;/a&gt; where we analyzed self-training. As a reminder, this graph is built such that the nodes represent all possible augmentations of all data points in the population distribution and the edges connect nodes that are derived from the same natural image. Further, the edges are weighted to be the probability that the two augmented images are augmentations of the same underlying image, given the set of augmentation functions being used. Some augmentation methods, like cropping, produce images that could only come from the same underlying image. However, others, such as Gaussian blurring, technically connect all images to each other, albeit mostly with very small probabilities. Because there are a potentially infinite number of augmentations, this graph is more of a theoretical idea we will use to describe our idea rather than an actual graph that we construct. The figure below gives a visualization of the graph, where augmented images of French bulldogs are connected in the graph.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image2.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-understanding-contrastive-learning/image2.png&quot; /&gt;&lt;/p&gt;
 &lt;figcaption align=&quot;center&quot;&gt;
 Figure 1
 &lt;/figcaption&gt;
@@ -380,25 +380,25 @@ Figure 1
 
 &lt;p&gt;Assume we have access to the population data distribution and hence the whole augmentation graph. A successful algorithm for graph partitioning is spectral clustering (&lt;a href=&quot;https://people.eecs.berkeley.edu/~malik/papers/SM-ncut.pdf&quot;&gt;Shi &amp;amp; Malik 2000&lt;/a&gt;, &lt;a href=&quot;https://papers.nips.cc/paper/2001/file/801272ee79cfde7fa5960571fee36b9b-Paper.pdf&quot;&gt;Ng et al. 2002&lt;/a&gt;), which uses spectral graph theory tools to discover the connected components in a graph. We’ll describe spectral clustering in more detail here, and then interpret contrastive learning as an effective, parametric way to implement spectral clustering on the large augmentation graph.&lt;/p&gt;
 
-&lt;p&gt;Let X denote the vertex set of the graph, and for the ease of exposition assume \( |X| = N\). (\(N\) can also be infinite or exponential.) Let \(A\in \mathbb{R}^{N\times N}\) be the &lt;strong&gt;adjacency matrix&lt;/strong&gt; which contains edge weights \(w_{xx’}\) as its entries. For every node \(x\), let \(w_x=\sum_{x’\in X} w_{xx’}\) be the sum of weights of edges connected to x (which can be thought of as the degree of the vertex \(x\)). We call the matrix \(L=I-\text{diag}(w_x^{-1/2})\cdot A \cdot \text{diag}(w_x^{-1/2})\) the &lt;strong&gt;Laplacian matrix&lt;/strong&gt; of the graph.&lt;/p&gt;
+&lt;p&gt;Let X denote the vertex set of the graph, and for the ease of exposition assume \( |X| = N\). (\(N\) can also be infinite or exponential.) Let \(A\in \mathbb{R}^{N\times N}\) be the &lt;strong&gt;adjacency matrix&lt;/strong&gt; which contains edge weights \(w&lt;em&gt;{xx’}\) as its entries. For every node \(x\), let \(w_x=\sum&lt;/em&gt;{x’\in X} w_{xx’}\) be the sum of weights of edges connected to x (which can be thought of as the degree of the vertex \(x\)). We call the matrix \(L=I-\text{diag}(w_x^{-1/2})\cdot A \cdot \text{diag}(w_x^{-1/2})\) the &lt;strong&gt;Laplacian matrix&lt;/strong&gt; of the graph.&lt;/p&gt;
 
-&lt;p&gt;Spectral clustering begins with eigendecomposition of the Laplacian matrix. Let \(u_1, u_2, \cdots, u_{k}\) be the \(N\)-dimensional eigenvectors that correspond to the smallest \(k\) eigenvalues. If we write these vectors as columns of a matrix \(F \in \mathbb{R}^{N\times k}\), every row (denoted as \(v_1, v_2, \cdots, v_N \in \mathbb{R}^{k}\)) would correspond to a single node in the graph. We can then obtain a \(k\)-way partition of the graph by running \(k\)-means on these \(N\) vectors.&lt;/p&gt;
+&lt;p&gt;Spectral clustering begins with eigendecomposition of the Laplacian matrix. Let \(u&lt;em&gt;1, u_2, \cdots, u&lt;/em&gt;{k}\) be the \(N\)-dimensional eigenvectors that correspond to the smallest \(k\) eigenvalues. If we write these vectors as columns of a matrix \(F \in \mathbb{R}^{N\times k}\), every row (denoted as \(v_1, v_2, \cdots, v_N \in \mathbb{R}^{k}\)) would correspond to a single node in the graph. We can then obtain a \(k\)-way partition of the graph by running \(k\)-means on these \(N\) vectors.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;postimage_50&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image4.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_50&quot; src=&quot;/blog/assets/img/posts/2022-03-14-understanding-contrastive-learning/image4.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It’s worth noting that we cannot directly run spectral clustering on the population augmentation graph, since its eigendecomposition step requires knowing the entire graph (i.e., all the data in the population), whereas in reality we only have a sampled dataset. However, the intuition behind spectral clustering is still valuable: the smallest eigenvectors of the Laplacian matrix should provide pretty good representations of the data.&lt;/p&gt;
 
 &lt;h3 id=&quot;contrastive-learning-as-spectral-clustering&quot;&gt;Contrastive learning as spectral clustering&lt;/h3&gt;
 
-&lt;p&gt;We can use these intuitions about spectral clustering to design a contrastive learning algorithm. Specifically, because we don’t have access to the true population augmentation graph, we instead define \(f_\theta\) which is a neural network that takes in an example and outputs the eigenvector representation of the example. Put another way, our goal is to compute the matrix \(F\) that contains the eigenvectors as columns, and use its rows as the representations. We aim to learn \(f_\theta\) such that \(f_\theta(x)\) is the row of matrix \(F\) corresponding to example \(x\). Given the high expressivity of neural nets, we assume that such a \(\theta\) exists.&lt;/p&gt;
+&lt;p&gt;We can use these intuitions about spectral clustering to design a contrastive learning algorithm. Specifically, because we don’t have access to the true population augmentation graph, we instead define \(f&lt;em&gt;\theta\) which is a neural network that takes in an example and outputs the eigenvector representation of the example. Put another way, our goal is to compute the matrix \(F\) that contains the eigenvectors as columns, and use its rows as the representations. We aim to learn \(f&lt;/em&gt;\theta\) such that \(f_\theta(x)\) is the row of matrix \(F\) corresponding to example \(x\). Given the high expressivity of neural nets, we assume that such a \(\theta\) exists.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image6.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-14-understanding-contrastive-learning/image6.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It turns out that this feature can be learned by minimizing the following “matrix factorization loss”:&lt;/p&gt;
 
 \[\min_{F_\theta}L(F_\theta) \triangleq \left\| (I-L) - F_\theta F_\theta^\top \right\|_F^2 =\sum_{i, j} \left(\frac{w_{x_ix_j}}{\sqrt{w_{x_i}}\sqrt{w_{x_j}}} - f_\theta(x_i)^\top f_\theta(x_j)\right)^2\]
 
-&lt;p&gt;where \(F_\theta\in\mathbb{R}^{N\times k}\) is the matrix containing \(f_\theta(x_i)\) as its \(i\)-th row. According to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Low-rank_approximation%23Basic_low-rank_approximation_problem&quot;&gt;Eckart–Young–Mirsky theorem&lt;/a&gt;, any minimizer of this loss contains the largest eigenvectors of \(I-L\) (hence the smallest eigenvectors of \(L\)) as its columns(up to scaling). As a result, at the minimizer, \(f_\theta\) recovers the smallest eigenvectors.&lt;/p&gt;
+&lt;p&gt;where \(F&lt;em&gt;\theta\in\mathbb{R}^{N\times k}\) is the matrix containing \(f&lt;/em&gt;\theta(x&lt;em&gt;i)\) as its \(i\)-th row. According to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Low-rank_approximation%23Basic_low-rank_approximation_problem&quot;&gt;Eckart–Young–Mirsky theorem&lt;/a&gt;, any minimizer of this loss contains the largest eigenvectors of \(I-L\) (hence the smallest eigenvectors of \(L\)) as its columns(up to scaling). As a result, at the minimizer, \(f&lt;/em&gt;\theta\) recovers the smallest eigenvectors.&lt;/p&gt;
 
 &lt;p&gt;We expand the above loss, and arrive at a formula that (somewhat surprisingly) resembles a contrastive loss:&lt;/p&gt;
 
@@ -406,7 +406,7 @@ Figure 1
 &amp;amp;= \text{const} -2\mathbb{E}_{x,x^+}\frac{f_\theta(x)^\top}{\sqrt{w_x}}\frac{f_\theta(x^+)}{\sqrt{w_{x^+}}} + \mathbb{E}_{x,x'}\left(\frac{f_\theta(x)^\top}{\sqrt{w_x}}\frac{f_\theta(x')}{\sqrt{w_{x'}}}\right)^2
 \end{aligned}\]
 
-&lt;p&gt;where \((x, x^+)\) is a random positive pair and \((x, x’)\) is a random negative pair. In the second line, we are using the fact that \(w_{x_ix_j}\) and \(w_{x_i}w_{x_j}\) are the probability densities of \((x_i, x_j)\) being a positive and negative pair, respectively, to replace the sums by expectations.&lt;/p&gt;
+&lt;p&gt;where \((x, x^+)\) is a random positive pair and \((x, x’)\) is a random negative pair. In the second line, we are using the fact that \(w&lt;em&gt;{x_ix_j}\) and \(w&lt;/em&gt;{x&lt;em&gt;i}w&lt;/em&gt;{x_j}\) are the probability densities of \((x_i, x_j)\) being a positive and negative pair, respectively, to replace the sums by expectations.&lt;/p&gt;
 
 &lt;p&gt;Ignoring the constant term and the scalings \(\sqrt{w_x}\) (which do not influence linear separability of the learned representations), we get the following contrastive loss objective&lt;/p&gt;
 
@@ -416,7 +416,7 @@ Figure 1
 
 &lt;p&gt;In summary, the above analysis shows that, when minimizing a special variant of contrastive loss (i.e., spectral contrastive loss), the learned features correspond to the eigenvectors of the Laplacian matrix of the population augmentation graph.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image7.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-14-understanding-contrastive-learning/image7.png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Empirically, features learned by training spectral contrastive loss can match strong baselines such as &lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;SimCLR&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/2011.10566&quot;&gt;SimSiam&lt;/a&gt;. The above table shows the linear probe accuracy with 100-epoch pre-training on ImageNet. More discussions about the empirical performance of this loss can be found in the experiments section of our &lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;paper&lt;/a&gt;.&lt;/p&gt;
 
@@ -429,7 +429,7 @@ Figure 1
 &lt;p&gt;The usefulness of this representation in classification tasks can be demonstrated by the following didactic example: consider a augmentation graph \(G\) with three completely disconnected components that correspond to three classes, and the downstream task is to classify one component (e.g., set \(\{x_1, x_2, x_3\}\) versus the rest).&lt;/p&gt;
 
 &lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image8.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-understanding-contrastive-learning/image8.png&quot; /&gt;&lt;/p&gt;
 &lt;/div&gt;&lt;/figure&gt;
 
 &lt;p&gt;The figure above shows the smallest eigenvectors of the Laplacian, where the blank entries are 0. It’s easy to see that here rows of the eigenvector matrix exactly correspond to indicators of different components in the graph, and hence the representations of nodes from different connected subgraphs are clearly linearly separable. For instance, if we use the sign of \(f(x)^\top b\) as the predictor where vector \(b\in\mathbb{R}^{k}\) is set to be \(e_1\), we can perfectly classify whether a node belongs to set \(\{x_1, x_2, x_3\}\) or not.&lt;/p&gt;
@@ -447,7 +447,6 @@ Figure 1
 &lt;p&gt;Due to the abundance of unlabeled data in practice, generalization in the traditional sense (i.e., studying population loss vs. empirical loss) is no longer the main challenge to understanding self-supervised learning. Instead, a good understanding of the population pretraining loss and its connection with the downstream tasks becomes essential. As a result, proper modeling of the pretraining data becomes key to the theoretical analysis. We hope that our theoretical framework, which characterizes properties of the data via the augmentation graph, can facilitate a better understanding of unsupervised algorithms in deep learning and can inspire new practical loss functions and algorithms.&lt;/p&gt;
 
 &lt;p&gt;This blog post was based on our NeurIPS 2021 paper &lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;Provable Guarantees for Self-Supervised Deep Learning with Spectral Contrastive Loss&lt;/a&gt;.&lt;/p&gt;
-
 </description>
               <pubDate>Mon, 14 Mar 2022 00:00:00 -0700</pubDate>
           </item>
