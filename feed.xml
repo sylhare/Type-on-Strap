@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Sun, 10 Apr 2022 14:27:39 -0700</pubDate>
+        <pubDate>Wed, 13 Apr 2022 15:21:19 -0700</pubDate>
         
           
           <item>
@@ -341,6 +341,115 @@ A tremendous amount of effort has been poured into training AI algorithms to com
 &lt;/div&gt;
 </description>
               <pubDate>Mon, 28 Mar 2022 00:00:00 -0700</pubDate>
+          </item>
+          
+        
+          
+          <item>
+              <title>Understanding Deep Learning Algorithms that Leverage Unlabeled Data, Part 2: Contrastive Learning</title>
+              <link>/blog/understanding-contrastive-learning/</link>
+              <guid isPermaLink="true">/blog/understanding-contrastive-learning/</guid>
+              <description>&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Labels for large-scale datasets are expensive to curate, so leveraging abundant unlabeled data before fine-tuning them on the smaller, labeled, data sets is an important and promising direction for pre-training machine learning models. One popular and successful approach for developing pre-trained models is contrastive learning, (&lt;a href=&quot;https://arxiv.org/abs/1911.05722&quot;&gt;He et al., 2019&lt;/a&gt;, &lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;Chen et al., 2020&lt;/a&gt;). Contrastive learning is a powerful class of self-supervised visual representation learning methods that learn feature extractors by (1) minimizing the distance between the representations of positive pairs, or samples that are similar in some sense, and (2) maximizing the distance between representations of negative pairs, or samples that are different in some sense. Contrastive learning can be applied to unlabeled images by having positive pairs contain augmentations of the same image and negative pairs contain augmentations of different images.&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image3.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;In this blog post, we will propose a theoretical framework for understanding the success of this contrastive learning approach. Our theory motivates a novel contrastive loss with theoretical guarantees for downstream linear-probe performance. Our experiments suggest that representations learned by minimizing this objective achieve comparable performance to state-of-the-art methods.&lt;/p&gt;
+
+&lt;h3 id=&quot;augmentation-graph-for-self-supervised-learning&quot;&gt;Augmentation graph for self-supervised learning&lt;/h3&gt;
+
+&lt;p&gt;The key idea behind our work is the idea of a &lt;strong&gt;population&lt;/strong&gt; augmentation graph, which also appeared in our &lt;a href=&quot;https://ai.stanford.edu/blog/understanding-self-training&quot;&gt;previous blog post&lt;/a&gt; where we analyzed self-training. As a reminder, this graph is built such that the nodes represent all possible augmentations of all data points in the population distribution and the edges connect nodes that are derived from the same natural image. Further, the edges are weighted to be the probability that the two augmented images are augmentations of the same underlying image, given the set of augmentation functions being used. Some augmentation methods, like cropping, produce images that could only come from the same underlying image. However, others, such as Gaussian blurring, technically connect all images to each other, albeit mostly with very small probabilities. Because there are a potentially infinite number of augmentations, this graph is more of a theoretical idea we will use to describe our idea rather than an actual graph that we construct. The figure below gives a visualization of the graph, where augmented images of French bulldogs are connected in the graph.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image2.png&quot; /&gt;&lt;/p&gt;
+&lt;figcaption align=&quot;center&quot;&gt;
+Figure 1
+&lt;/figcaption&gt;
+
+&lt;p&gt;We have two simple intuitions about the graph that suggests it contains information generally useful for a pre-trained computer vision model.&lt;/p&gt;
+
+&lt;p&gt;First, &lt;strong&gt; very few high-probability edges exist between any two images, especially if they have different semantic content&lt;/strong&gt;. For instance, consider two pictures of the same dogs in different poses. Even though the semantic content is the same, there is almost zero chance that one could produce one image from the other using augmentation methods like Gaussian blur. This probability is reduced further when considering two images that don’t even share the same objects, such as one image of a dog outside and another image of a cruise ship in the ocean. Rather, the only high-probability connections are augmented images with similar objects in similar orientations or poses.&lt;/p&gt;
+
+&lt;p&gt;Second, &lt;strong&gt;images with similar content (e.g, dog images of the same breed) can be connected to each other via a path of interpolating images&lt;/strong&gt;. The figure above visualizes this intuition, where \(x_1\) and \(x_2\) are two augmented images of French bulldogs that aren’t obtained from the same natural image (hence no high-probability edge between them). However, since the augmentation graph is a theoretical construct that is defined on the population data which contains all possible dog images, there must exist a path of interpolating French bulldog images (as shown in Figure 1) where every consecutive two images are directly connected by a reasonably high-probability edge. As a result, this sequence forms a path connecting \(x_1\) and \(x_2\).&lt;/p&gt;
+
+&lt;h3 id=&quot;graph-partitioning-via-spectral-decomposition&quot;&gt;Graph partitioning via spectral decomposition&lt;/h3&gt;
+
+&lt;p&gt;Consider an ideal world where we can partition the augmentation graph into multiple disconnected subgraphs. From the intuition above, each subgraph contains images that can be easily interpolated into each other, and so likely depicts the same underlying concept or objects in its images. This motivates us to design self-supervised algorithms that can map nodes within the same subgraph to similar representations.&lt;/p&gt;
+
+&lt;p&gt;Assume we have access to the population data distribution and hence the whole augmentation graph. A successful algorithm for graph partitioning is spectral clustering (&lt;a href=&quot;https://people.eecs.berkeley.edu/~malik/papers/SM-ncut.pdf&quot;&gt;Shi &amp;amp; Malik 2000&lt;/a&gt;, &lt;a href=&quot;https://papers.nips.cc/paper/2001/file/801272ee79cfde7fa5960571fee36b9b-Paper.pdf&quot;&gt;Ng et al. 2002&lt;/a&gt;), which uses spectral graph theory tools to discover the connected components in a graph. We’ll describe spectral clustering in more detail here, and then interpret contrastive learning as an effective, parametric way to implement spectral clustering on the large augmentation graph.&lt;/p&gt;
+
+&lt;p&gt;Let X denote the vertex set of the graph, and for the ease of exposition assume \( |X| = N\). (\(N\) can also be infinite or exponential.) Let \(A\in \mathbb{R}^{N\times N}\) be the &lt;strong&gt;adjacency matrix&lt;/strong&gt; which contains edge weights \(w_{xx’}\) as its entries. For every node \(x\), let \(w_x=\sum_{x’\in X} w_{xx’}\) be the sum of weights of edges connected to x (which can be thought of as the degree of the vertex \(x\)). We call the matrix \(L=I-\text{diag}(w_x^{-1/2})\cdot A \cdot \text{diag}(w_x^{-1/2})\) the &lt;strong&gt;Laplacian matrix&lt;/strong&gt; of the graph.&lt;/p&gt;
+
+&lt;p&gt;Spectral clustering begins with eigendecomposition of the Laplacian matrix. Let \(u_1, u_2, \cdots, u_{k}\) be the \(N\)-dimensional eigenvectors that correspond to the smallest \(k\) eigenvalues. If we write these vectors as columns of a matrix \(F \in \mathbb{R}^{N\times k}\), every row (denoted as \(v_1, v_2, \cdots, v_N \in \mathbb{R}^{k}\)) would correspond to a single node in the graph. We can then obtain a \(k\)-way partition of the graph by running \(k\)-means on these \(N\) vectors.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;postimage_50&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image4.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s worth noting that we cannot directly run spectral clustering on the population augmentation graph, since its eigendecomposition step requires knowing the entire graph (i.e., all the data in the population), whereas in reality we only have a sampled dataset. However, the intuition behind spectral clustering is still valuable: the smallest eigenvectors of the Laplacian matrix should provide pretty good representations of the data.&lt;/p&gt;
+
+&lt;h3 id=&quot;contrastive-learning-as-spectral-clustering&quot;&gt;Contrastive learning as spectral clustering&lt;/h3&gt;
+
+&lt;p&gt;We can use these intuitions about spectral clustering to design a contrastive learning algorithm. Specifically, because we don’t have access to the true population augmentation graph, we instead define \(f_\theta\) which is a neural network that takes in an example and outputs the eigenvector representation of the example. Put another way, our goal is to compute the matrix \(F\) that contains the eigenvectors as columns, and use its rows as the representations. We aim to learn \(f_\theta\) such that \(f_\theta(x)\) is the row of matrix \(F\) corresponding to example \(x\). Given the high expressivity of neural nets, we assume that such a \(\theta\) exists.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image6.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It turns out that this feature can be learned by minimizing the following “matrix factorization loss”:&lt;/p&gt;
+
+\[\min_{F_\theta}L(F_\theta) \triangleq \left\| (I-L) - F_\theta F_\theta^\top \right\|_F^2 =\sum_{i, j} \left(\frac{w_{x_ix_j}}{\sqrt{w_{x_i}}\sqrt{w_{x_j}}} - f_\theta(x_i)^\top f_\theta(x_j)\right)^2\]
+
+&lt;p&gt;where \(F_\theta\in\mathbb{R}^{N\times k}\) is the matrix containing \(f_\theta(x_i)\) as its \(i\)-th row. According to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Low-rank_approximation%23Basic_low-rank_approximation_problem&quot;&gt;Eckart–Young–Mirsky theorem&lt;/a&gt;, any minimizer of this loss contains the largest eigenvectors of \(I-L\) (hence the smallest eigenvectors of \(L\)) as its columns(up to scaling). As a result, at the minimizer, \(f_\theta\) recovers the smallest eigenvectors.&lt;/p&gt;
+
+&lt;p&gt;We expand the above loss, and arrive at a formula that (somewhat surprisingly) resembles a contrastive loss:&lt;/p&gt;
+
+\[\begin{aligned} \min_{\theta} L(f_\theta) &amp;amp;= \text{const} -2\sum_{i, j}\frac{w_{x_ix_j}}{\sqrt{w_{x_i}}\sqrt{w_{x_j}}}f_\theta(x_i)^\top f_\theta(x_j) + \sum_{i, j}\left(f_\theta(x_i)^\top f_\theta(x_j)\right)^2 \\
+&amp;amp;= \text{const} -2\mathbb{E}_{x,x^+}\frac{f_\theta(x)^\top}{\sqrt{w_x}}\frac{f_\theta(x^+)}{\sqrt{w_{x^+}}} + \mathbb{E}_{x,x'}\left(\frac{f_\theta(x)^\top}{\sqrt{w_x}}\frac{f_\theta(x')}{\sqrt{w_{x'}}}\right)^2
+\end{aligned}\]
+
+&lt;p&gt;where \((x, x^+)\) is a random positive pair and \((x, x’)\) is a random negative pair. In the second line, we are using the fact that \(w_{x_ix_j}\) and \(w_{x_i}w_{x_j}\) are the probability densities of \((x_i, x_j)\) being a positive and negative pair, respectively, to replace the sums by expectations.&lt;/p&gt;
+
+&lt;p&gt;Ignoring the constant term and the scalings \(\sqrt{w_x}\) (which do not influence linear separability of the learned representations), we get the following contrastive loss objective&lt;/p&gt;
+
+\[\min_{\theta} L_{\text{scl}}(f_\theta) = -2\mathbb{E}_{x,x^+} \left[f_\theta(x)^\top f_\theta(x^+)\right] + \mathbb{E}_{x,x'}\left[\left(f_\theta(x)^\top f_\theta(x')\right)^2\right]\]
+
+&lt;p&gt;which we call &lt;strong&gt;spectral contrastive loss&lt;/strong&gt;. The minimizer of this objective would correspond to the smallest eigenvectors of the Laplacian matrix with some data-wise positive scaling.&lt;/p&gt;
+
+&lt;p&gt;In summary, the above analysis shows that, when minimizing a special variant of contrastive loss (i.e., spectral contrastive loss), the learned features correspond to the eigenvectors of the Laplacian matrix of the population augmentation graph.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image7.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Empirically, features learned by training spectral contrastive loss can match strong baselines such as &lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;SimCLR&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/2011.10566&quot;&gt;SimSiam&lt;/a&gt;. The above table shows the linear probe accuracy with 100-epoch pre-training on ImageNet. More discussions about the empirical performance of this loss can be found in the experiments section of our &lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;paper&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-does-this-method-produce-good-representations&quot;&gt;Why does this method produce good representations?&lt;/h3&gt;
+
+&lt;p&gt;We now turn to the question we began with: why are the representations learned by contrastive loss useful for downstream computer vision tasks? We study the downstream accuracy of the representation with the “linear probe” protocol (&lt;a href=&quot;https://arxiv.org/abs/2002.05709&quot;&gt;Chen et al. 2020&lt;/a&gt;), where an additional linear model is trained on the representation to predict the labels for a downstream classification task.&lt;/p&gt;
+
+&lt;p&gt;As discussed above, the representations learned by the spectral contrastive loss are the rows (with data-wise positive scaling) of a matrix where the columns are the smallest eigenvectors of the Laplacian matrix. Since the scaling doesn’t change the linear prediction, it suffices to consider the rows of the eigenvector matrix as representations.&lt;/p&gt;
+
+&lt;p&gt;The usefulness of this representation in classification tasks can be demonstrated by the following didactic example: consider a augmentation graph \(G\) with three completely disconnected components that correspond to three classes, and the downstream task is to classify one component (e.g., set \(\{x_1, x_2, x_3\}\) versus the rest).&lt;/p&gt;
+
+&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
+&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2022-03-14-ssl-part2/image8.png&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/figure&gt;
+
+&lt;p&gt;The figure above shows the smallest eigenvectors of the Laplacian, where the blank entries are 0. It’s easy to see that here rows of the eigenvector matrix exactly correspond to indicators of different components in the graph, and hence the representations of nodes from different connected subgraphs are clearly linearly separable. For instance, if we use the sign of \(f(x)^\top b\) as the predictor where vector \(b\in\mathbb{R}^{k}\) is set to be \(e_1\), we can perfectly classify whether a node belongs to set \(\{x_1, x_2, x_3\}\) or not.&lt;/p&gt;
+
+&lt;p&gt;The same intuition holds in a broader setting where the graph isn’t regular, the components aren’t necessarily disconnected, and the downstream task has more than two classes. In summary, the contrastive learned representation can linearly predict any set of nearly disconnected components with high accuracy, which is captured by the following theorem:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Theorem (informal):&lt;/strong&gt; Assume the population augmentation graph contains \(k\) approximately disconnected components, where each component corresponds to a downstream class. Let the feature map \(f: X\rightarrow \mathbb{R}^k\) be the minimizer of the population spectral contrastive loss. Then, there exists a linear head on top of \(f\) that achieves small downstream classification error.&lt;/p&gt;
+
+&lt;p&gt;The formal version of this theorem can be found in our &lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;paper&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Our theory suggests that self-supervised learning can learn quite powerful and diverse features that are suitable for a large set of downstream tasks. To see this, consider a situation where there are a large number of disconnected subgraphs in the augmentation graph, the downstream task can be an arbitrary way of grouping these subgraphs into a small number of classes (each class can correspond to many subgraphs, .e.g., the “dog” class may contain many subgraphs corresponding to different breeds of dogs).&lt;/p&gt;
+
+&lt;p&gt;Due to the abundance of unlabeled data in practice, generalization in the traditional sense (i.e., studying population loss vs. empirical loss) is no longer the main challenge to understanding self-supervised learning. Instead, a good understanding of the population pretraining loss and its connection with the downstream tasks becomes essential. As a result, proper modeling of the pretraining data becomes key to the theoretical analysis. We hope that our theoretical framework, which characterizes properties of the data via the augmentation graph, can facilitate a better understanding of unsupervised algorithms in deep learning and can inspire new practical loss functions and algorithms.&lt;/p&gt;
+
+&lt;p&gt;This blog post was based on our NeurIPS 2021 paper &lt;a href=&quot;https://arxiv.org/abs/2106.04156&quot;&gt;Provable Guarantees for Self-Supervised Deep Learning with Spectral Contrastive Loss&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+              <pubDate>Mon, 14 Mar 2022 00:00:00 -0700</pubDate>
           </item>
           
         
@@ -2699,66 +2808,6 @@ Let’s look at how our fixer performs through examples too. The left side of th
 &lt;/div&gt;
 </description>
               <pubDate>Tue, 21 Sep 2021 00:00:00 -0700</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Our Journey towards Data-Centric AI: A Retrospective</title>
-              <link>/blog/data-centric-ai-retrospective/</link>
-              <guid isPermaLink="true">/blog/data-centric-ai-retrospective/</guid>
-              <description>&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postfigurehalf&quot; src=&quot;/blog/assets/img/posts/2021-09-15-data-centric-ai-retrospective/header.png&quot; /&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;This article provides a brief, &lt;em&gt;biased&lt;/em&gt; retrospective of our road to data-centric AI. Our hope is to provide an entry point for people interested in this area, which has been scattered to the nooks and crannies of AI—even as it drives some of our favorite products, advancements, and benchmark improvements.&lt;/p&gt;
-
-&lt;p&gt;We’re collecting pointers to these resources on &lt;a href=&quot;https://github.com/hazyresearch/data-centric-ai&quot;&gt;GitHub&lt;/a&gt;, and plan to write a few more articles about exciting new directions. We hope to engage with folks who are excited about data-centric AI in an upcoming HAI workshop in November — folks like you!&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/hazyresearch/data-centric-ai&quot;&gt;&lt;img src=&quot;https://img.shields.io/badge/GitHub-Data--Centric%20AI%20Resource-informational&quot; alt=&quot;Generic badge&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;https://groups.google.com/forum/#!forum/data-centric-ai/join&quot;&gt;&lt;img src=&quot;https://img.shields.io/badge/Mailing%20List-Data--Centric%20AI-green&quot; alt=&quot;Generic badge&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Starting in about 2016, researchers from our lab — &lt;a href=&quot;https://hazyresearch.stanford.edu/&quot;&gt;the Hazy Research lab&lt;/a&gt; — circled through academia and industry &lt;a href=&quot;https://www.youtube.com/watch?v=iSQHelJ1xxU&quot;&gt;giving talks&lt;/a&gt; about an intentionally provocative idea: machine learning (ML) models—long the darlings of researchers and practitioners—were no longer the center of AI. In fact, models were becoming commodities. Instead, we claimed that it was the training data that would drive progress towards more performant ML models and systems.&lt;/p&gt;
-
-&lt;p&gt;To underscore this, we had taglines like “AI is driven by data—not code” or worse ”&lt;a href=&quot;https://www.youtube.com/watch?v=iSQHelJ1xxU&quot;&gt;Training data is the &lt;em&gt;new&lt;/em&gt; new oil&lt;/a&gt;”. We started building systems &lt;a href=&quot;http://snorkel.ai&quot;&gt;championed by little octopuses wearing snorkels&lt;/a&gt;. Eventually, we turned to others and called this “Software 2.0” (inspired by &lt;a href=&quot;https://karpathy.medium.com/software-2-0-a64152b37c35&quot;&gt;Karpathy’s post&lt;/a&gt;. Others have since termed it data-centric AI, and recently Andrew Ng gave &lt;a href=&quot;https://www.youtube.com/watch?v=06-AZXmwHjo&quot;&gt;a great talk&lt;/a&gt; about his perspective on this direction.&lt;/p&gt;
-
-&lt;p&gt;Our view that models were becoming a commodity was heretical for a few reasons.&lt;/p&gt;
-
-&lt;p&gt;First, people often think of data as a static thing. After all, data literally means “that which is given”. For most ML people, they download an off-the-shelf dataset, drop it into a PyTorch dataloader, and plug-and-play: losses go down, accuracy goes up, and the data is a mere accessory.&lt;/p&gt;
-
-&lt;p&gt;But to an engineer in the wild, the training data is never “that which is given”. It is the result of a process — usually a dirty, messy process that is critical and underappreciated.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-15-data-centric-ai-retrospective/doggo.png&quot; /&gt;&lt;/p&gt;
-&lt;figcaption&gt;
-An engineer and their training data in the wild. &lt;it&gt;Credit: Vickie Shelton.&lt;/it&gt;
-&lt;/figcaption&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Still, we had hope. In applications, we took time to clean and merge data. We engineered it. We began to talk about how AI and ML systems were driven by this data, how they were programmed by this data. This led to understandably (obtuse) names like “data programming”.&lt;/p&gt;
-
-&lt;p&gt;Unfortunately, we were telling people to put on galoshes, jump into the sewer that is your data, and splash around. Not an easy sales pitch for researchers used to life in beautiful PyTorch land.&lt;/p&gt;
-
-&lt;p&gt;We started to recognize that &lt;a href=&quot;https://arxiv.org/pdf/1909.05372.pdf&quot;&gt;model-itis is a real problem&lt;/a&gt;. With some friends at Apple, we realized that teams would often spend time writing new models instead of understanding their problem—and its expression in data—more deeply. We weren’t the only ones thinking this way, lots of no-code AI folks like &lt;a href=&quot;https://ludwig-ai.github.io&quot;&gt;Ludwig&lt;/a&gt;, &lt;a href=&quot;https://www.h2o.ai/&quot;&gt;H2O&lt;/a&gt;, &lt;a href=&quot;https://www.datarobot.com&quot;&gt;DataRobot&lt;/a&gt; were too. We began to argue that this aversion to data didn’t really lead to a great use of time. To make matters worse, 2016-2017 was a thrilling time to be in ML. Each week a new model came out, and each week, it felt like we were producing demos that we couldn’t dream of a decade earlier.&lt;/p&gt;
-
-&lt;p&gt;Despite this excitement, it was clear to us that success or failure to a level usable in applications we cared about—in medicine, at large technology companies or even pushing the limits on benchmarks—wasn’t really tied to models per se. That is, the advances were impressive, but they were hitting diminishing returns. You can see this in benchmarks, where most of the progress after 2017 is fueled by new advances in augmentations, weak supervision, and other issues of how you feed machines data. In round numbers, ten points of accuracy were due to those—while (by and large) model improvements were squeaking out a few tenths in accuracy points.&lt;/p&gt;
-
-&lt;p&gt;At the time, many of the folks who are now converts have shared with us that they were skeptical of our view of the future. We get it, our stupid jokes and general demeanor didn’t inspire confidence. But we weren’t totally insane. This idea has become mainstream and widespread. Our friends at Google in Ads, Gmail, YouTube and Apple extended to us a level of technical trust that we hope we’ve repaid. You’ve probably used some of the products that have incorporated these crazy ideas in the last few minutes. &lt;a href=&quot;https://snorkel.ai&quot;&gt;The Octopus&lt;/a&gt; is now widely used in the enterprise, and we’re just at the beginning!&lt;/p&gt;
-
-&lt;p&gt;This blog post is an incomplete, biased retrospective of this road. We’ll close with two thoughts:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;There is a data-centric research agenda inside AI. It’s intellectually deep, and it has been lurking at the core of AI progress for a while. Perhaps by calling it out we can make even more progress on an important viewpoint.&lt;/li&gt;
-  &lt;li&gt;We’d love to provide entry points for folks interested in this area. Our results are scattered in a number of different research papers, and we’d enjoy writing a survey (if anyone is interested – we have a &lt;a href=&quot;https://docs.google.com/forms/d/e/1FAIpQLSf5UcTJnvMIcLzxvTgac5Jdvyry3u2XsewMrXFosgKtWTTGxA/viewform?usp=sf_link&quot;&gt;form&lt;/a&gt;!). We’ve opted to be biased about what influenced us the most to try to present a coherent story here. Necessarily, this means we’re leaving out amazing work. Apologies, please send us notes and corrections.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;On our end, we’ll do our best to build this &lt;a href=&quot;https://github.com/hazyresearch/data-centric-ai&quot;&gt;data-centric community up on GitHub&lt;/a&gt;, with a collage of exciting related papers and lines of work. If you’re new to the area, use it as a pedagogical resource, and if you’re a veteran, please go ahead and send us PRs and contributions so we can expand the discussion! We’re gathering &lt;a href=&quot;https://github.com/HazyResearch/data-centric-ai/tree/main/case-studies&quot;&gt;real-world case studies&lt;/a&gt;, so if you work on real applications that have benefited from a data-centric viewpoint (in academia, industry or anywhere), please don’t hesitate to reach out at &lt;a href=&quot;mailto:kgoel@cs.stanford.edu&quot;&gt;kgoel@cs.stanford.edu&lt;/a&gt; or create an Issue on the Github so we can bring your experiences into the fold.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;A more informal version of this blog can be found &lt;a href=&quot;https://hazyresearch.stanford.edu/data-centric-ai&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-</description>
-              <pubDate>Wed, 15 Sep 2021 00:00:00 -0700</pubDate>
           </item>
           
         
