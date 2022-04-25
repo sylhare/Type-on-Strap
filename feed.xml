@@ -5,7 +5,7 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Mon, 25 Apr 2022 09:18:45 -0400</pubDate>
+        <pubDate>Mon, 25 Apr 2022 10:54:20 -0400</pubDate>
         
           
           <item>
@@ -67,9 +67,9 @@
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: kaichun@cs.stanford.edu
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2106.14440&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=HjhsLKf1eQY&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://hyperplane-lab.github.io/vat-mart/&quot;&gt;Website&lt;/a&gt;
 &lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: visual affordance learning, robotic manipulation, 3d perception, interactive perception&lt;/p&gt;
-&lt;h4 id=&quot;language-modeling-via-stochastic-processes-&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2203.11370.pdf&quot;&gt;Language modeling via stochastic processes &lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;language-modeling-via-stochastic-processes&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2203.11370.pdf&quot;&gt;Language modeling via stochastic processes&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-04-25-iclr-2022/img8.png&quot; /&gt;
-&lt;strong&gt;Authors&lt;/strong&gt;: Rose E Wang
+&lt;strong&gt;Authors&lt;/strong&gt;: Rose E Wang, Esin Durmus, Noah Goodman, Tatsunori Hashimoto
 &lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: rewang@stanford.edu
 &lt;br /&gt;&lt;strong&gt;Award nominations:&lt;/strong&gt; Oral Presentation
 &lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2203.11370.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://www.youtube.com/watch?v=AwnoASlxeIs&amp;amp;ab_channel=RoseWang&quot;&gt;Video&lt;/a&gt; | &lt;a href=&quot;https://github.com/rosewang2008/language_modeling_via_stochastic_processes&quot;&gt;Website&lt;/a&gt;
