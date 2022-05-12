@@ -1,7 +1,7 @@
 <style>
 /* force scrollbar */
 html { overflow-y: scroll; }
-    
+
 /* To overwrite page's padding, to get bigger images */
 /* article {padding:2%;} */
 </style>
@@ -13,10 +13,10 @@ html { overflow-y: scroll; }
   {% if image.path contains include.gallery_path %}
     {% unless image.path contains '.md' %}
         <img src="{{ image.path | relative_url }}" alt="" class="grid-item" style="padding: 0;">
-    {% endunless %}  
+    {% endunless %}
   {% endif %}
 {% endfor %}
-</div> 
+</div>
 
-<script src="{{ '/assets/js/vendor/imagesloaded.min.js' | relative_url }}" type="text/javascript"></script>
+<script src="{{ '/assets/js/vendor/imagesloaded.pkgd.min.js' | relative_url }}" type="text/javascript"></script>
 <script src="{{ '/assets/js/vendor/masonry.pkgd.min.js' | relative_url }}" type="text/javascript"></script>
