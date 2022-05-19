@@ -98,8 +98,8 @@ steps:
 ```
 ### build validation 설정
 
-![build validation settings](./img/build-validation-설정법.png)
-![bypass policies when pushing](./img/build-validation-무시-권한-부여.png)
+![build validation settings](/assets/img/build-validation-설정법.png)
+![bypass policies when pushing](/assets/img/build-validation-무시-권한-부여.png)
 
 #### 주의 사항
 - main branch에 build validation 을 설정하면 main branch 로 pull request를 요청하는 경우의 모든 pull request는 build validation을 거치게 됩니다. (ex : feature/test -> main, dev -> main, hotfix -> main 모두 빌드 유효성 검사 대상)
