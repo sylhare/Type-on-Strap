@@ -43,7 +43,10 @@
 
     <!-- Mermaid 9.1.1 -->
     {% if site.mermaid %}
-    <script defer src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}" onload="mermaid.initialize({startOnLoad:true});"></script>
+    <script defer src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}" onload="mermaid.initialize({
+      startOnLoad:true,
+      theme: '{{ site.mermaid }}',
+    });"></script>
     {% endif %}
 
     <!-- Simple Jekyll Search 1.10.0 -->

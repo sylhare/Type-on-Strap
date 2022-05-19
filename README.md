@@ -251,7 +251,7 @@ Enable the [mermaid-js](https://github.com/mermaid-js/mermaid) diagram rendering
 This will load and init the [mermaid.min.js](https://mermaid-js.github.io/mermaid/getting-started/n00b-gettingStarted.html#4-calling-mermaid-from-a-relative-link).
 
 ```yml
-mermaid: true # to Enable it
+mermaid: default # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
 ```
 
 Find all the help you need on the official [mermaid documentation](https://mermaid-js.github.io/mermaid/).

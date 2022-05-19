@@ -7,9 +7,8 @@ thumbnail: "assets/img/thumbnails/feature-img/circuit.jpeg"
 tags: [Mermaid, Highlight, Markdown]
 ---
 
-
+Let's demo some code snippet, with some mermaid diagrams.
 Because if you put some code in your blog, you would at least make it:
-
 1. Searchable
 2. Good-looking
 
@@ -79,7 +78,7 @@ function helloWorld(param1, param2) {
         return null;
     }
 
-    // @TODO comment
+    // TODO comment
 }
 ```
 
