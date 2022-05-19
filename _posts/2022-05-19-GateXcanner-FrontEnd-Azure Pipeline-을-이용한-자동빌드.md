@@ -98,8 +98,8 @@ steps:
 ```
 ### build validation 설정
 
-![build validation settings](/assets/img/build-validation-설정법.png)
-![bypass policies when pushing](/assets/img/build-validation-무시-권한-부여.png)
+![build validation settings](/assets/img/posts/2022-05-19-GateXcanner-FrontEnd-Azure%20Pipeline-%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%9E%90%EB%8F%99%EB%B9%8C%EB%93%9C/build-validation-%EC%84%A4%EC%A0%95%EB%B2%95.png)
+![bypass policies when pushing](/assets/img/posts/2022-05-19-GateXcanner-FrontEnd-Azure%20Pipeline-%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%9E%90%EB%8F%99%EB%B9%8C%EB%93%9C/build-validation-%EB%AC%B4%EC%8B%9C-%EA%B6%8C%ED%95%9C-%EB%B6%80%EC%97%AC.png)
 
 #### 주의 사항
 - main branch에 build validation 을 설정하면 main branch 로 pull request를 요청하는 경우의 모든 pull request는 build validation을 거치게 됩니다. (ex : feature/test -> main, dev -> main, hotfix -> main 모두 빌드 유효성 검사 대상)
