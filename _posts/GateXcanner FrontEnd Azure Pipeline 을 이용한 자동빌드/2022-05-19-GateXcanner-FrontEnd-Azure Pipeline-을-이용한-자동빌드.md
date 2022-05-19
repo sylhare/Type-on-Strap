@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "GateXcanner FrontEnd Azure Pipeline 을 이용한 자동빌드"
-author: wusub shin
+author: Shinwusub
 tags: [GateXcanner, FrontEnd]
 ---
 
