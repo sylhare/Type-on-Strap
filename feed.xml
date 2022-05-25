@@ -5,7 +5,87 @@
         <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml"/>
         <link>http://ai.stanford.edu/blog/</link>
         <description>The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.</description>
-        <pubDate>Mon, 25 Apr 2022 10:54:20 -0400</pubDate>
+        <pubDate>Wed, 25 May 2022 10:54:45 -0400</pubDate>
+        
+          
+          <item>
+              <title>Stanford AI Lab Papers and Talks at ACL 2022</title>
+              <link>/blog/acl-2022/</link>
+              <guid isPermaLink="true">/blog/acl-2022/</guid>
+              <description>&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/logo.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://www.2022.aclweb.org/&quot;&gt;60th Annual Meeting of the Association for Computational Linguistics&lt;/a&gt; (ACL) 2022 is taking place May 22nd - May 27th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!&lt;/p&gt;
+
+&lt;h2 id=&quot;list-of-accepted-papers&quot;&gt;List of Accepted Papers&lt;/h2&gt;
+&lt;h4 id=&quot;linkbert-pretraining-language-models-with-document-links&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2203.15827.pdf&quot;&gt;LinkBERT: Pretraining Language Models with Document Links&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img0.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Michihiro Yasunaga, Jure Leskovec*, Percy Liang*
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: myasu@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2203.15827.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://github.com/michiyasunaga/LinkBERT&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: language model, pretraining, knowledge, hyperlink, bionlp&lt;/p&gt;
+&lt;h4 id=&quot;when-classifying-grammatical-role-bert-doesnt-care-about-word-order-except-when-it-matters&quot;&gt;&lt;a href=&quot;https://arxiv.org/abs/2203.06204&quot;&gt;When classifying grammatical role, BERT doesn’t care about word order… except when it matters&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img1.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Isabel Papadimitriou, Richard Futrell, Kyle Mahowald
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: isabelvp@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/abs/2203.06204&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: large language models, analysis, word order, order invariance, grammatical role, syntax, semantics&lt;/p&gt;
+&lt;h4 id=&quot;problems-with-cosine-as-a-measure-of-embedding-similarity-for-high-frequency-words&quot;&gt;Problems with Cosine as a Measure of Embedding Similarity for High Frequency Words&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img2.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Kaitlyn Zhou, Kawin Ethayarajh, Dallas Card, Dan Jurafsky
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: katezhou@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: cosine similarity, training data frequency, model analysis&lt;/p&gt;
+&lt;h4 id=&quot;faithful-or-extractive-on-mitigating-the-faithfulness-abstractiveness-trade-off-in-abstractive-summarization&quot;&gt;&lt;a href=&quot;https://aclanthology.org/2022.acl-long.100/&quot;&gt;Faithful or Extractive? On Mitigating the Faithfulness-Abstractiveness Trade-off in Abstractive Summarization&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img6.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Faisal Ladhak, Esin Durmus, He He, Claire Cardie, Kathleen McKeown
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: esdurmus@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://aclanthology.org/2022.acl-long.100/&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: text summarization, text generation, evaluation, faithfulness&lt;/p&gt;
+&lt;h4 id=&quot;spurious-correlations-in-reference-free-evaluation-of-text-generation&quot;&gt;&lt;a href=&quot;https://aclanthology.org/2022.acl-long.102/&quot;&gt;Spurious Correlations in Reference-Free Evaluation of Text Generation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img7.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Esin Durmus, Faisal Ladhak, Tatsunori Hashimoto
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: esdurmus@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://aclanthology.org/2022.acl-long.102/&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: text summarization, text generation, dialogue generation, evaluation, metrics,&lt;/p&gt;
+&lt;h4 id=&quot;tabi-type-aware-bi-encoders-for-open-domain-entity-retrieval&quot;&gt;&lt;a href=&quot;https://arxiv.org/pdf/2204.08173.pdf&quot;&gt;TABi: Type-Aware Bi-Encoders for Open-Domain Entity Retrieval&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img8.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Megan Leszczynski, Daniel Y. Fu, Mayee F. Chen, Christopher Ré
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: mleszczy@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://arxiv.org/pdf/2204.08173.pdf&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://hazyresearch.stanford.edu/blog/2022-04-19-contrastive-3&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://github.com/HazyResearch/tabi&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: entity retrieval, contrastive learning, bi-encoders&lt;/p&gt;
+&lt;h4 id=&quot;a-few-shot-semantic-parser-for-wizard-of-oz-dialogues-with-the-precise-thingtalk-representation&quot;&gt;&lt;a href=&quot;https://aclanthology.org/2022.findings-acl.317/&quot;&gt;A Few-Shot Semantic Parser for Wizard-of-Oz Dialogues with the Precise ThingTalk Representation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img9.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Giovanni Campagna, Sina J. Semnani, Ryan Kearns, Lucas Jun Koba Sato, Silei Xu, Monica S. Lam
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: gcampagn@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Venue&lt;/strong&gt;: Findings of ACL
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://aclanthology.org/2022.findings-acl.317/&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://oval.cs.stanford.edu/releases/&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: dialogue agents, task-oriented dialogues, data synthesis&lt;/p&gt;
+&lt;h4 id=&quot;richer-countries-and-richer-representations&quot;&gt;Richer Countries and Richer Representations&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img3.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Kaitlyn Zhou, Kawin Ethayarajh, Dan Jurafsky
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: katezhou@stanford.edu
+&lt;br /&gt;&lt;strong&gt;Venue&lt;/strong&gt;: Findings of ACL
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: representational harms, model analysis, geographic entities&lt;/p&gt;
+&lt;h4 id=&quot;modular-domain-adaptation&quot;&gt;&lt;a href=&quot;https://aclanthology.org/2022.findings-acl.288/&quot;&gt;Modular Domain Adaptation&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img5.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Junshen K. Chen, Dallas Card, Dan Jurafsky
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: dalc@umich.edu
+&lt;br /&gt;&lt;strong&gt;Venue&lt;/strong&gt;: Findings of ACL
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://aclanthology.org/2022.findings-acl.288/&quot;&gt;Paper&lt;/a&gt; | &lt;a href=&quot;https://dallascard.github.io/granular-material/post/modular/&quot;&gt;Blog Post&lt;/a&gt; | &lt;a href=&quot;https://github.com/jkvc/modular-domain-adaptation&quot;&gt;Website&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: domain adaptation, computational social science, text classification, lexicons, sentiment&lt;/p&gt;
+&lt;h4 id=&quot;shared-autonomy-for-robotic-manipulation-with-language-corrections&quot;&gt;&lt;a href=&quot;https://iliad.stanford.edu/pdfs/publications/karamcheti2022lilac.pdf&quot;&gt;Shared Autonomy for Robotic Manipulation with Language Corrections&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img class=&quot;postimage_75&quot; src=&quot;/blog/assets/img/posts/2022-05-25-acl-2022/img4.png&quot; /&gt;
+&lt;strong&gt;Authors&lt;/strong&gt;: Siddharth Karamcheti*, Raj Palleti*, Yuchen Cui, Percy Liang, Dorsa Sadigh
+&lt;br /&gt;&lt;strong&gt;Contact&lt;/strong&gt;: skaramcheti@cs.stanford.edu
+&lt;br /&gt;&lt;strong&gt;Venue&lt;/strong&gt;: ACL LNLS workshop
+&lt;br /&gt;&lt;strong&gt;Links:&lt;/strong&gt; &lt;a href=&quot;https://iliad.stanford.edu/pdfs/publications/karamcheti2022lilac.pdf&quot;&gt;Paper&lt;/a&gt;
+&lt;br /&gt;&lt;strong&gt;Keywords&lt;/strong&gt;: human-robot interaction, online language corrections, language supervision&lt;/p&gt;
+
+&lt;hr /&gt;
+
+</description>
+              <pubDate>Wed, 25 May 2022 00:00:00 -0400</pubDate>
+          </item>
+          
         
           
           <item>
@@ -2678,167 +2758,6 @@ We continue to actively maintain
 &lt;/div&gt;
 </description>
               <pubDate>Tue, 05 Oct 2021 00:00:00 -0400</pubDate>
-          </item>
-          
-        
-          
-          <item>
-              <title>Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors</title>
-              <link>/blog/bifi/</link>
-              <guid isPermaLink="true">/blog/bifi/</guid>
-              <description>&lt;h3 id=&quot;machine-learning-for-code-repair&quot;&gt;&lt;strong&gt;Machine Learning for Code Repair&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;Across the board, programming has increased in popularity, ranging from developing with general-purpose programming languages like Python, C, Java to using simpler languages like HTML, SQL, LaTeX, and Excel formulas. When writing code we often make syntax errors such as typos, unbalanced parentheses, invalid indentations, etc., and need to fix them. In fact, several studies &lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; show that both beginner and professional programmers spend 50% of time fixing code errors during programming. Automating code repair can dramatically enhance the programming productivity &lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/examples.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/examples.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Recent works &lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; use machine learning models to fix code errors by training the models on human-labeled (broken code, fixed code) pairs. However, collecting this data for even a single programming language is costly, much less the dozens of languages commonly used in practice.&lt;/p&gt;
-
-&lt;p&gt;On the other hand, &lt;strong&gt;&lt;em&gt;unlabeled (unaligned) data&lt;/em&gt;&lt;/strong&gt;—not aligned as (broken, fixed) pairs—is readily available: for example, raw code snippets on the web like GitHub. An unsupervised approach for training code repair models would make them much more scalable and widely deployable. In &lt;a href=&quot;https://arxiv.org/abs/2106.06600&quot;&gt;our recent work&lt;/a&gt; &lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; published at ICML 2021, we study how to leverage unlabeled data to learn code fixers effectively.&lt;/p&gt;
-
-&lt;h3 id=&quot;problem-setup&quot;&gt;&lt;strong&gt;Problem Setup&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;In code repair, we are given a &lt;strong&gt;&lt;em&gt;critic&lt;/em&gt;&lt;/strong&gt; that assesses the quality of an input: for instance, a compiler or code analyzer that tells us if input code has any syntax errors. The code is &lt;strong&gt;&lt;em&gt;bad&lt;/em&gt;&lt;/strong&gt; if there is at least one error and it is &lt;strong&gt;&lt;em&gt;good&lt;/em&gt;&lt;/strong&gt; if there are no errors. What we want is a &lt;strong&gt;&lt;em&gt;fixer&lt;/em&gt;&lt;/strong&gt; that repairs bad code into good code that satisfies the critic, e.g. repairing missing parenthesis as in the figure below. Our goal is to use &lt;strong&gt;unlabeled data&lt;/strong&gt; and &lt;strong&gt;critic&lt;/strong&gt; to learn a &lt;strong&gt;fixer&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/task.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/task.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Challenges&lt;/strong&gt;&lt;br /&gt;
-While unlabeled data can be split into a set of good code and a set of bad code using the critic, they are unaligned; in other words, they do not form (broken, fixed) pairs ready to be used for training a fixer.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/split.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/split.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;A straightforward technique &lt;sup id=&quot;fnref:5&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; is to apply random or heuristic perturbations to good code, such as dropping tokens, and prepare synthetic paired data (perturbed code, good code) to train a fixer. However, such synthetically-generated bad code does not match the distribution of real bad code written by humans. For instance, as the figure below shows, synthetic perturbations (purple box) may drop parentheses arbitrarily from code, generating errors that are rare in real code. In contrast, human-written code (red box) rarely misses parentheses when only a single pair appears, but misses parentheses often in a nested context (e.g., 10x more than non-nested in our Python code dataset collected from GitHub). This distributional mismatch between synthetic data and real data can result in low code repair performance when used in practice. To tackle this challenge, we introduce a new training approach, &lt;strong&gt;&lt;em&gt;Break-It-Fix-It (BIFI)&lt;/em&gt;&lt;/strong&gt;, that adapts the fixer towards real distributions of bad code.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/prior-work-challenge.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/prior-work-challenge.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;approach-break-it-fix-it&quot;&gt;&lt;strong&gt;Approach: Break-It-Fix-It&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;The basic idea of BIFI is to introduce a machine learning-based breaker that learns to corrupt good code into realistic bad code, and iteratively train both the fixer and the breaker while using them in conjunction to generate more realistic paired data. Concretely, BIFI takes as inputs:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Critic&lt;/li&gt;
-  &lt;li&gt;Unaligned set of good and bad code&lt;/li&gt;
-  &lt;li&gt;Initial fixer, which potentially is trained on synthetic data&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;BIFI then improves the fixer by performing the following cycle of data generation and training procedure:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Apply the fixer to the set of bad code, which consists of real code errors made by humans, and use the critic to assess if the fixer’s output is good. If good, keep the pair&lt;/li&gt;
-  &lt;li&gt;Train the breaker on the resulting paired data from Step 1. Consequently, the breaker can generate more realistic errors than the initial synthetic data&lt;/li&gt;
-  &lt;li&gt;Apply the breaker to the set of good code, and keep outputs that the critic judges as bad&lt;/li&gt;
-  &lt;li&gt;Train the fixer on the newly-generated paired data in Step 1 and Step 3&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;These steps are also illustrated in the left panel of the figure below. We iterate over this cycle to improve the fixer and the breaker simultaneously until they have both converged. The intuition is that a better fixer and breaker will be able to generate more realistic paired data, which in turn helps to train a better fixer and breaker.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/BIFI-vs-BT.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/BIFI-vs-BT.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;BIFI is related to the backtranslation (cycle-consistency) method in unsupervised translation &lt;sup id=&quot;fnref:6&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;. If we apply backtranslation directly to the code repair task, we would do the following:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Apply the fixer to the set of bad code and generate (noisy) good code&lt;/li&gt;
-  &lt;li&gt;Train the breaker to reconstruct the bad code&lt;/li&gt;
-  &lt;li&gt;Apply the breaker to the set of good code and generate (noisy) bad code&lt;/li&gt;
-  &lt;li&gt;Train the fixer to reconstruct the good code&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;as illustrated in the right panel of the figure. BIFI improves on backtranslation in two aspects. First, while backtranslation may include non-fixed code as good or non-broken code as bad in Step 1 or 3, BIFI uses the critic to verify if the generated code is actually fixed or broken in Step 1 and 3, as highlighted with pink in the left panel of the figure. This ensures the correctness of training data generated by the breaker and fixer. Second, while backtranslation only uses paired data generated in Step 3 to train the fixer in Step 4, BIFI uses paired data generated in both Step 3 and Step 1, as paired data from Step 1 contains real code errors made by humans. This improves the distributional match of generated training data.&lt;/p&gt;
-
-&lt;h3 id=&quot;lets-use-our-code-repair-model&quot;&gt;&lt;strong&gt;Let’s use our code repair model!&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;We apply and evaluate our method, BIFI, on two code repair benchmarks:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;GitHub-Python &lt;sup id=&quot;fnref:7&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:7&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt;: Fix syntax errors in Python code. Critic is Python AST parser.&lt;/li&gt;
-  &lt;li&gt;DeepFix &lt;sup id=&quot;fnref:8&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt;: Fix compiler errors in C code. Critic is C compiler.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;BIFI improves on existing unsupervised methods for code repair&lt;/strong&gt;&lt;br /&gt;
-Using the GitHub-Python dataset, we first compare BIFI with existing unsupervised methods for code repair: a &lt;strong&gt;synthetic baseline&lt;/strong&gt; that uses synthetic paired data generated by randomly dropping, inserting or replacing tokens from good code, and a &lt;strong&gt;backtranslation baseline&lt;/strong&gt; that directly applies backtracklation to code repair. The synthetic baseline serves as the initial fixer for our BIFI algorithm. We find that BIFI improves the repair accuracy by 28% (62%→90%) over the synthetic baseline and by 10% (80%→90%) over the backtranslation baseline, as shown in the left panel of the figure. This result suggests that while we started from a simple initial fixer trained with random perturbations, BIFI can automatically turn it into a usable fixer with high repair accuracy.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/result.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/result.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;For the other dataset, DeepFix, there are several prior works that use heuristic ways to generate synthetic paired data for the task: Gupta+17 &lt;sup id=&quot;fnref:9&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:9&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt;, Hajipour+19 &lt;sup id=&quot;fnref:10&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:10&quot; class=&quot;footnote&quot;&gt;10&lt;/a&gt;&lt;/sup&gt;, DrRepair &lt;sup id=&quot;fnref:11&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:11&quot; class=&quot;footnote&quot;&gt;11&lt;/a&gt;&lt;/sup&gt;. We take the existing best model, DrRepair, as our initial fixer and apply BIFI. We find that it improves the repair accuracy by 5% (66%→71%), as shown in the right panel of the figure. This result suggests that while the initial fixer DrRepair was already trained with manually designed heuristics, there is still room for improving the adaptation to a more realistic distribution of code errors. BIFI helps to achieve this without additional manual effort.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Examples of breaker outputs&lt;/strong&gt;&lt;br /&gt;
-Let’s look at several examples of code generated by the trained breaker. Given the good Python code shown on the left below, we show on the right outputs that the breaker places high probability on. In output 1, the breaker converts &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raise ValueError(...)&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raise ValueError, ...&lt;/code&gt;, which is an obsolete usage of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raise&lt;/code&gt; in Python. In output 2, the breaker drops a closing parenthesis in a nested context. These are both errors commonly seen in human written bad code.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/breaker.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/breaker.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Examples of fixer outputs&lt;/strong&gt;&lt;br /&gt;
-Let’s look at how our fixer performs through examples too. The left side of the figure shows human-written Python code with an indentation error—one needs to add indent to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;err = 0&lt;/code&gt; line and remove indent in the next line. The initial fixer, shown in the center, only inserts one indent token and fails to fix the error. This is most likely due to the mismatch between real errors and synthetic errors used in training: synthetic errors generated by random perturbations do not frequently contain this kind of indentation error where multiple tokens need to be inserted/removed accordingly. The fixer trained by BIFI, shown on the right, fixes the indentation error by inserting and removing the correct pair of indent tokens. We find that this is one of the representative examples of when BIFI successfully fixes code errors but the initial fixer fails.&lt;/p&gt;
-
-&lt;figure class=&quot;figure&quot;&gt;&lt;div class=&quot;figure__main&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;/blog/assets/img/posts/2021-09-21-bifi/fixer.png&quot;&gt;&lt;img class=&quot;postimage&quot; src=&quot;/blog/assets/img/posts/2021-09-21-bifi/fixer.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;&lt;/figure&gt;
-
-&lt;p&gt;Finally, one limitation of this work is that we focus on fixing syntactic errors (we use critics such as AST parser and compiler), and we are not evaluating the semantic correctness of our outputs. Extending BIFI to fixing semantic errors is an exciting future research avenue.&lt;/p&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;Machine learning of source code repair is an important direction to enhance programming productivity, but collecting human-labeled data is costly. In this work, we studied how to learn source code repair in an unsupervised way, and developed a new training method, BIFI. The key innovation of BIFI is that it creates realistic paired data for training fixers from a critic (e.g. compiler) and unlabeled data (e.g. code snippets on the web) only, which are cheaply available.&lt;/p&gt;
-
-&lt;p&gt;More broadly, the idea of learning fixers from critics + unlabeled data is applicable to various repair tasks beyond code repair, such as grammatical error correction &lt;sup id=&quot;fnref:12&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:12&quot; class=&quot;footnote&quot;&gt;12&lt;/a&gt;&lt;/sup&gt; and molecule design, using domain-specific critics. Additionally, the idea of using a critic to improve the quality of paired data is applicable to various translation tasks by introducing a learned critic. We hope that BIFI can be an effective solution to unsupervised repair tasks and translation tasks.&lt;/p&gt;
-
-&lt;p&gt;You can check out our full paper &lt;a href=&quot;https://arxiv.org/abs/2106.06600&quot;&gt;here&lt;/a&gt; and our source code/data on &lt;a href=&quot;https://github.com/michiyasunaga/BIFI&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;acknowledgments&quot;&gt;&lt;strong&gt;Acknowledgments&lt;/strong&gt;&lt;/h3&gt;
-&lt;p&gt;This blog post is based on the paper:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.06600&quot;&gt;Break-It-Fix-It: Unsupervised Learning for Program Repair&lt;/a&gt;. &lt;a href=&quot;https://michiyasunaga.github.io/&quot;&gt;Michihiro Yasunaga&lt;/a&gt; and &lt;a href=&quot;https://cs.stanford.edu/people/pliang/&quot;&gt;Percy Liang&lt;/a&gt;. ICML 2021.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Many thanks to Percy Liang, as well as members of the Stanford P-Lambda group, SNAP group and NLP group for their valuable feedback. Many thanks to Jacob Schreiber and Sidd Karamcheti for edits on this blog post.&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.370.9611&quot;&gt;Reversible Debugging Software&lt;/a&gt;. Tom Britton, Lisa Jeng, Graham Carver, Paul Cheak, Tomer Katzenellenbogen. 2013.   &lt;a href=&quot;https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/42184.pdf&quot;&gt;Programmers’ Build Errors: A Case Study (at Google)&lt;/a&gt;. Hyunmin Seo, Caitlin Sadowski, Sebastian Elbaum, Edward Aftandilian, Robert Bowdidge. 2014. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Improving programming productivity with machine learning is an extremely active area of research. A prominent example is the &lt;a href=&quot;https://copilot.github.com/&quot;&gt;Copilot&lt;/a&gt; / &lt;a href=&quot;https://openai.com/blog/openai-codex/&quot;&gt;Codex&lt;/a&gt; service recently released by OpenAI and GitHub, which translates natural language (e.g. English) descriptions into code. Automated code repair is another complementary technology to improve programming productivity. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1901.01808&quot;&gt;SEQUENCER: Sequence-to-Sequence Learning for End-to-End Program Repair&lt;/a&gt;. Zimin Chen, Steve Kommrusch, Michele Tufano, Louis-Noël Pouchet, Denys Poshyvanyk, Martin Monperrus. 2019. &lt;a href=&quot;https://dl.acm.org/doi/10.1145/3338906.3340455&quot;&gt;DeepDelta: Learning to Repair Compilation Errors&lt;/a&gt;. Ali Mesbah Andrew Rice Emily Johnston Nick Glorioso Eddie Aftandilian. 2019. &lt;a href=&quot;https://arxiv.org/abs/2008.10707&quot;&gt;Patching as Translation: the Data and the Metaphor&lt;/a&gt;. Yangruibo Ding, Baishakhi Ray, Premkumar Devanbu, Vincent J. Hellendoorn. 2020 &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.06600&quot;&gt;Break-It-Fix-It: Unsupervised Learning for Program Repair&lt;/a&gt;. Michihiro Yasunaga, Percy Liang. 2021. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:5&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14603&quot;&gt;DeepFix: Fixing common C language errors by deep learning&lt;/a&gt;. Rahul Gupta, Soham Pal, Aditya Kanade, Shirish Shevade. 2017. &lt;a href=&quot;https://arxiv.org/abs/1805.11683&quot;&gt;DeepBugs: A Learning Approach to Name-based Bug Detection&lt;/a&gt;. Michael Pradel, Koushik Sen. 2018. &lt;a href=&quot;https://arxiv.org/abs/1904.01720&quot;&gt;Neural program repair by jointly learning to localize and repair&lt;/a&gt;. Marko Vasic, Aditya Kanade, Petros Maniatis, David Bieber, Rishabh Singh. 2019. &lt;a href=&quot;https://openreview.net/pdf?id=B1lnbRNtwr&quot;&gt;Global relational models of source code&lt;/a&gt;. Vincent J. Hellendoorn, Charles Sutton, Rishabh Singh, Petros Maniatis, David Bieber. 2020. &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:6&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1511.06709&quot;&gt;Improving Neural Machine Translation Models with Monolingual Data&lt;/a&gt;. Rico Sennrich, Barry Haddow, Alexandra Birch. 2016. &lt;a href=&quot;https://arxiv.org/abs/1804.07755&quot;&gt;Phrase-Based &amp;amp; Neural Unsupervised Machine Translation&lt;/a&gt;. Guillaume Lample, Myle Ott, Alexis Conneau, Ludovic Denoyer, Marc’Aurelio Ranzato. 2018. &lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:7&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://github.com/michiyasunaga/BIFI&quot;&gt;https://github.com/michiyasunaga/BIFI&lt;/a&gt; &lt;a href=&quot;#fnref:7&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:8&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14603&quot;&gt;DeepFix: Fixing common C language errors by deep learning&lt;/a&gt;. Rahul Gupta, Soham Pal, Aditya Kanade, Shirish Shevade. 2017. &lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:9&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14603&quot;&gt;DeepFix: Fixing common C language errors by deep learning&lt;/a&gt;. Rahul Gupta, Soham Pal, Aditya Kanade, Shirish Shevade. 2017. &lt;a href=&quot;#fnref:9&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:10&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1906.10502&quot;&gt;SampleFix: Learning to Correct Programs by Sampling Diverse Fixes&lt;/a&gt;. Hossein Hajipour, Apratim Bhattacharya, Mario Fritz. 2019. &lt;a href=&quot;#fnref:10&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:11&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2005.10636&quot;&gt;Graph-based, Self-Supervised Program Repair from Diagnostic Feedback&lt;/a&gt;. Michihiro Yasunaga, Percy Liang. 2020. &lt;a href=&quot;#fnref:11&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:12&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2109.06822&quot;&gt;LM-Critic: Language Models for Unsupervised Grammatical Error Correction&lt;/a&gt;. Michihiro Yasunaga, Jure Leskovec, Percy Liang. 2021. &lt;a href=&quot;#fnref:12&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-              <pubDate>Tue, 21 Sep 2021 00:00:00 -0400</pubDate>
           </item>
           
         
