@@ -35,6 +35,7 @@ function googleAnalytics() {
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', analyticsName);
+    gtag('config', analyticsNameGA4, { 'anonymize_ip': true });
 
     // Google analytics
     window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
