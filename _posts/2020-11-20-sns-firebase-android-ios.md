@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Push notifications with SNS and Firebase"
+title: "Push notifications SNS and Firebase"
 description: This post describe how I setup SNS to communicate with Firebase to send push notifications to Android and iOS devices
 author-id: "galera"
 categories: [aws, mobile, backend, java]

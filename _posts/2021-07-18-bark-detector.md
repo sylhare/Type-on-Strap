@@ -3,8 +3,8 @@ layout: post
 title: Implementing a dog bark detector
 description: Using machine learning to detect when my dog barks
 author-id: "galera"
-categories: [python, ml, audio, raspberrypi, bash]
-tags: [python, ml, audio, scikit, librosa, raspberrypi, vlc, bash]
+categories: [python, ml, audio, raspberry-pi, bash]
+tags: [python, ml, audio, scikit, librosa, raspberry-pi, vlc, bash]
 excerpt_separator: <!--more-->
 feature-img: "assets/img/posts/bark-detector/featured-image.jpg"
 thumbnail: "assets/img/posts/bark-detector/featured-image.jpg"
@@ -37,7 +37,7 @@ What is audio and how is its digital representation? It's basically an array of 
 <table class="image-table">
 <tr>
 <td>
-<img src="/assets/img/posts/bark-detector/wave.png"/>
+<img src="/assets/img/posts/bark-detector/wave.png" alt="Sound wave"/>
 </td>
 </tr>
 <tr>
@@ -56,7 +56,7 @@ So, instead of using the temporal representation, let's observe the frequency re
 <table class="image-table">
 <tr>
 <td>
-<img src="/assets/img/posts/bark-detector/stft.png"/>
+<img src="/assets/img/posts/bark-detector/stft.png" alt="Frequency representation"/>
 </td>
 </tr>
 <tr>
@@ -93,7 +93,7 @@ Ok, what does it mean? It's an improved frequency representation but applying op
 <table class="image-table">
 <tr>
 <td>
-<img src="/assets/img/posts/bark-detector/mfcc.png"/>
+<img src="/assets/img/posts/bark-detector/mfcc.png" alt="MFCC"/>
 </td>
 </tr>
 <tr>
@@ -147,8 +147,8 @@ We can pre-process the dataset and check for files that have something different
 
 <table class="image-table">
 <tr>
-<td><img src="/assets/img/posts/bark-detector/noise.png"/></td>
-<td><img src="/assets/img/posts/bark-detector/wave.png"/></td></tr>
+<td><img src="/assets/img/posts/bark-detector/noise.png" alt="Signal wit noise"/></td>
+<td><img src="/assets/img/posts/bark-detector/wave.png" alt="Signal wit unclassified audio event"/></td></tr>
 <tr>
 <td class="center"><small>File with only noise</small></td>
 <td class="center"><small>File with unclassified audio event</small></td></tr>
@@ -163,7 +163,7 @@ As mentioned before, we'll discard files whose amplitude is lower than 0.25. Lis
 <table class="image-table">
 <tr>
 <td>
-<img src="/assets/img/posts/bark-detector/bark.png"/>
+<img src="/assets/img/posts/bark-detector/bark.png" alt="Bark signal/>
 </td>
 </tr>
 <tr>
@@ -255,7 +255,7 @@ More info: <a href="https://towardsdatascience.com/having-an-imbalanced-dataset-
 
 I've used `SMOTE` (Synthetic Minority Over-sampling Technique) technique to perform the oversampling with very satisfactory results. In simple terms, SMOTE looks at the feature space for the minority class data points and considers its k nearest neighbours. 
 
-To do that I've used <a href="https://imbalanced-learn.readthedocs.io/en/stable/index.html">imbalanced-learn</a> python libary and it's really simple:
+To do that I've used <a href="https://imbalanced-learn.org/stable/">imbalanced-learn</a> python libary and it's really simple:
 
 ```python
 def fix_imbalance(X, Y):
@@ -333,7 +333,7 @@ def send_to_telegram(predictions, filename):
 
 <table class="image-table">
 <tr>
-<td><img src="/assets/img/posts/bark-detector/telegram.png"/></td>
+<td><img src="/assets/img/posts/bark-detector/telegram.png" alt="Telegram message when a bark occurs"/></td>
 </tr>
 <tr>
 <td class="center"><small>Example of messages in Telegram</small></td>

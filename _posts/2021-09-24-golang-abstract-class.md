@@ -3,8 +3,8 @@ layout: post
 title: Golang abstract class
 description: How to implement an abstract class on golang
 author-id: "galera"
-categories: [golang, design patterns, architecture]
-tags: [golang, design patterns, architecture]
+categories: [golang, design-patterns, architecture]
+tags: [golang, design-patterns, architecture]
 excerpt_separator: <!--more-->
 feature-img: "assets/img/posts/golang-abstract/featured-image.jpg"
 thumbnail: "assets/img/posts/golang-abstract/featured-image.jpg"
