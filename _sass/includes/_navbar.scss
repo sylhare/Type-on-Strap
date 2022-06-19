@@ -16,8 +16,8 @@
 .site-header {
   padding: 2% 2% 1% 2%;
   background: var(--background);
-  display: inline-block;
-  float: left;
+  display: flexbox;
+  flex-direction: row;
   width: 100%;
 
   .separator {

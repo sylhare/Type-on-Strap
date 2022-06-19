@@ -43,13 +43,24 @@
 }
 
 .player {
-  width: 10%;
-  float: right;
+  width: 50%;
+  float: left;
+
+  .branding {
+    float: left;
+  }
+
+  .iframeplayer {
+    float: clear;
+  }
+
+  nav {
+    float: right;
+  }
 
   /* --- Responsive --- */
   @media screen and (max-width: $m-break) {
     width: 100%;
-    float: clear;
 
     iframe {
       height: 0%;
@@ -58,7 +69,6 @@
 
   @media screen and (max-width: 450px) {
     width: 100%;
-    float: clear;
     iframe {
       height: 0%;
     }
@@ -66,7 +76,6 @@
 
   @media screen and (max-width: 400px) {
     width: 100%;
-    float: clear;
     iframe {
       height: 0%;
     }
@@ -74,7 +83,6 @@
 
   @media screen and (max-width: 380px) {
     width: 100%;
-    float: clear;
     iframe {
       height: 0%;
     }
