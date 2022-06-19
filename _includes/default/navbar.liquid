@@ -18,6 +18,13 @@
       {{ site.title }}
     </a>
   </div>
+  <iframe
+    id="embed_player"
+    frameborder="0"
+    width="200"
+    height="100"
+    src="https://tropicofm.airtime.pro/embed/player?stream=auto&skin=2"
+  ></iframe>
 
   <!-- Toggle menu -->
   <nav class="clear">
@@ -43,19 +50,7 @@
         </a>
       </li>
       {% endunless %} {% assign name_page = page.title | append: name_page %} {%
-      endfor %}
-
-      <div class="player">
-        <iframe
-          id="embed_player"
-          frameborder="0"
-          width="250"
-          height="296"
-          src="https://tropicofm.airtime.pro/embed/player?stream=auto&skin=2"
-        ></iframe>
-      </div>
-
-      {% if site.color_theme == 'auto' %}
+      endfor %} {% if site.color_theme == 'auto' %}
       <li class="separator">|</li>
       <li>
         <a
