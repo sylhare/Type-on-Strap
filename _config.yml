@@ -1,10 +1,10 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
+baseurl: ""
+url: "https://saveme2.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
-title: Type on Strap                                    # site's title
-description: "A website with blog posts and pages"      # used by search engines
+title: SAVEME2                                          # site's title
+description: "hi hello"                                 # used by search engines
 avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
@@ -38,7 +38,7 @@ comments:
     issue-term:                                         # Issue term (e.g. "comment" consider issues with this word in the title as comments)
 
 # PAGINATION
-paginate: 5
+paginate: 10
 paginate_path: "/blog/page:num"
 
 # PORTFOLIO
