@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Testing python BaseHttpServer
-description: How do I manage to put BaseHttpServer and mock dependencies
+description: While BaseHttpServer is very fancy for quick and dirty tests, it's not easy to do testing on it. Discover how do I manage to test BaseHttpServer and mock dependencies
 author-id: "galera"
 categories: [python, testing]
 tags: [python, testing, mocking]

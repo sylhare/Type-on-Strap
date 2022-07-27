@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Golang abstract class
-description: How to implement an abstract class on golang
+description: I'm doing a side project using golang, and I have a use case where I'd use an abstract class in Java. Unfortunately, in golang the concept of classes does not exist. In this article I describe how can I implement the behaviour I want without abstract class.
 author-id: "galera"
 categories: [golang, design-patterns, architecture]
 tags: [golang, design-patterns, architecture]
@@ -11,7 +11,7 @@ thumbnail: "assets/img/posts/golang-abstract/featured-image.jpg"
 image: "assets/img/posts/golang-abstract/featured-image.jpg"
 ---
 
-I'm doing a side project using golang, and I have a use case where I'd use an abstract class in Java.  Unfortunately, in golang the concept of classes does not exist. 
+I'm doing a side project using golang, and I have a use case where I'd use an abstract class in Java.  Unfortunately, in golang the concept of classes does not exist.
 
 In this article I describe how can I implement the behaviour I want without abstract class.
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Leaflet fog of war
-description: How I did implement fog of war with leaflet
+description: When I was playing age of empires the map was all in black color at the beginning. As long as you explore the map, the black color is removed discovering what it was hidden behind. I wanted to implement something similar in a leaflet map. I'll describe the callenges I have found in a series of articles.
 author-id: "galera"
 categories: [leaflet, javascript, browser, gis]
 tags: [leaflet, javascript, browser, gis]
@@ -15,7 +15,8 @@ image: "assets/img/posts/leaflet-fog-of-war/featured-image.jpg"
 iframe {
     padding: 0;
     border-width: 0;
-    width: 60%
+    width: 60%;
+    height: 400px
 }
 
 .iframe-holder {
@@ -31,6 +32,13 @@ When I was playing age of empires the map was all in black color at the beginnin
 I wanted to implement something similar to show all the trails, routes, paths, roads, streets, etc that I have discovered. I'll describe the callenges I have found in a series of articles.
 
 <p><!--more--></p>
+
+This is part of my series of articles about leaflet:
+
+- <a href="/leaflet-fog-of-war">Leaflet fog of war</a>
+- <a href="/leaflet-draw-polygon-markers">Draw a polygon from markers in leaflet</a>
+- <a href="/leaflet-load-gpx">Load and display GPX in leaflet</a>
+- <a href="/browser-storage">Browser storage</a>
 
 Age of empires... what a great game
 
@@ -99,4 +107,7 @@ The plugin reads the input data as <a href="https://en.wikipedia.org/wiki/GeoJSO
 
 Here you can see it in action: <a href="https://www.agalera.eu/leaflet-fogofwar/" target="_blank" rel="noopener">https://www.agalera.eu/leaflet-fogofwar/</a>
 
-But wait ... that's not all, I need a way to draw the areas I visisted. That's covered in the next article: <a href="/leaflet-draw-polygon-markers/">Draw a polygon from markers in leaflet</a>
+But wait ... that's not all, I want the fulfill the following requirements:
+- I need a way to draw the areas I visisted, covered in the article: <a href="/leaflet-draw-polygon-markers/">Draw a polygon from markers in leaflet</a>
+- Load a GPX and display it in the map, covered in the article: <a href="/leaflet-draw-polygon-markers/">Load and display GPX in leaflet</a>
+- I don't want to spent any money in this, so the storage will be browser based. This is covered in the article: <a href="/browser-storage">Browser storage</a>

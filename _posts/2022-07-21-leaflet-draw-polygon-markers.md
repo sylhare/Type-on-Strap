@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Draw a polygon from markers in leaflet
-description: How to join multiple markers in leaflet into a polygon
+description: I want to add some markers to the map and to create a polygon that joins them to display them nicely in a leaflet map
 author-id: "galera"
 categories: [leaflet, javascript, browser, gis]
 tags: [leaflet, javascript, browser, gis]
@@ -23,6 +23,13 @@ Following up from the previous article about implementing the fog of war in leaf
 Let's see how I manage to do that.
 
 <p><!--more--></p>
+
+This is part of my series of articles about leaflet:
+
+- <a href="/leaflet-fog-of-war">Leaflet fog of war</a>
+- <a href="/leaflet-draw-polygon-markers">Draw a polygon from markers in leaflet</a>
+- <a href="/leaflet-load-gpx">Load and display GPX in leaflet</a>
+- <a href="/browser-storage">Browser storage</a>
 
 The user can click the map to generate markers that follow a route, e.g. a road, a trail, etc.. and later join those markers to create a complex polygon. This reflects the fact that you have visited the road, but you only have certain visibility of the environment (maybe 10 meters or so):
 
@@ -47,16 +54,14 @@ The user can click the map to generate markers that follow a route, e.g. a road,
 
 ## Join markers into a polygon
 
-In order to compute all the geographic information, I'll use the <a href="https://github.com/bjornharrtell/jsts">jsts</a> library.
-
-When a new marker is added, it added to the map and to a internal array:
+When a new marker is added, it is added to the map and to an internal array:
 ```javascript
         onAdd: function (e) {
             const marker = new L.Marker(e.latlng)
             container.markers.push(marker.addTo(map))
         }
 ```
-When the user click on a button, those markers are processed and joined into a polygon:
+When the user click on a button, those markers are processed and joined into a polygon by using the <a href="https://github.com/bjornharrtell/jsts">jsts</a> library
 
 ```javascript
 const _joinLinesInPolygon = (points) => {
@@ -80,4 +85,8 @@ const _joinLinesInPolygon = (points) => {
     return polygonCoords.map((coord) => toLeafletPoint(coord))
 }
 ```
-This method converts the leaflet points into a format the jsts libray can understand and perform the `buffer` operation in jsts which does all the magic. Later the coordinates are transformed into the leaflet format
+This method converts the leaflet points into a format the jsts libray can understand and perform the `buffer` operation in jsts which does all the magic. From the API definition: buffer computes a buffer area around this geometry having the given width.
+
+Later the coordinates are transformed into the leaflet format.
+
+Here you can see it in action: <a href="https://www.agalera.eu/leaflet-fogofwar/" target="_blank" rel="noopener">https://www.agalera.eu/leaflet-fogofwar/</a>
