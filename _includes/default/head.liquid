@@ -70,6 +70,14 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
         <!-- Page analysis (analytics.js) -->
         <script async src='https://www.google-analytics.com/analytics.js'></script>
+        <script>
+        // disable GA for localhost
+        const isProduction = window.location.host.includes("agalera.eu")
+        if (!isProduction) { 
+          console.log(`Disabling google analytics for {{ site.google_analytics }}`)
+          window['ga-disable-{{ site.google_analytics }}'] = true;
+        }
+        </script>
     {% endif %}
 
     <!-- seo tags -->
