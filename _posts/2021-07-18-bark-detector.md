@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Implementing a dog bark detector
-description: Using machine learning to detect when my dog barks
+description: Using machine learning with python to detect when my dog barks and send a telegram message when it happens
 author-id: "galera"
 categories: [python, ml, audio, raspberry-pi, bash]
 tags: [python, ml, audio, scikit, librosa, raspberry-pi, vlc, bash]

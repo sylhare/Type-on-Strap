@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Combine two Java Optionals
-description: How to combine two Optional results in Java 9 using Optional.or compared with Java 8
+description: I was implementing a searching algorithm and I had to search for two things. In this article I describe how I implemented combining two Java optionals in Java 9 using Optional.or compared with Java 8
 author-id: "galera"
 categories: [java9, optional]
 tags: [java9, optional]

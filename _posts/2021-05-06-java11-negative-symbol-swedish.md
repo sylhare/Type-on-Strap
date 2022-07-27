@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java 11 negative symbol in Swedish
-description: How Java 11 negative symbol bug fix break our implementation
+description: We performed a migration to Java 11 and a bug fix about negative symbol for negative numbers in Java ruined our implementation. This article describes the situation and the lessons learned.
 author-id: "galera"
 categories: [java, testing]
 tags: [java, java11]

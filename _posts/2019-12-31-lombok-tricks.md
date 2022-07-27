@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Lombok tricks
-description: Compilation of lombok tricks and useful techniques
+description: This article is intented to serve as a compilation of lombok tricks and useful techniques I have found using lombok
 author-id: "galera"
 categories: [java,lombok]
 tags: [java,lombok]
