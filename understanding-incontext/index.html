@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/understanding-incontext/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How does in-context learning work? A framework for understanding the differences from traditional supervised learning | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="How does in-context learning work? A framework for understanding the differences from traditional supervised learning" />
+<meta name="author" content="<a href="https://cs.stanford.edu/~eix/">Sang Michael Xie</a> and <a href="https://shmsw25.github.io/">Sewon Min</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/understanding-incontext/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/understanding-incontext/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-01T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How does in-context learning work? A framework for understanding the differences from traditional supervised learning" />
+<script type="application/ld+json">
+{"url":"http://ai.stanford.edu/blog/understanding-incontext/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/understanding-incontext/"},"author":{"@type":"Person","name":"<a href=\"https://cs.stanford.edu/~eix/\">Sang Michael Xie</a> and <a href=\"https://shmsw25.github.io/\">Sewon Min</a>"},"description":"The official Stanford AI Lab blog","headline":"How does in-context learning work? A framework for understanding the differences from traditional supervised learning","dateModified":"2022-08-01T00:00:00-07:00","datePublished":"2022-08-01T00:00:00-07:00","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>How does in-context learning work? A framework for understanding the differences from traditional supervised learning | The Stanford AI Lab Blog</title>
+    <meta name="description" content="A Bayesian inference framework for in-context learning in large language models.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="How does in-context learning work? A framework for understanding the differences from traditional supervised learning">
+    
+    <meta name="twitter:description" content="A Bayesian inference framework for in-context learning in large language models.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-08-01-understanding-incontext/large_img.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-08-01-understanding-incontext/large_img.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">How does in-context learning work? A framework for understanding the differences from traditional supervised learning</h1>
+    <p class="meta">
+    <a href="https://cs.stanford.edu/~eix/">Sang Michael Xie</a> and <a href="https://shmsw25.github.io/">Sewon Min</a>
+    <div class="post-date">August 1, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+<p><em>In this post, we provide a Bayesian inference framework for in-context learning in large language models like GPT-3 and show empirical evidence for our framework, highlighting the differences from traditional supervised learning. This blog post primarily draws from the theoretical framework for in-context learning from <a href="https://arxiv.org/abs/2111.02080">An Explanation of In-context Learning as Implicit Bayesian Inference</a> <sup id="fnref:BI" role="doc-noteref"><a href="#fn:BI" class="footnote">1</a></sup> and experiments from <a href="https://arxiv.org/abs/2202.12837">Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?</a> <sup id="fnref:RRD" role="doc-noteref"><a href="#fn:RRD" class="footnote">2</a></sup>.</em></p>
+
+<p><strong>TL;DR</strong> – In-context learning is a mysterious emergent behavior in large language models (LMs) where the LM performs a task just by conditioning on input-output examples, without optimizing any parameters. In this post, we provide a Bayesian inference framework for understanding in-context learning as “locating” latent concepts the LM has acquired from pretraining data. This suggests that all components of the prompt (inputs, outputs, formatting, and the input-output mapping) can provide information for inferring the latent concept. We connect this framework to empirical evidence where in-context learning still works when provided training examples with random outputs. While output randomization cripples traditional supervised learning algorithms, it only removes one source of information for Bayesian inference (the input-output mapping). Finally, we present missing gaps and avenues for future work and invite the community to join us in further understanding in-context learning.</p>
+
+<h3 id="content">Content</h3>
+<ol>
+  <li><a href="#the-mystery-of-in-context-learning">The mystery of in-context learning</a></li>
+  <li><a href="#a-framework-for-in-context-learning">A framework for in-context learning</a></li>
+  <li><a href="#empirical-evidence">Empirical evidence</a></li>
+  <li><a href="#avenues-for-extensions">Avenues for extensions</a></li>
+  <li><a href="#wrapping-up">Wrapping up</a></li>
+</ol>
+
+<hr />
+
+<h1 id="the-mystery-of-in-context-learning">The mystery of in-context learning</h1>
+
+<p>Large language models (LMs) such as GPT-3 <sup id="fnref:GPT" role="doc-noteref"><a href="#fn:GPT" class="footnote">3</a></sup> are trained on internet-scale text data to predict the next token given the preceding text. This simple objective paired with a large-scale dataset and model results in a very flexible LM that can “read” any text input and condition on it to “write” text that could plausibly come after the input. While the training procedure is both simple and general, the GPT-3 paper found that the large scale leads to a particularly interesting emergent behavior <sup id="fnref:EMER" role="doc-noteref"><a href="#fn:EMER" class="footnote">4</a></sup> called in-context learning.</p>
+
+<p><strong>What is in-context learning?</strong> In-context learning was popularized in the original GPT-3 paper as a way to use language models to learn tasks given only a few examples.<sup id="a1"><a href="#f1">[1]</a></sup> During in-context learning, we give the LM a prompt that consists of a list of input-output pairs that demonstrate a task. At the end of the prompt, we append a test input and allow the LM to make a prediction just by conditioning on the prompt and predicting the next tokens. To correctly answer the two prompts below, the model needs to read the training examples to figure out the input distribution (financial or general news), output distribution (Positive/Negative or topic), input-output mapping (sentiment or topic classification), and the formatting.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image13.gif" style="width: 88%" /></p>
+<figcaption>
+Two examples of in-context learning, where a language model (LM) is given a list of training examples (black) and a test input (green) and asked to make a prediction (orange) by predicting the next tokens/words to fill in the blank.
+</figcaption>
+</div></figure>
+
+<p><strong>What can in-context learning do?</strong> On many benchmark NLP benchmarks, in-context learning is competitive with models trained with much more labeled data and is state-of-the-art on LAMBADA (commonsense sentence completion) and TriviaQA (question answering). Perhaps even more exciting is the array of applications that in-context learning has enabled people to spin up in just a few hours, including writing code from natural language descriptions, helping with app design mockups, and generalizing spreadsheet functions:</p>
+
+<figure class="figure"><div class="figure__main">
+<div style="display: inline-block; width: 33%"> <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#39;s a sentence describing what Google&#39;s home page should look and here&#39;s GPT-3 generating the code for it nearly perfectly. <a href="https://t.co/m49hoKiEpR">pic.twitter.com/m49hoKiEpR</a></p>&mdash; Sharif Shameem (@sharifshameem) <a href="https://twitter.com/sharifshameem/status/1283322990625607681?ref\_src=twsrc%5Etfw">July 15, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
+
+<div style="display: inline-block; width: 33%"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">This changes everything. 🤯<br /><br />With GPT-3, I built a Figma plugin to design for you.<br /><br />I call it &quot;Designer&quot; <a href="https://t.co/OzW1sKNLEC">pic.twitter.com/OzW1sKNLEC</a></p>&mdash; jordan singer (@jsngr) <a href="https://twitter.com/jsngr/status/1284511080715362304?ref\_src=twsrc%5Etfw">July 18, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
+
+<div style="display: inline-block; width: 31%"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">=GPT3()... the spreadsheet function to rule them all.<br /><br />Impressed with how well it pattern matches from a few examples.<br /><br />The same function looked up state populations, peoples&#39; twitter usernames and employers, and did some math. <a href="https://t.co/W8FgVAov2f">pic.twitter.com/W8FgVAov2f</a></p>&mdash; Paul Katsen (@pavtalk) <a href="https://twitter.com/pavtalk/status/1285410751092416513?ref_src=twsrc%5Etfw">July 21, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+</div></figure>
+
+<p>In-context learning allows users to quickly build models for a new use case without worrying about fine-tuning and storing new parameters for each task. It typically requires very few training examples to get a prototype working, and the natural language interface is intuitive even for non-experts.</p>
+
+<p><strong>Why is in-context learning surprising?</strong> In-context learning is unlike conventional machine learning in that there’s no optimization of any parameters. However, this isn’t unique—meta-learning methods have trained models that learn from examples <sup id="fnref:META" role="doc-noteref"><a href="#fn:META" class="footnote">5</a></sup>. The mystery is that the LM isn’t trained to learn from examples. Because of this, there’s seemingly a mismatch between pretraining (what it’s trained to do, which is next token prediction) and in-context learning (what we’re asking it to do).</p>
+
+<p>This seems like magic. How does in-context learning work?</p>
+
+<hr />
+
+<h1 id="a-framework-for-in-context-learning">A framework for in-context learning</h1>
+
+<p>How can we better understand in-context learning? The first thing to note is that a large LM like GPT-3 has been trained on a massive amount of text with a wide array of topics and formats, from Wikipedia pages, academic papers, and Reddit posts to Shakespeare’s works. We hypothesize that training on this text allows the LM to model a diverse set of learned concepts.</p>
+
+<p>In <a href="https://arxiv.org/abs/2111.02080">Xie et al.</a>,
+we propose a framework in which the LM uses the in-context learning prompt to “locate” a previously learned concept to do the in-context learning task. For example (see figure below), in our framework, the LM uses the training examples to internally figure out that the task is either sentiment analysis (left) or topic classification (right) and apply the same mapping to the test input.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image11.gif" /></p>
+</div></figure>
+
+<p><strong>What’s a concept?</strong> We can think of a concept as a latent variable that contains various document-level statistics. For example, a “news topics” concept describes a distribution of words (news and their topics), a format (the way that news articles are written), a relation between news and topics, and other semantic and syntactic relationships between words. In general, concepts may be a combination of many latent variables that specify different aspects of the semantics and syntax of a document, but we simplify here by grouping them all into one concept variable.</p>
+
+<h3 id="how-does-the-lm-learn-to-do-bayesian-inference-during-pretraining">How does the LM learn to do Bayesian inference during pretraining?</h3>
+
+<p>We show that an LM trained (using next token prediction) on synthetic data with a latent concept structure can learn to do in-context learning. We hypothesize that a similar effect can occur in real pretraining data since text documents naturally have long-term coherence: sentences/paragraphs/table rows in the same document tend to share underlying semantic information (e.g., topic) and formatting (e.g., a FAQ page alternates between questions and answers). In our framework, the document-level latent concept creates long-term coherence, and modeling this coherence during pretraining requires learning to infer the latent concept:</p>
+
+<ol>
+  <li><strong>Pretrain</strong>: To predict the next token during pretraining, the LM must infer (“locate”) the latent concept for the document using evidence from the previous sentences.</li>
+  <li><strong>In-context learning</strong>: If the LM also infers the <em>prompt concept</em> (the latent concept shared by examples in the prompt) using in-context examples in the prompt, then in-context learning occurs!</li>
+</ol>
+
+<h3 id="bayesian-inference-view-of-in-context-learning">Bayesian inference view of in-context learning</h3>
+
+<p>Before we get into the Bayesian inference view, let’s set up the in-context learning setting.</p>
+
+<ul>
+  <li>
+    <p><strong>Pretraining distribution</strong> (\(p\)): Our main assumption on the structure of pretraining documents is that a document is generated by first sampling a latent concept, and then the document is generated by conditioning on the latent concept. We assume that the pretraining data and LM are large enough that the LM fits the pretraining distribution exactly. Because of this, we will use \(p\) to denote both the pretraining distribution and the probability under the LM.</p>
+  </li>
+  <li>
+    <p><strong>Prompt distribution</strong>: In-context learning prompts are lists of IID (independent and identically distributed) training examples concatenated together with one test input. Each example in the prompt is drawn as a sequence conditioned on the same <em>prompt concept</em>, which describes the task to be learned.</p>
+  </li>
+</ul>
+
+<p>The process of “locating” learned capabilities can be viewed as Bayesian inference of a prompt concept that every example in the prompt shares. If the model can infer the prompt concept, then it can be used to make the correct prediction on the test example. Mathematically, the prompt provides evidence for the model (\(p\)) to sharpen the posterior distribution over concepts, \(p(\text{concept} \mid \text{prompt})\). If \(p(\text{concept} \mid \text{prompt})\) is concentrated on the prompt concept, the model has effectively “learned” the concept from the prompt.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image8.png" /></p>
+</div></figure>
+
+<p>Ideally, \(p(\text{concept} \mid \text{prompt})\) concentrates on the prompt concept with more examples in the prompt so that the prompt concept is “selected” through marginalization.</p>
+
+<h3 id="prompts-provide-noisy-evidence-for-bayesian-inference">Prompts provide noisy evidence for Bayesian inference</h3>
+
+<p>The logical leap in the explanation is that the LM will infer the prompt concept from in-context examples, even though prompts are sampled from the prompt distribution, which can be very different from the pretraining distribution that the LM trained on. Prompts concatenate independent training examples together, so the transitions between examples can be very low-probability under the LM (and the pretraining distribution), and can introduce noise into the inference process. For example, concatenating independent sentences about different news topics may result in very atypical text, since none of the sentences have sufficient context. Interestingly, the LM can still do Bayesian inference despite the mismatch between the pretraining and prompt distributions, as seen empirically in GPT-3. We prove that in-context learning via Bayesian inference can emerge from latent concept structure in the pretraining data in a simplified theoretical setting and use this to generate a synthetic dataset where in-context learning emerges for both Transformers and LSTMs.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image6.gif" /></p>
+<figcaption>
+Green arrows represent the signal about the latent prompt concept from the training examples, while red arrows represent noise from low-probability transitions between examples.
+</figcaption>
+</div></figure>
+
+<p><strong>Training examples provide signal</strong>: We can think of the training examples as providing a signal for Bayesian inference. In particular, the transitions within training examples (green in the figure above) allow the LM to infer the latent concept they all share. In a prompt, the green transitions come from the input distribution (the transitions inside the news sentence), the output distribution (the topic word), the format (syntax of news sentence), and the input-output mapping (relation between the news and the topic) all provide signal for Bayesian inference.</p>
+
+<p><strong>Transitions between training examples can be low-probability (noise)</strong>: Because the training examples are IID, concatenating them together often creates unnatural, low-probability transitions between examples. For example, seeing a sentence about the NFC Championship after a sentence about circulation revenue in Finland may be surprising (see figure above). These transitions create noise in the inference process, and stems from the mismatch between the pretraining and prompt distributions.</p>
+
+<p><strong>In-context learning is robust to some noise</strong>: We prove that if the signal is greater than the noise, then the LM can successfully do in-context learning: it predicts the correct test output as the number of training examples (\(n\)) goes to infinity.<sup id="a2"><a href="#f2">[2]</a></sup> We characterize the signal as the KL divergence between other concepts and the prompt concept conditioned on the prompt, and the noise as error terms coming from the transitions between examples. Intuitively, if the prompt allows the model to distinguish the prompt concept from other concepts really easily, then there’s a strong signal.<sup id="a3"><a href="#f3">[3]</a></sup> This also suggests that with a strong enough signal, other forms of noise such as removing a source of information (e.g., input-output mapping) could be tolerable, especially if the format of the prompt doesn’t change and the input-output mapping information is in the pretraining data. This is different from traditional supervised learning, which would fail if the input-output mapping information is removed (e.g., by randomizing the labels). We will examine this distinction directly in the next section.</p>
+
+<p><strong>Small-scale testbed for in-context learning (GINC dataset)</strong>: To support the theory, we built GINC, a synthetic pretraining dataset and in-context learning testbed with the latent concept structure. We found that pretraining on GINC causes in-context learning to emerge for both Transformers and LSTMs, suggesting that the main effect comes from the structure in the pretraining data. Ablations show that the latent concept structure (which leads to long-term coherence) is crucial for the emergence of in-context learning in GINC (see <a href="https://arxiv.org/abs/2111.02080">Xie et al.</a> to learn more).</p>
+
+<hr />
+
+<h1 id="empirical-evidence">Empirical evidence</h1>
+
+<p>Next, we aim to provide empirical evidence for the above framework through a set of experiments.</p>
+
+<h3 id="input-output-pairing-in-the-prompt-matters-much-less-than-previously-thought">Input-output pairing in the prompt matters much less than previously thought</h3>
+
+<p><strong>tl;dr</strong>: Forming the prompt with the ground truth output is not required to achieve good in-context learning performance.<sup id="a4"><a href="#f4">[4]</a></sup></p>
+
+<p>In <a href="https://arxiv.org/abs/2202.12837">Min et al.</a>, we compare three different methods:</p>
+
+<ul>
+  <li><strong>No-examples</strong>: the LM conditions on the test input only, with no examples. This is typical zero-shot inference, first done by GPT-2/GPT-3.</li>
+  <li><strong>Examples with ground truth outputs</strong>: the LM conditions on the concatenation of a few in-context examples and the test input. This is a typical in-context learning method, and by default, all outputs in the prompt are ground truth.</li>
+  <li><strong>Examples with random outputs</strong>: the LM conditions on in-context examples and the test input, but now, each output in the prompt is randomly sampled from the output set (labels in the classification tasks; a set of answer options in the multi-choice tasks).</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image14.png" />
+<img class="postimage_75" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image5.png" /></p>
+<figcaption>
+The prompt with ground truth outputs (top) and the prompt with random outputs (bottom).
+</figcaption>
+</div></figure>
+
+<p>In particular, the approach “Examples with random outputs” hasn’t been tried before. Typical supervised learning will not work at all if the outputs of the labeled data are random, since the task does not make sense anymore.</p>
+
+<p>We experiment with 12 models whose sizes range from 774M to 175B, including the largest GPT-3 (Davinci). Models are evaluated on 16 classification datasets and 10 multi-choice datasets.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image3.png" /></p>
+<figcaption>
+Comparison between no-examples (blue), examples with ground truth outputs (yellow) and examples with random outputs (random). Replacing ground truth outputs with random outputs hurts performance significantly less than previously thought, and is still significantly better than no-examples.
+</figcaption>
+</div></figure>
+
+<p>In-context learning performance does not drop much when each output is replaced with a random output from the output set.</p>
+
+<p>First, as expected, using the examples with ground truth outputs significantly outperforms no-examples. Then, replacing ground truth outputs with random outputs only barely hurts performance. This means, unlike typical supervised learning, ground truth outputs are not really required to achieve good in-context learning performance, which is counter-intuitive!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image1.png" /></p>
+<figcaption>
+Four different aspects of the concatenation of the in-context examples: the input-output mapping, the input distribution, the output space and the format.
+</figcaption>
+</div></figure>
+
+<p>If the correct input-output mapping has a marginal effect, which aspects of the prompt are most important for in-context learning?</p>
+
+<p>One possible aspect is the <strong>input distribution</strong>, i.e., the underlying distribution that inputs in the examples are from (the red text in the figure below). To quantify its impact, we design a variant of demonstrations where each in-context example consists of an input sentence that is randomly sampled from an external corpus (instead of the input from the training data). We then compare its performance with demonstrations with random labels. The intuition is that these two versions of demonstrations both do not keep the correct input-label correspondence, but only differ in whether or not the LM conditions on the correct input distribution.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image9.png" /></p>
+<figcaption>
+The input distribution matters: when the inputs in the prompt are replaced with random inputs from an external corpus (the CC News corpus), model performance significantly drops.
+</figcaption>
+</div></figure>
+
+<p>Results indicate that overall, the model with random sentences as inputs achieves significantly lower performance (up to 16% absolute points worse). This indicates conditioning on the correct input distribution is important.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image7.png" /></p>
+<figcaption>
+The output space matters: when the outputs in the examples are replaced with random English unigrams, model performance significantly drops.
+</figcaption>
+</div></figure>
+
+<p>Another aspect that may affect in-context learning is the <strong>output space</strong>: the set of outputs (classes or answer choices) in the task. To quantify its impact, we design a variant of demonstrations consisting of in-context examples with randomly paired, random English unigrams that are not related to the original labels of the task (e.g., “wave”). Results indicate that there is a significant performance drop when using this demonstration (up to 16% absolute). This indicates conditioning on the correct output space is important.<sup id="a5"><a href="#f5">[5]</a></sup> This is true even for a multi-choice task, likely because it still has a particular distribution of the choices (e.g., objects like “Bolts” and “Screws” in the OpenBookQA dataset) that the model uses.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image12.png" /></p>
+</div></figure>
+
+<h4 id="connections-to-the-bayesian-inference-framework">Connections to the Bayesian inference framework</h4>
+
+<p>The fact that the LMs do not rely on the input-output correspondence in the prompt possibly means that the LMs might have been exposed to some notions of the input-output correspondence for the task during pretraining, and in-context learning is simply relying on them. Instead, all the components of the prompt (input distribution, the output space and format) are providing “evidence” to enable the model to better infer (locate) concepts that are learned during pretraining. The random input-output mapping still increases the “noise” due to concatenating random sequences together in the prompt. Nonetheless, based on our framework, the model still does Bayesian inference as long as there is still enough signal (such as the correct input distribution, output space, and format). Of course, having the correct input-output mapping can still help by providing more evidence and reducing noise, especially when the input-output mapping doesn’t show up often in pretraining data.</p>
+
+<h3 id="in-context-learning-performance-is-highly-correlated-with-term-frequencies-during-pretraining">In-context learning performance is highly correlated with term frequencies during pretraining</h3>
+
+<p>Razeghi et al. <sup id="fnref:IPTF" role="doc-noteref"><a href="#fn:IPTF" class="footnote">6</a></sup> evaluate GPT-J on various numeric tasks, and find that in-context learning performance is highly correlated with how many times the terms in each instance (numbers and units) appear in the pretraining data of GPT-J (The PILE).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image4.png" style="display:inline-block; width: 49%" />
+<img src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image10.png" style="display:inline-block; width: 49%" /></p>
+<figcaption>
+Correlation between term frequency (x-axis) and in-context learning performance (y-axis). From left to right: addition, multiplication, addition with no task indication in the prompt, and multiplication with no task indication in the prompt. Figures from Razeghi et al.
+</figcaption>
+</div></figure>
+
+<p>This is consistent across different types of numeric tasks (addition, multiplication and unit conversions), and different values of k (the number of labeled examples in the prompt). An interesting fact is that this is true also when the input does not explicitly state the task—for instance, instead of using “Q: What is 3 times 4? A: 12”, use “Q: What is 3 # 4? A: 12”.</p>
+
+<h4 id="connections-to-the-bayesian-inference-framework-1">Connections to the Bayesian inference framework</h4>
+
+<p>We view this work as another piece of evidence that shows in-context learning is mainly about locating latent concepts learned during pretraining. In particular, if terms in a particular instance are exposed many times in the pretraining data, the model is likely to know better about the distribution of the inputs. This will provide better evidence to locate latent concepts to perform a downstream task, according to Bayesian inference. While Razeghi et al. specifically focuses on one aspect of how much the model would know the input distribution — term frequencies of the specific instance — there can be a broader set of variations, such as frequencies of the input-output correlation, the format (or the text pattern), and more.</p>
+
+<hr />
+
+<h1 id="avenues-for-extensions">Avenues for extensions</h1>
+
+<h4 id="understanding-model-performance-on-unseen-tasks">Understanding model performance on “unseen” tasks</h4>
+
+<p>Our framework suggests that the model is “localizing” or “retrieving” concepts that it has learned during pretraining. However, Rong shows in <a href="https://ai.stanford.edu/blog/in-context-learning">this blog post</a> that the model performs almost perfectly on an unnatural/unseen synthetic task that maps sports to animals, vegetables to sports, etc (below). Also, the input-output mapping still matters in this case since the model learns the unnatural mapping from examples. Empirically, one possibility is that in-context learning behaviors may change in synthetic tasks (rather than real NLP benchmarks that our experiments focus on) – this requires further investigation.</p>
+
+<p>Nonetheless, Bayesian inference could still explain some forms of extrapolation if we view a concept as a composition of many latent variables. For example, consider a latent variable representing syntax and another variable representing semantics. Bayesian inference can combinatorially generalize to new semantics-syntax pairs even if the model has not seen all the pairs during pretraining. General operations like permutation, swapping, and copying are useful during pretraining and can help extrapolation when composed (e.g., label permutation in the sport-to-animal case). More work is needed to model how in-context learning can work on unseen tasks.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-08-01-understanding-incontext/images/image2.png" /></p>
+<figcaption>
+An example synthetic task with unusual semantics that GPT-3 can successfully learn. A modified figure from Rong.
+</figcaption>
+</div></figure>
+
+<h4 id="connection-to-learning-to-read-task-descriptions">Connection to learning to read task descriptions</h4>
+
+<p>Task descriptions (or instructions) in natural language can be used in the prompt to perform a downstream task. For instance, we can prepend “Write a summary about the given article” to describe summarization or “Answer a following question about the Wikipedia article” to describe question answering. Language models that are further tuned on the large-scale, high-quality instruction data are shown to perform unseen tasks very well <sup id="fnref:FLAN" role="doc-noteref"><a href="#fn:FLAN" class="footnote">7</a></sup> <sup id="fnref:TZERO" role="doc-noteref"><a href="#fn:TZERO" class="footnote">8</a></sup>. In light of our framework, we can understand specifying the task description as improving Bayesian inference by providing explicit observations of the latent prompt concept. Extending the framework to incorporate task descriptions can inform other more compact ways of specifying the task.</p>
+
+<h4 id="understanding-pretraining-data-for-in-context-learning">Understanding pretraining data for in-context learning</h4>
+
+<p>While we propose that in-context learning comes from long-term coherence structure in the pretraining data (due to the latent concept structure), more work is needed to pinpoint exactly what elements of the pretraining data are the biggest contributors to in-context learning. Is there a critical subset of data from which in-context learning emerges, or is it a complex interaction between many types of data? Recent works give some hints about the kind of pretraining data needed to elicit in-context learning behaviors <sup id="fnref:DDPD" role="doc-noteref"><a href="#fn:DDPD" class="footnote">9</a></sup> <sup id="fnref:OEPC" role="doc-noteref"><a href="#fn:OEPC" class="footnote">10</a></sup>. A better understanding of the ingredients for in-context learning can help construct a more effective large-scale pretraining dataset.</p>
+
+<h4 id="capturing-effects-from-model-architecture-and-training">Capturing effects from model architecture and training</h4>
+
+<p>Our framework only describes the effect of pretraining data on in-context learning, but there can be effects from all the other parts of the ML pipeline. Model scale is one of them—many papers have shown the benefits of scale <sup id="fnref:SCALE" role="doc-noteref"><a href="#fn:SCALE" class="footnote">11</a></sup> <sup id="fnref:GOPH" role="doc-noteref"><a href="#fn:GOPH" class="footnote">12</a></sup> <sup id="fnref:PALM" role="doc-noteref"><a href="#fn:PALM" class="footnote">13</a></sup>. Architecture (e.g., decoder-only vs. encoder-decoder) and objective (e.g., casual LM vs. masked LM) are other factors, as Wang et al <sup id="fnref:WLM" role="doc-noteref"><a href="#fn:WLM" class="footnote">14</a></sup> investigated in depth. Future work may further investigate how the model behavior in in-context learning depends on the model scale and the choices of architecture and training objective.</p>
+
+<hr />
+
+<h2 id="wrapping-up">Wrapping up</h2>
+
+<p>In this blog post, we provide a framework where the LM does in-context learning by using the prompt to “locate” the relevant concept it has learned during pretraining to do the task. We can theoretically view this as Bayesian inference of a latent concept conditioned on the prompt, and this capability comes from structure (long-term coherence) in the pretraining data. We connect this to empirical evidence on NLP benchmarks showing that in-context learning still works well when outputs in the prompt are replaced with random outputs. While random outputs add noise and remove input-output mapping information, other components (input distribution, output distribution, format) still provide evidence for Bayesian inference. Finally, we detail limitations and possible extensions of our framework, such as explaining extrapolation to unseen tasks and incorporating the effect of model architecture and optimization. We call for more future work on understanding and improving in-context learning.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>We thank Rishi Bommasani, Gabriel Ilharco, Jungo Kasai, Ananya Kumar, Percy Liang, Tengyu Ma, Ofir Press, Yasaman Razeghi, Megha Srivastava, Luke Zettlemoyer, and Michael Zhang for their comments and suggestions on the blog post.</p>
+
+<hr />
+
+<p><b id="f1">[1]</b> Another definition of in-context learning from <a href="https://arxiv.org/abs/2001.08361">Kaplan et al.</a> is that the model improves at predicting the next token when given progressively more preceding context. In this post, we focus on the few-shot task learning view of in-context learning. <a href="#a1">↩</a></p>
+
+<p><b id="f2">[2]</b> In the theory, we assume that a concept is a hidden state transition matrix for a Hidden Markov Model (HMM) and a document is generated by first sampling a concept from a family of concepts, then sampling a sequence from an HMM with the concept as the transition matrix. Intuitively, the transition matrix describes a distribution of words (through likely hidden states) and their relationships, which can describe the task. <a href="#a2">↩</a></p>
+
+<p><b id="f3">[3]</b> Longer example lengths improve asymptotic error: Interestingly, we also prove that increasing the length of the example (let’s call it \(k\)) decreases the asymptotic error, while increasing the number of examples (\(n\)) gets us closer to the asymptotic error. Intuitively, with longer examples, there are a lot more green arrows than red ones, and the amount of signal dominates the noise.<a href="#a3">↩</a></p>
+
+<p><b id="f4">[4]</b> The original paper uses the term “demonstrations” to refer to the in-context examples in the prompt.<a href="#a4">↩</a></p>
+
+<p><b id="f5">[5]</b> The channel model that computes the probability of the input conditioned on the output (instead of the probability of the output conditioned on the input) has an exception, which is likely because the inference formulation makes the model largely insensitive to the output space.<a href="#a5">↩</a></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:BI" role="doc-endnote">
+      <p>Sang Michael Xie, Aditi Raghunathan, Percy Liang, Tengyu Ma. An Explanation of In-context Learning as Implicit Bayesian Inference. International Conference on Learning Representations (ICLR), 2022. <a href="#fnref:BI" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:RRD" role="doc-endnote">
+      <p>Sewon Min, Xinxi Lyu, Ari Holtzman, Mikel Artetxe, Mike Lewis, Hannaneh Hajishirzi, Luke Zettlemoyer. Rethinking the Role of Demonstrations: What Makes In-Context Learning Work? arXiv preprint, 2022. <a href="#fnref:RRD" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:GPT" role="doc-endnote">
+      <p>Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, Dario Amodei. Language Models are Few-Shot Learners. Neural Information Processing Systems (NeurIPS), 2020. <a href="#fnref:GPT" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:EMER" role="doc-endnote">
+      <p>Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, Ed H. Chi, Tatsunori Hashimoto, Oriol Vinyals, Percy Liang, Jeff Dean, William Fedus. Emergent Abilities of Large Language Models. arXiv preprint, 2022. <a href="#fnref:EMER" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:META" role="doc-endnote">
+      <p>Sachin Ravi and Hugo Larochelle. Optimization as a model for few-shot learning. In International Conference on Learning Representations (ICLR), 2017. <a href="#fnref:META" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:IPTF" role="doc-endnote">
+      <p>Yasaman Razeghi, Robert L. Logan IV, Matt Gardner, Sameer Singh. Impact of Pretraining Term Frequencies on Few-Shot Reasoning. arXiv preprint, 2022. <a href="#fnref:IPTF" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:FLAN" role="doc-endnote">
+      <p>Jason Wei, Maarten Bosma, Vincent Y. Zhao, Kelvin Guu, Adams Wei Yu, Brian Lester, Nan Du, Andrew M. Dai, Quoc V. Le. Finetuned Language Models Are Zero-Shot Learners. International Conference on Learning Representations (ICLR), 2022. <a href="#fnref:FLAN" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:TZERO" role="doc-endnote">
+      <p>Victor Sanh, Albert Webson, Colin Raffel, Stephen H. Bach, Lintang Sutawika, Zaid Alyafeai, Antoine Chaffin, Arnaud Stiegler, Teven Le Scao, Arun Raja, Manan Dey, M Saiful Bari, Canwen Xu, Urmish Thakker, Shanya Sharma Sharma, Eliza Szczechla, Taewoon Kim, Gunjan Chhablani, Nihal Nayak, Debajyoti Datta, Jonathan Chang, Mike Tian-Jian Jiang, Han Wang, Matteo Manica, Sheng Shen, Zheng Xin Yong, Harshit Pandey, Rachel Bawden, Thomas Wang, Trishala Neeraj, Jos Rozen, Abheesht Sharma, Andrea Santilli, Thibault Fevry, Jason Alan Fries, Ryan Teehan, Tali Bers, Stella Biderman, Leo Gao, Thomas Wolf, Alexander M. Rush. Multitask Prompted Training Enables Zero-Shot Task Generalization. International Conference on Learning Representations (ICLR), 2022. <a href="#fnref:TZERO" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:DDPD" role="doc-endnote">
+      <p>Stephanie C.Y. Chan, Adam Santoro, Andrew K. Lampinen, Jane X. Wang, Aaditya Singh, Pierre H. Richemond, Jay McClelland, Felix Hill. Data Distributional Properties Drive Emergent In-Context Learning in Transformers. arXiv preprint, 2022. <a href="#fnref:DDPD" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:OEPC" role="doc-endnote">
+      <p>Seongjin Shin, Sang-Woo Lee, Hwijeen Ahn, Sungdong Kim, HyoungSeok Kim, Boseop Kim, Kyunghyun Cho, Gichang Lee, Woomyoung Park, Jung-Woo Ha, Nako Sung. On the Effect of Pretraining Corpora on In-context Learning by a Large-scale Language Model. North American Chapter of the Association for Computational Linguistics (NAACL), 2022. <a href="#fnref:OEPC" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:SCALE" role="doc-endnote">
+      <p>Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, Dario Amodei. Scaling Laws for Neural Language Models. arXiv preprint, 2020. <a href="#fnref:SCALE" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:GOPH" role="doc-endnote">
+      <p>Jack W. Rae, Sebastian Borgeaud, Trevor Cai, Katie Millican, Jordan Hoffmann, Francis Song, John Aslanides, Sarah Henderson, Roman Ring, Susannah Young, Eliza Rutherford, Tom Hennigan, Jacob Menick, Albin Cassirer, Richard Powell, George van den Driessche, Lisa Anne Hendricks, Maribeth Rauh, Po-Sen Huang, Amelia Glaese, Johannes Welbl, Sumanth Dathathri, Saffron Huang, Jonathan Uesato, John Mellor, Irina Higgins, Antonia Creswell, Nat McAleese, Amy Wu, Erich Elsen, Siddhant Jayakumar, Elena Buchatskaya, David Budden, Esme Sutherland, Karen Simonyan, Michela Paganini, Laurent Sifre, Lena Martens, Xiang Lorraine Li, Adhiguna Kuncoro, Aida Nematzadeh, Elena Gribovskaya, Domenic Donato, Angeliki Lazaridou, Arthur Mensch, Jean-Baptiste Lespiau, Maria Tsimpoukelli, Nikolai Grigorev, Doug Fritz, Thibault Sottiaux, Mantas Pajarskas, Toby Pohlen, Zhitao Gong, Daniel Toyama, Cyprien de Masson d’Autume, Yujia Li, Tayfun Terzi, Vladimir Mikulik, Igor Babuschkin, Aidan Clark, Diego de Las Casas, Aurelia Guy, Chris Jones, James Bradbury, Matthew Johnson, Blake Hechtman, Laura Weidinger, Iason Gabriel, William Isaac, Ed Lockhart, Simon Osindero, Laura Rimell, Chris Dyer, Oriol Vinyals, Kareem Ayoub, Jeff Stanway, Lorrayne Bennett, Demis Hassabis, Koray Kavukcuoglu, Geoffrey Irving. Scaling Language Models: Methods, Analysis &amp; Insights from Training Gopher. arXiv preprint, 2022. <a href="#fnref:GOPH" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:PALM" role="doc-endnote">
+      <p>Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul Barham, Hyung Won Chung, Charles Sutton, Sebastian Gehrmann, Parker Schuh, Kensen Shi, Sasha Tsvyashchenko, Joshua Maynez, Abhishek Rao, Parker Barnes, Yi Tay, Noam Shazeer, Vinodkumar Prabhakaran, Emily Reif, Nan Du, Ben Hutchinson, Reiner Pope, James Bradbury, Jacob Austin, Michael Isard, Guy Gur-Ari, Pengcheng Yin, Toju Duke, Anselm Levskaya, Sanjay Ghemawat, Sunipa Dev, Henryk Michalewski, Xavier Garcia, Vedant Misra, Kevin Robinson, Liam Fedus, Denny Zhou, Daphne Ippolito, David Luan, Hyeontaek Lim, Barret Zoph, Alexander Spiridonov, Ryan Sepassi, David Dohan, Shivani Agrawal, Mark Omernick, Andrew M. Dai, Thanumalayan Sankaranarayana Pillai, Marie Pellat, Aitor Lewkowycz, Erica Moreira, Rewon Child, Oleksandr Polozov, Katherine Lee, Zongwei Zhou, Xuezhi Wang, Brennan Saeta, Mark Diaz, Orhan Firat, Michele Catasta, Jason Wei, Kathy Meier-Hellstern, Douglas Eck, Jeff Dean, Slav Petrov, Noah Fiedel. PaLM: Scaling Language Modeling with Pathways. arXiv preprint, 2022. <a href="#fnref:PALM" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:WLM" role="doc-endnote">
+      <p>Thomas Wang, Adam Roberts, Daniel Hesslow, Teven Le Scao, Hyung Won Chung, Iz Beltagy, Julien Launay, Colin Raffel. What Language Model Architecture and Pretraining Objective Work Best for Zero-Shot Generalization? arXiv preprint, 2022. <a href="#fnref:WLM" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/understanding-incontext/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/understanding-incontext/&text=How+does+in-context+learning+work%3F+A+framework+for+understanding+the+differences+from+traditional+supervised+learning%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/understanding-incontext/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/understanding-incontext/&title=How+does+in-context+learning+work%3F+A+framework+for+understanding+the+differences+from+traditional+supervised+learning%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/understanding-incontext/&title=How+does+in-context+learning+work%3F+A+framework+for+understanding+the+differences+from+traditional+supervised+learning%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=How+does+in-context+learning+work%3F+A+framework+for+understanding+the+differences+from+traditional+supervised+learning%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/understanding-incontext/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#bayesian+inference">
+      <p><i class="fa fa-tag fa-fw"></i> bayesian inference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#deep+learning">
+      <p><i class="fa fa-tag fa-fw"></i> deep learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#few-shot+learning">
+      <p><i class="fa fa-tag fa-fw"></i> few-shot learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#gpt-3">
+      <p><i class="fa fa-tag fa-fw"></i> gpt-3</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#in-context+learning">
+      <p><i class="fa fa-tag fa-fw"></i> in-context learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#language+models">
+      <p><i class="fa fa-tag fa-fw"></i> language models</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#large+language+models">
+      <p><i class="fa fa-tag fa-fw"></i> large language models</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#pretraining">
+      <p><i class="fa fa-tag fa-fw"></i> pretraining</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/icml-2022/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at ICML 2022
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
