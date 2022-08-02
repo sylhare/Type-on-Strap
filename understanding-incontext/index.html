@@ -131,11 +131,11 @@
 <meta property="og:url" content="http://ai.stanford.edu/blog/understanding-incontext/" />
 <meta property="og:site_name" content="SAIL Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-08-01T00:00:00-07:00" />
+<meta property="article:published_time" content="2022-08-01T00:00:00-04:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How does in-context learning work? A framework for understanding the differences from traditional supervised learning" />
 <script type="application/ld+json">
-{"url":"http://ai.stanford.edu/blog/understanding-incontext/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/understanding-incontext/"},"author":{"@type":"Person","name":"<a href=\"https://cs.stanford.edu/~eix/\">Sang Michael Xie</a> and <a href=\"https://shmsw25.github.io/\">Sewon Min</a>"},"description":"The official Stanford AI Lab blog","headline":"How does in-context learning work? A framework for understanding the differences from traditional supervised learning","dateModified":"2022-08-01T00:00:00-07:00","datePublished":"2022-08-01T00:00:00-07:00","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/understanding-incontext/"},"@type":"BlogPosting","url":"http://ai.stanford.edu/blog/understanding-incontext/","headline":"How does in-context learning work? A framework for understanding the differences from traditional supervised learning","dateModified":"2022-08-01T00:00:00-04:00","datePublished":"2022-08-01T00:00:00-04:00","author":{"@type":"Person","name":"<a href=\"https://cs.stanford.edu/~eix/\">Sang Michael Xie</a> and <a href=\"https://shmsw25.github.io/\">Sewon Min</a>"},"description":"The official Stanford AI Lab blog","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -246,6 +246,27 @@
   
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
 
+<style>
+.twitterblock {
+  width: 32%;
+  display: inline-block;
+}
+
+/* The block of code below tells the browsers what to do on a screen that has a width of 1000px or less */
+
+@media (max-width: 1200px) {
+  
+  .twitterblock {
+  width: 320px;
+  display: block; /* Stops it from floating */
+  margin: auto; /* Ensures that it is centered */
+  margin-bottom: 10px; /* Space between the stacked elements */
+    
+  }
+  
+}
+</style>
+
 <p><em>In this post, we provide a Bayesian inference framework for in-context learning in large language models like GPT-3 and show empirical evidence for our framework, highlighting the differences from traditional supervised learning. This blog post primarily draws from the theoretical framework for in-context learning from <a href="https://arxiv.org/abs/2111.02080">An Explanation of In-context Learning as Implicit Bayesian Inference</a> <sup id="fnref:BI" role="doc-noteref"><a href="#fn:BI" class="footnote">1</a></sup> and experiments from <a href="https://arxiv.org/abs/2202.12837">Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?</a> <sup id="fnref:RRD" role="doc-noteref"><a href="#fn:RRD" class="footnote">2</a></sup>.</em></p>
 
 <p><strong>TL;DR</strong> – In-context learning is a mysterious emergent behavior in large language models (LMs) where the LM performs a task just by conditioning on input-output examples, without optimizing any parameters. In this post, we provide a Bayesian inference framework for understanding in-context learning as “locating” latent concepts the LM has acquired from pretraining data. This suggests that all components of the prompt (inputs, outputs, formatting, and the input-output mapping) can provide information for inferring the latent concept. We connect this framework to empirical evidence where in-context learning still works when provided training examples with random outputs. While output randomization cripples traditional supervised learning algorithms, it only removes one source of information for Bayesian inference (the input-output mapping). Finally, we present missing gaps and avenues for future work and invite the community to join us in further understanding in-context learning.</p>
@@ -277,11 +298,11 @@ Two examples of in-context learning, where a language model (LM) is given a list
 <p><strong>What can in-context learning do?</strong> On many benchmark NLP benchmarks, in-context learning is competitive with models trained with much more labeled data and is state-of-the-art on LAMBADA (commonsense sentence completion) and TriviaQA (question answering). Perhaps even more exciting is the array of applications that in-context learning has enabled people to spin up in just a few hours, including writing code from natural language descriptions, helping with app design mockups, and generalizing spreadsheet functions:</p>
 
 <figure class="figure"><div class="figure__main">
-<div style="display: inline-block; width: 33%"> <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#39;s a sentence describing what Google&#39;s home page should look and here&#39;s GPT-3 generating the code for it nearly perfectly. <a href="https://t.co/m49hoKiEpR">pic.twitter.com/m49hoKiEpR</a></p>&mdash; Sharif Shameem (@sharifshameem) <a href="https://twitter.com/sharifshameem/status/1283322990625607681?ref\_src=twsrc%5Etfw">July 15, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
+<div class="twitterblock"> <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Here&#39;s a sentence describing what Google&#39;s home page should look and here&#39;s GPT-3 generating the code for it nearly perfectly. <a href="https://t.co/m49hoKiEpR">pic.twitter.com/m49hoKiEpR</a></p>&mdash; Sharif Shameem (@sharifshameem) <a href="https://twitter.com/sharifshameem/status/1283322990625607681?ref\_src=twsrc%5Etfw">July 15, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
 
-<div style="display: inline-block; width: 33%"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">This changes everything. 🤯<br /><br />With GPT-3, I built a Figma plugin to design for you.<br /><br />I call it &quot;Designer&quot; <a href="https://t.co/OzW1sKNLEC">pic.twitter.com/OzW1sKNLEC</a></p>&mdash; jordan singer (@jsngr) <a href="https://twitter.com/jsngr/status/1284511080715362304?ref\_src=twsrc%5Etfw">July 18, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
+<div class="twitterblock"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">This changes everything. 🤯<br /><br />With GPT-3, I built a Figma plugin to design for you.<br /><br />I call it &quot;Designer&quot; <a href="https://t.co/OzW1sKNLEC">pic.twitter.com/OzW1sKNLEC</a></p>&mdash; jordan singer (@jsngr) <a href="https://twitter.com/jsngr/status/1284511080715362304?ref\_src=twsrc%5Etfw">July 18, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
 
-<div style="display: inline-block; width: 31%"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">=GPT3()... the spreadsheet function to rule them all.<br /><br />Impressed with how well it pattern matches from a few examples.<br /><br />The same function looked up state populations, peoples&#39; twitter usernames and employers, and did some math. <a href="https://t.co/W8FgVAov2f">pic.twitter.com/W8FgVAov2f</a></p>&mdash; Paul Katsen (@pavtalk) <a href="https://twitter.com/pavtalk/status/1285410751092416513?ref_src=twsrc%5Etfw">July 21, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+<div class="twitterblock"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">=GPT3()... the spreadsheet function to rule them all.<br /><br />Impressed with how well it pattern matches from a few examples.<br /><br />The same function looked up state populations, peoples&#39; twitter usernames and employers, and did some math. <a href="https://t.co/W8FgVAov2f">pic.twitter.com/W8FgVAov2f</a></p>&mdash; Paul Katsen (@pavtalk) <a href="https://twitter.com/pavtalk/status/1285410751092416513?ref_src=twsrc%5Etfw">July 21, 2020</a></blockquote> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 </div></figure>
 
 <p>In-context learning allows users to quickly build models for a new use case without worrying about fine-tuning and storing new parameters for each task. It typically requires very few training examples to get a prototype working, and the natural language interface is intuitive even for non-experts.</p>
@@ -500,7 +521,6 @@ An example synthetic task with unusual semantics that GPT-3 can successfully lea
 <p><b id="f4">[4]</b> The original paper uses the term “demonstrations” to refer to the in-context examples in the prompt.<a href="#a4">↩</a></p>
 
 <p><b id="f5">[5]</b> The channel model that computes the probability of the input conditioned on the output (instead of the probability of the output conditioned on the input) has an exception, which is likely because the inference formulation makes the model largely insensitive to the output space.<a href="#a5">↩</a></p>
-
 <div class="footnotes" role="doc-endnotes">
   <ol>
     <li id="fn:BI" role="doc-endnote">
