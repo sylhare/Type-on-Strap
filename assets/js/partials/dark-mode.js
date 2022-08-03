@@ -15,7 +15,10 @@ const currentTheme = () => sessionStorage.getItem('theme')
 function setMode(theme) {
     document.documentElement.setAttribute('data-theme', theme)
     sessionStorage.setItem('theme', theme)
-    document.getElementById('theme-toggle').innerHTML = themeButton[theme]
+    const toggle = document.getElementById('theme-toggle')
+    if (toggle) {
+        toggle.innerHTML = themeButton[theme]
+    }
 }
 
 function themeToggle() {
