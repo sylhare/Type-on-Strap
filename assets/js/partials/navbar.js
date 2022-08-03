@@ -8,11 +8,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const menu = document.querySelector('nav ul');
 
   ['click', 'touch'].forEach(function (e) {
-    if (pull) {
-      pull.addEventListener(e, function () {
-        menu.classList.toggle('hide')
-      }, false);
-    }
+    pull?.addEventListener(e, function () {
+      menu.classList.toggle('hide')
+    }, false);
   });
 
   /*
