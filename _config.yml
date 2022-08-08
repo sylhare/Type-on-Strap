@@ -1,16 +1,16 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
+baseurl: "/home"
 url: "https://sylhare.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
-title: Type on Strap                                    # site's title
+title: The Digital South @ UNC                                   # site's title
 description: "A website with blog posts and pages"      # used by search engines
 avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
 # Header and footer text
-header_text: Change <code>header_text</code> in <code>_config.yml</code>  # Change Blog header text
-header_feature_image: assets/img/header/triangular.jpeg
+header_text: <code>The Digital South @ UNC </code>   # Change Blog header text
+header_feature_image: assets/img/pexels/ds_bkd_1.jpg
 header_feature_image_responsive: true
 footer_text: >
   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
@@ -27,7 +27,7 @@ katex: true                                             # Enable if using math m
 mermaid: default                                        # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
 google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
 cookie_consent: false                                   # To respect the usage of cookies
-color_theme: auto                                       # auto, dark or light
+color_theme: dark                                       # auto, dark or light
 
 # Comments
 comments:
@@ -44,6 +44,13 @@ paginate_path: "/blog/page:num"
 # PORTFOLIO
 collections:
   portfolio:
+    output: true
+    permalink: /:collection/:name
+
+
+# SCHOLARS
+collections:
+  scholars:
     output: true
     permalink: /:collection/:name
 

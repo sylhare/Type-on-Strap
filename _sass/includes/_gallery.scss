@@ -1,48 +1,130 @@
 /* ---- grid ---- */
 
 .grid {
-  padding-bottom: 6%;
-  padding-top: 1%;
-
-
-  /* clear fix */
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
+    max-width: 70vw;
+    justify-content: space-between;
+    padding-bottom: 6%;
+    padding-top: 1%;
 }
+
 
 /* ---- .grid-item within masonry ---- */
 
 .grid-sizer,
 .grid-item {
-  /* state column width */
-  width: 32.6%;
+    /* state column width */
+    width: 33%;
 }
 
 .grid-item {
-  float: left;
-  border-radius: 5px;
-
-  img {
-    /* for image formatting in the masonry */
-    display: block;
-    max-width: 100%;
-    min-height: 30%;
-  }
+    float: left;
+    border-radius: 5px;
+    img {
+        /* for image formatting in the masonry */
+        display: block;
+        max-width: 100%;
+        min-height: 30%;
+    }
 }
+
+.scholar {
+    width: 100px;
+    height: 200px;
+}
+
 
 /* --- Masonry gutter size --- */
 
 .gutter-sizer {
-  width: 1%;
+    width: 1%;
 }
 
 .grid-item:first-of-type {
-  margin-bottom: 1%;
+    margin-bottom: 1%;
 }
 
 .grid-item {
-  margin-bottom: 1%;
+    margin-bottom: 1%;
+}
+
+
+/* --- scholars gutter size --- */
+
+.scholar-sizer {
+    width: 31%;
+}
+
+.scholar-item {
+    width: 20vw;
+    height: 20vw;
+    float: center;
+    border-radius: 5px;
+    padding: 2%;
+    background-size: cover;
+}
+
+.s-container {
+    width: 18vw;
+    height: 20vw;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+
+.s-caption-box {
+    position: absolute;
+    display: block;
+    top: 80%;
+    height: 20%;
+    width: 96%;
+    left: 2%;
+    opacity: 0.7;
+    background-color: grey;
+    text-align: center;
+    padding: 2%;
+    -webkit-transition: all ease-in-out .5s;
+    -moz-transition: all ease-in-out .5s;
+    transition: all ease-in-out .5s;
+}
+
+.post-content h2.s-caption,
+.post-content h4.s-caption,
+.s-caption {
+    position: relative;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.s-container img {
+    filter: none;
+    -webkit-transition: all ease .4s;
+    -moz-transition: all ease .4s;
+    transition: all ease .4s;
+}
+
+.post-content h4.s-caption {
+    opacity: 0;
+    -webkit-transition: all ease .4s;
+    -moz-transition: all ease .4s;
+    transition: all ease .4s;
+}
+
+.post-content div.s-container:hover {
+    * {
+        filter: none;
+    }
+    .s-caption-box {
+        height: fit-content;
+        top: 70%;
+        opacity: 0.9;
+        background-color: #467aaa;
+        box-shadow: 2% -5% 2% 2% black;
+    }
+    h4.s-caption {
+        opacity: 1;
+    }
+    .s-container img {
+        filter: brightness(0.8);
+    }
 }

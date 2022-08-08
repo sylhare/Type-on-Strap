@@ -1,0 +1,18 @@
+<!-- Portfolio Grid Section -->
+
+<div class="grid">
+    <div class="scholar-sizer"></div>
+    <div class="gutter-sizer"></div>
+    {% for item in site.scholars %}
+    <div class="s-container">
+        <a class="scholar-link" data-keyboard="true" href="{{ item.url | relative_url }}">
+            <img alt="" class="scholar-item" src="{{ item.image_url }}">
+            <div class="s-caption-box">
+                <h2 class="s-caption">{{ item.name }}</h2>
+                <h4 class="s-caption">{{ item.department }}</h4>
+
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>

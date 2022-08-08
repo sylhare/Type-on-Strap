@@ -1,8 +1,8 @@
 --- 
 layout: page
-title : Portfolio 
-permalink: /portfolio/
-subtitle: "Projects I am working on" 
+title : Collections 
+permalink: /collections/
+subtitle: "Showcase of Special Collections" 
 feature-img: "assets/img/pexels/computer.jpeg"
 tags: [Page]
 ---
