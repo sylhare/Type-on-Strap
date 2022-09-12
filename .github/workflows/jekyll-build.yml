@@ -1,4 +1,4 @@
-name: Build
+name: Jekyll Build
 
 on:
   push:
@@ -10,9 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: [ '2.6', '2.7', '3.0' ]
 
     steps:
     - uses: actions/checkout@v2
@@ -22,23 +19,9 @@ jobs:
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
 
-    - name: Set up Ruby ${{ matrix.ruby-version }}
-      uses: ruby/setup-ruby@v1.115.3
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-
-    - name: Build the gem
-      continue-on-error: true
-      run: |
-        gem build *.gemspec
-        echo `find . -name "*.gem" | tail -1 | awk -F"[/]" '{print $2}'`
-
     - name: Install packages
       continue-on-error: true
       run: |
-        gem install type-on-strap
-        gem install jekyll-theme-type-on-strap
         docker pull sylhare/type-on-strap
         docker pull sylhare/jekyll
 

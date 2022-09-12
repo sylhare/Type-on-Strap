@@ -1,0 +1,42 @@
+name: Build Ruby Gem
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [ '2.6', '2.7', '3.0' ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+        # change this to (see https://github.com/ruby/setup-ruby#versioning):
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Install
+        run: bundle install
+      - name: Build jekyll site
+        run: bundle exec jekyll build
+      - name: Build the gem
+        continue-on-error: true
+        run: |
+          gem build *.gemspec
+          echo `find . -name "*.gem" | tail -1 | awk -F"[/]" '{print $2}'`
+      - name: Gems
+        run: |
+          gem install type-on-strap
+          gem install jekyll-theme-type-on-strap
+      - name: GPR
+        continue-on-error: true
+        run: |
+          gem install type-on-strap --version "2.4.3" --source "https://rubygems.pkg.github.com/sylhare"
