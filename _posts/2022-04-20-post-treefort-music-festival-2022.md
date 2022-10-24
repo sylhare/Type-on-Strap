@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Treefort 10 - Tropico FM Showcase
+title: Treefort 10 - Overview and Artist Profiles
 author: kschef
 thumbnail: /assets/img/music/posts/tf-official-thumb.png
 tags:
