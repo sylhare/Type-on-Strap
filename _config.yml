@@ -4,7 +4,7 @@ url: "https://tropico.fm"
 
 # THEME-SPECIFIC CONFIGURATION
 title: Tropico.FM # site's title
-description: "Trópico 208 was formed as an artist collective of like minded individuals who celebrate the rich art & music of countries like Mexico, Brazil, Bahamas, Colombia, and more. From art showcases to music festivals, we seek to put local artists of color into the spotlight." # used by search engines
+description: "Trópico.fm was formed as an artist collective of like minded individuals who celebrate the rich art & music of countries like Mexico, Brazil, Bahamas, Colombia, and more. From art showcases to music festivals, we seek to put local artists of color into the spotlight." # used by search engines
 avatar: # Empty for no avatar in navbar
 favicon: assets/favicon-96x96.png # Icon displayed in the tab
 
