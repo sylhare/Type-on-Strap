@@ -21,6 +21,9 @@
     "url": "https://github.com/Sylhare/Type-on-Strap/issues"
   },
   "homepage": "https://github.com/sylhare/Type-on-Strap#readme",
+  "engines" : {
+    "node" : ">=12.0.0 <16.0.0"
+  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
