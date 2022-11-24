@@ -66,9 +66,9 @@
         </span>
     {% endif %}
     {% if site.google_analytics %}
-        <!-- Global site tag (gtag.js) -->
+        <!-- old google analytics -->
+        <!--
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
-        <!-- Page analysis (analytics.js) -->
         <script async src='https://www.google-analytics.com/analytics.js'></script>
         <script>
         // disable GA for localhost
@@ -78,6 +78,16 @@
           window['ga-disable-{{ site.google_analytics }}'] = true;
         }
         </script>
+        -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8VGYBN25C"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-S8VGYBN25C');
+        </script>        
     {% endif %}
 
     <!-- seo tags -->
