@@ -10,6 +10,9 @@
       <a class="site-title" aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
         {{ site.title }}
       </a>
+      <a class="site-title blink-bg" onClick="window.open('http://www.radiorethink.com/tuner/?stationCode=tropico&stream=hi','tropico','resizable,scrollbars=1,height=800,width=425'); return false;" style="cursor: pointer; cursor: hand; text-align:jusitfy">
+        <i class="fas fa-play" aria-label="On Air" title="On Air"></i>
+        On Air</a>
     </div>
 
     <!-- Toggle menu -->
@@ -20,9 +23,6 @@
 
       <!-- Menu -->
       <ul class="hide">
-        <a onClick="window.open('http://www.radiorethink.com/tuner/?stationCode=tropico&stream=hi','tropico','resizable,scrollbars=1,height=800,width=425'); return false;" style="cursor: pointer; cursor: hand; float:left">
-          <i class="fas fa-play" aria-label="Tune In" title="Tune In"></i>
-          Tune In</a>
         {% assign name_page = "" %}
         {% for page in site.pages %}
           {% unless

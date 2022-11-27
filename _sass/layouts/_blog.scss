@@ -44,47 +44,32 @@
 
 .player {
   width: 100%;
-  float: left;
 
-  .branding {
-    float: left;
+  .blink-bg {
+    color: #fff;
+    padding: 0 5px;
+    margin-left: 50px;
+
+    animation: blinkingText 5s linear 0s infinite alternate;
   }
-
-  .iframeplayer {
-    float: clear;
-  }
-
-  nav {
-    float: right;
-  }
-
-  /* --- Responsive --- */
-  @media screen and (max-width: $m-break) {
-    width: 100%;
-
-    iframe {
-      height: 0%;
+  @keyframes blinkingText {
+    0% {
+      color: #b10305;
     }
-  }
-
-  @media screen and (max-width: 450px) {
-    width: 100%;
-    iframe {
-      height: 0%;
+    20% {
+      color: #fff;
     }
-  }
-
-  @media screen and (max-width: 400px) {
-    width: 100%;
-    iframe {
-      height: 0%;
+    40% {
+      color: #b10305;
     }
-  }
-
-  @media screen and (max-width: 380px) {
-    width: 100%;
-    iframe {
-      height: 0%;
+    60% {
+      color: #fff;
+    }
+    80% {
+      color: #b10305;
+    }
+    100% {
+      color: #fff;
     }
   }
 }
