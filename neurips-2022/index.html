@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/neurips-2022/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at NeurIPS 2022 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2022" />
+<meta name="author" content="Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/neurips-2022/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/neurips-2022/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-30T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2022" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/neurips-2022/"},"@type":"BlogPosting","url":"http://ai.stanford.edu/blog/neurips-2022/","headline":"Stanford AI Lab Papers and Talks at NeurIPS 2022","dateModified":"2022-11-30T00:00:00-05:00","datePublished":"2022-11-30T00:00:00-05:00","author":{"@type":"Person","name":"Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>"},"description":"The official Stanford AI Lab blog","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at NeurIPS 2022 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at NeurIPS 2022, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2022">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at NeurIPS 2022, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-11-30-neurips-2022/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-11-30-neurips-2022/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at NeurIPS 2022</h1>
+    <p class="meta">
+    Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>
+    <div class="post-date">November 30, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/logo.png" /></p>
+
+<p>The <a href="https://neurips.cc">thirty-sixth Conference on Neural Information Processing Systems</a> (NeurIPS) 2022 is being hosted this week. We’re excited to share all the work from SAIL that’s being presented at the <a href="#main-conference"><strong>main conference</strong></a>, at the <a href="#datasets-and-benchmarks-track"><strong>Datasets and Benchmarks track</strong></a> and the various <a href="#workshop-papers"><strong>workshops</strong></a>, and you’ll find links to papers, videos and blogs below.</p>
+
+<p>Feel free to reach out to the contact authors and the workshop organizers directly to learn more about the work that’s happening at Stanford!</p>
+
+<iframe src="https://calendar.google.com/calendar/embed?height=750&amp;wkst=1&amp;bgcolor=%23D50000&amp;ctz=America%2FChicago&amp;mode=WEEK&amp;title=Stanford%20AI%20Lab%3A%20NeurIPS&amp;showCalendars=1&amp;showTz=1&amp;showTabs=1&amp;showPrint=1&amp;showDate=1&amp;src=OGZhZDU1YjQyODNjNmJlYmViNDllMjEzMmYxZWJmN2ZhYmRhZjM2ZTljODY5NGE2MWExOTViMWE1ZGUwYjdmZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=YWE0ZmQ2MTlmMzcxNzAyMDhjNWY0N2M0OWQwMDFlN2I3NzE5YWYxNjE3ZGZiNDg0NzA2Zjk1ZjA0NDE2OTMyZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=OGQ5N2E4YTJjZmQwNjhiYWJjYzZlMjcxZjEzYmZmMDJmNDFkMjk3YTBjODI0MTdkYzIyNjdiODBmY2QwNzVlZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%233F51B5&amp;color=%23D50000&amp;color=%239E69AF" style="border-width:0" width="1200" height="750" frameborder="0" scrolling="no"></iframe>
+
+<h2 id="main-conference">Main Conference</h2>
+<h4 id="learning-options-via-compression">Learning Options via Compression</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img44" />
+<strong>Authors</strong>: Yiding Jiang*, Evan Zheran Liu*, Benjamin Eysenbach, J. Zico Kolter, Chelsea Finn
+<br /><strong>Contact</strong>: evanliu@cs.stanford.edu
+<br /><strong>Keywords</strong>: hierarchical reinforcement learning, skill learning</p>
+<hr />
+
+<h4 id="mabsplit-faster-forest-training-using-multi-armed-bandits">MABSplit: Faster Forest Training Using Multi-Armed Bandits</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img7" />
+<strong>Authors</strong>: Mo Tiwari, Ryan Kang*, Je-Yong Lee*, Sebastian Thrun, Chris Piech, Ilan Shomorony#, Martin Jinye Zhang#
+<br /><strong>Contact</strong>: Motiwari@stanford.edu
+<br /><strong>Keywords</strong>: multi-armed bandits, random forests</p>
+<hr />
+
+<h4 id="off-policy-evaluation-for-action-dependent-non-stationary-environments">Off-Policy Evaluation for Action-Dependent Non-stationary Environments</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img35" />
+<strong>Authors</strong>: Yash Chandak, Shiv Shankar, Nathaniel D. Bastian, Bruno Castro da Silva, Emma Brunskill, Philip S. Thomas
+<br /><strong>Contact</strong>: ychandak@stanford.edu
+<br /><strong>Keywords</strong>: non-stationarity, off-policy, reinforcement learning, counterfactual</p>
+<hr />
+
+<h4 id="a-fourier-approach-to-mixture-learning"><a href="https://arxiv.org/abs/2210.02415">A Fourier Approach to Mixture Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img34" />
+<strong>Authors</strong>: Mingda Qiao, Guru Guruganesh, Ankit Singh Rawat, Avinava Dubey, Manzil Zaheer
+<br /><strong>Contact</strong>: mqiao@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.02415">Paper</a>
+<br /><strong>Keywords</strong>: mixture learning, gaussian mixture models</p>
+<hr />
+
+<h4 id="a-nonconvex-framework-for-structured-dynamic-covariance-recovery"><a href="https://www.jmlr.org/papers/v23/21-0795.html">A Nonconvex Framework for Structured Dynamic Covariance Recovery</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img33" />
+<strong>Authors</strong>: Katherine Tsai, Mladen Kolar, Oluwasanmi Koyejo
+<br /><strong>Contact</strong>: tsaikl@stanford.edu
+<br /><strong>Links:</strong> <a href="https://www.jmlr.org/papers/v23/21-0795.html">Paper</a>
+<br /><strong>Keywords</strong>: dynamic covariance, structured factor model, alternating projected gradient descent, time series data, functional connectivity</p>
+<hr />
+
+<h4 id="active-learning-helps-pretrained-models-learn-the-intended-task"><a href="https://arxiv.org/abs/2204.08491">Active Learning Helps Pretrained Models Learn the Intended Task</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img10" />
+<strong>Authors</strong>: Alex Tamkin, Dat Pham Nguyen, Salil Deshpande, Jesse Mu, Noah Goodman
+<br /><strong>Contact</strong>: atamkin@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2204.08491">Paper</a>
+<br /><strong>Keywords</strong>: pretrained models, robustness, active learning, few shot learning</p>
+<hr />
+
+<h4 id="an-information-theoretic-framework-for-deep-learning"><a href="https://openreview.net/pdf?id=p_BVHgrvHD4">An Information-Theoretic Framework for Deep Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img46" />
+<strong>Authors</strong>: Hong Jun Jeon, Benjamin Van Roy
+<br /><strong>Contact</strong>: hjjeon@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=p_BVHgrvHD4">Paper</a>
+<br /><strong>Keywords</strong>: information theory, deep learning, neural network theory</p>
+<hr />
+
+<h4 id="assistive-teaching-of-motor-control-tasks-to-humans"><a href="https://iliad.stanford.edu/pdfs/publications/srivastava2022assistive.pdf">Assistive Teaching of Motor Control Tasks to Humans</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img3" />
+<strong>Authors</strong>: Megha Srivastava, Erdem Biyik, Survir Mirchandani, Noah Goodman, Dorsa Sadigh
+<br /><strong>Contact</strong>: meghas@stanford.edu
+<br /><strong>Links:</strong> <a href="https://iliad.stanford.edu/pdfs/publications/srivastava2022assistive.pdf">Paper</a> | <a href="https://sites.google.com/view/assistive-teaching-2022/home">Website</a>
+<br /><strong>Keywords</strong>: human-ai interaction, education, reinforcement learning</p>
+<hr />
+
+<h4 id="beyond-separability-analyzing-the-linear-transferability-of-contrastive-representations-to-related-subpopulations"><a href="https://arxiv.org/abs/2204.02683">Beyond Separability: Analyzing the Linear Transferability of Contrastive Representations to Related Subpopulations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img39" />
+<strong>Authors</strong>: Jeff Z. HaoChen, Colin Wei, Ananya Kumar, Tengyu Ma
+<br /><strong>Contact</strong>: jhaochen@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2204.02683">Paper</a>
+<br /><strong>Keywords</strong>: self-supervised learning theory, deep learning theory</p>
+<hr />
+
+<h4 id="beyond-neural-scaling-laws-beating-power-law-scaling-via-data-pruning"><a href="https://openreview.net/forum?id=UmvSlP-PyV">Beyond neural scaling laws: beating power law scaling via data pruning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img12" />
+<strong>Authors</strong>: Ben Sorscher, Robert Geirhos, Shashank Shekhar, Surya Ganguli, Ari S Morcos
+<br /><strong>Contact</strong>: bsorsch@gmail.com
+<br /><strong>Award nominations:</strong> Best paper award
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=UmvSlP-PyV">Paper</a>
+<br /><strong>Keywords</strong>: scaling laws, deep learning theory, data pruning, replica theory, active learning, data structure</p>
+<hr />
+
+<h4 id="cebab-estimating-the-causal-effects-of-real-world-concepts-on-nlp-model-behavior"><a href="https://arxiv.org/abs/2205.14140">CEBaB: Estimating the Causal Effects of Real-World Concepts on NLP Model Behavior</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img30" />
+<strong>Authors</strong>: Eldar David Abraham, Karel D’Oosterlinck, Amir Feder, Yair Ori Gat, Atticus Geiger, Christopher Potts, Roi Reichart, Zhengxuan Wu
+<br /><strong>Contact</strong>: karel.doosterlinck@ugent.be
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2205.14140">Paper</a> | <a href="https://www.youtube.com/watch?v=xa5ttoN-Zic">Video</a> | <a href="https://cebabing.github.io/CEBaB/">Website</a></p>
+<hr />
+
+<h4 id="collaborative-decision-making-using-action-suggestions"><a href="https://arxiv.org/abs/2209.13160">Collaborative Decision Making Using Action Suggestions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img26" />
+<strong>Authors</strong>: Dylan M. Asmar, Mykel J. Kochenderfer
+<br /><strong>Contact</strong>: asmar@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2209.13160">Paper</a> | <a href="https://github.com/sisl/action_suggestions">Website</a>
+<br /><strong>Keywords</strong>: collaboration, decision making, human-ai collaboration, pomdp, state estimation</p>
+<hr />
+
+<h4 id="concrete-score-matching-generalized-score-matching-for-discrete-data"><a href="https://arxiv.org/pdf/2211.00802.pdf">Concrete Score Matching: Generalized Score Matching for Discrete Data</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img17" />
+<strong>Authors</strong>: Chenlin Meng*, Kristy Choi*, Jiaming Song, Stefano Ermon
+<br /><strong>Contact</strong>: chenlin@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2211.00802.pdf">Paper</a>
+<br /><strong>Keywords</strong>: generative models, score matching, discrete data</p>
+<hr />
+
+<h4 id="contrastive-adapters-for-foundation-model-group-robustness"><a href="https://openreview.net/forum?id=JZP2U_0RTee">Contrastive Adapters for Foundation Model Group Robustness</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img48" />
+<strong>Authors</strong>: Michael Zhang, Christopher Ré
+<br /><strong>Contact</strong>: mzhang@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=JZP2U_0RTee">Paper</a>
+<br /><strong>Keywords</strong>: foundation models, robustness, adaption, efficient</p>
+<hr />
+
+<h4 id="dragon-deep-bidirectional-language-knowledge-graph-pretraining"><a href="https://arxiv.org/abs/2210.09338">DRAGON: Deep Bidirectional Language-Knowledge Graph Pretraining</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img4" />
+<strong>Authors</strong>: Michihiro Yasunaga, Antoine Bosselut, Hongyu Ren, Xikun Zhang, Christopher D. Manning, Percy Liang*, Jure Leskovec*
+<br /><strong>Contact</strong>: myasu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.09338">Paper</a> | <a href="https://cs.stanford.edu/~myasu/files/DRAGON_slides.pdf">Blog Post</a> | <a href="https://github.com/michiyasunaga/dragon">Website</a>
+<br /><strong>Keywords</strong>: pretraining, language model, knowledge graph, question answering, commonsense, reasoning, foundation model, self-supervised learning, biomedical</p>
+<hr />
+
+<h4 id="data-efficient-pipeline-for-offline-reinforcement-learning-with-limited-data"><a href="https://arxiv.org/abs/2210.08642">Data-Efficient Pipeline for Offline Reinforcement Learning with Limited Data</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img16" />
+<strong>Authors</strong>: Allen Nie, Yannis Flet-Berliac, Deon R. Jordan, William Steenbergen, Emma Brunskill
+<br /><strong>Contact</strong>: anie@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.08642">Paper</a> | <a href="https://arxiv.org/abs/2210.08642">Website</a>
+<br /><strong>Keywords</strong>: offline rl, hyperparameter selection, data efficient, small data</p>
+<hr />
+
+<h4 id="deciding-what-to-model-value-equivalent-sampling-for-reinforcement-learning"><a href="https://dilipa.github.io/papers/nips22_vsrl.pdf">Deciding What to Model: Value-Equivalent Sampling for Reinforcement Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img14" />
+<strong>Authors</strong>: Dilip Arumugam, Benjamin Van Roy
+<br /><strong>Contact</strong>: dilip@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://dilipa.github.io/papers/nips22_vsrl.pdf">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning, efficient exploration, information theory, bayesian reinforcement learning, value equivalence</p>
+<hr />
+
+<h4 id="denoising-diffusion-restoration-models"><a href="https://arxiv.org/abs/2201.11793">Denoising Diffusion Restoration Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img2" />
+<strong>Authors</strong>: Bahjat Kawar, Michael Elad, Stefano Ermon, Jiaming Song
+<br /><strong>Contact</strong>: jiaming.tsong@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2201.11793">Paper</a> | <a href="https://ddrm-ml.github.io/">Website</a>
+<br /><strong>Keywords</strong>: diffusion problems, inverse problems</p>
+<hr />
+
+<h4 id="distinguishing-discrete-and-continuous-behavioral-variability-using-warped-autoregressive-hmms"><a href="https://www.biorxiv.org/content/10.1101/2022.06.10.495690v2">Distinguishing discrete and continuous behavioral variability using warped autoregressive HMMs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img22" />
+<strong>Authors</strong>: Julia Costacurta, Lea Duncker, Blue Sheffer, Winthrop Gillis, Caleb Weinreb, Jeffrey Markowitz, Sandeep Datta, Alex Williams, Scott Linderman
+<br /><strong>Contact</strong>: jcostac@stanford.edu
+<br /><strong>Links:</strong> <a href="https://www.biorxiv.org/content/10.1101/2022.06.10.495690v2">Paper</a>
+<br /><strong>Keywords</strong>: time series, markov models, naturalistic behavior, clustering</p>
+<hr />
+
+<h4 id="elign-expectation-alignment-as-a-multi-agent-intrinsic-reward"><a href="https://arxiv.org/pdf/2210.04365.pdf">ELIGN: Expectation Alignment as a Multi-agent Intrinsic Reward</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img40" />
+<strong>Authors</strong>: Zixian Ma, Rose Wang, Li Fei-Fei, Michael Bernstein, Ranjay Krishna
+<br /><strong>Contact</strong>: zixianma@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2210.04365.pdf">Paper</a>
+<br /><strong>Keywords</strong>: multi-agent collaboration, intrinsic reward, reinforcement learning</p>
+<hr />
+
+<h4 id="estimating-and-explaining-model-performance-when-both-covariates-and-labels-shift"><a href="https://openreview.net/pdf?id=BK0O0xLntFM">Estimating and Explaining Model Performance When Both Covariates and Labels Shift</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img43" />
+<strong>Authors</strong>: Lingjiao Chen, Matei Zaharia, James Zou
+<br /><strong>Contact</strong>: lingjiao@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=BK0O0xLntFM">Paper</a> | <a href="https://github.com/stanford-futuredata/SparseJointShift">Website</a>
+<br /><strong>Keywords</strong>: ml models, model deployment and monitoring, data distribution shift</p>
+<hr />
+
+<h4 id="few-shot-relational-reasoning-via-connection-subgraph-pretraining"><a href="https://arxiv.org/abs/2210.06722">Few-shot Relational Reasoning via Connection Subgraph Pretraining</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img8" />
+<strong>Authors</strong>: Qian Huang, Hongyu Ren, Jure Leskovec
+<br /><strong>Contact</strong>: qhwang@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.06722">Paper</a>
+<br /><strong>Keywords</strong>: few-shot learning, knowledge graphs, graph neural networks, self-supervised pretraining</p>
+<hr />
+
+<h4 id="flashattention-fast-and-memory-efficient-exact-attention-with-io-awareness"><a href="https://arxiv.org/abs/2205.14135">FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img49" />
+<strong>Authors</strong>: Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré
+<br /><strong>Contact</strong>: trid@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2205.14135">Paper</a> | <a href="https://www.youtube.com/watch?v=FThvfkXWqtE">Video</a> | <a href="https://github.com/HazyResearch/flash-attention/">Website</a>
+<br /><strong>Keywords</strong>: attention, long context, language modeling</p>
+<hr />
+
+<h4 id="giving-feedback-on-interactive-student-programs-with-meta-exploration"><a href="https://arxiv.org/abs/2211.08802">Giving Feedback on Interactive Student Programs with Meta-Exploration</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img42" />
+<strong>Authors</strong>: Evan Zheran Liu*, Moritz Stephan*, Allen Nie, Chris Piech, Emma Brunskill, Chelsea Finn
+<br /><strong>Contact</strong>: evanliu@cs.stanford.edu
+<br /><strong>Award nominations:</strong> Selected as oral
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2211.08802">Paper</a> | <a href="https://slideslive.com/38985890">Video</a> | <a href="https://ezliu.github.io/dreamgrader/">Website</a>
+<br /><strong>Keywords</strong>: meta-reinforcement learning, reinforcement learning, exploration, education</p>
+<hr />
+
+<h4 id="gradient-estimation-with-discrete-stein-operators"><a href="https://arxiv.org/abs/2202.09497">Gradient Estimation with Discrete Stein Operators</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img47" />
+<strong>Authors</strong>: Jiaxin Shi, Yuhao Zhou, Jessica Hwang, Michalis K. Titsias, Lester Mackey
+<br /><strong>Contact</strong>: jiaxins@stanford.edu
+<br /><strong>Award nominations:</strong> Outstanding Paper Award
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2202.09497">Paper</a> | <a href="https://github.com/thjashin/rodeo">Website</a>
+<br /><strong>Keywords</strong>: gradient estimation, stein’s method, discrete latent variables, variance reduction</p>
+<hr />
+
+<h4 id="improving-intrinsic-exploration-with-language-abstractions"><a href="https://arxiv.org/abs/2202.08938">Improving Intrinsic Exploration with Language Abstractions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img23" />
+<strong>Authors</strong>: Jesse Mu, Victor Zhong, Roberta Raileanu, Minqi Jiang, Noah Goodman, Tim Rocktäschel, Edward Grefenstette
+<br /><strong>Contact</strong>: muj@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2202.08938">Paper</a> | <a href="https://www.youtube.com/watch?v=NeGJAUSQEJI">Video</a>
+<br /><strong>Keywords</strong>: reinforcement learning, intrinsic motivation, exploration, language, deep rl, language-guided rl</p>
+<hr />
+
+<h4 id="improving-policy-learning-via-language-dynamics-distillation"><a href="https://arxiv.org/abs/2210.00066">Improving Policy Learning via Language Dynamics Distillation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img24" />
+<strong>Authors</strong>: Victor Zhong, Jesse Mu, Luke Zettlemoyer, Edward Grefenstette, Tim Rocktäschel
+<br /><strong>Contact</strong>: muj@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.00066">Paper</a>
+<br /><strong>Keywords</strong>: language grounding, reinforcement learning, reading to generalize</p>
+<hr />
+
+<h4 id="improving-self-supervised-learning-by-characterizing-idealized-representations"><a href="https://arxiv.org/abs/2209.06235">Improving Self-Supervised Learning by Characterizing Idealized Representations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img45" />
+<strong>Authors</strong>: Yann Dubois, Tatsunori Hashimoto, Stefano Ermon, Percy Liang
+<br /><strong>Contact</strong>: yanndubs@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2209.06235">Paper</a> | <a href="https://neurips.cc/virtual/2022/poster/53880">Video</a> | <a href="https://github.com/YannDubs/Invariant-Self-Supervised-Learning">Website</a>
+<br /><strong>Keywords</strong>: self-supervised learning, invariances, contrastive learning, machine learning, representation learning</p>
+<hr />
+
+<h4 id="increasing-the-scope-as-you-learn-adaptive-bayesian-optimization-in-nested-subspaces"><a href="https://openreview.net/pdf?id=e4Wf6112DI">Increasing the Scope as You Learn: Adaptive Bayesian Optimization in Nested Subspaces</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img32" />
+<strong>Authors</strong>: Leonard Papenmeier, Luigi Nardi, Matthias Poloczek
+<br /><strong>Contact</strong>: lnardi@stanford.edu
+<br /><strong>Award nominations:</strong> No
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=e4Wf6112DI">Paper</a> | <a href="https://github.com/LeoIV/BAxUS">Website</a>
+<br /><strong>Keywords</strong>: high-dimensional global optimization, bayesian optimization, gaussian processes</p>
+<hr />
+
+<h4 id="iterative-feature-matching-toward-provable-domain-generalization-with-logarithmic-environments"><a href="https://arxiv.org/abs/2106.09913">Iterative Feature Matching: Toward Provable Domain Generalization with Logarithmic Environments</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img25" />
+<strong>Authors</strong>: Yining Chen, Elan Rosenfeld, Mark Sellke, Tengyu Ma, Andrej Risteski
+<br /><strong>Contact</strong>: cynnjjs@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2106.09913">Paper</a>
+<br /><strong>Keywords</strong>: domain generalization, ood robustness</p>
+<hr />
+
+<h4 id="joint-entropy-search-for-maximally-informed-bayesian-optimization"><a href="https://arxiv.org/pdf/2206.04771.pdf">Joint Entropy Search for Maximally-Informed Bayesian Optimization</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img31" />
+<strong>Authors</strong>: Carl Hvarfner, Frank Hutter, Luigi Nardi
+<br /><strong>Contact</strong>: lnardi@stanford.edu
+<br /><strong>Award nominations:</strong> No
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2206.04771.pdf">Paper</a> | <a href="https://github.com/hvarfner/JointEntropySearch">Website</a>
+<br /><strong>Keywords</strong>: bayesian optimization, entropy search, gaussian processes</p>
+<hr />
+
+<h4 id="learning-to-accelerate-partial-differential-equations-via-latent-global-evolution"><a href="https://arxiv.org/abs/2206.07681">Learning to Accelerate Partial Differential Equations via Latent Global Evolution</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img19" />
+<strong>Authors</strong>: Tailin Wu, Takashi Maruyama, Jure Leskovec
+<br /><strong>Contact</strong>: tailin@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2206.07681">Paper</a> | <a href="http://snap.stanford.edu/le_pde/">Website</a>
+<br /><strong>Keywords</strong>: accelerate, partial differential equation, latent global evolution, inverse optimization</p>
+<hr />
+
+<h4 id="lottery-tickets-on-a-data-diet-finding-initializations-with-sparse-trainable-networks"><a href="https://openreview.net/forum?id=QLPzCpu756J">Lottery Tickets on a Data Diet: Finding Initializations with Sparse Trainable Networks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img38" />
+<strong>Authors</strong>: Mansheej Paul*, Brett W. Larsen*, Surya Ganguli, Jonathan Frankle, Gintare Karolina Dziugaite
+<br /><strong>Contact</strong>: mansheej@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=QLPzCpu756J">Paper</a>
+<br /><strong>Keywords</strong>: data pruning, linear mode connectivity, iterative magnitude pruning, loss landscape geometry, lottery ticket hypothesis, sparsity</p>
+<hr />
+
+<h4 id="mind-the-gap-understanding-the-modality-gap-in-multi-modal-contrastive-representation-learning"><a href="https://arxiv.org/abs/2203.02053">Mind the Gap: Understanding the Modality Gap in Multi-modal Contrastive Representation Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img1" />
+<strong>Authors</strong>: Weixin Liang
+<br /><strong>Contact</strong>: wxliang@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2203.02053">Paper</a> | <a href="https://recorder-v3.slideslive.com/?share=72779&amp;s=483bc546-d5b7-44ee-b958-20f4e653f645">Video</a> | <a href="https://modalitygap.readthedocs.io/en/latest/">Website</a>
+<br /><strong>Keywords</strong>: cone effect, modality gap, geometry of deep multi-model learning, contrastive representation learning, multi-modal representation learning</p>
+<hr />
+
+<h4 id="no-free-lunch-from-deep-learning-in-neuroscience-a-case-study-through-models-of-the-entorhinal-hippocampal-circuit"><a href="https://openreview.net/forum?id=syU-XvinTI1">No Free Lunch from Deep Learning in Neuroscience: A Case Study through Models of the Entorhinal-Hippocampal Circuit</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img13" />
+<strong>Authors</strong>: Rylan Schaeffer, Mikail Khona, Ila Rani Fiete
+<br /><strong>Contact</strong>: rylanschaeffer@gmail.com
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=syU-XvinTI1">Paper</a> | <a href="Forthcoming in the SAIL Blog">Blog Post</a>
+<br /><strong>Keywords</strong>: neuroscience, deep learning, grid cells, representation learning</p>
+<hr />
+
+<h4 id="oracle-inequalities-for-model-selection-in-offline-reinforcement-learning"><a href="https://arxiv.org/abs/2211.02016">Oracle Inequalities for Model Selection in Offline Reinforcement Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img29" />
+<strong>Authors</strong>: Jonathan N. Lee, George Tucker, Ofir Nachum, Bo Dai, Emma Brunskill
+<br /><strong>Contact</strong>: jnl@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2211.02016">Paper</a> | <a href="https://sites.google.com/stanford.edu/offline-model-selection">Website</a>
+<br /><strong>Keywords</strong>: reinforcement learning, offline reinforcement learning, model selection, hyperparameter tuning, offline policy evaluation</p>
+<hr />
+
+<h4 id="planning-to-the-information-horizon-of-bamdps-via-epistemic-state-abstraction"><a href="https://dilipa.github.io/papers/nips22_infoh_epistemicsa.pdf">Planning to the Information Horizon of BAMDPs via Epistemic State Abstraction</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img15" />
+<strong>Authors</strong>: Dilip Arumugam, Satinder Singh
+<br /><strong>Contact</strong>: dilip@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://dilipa.github.io/papers/nips22_infoh_epistemicsa.pdf">Paper</a>
+<br /><strong>Keywords</strong>: bayes-adaptive markov decision process, bayesian reinforcement learning, exploration, planning</p>
+<hr />
+
+<h4 id="s4nd-modeling-images-and-videos-as-multidimensional-signals-using-state-spaces"><a href="https://arxiv.org/abs/2210.06583">S4ND: Modeling Images and Videos as Multidimensional Signals Using State Spaces</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img52" />
+<strong>Authors</strong>: Eric Nguyen*, Karan Goel*, Albert Gu*, Gordon W. Downs, Tri Dao, Preey Shah, Stephen A. Baccus, Christopher Ré
+<br /><strong>Contact</strong>: etnguyen@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.06583">Paper</a> | <a href="https://recorder-v3.slideslive.com/#/share?share=75896&amp;s=2349787d-6677-4b98-b64c-cff0efa02f09">Video</a> | <a href="https://github.com/HazyResearch/hippo">Website</a>
+<br /><strong>Keywords</strong>: state space models, s4, computer vision, deep learning</p>
+<hr />
+
+<h4 id="sixo-smoothing-inference-with-twisted-objectives"><a href="sixo.ai">SIXO: Smoothing Inference with Twisted Objectives</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img21" />
+<strong>Authors</strong>: Dieterich Lawson, Allan Raventos, Andrew Warrington, Scott Linderman
+<br /><strong>Contact</strong>: jdlawson@stanford.edu
+<br /><strong>Award nominations:</strong> Oral
+<br /><strong>Links:</strong> <a href="sixo.ai">Paper</a>
+<br /><strong>Keywords</strong>: smoothing, variational, objectives, fivo, sequential monte carlo, inference, twisted, time series</p>
+<hr />
+
+<h4 id="star-bootstrapping-reasoning-with-reasoning"><a href="https://openreview.net/forum?id=_3ELRdg2sgI">STaR: Bootstrapping Reasoning With Reasoning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img9" />
+<strong>Authors</strong>: Eric Zelikman*, Yuhuai Wu*, Jesse Mu, Noah Goodman
+<br /><strong>Contact</strong>: ezelikman@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=_3ELRdg2sgI">Paper</a>
+<br /><strong>Keywords</strong>: chain-of-thought, reasoning, language model, bootstrapping</p>
+<hr />
+
+<h4 id="satmae-pre-training-transformers-for-temporal-and-multi-spectral-satellite-imagery"><a href="https://arxiv.org/pdf/2207.08051.pdf">SatMAE: Pre-training Transformers for Temporal and Multi-Spectral Satellite Imagery</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img28" />
+<strong>Authors</strong>: Yezhen Cong, Samar Khanna, Chenlin Meng, Patrick Liu, Erik Rozi, Yutong He, Marshall Burke, David B. Lobell, Stefano Ermon
+<br /><strong>Contact</strong>: samar.khanna@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2207.08051.pdf">Paper</a> | <a href="https://recorder-v3.slideslive.com/?share=75759&amp;s=4597a5f4-7f86-4e18-a11b-fbac51cb7616">Video</a> | <a href="https://sustainlab-group.github.io/SatMAE/">Website</a>
+<br /><strong>Keywords</strong>: self-supervised learning, transformers, pretraining, satellite images, temporal, multi-spectral</p>
+<hr />
+
+<h4 id="self-similarity-priors-neural-collages-as-differentiable-fractal-representations"><a href="https://openreview.net/pdf?id=U2bAR6qzF9E">Self-Similarity Priors: Neural Collages as Differentiable Fractal Representations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img36" />
+<strong>Authors</strong>: Michael Poli, Winnie Xu, Stefano Massaroli, Chenlin Meng, Kuno Kim, Stefano Ermon
+<br /><strong>Contact</strong>: poli@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=U2bAR6qzF9E">Paper</a> | <a href="https://zymrael.github.io/self-similarity-prior/">Website</a>
+<br /><strong>Keywords</strong>: implicit representations, compression, deep equilibrium models, generative models, fractal, fixed-point</p>
+<hr />
+
+<h4 id="self-supervised-learning-of-brain-dynamics-from-broad-neuroimaging-data"><a href="https://arxiv.org/abs/2206.11417">Self-Supervised Learning of Brain Dynamics from Broad Neuroimaging Data</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img50" />
+<strong>Authors</strong>: Armin W. Thomas, Christopher Ré, Russell A. Poldrack
+<br /><strong>Contact</strong>: athms@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2206.11417">Paper</a>
+<br /><strong>Keywords</strong>: self-supervised learning, neuroimaging, deep learning, natural language processing, brain decoding</p>
+<hr />
+
+<h4 id="statistically-meaningful-approximation-a-case-study-on-approximating-turing-machines-with-transformers"><a href="https://arxiv.org/abs/2107.13163">Statistically Meaningful Approximation: a Case Study on Approximating Turing Machines with Transformers</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img27" />
+<strong>Authors</strong>: Colin Wei, Yining Chen, Tengyu Ma
+<br /><strong>Contact</strong>: colin.y.wei@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2107.13163">Paper</a>
+<br /><strong>Keywords</strong>: approximation theory, generalization bounds, sample complexity bounds, learning theory</p>
+<hr />
+
+<h4 id="structural-analysis-of-branch-and-cut-and-the-learnability-of-gomory-mixed-integer-cuts-"><a href="https://arxiv.org/abs/2204.07312">Structural Analysis of Branch-and-Cut and the Learnability of Gomory Mixed Integer Cuts </a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img11" />
+<strong>Authors</strong>:  Maria-Florina Balcan, Siddharth Prasad, Tuomas Sandholm, Ellen Vitercik 
+<br /><strong>Contact</strong>: vitercik@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2204.07312">Paper</a>
+<br /><strong>Keywords</strong>: gomory mixed integer cuts, automated algorithm configuration, integer programming, tree search, branch-and-bound, branch-and-cut, cutting planes, sample complexity, generalization guarantees, data-driven algorithm design</p>
+<hr />
+
+<h4 id="training-and-inference-on-any-order-autoregressive-models-the-right-way"><a href="https://arxiv.org/abs/2205.13554">Training and Inference on Any-Order Autoregressive Models the Right Way</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img0" />
+<strong>Authors</strong>: Andy Shih, Dorsa Sadigh, Stefano Ermon
+<br /><strong>Contact</strong>: andyshih@stanford.edu
+<br /><strong>Award nominations:</strong> Selected as Oral
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2205.13554">Paper</a> | <a href="https://youtu.be/o94ZjGdZQrY?t=1261">Video</a> | <a href="https://github.com/AndyShih12/mac">Website</a>
+<br /><strong>Keywords</strong>: any-order autoregressive models, tractable generative models, arbitrary marginal and conditional</p>
+<hr />
+
+<h4 id="transform-once-efficient-operator-learning-in-frequency-domain"><a href="https://openreview.net/forum?id=B2PpZyAAEgV">Transform Once: Efficient Operator Learning in Frequency Domain</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img37" />
+<strong>Authors</strong>: Michael Poli, Stefano Massaroli, Federico Berto, Jinkyoo Park, Tri Dao, Christopher Re, Stefano Ermon
+<br /><strong>Contact</strong>: poli@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=B2PpZyAAEgV">Paper</a>
+<br /><strong>Keywords</strong>: convolutions, long range dependencies, neural operators, high-resolution, frequency, transform, differential equation, dynamics, turbulence, fluid flows, pde</p>
+<hr />
+
+<h4 id="uncalibrated-models-can-improve-human-ai-collaboration"><a href="https://arxiv.org/pdf/2202.05983.pdf">Uncalibrated Models Can Improve Human-AI Collaboration</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img51" />
+<strong>Authors</strong>: Kailas Vodrahalli, Tobias Gerstenberg, James Zou
+<br /><strong>Contact</strong>: kailasv@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2202.05983.pdf">Paper</a>
+<br /><strong>Keywords</strong>: human-in-the-loop ai, human-calibrated ai</p>
+<hr />
+
+<h4 id="weightedshap-analyzing-and-improving-shapley-based-feature-attributions"><a href="https://arxiv.org/abs/2209.13429">WeightedSHAP: analyzing and improving Shapley based feature attributions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img41" />
+<strong>Authors</strong>: Yongchan Kwon, James Zou
+<br /><strong>Contact</strong>: yckwon@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2209.13429">Paper</a> | <a href="https://github.com/ykwon0407/WeightedSHAP">Website</a>
+<br /><strong>Keywords</strong>: shapley value, model interpretation, attribution problem</p>
+<hr />
+
+<h4 id="what-can-transformers-learn-in-context-a-case-study-of-simple-function-classes"><a href="https://arxiv.org/abs/2208.01066">What Can Transformers Learn In-Context? A Case Study of Simple Function Classes</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img5" />
+<strong>Authors</strong>: Shivam Garg, Dimitris Tsipras, Percy Liang, Gregory Valiant
+<br /><strong>Contact</strong>: shivamg@cs.stanford.edu; tsipras@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2208.01066">Paper</a>
+<br /><strong>Keywords</strong>: in-context learning, transformers, meta-learning</p>
+<hr />
+
+<h4 id="when-does-differentially-private-learning-not-suffer-in-high-dimensions"><a href="https://arxiv.org/abs/2207.00160">When Does Differentially Private Learning Not Suffer in High Dimensions?</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img6" />
+<strong>Authors</strong>: Xuechen Li, Daogao Liu, Tatsunori Hashimoto, Huseyin A Inan, Janardhan Kulkarni, YinTat Lee, Abhradeep Guha Thakurta
+<br /><strong>Contact</strong>: lxuechen@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2207.00160">Paper</a>
+<br /><strong>Keywords</strong>: differential privacy, fine-tuning, dp convex optimization, pretrained models</p>
+<hr />
+
+<h4 id="you-only-live-once-single-life-reinforcement-learning"><a href="https://arxiv.org/pdf/2210.08863.pdf">You Only Live Once: Single Life Reinforcement Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img18" />
+<strong>Authors</strong>: Annie S. Chen, Archit Sharma, Sergey Levine, Chelsea Finn
+<br /><strong>Contact</strong>: asc8@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2210.08863.pdf">Paper</a> | <a href="https://sites.google.com/stanford.edu/single-life-rl">Website</a>
+<br /><strong>Keywords</strong>: reinforcement learning, autonomous reinforcement learning, adversarial imitation learning</p>
+<hr />
+
+<h4 id="zeroc-a-neuro-symbolic-model-for-zero-shot-concept-recognition-and-acquisition-at-inference-time"><a href="https://arxiv.org/abs/2206.15049">ZeroC: A Neuro-Symbolic Model for Zero-shot Concept Recognition and Acquisition at Inference Time</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/img20" />
+<strong>Authors</strong>: Tailin Wu, Megan Tjandrasuwita, Zhengxuan Wu, Xuelin Yang, Kevin Liu, Rok Sosič, Jure Leskovec
+<br /><strong>Contact</strong>: tailin@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2206.15049">Paper</a> | <a href="https://snap.stanford.edu/zeroc/">Website</a>
+<br /><strong>Keywords</strong>: zero-shot concept recognition, zero-shot concept acquisition, neuro-symbolic, inference time</p>
+
+<hr />
+
+<h4 id="the-5th-robot-learning-workshop-trustworthy-robotics"><a href="http://robot-learning.ml/">The 5th Robot Learning Workshop: Trustworthy Robotics</a></h4>
+<p><strong>Organizer</strong>: Ransalu Senanayake
+<br /><strong>Contact</strong>: ransalu@stanford.edu
+<br /><strong>Links:</strong> <a href="http://robot-learning.ml/">Website</a>
+<br /><strong>Keywords</strong>: trustworthy ai, robotics</p>
+
+<h2 id="datasets-and-benchmarks-track">Datasets and Benchmarks Track</h2>
+
+<ul>
+  <li><a href="https://openreview.net/pdf?id=sd1fv0g3UO1">CLEVRER-Humans: Describing Physical and Causal Events the Human Way</a> | <a href="https://sites.google.com/stanford.edu/clevrer-humans/home">Website</a> by Jiayuan Mao*, Xuelin Yang*, Xikun Zhang, Noah Goodman, Jiajun Wu.</li>
+  <li><a href="https://openreview.net/pdf?id=ChWf1E43l4">DABS 2.0: Improved Datasets and Algorithms for Universal Self-Supervision </a> | <a href="https://dabs.stanford.edu/">Website</a> by Alex Tamkin, Gaurab Banerjee, Mohamed Owda, Vincent Liu, Shashank Rammoorthy, Noah Goodman.</li>
+  <li><a href="https://openreview.net/pdf?id=3lk54yE2tYJ">Geoclidean: Few-Shot Generalization in Euclidean Geometry</a> | <a href="http://web.stanford.edu/~joycj/projects/geoclidean_neurips_2022.html">Website</a> by Joy Hsu, Jiajun Wu, Noah Goodman.</li>
+  <li><a href="https://openreview.net/pdf?id=CZeIOfCjMf">HAPI: A Large-scale Longitudinal Dataset of Commercial ML API Predictions</a> | <a href="http://hapi.stanford.edu/">Website</a> by Lingjiao Chen, Matei Zaharia, James Zou.</li>
+  <li><a href="https://openreview.net/forum?id=c0l2YolqD2T">How Well Do Unsupervised Learning Algorithms Model Human Real-time and Life-long Learning?</a> | <a href="https://github.com/neuroailab/VisualLearningBenchmarks">Website</a> by Chengxu Zhuang, Violet Xiang, Yoon Bai, Xiaoxuan Jia, Nick Turk-Browne,  Kenneth Norman, James J. DiCarlo, Daniel LK Yamins.</li>
+  <li><a href="https://cs.stanford.edu/~rcwang/projects/ikea_manual/">IKEA-Manual: Seeing Shape Assembly Step by Step</a> by Ruocheng Wang, Yunzhi Zhang, Jiayuan Mao, Ran Zhang, Chin-Yi Cheng, Jiajun Wu.</li>
+  <li><a href="https://arxiv.org/abs/2207.00220">Pile of Law: Learning Responsible Data Filtering from the Law and a 256GB Open-Source Legal Dataset</a> | <a href="https://huggingface.co/datasets/pile-of-law/pile-of-law">Website</a> by Peter Henderson*, Mark S. Krass*, Lucia Zheng, Neel Guha, Christopher D. Manning, Dan Jurafsky, Daniel E. Ho.</li>
+</ul>
+
+<h2 id="workshop-papers">Workshop Papers</h2>
+
+<ul>
+  <li>Generation Probabilities are Not Enough: Improving Error Highlighting for AI Code Suggestions by Helena Vasconcelos, Gagan Bansal, Adam Fourney, Q.Vera Liao, Jennifer Wortman Vaughan.</li>
+  <li>Learning Absorption Rates in Glucose-Insulin Dynamics from Meal Covariates by Ke Alexander Wang, Matthew E. Levine, Jiaxin Shi, Emily Fox.</li>
+  <li>The Solution Path of the Group Lasso by Aaron Mishkin, Mert Pilanci.</li>
+  <li><a href="https://arxiv.org/abs/2211.09721">A Finite-Particle Convergence Rate for Stein Variational Gradient Descent</a> by Jiaxin Shi, Lester Mackey.</li>
+  <li><a href="Still under review">BudgetLongformer: Can we Cheaply Pretrain a SotA Legal Language Model From Scratch?</a> by Joel Niklaus, Daniele Giofre.</li>
+  <li><a href="https://openreview.net/forum?id=8b0RHdh2Xd0">ColRel: Collaborative Relaying for Federated Learning over Intermittently Connected Networks</a> by Rajarshi Saha, Michal Yemini, Emre Ozfatura, Deniz Gunduz, Andrea Goldsmith.</li>
+  <li><a href="https://arxiv.org/abs/2209.03942">Data Feedback Loops: Model-driven Amplification of Dataset Biases</a> | <a href="https://tinyurl.com/data-feedback">Website</a> by Rohan Taori, Tatsu Hashimoto.</li>
+  <li><a href="https://openreview.net/pdf?id=ZpN2EOEUnr">DrML: Diagnosing and Rectifying Vision Models using Language</a> by Yuhui Zhang, Jeff Z. HaoChen, Shih-Cheng Huang, Kuan-Chieh Wang, James Zou, Serena Yeung.</li>
+  <li><a href="https://www.researchgate.net/publication/365174780_Federated_Learning_on_Patient_Data_for_Privacy-Protecting_Polycystic_Ovary_Syndrome_Treatment">Federated Learning on Patient Data for Privacy-Protecting Polycystic Ovary Syndrome Treatment</a> by Lucia Morris*, Tori Qiu*, Nikhil Raghuraman*.</li>
+  <li><a href="https://aishwarya-rm.github.io/data/kdbirl.pdf">Kernel Density Bayesian Inverse Reinforcement Learning</a> by Aishwarya Mandyam, Didong Li, Diana Cai, Andrew Jones, Barbara Engelhardt.</li>
+  <li><a href="https://openreview.net/forum?id=PhktEpJHU3">Learning Controllable Adaptive Simulation for Multi-scale Physics</a> by Tailin Wu, Takashi Maruyama, Qingqing Zhao, Gordon Wetzstein, Jure Leskovec.</li>
+  <li><a href="https://openreview.net/forum?id=Rd68eTARk4">Learning Efficient Hybrid Particle-continuum Representations of Non-equilibrium N-body Systems</a> by  Tailin Wu, Michael Sun, H.G. Jason Chou, Pranay Reddy Samala, Sithipont Cholsaipant, Sophia Kivelson, Jacqueline Yau, Zhitao Ying, E. Paulo Alves, Jure Leskovec, Frederico Fiuza.</li>
+  <li><a href="https://dilipa.github.io/papers/nips22_infocog_workshop_rdt_satisficing.pdf">On Rate-Distortion Theory in Capacity-Limited Cognition &amp; Reinforcement Learning</a> by Dilip Arumugam, Mark K. Ho, Noah D. Goodman, Benjamin Van Roy.</li>
+  <li><a href="https://openreview.net/forum?id=ds21dwfBBH">PriorBand: Hyperband + Human Expert Knowledge</a> | <a href="https://github.com/automl/mf-prior-exp">Website</a> by Neeratyoy Mallik*, Carl Hvarfner*, Danny Stoll, Maciej Janowski, Edward Bergman, Mairus Lindauer, Luigi Nardi, Frank Hutter.</li>
+  <li><a href="https://arxiv.org/abs/2208.01545">The Curse of Low Task Diversity: On the Failure of Transfer Learning to Outperform MAML and Their Empirical Equivalence</a> | <a href="https://youtu.be/mM5vllz1hPg">Video</a> by Brando Miranda, Patrick Yu, Yu-Xiong Wang, Sanmi Koyejo.</li>
+  <li><a href="https://openreview.net/forum?id=nBRNjUPhWr">Unmasking the Lottery Ticket Hypothesis: Efficient Adaptive Pruning for Finding Winning Tickets</a> by Mansheej Paul*, Feng Chen*, Brett W. Larsen*, Jonathan Frankle, Surya Ganguli, Gintare Karolina Dziugaite.</li>
+</ul>
+
+<p>We look forward to seeing you at NeurIPS 2022!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/neurips-2022/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/neurips-2022/&text=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2022%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/neurips-2022/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/neurips-2022/&title=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2022%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/neurips-2022/&title=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2022%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2022%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/neurips-2022/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#NeurIPS">
+      <p><i class="fa fa-tag fa-fw"></i> NeurIPS</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/iros-2022/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at IROS 2022
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
