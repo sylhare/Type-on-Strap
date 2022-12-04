@@ -1,0 +1,14 @@
+/*!
+ * Font: SIL OFL 1.1, CSS: MIT License
+ */
+
+$hobo-font-path: "../../assets/fonts/hobo" !default;
+
+@font-face {
+  font-family: "Hobo";
+  src: url("#{$hobo-font-path}/Hobo-Regular.eot"); /* IE9 Compat Modes */
+  src: url("#{$hobo-font-path}/Hobo-Regular.woff2") format("woff2"),
+    url("#{$hobo-font-path}/Hobo-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: normal;
+  font-style: normal;
+}

@@ -2,39 +2,40 @@
 
 /* Variables */
 // All the options to customize your theme in one file
-@import 'base/variables';
+@import "base/variables";
 
 /* External */
 // CSS from external sources
-@import 'external/reset';
-@import 'external/font-awesome';
-@import 'external/pacifico';
-@import 'external/katex';
-@import 'external/source-sans-pro';
+@import "external/reset";
+@import "external/font-awesome";
+@import "external/pacifico";
+@import "external/hobo";
+@import "external/katex";
+@import "external/source-sans-pro";
 
 /* Base */
 // For general CSS in the theme
-@import 'base/global';
-@import 'base/highlight';
-@import 'base/utility';
+@import "base/global";
+@import "base/highlight";
+@import "base/utility";
 
 /* Includes */
 // Linked with the html in the _includes folder
-@import 'includes/post_nav';
-@import 'includes/footer';
-@import 'includes/navbar';
-@import 'includes/share_buttons';
-@import 'includes/blog_nav';
-@import 'includes/gallery';
-@import 'includes/portfolio';
+@import "includes/post_nav";
+@import "includes/footer";
+@import "includes/navbar";
+@import "includes/share_buttons";
+@import "includes/blog_nav";
+@import "includes/gallery";
+@import "includes/portfolio";
 
 /* Posts */
 // Linked with the html in the _layouts folder
-@import 'layouts/posts';
-@import 'layouts/blog';
-@import 'layouts/page';
-@import 'layouts/tags';
-@import 'layouts/search';
+@import "layouts/posts";
+@import "layouts/blog";
+@import "layouts/page";
+@import "layouts/tags";
+@import "layouts/search";
 
 /**
 
