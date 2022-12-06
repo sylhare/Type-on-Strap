@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://O-WigglyPlay.github.io"
+url: "https://o-wigglyplay.github.io/"
 
 # THEME-SPECIFIC CONFIGURATION
 title: 오재준의 블로그                                 # site's title
