@@ -4,6 +4,7 @@ title: Color Post
 tags: [Test, Color]
 color: brown
 author: sylhare
+categories: Example
 excerpt_separator: <!--more-->
 ---
 
