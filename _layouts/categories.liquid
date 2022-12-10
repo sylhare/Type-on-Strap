@@ -1,0 +1,38 @@
+---
+layout: page
+---
+
+<div class="home">
+    <div id="categories">
+        <section class="bg"></section>
+        <ul class="category-clouds">
+            {% for category in site.categories %}
+                <a href="#{{ category | first | cgi_escape }}" class="category-anchor">
+                    <li>
+                        {{ category | first }}
+                        <!-- {{ category | last | size | times: 100 | divided_by: site.tags.size | plus: 50 | divided_by: 100.0 }} -->
+                        <!-- <span class="category-number">{{ category | last | size }}</span> -->
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+        <div class="category-groups">
+            {% for category in site.categories %}
+                <div class="category-group">
+                    {% capture group %}{{ category | first }}{% endcapture %}
+                    <h4 id="{{ group }}" class="title">{{ group }}</h4>
+                    <div class="items">
+                        {% for post in site.categories[group] %}
+                            <a href="{{ post.url | relative_url }}" class="category-post-link">
+                                <div class="item">
+                                    <p class="meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+                                    <p class="title">{{ post.title }}</p>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
