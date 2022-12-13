@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: Lupe Galvan
 feature-img: "/assets/img/art/lupe.galvan/img/bg.jpg"
 img: "assets/img/art/lupe.galvan/img/portrait.png"

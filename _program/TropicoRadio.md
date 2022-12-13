@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: TROPICO RADIO
 feature-img: "assets/img/programs/tropicofm.png"
 img: "/assets/img/programs/tropicofm.png"

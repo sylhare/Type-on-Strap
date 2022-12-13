@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: Sara Esquivel
 feature-img: "/assets/img/art/sara.esquivel/img/bg.jpg"
 img: "assets/img/art/sara.esquivel/img/portrait.jpg"

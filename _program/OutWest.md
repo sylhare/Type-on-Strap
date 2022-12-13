@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: Out West
 feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
 img: "/assets/img/programs/outwest.jpg"

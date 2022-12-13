@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: Carly Jackson
 feature-img: "/assets/img/art/carly.jackson/img/bg.jpg"
 img: "assets/img/art/carly.jackson/img/portrait.png"

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: New Jack Tha Kid
 feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
 img: "assets/img/music/new.jack.tha.kid/img/portrait.jpg"

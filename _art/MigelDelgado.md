@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: Migel Delgado
 feature-img: "/assets/img/art/migel.delgado/img/bg.jpg"
 img: "assets/img/art/migel.delgado/img/portrait.png"

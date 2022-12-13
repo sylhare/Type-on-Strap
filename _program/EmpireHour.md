@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: 5th Empire Hour
 feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
 img: "/assets/img/programs/empirehour.png"
