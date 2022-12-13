@@ -43,7 +43,7 @@ paginate_path: "/blog/page:num"
 
 # PORTFOLIO
 collections:
-  music:
+  program:
     output: true
     permalink: /:collection/:name
   art:
