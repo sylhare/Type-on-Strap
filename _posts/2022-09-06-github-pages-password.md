@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Password protection for Github Pages
-description: How to protect a static page serve from Github pages without password and avoid link sharing
+description: How to protect a static page served from Github pages with password and avoid link sharing without using any backend
 author-id: "galera"
 categories: [javascript, browser, github-pages, security]
 tags: [javascript, browser, github-pages, security]

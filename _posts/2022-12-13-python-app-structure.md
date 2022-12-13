@@ -3,8 +3,8 @@ layout: post
 title: Python app structure
 description: Description of how you should organise a Python executable application to publish and generate an executable
 author-id: "galera"
-categories: [python, architecture]
-tags: [python, architecture]
+categories: [python, architecture, cli]
+tags: [python, architecture, cli]
 excerpt_separator: <!--more-->
 feature-img: "assets/img/posts/python-app-structure/featured.jpg"
 thumbnail: "assets/img/posts/python-app-structure/featured.jpg"
