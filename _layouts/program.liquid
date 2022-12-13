@@ -19,13 +19,20 @@ layout: default
   </header>
 
   <section class="post-content">
-    {% if page.bootstrap %}
-      <div class="bootstrap-iso">
-      {% endif %}
-      {{ content }}
-      {% if page.bootstrap %}
+    <h1>Programmer: {{ page.programmer }}</h1>
+
+    {% if page.profile %}
+      <div class="profile">
+        <img src={{ page.profile }} />
+        <div>{{ content }}</div>
       </div>
-    {% endif %}
+    {% else %}
+      {{ content }}
+    </div>
+  {% endif %}
+  {% if page.mixcloud %}
+    <iframe class="mixcloud" src={{page.mixcloud}} frameborder="0"></iframe>
+  {%endif%}
   </section>
 
 
