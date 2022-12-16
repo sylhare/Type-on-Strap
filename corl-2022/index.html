@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://0.0.0.0:4000/blog/corl-2022/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://0.0.0.0:4000/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at CoRL 2022 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at CoRL 2022" />
+<meta name="author" content="Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://0.0.0.0:4000/blog/corl-2022/" />
+<meta property="og:url" content="http://0.0.0.0:4000/blog/corl-2022/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-16T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at CoRL 2022" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/blog/corl-2022/"},"@type":"BlogPosting","url":"http://0.0.0.0:4000/blog/corl-2022/","headline":"Stanford AI Lab Papers and Talks at CoRL 2022","dateModified":"2022-12-16T00:00:00-05:00","datePublished":"2022-12-16T00:00:00-05:00","author":{"@type":"Person","name":"Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>"},"description":"The official Stanford AI Lab blog","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at CoRL 2022 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at CoRL 2022, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at CoRL 2022">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at CoRL 2022, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://0.0.0.0:4000/blog/assets/img/posts/2022-12-16-corl-2022/logo_small.png">
+    <meta name="og:image" content="http://0.0.0.0:4000/blog/assets/img/posts/2022-12-16-corl-2022/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at CoRL 2022</h1>
+    <p class="meta">
+    Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>
+    <div class="post-date">December 16, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/logo.png" /></p>
+
+<p>The <a href="https://corl2022.org/">Conference on Robot Learning</a> (CoRL 2022) will take place next week. We’re excited to share all the work from SAIL that will be presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23D50000&amp;ctz=Pacific%2FChatham&amp;mode=WEEK&amp;showTitle=1&amp;title=Stanford%20AI%20Lab%20%40%20CoRL&amp;src=ZTNjYWJkMGI3ODNjNmNjN2I4YjY2OWRjNDYwNTgyMjlhNjdlNTZiNWQ0ZTEzNjNiMDdiMjliOTMxMzc0YmU1MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=OGE2Yjg3ZWYyMWViNmE3OTZiYTRmZGZhMzJiZDc2OGE5M2RlNTIzMzIzZmZjYWUwYjUyNDY0MTg2Mzg3NmRkOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=NmJlYmRkNTYwOTQ2NzZiN2NhZTMzYTdjYWYyYzE2YWU4MjIyNDE4ZmM0MDM3NGYzOTE4YjlkNGI5YmZhYjFkY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23D50000&amp;color=%238E24AA&amp;color=%234285F4&amp;dates=20221212/20221219" style="border-width:0" width="2000" height="600" frameborder="0" scrolling="no"></iframe>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="a-dual-representation-framework-for-robot-learning-with-human-guidance"><a href="https://openreview.net/pdf?id=H6rr_CGzV9y">A Dual Representation Framework for Robot Learning with Human Guidance</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img1" />
+<strong>Authors</strong>: Ruohan Zhang, Dhruva Bansal, Yilun Hao, Ayano Hiranaka, Jialu Gao, Chen Wang, Roberto Martín-Martín, Li Fei-Fei, Jiajun Wu
+<br /><strong>Contact</strong>: zharu@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=H6rr_CGzV9y">Paper</a>
+<br /><strong>Keywords</strong>: human guidance, evaluative feedback, preference learning</p>
+<hr />
+
+<h4 id="behavior-1k-a-benchmark-for-embodied-ai-with-1000-everyday-activities-and-realistic-simulation-"><a href="https://openreview.net/pdf?id=_8DoIe8G3t">BEHAVIOR-1K: A Benchmark for Embodied AI with 1,000 Everyday Activities and Realistic Simulation </a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img0" />
+<strong>Authors</strong>: Chengshu Li, Ruohan Zhang, Josiah Wong, Cem Gokmen, Sanjana Srivastava, Roberto Martín-Martín, Chen Wang, Gabrael Levine, Michael Lingelbach, Jiankai Sun, Mona Anvari, Minjune Hwang, Manasi Sharma, Arman Aydin, Dhruva Bansal, Samuel Hunter, Kyu-Young Kim, Alan Lou, Caleb R Matthews, Ivan Villa-Renteria, Jerry Huayang Tang, Claire Tang, Fei Xia, Silvio Savarese, Hyowon Gweon, Karen Liu, Jiajun Wu, Li Fei-Fei
+<br /><strong>Contact</strong>: zharu@stanford.edu
+<br /><strong>Award nominations:</strong> Best paper nomination
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=_8DoIe8G3t">Paper</a> | <a href="https://behavior.stanford.edu/">Website</a>
+<br /><strong>Keywords</strong>: embodied ai benchmark, everyday activities, mobile manipulation</p>
+<hr />
+
+<h4 id="eliciting-compatible-demonstrations-for-multi-human-imitation-learning"><a href="https://arxiv.org/abs/2210.08073">Eliciting Compatible Demonstrations for Multi-Human Imitation Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img5" />
+<strong>Authors</strong>: Kanishk Gandhi, Siddharth Karamcheti, Madeline Liao, Dorsa Sadigh
+<br /><strong>Contact</strong>: kanishk.gandhi@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.08073">Paper</a> | <a href="https://sites.google.com/view/eliciting-demos-corl22/home">Website</a>
+<br /><strong>Keywords</strong>: imitation learning, active learning, human-robot interaction</p>
+<hr />
+
+<h4 id="eliciting-compatible-demonstrations-for-multi-human-imitation-learning-1"><a href="https://iliad.stanford.edu/pdfs/publications/gandhi2022eliciting.pdf">Eliciting Compatible Demonstrations for Multi-Human Imitation Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img4" />
+<strong>Authors</strong>: Kanishk Gandhi
+<br /><strong>Contact</strong>: kanishk.gandhi@stanford.edu
+<br /><strong>Links:</strong> <a href="https://iliad.stanford.edu/pdfs/publications/gandhi2022eliciting.pdf">Paper</a> | <a href="https://sites.google.com/view/eliciting-demos-corl22/home">Website</a>
+<br /><strong>Keywords</strong>: interactive imitation learning, active demonstration elicitation, human-robot interaction</p>
+<hr />
+
+<h4 id="few-shot-preference-learning-for-human-in-the-loop-rl"><a href="https://arxiv.org/abs/2212.03363">Few-Shot Preference Learning for Human-in-the-Loop Rl</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img3" />
+<strong>Authors</strong>: Joey Hejna, Dorsa Sadigh
+<br /><strong>Contact</strong>: jhejna@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2212.03363">Paper</a> | <a href="https://www.youtube.com/watch?v=TqNvYmvfq2k">Video</a> | <a href="https://sites.google.com/view/few-shot-preference-rl/home">Website</a>
+<br /><strong>Keywords</strong>: preference learning, interactive learning, multi-task learning, human-in-the-loop</p>
+<hr />
+
+<h4 id="interpretable-self-aware-neural-networks-for-robust-trajectory-prediction"><a href="https://arxiv.org/pdf/2211.08701.pdf">Interpretable Self-Aware Neural Networks for Robust Trajectory Prediction</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img12" />
+<strong>Authors</strong>: Masha Itkina, Mykel J. Kochenderfer
+<br /><strong>Contact</strong>: mitkina@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2211.08701.pdf">Paper</a> | <a href="https://github.com/sisl/InterpretableSelfAwarePrediction">Website</a>
+<br /><strong>Keywords</strong>: autonomous vehicles, trajectory prediction, distribution shift</p>
+<hr />
+
+<h4 id="learning-bimanual-scooping-policies-for-food-acquisition"><a href="https://arxiv.org/pdf/2211.14652.pdf">Learning Bimanual Scooping Policies for Food Acquisition</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img2" />
+<strong>Authors</strong>: Jennifer Grannen*, Yilin Wu*, Suneel Belkhale, Dorsa Sadigh
+<br /><strong>Contact</strong>: jgrannen@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2211.14652.pdf">Paper</a> | <a href="https://youtu.be/v8VxDmAyd6w">Video</a> | <a href="https://sites.google.com/view/bimanualscoop-corl22/home">Website</a>
+<br /><strong>Keywords</strong>: bimanual manipulation, food acquisition, robot-assisted feeding, deformable object manipulation</p>
+<hr />
+
+<h4 id="learning-diverse-and-physically-feasible-dexterous-grasps-with-generative-model-and-bilevel-optimization"><a href="https://arxiv.org/abs/2207.00195">Learning Diverse and Physically Feasible Dexterous Grasps with Generative Model and Bilevel Optimization</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img6" />
+<strong>Authors</strong>: Albert Wu, Michelle Guo, Karen Liu
+<br /><strong>Contact</strong>: amhwu@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2207.00195">Paper</a> | <a href="https://www.youtube.com/watch?v=9DTrImbN99I">Video</a>
+<br /><strong>Keywords</strong>: dexterous grasping, grasp planning, bilevel optimization, generative model</p>
+<hr />
+
+<h4 id="learning-visuo-haptic-skewering-strategies-for-robot-assisted-feeding"><a href="https://sites.google.com/view/hapticvisualnet-corl22/home">Learning Visuo-Haptic Skewering Strategies for Robot-Assisted Feeding</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img9" />
+<strong>Authors</strong>: Priya Sundaresan, Suneel Belkhale, Dorsa Sadigh
+<br /><strong>Contact</strong>: priyasun@stanford.edu
+<br /><strong>Links:</strong> <a href="https://sites.google.com/view/hapticvisualnet-corl22/home">Paper</a> | <a href="https://youtu.be/CxP5vFV2ejQ">Video</a>
+<br /><strong>Keywords</strong>: manipulation, deformable manipulation, perception, planning, computer vision</p>
+<hr />
+
+<h4 id="leveraging-haptic-feedback-to-improve-data-quality-and-quantity-for-deep-imitation-learning-models"><a href="https://arxiv.org/abs/2211.03020">Leveraging Haptic Feedback to Improve Data Quality and Quantity for Deep Imitation Learning Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img11" />
+<strong>Authors</strong>: Catie Cuan, Allison Okamura, Mohi Khansari
+<br /><strong>Contact</strong>: ccuan@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2211.03020">Paper</a>
+<br /><strong>Keywords</strong>: haptics and haptic interfaces, imitation learning, data curation</p>
+<hr />
+
+<h4 id="offline-reinforcement-learning-at-multiple-frequencies"><a href="https://openreview.net/forum?id=TGUp8EaCGj9">Offline Reinforcement Learning at Multiple Frequencies</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img7" />
+<strong>Authors</strong>: Kaylee Burns ~Kaylee_Burns2 , Tianhe Yu, Chelsea Finn, Karol Hausman
+<br /><strong>Contact</strong>: kayburns@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=TGUp8EaCGj9">Paper</a> | <a href="https://youtu.be/5H1MiFjUsm8">Video</a> | <a href="https://sites.google.com/stanford.edu/adaptive-nstep-returns/">Website</a>
+<br /><strong>Keywords</strong>: offline reinforcement learning, robotics</p>
+<hr />
+
+<h4 id="r3m-a-universal-visual-representation-for-robot-manipulation"><a href="https://arxiv.org/pdf/2203.12601.pdf">R3M: A Universal Visual Representation for Robot Manipulation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img10" />
+<strong>Authors</strong>: Suraj Nair, Aravind Rajeswaran, Vikash Kumar, Chelsea Finn, Abhinav Gupta
+<br /><strong>Contact</strong>: surajn@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2203.12601.pdf">Paper</a> | <a href="https://sites.google.com/view/robot-r3m/">Website</a>
+<br /><strong>Keywords</strong>: visual representation learning, robotic manipulation</p>
+<hr />
+
+<h4 id="see-hear-feel-smart-sensory-fusion-for-robotic-manipulation"><a href="https://arxiv.org/pdf/2212.03858.pdf">See, Hear, Feel: Smart Sensory Fusion for Robotic Manipulation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-12-16-corl-2022/img8" />
+<strong>Authors</strong>: Hao Li*, Yizhi Zhang*, Junzhe Zhu, Shaoxiong Wang, Michelle A Lee, Huazhe Xu, Edward Adelson, Li Fei-Fei, Ruohan Gao†, Jiajun Wu†
+<br /><strong>Contact</strong>: rhgao@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2212.03858.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=sRdx3sa6ryk">Video</a> | <a href="https://ai.stanford.edu/~rhgao/see_hear_feel/">Website</a>
+<br /><strong>Keywords</strong>: multisensory, robot learning, robotic manipulation</p>
+
+<hr />
+
+<p>We look forward to seeing you at CoRL 2022!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://0.0.0.0:4000/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://0.0.0.0:4000/blog/corl-2022/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://0.0.0.0:4000/blog/corl-2022/&text=Stanford+AI+Lab+Papers+and+Talks+at+CoRL+2022%20%7C%20SAIL+Blog:%20http://0.0.0.0:4000/blog/corl-2022/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://0.0.0.0:4000/blog/corl-2022/&title=Stanford+AI+Lab+Papers+and+Talks+at+CoRL+2022%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://0.0.0.0:4000/blog/corl-2022/&title=Stanford+AI+Lab+Papers+and+Talks+at+CoRL+2022%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+CoRL+2022%20%7C%20SAIL+Blog&body=:%20http://0.0.0.0:4000/blog/corl-2022/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#CoRL">
+      <p><i class="fa fa-tag fa-fw"></i> CoRL</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/discrimination_in_ML_and_law/">
+      <p>Previous post</p>
+        From Discrimination in Machine Learning to Discrimination in Law, Part 1: Disparate Treatment 
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://0.0.0.0:4000/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
