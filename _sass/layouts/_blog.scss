@@ -44,21 +44,21 @@
 
 .player {
   width: 100%;
+}
 
-  img {
-    height: 60px;
-    width: 120px;
-    margin-top: -20px;
-  }
+.radio-pixel {
+  height: 60px;
+  width: 120px;
+  margin-top: -20px;
+}
 
-  @media (max-width: 750px) {
-    img {
-      width: 100px;
-      padding: 10px;
-      margin-left: 10px;
-    }
-    /* … */
+@media (max-width: 750px) {
+  .radio-pixel {
+    width: 100px;
+    padding: 10px;
+    margin-left: 10px;
   }
+  /* … */
 }
 
 /* --- Post listing --- */
