@@ -4,19 +4,32 @@
     <div class="branding">
       {% if site.avatar %}
         <a href="{{ '/' | relative_url }}">
-          <img alt="logo img" class="avatar" src="{{ site.avatar | relative_url }}"/>
+          <img
+            alt="logo img"
+            class="avatar"
+            src="{{ site.avatar | relative_url }}" />
         </a>
       {% endif %}
-      <a class="site-title" aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
+      <a
+        class="site-title"
+        aria-label="{{ site.title }}"
+        href="{{ '/' | relative_url }}">
         {{ site.title }}
       </a>
-      <a class="site-title blink-bg" onClick="window.open('http://www.radiorethink.com/tuner/?stationCode=tropico&stream=hi','tropico','resizable,scrollbars=1,height=800,width=425'); return false;" style="cursor: pointer; cursor: hand; text-align:jusitfy">
-        <img alt="radio img" src="/assets/img/radio.gif" style="height:60px; width:120px; margin-top:-20px;"/></a>
+      <a
+        class="site-title blink-bg"
+        onClick="window.open('http://www.radiorethink.com/tuner/?stationCode=tropico&stream=hi','tropico','resizable,scrollbars=1,height=800,width=425'); return false;"
+        style="cursor: pointer; cursor: hand; text-align:jusitfy">
+        <img alt="radio img" src="/assets/img/radio.gif" /></a>
     </div>
 
     <!-- Toggle menu -->
     <nav class="clear">
-      <a aria-label="pull" id="pull" class="toggle" href="#">
+      <a
+        aria-label="pull"
+        id="pull"
+        class="toggle"
+        href="#">
         <i class="fas fa-bars fa-lg"></i>
       </a>
 
@@ -25,15 +38,19 @@
         {% assign name_page = "" %}
         {% for page in site.pages %}
           {% unless
-        page.title == null or page.hide or name_page contains page.title %}
+ page.title == null or page.hide or name_page contains page.title %}
             <li class="separator">|</li>
             <li>
-              <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
+              <a
+                class="clear"
+                aria-label="{{ page.title }}"
+                title="{{ page.title }}"
+                href="{{ page.url | relative_url }}">
                 {% if page.icon %}
                   <i class="fas {{ page.icon }}" aria-hidden="true"></i>
                 {% else %}
                   {{ page.title }}
-                {% endif%}
+                {% endif %}
               </a>
             </li>
           {% endunless %}
@@ -42,7 +59,11 @@
         {% if site.color_theme == 'auto' %}
           <li class="separator">|</li>
           <li>
-            <a id="theme-toggle" title="{{ page.title }} " aria-label="{{ page.title }}" onclick="themeToggle()"></a>
+            <a
+              id="theme-toggle"
+              title="{{ page.title }} "
+              aria-label="{{ page.title }}"
+              onclick="themeToggle()"></a>
           </li>
         {% endif %}
       </ul>
@@ -50,13 +71,12 @@
 
 
     {%- comment -%}
-      <iframe
-      class="iframeplayer"
-      frameborder="0"
-      width="580"
-      height="216"
-      src="https://tropicofm1.airtime.pro/embed/player?stream=auto&skin=1"
-      ></iframe>
-    {%- endcomment -%}
-  </div>
+    <iframe
+    class="iframeplayer"
+    frameborder="0"
+    width="580"
+    height="216"
+    src="https://tropicofm1.airtime.pro/embed/player?stream=auto&skin=1"
+    ></iframe>
+    {%- endcomment -%}</div>
 </header>

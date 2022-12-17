@@ -45,32 +45,19 @@
 .player {
   width: 100%;
 
-  .blink-bg {
-    color: #fff;
-    padding: 0 5px;
-    margin-left: 50px;
-
-    animation: blinkingText 5s linear 0s infinite alternate;
+  img {
+    height: 60px;
+    width: 120px;
+    margin-top: -20px;
   }
-  @keyframes blinkingText {
-    0% {
-      color: #b10305;
+
+  @media (max-width: 750px) {
+    img {
+      width: 100px;
+      padding: 10px;
+      margin-left: 10px;
     }
-    20% {
-      color: #fff;
-    }
-    40% {
-      color: #b10305;
-    }
-    60% {
-      color: #fff;
-    }
-    80% {
-      color: #b10305;
-    }
-    100% {
-      color: #fff;
-    }
+    /* … */
   }
 }
 
