@@ -1,3 +1,53 @@
+@media (min-width: 770px) {
+  .portfolio-link {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    max-width: 400px;
+
+    .caption {
+      margin: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      opacity: 0;
+      -webkit-transition: all ease 0.5s;
+      -moz-transition: all ease 0.5s;
+      transition: all ease 0.5s;
+
+      &::before {
+        content: " ";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+
+      .caption-content {
+        font-size: 35px;
+        font-family: $font-family-hobo;
+        color: rgb(255, 255, 255);
+        text-shadow: -1px 0 rgb(219, 140, 140), 0 1px rgb(219, 140, 140),
+          1px 0 rgb(219, 140, 140), 0 -1px rgb(219, 140, 140);
+        display: inline-block;
+        vertical-align: middle;
+
+        @media screen and (max-width: $sm-break) {
+          font-size: 7px;
+        }
+      }
+    }
+  }
+  .portfolio-cell {
+    flex: 0 0 32%;
+    margin-bottom: 10px;
+  }
+}
+
 .portfolio-link {
   display: block;
   position: relative;
@@ -5,50 +55,27 @@
   max-width: 400px;
 
   .caption {
-    margin: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
     text-align: center;
-    opacity: 0;
-    -webkit-transition: all ease 0.5s;
-    -moz-transition: all ease 0.5s;
-    transition: all ease 0.5s;
-
-    &::before {
-      content: " ";
-      display: inline-block;
-      vertical-align: middle;
-      height: 100%;
-    }
-
-    &:hover {
-      opacity: 1;
-    }
-
-    .caption-content {
-      font-size: 35px;
-      font-family: $font-family-pacifico;
-      color: rgb(255, 255, 255);
-      text-shadow: -1px 0 rgb(219, 140, 140), 0 1px rgb(219, 140, 140),
-        1px 0 rgb(219, 140, 140), 0 -1px rgb(219, 140, 140);
-      display: inline-block;
-      vertical-align: middle;
-
-      @media screen and (max-width: $sm-break) {
-        font-size: 7px;
-      }
-    }
+    opacity: 1;
   }
+
+  .caption-content {
+    font-size: 35px;
+    font-family: $font-family-hobo;
+    color: rgb(255, 255, 255);
+    text-shadow: -1px 0 rgb(219, 140, 140), 0 1px rgb(219, 140, 140),
+      1px 0 rgb(219, 140, 140), 0 -1px rgb(219, 140, 140);
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.portfolio-cell {
+  margin-bottom: 10px;
 }
 
 .portfolio-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-}
-
-.portfolio-cell {
-  flex: 0 0 32%;
-  margin-bottom: 10px;
 }
