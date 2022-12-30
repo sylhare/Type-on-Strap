@@ -17,12 +17,6 @@ tags: []
 
 _Every Wednesday 5-7 PM_
 
-### Program: Paluku’s Picks
-
-**Programmer:** Paluku the scribe
-
-_Every Wednesday 7-9 PM_
-
 ### Program: Mundo Mungo
 
 **Programmer:** Mungo
