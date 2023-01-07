@@ -5,6 +5,7 @@ feature-img: "assets/img/programs/tropicofm.png"
 img: "/assets/img/programs/tropicofm.png"
 date: 19 March 2022
 tags: [Irvin Brown, Lobo Lara]
+insta: https://www.instagram.com/irvinbrownmusic/
 ---
 
 # Programmers

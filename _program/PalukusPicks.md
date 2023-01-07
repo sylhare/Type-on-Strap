@@ -8,6 +8,7 @@ tags: [Paluku The Scribe, Paluku's Picks]
 programmer: "Paluku the Scribe"
 profile: "/assets/img/programs/palukuspicks.png"
 mixcloud: "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Ftropicofm%2Fplaylists%2Fpalukus-picks%2F"
+insta: https://www.instagram.com/dreamvillain47/
 ---
 
 A hub for good music and good vibes in the 208 with your host Paluku the Scribe.

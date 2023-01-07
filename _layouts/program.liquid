@@ -33,6 +33,20 @@ layout: default
   {% if page.mixcloud %}
   <iframe width="100%" height="180" src={{page.mixcloud}} frameborder="0" ></iframe>
   {%endif%}
+
+  {% if page.insta  %}
+          <div class="insta">
+            <a href={{page.insta}} title="Follow {{page.programmer}} on Instagram" target="_blank" rel="noopener">
+              Follow {{page.programmer}} on Instagram
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </div>
+      {%endif%}
+
+
   </section>
 
 

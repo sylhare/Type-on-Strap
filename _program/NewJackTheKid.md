@@ -7,6 +7,7 @@ date: 19 March 2022
 tags: [New Jack Tha Kid]
 profile: "/assets/img/music/new.jack.tha.kid/img/portrait.jpg"
 programmer: New Jack Tha Kid
+insta: https://www.instagram.com/officialnewjackthakid/
 ---
 
 Chicago based producer New Jack Tha Kid got into Brazilian music, like many of us, by chance: “I got into brazilian music because we discovered, my mom and I, that there was some Brazilian heritage in my family, and then I found Sango.”
