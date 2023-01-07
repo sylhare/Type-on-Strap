@@ -6,5 +6,7 @@ img: "/assets/img/programs/artVoice.png"
 subtitle: 1st and 3rd Saturday of every month, 5-7 PM
 tags: [Lupe Galvan, The Artist’s Voice]
 programmer: "Lupe Galvan"
-profile: "/assets/img/programs/artVoice.png"
+profile: "/assets/img/programs/lupe.jpeg"
 ---
+
+Artist Lupe Galvan interviews artists, writers, story tellers, poets and teachers. We learn about their work, process, philosophy and experience. Tune in for a new episodes.
