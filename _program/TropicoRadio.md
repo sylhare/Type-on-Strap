@@ -5,7 +5,6 @@ feature-img: "assets/img/programs/tropicofm.png"
 img: "/assets/img/programs/tropicofm.png"
 date: 19 March 2022
 tags: [Irvin Brown, Lobo Lara]
-insta: https://www.instagram.com/irvinbrownmusic/
 ---
 
 # Programmers
@@ -23,3 +22,23 @@ insta: https://www.instagram.com/irvinbrownmusic/
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1218172957&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/kyle-scheffler-458698114" title="Tropico FM" target="_blank" style="color: #cccccc; text-decoration: none;">Tropico FM</a> · <a href="https://soundcloud.com/kyle-scheffler-458698114/sets/tropico-radio-shows" title="Tropico Radio Shows" target="_blank" style="color: #cccccc; text-decoration: none;">Tropico Radio Shows</a></div>
 
 <iframe width="100%" height="315" src="https://www.youtube.com/embed/JBcvkKpU8mY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<div class="insta">
+  <a href="https://www.instagram.com/irvinbrownmusic/" title="Follow Irvin Brown on Instagram" target="_blank" rel="noopener">
+    Follow Irvin Brown on Instagram
+    <span class="fa-stack fa-lg">
+      <i class="fas fa-circle fa-stack-2x"></i>
+      <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+</div>
+
+<div class="insta">
+  <a href="https://www.instagram.com/lobolara208/" title="Follow Lobo Lara on Instagram" target="_blank" rel="noopener">
+    Follow Lobo Lara on Instagram
+    <span class="fa-stack fa-lg">
+      <i class="fas fa-circle fa-stack-2x"></i>
+      <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+</div>
