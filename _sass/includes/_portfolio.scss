@@ -67,6 +67,11 @@
       1px 0 rgb(219, 140, 140), 0 -1px rgb(219, 140, 140);
     display: inline-block;
     vertical-align: middle;
+
+    span {
+      font-size: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
   }
 }
 

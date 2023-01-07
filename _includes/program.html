@@ -8,7 +8,10 @@
       href="{{ item.url | relative_url }}"
     >
       <div class="caption">
-        <div class="caption-content">{{item.title}}</div>
+        <div class="caption-content">
+          <div>{{item.title}}</div>
+          <span>{{item.subtitle}}</span>
+        </div>
       </div>
       <img alt="" class="" src="{{ item.img | relative_url }}" />
     </a>

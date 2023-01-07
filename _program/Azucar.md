@@ -3,7 +3,7 @@ layout: program
 title: Azucar
 feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
 img: "/assets/img/programs/azucar.png"
-subtitle: 1st and 3rd Saturday of every month, 5-7 PM
+subtitle: 1st and 3rd Saturday, 5-7 PM
 tags: [Neolito, Azucar]
 programmer: "Noelito"
 profile: "/assets/img/programs/noelito.jpg"

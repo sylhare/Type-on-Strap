@@ -4,7 +4,7 @@ title: Continental Drift
 feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
 img: "/assets/img/programs/contdrift.png"
 profile: "/assets/img/programs/jordan.jpg"
-subtitle: Every Thursday 5-7 PM
+subtitle: Thursdays 5-7 PM
 tags: [Nug Vegas, Continental Drift]
 programmer: "Nug Vegas"
 mixcloud: "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Ftropicofm%2Fplaylists%2Fcontinental-drift%2F"
