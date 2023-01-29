@@ -11,12 +11,6 @@ tags: []
 
 ## New Programs
 
-### Program: Cousin Claire Presents
-
-**Programmer:** Clairemarie
-
-_Every Wednesday 5-7 PM_
-
 ### Program: Mundo Mungo
 
 **Programmer:** Mungo
