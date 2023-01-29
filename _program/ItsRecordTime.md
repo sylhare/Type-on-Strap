@@ -1,7 +1,7 @@
 ---
 layout: program
 title: It’s Record Time!
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/recordtime.png"
 subtitle: 2nd and 4th Tuesday, 6-8 PM
 tags: [It’s Record Time!, DJ Mike Moses]

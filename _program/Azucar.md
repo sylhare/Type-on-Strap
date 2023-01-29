@@ -1,7 +1,7 @@
 ---
 layout: program
 title: Azucar
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/azucar.png"
 subtitle: 1st and 3rd Saturday, 5-7 PM
 tags: [Neolito, Azucar]

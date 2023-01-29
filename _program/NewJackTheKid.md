@@ -1,7 +1,7 @@
 ---
 layout: program
 title: New Jack Tha Kid
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "assets/img/music/new.jack.tha.kid/img/portrait.jpg"
 date: 19 March 2022
 tags: [New Jack Tha Kid]

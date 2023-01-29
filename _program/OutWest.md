@@ -1,7 +1,7 @@
 ---
 layout: program
 title: Out West
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/outwest.jpg"
 tags: [Out West, Ben West, Becky West]
 programmer: "Becky & Ben West"

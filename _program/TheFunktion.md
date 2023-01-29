@@ -1,7 +1,7 @@
 ---
 layout: program
 title: The Funktion
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/TheFunkiton.png"
 date: 19 March 2022
 tags: [The Magnificent DJ Xclusive]

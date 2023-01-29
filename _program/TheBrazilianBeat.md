@@ -1,7 +1,7 @@
 ---
 layout: program
 title: The Brazilian Beat
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/BrazilBeat.png"
 subtitle: Every Sunday 3-5 PM
 tags: [The Brazilian Beat, Allen Thayer]

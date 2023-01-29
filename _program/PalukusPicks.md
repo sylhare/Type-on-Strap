@@ -1,7 +1,7 @@
 ---
 layout: program
 title: "Paluku’s Picks"
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 subtitle: Wednesdays 7-9 PM
 img: "/assets/img/programs/palukuspicks.png"
 tags: [Paluku The Scribe, Paluku's Picks]

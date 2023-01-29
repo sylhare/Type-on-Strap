@@ -1,7 +1,7 @@
 ---
 layout: program
 title: Continental Drift
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/contdrift.png"
 profile: "/assets/img/programs/jordan.jpg"
 subtitle: Thursdays 5-7 PM

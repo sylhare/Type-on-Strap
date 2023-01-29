@@ -1,7 +1,7 @@
 ---
 layout: program
 title: 5th Empire Hour
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/empirehour.png"
 subtitle: 1st and 3rd Tuesdays, 6-8 PM
 tags: [5th Empire Hour, The Mighty DeltaOne]

@@ -1,7 +1,7 @@
 ---
 layout: program
 title: The Artist’s Voice
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
+feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/artVoice.png"
 subtitle: Every 2nd Sunday 6-7 PM
 tags: [Lupe Galvan, The Artist’s Voice]

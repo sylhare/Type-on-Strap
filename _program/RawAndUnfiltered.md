@@ -1,8 +1,8 @@
 ---
 layout: program
 title: Raw and Unfiltered
-feature-img: "/assets/img/music/new.jack.tha.kid/img/bg.jpg"
-# img: "/assets/imgr/programs/artVoice.png"
+feature-img: "assets/img/header/about.jpeg"
+img: "/assets/imgr/programs/raw.png"
 subtitle: Mondays 6-8 PM 
 tags: [Maddy B., Najean]
 programmer: "Maddy B. & Najean"
