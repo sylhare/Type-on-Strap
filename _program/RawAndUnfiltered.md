@@ -2,7 +2,7 @@
 layout: program
 title: Raw and Unfiltered
 feature-img: "assets/img/header/about.jpeg"
-img: "/assets/imgr/programs/raw.png"
+img: "/assets/img/programs/raw.png"
 subtitle: Mondays 6-8 PM 
 tags: [Maddy B., Najean]
 programmer: "Maddy B. & Najean"
