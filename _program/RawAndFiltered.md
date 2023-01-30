@@ -1,6 +1,6 @@
 ---
 layout: program
-title: Raw and Unfiltered
+title: Raw and Filtered
 feature-img: "assets/img/header/about.jpeg"
 img: "/assets/img/programs/raw.png"
 subtitle: Mondays 6-8 PM 
