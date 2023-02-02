@@ -8,7 +8,7 @@ tags: [The Magnificent DJ Xclusive]
 programmer: "The Magnificent DJ Xclusive"
 subtitle: 1st and 3rd Thursday, 7-9 PM
 profile: "/assets/img/programs/djexclusive.jpg"
-mixcloud: "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Ftropicofm%2Fthe-funktion-12012022%2F"
+mixcloud: "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Ftropicofm%2Fplaylists%2Fthe-funktion%2F"
 insta: https://www.instagram.com/xclusivelifela/
 ---
 
