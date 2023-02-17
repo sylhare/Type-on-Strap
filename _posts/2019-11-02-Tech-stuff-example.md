@@ -31,6 +31,23 @@ find /etc -type f -exec cat '{}' \; | tr -c '.[:digit:]' '\n' | grep '^[^.][^.]*
 Because you might put code in your blog post, and you want to make sure it will look good in here. Plus that the search
 function will still be working!
 
+### XML
+
+Example from [W3C]
+```xml
+<part number="1976">
+  <name>Windscreen Wiper</name>
+  <description>The Windscreen wiper
+    automatically removes rain
+    from your windscreen, if it
+    should happen to splash there.
+    It has a rubber <ref part="1977">blade</ref>
+    which can be ordered separately
+    if you need to replace it.
+  </description>
+</part>
+```
+
 ### Java
 
 java example
@@ -193,3 +210,5 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 </div>
 </details>
+
+[W3C]: https://www.w3.org/standards/xml/core
