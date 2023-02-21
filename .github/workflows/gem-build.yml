@@ -33,10 +33,12 @@ jobs:
           gem build *.gemspec
           echo `find . -name "*.gem" | tail -1 | awk -F"[/]" '{print $2}'`
       - name: Gems
+        continue-on-error: true
         run: |
+          gem update --system
           gem install type-on-strap
           gem install jekyll-theme-type-on-strap
       - name: GPR
         continue-on-error: true
         run: |
-          gem install type-on-strap --version "2.4.3" --source "https://rubygems.pkg.github.com/sylhare"
+          gem install type-on-strap --version "2.4.4" --source "https://rubygems.pkg.github.com/sylhare"
