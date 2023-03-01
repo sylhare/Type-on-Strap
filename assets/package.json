@@ -21,18 +21,18 @@
     "url": "https://github.com/Sylhare/Type-on-Strap/issues"
   },
   "homepage": "https://github.com/sylhare/Type-on-Strap#readme",
-  "engines" : {
-    "node" : ">=12.0.0 <16.0.0"
+  "engines": {
+    "node": ">=12.0.0 <16.0.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^7.1.0",
+    "gulp-imagemin": "^8.0.0",
     "gulp-less": "^5.0.0",
-    "gulp-replace": "^1.1.3",
+    "gulp-replace": "^1.1.4",
     "gulp-responsive": "^3.0.1",
-    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^3.0.0",
     "gulp-webp": "^4.0.1"
   }
 }

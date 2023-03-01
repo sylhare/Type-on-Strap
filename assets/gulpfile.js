@@ -1,13 +1,12 @@
 /*
- * Here are all of the gulp tasks you can use to help manage your blog
+ * Here are all the gulp tasks you can use to help manage your blog
  * Use `npm install` to install all the dependencies located in package.json
  * If you have an issue with sharp, try: `npm rebuild`.
  * Then `gulp default` to minimize css and images.
  */
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const imagemin = require('gulp-imagemin');
+const uglify = require('gulp-uglify-es').default;
 const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
 const replace = require('gulp-replace');
@@ -41,9 +40,11 @@ gulp.task('js', function minijs() {
     .pipe(gulp.dest("js/"))
 });
 
-gulp.task("img", function imging() {
+gulp.task("img", async function imging() {
+  const imagemin = await import('gulp-imagemin');
+
   return gulp.src('img/**/*.{png,svg,jpg,webp,jpeg,gif}')
-    .pipe(imagemin())
+    .pipe(imagemin.default())
     .on('error', (err) => {
       console.log(err.toString())
     })
