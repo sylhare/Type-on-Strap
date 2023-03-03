@@ -99,7 +99,7 @@ header {
   header {
     color: var(--header-text);
     margin-bottom: 0;
-    padding: calc(#{padding-large}/2.5) $padding-large;
+    padding: $padding-large/2.5 $padding-large;
 
     .meta {
       color: var(--header-text);
@@ -125,7 +125,7 @@ header {
 /*-- feature-image Responsive scrolling --*/
 .feature-image header {
   @media screen and (max-width: $break) {
-    padding: calc(#{padding-large}*1.5) $padding-small;
+    padding: $padding-large*1.5 $padding-small;
   }
 
   @media screen and (min-width: $break) {
