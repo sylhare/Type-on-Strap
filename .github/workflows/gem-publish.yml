@@ -2,6 +2,8 @@ name: Publish Ruby Gem
 
 on:
   push:
+    branches:
+      - master
     tags:
       - v*
 
