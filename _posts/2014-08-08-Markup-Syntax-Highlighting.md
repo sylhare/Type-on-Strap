@@ -84,7 +84,7 @@ Indentation matters. Be sure the indent of the code block aligns with the first 
 
 An example of a Gist embed below:
 
-<script src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js"></script>
+<script defer src="https://gist.github.com/sylhare/dad7ed1ef3d13614c77c4ebadf8a11c3.js"></script>
 
 Here is how it looks like:
 
