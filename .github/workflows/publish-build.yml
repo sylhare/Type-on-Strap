@@ -1,0 +1,30 @@
+name: Publish build
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby 3.1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.0
+      - name: Install
+        run: bundle install
+      - name: Build jekyll site
+        run: bundle exec jekyll build
+      - name: Build the gem
+        continue-on-error: true
+        run: |
+          gem build *.gemspec
+          echo `find . -name "*.gem" | tail -1 | awk -F"[/]" '{print $2}'`
