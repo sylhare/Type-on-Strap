@@ -186,6 +186,7 @@ p,
 ol,
 ul,
 dl,
+details,
 .math-display {
   line-height: 1.5;
   margin-bottom: 1em;
@@ -237,6 +238,17 @@ kbd {
   white-space: nowrap;
 }
 
+details {
+  & > summary {
+    cursor: pointer;
+    display: list-item;
+  }
+
+  &[open] > summary {
+    color: var(--link);
+  }
+}
+
 // Cookie consent
 #cookie-notice {
   padding: 0.5rem 1rem;
@@ -270,3 +282,4 @@ kbd {
     max-width: 100%;
   }
 }
+
