@@ -1,15 +1,15 @@
 <div style="
-      font-size: 10px;
-      color: #cccccc;
-      line-break: anywhere;
-      word-break: normal;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
-        Garuda, Verdana, Tahoma, sans-serif;
-      font-weight: 100;
-    "></div>
+        font-size: 10px;
+        color: #cccccc;
+        line-break: anywhere;
+        word-break: normal;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans,
+          Garuda, Verdana, Tahoma, sans-serif;
+        font-weight: 100;
+      "></div>
 <div class="posts">
   {% unless paginator.posts %}
     <article>
@@ -41,11 +41,7 @@
         </header>
         {% if site.excerpt or site.theme_settings.excerpt %}
           <div class="excerpt">
-            {% if site.excerpt == "truncate" %}
-              {{ post.content | strip_html | truncate: "250" | escape }}
-            {% else %}
-              {{ post.excerpt | strip_html | escape }}
-            {% endif %}
+            {{ post.content | strip_html | truncate: "250" | escape }}
           </div>
         {% endif %}
       </span>

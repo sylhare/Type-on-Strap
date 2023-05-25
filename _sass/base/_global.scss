@@ -305,3 +305,28 @@ kbd {
   height: 180 px;
   text-align: center;
 }
+
+.slideshow-container {
+  height: 500px;
+  margin: 30px;
+}
+
+.slideshow {
+  height: 420px;
+  margin: auto;
+  text-align: center;
+}
+
+.slideshow img {
+  height: 400px;
+}
+
+.slideshow-nav {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.slideshow-nav button {
+  margin: 0 5px;
+}
