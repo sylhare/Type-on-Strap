@@ -11,4 +11,4 @@ insta: https://www.instagram.com/madisunproof/
 mixcloud: "https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Ftropicofm%2Fplaylists%2Fbeneath-the-surface%2F"
 ---
 
-Every Monday 8-10 PM conscious rapper Madisun Proof takes you on a journey through local hip hop and more!
+Calling all underground hip-hop lovers! Beneath the Surface is Tropico FM’s 2 hour extravaganza showcasing Boise’s local underground hip hop scene. Hosted by Madisun Proof every Monday 8-10 PM.
