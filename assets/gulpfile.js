@@ -11,7 +11,6 @@ const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
 const replace = require('gulp-replace');
 const webp = require('gulp-webp');
-const responsive = require('gulp-responsive');
 const fs = require('fs');
 
 // Use it gulp post -n <title of the post>
@@ -52,7 +51,8 @@ gulp.task("img", async function imging() {
 });
 
 // Alternative using "sharp" in case "imagemin" does not work, supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
-gulp.task('sharp_img', function () {
+gulp.task('sharp_img', async function () {
+  const responsive = await import('gulp-responsive');
   let settings = {
     quality: 85,
     progressive: true,
@@ -67,7 +67,8 @@ gulp.task('sharp_img', function () {
     .pipe(gulp.dest('img'))
 });
 
-gulp.task('thumbnails', function () {
+gulp.task('thumbnails', async function () {
+  const responsive = await import('gulp-responsive');
   let settings = {
     width: '50%',
     //format: 'jpeg', // convert to jpeg format
@@ -82,7 +83,8 @@ gulp.task('thumbnails', function () {
 });
 
 
-gulp.task('thumbnails-all', function () {
+gulp.task('thumbnails-all', async function () {
+  const responsive = await import('gulp-responsive');
   let settings = {
     width: '50%',
     //format: 'jpeg', // convert to jpeg format
