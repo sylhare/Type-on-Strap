@@ -168,12 +168,14 @@ By default, it is in english, but you can easily add your own language.
 
 ### Google Analytics
 
-To enable Google Analytics, add your [tracking ID](https://support.google.com/analytics/answer/1032385) 
+To enable Google Analytics (GA4), add your [Measurement ID](https://support.google.com/analytics/answer/12270356?hl=en&sjid=1593376271608310401-NA) 
 to `_config.yml` like so:
 
 ```yml
-google_analytics: UA-NNNNNNNN-N
+google_analytics: G-XXXXXXXXXX
 ```
+
+It will use the [Google Tag Manager](https://support.google.com/analytics/answer/10220869?hl=en&ref_topic=9355633&sjid=1593376271608310401-NA)
 
 ### Comments 💬
 
