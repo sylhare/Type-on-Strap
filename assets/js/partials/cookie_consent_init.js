@@ -34,23 +34,19 @@ function googleAnalytics() {
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', analyticsName);
-    gtag('config', analyticsNameGA4, { 'anonymize_ip': true });
-
-    // Google analytics
-    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
-    ga.l = +new Date;
-    ga('create', analyticsName, 'auto');
-    ga('send', 'pageview');
+    gtag('config', analyticsName, { 'anonymize_ip': true });
+    if (analyticsNameGA4) {
+      gtag('config', analyticsNameGA4, { 'anonymize_ip': true });
+    }
   }
 }
 
 if (isCookieConsent.toLowerCase() === 'true') {
   addCookieConsentListener();
   if (readCookie(cookieName) === 'true') {
-      googleAnalytics();
+    googleAnalytics();
   } else {
-  document.getElementById('cookie-notice').style.display = 'block';
+    document.getElementById('cookie-notice').style.display = 'block';
   }
 } else {
   googleAnalytics();
