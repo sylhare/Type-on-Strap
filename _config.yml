@@ -12,7 +12,7 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 header_text: Felipe Tapia C.  # Change Blog header text
 header_feature_image: assets/img/header/triangular.jpeg
 header_feature_image_responsive: true
-footer_text: ""
+footer_text: "Ingenieria Civil en Telecomunicaciones"
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
