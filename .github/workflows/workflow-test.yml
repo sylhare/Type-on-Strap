@@ -1,0 +1,17 @@
+name: Workflow Test
+
+on:
+  workflow_run:
+    workflows: ["Jekyll build"]
+    types:
+      - completed
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Hello world
+        run: echo "Hello world"
