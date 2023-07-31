@@ -2,13 +2,14 @@ name: Publish deploy
 
 on:
   workflow_run:
-    workflows: Publish build
-    branches: master
-    types: completed
+    workflows: ["Publish build"]
+    branches: ["master"]
+    types:
+      - completed
 
 jobs:
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
