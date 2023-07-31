@@ -10,6 +10,7 @@ favicon: "" #assets/favicon.ico                             # Icon displayed in 
 
 # Header and footer text
 header_text: Felipe Tapia C.  # Change Blog header text
+header_subtitle: Felipe Ignacio Tapia Contreras
 header_feature_image: assets/img/header/header.png
 header_feature_image_responsive: true
 footer_text: "Ingenieria Civil en Telecomunicaciones"
