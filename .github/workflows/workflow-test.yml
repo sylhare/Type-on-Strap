@@ -3,6 +3,7 @@ name: Workflow Test
 on:
   workflow_run:
     workflows: ["Jekyll build"]
+    branches: ["master"]
     types:
       - completed
 
