@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 thumbnail: /assets/img/posts/reggaton-nights/may26.png
 ---
 
-Featuring: k-schef, DJ Fresh, & special guest DJ Illninyo
+Featuring: k-schef, DJ Fresh, and special guest DJ Illninyo
 
 | :--- | ---: |
 | ![](/assets/img/posts/reggaton-nights/TropicoFMReggatonNight2.png) | TROPICO FM PRESENTS: <br> Zona De Perreo Reggaeton Party
