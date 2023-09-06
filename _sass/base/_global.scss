@@ -330,3 +330,37 @@ kbd {
 .slideshow-nav button {
   margin: 0 5px;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.image {
+  width: 100%; /* Image takes up full width by default */
+  max-width: 50%; /* Limit the image width on larger screens */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.text {
+  width: 100%;
+  max-width: 100%; /* Text takes up full width on all screens */
+}
+
+@media (min-width: 768px) {
+  /* Media query for screens with a minimum width of 768px (desktop) */
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .image {
+    width: 50%; /* Image takes up 50% of the screen on desktop */
+    max-width: none; /* Remove the max-width constraint */
+  }
+}
