@@ -30,6 +30,13 @@ By advertising with Tropico.fm, you not only promote your business but also supp
 
 ## Advertising Packages
 
+### **Premium Plan: $1000/year**
+
+- 100 plays of your advertisement each month
+- Ideal for continuous brand exposure
+- Allows lump sum payment for ease of billing
+- <a href="https://buy.stripe.com/6oE7vT7ap94H1BCcMO" target="_blank">Get Started</a>
+
 ### **Standard Plan: $40/month**
 
 - 40 plays of your advertisement each month
