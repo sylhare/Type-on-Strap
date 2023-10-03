@@ -67,4 +67,8 @@ For inquiries, further information, or to get started with your advertising camp
 
 Thank you for considering advertising with Tropico.fm. We look forward to a successful partnership!
 
+### Manage your account
+
+To manage your account with tropico.fm please visit our [stripe customer management portal](https://billing.stripe.com/p/login/dR63fi5cI6aB9m87ss)
+
 _<font size="2">Vivo Latino is FCC licensee of KFFI-LP. The station is a Low Power FM (LPFM) non-commercial, educational radio station licensed by the Federal Communications Commission. KFFI's mission is to serve the Boise community for programming not heard on other broadcast stations, be a laboratory for student learning and local community access participation, exploring music, news and public affairs not covered in the mainstream media. KFFI's talk programming concentrates on producing programming to address issues of local or regional significance, encouraging civic engagement, education, and sustainability. KFFI's music programming concentrates on exposing diverse music of alternative, multicultural, independent, local, historical, underground/eclectic, and emerging sounds not programmed on commercial or public radio, within a freeform music format. The station is open to the Boise community for volunteering and programming. Vivo Latino reserves the right to choose programming based upon quality and deemed appropriateness.</font>_
