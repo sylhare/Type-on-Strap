@@ -10,11 +10,11 @@ const themeButton = {
     'dark': '<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i>'
 }
 
-const currentTheme = () => sessionStorage.getItem('theme')
+const currentTheme = () => localStorage.getItem('theme')
 
 function setMode(theme) {
     document.documentElement.setAttribute('data-theme', theme)
-    sessionStorage.setItem('theme', theme)
+    localStorage.setItem('theme', theme)
     const toggle = document.getElementById('theme-toggle')
     if (toggle) {
         toggle.innerHTML = themeButton[theme]
@@ -35,9 +35,9 @@ function bootstrapTheme() {
         if (!currentTheme()) {
             // Load browser's preference
             let browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-            if (browserPrefersDark.matches) sessionStorage.setItem('theme', 'dark');
+            if (browserPrefersDark.matches) localStorage.setItem('theme', 'dark');
             browserPrefersDark.addEventListener('change', () => {
-                if (browserPrefersDark.matches) sessionStorage.setItem('theme', 'dark')
+                if (browserPrefersDark.matches) localStorage.setItem('theme', 'dark')
             });
         }
 
