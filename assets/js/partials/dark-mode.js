@@ -30,7 +30,7 @@ function themeToggle() {
     }
 }
 
-window.onload = function bootstrapTheme() {
+function bootstrapTheme() {
     if (isAutoTheme) {
         if (!currentTheme()) {
             // Load browser's preference
@@ -46,3 +46,8 @@ window.onload = function bootstrapTheme() {
         setMode(sessionPrefers ? sessionPrefers : 'light')
     }
 }
+
+// Init
+(function () {
+    bootstrapTheme();
+})()
