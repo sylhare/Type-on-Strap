@@ -35,6 +35,7 @@ window.onload = function bootstrapTheme() {
         if (!currentTheme()) {
             // Load browser's preference
             let browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+            if (browserPrefersDark.matches) sessionStorage.setItem('theme', 'dark');
             browserPrefersDark.addEventListener('change', () => {
                 if (browserPrefersDark.matches) sessionStorage.setItem('theme', 'dark')
             });
