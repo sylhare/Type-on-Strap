@@ -37,18 +37,11 @@ By advertising with Tropico.fm, you not only promote your business but also supp
 - Allows lump sum payment for ease of billing
 - <a href="https://buy.stripe.com/6oE7vT7ap94H1BCcMO" target="_blank">Get Started</a>
 
-### **Standard Plan: $40/month**
+### **Monthly Ad Plan: $50/month**
 
-- 40 plays of your advertisement each month
+- 1 play per day of your advertisement each month
 - Affordable and budget-friendly
 - Ideal for continuous brand exposure
-- <a href="https://buy.stripe.com/8wM5nL66l94H6VWcMM" target="_blank">Get Started</a>
-
-### **Basic Plan: $20/month**
-
-- 20 plays of your advertisement each month
-- Affordable and budget-friendly
-- Ideal for small businesses looking to expand
 - <a href="https://buy.stripe.com/3cs03reCR4Or4NOdQR" target="_blank">Get Started</a>
 
 ## Getting Started
