@@ -2,7 +2,7 @@
   data-host="https://cusdis.com"
   data-app-id="{% if site.comments.cusdis_app_id %}{{ site.comments.cusdis_app_id }}{% else %}{{ site.cusdis_app_id }}{% endif %}"
   data-page-id="{{ page.relative_path }}"
-  data-page-url="{{ page.url }}"
+  data-page-url="{{ page.url | absolute_url }}"
   data-page-title="{{ page.title }}"
   data-theme="{{ site.color_theme }}"
 ></div>
