@@ -6,7 +6,8 @@
 
 [![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
-A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily customizable:
+A free and open-source [Jekyll](https://jekyllrb.com) theme. 
+Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily customizable:
 
 * Responsive design on all devices (🖥, 💻, 📱, ...)
 * Portfolio 🗂, Gallery 🖼 pages for your projects
@@ -46,7 +47,7 @@ Check out this tutorial: [Use as Ruby Gem](#use-as-ruby-gem-)
 Here are the main files of the template
 
 ```shell
-Type-on-Strap
+./Type-on-Strap
 ├── _includes	               # Theme includes
 ├── _layouts                   # Theme layouts (see below for details)
 ├── _portfolio	               # Collection of articles for the portfolio page
@@ -116,8 +117,8 @@ To configure the blog part and default plugins. Those plugins are validated by G
 
 #### Meta and Branding
 
-Meta variables hold basic information about your Jekyll site which will be used throughout the site 
-and as meta properties that are used for search engines, browsers, and the site's RSS feed.
+_Meta variables_ hold basic information about your Jekyll site, which will be used throughout the site 
+and as _meta properties_ that are used for search engines, browsers, and the site's RSS feed.
 
 Change these variables in `_config.yml`:
 
@@ -135,7 +136,7 @@ Using _auto_ you'll have a tiny icon in the navbar allowing the use to manually 
 
 ### Theme customization 🎨
 
-#### Footer and Header's text
+#### Footer and Header text
 
 Customize your site header/footer with these variables in `_config.yml`:
 
@@ -164,7 +165,7 @@ with suffix `-small` (620x320) and `-medium` (1240x640) to display on smaller sc
 Localization string is a way to quickly change the template language for text like *Next Post* or *Follow on*, ...
 You can find all the properties in `_data/language.yml`.
 
-By default, it is in english, but you can easily add your own language.
+By default, it is in English, but you can easily add your own language.
 
 ### Google Analytics
 
@@ -193,10 +194,10 @@ comments:
 
 #### Cusdis
 
-[Cusdis](https://cusdis.com/) is an open source alternative to Disqus.
+[Cusdis](https://cusdis.com/) is an open-source alternative to Disqus.
 You can read more about it in the [documentation](https://cusdis.com/doc#/)
 
-To enable it, set your cusdis name in `_config.yml`:
+To enable it, set your Cusdis name in `_config.yml`:
 
 ```yaml
 comments:
@@ -275,7 +276,7 @@ You can also enable RSS.
 The site icons come from [Font Awesome](https://fontawesome.com/).
 
 In `_data/icons.yml` you can set the footer icon that will appear at the bottom of the page.
-They will redirect the user on your profile on the other platform like Twitter, GitHub and so many more!
+They will redirect the user on your profile on to other platforms like Twitter, GitHub and so many more!
 
 ### Cookie consent
 
@@ -618,7 +619,7 @@ Then you can start adding content like:
 
 ### Remote Theme
 
-Now you can use any theme gem with GitHub pages with [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
+Now you can use any theme gem with GitHub pages with [29/11/2017 GitHub Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
 For that remove all `theme:` attributes from `_config.yml` and add instead:
 
 ```yml
@@ -627,7 +628,7 @@ remote_theme: sylhare/Type-on-Strap
 
 ## License
 
-This theme is licensed under the [The MIT License (MIT)](/LICENSE)
+This theme is licensed under the [MIT License (MIT)](/LICENSE)
 
 - Pictures from [Pexels](https://www.pexels.com/) are under Creative Commons Zero (CC0) license
 - Fonts are licensed under the [SIL Open Font License (OFL)](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)

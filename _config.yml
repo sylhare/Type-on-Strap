@@ -25,11 +25,11 @@ color_image: /assets/img/lineart.png                    # A bit transparent for 
 # For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
 katex: true                                             # Enable if using math markup
 mermaid: default                                        # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
-google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
+google_analytics:                                       # Measurement ID, e.g. "G-00000"
 cookie_consent: false                                   # To respect the usage of cookies
 color_theme: auto                                       # auto, dark or light
 
-# Comments
+# Comments options
 comments:
   disqus_shortname:                                     # Your discus shortname for comments
   cusdis_app_id:                                        # Your cusdis data-app-id
