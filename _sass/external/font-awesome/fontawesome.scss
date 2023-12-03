@@ -3,9 +3,19 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2023 Fonticons, Inc.
  */
-// V4 shims compile (Web Fonts-based)
+// Font Awesome core compile (Web Fonts-based)
 // -------------------------
 
 @import 'functions';
 @import 'variables';
-@import 'shims';
+@import 'mixins';
+@import 'core';
+@import 'sizing';
+@import 'fixed-width';
+@import 'list';
+@import 'bordered-pulled';
+@import 'animated';
+@import 'rotated-flipped';
+@import 'stacked';
+@import 'icons';
+@import 'screen-reader';
