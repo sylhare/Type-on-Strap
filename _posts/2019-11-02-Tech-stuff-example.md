@@ -4,7 +4,7 @@ title: Tech Stuff example
 color: rgb(250, 50, 50)
 feature-img: "assets/img/feature-img/circuit.jpeg"
 thumbnail: "assets/img/thumbnails/feature-img/circuit.jpeg"
-tags: [Mermaid, Highlight, Markdown]
+tags: [Highlight, Markdown]
 ---
 
 Let's demo some code snippet, with some mermaid diagrams.
@@ -174,42 +174,5 @@ favicon: assets/favicon.ico                             # Icon displayed in the 
 
 remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
 ```
-
-### Mermaid
-
-Diagrams with mermaid, make sure it is enabled in the `_config.yml`.
-Here is a simple example:
-
-```html
-<!-- To generate a diagram -->
-<div class="mermaid">
-sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-</div>
-```
-
-That will be rendered into this:
-
-{% include aligner.html images="mermaid-example.png" column=1 %}
-
-You can also go with more complex features and diagrams from the [documentation](https://mermaid-js.github.io/mermaid/):
-
-<details>
-<summary>More complex diagram</summary>
-<div class="mermaid">
-sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-</div>
-</details>
 
 [W3C]: https://www.w3.org/standards/xml/core
