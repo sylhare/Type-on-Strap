@@ -1,20 +1,12 @@
 /*!
- * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
- * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ * Type-on-strap Font Awesome kit v6.5.1
+ * Find the version and license of the included Font Awesome here: _sass/external/font-awesome/fontawesome.scss
  */
 $fa-inverse: var(--background);
-@import 'font-awesome/variables';
-@import 'font-awesome/mixins';
-@import 'font-awesome/core';
-@import 'font-awesome/larger';
-@import 'font-awesome/fixed-width';
-@import 'font-awesome/list';
-@import 'font-awesome/bordered-pulled';
-@import 'font-awesome/animated';
-@import 'font-awesome/rotated-flipped';
-@import 'font-awesome/stacked';
-@import 'font-awesome/icons';
-@import 'font-awesome/screen-reader';
-@import 'font-awesome/solid';
-@import 'font-awesome/regular';
+$fa-font-path: "../fonts/font-awesome" !default;
+
+@import 'font-awesome/fontawesome';
 @import 'font-awesome/brands';
+@import 'font-awesome/regular';
+@import 'font-awesome/solid';
+@import 'font-awesome/v4-shims';

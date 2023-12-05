@@ -286,8 +286,8 @@ Once the user clicks on "Approve" the cookies will be created for Google Analyti
 
 #### Share in article
 
-The share icons are the one at the bottom of the blog page if enabled, 
-to share the article on those platform.
+The share icons are the one at the bottom of the blog page if enabled.
+They will on click redirect you to the logo's platform to share the article.
 
 #### Footer
 
