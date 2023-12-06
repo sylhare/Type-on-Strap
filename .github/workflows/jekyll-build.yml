@@ -10,18 +10,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Do not change as jekyll/builder is used by GitHub pages (for compatibility)
+        docker-image: [ 'jekyll/builder', 'sylhare/jekyll' ]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        sylhare/jekyll:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+      - uses: actions/checkout@v3
+      - name: Build the site in the container
+        run: |
+          docker run \
+          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+          ${{ matrix.docker-image }}:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
 
-    - name: Install packages
-      continue-on-error: true
-      run: |
-        docker pull sylhare/type-on-strap
-        docker pull sylhare/jekyll
+      - name: Install packages
+        continue-on-error: true
+        run: |
+          docker pull sylhare/type-on-strap
+          docker pull sylhare/jekyll
 
