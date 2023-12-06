@@ -1,6 +1,8 @@
+@use "sass:math";
+
 ul.share-buttons {
   list-style: none;
-  padding: $padding-x-small/2 0 $padding-x-small/4 0;
+  padding: math.div($padding-x-small, 2) 0 math.div($padding-x-small, 4) 0;
   margin: 0;
   text-align: center;
 
