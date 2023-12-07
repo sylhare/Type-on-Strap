@@ -1,4 +1,7 @@
-/* Custom */
+/*!
+ * KaTeX v0.16.9
+ * Plus added customizations for the theme and font path
+ */
 $katex-font-path: "../../assets/fonts/katex" !default;
 .katex-display {
   @media screen and (max-width: $sm-break) {
