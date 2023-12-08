@@ -1,13 +1,13 @@
 /* @preserve Dark mode Init */
 /*
- * There are two color palettes on CSS for the data-theme: 'light' and 'dark'.
- * Initially the script check if a theme is set in session storage and
+ * There are two colour palettes on CSS for the data-theme: 'light' and 'dark'.
+ * Initially the script checks if a theme is set in session storage and
  * alternatively listens to a MediaQuery callback looking for "prefers-color-scheme: dark".
  */
 
 const themeButton = {
-    'light': '<i class="fas fa-adjust" aria-hidden="true"></i>',
-    'dark': '<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i>'
+    'light': '<i class="fas fa-adjust" aria-hidden="true"></i><span class="navbar-label-with-icon"> Dark</span>',
+    'dark': '<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i><span class="navbar-label-with-icon"> Light</span>'
 }
 
 const currentTheme = () => localStorage.getItem('theme')
