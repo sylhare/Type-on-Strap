@@ -28,8 +28,8 @@
             <li class="separator"> | </li>
             <li>
                 <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
-                    {% if page.icon %} <i class="fas {{ page.icon }}" aria-hidden="true"></i>
-                    {% else %} {{ page.title }} {% endif%}
+                    {% if page.icon %} <i class="navbar-icon fas {{ page.icon }}" aria-hidden="true"></i>{% endif %}
+                    <span class="navbar-label {% if page.icon %}navbar-label-with-icon{% endif%}">{{ page.title }}</span>
                 </a>
             </li>
         {% endunless %}
