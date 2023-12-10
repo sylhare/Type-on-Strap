@@ -21,9 +21,10 @@
     <!-- Menu -->
     <ul class="hide">
         {% assign name_page = "" %}
+        {% assign pages = site.pages | sort: 'position' %}
 
-        {% for page in site.pages %}
-            {% unless page.title == null or page.hide or name_page contains page.title %}
+        {% for page in pages %}
+        {% unless page.title == null or page.hide or name_page contains page.title %}
             <li class="separator"> | </li>
             <li>
                 <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
@@ -31,8 +32,8 @@
                     {% else %} {{ page.title }} {% endif%}
                 </a>
             </li>
-            {% endunless %}
-            {% assign name_page = page.title | append: name_page %}
+        {% endunless %}
+        {% assign name_page = page.title | append: name_page %}
         {% endfor %}
 
         {% if site.color_theme == 'auto' %}
