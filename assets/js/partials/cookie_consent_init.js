@@ -1,4 +1,9 @@
 /* @preserve Cookie Consent Init */
+/*
+ * This script is used to display a cookie consent banner.
+ * The variables isCookieConsent, cookieName, analyticsName are defined in head.liquid from the _config.yml
+ * The variables cookieNotice and cookieNoticeAccept are defined in head.liquid from the _data/translations.yml
+ */
 function createCookie(name, value, days) {
   var expires = "";
   if (days) {
