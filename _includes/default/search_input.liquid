@@ -13,7 +13,7 @@
 {% if site.pages.size > 0 %},{% endif %}
 {% for page in site.pages %}
     {
-    {% unless page.title == nil or page.title == "404 Page not found" %}
+    {% unless page.hide or page.title == nil %}
         "title"    : "{{ page.title | strip_newlines | escape }}",
         "category" : "{{ page.category }}",
         "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
