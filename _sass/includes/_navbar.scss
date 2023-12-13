@@ -80,13 +80,11 @@ nav {
 
     &#pull {
       i {
-        margin-top: 13px;
-        margin-right: 10px;
+        margin-top: 22px;
+        margin-right: 18px;
         float: right;
       }
-
     }
-
   }
 }
 
@@ -94,6 +92,10 @@ nav {
 
 @media (min-width: $break) {
   a#pull {
+    display: none;
+  }
+
+  .navbar-label-with-icon {
     display: none;
   }
 }

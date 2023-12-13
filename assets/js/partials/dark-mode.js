@@ -1,13 +1,16 @@
 /* @preserve Dark mode Init */
 /*
- * There are two color palettes on CSS for the data-theme: 'light' and 'dark'.
- * Initially the script check if a theme is set in session storage and
+ * There are two colour palettes on CSS for the data-theme: 'light' and 'dark'.
+ * Initially the script checks if a theme is set in session storage and
  * alternatively listens to a MediaQuery callback looking for "prefers-color-scheme: dark".
+ *
+ * The variables darkBtn and lightBtn are defined in head.liquid from the _data/translations.yml
+ * The isAutoTheme is defined in head.liquid from the _config.yml
  */
 
 const themeButton = {
-    'light': '<i class="fas fa-adjust" aria-hidden="true"></i>',
-    'dark': '<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i>'
+    'light': `<i class="fas fa-adjust" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${darkBtn}</span>`,
+    'dark': `<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${lightBtn}</span>`
 }
 
 const currentTheme = () => localStorage.getItem('theme')

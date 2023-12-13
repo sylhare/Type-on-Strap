@@ -307,34 +307,39 @@ Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/po
 
 #### Layout: Post
 
-These are the basic features you can use with the `post` layout.
+These are the basic features you can use with the `post` layout, in the comment the `Opt` means that
+it is optional.
 
 ```yml
 
 ---
 layout: post
 title: Hello World                                # Title of the page
-hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
-feature-img: "assets/img/sample.png"              # Add a feature-image to the post
-thumbnail: "assets/img/thumbnails/sample-th.png"  # Add a thumbnail image on blog view
-color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
-bootstrap: true                                   # Add bootstrap to the page
-tags: [sample, markdown, html]
+hide_title: true                                  # [Opt] Hide the title when displaying the post, but shown in lists of posts
+feature-img: "assets/img/sample.png"              # [Opt] Add a feature-image to the post
+thumbnail: "assets/img/thumbnails/sample-th.png"  # [Opt] Add a thumbnail image on blog view
+color: rgb(80,140,22)                             # [Opt] Add the specified colour as feature image, and change link colors in post
+position: 1                                       # [Opt] Set position on the menu navigation bar
+tags: [sample, markdown, html]                    # [Opt] Add tags to the page
 ---
 ```
 
 With `thumbnail`, you can add a smaller image than the `feature-img`. 
-If you don't have a thumbnail you can still use the same image as the feature one. Or use the gulp task to create it.
+If you don't have a thumbnail, you can still use the same image as the feature one. Or use the gulp task to create it.
 
-The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
-you can edit it in the config file (`_config.yml > color_image`). If you want another one, put it in `/assets/img` as well. 
+If you don't use a feature image, but `color`, the transparent background is set comes from `lineart.png`. 
+You can edit it in the config file (`_config.yml > color_image`). If you want another one, put it in `/assets/img` as well. 
 
-The **bootstrap** is not mandatory and is only useful if you want to add bootstrapped content in your page. 
+For position, if not set on all pages, it will be by alphabetical order without `position` then by `position` order.
+If two pages have the same position number, the order is decided by alphabetical order on the page title.
+
+There's also `bootstrap: true` which is not mandatory and only useful if you want to add HTML content in your page that
+requires [bootstrap](http://getbootstrap.com/).
 It will respect the page and theme layout, mind the padding on the sides.
 
 #### Post excerpt
 
-The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. 
+The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is displayed on the blog page. 
 The length of the excerpt has a default of around `250` characters or can be manually set in the post using:
 
 in `conflig.yml`:
@@ -408,7 +413,7 @@ If your posts are not displaying ensure that you have added the line `paginate: 
 
 ### Layout: Page 📄
 
-The page layout have a bit more features explained here.
+The page layout has a bit more features explained here.
 
 ```yml
 
@@ -424,7 +429,7 @@ tags: [sample, markdown, html]
 ---
 ```
 
-The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. 
+The hide only hides your page from the navigation bar, it is, however, still generated and can be accessed through its link. 
 
 ### Feature: Portfolio 🗂
 
@@ -444,9 +449,11 @@ title : Portfolio
 
 #### Portfolio posts
 
-You can format the portfolio posts in the `_portfolio` folder using the `post layout`. Here are little explaination on some of the possible feature you can use and what they will do.
+You can format the portfolio posts in the `_portfolio` folder using the `post layout`. 
+Here is a little explanation on some of the possible features you can use.
 
-If you decide to use a date, please be sure to use one that can be parsed such as `yyyy-mm-dd`. You can see more format example on the demo posts that are available for the theme:
+If you decide to use a date, please be sure to use one that can be parsed such as `yyyy-mm-dd`. 
+You can see more format examples in the demo posts that are available for the theme:
 
 ```yml
 
@@ -475,7 +482,7 @@ This creates the collection for Jekyll, so it can find and display your portfoli
 
 ### Feature: Gallery 🖼
 
-You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position 
+You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures at the optimal position 
 based on available vertical space. 
 You need to specify the `gallery_path` which will be used to find the pictures to render. 
 It will take all the pictures under that directory. Then use the `include` to add it in your page. 
@@ -496,7 +503,7 @@ gallery: "assets/img/pexels"
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
 there is a `search.liquid` file that will create a list of all the site posts, pages and portfolios. 
 
-Then there's a `search.js` displaying the formatted results in the "search page".
+Then there's a `search.js` displaying the formatted results in the "search" page.
 
 The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
 
@@ -527,7 +534,7 @@ tags: [sample, markdown, html]
 
 > Tags are case-sensitive `Tag_nAme` ≠ `tag_name`
 
-All the tags will be listed the tags page with a link toward the pages or posts.
+All the tags will be listed on the "tags" page with a link toward the pages or posts.
 The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
 
 ## Advanced

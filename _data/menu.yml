@@ -1,0 +1,10 @@
+# To add links to the navigation bar.
+- example:
+  title: Example
+  url: https://example.com
+  hide: true
+  position: 2
+- type-on-strap:
+  title: "Type on Strap"
+  url: https://github.com/sylhare/Type-on-Strap
+  position: 1
