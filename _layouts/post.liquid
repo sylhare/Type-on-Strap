@@ -2,80 +2,30 @@
 layout: default
 ---
 <article {% if page.feature-img or page.color %}class="feature-image" {% endif %}>
-  <header id="main" style="">
-    <div class="title-padder">
-      {% if page.hide_title %}
-      <div class="feature-image-padding"></div>
-      {% else %}
-      <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
-      {% include blog/post_info.liquid author=page.author date=page.date %}
-      {% endif %}
-    </div>
-  </header>
+    <header id="main" style="">
+        <div class="title-padder">
+            {% if page.hide_title %}
+                <div class="feature-image-padding"></div>
+            {% else %}
+                <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+                {% include blog/post_info.liquid author=page.author date=page.date %}
+            {% endif %}
+        </div>
+    </header>
 
-  <section class="post-content">
-  {% if page.bootstrap %}
-    <div class="bootstrap-iso">
-    {% endif %}
-      {{ content }}
-    {% if page.bootstrap %}
-    </div>
-  {% endif %}
-  </section>
+    <section class="post-content">
+    {% if page.bootstrap %}<div class="bootstrap-iso">{% endif %}
+            {{ content }}
+    {% if page.bootstrap %}</div>{% endif %}
+    </section>
 
-  <!-- Social media shares -->
-  {% include social/share_buttons.liquid %}
+    <!-- Social media shares -->
+    {% include social/share_buttons.liquid %}
 
-   <!-- Tag list -->
-  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-  {% include default/tags_list.liquid tags=tag_list %}
+    <!-- Tag list -->
+    {% capture tag_list %}{{ page.tags | join: "|" }}{% endcapture %}
+    {% include default/tags_list.liquid tags=tag_list %}
 
 </article>
 
-<!-- Post navigation -->
-{% if site.post_navigation  or site.theme_settings.post_navigation %}
-{% include blog/post_nav.liquid %}
-{% endif %}
-
-<!--Utterances-->
-{% if site.comments.utterances.repo and site.comments.utterances.issue-term %} {% include social/utterances.liquid %} {% endif %}
-
-<!-- Cusdis -->
-{% if site.comments.cusdis_app_id or site.cusdis_app_id %}{% include social/cusdis.liquid %}{% endif %}
-
-<!-- Disqus -->
-{% if site.comments.disqus_shortname or site.theme_settings.disqus_shortname or site.disqus_shortname %}
-{% include social/disqus.liquid %}{% endif %}
-
-<!-- To change color of links in the page -->
-<style>
-  header#main {
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-  }
-
-  {% if page.color %}
-  .post-content a { color: {{ page.color }} !important; }
-  .share-buttons a { color: {{ page.color }} !important; }
-  .tag-list a:not(:hover) { color: {{ page.color }} !important; }
-  div#post-nav a { color: {{ page.color }} !important; }
-  footer a { color: {{ page.color }} !important; }
-  .site-header nav a:hover {  color: {{ page.color }} !important; }
-  a.button:hover {
-    background: {{ page.color }} !important;
-    border: 1px solid {{ page.color }} !important;
-    color: white;
-    text-decoration: none;
-    filter: none;
-  }
-  header#main {
-      background-color: {{ page.color }} !important;
-      background-image: url('{{ site.color_image | relative_url }}');
-  }
-  {% endif %}
-
-  {% if page.feature-img %}
-  header#main { background-image: url('{{ page.feature-img | relative_url }}'); }
-  {% endif %}
-</style>
+{% include blog/post_footer.liquid color=page.color img=page.feature-img %}
