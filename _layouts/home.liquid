@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-
 <div class="home">
     <style scoped>
         {% assign image = site.header_feature_image | relative_url | split: '.' %}
@@ -24,7 +23,6 @@ layout: default
     <div id="main" class="call-out call-out_img">
         <h1> {{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
     </div>
-
-    {% include blog/blog.liquid %}
-
+    {% capture _blog %}{% include blog/blog.liquid %}{% endcapture %}
+    {{ _blog | split: " " | join: " "}}
 </div>

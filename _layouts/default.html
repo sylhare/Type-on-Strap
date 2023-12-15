@@ -5,12 +5,15 @@
     https://github.com/sylhare/Type-on-Strap/blob/master/LICENSE
 -->
 <html lang="en">
-  {% include default/head.liquid %}
+  {% capture _head %}{% include default/head.liquid %}{% endcapture %}
+  {{ _head | split: " " | join: " "}}
   <body>
-    {% include default/navbar.liquid %}
+    {% capture _navbar %}{% include default/navbar.liquid %}{% endcapture %}
+    {{ _navbar | split: " " | join: " "}}
     <div class="content">
       {{ content }}
     </div>
-    {% include default/footer.liquid %}
+    {% capture _footer %}{% include default/footer.liquid %}{% endcapture %}
+    {{ _footer | split: " " | join: " "}}
   </body>
 </html>

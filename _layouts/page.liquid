@@ -1,35 +1,30 @@
 ---
 layout: default
 ---
-
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
-
-  <header id="main" style="background-image: url('{{ page.feature-img | relative_url }}')">
-    <div class="title-padder">
-      {% if page.hide_title %}
-        <div class="feature-image-padding"></div>
-      {% else %}
-        <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title"> {{ page.title }}</h1>
-        {% if page.subtitle %}
-        <h2 class="subtitle">{{ page.subtitle }}</h2>
+    <header id="main" style="background-image: url('{{ page.feature-img | relative_url }}')">
+        <div class="title-padder">
+            {% if page.hide_title %}
+                <div class="feature-image-padding"></div>
+            {% else %}
+                <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title"> {{ page.title }}</h1>
+                {% if page.subtitle %}
+                    <h2 class="subtitle">{{ page.subtitle }}</h2>
+                {% endif %}
+            {% endif %}
+        </div>
+    </header>
+    <section class="post-content">
+    {% if page.bootstrap %}
+        <div class="bootstrap-iso">
+            {% endif %}
+            {{ content }}
+            {% if page.bootstrap %}
+        </div>
         {% endif %}
-      {% endif %}
-    </div>
-  </header>
-
-  <section class="post-content">
-  {% if page.bootstrap %}
-  <div class="bootstrap-iso">
-  {% endif %}
-	{{ content }}
-  {% if page.bootstrap %}
-  </div>
-  {% endif %}
-  </section>
-
-
-  <!-- Tag list for portfolio -->
-  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-  {% include default/tags_list.liquid tags=tag_list %}
-
+    </section>
+    <!-- Tag list for portfolio -->
+    {% capture tag_list %}{{ page.tags | join: "|" }}{% endcapture %}
+    {% capture _tags %}{% include default/tags_list.liquid tags=tag_list %}{% endcapture %}
+    {{ _tags | split: " " | join: " " }}
 </article>

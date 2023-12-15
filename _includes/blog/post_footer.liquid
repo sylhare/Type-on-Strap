@@ -1,0 +1,57 @@
+{% assign color = include.color %}
+{% assign img = include.img %}
+{% capture _post_footer %}
+    <!-- To change color of links in the page -->
+    <style>
+        header#main {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        {% if color != nil %}
+        .post-content a { color: {{ color }} !important; }
+        .share-buttons a { color: {{ color }} !important; }
+        .tag-list a:not(:hover) { color: {{ color }} !important; }
+        div#post-nav a { color: {{ color }} !important; }
+        footer a { color: {{ color }} !important; }
+        .site-header nav a:hover {  color: {{ color }} !important; }
+        a.button:hover {
+            background: {{ color }} !important;
+            border: 1px solid {{ color }} !important;
+            color: white;
+            text-decoration: none;
+            filter: none;
+        }
+        header#main {
+            background-color: {{ color }} !important;
+            background-image: url('{{ site.color_image | relative_url }}');
+        }
+        {% endif %}
+
+        {% if img != nil %}
+        header#main { background-image: url('{{ img | relative_url }}'); }
+        {% endif %}
+    </style>
+
+    <!-- Post navigation -->
+    {% if site.post_navigation or site.theme_settings.post_navigation %}
+        {% include blog/post_nav.liquid %}
+    {% endif %}
+
+    <!--Utterances-->
+    {% if site.comments.utterances.repo and site.comments.utterances.issue-term %}
+        {% include social/utterances.liquid %}
+    {% endif %}
+
+    <!-- Cusdis -->
+    {% if site.comments.cusdis_app_id or site.cusdis_app_id %}
+        {% include social/cusdis.liquid %}
+    {% endif %}
+
+    <!-- Disqus -->
+    {% if site.comments.disqus_shortname or site.theme_settings.disqus_shortname or site.disqus_shortname %}
+        {% include social/disqus.liquid %}
+    {% endif %}
+{% endcapture %}
+{{ _post_footer | split: " " | join: " " }}
