@@ -1,19 +1,21 @@
 [
 {% for post in site.posts %}
     {
-    "title"    : "{{ post.title | strip_newlines | escape }}",
-    "category" : "{{ post.category }}",
-    "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
-    "url"      : "{{ post.url | relative_url }}",
-    "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
-    "excerpt"  : {{ post.content | strip_html | strip_newlines | strip | escape | truncate: '250' | escape | jsonify }},
-    "content"  : {{ post.content | strip_html | strip_newlines | strip | escape | jsonify }}
+    {% unless post.excluded %}
+        "title"    : "{{ post.title | strip_newlines | escape }}",
+        "category" : "{{ post.category }}",
+        "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
+        "url"      : "{{ post.url | relative_url }}",
+        "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
+        "excerpt"  : {{ post.content | strip_html | strip_newlines | strip | escape | truncate: '250' | escape | jsonify }},
+        "content"  : {{ post.content | strip_html | strip_newlines | strip | escape | jsonify }}
+    {% endunless %}
     }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 {% if site.pages.size > 0 %},{% endif %}
 {% for page in site.pages %}
     {
-    {% unless page.hide or page.title == nil %}
+    {% unless page.excluded or page.title == nil %}
         "title"    : "{{ page.title | strip_newlines | escape }}",
         "category" : "{{ page.category }}",
         "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
@@ -27,7 +29,7 @@
 {% if site.portfolio.size > 0 %},{% endif %}
 {% for page in site.portfolio %}
     {
-    {% if page.title != nil %}
+    {% if page.excluded or page.title != nil %}
         "title"    : "{{ page.title | strip_newlines | escape }}",
         "category" : "{{ page.category }}",
         "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
