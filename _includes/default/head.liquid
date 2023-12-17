@@ -4,14 +4,14 @@
 
     <!-- Theme Mode-->
     <script>
-        const darkBtn = "{{ site.data.language.str_dark | default: "Dark" }}"
-        const lightBtn = "{{ site.data.language.str_light | default: "Light" }}"
-        const isAutoTheme = {% if site.color_theme == 'auto' %}true{% else %}false{% endif %}
+        const darkBtn = "{{ site.data.language.str_dark | default: "Dark" }}";
+        const lightBtn = "{{ site.data.language.str_light | default: "Light" }}";
+        const isAutoTheme = {% if site.color_theme == 'auto' %}true{% else %}false{% endif %};
         const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         if (isAutoTheme) {
-            document.documentElement.setAttribute('data-theme', sessionStorage.getItem('theme') ?? preferredTheme)
+            document.documentElement.setAttribute('data-theme', sessionStorage.getItem('theme') ?? preferredTheme);
         } else {
-            document.documentElement.setAttribute('data-theme', "{{ site.color_theme | default: 'light' }}")
+            document.documentElement.setAttribute('data-theme', "{{ site.color_theme | default: 'light' }}");
         }
     </script>
 
