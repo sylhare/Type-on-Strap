@@ -502,10 +502,12 @@ gallery: "assets/img/pexels"
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
 there is a `search.liquid` file that will create a list of all the site posts, pages and portfolios. 
+Then there's a script displaying the formatted results in the _search page_.
 
-Then there's a `search.js` displaying the formatted results in the "search" page.
-
-The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
+To exclude contents from the search add the `exclude: true` option in the markdown header. 
+By default, all posts, pages, and collections are available in the search.
+Hide the search page from the navigation bar with the `hide: true` option. 
+You can remove the icon by removing `icon`:
 
 ```yml
 

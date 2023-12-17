@@ -5,6 +5,8 @@ img: "assets/img/portfolio/toh.png"
 date: September 2014
 ---
 
+The tower of Hanoi...
+
 ![image]({{ page.img | relative_url }})
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
