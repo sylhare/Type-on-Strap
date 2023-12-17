@@ -11,25 +11,27 @@
 const themeButton = {
     'light': `<i class="fas fa-adjust" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${darkBtn}</span>`,
     'dark': `<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${lightBtn}</span>`
+};
+
+function currentTheme(){
+    return localStorage.getItem('theme');
 }
 
-const currentTheme = () => localStorage.getItem('theme')
-
 function setMode(theme) {
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('theme', theme)
-    const toggle = document.getElementById('theme-toggle')
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    const toggle = document.getElementById('theme-toggle');
     if (toggle) {
-        toggle.innerHTML = themeButton[theme]
+        toggle.innerHTML = themeButton[theme];
     }
 }
 
 function themeToggle() {
-    let sessionPrefers = currentTheme()
+    let sessionPrefers = currentTheme();
     if (sessionPrefers === 'light') {
-        setMode('dark')
+        setMode('dark');
     } else {
-        setMode('light')
+        setMode('light');
     }
 }
 
@@ -40,13 +42,12 @@ function bootstrapTheme() {
             let browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
             if (browserPrefersDark.matches) localStorage.setItem('theme', 'dark');
             browserPrefersDark.addEventListener('change', () => {
-                if (browserPrefersDark.matches) localStorage.setItem('theme', 'dark')
+                if (browserPrefersDark.matches) localStorage.setItem('theme', 'dark');
             });
         }
-
         // Load theme
-        let sessionPrefers = currentTheme()
-        setMode(sessionPrefers ? sessionPrefers : 'light')
+        let sessionPrefers = currentTheme();
+        setMode(sessionPrefers ? sessionPrefers : 'light');
     }
 }
 
