@@ -28,8 +28,8 @@
 {% endfor %}
 {% if site.collections.size > 1 %},{% endif %}
 {% for collection in site.collections %}
-    {% for page in site[collection.label] %}
-        {% unless collection.label == 'posts' %}
+    {% unless collection.label == 'posts' or site[collection.label].size == 0 %}
+        {% for page in site[collection.label] %}
             {
             {% if page.excluded or page.title != nil %}
                 "title"    : "{{ page.title | strip_newlines | escape }}",
@@ -41,8 +41,10 @@
                 "content"  : {{ page.content | strip_html | strip_newlines | strip | escape | jsonify }}
             {% endif %}
             }{% unless forloop.last %},{% endunless %}
-        {% endunless %}
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        {}
+    {% endunless %}
     {% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
