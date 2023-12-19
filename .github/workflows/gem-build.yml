@@ -34,12 +34,15 @@ jobs:
         continue-on-error: true
         run: |
           gem update --system
+      - name: Install theme gems
+        continue-on-error: true
+        run: |
           gem install type-on-strap
           gem install jekyll-theme-type-on-strap
       - name: GPR
         continue-on-error: true
         run: |
-          gem install type-on-strap --version "2.4.7" --source "https://rubygems.pkg.github.com/sylhare"
+          gem install type-on-strap --version "2.4.8" --source "https://rubygems.pkg.github.com/sylhare"
       - name: Build with Docker
         continue-on-error: true
         run: |
