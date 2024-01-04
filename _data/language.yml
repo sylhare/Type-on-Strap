@@ -17,6 +17,7 @@ str_cookie_disclaimer: "We would like to use third party cookies and scripts to 
 str_months: [January, February, March, April, May, June, July, August, September, October, November, December]
 str_dark: 'Dark'
 str_light: 'Light'
+str_date_format: '%B %-d, %Y'
 
 # Localization settings
 cusdis_lang: # zh-cn, es, tr, pt-BR

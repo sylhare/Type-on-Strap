@@ -6,7 +6,7 @@
         "category" : "{{ post.category }}",
         "tags"     : "{{ post.tags | join: ', ' | prepend: " " }}",
         "url"      : "{{ post.url | relative_url }}",
-        "date"     : "{{ post.date | date: "%B %-d, %Y" }}",
+        "date"     : "{{ post.date | date: site.data.language.str_date_format }}",
         "excerpt"  : {{ post.content | strip_html | strip_newlines | strip | escape | truncate: '250' | escape | jsonify }},
         "content"  : {{ post.content | strip_html | strip_newlines | strip | escape | jsonify }}
     {% endunless %}
@@ -20,7 +20,7 @@
         "category" : "{{ page.category }}",
         "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
         "url"      : "{{ page.url | relative_url }}",
-        "date"     : "{{ page.date | date: "%B %-d, %Y" | default: "N/A" }}",
+        "date"     : "{{ page.date | date: site.data.language.str_date_format | default: "N/A" }}",
         "excerpt"  : {{ page.content | strip_html | strip_newlines | strip | escape | truncate: '250' | escape | jsonify }},
         "content"  : {{ page.content | strip_html | strip_newlines | strip | escape | jsonify }}
     {% endunless %}
@@ -36,7 +36,7 @@
                 "category" : "{{ page.category }}",
                 "tags"     : "{{ page.tags | join: ', ' | prepend: " " }}",
                 "url"      : "{{ page.url | relative_url }}",
-                "date"     : "{{ page.date | date: "%B %-d, %Y" | default: "N/A" }}",
+                "date"     : "{{ page.date | date: site.data.language.str_date_format | default: "N/A" }}",
                 "excerpt"  : {{ page.content | strip_html | strip_newlines | strip | escape | truncate: '250' | jsonify }},
                 "content"  : {{ page.content | strip_html | strip_newlines | strip | escape | jsonify }}
             {% endif %}
