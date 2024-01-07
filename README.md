@@ -167,6 +167,8 @@ You can find all the properties in `_data/language.yml`.
 
 By default, it is in English, but you can easily add your own language.
 
+Here you also can set the date format, e.g., set `str_date_format: '%B %-d, %Y'` for "January, 13, 2024",  `str_date_format: '%Y-%m-%d'` for 2024-01-13, or `str_date_format: '%d.%m.%Y'` for 13.01.2024.
+
 ### Google Analytics
 
 To enable Google Analytics (GA4), add your [Measurement ID](https://support.google.com/analytics/answer/12270356?hl=en&sjid=1593376271608310401-NA) 
