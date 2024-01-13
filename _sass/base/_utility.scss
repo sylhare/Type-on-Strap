@@ -32,13 +32,7 @@
 }
 
 %padding-header {
-  padding: $padding-medium $padding-large;
-  @media (min-width: $xl-break) {
-    padding: $padding-large $padding-large;
-  }
-  @media (max-width: $sm-break) {
-    padding: $padding-large;
-  }
+  padding: $padding-header;
 }
 
 .txt-shadow {
