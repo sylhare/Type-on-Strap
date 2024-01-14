@@ -5,7 +5,7 @@ url: "https://jvalegre.github.io"
 # THEME-SPECIFIC CONFIGURATION
 title: "CAMLC24" # site's title
 description: "Website of the CAMLC24 course"      # used by search engines
-avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
+avatar: assets/img/caml24_logo.png                         # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
 # Header and footer text
