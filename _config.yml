@@ -6,7 +6,7 @@ url: "https://jvalegre.github.io"
 title: "CAMLC24" # site's title
 description: "Website of the CAMLC24 course"      # used by search engines
 avatar: assets/img/caml24_logo.png                         # Empty for no avatar in navbar
-favicon: assets/favicon.ico                             # Icon displayed in the tab
+favicon: assets/img/favicon.ico                             # Icon displayed in the tab
 
 # Header and footer text
 header_text: " "  # Change Blog header text
