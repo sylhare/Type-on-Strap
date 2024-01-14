@@ -39,7 +39,7 @@ The attendants will arrive in Jaca on the afternoon of June 16th (at any time af
   </tr>
   <tr>
     <td><i>20:30</i><br>Welcome dinner</td>
-    <td><i>9:00 – Klem & Irribaren</i><br>Python and its scientific modules</td>
+    <td><i>9:00 – Klem & Iribarren</i><br>Python and its scientific modules</td>
     <td><i>9:00 – Paton & Laplaza</i><br>Open source in comp. chem.</td>
     <td><i>9:00 – Dalmau</i><br>ML automation with ROBERT</td>
   </tr>
@@ -51,7 +51,7 @@ The attendants will arrive in Jaca on the afternoon of June 16th (at any time af
   </tr>
   <tr>
     <td></td>
-    <td><i>11:30 – Laplaza & Irribaren</i><br>Intro to SMILES, RDKit & OpenBabel</td>
+    <td><i>11:30 – Laplaza & Iribarren</i><br>Intro to SMILES, RDKit & OpenBabel</td>
     <td><i>11:30 – Alegre</i><br>Automation of QM with AQME</td>
     <td><i>11:30 – All organizers</i><br>Automation of custom workflows</td>
   </tr>
@@ -69,7 +69,7 @@ The attendants will arrive in Jaca on the afternoon of June 16th (at any time af
   <tr>
     <td></td>
     <td><i>16:30 – Klem</i><br>CREST and conformational searches</td>
-    <td><i>16:30 – Paton & Irribaren</i><br>Intro to chemical ML</td>
+    <td><i>16:30 – Paton & Iribarren</i><br>Intro to chemical ML</td>
   </tr>
   <tr>
     <td></td>
