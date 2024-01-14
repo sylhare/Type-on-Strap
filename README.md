@@ -1,3 +1,12 @@
+# Repository of the CAMLC24 course
+
+For more information about the course, please visit the [official webpage](https://jvalegre.github.io/).
+
+<br>
+<br>
+
+We used the Type on Strap theme to build the webpage (below).
+
 # Type on Strap 🎨
 
 [![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml)
