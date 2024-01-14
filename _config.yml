@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://jvalegre.github.io/CAMLC24/"
+url: "https://jvalegre.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: "CAMLC24" # site's title
