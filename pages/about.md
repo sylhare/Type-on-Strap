@@ -1,21 +1,19 @@
 ---
 layout: page
 title: About
-feature-img: "assets/img/header/banner.jpeg"
+feature-img: "assets/img/header/tab_back.png"
 position: 1
 ---
 
 ### The CAMLC24 course
 
-The course aims to introduce attendees to <u>cheminformatics, automation, and machine learning in chemistry</u>. Initially, attendees will review various functions of Python, particularly those related to modules commonly used in cheminformatics. Once users are familiar with Python environments and Jupyter Notebooks, machine learning will be introduced, with a focus on state-of-the-art implementations in the field of chemistry.
+The course aims to introduce attendees to cheminformatics, automation, and machine learning in chemistry. Initially, attendees will review various functions of Python, particularly those related to modules commonly used in cheminformatics. Once users are familiar with Python environments and Jupyter Notebooks, machine learning will be introduced, with a focus on state-of-the-art implementations in the field of chemistry. It is particularly relevant for attendees who work with the following:
 
-This course is ideal for computational chemists who want to enhance their proficiency in Python and machine learning, as well as gain expertise in automating quantum mechanics and machine learning workflows. It is <u>particularly relevant for attendees who work with the following</u>:
-
-&nbsp;&nbsp;&nbsp;&nbsp;1.   Gaussian and ORCA calculations<br>
-&nbsp;&nbsp;&nbsp;&nbsp;2.   Machine learning modelling<br>
-&nbsp;&nbsp;&nbsp;&nbsp;3.   Database generation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;4.   Quantum mechanics and machine learning automated workflows<br>
-&nbsp;&nbsp;&nbsp;&nbsp;5.   Applications to mechanistic modeling, catalyst design and material discovery<br>
+* Gaussian and ORCA calculations<br>
+* Machine learning modelling<br>
+* Database generation<br>
+* Quantum mechanics and machine learning automated workflows<br>
+* Applications to mechanistic modeling, catalyst design and material discovery<br>
 
 <br>
 

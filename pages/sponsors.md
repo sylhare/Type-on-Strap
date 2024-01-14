@@ -1,7 +1,7 @@
 --- 
 layout: page
 title : Sponsors
-feature-img: "assets/img/header/banner.jpeg"
+feature-img: "assets/img/header/tab_back.png"
 position: 6
 ---
 
