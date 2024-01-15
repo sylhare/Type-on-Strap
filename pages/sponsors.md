@@ -7,9 +7,9 @@ position: 6
 
 ### Funding agencies
 
-Thanks to the <a href='https://geqc.rseq.org/'>Computers in Chemistry Group (GEQC) of the Spanish Royal Society of Chemistry (RSEQ)</a>, students are benefiting from very low registration fees that cover their stays at the <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> and their meals. Additionally, GEQC members receive a 30 EUR discount on their fees.
+<p align="justify">Thanks to the <a href='https://geqc.rseq.org/'>Computers in Chemistry Group (GEQC) of the Spanish Royal Society of Chemistry (RSEQ)</a>, students are benefiting from very low registration fees that cover their stays at the <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> and their meals. Additionally, GEQC members receive a 30 EUR discount on their fees.
 
-Thanks to the <a href='https://colegioquimicos.com/'>Colegio de Químicos de la Comunidad Valenciana</a>, two students will be awarded travel grants of 80 EUR each.
+Thanks to the <a href='https://colegioquimicos.com/'>Colegio de Químicos de la Comunidad Valenciana</a>, two students will be awarded travel grants of 80 EUR each.</p>
 
 <html>
 <head>

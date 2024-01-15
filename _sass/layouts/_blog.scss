@@ -7,10 +7,10 @@
   background: no-repeat var(--header-background);
   backdrop-filter: brightness(0.5);
   background-size: cover;
-/* use this to include the full image
-  background-size: contain;
-  background-repeat: no-repeat;
-*/
+/* use this to include the full image */
+  // background-size: contain;
+  // background-repeat: no-repeat;
+
   h1 {
     font-family: $font-family-logo;
     @extend .subtle-txt-shadow;

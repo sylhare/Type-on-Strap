@@ -1,6 +1,6 @@
 <div class="posts">
     {% unless paginator.posts %}
-    <article><section class="post-content"><p>There are no blog posts</p></section></article>
+    <article><section class="post-content"><p></p></section></article>
     {% endunless %}
     {% for post in paginator.posts %}
     <div class="post-teaser">
@@ -34,4 +34,4 @@
     {% endfor %}
 </div>
 
-{% include blog/blog_nav.liquid %}
+<!-- {% include blog/blog_nav.liquid %} -->

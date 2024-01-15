@@ -7,9 +7,10 @@ position: 2
 
 ### Residencia Universitaria de Jaca
 
+<p align="justify">
 <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Huesca, Spain), from June 16th to June 19th of 2024.
 
-On their webpage (follow the hyperlink), applicants can find instructions on how to reach the location by car, bus, or train. Please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>.
+On their webpage (follow the hyperlink), applicants can find instructions on how to reach the location by car, bus, or train. Please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>.</p>
 
 <br>
 <center><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2938.3596487725686!2d-0.556613024862697!3d42.568888271174245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd578092a9855555%3A0x4baa1306b4ffdc29!2sResidencia%20Universitaria%20de%20Jaca!5e0!3m2!1ses!2ses!4v1705167254537!5m2!1ses!2ses" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></center>

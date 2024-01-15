@@ -12,17 +12,18 @@ position: 3
 
 <u>This fee includes:</u>
 
-\+ Three nights (Sunday, Monday, and Tuesday) at the <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> in a shared two-person room. You may choose your room partner, or the organizing committee will assign roommates if no preference is indicated.<br>
-\+ Three breakfasts at the Residencia Universitaria de Jaca (Monday, Tuesday, and Wednesday)<br>
-\+ Three lunches at the Residencia Universitaria de Jaca (Monday, Tuesday, and Wednesday)<br>
-\+ Three dinners at a local restaurant (Sunday, Monday and Tuesday, place to be decided)<br>
+* Three nights (Sunday, Monday, and Tuesday) at the <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> in a shared two-person room. You may choose your room partner, or the organizing committee will assign roommates if no preference is indicated.<br>
+* Three breakfasts at the Residencia Universitaria de Jaca (Monday, Tuesday, and Wednesday)<br>
+* Three lunches at the Residencia Universitaria de Jaca (Monday, Tuesday, and Wednesday)<br>
+* Three dinners at a local restaurant (Sunday, Monday and Tuesday, place to be decided)<br>
 
 <br>
 
 ### Application to enroll the course
 
+<p align="justify">
 The course is recommended for researchers at all stages, from undergraduates to established researchers, who want to initiate or expand their knowledge in cheminformatics, automation, and machine learning in chemistry.
-Applicants should send the following files in PDF format to <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>:
+Applicants should send the following files in PDF format to <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>:</p>
 
 * A two-page curriculum vitae
 * A one-page motivation letter, which should include why the applicant wants to join the course and a brief explanation of a custom problem for the Automation of custom workflows session
