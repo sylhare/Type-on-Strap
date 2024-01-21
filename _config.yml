@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/blog"
+baseurl: "/blogs"
 url: "https://spacegirlhere.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
