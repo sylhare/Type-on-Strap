@@ -6,9 +6,24 @@ feature-img: "assets/img/pexels/travel.jpeg"
 tags: [Page]
 ---
 
-Type on Strap is based on Type Theme, a free and open-source theme for [Jekyll](http://jekyllrb.com/), licensed under the MIT License.
+## About Me
 
-Head over to the [theme's documentation](https://github.com/sylhare/Type-on-Strap) for much more information about Type on Strap or to install this theme on your own Jekyll site.
+Welcome to my world, where everything is a wonder. It's a realm much smaller than you might think but larger than you can imagine. My thoughts traverse the subatomic intricacies within atoms to the cosmic expanses spanning light-years across the vast cosmos!
 
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
- 
+### The Wonder Within
+
+In this space, I delve into the mysteries of the smallest particles, exploring the intricate dance within atoms that shape our reality. The subatomic world, often unseen, holds the key to understanding the foundations of our universe.
+
+### The Cosmic Journey
+
+Simultaneously, we embark on a cosmic journey through the vastness of space. From the celestial bodies within our reach to the distant galaxies that paint the canvas of the night sky, every discovery fuels the flames of curiosity.
+
+### Faster Than Light
+
+Let's embark on this wonderful journey, moving faster than light itself, fueled by the relentless force of curiosity. Together, we'll navigate the realms of physics, space, cosmos, and beyond.
+
+Join me in unraveling the wonders of the universe, one thought at a time.
+
+Happy exploring!
+
+SpaceGirl
