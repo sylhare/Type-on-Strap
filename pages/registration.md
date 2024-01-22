@@ -157,7 +157,7 @@ Applicants should fill the form below <u>prior to March 31, 2024 (AoE).</u></p><
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="institution" placeholder="Institution" required>
         <input type="text" name="group" placeholder="Research group" required>
-        <textarea name="CV" placeholder="Short CV (max. 2000 characters with spaces)" rows="5" cols="50" maxlength="2000" required></textarea>
+        <textarea name="CV" placeholder="CV summary (max. 2000 characters with spaces)" rows="5" cols="50" maxlength="2000" required></textarea>
         <textarea name="Motivation letter" placeholder="Motivation letter, including why the applicant wants to join the course (max. 2000 characters with spaces)" rows="5" cols="50" maxlength="2000" required></textarea>
         <p align="justify">Are you a GEQC member?</p>
         <select name="GEQC member">

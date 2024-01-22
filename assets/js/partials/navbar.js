@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }, false);
   });
 
+  /* the line below makes feature-img of the pages scroll when you scroll the page */
   /*
    * Make the header images move on scroll
    */
