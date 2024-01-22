@@ -1,21 +1,29 @@
-The MIT License (MIT)
+# SpaceGirl's Blog Content License
 
-Copyright (c) 2016-2023 Sylhare
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Articles:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- **CC BY-NC-SA 4.0:** You are free to share and adapt the articles under the terms of the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## Images:
+
+- **License Varies:** Image licensing is specified by the appropriate author mentioned in the article. Please refer to the individual image credits for licensing information.
+
+## Logos:
+
+- **Copyrighted:** All the files inside the `source/img/logos` directory are copyrighted to their respective companies. These logos are not covered by the Creative Commons license and are subject to their individual copyright and usage terms.
+
+## Other Files:
+
+- **Appropriate License:** The licensing terms for other files not covered by specific sections (e.g., code snippets, documents) will be mentioned alongside the respective files. Please refer to the specific file for its applicable license.
+
+## No additional restrictions:
+
+- You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+## Notices:
+
+- You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+
+- No warranties are given. The license may not give you all the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
