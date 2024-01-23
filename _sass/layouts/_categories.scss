@@ -1,4 +1,6 @@
+#archive,
 #categories {
+  .archive-clouds,
   .category-clouds {
     margin: 30px 0 30px;
 
@@ -30,12 +32,14 @@
       color: var(--header-text);
     }
 
+    .archive-anchor:hover,
     .category-anchor:hover {
       text-decoration: none !important;
       filter: none;
     }
   }
 
+  .archive-group,
   .category-group {
     padding: 15px 0 10px;
 
@@ -71,6 +75,7 @@
         height: 100%;
       }
 
+      .archive-post-link:hover,
       .category-post-link:hover {
         text-decoration: none;
 
