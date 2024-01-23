@@ -2,7 +2,7 @@
 layout: page
 title : Organizers
 feature-img: "assets/img/header/tab_back.png"
-position: 5
+position: 6
 ---
 
 ### Meet the CAMLC24 team

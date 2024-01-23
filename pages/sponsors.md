@@ -2,7 +2,7 @@
 layout: page
 title : Sponsors
 feature-img: "assets/img/header/tab_back.png"
-position: 6
+position: 7
 ---
 
 ### Funding agencies

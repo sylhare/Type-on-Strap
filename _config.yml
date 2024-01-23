@@ -11,7 +11,7 @@ favicon: assets/img/favicon.ico                             # Icon displayed in 
 # Header and footer text
 header_text: " "  # Change Blog header text
 header_feature_image: assets/img/header/banner.png
-header_feature_image_responsive: true
+header_feature_image_responsive: false
 footer_text: Sponsored by <a href='https://geqc.rseq.org/'>GEQC-RSEQ</a> and <a href='https://colegioquimicos.com/'>Colegio Químicos CV</a>
 
 # Blog

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Location and dates
+title: Location
 feature-img: "assets/img/header/tab_back.png"
 position: 2
 ---
@@ -8,7 +8,26 @@ position: 2
 ### Residencia Universitaria de Jaca
 
 <p align="justify">
-<a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Huesca, Spain), from June 16th to June 19th of 2024.
+<a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Huesca, Spain), <i>sessions are in-person only.</i> Participants can arrive at any time after 17:00 on June 16th (see <a href="#" id="aboutLink">Schedule</a>).
+
+
+<!-- JavaScript code to handle the click event and change the URL -->
+<script>
+document.getElementById('aboutLink').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevents the default behavior of the link
+
+    // Get the current URL
+    var currentURL = window.location.href;
+
+    // Replace the part of the URL you want to change
+    var newURL = currentURL.replace('location', 'schedule');
+
+    // Navigate to the new URL
+    window.location.href = newURL;
+});
+</script>
+
+<br><br>
 
 On their webpage (follow the hyperlink), applicants can find instructions on how to reach the location by car, bus, or train. Please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>.</p>
 
