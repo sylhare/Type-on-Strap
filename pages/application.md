@@ -5,7 +5,7 @@ feature-img: "assets/img/header/tab_back.png"
 position: 4
 ---
 
-### Application to enroll the course
+### Application to enroll in the course
 
 <p align="justify">
 Applicants should fill the form below in English <u>prior to March 31, 2024 (AoE).</u></p><br>
@@ -17,7 +17,7 @@ Applicants should fill the form below in English <u>prior to March 31, 2024 (AoE
 * All documents must be uploaded in PDF format
 * CV (max. 2 pages): include experience, relevant publications, talks in conferences, etc.
 * Motivation letter (max. 1 page): include experience with computational chemistry and/or machine learning, what the applicant hopes to gain from the course, etc.
-* GEQC membership: proof of GEQC membership. For example, a screenshot of your suscription dates from the <a href='https://rseq.playoffinformatica.com/FormLogin.php'>"Member area" of the RSEQ webpage.</a>
+* GEQC membership: proof of GEQC membership. For example, a screenshot of your subscription dates from the <a href='https://rseq.playoffinformatica.com/FormLogin.php'>"Member area" of the RSEQ webpage.</a>
 
 
 <br><br>
