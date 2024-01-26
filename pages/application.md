@@ -145,7 +145,7 @@ All documents must be uploaded as one combined PDF, including:
         <h2>Register here</h2>
     </div>
     <div class="info">
-        <input type="hidden" id="redirect" name="redirect" value="https://https://camlccourse.github.io/pages/success.html" />
+        <input type="hidden" id="redirect" name="redirect" value="https://camlccourse.github.io/pages/success.html" />
         <input type="hidden" id="access_key" name="access_key" value="47eccb18-9823-408a-b108-e0b03e4736b5" />
         <!-- Personal info -->
         <input class="fname" type="text" name="name" placeholder="Full name" required>
