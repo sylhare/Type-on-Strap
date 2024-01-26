@@ -8,13 +8,13 @@ position: 4
 ### Application to enroll in the course
 
 <p align="justify">
-Applicants should fill the form below in English <u>prior to March 31, 2024 (AoE).</u></p><br>
+Applicants should fill the form below in English <u>prior to March 22, 2024 (AoE).</u></p><br>
 
-<i>Up to 25 attendees will be accepted. Applicants will be selected based on the potential value of the course for them, with their motivation letter and CV serving as criteria. Selected applicants will be notified no later than April 15.</i><br><br>
+<i>Up to 25 attendees will be accepted. Applicants will be selected based on the potential value of the course for them, with their motivation letter and CV serving as criteria. Selected applicants will be notified no later than April 7.</i><br><br>
 
 <p align="justify"><u>Instructions for attachments:</u></p>
 
-* All documents must be uploaded in PDF format
+All documents must be uploaded as one combined PDF, including:
 * CV (max. 2 pages): include experience, relevant publications, talks in conferences, etc.
 * Motivation letter (max. 1 page): include experience with computational chemistry and/or machine learning, what the applicant hopes to gain from the course, etc.
 * GEQC membership: proof of GEQC membership. For example, a screenshot of your subscription dates from the <a href='https://rseq.playoffinformatica.com/FormLogin.php'>"Member area" of the RSEQ webpage.</a>
@@ -139,13 +139,14 @@ Applicants should fill the form below in English <u>prior to March 31, 2024 (AoE
   </head>
   <body>
     <center>
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form action="https://api.web3forms.com/submit" enctype="multipart/form-data" method="POST">
     <div class="title">
         <i class="fas fa-pencil-alt"></i> 
         <h2>Register here</h2>
     </div>
     <div class="info">
-        <input type="hidden" name="access_key" value="47eccb18-9823-408a-b108-e0b03e4736b5">
+        <input type="hidden" id="redirect" name="redirect" value="https://https://camlccourse.github.io/pages/success.html" />
+        <input type="hidden" id="access_key" name="access_key" value="47eccb18-9823-408a-b108-e0b03e4736b5" />
         <!-- Personal info -->
         <input class="fname" type="text" name="name" placeholder="Full name" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -217,12 +218,14 @@ Applicants should fill the form below in English <u>prior to March 31, 2024 (AoE
         })();
         </script> -->
         <!-- ATTACHMENTS -->
-        <p align="justify">&nbsp;&nbsp;CV of the applicant (max. 2 pages)</p>
-        <input type="file" name="CV" accept="application/pdf" required>
-        <p align="justify">&nbsp;&nbsp;Motivation letter (max. 1 page)</p>
-        <input type="file" name="Letter" accept="application/pdf" required>
-        <p align="justify">&nbsp;&nbsp;GEQC membership</p>
-        <input type="file" name="GEQC" accept="application/pdf">
+        <p align="justify">CV, Motivation Letter (and GEQC membership)</p>
+        <input type="file" name="CV" accept="application/pdf" required />
+        <!-- <p align="justify">&nbsp;&nbsp;CV of the applicant (max. 2 pages)</p>
+        <input type="file" name="CV" accept="application/pdf" required /> -->
+        <!-- <p align="justify">&nbsp;&nbsp;Motivation letter (max. 1 page)</p>
+        <input type="file" name="Letter" accept="application/pdf" required /> -->
+        <!-- <p align="justify">&nbsp;&nbsp;GEQC membership</p>
+        <input type="file" name="GEQC" accept="application/pdf" /> -->
     </div>
     <!-- <div class="checkbox">
         <input type="checkbox" name="checkbox"><span>I agree to the <a href="https://www.w3docs.com/privacy-policy">Privacy Poalicy for W3Docs.</a></span>
