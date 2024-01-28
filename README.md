@@ -1,6 +1,6 @@
-# Repository of the CAMLC24 course
+# Repository of the CAMLC24 workshop
 
-For more information about the course, please visit the [official webpage](https://jvalegre.github.io/).
+For more information about the workshop, please visit the [official webpage](https://jvalegre.github.io/).
 
 <br>
 <br>

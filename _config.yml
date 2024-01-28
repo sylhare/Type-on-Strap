@@ -1,10 +1,10 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://camlccourse.github.io"
+url: "https://camlc24.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
 title: "CAMLC24" # site's title
-description: "Website of the CAMLC24 course"      # used by search engines
+description: "Website of the CAMLC24 workshop"      # used by search engines
 avatar: assets/img/caml24_logo.png                         # Empty for no avatar in navbar
 favicon: assets/img/favicon.ico                             # Icon displayed in the tab
 

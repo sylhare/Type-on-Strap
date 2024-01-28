@@ -5,9 +5,9 @@ feature-img: "assets/img/header/tab_back.png"
 position: 3
 ---
 
-### Course schedule
+### Workshop schedule
 
-<p align="justify">The attendants will arrive in Jaca on the afternoon of June 16th (at any time after 17:00) and sleep at the venue. The organizers and the available attendants will arrange an informal dinner that night. The program of the course is presented below.</p>
+<p align="justify">The attendants will arrive in Jaca on the afternoon of June 16th (at any time after 17:00) and sleep at the venue. The organizers and the available attendants will arrange an informal dinner that night. The program of the workshop is presented below.</p>
 
 <html>
 <head>

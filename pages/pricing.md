@@ -5,7 +5,7 @@ feature-img: "assets/img/header/tab_back.png"
 position: 5
 ---
 
-###  Course registration fee and what is included
+###  Workshop registration fee and what is included
 
 * 140 EUR for <a href='https://geqc.rseq.org/'>GEQC</a> members (this option might be preferred since joining the <a href='https://geqc.rseq.org/'>GEQC</a> group is 10 EUR/year)<br>
 * 170 EUR for all the other participants<br><br>

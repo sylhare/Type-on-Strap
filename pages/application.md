@@ -5,18 +5,18 @@ feature-img: "assets/img/header/tab_back.png"
 position: 4
 ---
 
-### Application to enroll in the course
+### Application to enroll in the workshop
 
 <p align="justify">
 Applicants should fill the form below in English <u>prior to March 22, 2024 (AoE).</u></p><br>
 
-<i>Up to 25 attendees will be accepted. Applicants will be selected based on the potential value of the course for them, with their motivation letter and CV serving as criteria. Selected applicants will be notified no later than April 7.</i><br><br>
+<i>Up to 25 attendees will be accepted. Applicants will be selected based on the potential value of the workshop for them, with their motivation letter and CV serving as criteria. Selected applicants will be notified no later than April 7.</i><br><br>
 
 <p align="justify"><u>Instructions for attachments:</u></p>
 
 All documents must be uploaded as one combined PDF with a maximum size of 3MB, including:
 * CV (max. 2 pages): include experience, relevant publications, talks in conferences, etc.
-* Motivation letter (max. 1 page): include experience with computational chemistry and/or machine learning, what the applicant hopes to gain from the course, etc.
+* Motivation letter (max. 1 page): include experience with computational chemistry and/or machine learning, what the applicant hopes to gain from the workshop, etc.
 * GEQC membership: proof of GEQC membership. For example, a screenshot of your subscription dates from the <a href='https://rseq.playoffinformatica.com/FormLogin.php'>"Member area" of the RSEQ webpage.</a>
 
 
@@ -146,7 +146,7 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
     </div>
     <div class="info">
         <!-- Success page after submitting -->
-        <input type="hidden" id="redirect" name="redirect" value="https://camlccourse.github.io/pages/success.html" />
+        <input type="hidden" id="redirect" name="redirect" value="https://camlc24.github.io/pages/success.html" />
         <!-- Access key from web3forms -->
         <input type="hidden" id="access_key" name="access_key" value="47eccb18-9823-408a-b108-e0b03e4736b5" />
         <!-- Max size for attachments in bytes
@@ -165,7 +165,7 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
         <option value="No">No</option>
         <option value="Yes">Yes</option>
         </select>
-        <p align="justify">Do you have a laptop you can bring to the course?</p>
+        <p align="justify">Do you have a laptop you can bring to the workshop?</p>
         <select name="Laptop" required>
         <option value=""></option>
         <option value="No">No</option>
@@ -203,7 +203,7 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
         <!-- Motivation letter box -->
         <!-- <p align="justify">
         <label for="counter-input2" class="label">Characters: <span id="counter-display2" class="tag is-success">0/2000</span></label></p>
-        <textarea name="Motivation letter" id='counter-input2' placeholder="Motivation letter (experience with computational chemistry, what the applicant hopes to gain from the course, etc.)" rows="5" cols="50" maxlength="2000" required></textarea>
+        <textarea name="Motivation letter" id='counter-input2' placeholder="Motivation letter (experience with computational chemistry, what the applicant hopes to gain from the workshop, etc.)" rows="5" cols="50" maxlength="2000" required></textarea>
         <script>
         (() => {
           const counter = (() => {
