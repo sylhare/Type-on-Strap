@@ -72,6 +72,3 @@ position: 6
 </body>
 </html>
 
-<br>
- 
-

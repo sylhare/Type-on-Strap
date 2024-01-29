@@ -12,7 +12,7 @@ favicon: assets/img/favicon.ico                             # Icon displayed in 
 header_text: " "  # Change Blog header text
 header_feature_image: assets/img/header/banner.png
 header_feature_image_responsive: false
-footer_text: Sponsored by <a href='https://geqc.rseq.org/'>GEQC-RSEQ</a> and <a href='https://colegioquimicos.com/'>Colegio Químicos CV</a>
+footer_text: 
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable

@@ -47,6 +47,3 @@ Thanks to the <a href='https://colegioquimicos.com/'>Colegio de Químicos de la 
 </body>
 </html>
 
-<br>
- 
-

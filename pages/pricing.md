@@ -17,3 +17,5 @@ position: 5
 &#9900; Three breakfasts at the <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Monday, Tuesday, and Wednesday)<br>
 &#9900; Three lunches at the <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Monday, Tuesday, and Wednesday)<br>
 &#9900; Three dinners at a local restaurant (Sunday, Monday and Tuesday, place to be decided)<br></p>
+
+<br>

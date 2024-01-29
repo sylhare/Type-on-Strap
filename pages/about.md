@@ -30,3 +30,5 @@ The "Cheminformatics, Automation and Machine Learning in Chemistry: from fundame
 ### Recommended skills
 
 * Basic level of Python or other computing languages
+
+<br>
