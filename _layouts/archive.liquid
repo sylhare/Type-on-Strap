@@ -1,0 +1,33 @@
+---
+layout: page
+---
+
+<div class="home">
+    <div id="archive">
+        {% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'"  %}
+        <ul class="archive-clouds">
+            {% for year in postsByYear %}
+                <a href="#archive-{{ year.name | cgi_escape }}" class="archive-anchor">
+                    <li>
+                        {{ year.name | cgi_escape }} ({{year.items.size}})
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+        {% for year in postsByYear %}
+            <div class="archive-group">
+                <h4 id="archive-{{year.name}}" class="title">{{ year.name }} ({{year.items.size}})</h4>
+                <div class="items">
+                    {% for post in year.items %}
+                        <a href="{{ post.url | relative_url }}" class="archive-post-link">
+                            <div class="item">
+                                <p class="meta">{{ post.date | date: site.data.language.str_date_format | default: '%B %-d, %Y' }}</p>
+                                <p class="title">{{ post.title }}</p>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
