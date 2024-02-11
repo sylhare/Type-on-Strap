@@ -9,7 +9,7 @@ layout: page
             {% for category in site.categories %}
                 <a href="#{{ category | first | cgi_escape }}" class="category-anchor">
                     <li>
-                        {{ category | first }}
+                        {{ category | first }} 
                         <!-- {{ category | last | size | times: 100 | divided_by: site.tags.size | plus: 50 | divided_by: 100.0 }} -->
                         <!-- <span class="category-number">{{ category | last | size }}</span> -->
                     </li>
@@ -20,7 +20,12 @@ layout: page
             {% for category in site.categories %}
                 <div class="category-group">
                     {% capture group %}{{ category | first }}{% endcapture %}
-                    <h4 id="{{ group }}" class="title">{{ group }}</h4>
+                    <h4 id="{{ group }}" class="title">
+                        {{ group }}
+                        {% if page.showCounts %}
+                            ({{site.categories[group].size}})
+                        {% endif %}
+                    </h4>
                     <div class="items">
                         {% for post in site.categories[group] %}
                             <a href="{{ post.url | relative_url }}" class="category-post-link">
