@@ -41,12 +41,9 @@
     <script defer src="{{ '/assets/js/vendor/katex.auto-render.min.js' | relative_url }}" onload="renderMathInElement(document.body);"></script>
     {% endif %}
 
-    <!-- Mermaid 10.6.1 -->
+    <!-- Mermaid 10.8.0 -->
     {% if site.mermaid %}
-    <script defer src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}" onload="mermaid.initialize({
-      startOnLoad:true,
-      theme: '{{ site.mermaid }}',
-    });"></script>
+    <script defer src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}"></script>
     {% endif %}
 
     <!-- Simple Jekyll Search 1.10.0 -->

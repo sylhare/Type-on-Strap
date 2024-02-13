@@ -260,15 +260,13 @@ mermaid: default # Enable mermaid-js for diagrams, use theme: base, forest, dark
 ```
 
 Find all the help you need on the official [mermaid documentation](https://mermaid-js.github.io/mermaid/).
-You can create with ease diagrams. Add your mermaid script inside two mermaid divs (default Kramdown does not yet support mermaid).
-With the `class="mermaid"` inside the `<div>`:
+Use `mermaid` as color highlighter language to render the diagram or with the `class="mermaid"` inside the `<div>`:
 
-```html
-<div class="mermaid">
+```markdown
+```mermaid
 sequenceDiagram
     Alice->>John: Hello John, how are you?
     John-->>Alice: Great!
-</div>
 ```
 
 ### Social icons
