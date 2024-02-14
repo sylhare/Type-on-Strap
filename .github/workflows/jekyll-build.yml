@@ -16,7 +16,7 @@ jobs:
         docker-image: [ 'jekyll/builder', 'sylhare/jekyll' ]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build the site in the container
         run: |
           docker run \
