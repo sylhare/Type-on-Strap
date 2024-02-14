@@ -21,6 +21,16 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Install github-pages gem 2.7.4
+        continue-on-error: true
+        run: bundle install
+        working-directory: ./.github/workflows
+        if: matrix.ruby == '2.7.4'
+      - name: Install github-pages gem
+        run: |
+          gem install github-pages
+          gem update --system
+        if: matrix.ruby != '2.7.4'
       - name: Install
         run: bundle install
       - name: Build jekyll site
@@ -30,11 +40,6 @@ jobs:
         run: |
           gem build *.gemspec
           echo `find . -name "*.gem" | tail -1 | awk -F"[/]" '{print $2}'`
-      - name: Gems
-        continue-on-error: true
-        run: |
-          gem install github-pages
-          gem update --system
       - name: Install theme gems
         continue-on-error: true
         run: |
