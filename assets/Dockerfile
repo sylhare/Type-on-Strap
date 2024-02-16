@@ -4,7 +4,7 @@ LABEL image="sylhare/type-on-strap"
 
 # Create Type-on-strap Gemfile
 RUN echo "source \"https://rubygems.org\"" >> Gemfile
-RUN echo "gem 'type-on-strap', '>= 2.4.8', '< 3.0'" >> Gemfile
+RUN echo "gem 'type-on-strap', '>= 2.4.9', '< 3.0'" >> Gemfile
 RUN echo "Adding the Gemfile" >> cat Gemfile
 
 # Install the theme
