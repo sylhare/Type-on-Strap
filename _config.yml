@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: ""
+baseurl: "/sub-directory"
 url: "https://github.com/AmirSabzalipour/Type-on-Strap"
 
 # THEME-SPECIFIC CONFIGURATION
