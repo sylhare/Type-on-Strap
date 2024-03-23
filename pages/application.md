@@ -150,22 +150,22 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
         <i class="fas fa-pencil-alt"></i> 
         <h2>Register here</h2>
     </div>
-    <div class="info">
+    <div class="info"> -->
         <!-- Success page after submitting -->
-        <input type="hidden" id="redirect" name="redirect" value="https://camlc24.github.io/pages/success.html" />
+        <!-- <input type="hidden" id="redirect" name="redirect" value="https://camlc24.github.io/pages/success.html" /> -->
         <!-- Access key from web3forms -->
-        <input type="hidden" id="access_key" name="access_key" value="47eccb18-9823-408a-b108-e0b03e4736b5" />
+        <!-- <input type="hidden" id="access_key" name="access_key" value="47eccb18-9823-408a-b108-e0b03e4736b5" /> -->
         <!-- Max size for attachments in bytes
         example: 4MB in bytes {1024 * (1024 * 4)}
          -->
-        <input type="hidden" id="max_size" value="3145728">
+        <!-- <input type="hidden" id="max_size" value="3145728"> -->
         <!-- Personal info -->
-        <input class="fname" type="text" name="name" placeholder="Full name" required>
+        <!-- <input class="fname" type="text" name="name" placeholder="Full name" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="institution" placeholder="Institution" required>
-        <input type="text" name="group" placeholder="Research group" required>
+        <input type="text" name="group" placeholder="Research group" required> -->
         <!-- Yes or No questions -->
-        <p align="justify">Are you a GEQC member?</p>
+        <!-- <p align="justify">Are you a GEQC member?</p>
         <select name="GEQC member" required>
         <option value=""></option>
         <option value="No">No</option>
@@ -182,9 +182,9 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
         <option value=""></option>
         <option value="No">No</option>
         <option value="Yes">Yes</option>
-        </select>
+        </select> -->
         <!-- ATTACHMENTS -->
-        <p align="justify">CV, Motivation Letter (and GEQC membership)<br>Max. 3MB</p>
+        <!-- <p align="justify">CV, Motivation Letter (and GEQC membership)<br>Max. 3MB</p>
         <input onchange="upload_check()" type="file" id="pdf_file" name="pdf_file" accept="application/pdf" required />
         <script>
         function upload_check()
@@ -198,11 +198,11 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
             }
         };
         </script>
-    </div>
+    </div> -->
     <!-- <div class="checkbox">
         <input type="checkbox" name="checkbox"><span>I agree to the <a href="https://www.w3docs.com/privacy-policy">Privacy Poalicy for W3Docs.</a></span>
     </div> -->
-    <button type="submit" href="/">Submit</button>
+    <!-- <button type="submit" href="/">Submit</button>
     </form></center>
   </body>
 </html>
