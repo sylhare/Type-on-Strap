@@ -8,6 +8,11 @@ position: 4
 ### Application to enroll in the workshop
 
 <p align="justify">
+<i>We're currently evaluating the applications.</i></p><br>
+
+<i>Up to 25 attendees will be accepted. Applicants will be selected based on the potential value of the workshop for them, with their motivation letter and CV serving as criteria. Selected applicants will be notified no later than April 7.</i><br><br>
+
+<!-- <p align="justify">
 Applicants should fill the form below in English <u>prior to March 22, 2024 (AoE).</u></p><br>
 
 <i>Up to 25 attendees will be accepted. Applicants will be selected based on the potential value of the workshop for them, with their motivation letter and CV serving as criteria. Selected applicants will be notified no later than April 7.</i><br><br>
@@ -20,9 +25,10 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
 * GEQC membership: proof of GEQC membership. For example, a screenshot of your subscription dates from the <a href='https://rseq.playoffinformatica.com/FormLogin.php'>"Member area" of the RSEQ webpage.</a>
 
 
-<br><br>
+<br><br> -->
 
-<html>
+<!-- Application form (multiple comments)-->
+<!-- <html>
   <head>
     <title>CAMLC24 registration form</title>
     <style>
@@ -177,52 +183,6 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
         <option value="No">No</option>
         <option value="Yes">Yes</option>
         </select>
-        <!-- CV box -->
-        <!-- <p align="justify">
-        <label for="counter-input" class="label">Characters: <span id="counter-display" class="tag is-success">0/2000</span></label></p>
-        <textarea name="CV" id='counter-input' placeholder="CV summary (experience, relevant publications, talks in conferences, etc.)" rows="5" cols="50" maxlength="2000" required></textarea>
-        <script>
-        (() => {
-          const counter = (() => {
-            const input = document.getElementById('counter-input'),
-              display = document.getElementById('counter-display'),
-              changeEvent = (evt) => {
-                const charCount = evt.target.value.length;
-                display.innerHTML = `${charCount}/2000`;
-              },
-              getInput = () => input.value,
-              countEvent = () => input.addEventListener('keyup', changeEvent),
-              init = () => countEvent();
-            return {
-              init: init
-            }
-          })();
-          counter.init();
-        })();
-        </script> -->
-        <!-- Motivation letter box -->
-        <!-- <p align="justify">
-        <label for="counter-input2" class="label">Characters: <span id="counter-display2" class="tag is-success">0/2000</span></label></p>
-        <textarea name="Motivation letter" id='counter-input2' placeholder="Motivation letter (experience with computational chemistry, what the applicant hopes to gain from the workshop, etc.)" rows="5" cols="50" maxlength="2000" required></textarea>
-        <script>
-        (() => {
-          const counter = (() => {
-            const input = document.getElementById('counter-input2'),
-              display = document.getElementById('counter-display2'),
-              changeEvent = (evt) => {
-                const charCount = evt.target.value.length;
-                display.innerHTML = `${charCount}/2000`;
-              },
-              getInput = () => input.value,
-              countEvent = () => input.addEventListener('keyup', changeEvent),
-              init = () => countEvent();
-            return {
-              init: init
-            }
-          })();
-          counter.init();
-        })();
-        </script> -->
         <!-- ATTACHMENTS -->
         <p align="justify">CV, Motivation Letter (and GEQC membership)<br>Max. 3MB</p>
         <input onchange="upload_check()" type="file" id="pdf_file" name="pdf_file" accept="application/pdf" required />
@@ -238,12 +198,6 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
             }
         };
         </script>
-        <!-- <p align="justify">&nbsp;&nbsp;CV of the applicant (max. 2 pages)</p>
-        <input type="file" name="CV" accept="application/pdf" required /> -->
-        <!-- <p align="justify">&nbsp;&nbsp;Motivation letter (max. 1 page)</p>
-        <input type="file" name="Letter" accept="application/pdf" required /> -->
-        <!-- <p align="justify">&nbsp;&nbsp;GEQC membership</p>
-        <input type="file" name="GEQC" accept="application/pdf" /> -->
     </div>
     <!-- <div class="checkbox">
         <input type="checkbox" name="checkbox"><span>I agree to the <a href="https://www.w3docs.com/privacy-policy">Privacy Poalicy for W3Docs.</a></span>
@@ -253,4 +207,58 @@ All documents must be uploaded as one combined PDF with a maximum size of 3MB, i
   </body>
 </html>
 
-<br>
+<br> -->
+
+<!-- Alternative design with Boxes to fill CV and letter -->
+<!-- CV box -->
+<!-- <p align="justify">
+<label for="counter-input" class="label">Characters: <span id="counter-display" class="tag is-success">0/2000</span></label></p>
+<textarea name="CV" id='counter-input' placeholder="CV summary (experience, relevant publications, talks in conferences, etc.)" rows="5" cols="50" maxlength="2000" required></textarea>
+<script>
+(() => {
+  const counter = (() => {
+    const input = document.getElementById('counter-input'),
+      display = document.getElementById('counter-display'),
+      changeEvent = (evt) => {
+        const charCount = evt.target.value.length;
+        display.innerHTML = `${charCount}/2000`;
+      },
+      getInput = () => input.value,
+      countEvent = () => input.addEventListener('keyup', changeEvent),
+      init = () => countEvent();
+    return {
+      init: init
+    }
+  })();
+  counter.init();
+})();
+</script> -->
+<!-- Motivation letter box -->
+<!-- <p align="justify">
+<label for="counter-input2" class="label">Characters: <span id="counter-display2" class="tag is-success">0/2000</span></label></p>
+<textarea name="Motivation letter" id='counter-input2' placeholder="Motivation letter (experience with computational chemistry, what the applicant hopes to gain from the workshop, etc.)" rows="5" cols="50" maxlength="2000" required></textarea>
+<script>
+(() => {
+  const counter = (() => {
+    const input = document.getElementById('counter-input2'),
+      display = document.getElementById('counter-display2'),
+      changeEvent = (evt) => {
+        const charCount = evt.target.value.length;
+        display.innerHTML = `${charCount}/2000`;
+      },
+      getInput = () => input.value,
+      countEvent = () => input.addEventListener('keyup', changeEvent),
+      init = () => countEvent();
+    return {
+      init: init
+    }
+  })();
+  counter.init();
+})();
+</script> -->
+<!-- <p align="justify">&nbsp;&nbsp;CV of the applicant (max. 2 pages)</p>
+<input type="file" name="CV" accept="application/pdf" required /> -->
+<!-- <p align="justify">&nbsp;&nbsp;Motivation letter (max. 1 page)</p>
+<input type="file" name="Letter" accept="application/pdf" required /> -->
+<!-- <p align="justify">&nbsp;&nbsp;GEQC membership</p>
+<input type="file" name="GEQC" accept="application/pdf" /> -->
