@@ -2,7 +2,7 @@
 layout: page
 title: Projects
 permalink: /projects/
-feature-img: "assets/img/pexels/travel.jpeg"
+feature-img: "assets/img/projects_pic.jpeg"
 tags: [Page]
 ---
 
