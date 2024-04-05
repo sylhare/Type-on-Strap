@@ -53,8 +53,6 @@ position: 6
   </tr>
   <tr>
     <td>
-    </td>
-    <td>
       <a href="https://github.com/ddgunizar">
         <img src="../assets/img/people/david.png" width="200">
         <br><p style="text-align: center;">David Dalmau</p>
@@ -64,6 +62,12 @@ position: 6
       <a href="https://github.com/iribirii">
         <img src="../assets/img/people/inigo.png" width="200">
         <br><p style="text-align: center;">Iñigo Iribarren</p>
+      </a>
+    </td>
+    <td>
+      <a href="https://thijsstuyver.com/">
+        <img src="../assets/img/people/thijs.png" width="200">
+        <br><p style="text-align: center;">Thijs Stuyver</p>
       </a>
     </td>
   </tr>

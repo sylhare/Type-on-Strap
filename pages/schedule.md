@@ -47,7 +47,7 @@ position: 3
   <tr>
     <td><i>20:30</i><br>Welcome dinner</td>
     <td><i>9:00 – Klem & Iribarren</i><br>Python and its scientific modules</td>
-    <td><i>9:00 – Paton & Laplaza</i><br>Open source in comp. chem.</td>
+    <td><i>9:00 – Paton & Stuyver</i><br>Open source in comp. chem.</td>
     <td><i>9:00 – Dalmau</i><br>ML automation with ROBERT</td>
   </tr>
   <tr>
@@ -76,7 +76,7 @@ position: 3
   <tr>
     <td style="border:none;"></td>
     <td><i>16:30 – Klem</i><br>CREST and conformational searches</td>
-    <td><i>16:30 – Paton & Iribarren</i><br>Intro to chemical ML</td>
+    <td><i>16:30 – Paton & Stuyver</i><br>Intro to chemical ML</td>
   </tr>
   <tr>
     <td style="border:none;"></td>
