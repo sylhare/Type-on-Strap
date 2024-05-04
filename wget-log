@@ -1,0 +1,16 @@
+--2024-05-03 18:20:21--  https://docs.google.com/uc?export=download&id=1VqANHsq9iLQAx8t0cqoFR8ThIeNHu1yV
+Resolving docs.google.com (docs.google.com)... 172.217.12.110
+Connecting to docs.google.com (docs.google.com)|172.217.12.110|:443... connected.
+HTTP request sent, awaiting response... 303 See Other
+Location: https://drive.usercontent.google.com/download?id=1VqANHsq9iLQAx8t0cqoFR8ThIeNHu1yV&export=download [following]
+--2024-05-03 18:20:22--  https://drive.usercontent.google.com/download?id=1VqANHsq9iLQAx8t0cqoFR8ThIeNHu1yV&export=download
+Resolving drive.usercontent.google.com (drive.usercontent.google.com)... 142.250.189.193
+Connecting to drive.usercontent.google.com (drive.usercontent.google.com)|142.250.189.193|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1348898 (1.3M) [image/png]
+Saving to: ‘imgs/img15’
+
+imgs/img15                        57%[================================>                          ] 753.47K   167KB/s    eta 3s     imgs/img15                       100%[==========================================================>]   1.29M   292KB/s    in 4.5s    
+
+2024-05-03 18:20:27 (292 KB/s) - ‘imgs/img15’ saved [1348898/1348898]
+
