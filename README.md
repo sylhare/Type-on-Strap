@@ -66,7 +66,7 @@ Here are the main files of the template
 |   ├── search.md	       # Search page
 |   └── tags.md                # The tag page
 ├── _config.yml                # sample configuration
-├── _data.yml
+├── _data
 |  ├── authors.yml             # Update the post authors configurations 
 |  ├── language.yml            # Localization configuration
 |  ├── biblio.yml              # To create a reference bibliography
