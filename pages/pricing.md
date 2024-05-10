@@ -7,7 +7,7 @@ position: 5
 
 ###  Micro-credential registration fee and what is included
 
-* 170 EUR for <a href='https://geqc.rseq.org/'>GEQC</a> members (this option might be preferred since joining the <a href='https://geqc.rseq.org/'>GEQC</a> group is 10 EUR/year)<br>
+* 175 EUR for <a href='https://geqc.rseq.org/'>GEQC</a> members (this option might be preferred since joining the <a href='https://geqc.rseq.org/'>GEQC</a> group is 10 EUR/year)<br>
 * 205 EUR for all the other participants<br><br>
 
 <u>This fee includes:</u><br>
