@@ -1,0 +1,19 @@
+name: camlc24
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - ipykernel=6.9
+  - pandas=1.4
+  - pebble=4.6
+  - xtb=6.6
+  - tqdm=4.64
+  - pip=22.1
+  - rdkit=2022.03
+  - xyz2mol=0.1
+  - autode=1.4
+  - scikit-learn
+  - seaborn
+  - pip:
+    - rdchiral==1.1
+    - PyTDC
