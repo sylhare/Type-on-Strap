@@ -1,0 +1,6 @@
+aqme
+robert
+rdkit-pypi
+openbabel-wheel
+matplotlib
+goodvibes
