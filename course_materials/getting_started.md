@@ -16,19 +16,18 @@ If you do not have a preferred text editor, we recommend [Visual Studio Code (VS
 4. Unzip the file.
 
 ## Create Conda Environment
-1. Open your terminal or command line interface and enter the following commands separately:
-```console
-conda create --name camlc24 python==3.11 -y
+1. Open your terminal or command line interface and enter the following commands separately. Note some installations may take a few minutes. If you run into any issues, try to install the module using pip.
+```bash
+conda create --name camlc24 python==3.11 -y 
 conda activate camlc24
-conda config --add channels conda-forge
-conda install xtb-python
-conda install conda-forge::rdkit
-conda install -c conda-forge aqme
-conda install -c conda-forge robert
+conda config --add channels conda-forge -y
+conda install xtb-python -y # or pip install xtb
+conda install conda-forge::rdkit -y # or pip install rdkit-pypi
+conda install -c conda-forge aqme -y # or pip install aqme
+conda install -c conda-forge robert -y # or pip install aqme
 pip install jupyterlab
+conda install crest -y
 ```
-
-(Optional) follow these instructions to install [CREST](https://crest-lab.github.io/crest-docs/page/installation/install_basic.html) if you would like to follow along during the CREST session. 
 
 ## Start a Jupyter Notebook
 From your terminal, launch Jupyter Lab by running:
