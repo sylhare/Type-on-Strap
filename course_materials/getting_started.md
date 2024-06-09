@@ -30,10 +30,14 @@ conda install crest -y
 ```
 
 ## Start a Jupyter Notebook
-From your terminal, launch Jupyter Lab by running:
-> jupyter lab
+From your terminal, navigate to your camlc24 folder and launch JupyterLab.
+```bash
+cd ~/Desktop/camlc24
+jupyter lab
+```
 
-This will start a new JupyterLab session.
+A JupyterLab session should open in your default browser. Select the file from the left menu titled "camlc24_setup.ipynb".
+
 
 #### Acknowledgements
 This introduction is modelled after a MolSSI educational course: Ringer McDonald, A., & Nash, J. (2019). Python Data and Scripting Workshop for Computational Molecular Scientists (Version 2020.06.01). 
