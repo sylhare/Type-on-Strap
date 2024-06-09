@@ -5,9 +5,9 @@
 2. Download the appropriate installer for your operating system.
 3. Double click the installer icon and follow the set-up instructions, keeping most of the default options. If you are Windows, make sure to choose to choose the option **Make Anaconda the default Python** during installation.
 
-## Installing a Text Editor
+## Installing a Text Editor (optional)
 
-You will need a text editor for this workshop. If you do not have a preferred text editor, we recommend [Visual Studio Code (VS Code)](https://code.visualstudio.com/download). Download VSCode at the link and install on your computer.
+If you do not have a preferred text editor, we recommend [Visual Studio Code (VS Code)](https://code.visualstudio.com/download). Download VSCode at the link and install on your computer.
 
 ## Downloading Workshop Materials
 1. Download the files needed for these lessons [here](./content/content.zip)
