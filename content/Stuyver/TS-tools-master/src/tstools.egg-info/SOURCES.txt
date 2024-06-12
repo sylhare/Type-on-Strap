@@ -1,0 +1,14 @@
+LICENSE
+README.md
+setup.cfg
+setup.py
+src/tstools/__init__.py
+src/tstools/confirm_ts_guess.py
+src/tstools/irc_search.py
+src/tstools/path_generator.py
+src/tstools/ts_optimizer.py
+src/tstools/utils.py
+src/tstools.egg-info/PKG-INFO
+src/tstools.egg-info/SOURCES.txt
+src/tstools.egg-info/dependency_links.txt
+src/tstools.egg-info/top_level.txt
