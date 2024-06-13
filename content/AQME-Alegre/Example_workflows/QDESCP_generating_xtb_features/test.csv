@@ -1,0 +1,6 @@
+SMILES,code_name
+CN1[N]C=NN(C)C1=O,mol_1
+CC1(C)N([O])[CH]N([O])C1(C)C,mol_2
+CC1(C)CCC(C)(C)N1[O],mol_3
+CC1(C)C=CC(C)(C)N1[O],mol_4
+CC1(C)CCCC(C)(C)[N+]1[O-],mol_5

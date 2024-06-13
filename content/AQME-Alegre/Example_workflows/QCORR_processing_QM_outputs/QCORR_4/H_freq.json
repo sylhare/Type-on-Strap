@@ -1,0 +1,96 @@
+{
+    "chemical json": 0,
+    "name": "H_freq",
+    "smiles": "[H]\tH_freq.log\r\n",
+    "inchi": "InChI=1S/H\n",
+    "inchikey": "YZCKVEUIGOORGS-UHFFFAOYSA-N\n",
+    "formula": "H",
+    "properties": {
+        "partial charges": {
+            "mulliken": [0.0],
+            "mulliken_sum": [0.0],
+            "apt": [0.0],
+            "apt_sum": [0.0]
+        },
+        "charge": 0,
+        "enthalpy": -0.495778,
+        "entropy": 4.365252389736728e-05,
+        "energy": {
+            "free energy": -0.508793,
+            "alpha": {
+                "homo": -10.310393795445,
+                "gap": 19.037629208681
+            },
+            "beta": {
+                "homo": 55.575172256867496,
+                "gap": -70.6769467319165
+            },
+            "total": -13.555038850401955
+        },
+        "orbitals": {
+            "homos": [0, -1],
+            "energies": [ [-10.310393795445, 8.727235413236, 38.4145843889355, 38.4145843889355, 38.4145843889355, 57.3999677383205], [-15.101774475049002, 2.81909949118, 27.623909647358, 27.623909647358, 27.623909647358, 55.575172256867496] ],
+            "molecular orbital symmetry": [
+                [ "A1g", "A1g", "T1u", "T1u", "T1u", "A1g" ],
+                [ "A1g", "A1g", "T1u", "T1u", "T1u", "A1g" ]
+            ],
+            "basis number": 6,
+            "MO number": 6
+        },
+        "total dipole moment": 0.0,
+        "multiplicity": 2,
+        "number of atoms": 1,
+        "rotational": {
+            "symmetry point group": "OH"
+        },
+        "pressure": 1.0,
+        "S2 after annihilation": 0.75,
+        "S2 before annihilation": 0.75,
+        "temperature": 298.15,
+        "energies": {
+            "zero-point correction": 0.0
+        },
+        "molecular mass": 1.00794
+    },
+    "atoms": {
+        "coords": {
+            "3d": [ 0.0, 0.0, 0.0 ]
+        },
+        "elements": {
+            "number": [1],
+            "atom count": 1,
+            "heavy atom count": 0
+        },
+        "spins": {
+            "mulliken": [1.0],
+            "mulliken_sum": [0.0]
+        },
+        "core electrons": [0]
+    },
+    "metadata": {
+        "basis set": "def2TZVP",
+        "ground or transition state": "ground_state",
+        "dispersion model": "none",
+        "functional": "M062X",
+        "grid type": "ultrafine",
+        "keywords line": "M062X/Def2TZVP freq=noraman opt=(maxcycles=100)",
+        "memory": "24GB",
+        "processors": 12,
+        "QM program": "Gaussian 16, Revision C.01",
+        "run date": "24-Nov-2021",
+        "solvation": "gas_phase"
+    },
+    "optimization": {
+        "geometric targets": [0.00045, 0.0003, 0.0018, 0.0012],
+        "geometric values": [[0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]],
+        "done": true,
+        "status": [5, 5],
+        "S2 after annihilation": [0.75, 0.75],
+        "S2 before annihilation": [0.75, 0.75],
+        "scf": {
+            "scf energies": [-13.555038850401955, -13.555038850401955],
+            "targets": [[1e-08, 1e-06, 1e-06], [1e-08, 1e-06, 1e-06]]
+        }
+    },
+    "diagram": "<?xml version=\"1.0\"?>\n<svg version=\"1.1\" id=\"topsvg\"\nxmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"\nxmlns:cml=\"http://www.xml-cml.org/schema\" x=\"0\" y=\"0\" width=\"200px\" height=\"200px\" viewBox=\"0 0 100 100\">\n<title>H_freq.log - Open Babel Depiction</title>\n<rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"white\"/>\n<g transform=\"translate(0,0)\">\n<svg width=\"100\" height=\"100\" x=\"0\" y=\"0\" viewBox=\"0 0 80 80\"\nfont-family=\"sans-serif\" stroke=\"rgb(0,0,0)\" stroke-width=\"2\"  stroke-linecap=\"round\">\n<text x=\"44.8\" y=\"35.968\" fill=\"rgb(191,191,191)\" stroke-width=\"0\" font-weight=\"bold\" font-size=\"16\" ></text>\n<text x=\"44.8\" y=\"35.968\" fill=\"rgb(191,191,191)\" stroke-width=\"0\" font-weight=\"bold\" font-size=\"32\" >.</text>\n<text x=\"34\" y=\"48\" fill=\"rgb(191,191,191)\" stroke-width=\"0\" font-weight=\"bold\" font-size=\"16\" >H</text>\n</svg>\n</g>\n<text font-size=\"18\" fill =\"black\" font-family=\"sans-serif\"\nx=\"10\" y=\"20\" >H_freq.log</text>\n</svg>\n"
+}

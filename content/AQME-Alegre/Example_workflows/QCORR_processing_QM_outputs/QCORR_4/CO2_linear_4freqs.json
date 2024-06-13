@@ -1,0 +1,104 @@
+{
+    "chemical json": 0,
+    "name": "CO2_linear_4freqs",
+    "smiles": "C(=O)=O\tCO2_linear_4freqs.log\r\n",
+    "inchi": "InChI=1S/CO2/c2-1-3\n",
+    "inchikey": "CURLTUGMZLYLDI-UHFFFAOYSA-N\n",
+    "formula": "CO2",
+    "properties": {
+        "partial charges": {
+            "mulliken": [0.589068, -0.294534, -0.294534],
+            "mulliken_sum": [0.589068, -0.294534, -0.294534],
+            "apt": [0.990166, -0.495083, -0.495083],
+            "apt_sum": [0.990166, -0.495083, -0.495083]
+        },
+        "charge": 0,
+        "enthalpy": -188.485902,
+        "entropy": 8.207278215656403e-05,
+        "energy": {
+            "free energy": -188.510372,
+            "alpha": {
+                "homo": -10.1479418266965,
+                "gap": 10.052429865171
+            },
+            "beta": {
+                "homo": -10.1479418266965,
+                "gap": 10.052429865171
+            },
+            "total": -5129.353420019206
+        },
+        "orbitals": {
+            "homos": [10],
+            "energies": [ [-523.878483031909, -523.8754897795535, -283.132284534446, -32.2163751022465, -31.246017111363496, -15.3289895402165, -14.3047530069345, -14.3047530069345, -14.031550701032502, -10.1479418266965, -10.1479418266965, -0.09551196152550001, -0.09551196152550001, 1.5320009783150002, 10.1071247491215, 12.687308279562501, 12.687308279562501, 16.561937396832, 19.697233182292997, 23.5941756353035, 23.773498662783002, 23.773498662783002, 27.2279839948805, 28.308548095215997, 28.308548095215997, 44.6291205066545, 53.481800404971] ],
+            "molecular orbital symmetry": [
+                [ "B", "A", "A", "A", "B", "A", "B", "A", "B", "A", "B", "A", "B", "A", "B", "B", "A", "A", "B", "A", "A", "B", "B", "A", "B", "A", "B" ]
+            ],
+            "basis number": 27,
+            "MO number": 27
+        },
+        "total dipole moment": 0.0,
+        "multiplicity": 1,
+        "number of atoms": 3,
+        "rotational": {
+            "symmetry point group": "D*H",
+            "symmetry number": 2,
+            "rotational constants": [0.0, 11.1954622, 11.1954622],
+            "rotational temperatures": [0.5373]
+        },
+        "pressure": 1.0,
+        "temperature": 298.15,
+        "energies": {
+            "zero-point correction": 0.010688
+        },
+        "molecular mass": 44.0095
+    },
+    "atoms": {
+        "coords": {
+            "3d": [ 0.0, 0.0, 0.0, 0.0, 0.0, 1.187905, 0.0, 0.0, -1.187905 ]
+        },
+        "elements": {
+            "number": [6, 8, 8],
+            "atom count": 3,
+            "heavy atom count": 3
+        },
+        "core electrons": [0, 0, 0]
+    },
+    "metadata": {
+        "basis set": "6-31G",
+        "ground or transition state": "ground_state",
+        "dispersion model": "none",
+        "functional": "B3LYP",
+        "grid type": "sg1",
+        "keywords line": "opt=maxcycles=100 freq=noraman b3lyp/6-31g symmetry=(PG=Cinfv)",
+        "QM program": "Gaussian 09, Revision A.02",
+        "run date": "11-Feb-2022",
+        "solvation": "gas_phase"
+    },
+    "optimization": {
+        "geometric targets": [0.00045, 0.0003, 0.0018, 0.0012],
+        "geometric values": [[0.00026, 0.00013, 0.004325, 0.002649], [0.000502, 0.000251, 0.002848, 0.001744], [1.6e-05, 1.1e-05, 0.0, 0.0], [1.6e-05, 1.1e-05, 1.6e-05, 1.1e-05]],
+        "done": true,
+        "status": [1, 0, 4, 5],
+        "scf": {
+            "scf energies": [-5129.353413025881, -5129.353393977911, -5129.353420019206, -5129.353420019206],
+            "targets": [[1e-08, 1e-06, 1e-06], [1e-08, 1e-06, 1e-06], [1e-08, 1e-06, 1e-06], [1e-08, 1e-06, 1e-06]]
+        }
+    },
+    "vibrations": {
+        "displacement": [[[0.88, 0.0, 0.0], [-0.33, 0.0, 0.0], [-0.33, 0.0, 0.0]], [[0.0, 0.88, 0.0], [0.0, -0.33, 0.0], [0.0, -0.33, 0.0]], [[0.0, 0.0, 0.0], [0.0, 0.0, 0.71], [0.0, 0.0, -0.71]], [[0.0, 0.0, 0.88], [0.0, 0.0, -0.33], [0.0, 0.0, -0.33]]],
+        "frequencies": [563.0465, 563.0465, 1282.3804, 2283.0038],
+        "force constants": [2.4053, 2.4053, 15.4976, 39.5449],
+        "intensities": {
+            "IR": [24.7267, 24.7267, 0.0, 460.1696]
+        },
+        "reduced masses": [12.8774, 12.8774, 15.9949, 12.8774],
+        "vibration symmetry": [ "PIU", "PIU", "SGG", "SGU" ]
+    },
+    "bonds": {
+        "connections": {
+            "index": [ 2, 0, 0, 1 ]
+        },
+        "order": [ 2, 2 ]
+    },
+    "diagram": "<?xml version=\"1.0\"?>\n<svg version=\"1.1\" id=\"topsvg\"\nxmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"\nxmlns:cml=\"http://www.xml-cml.org/schema\" x=\"0\" y=\"0\" width=\"200px\" height=\"200px\" viewBox=\"0 0 100 100\">\n<title>CO2_linear_4freqs.log - Open Babel Depiction</title>\n<rect x=\"0\" y=\"0\" width=\"100\" height=\"100\" fill=\"white\"/>\n<g transform=\"translate(0,0)\">\n<svg width=\"100\" height=\"100\" x=\"0\" y=\"0\" viewBox=\"0 0 160 80\"\nfont-family=\"sans-serif\" stroke=\"rgb(0,0,0)\" stroke-width=\"2\"  stroke-linecap=\"round\">\n<line x1=\"107.0\" y1=\"43.0\" x2=\"80.0\" y2=\"43.0\" opacity=\"1.0\" stroke=\"rgb(0,0,0)\"  stroke-width=\"2.0\"/>\n<line x1=\"107.0\" y1=\"37.0\" x2=\"80.0\" y2=\"37.0\" opacity=\"1.0\" stroke=\"rgb(0,0,0)\"  stroke-width=\"2.0\"/>\n<line x1=\"80.0\" y1=\"43.0\" x2=\"53.0\" y2=\"43.0\" opacity=\"1.0\" stroke=\"rgb(0,0,0)\"  stroke-width=\"2.0\"/>\n<line x1=\"80.0\" y1=\"37.0\" x2=\"53.0\" y2=\"37.0\" opacity=\"1.0\" stroke=\"rgb(0,0,0)\"  stroke-width=\"2.0\"/>\n<text x=\"34.000000\" y=\"48.000000\" fill=\"rgb(255,12,12)\" stroke-width=\"0\" font-weight=\"bold\" font-size=\"16\" >O</text>\n<text x=\"114.000000\" y=\"48.000000\" fill=\"rgb(255,12,12)\" stroke-width=\"0\" font-weight=\"bold\" font-size=\"16\" >O</text>\n</svg>\n</g>\n<text font-size=\"18.000000\" fill =\"black\" font-family=\"sans-serif\"\nx=\"10.000000\" y=\"20.000000\" >CO2_linear_4freqs.log</text>\n</svg>\n"
+}

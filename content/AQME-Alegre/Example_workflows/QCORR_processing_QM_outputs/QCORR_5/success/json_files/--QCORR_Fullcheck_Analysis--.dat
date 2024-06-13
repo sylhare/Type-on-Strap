@@ -1,0 +1,6 @@
+-- Full check analysis --
+o  Same program (Gaussian 09, Revision A.02) used in all the calculations
+o  Same grid_type (sg1) used in all the calculations
+o  Same level_of_theory (M062X/3-21G) used in all the calculations
+o  Same dispersion (none) used in all the calculations
+o  Same solvation (gas_phase) used in all the calculations

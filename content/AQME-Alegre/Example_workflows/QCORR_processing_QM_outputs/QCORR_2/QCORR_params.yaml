@@ -1,0 +1,4 @@
+qcorr: True
+files: '/root/project/Example_workflows/QCORR_processing_QM_outputs/QCORR_2/*.log'
+freq_conv: 'opt=(calcfc,maxstep=5)'
+isom_type: 'com'

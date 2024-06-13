@@ -1,0 +1,25 @@
+--- # PES
+# Double S addition
+   Reaction1: [Diene+Do1, TS1, P1] 
+   Reaction2: [Diene+Do2, TS2, P2] 
+   Reaction3: [Diene+Do3, TS3, P3] 
+   
+
+--- # SPECIES
+    Diene     : Diene*
+   Do1     : Do1*
+   TS1     : TS1*
+   P1    : P1*
+   Do2     : Do2*
+   TS2     : TS2*
+   P2    : P2*
+   Do3    : Do3*
+   TS3     : TS3*
+   P3   : P3*
+  
+
+--- # FORMAT
+   dec : 1
+   units: kcal/mol
+   dpi : 300
+   color : #1b8bb9,#e5783d,#386e30

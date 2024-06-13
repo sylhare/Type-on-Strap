@@ -1,0 +1,7 @@
+qprep: True
+files: '/root/project/Example_workflows/QPREP_generating_input_files/json_files/CH4.json'
+program: 'gaussian'
+qm_input: 'wb97xd/lanl2dz'
+suffix: 'varfile'
+charge: 2
+mult: 3
