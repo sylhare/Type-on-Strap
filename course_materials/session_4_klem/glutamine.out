@@ -1,0 +1,290 @@
+
+       ==============================================
+       |                                            |
+       |                 C R E S T                  |
+       |                                            |
+       |  Conformer-Rotamer Ensemble Sampling Tool  |
+       |          based on the GFN methods          |
+       |             P.Pracht, S.Grimme             |
+       |          Universitaet Bonn, MCTC           |
+       ==============================================
+       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
+  Using the xTB program. Compatible with xTB version 6.4.0
+
+   Cite work conducted with this code as
+
+   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
+   • S.Grimme, JCTC, 2019, 15, 2847-2862.
+
+   and for works involving QCG as
+
+   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
+     JCTC, 2022, 18 (5), 3174-3189.
+
+   with help from:
+   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
+   C.Plett, P.Pracht, S.Spicher
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+ Command line input:
+ > crest glutamine.xyz --scratch glutamine --niceprint
+
+Using scratch directory: glutamine
+
+ -------------------------
+ xTB Geometry Optimization
+ -------------------------
+ Geometry successfully optimized.
+
+------------------------------------------------
+Generating MTD length from a flexibility measure
+------------------------------------------------
+ Calculating WBOs... done.
+ Calculating NCI flexibility... done.
+     covalent flexibility measure :   0.455
+ non-covalent flexibility measure :   0.820
+ flexibility measure :   0.504
+ t(MTD) / ps    :     5.0
+ Σ(t(MTD)) / ps :    70.0 (14 MTDs)
+
+-------------------------------------
+Starting a trial MTD to test settings
+-------------------------------------
+ Estimated runtime for one MTD (5.0 ps) on a single thread: 15 min 59 sec
+ Estimated runtime for a batch of 14 MTDs on 4 threads: 1 h 3 min 55 sec
+
+ list of Vbias parameters applied:
+$metadyn    0.00300   1.300
+$metadyn    0.00150   1.300
+$metadyn    0.00075   1.300
+$metadyn    0.00300   0.780
+$metadyn    0.00150   0.780
+$metadyn    0.00075   0.780
+$metadyn    0.00300   0.468
+$metadyn    0.00150   0.468
+$metadyn    0.00075   0.468
+$metadyn    0.00300   0.281
+$metadyn    0.00150   0.281
+$metadyn    0.00075   0.281
+$metadyn    0.00100   0.100
+$metadyn    0.00500   0.800
+
+*******************************************************************************************
+**                        N E W    I T E R A T I O N    C Y C L E                        **
+*******************************************************************************************
+
+========================================
+            MTD Iteration  1
+========================================
+
+     ========================================
+     |         Meta-MD (MTD) Sampling       |
+     ========================================
+
+Starting Meta-MD   1 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0600
+     Vbias exp α /bohr⁻²:    1.30
+*Warning: Meta-MTD 1 seemingly failed (no xtb.trj)*
+Starting Meta-MD   2 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0300
+     Vbias exp α /bohr⁻²:    1.30
+
+       ==============================================
+       |                                            |
+       |                 C R E S T                  |
+       |                                            |
+       |  Conformer-Rotamer Ensemble Sampling Tool  |
+       |          based on the GFN methods          |
+       |             P.Pracht, S.Grimme             |
+       |          Universitaet Bonn, MCTC           |
+       ==============================================
+       Version 2.12,   Thu 19. Mai 16:32:32 CEST 2022
+  Using the xTB program. Compatible with xTB version 6.4.0
+
+   Cite work conducted with this code as
+
+   • P.Pracht, F.Bohle, S.Grimme, PCCP, 2020, 22, 7169-7192.
+   • S.Grimme, JCTC, 2019, 15, 2847-2862.
+
+   and for works involving QCG as
+
+   • S.Spicher, C.Plett, P.Pracht, A.Hansen, S.Grimme,
+     JCTC, 2022, 18 (5), 3174-3189.
+
+   with help from:
+   C.Bannwarth, F.Bohle, S.Ehlert, S.Grimme,
+   C.Plett, P.Pracht, S.Spicher
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+ Command line input:
+ > crest glutamine.xyz --scratch glutamine
+
+Using scratch directory: glutamine
+
+ -------------------------
+ xTB Geometry Optimization
+ -------------------------
+ Geometry successfully optimized.
+
+------------------------------------------------
+Generating MTD length from a flexibility measure
+------------------------------------------------
+ Calculating WBOs... done.
+ Calculating NCI flexibility... done.
+     covalent flexibility measure :   0.455
+ non-covalent flexibility measure :   0.820
+ flexibility measure :   0.504
+ t(MTD) / ps    :     5.0
+ Σ(t(MTD)) / ps :    70.0 (14 MTDs)
+
+-------------------------------------
+Starting a trial MTD to test settings
+-------------------------------------
+ Estimated runtime for one MTD (5.0 ps) on a single thread: 15 min 37 sec
+ Estimated runtime for a batch of 14 MTDs on 4 threads: 1 h 2 min 28 sec
+
+ list of Vbias parameters applied:
+$metadyn    0.00300   1.300
+$metadyn    0.00150   1.300
+$metadyn    0.00075   1.300
+$metadyn    0.00300   0.780
+$metadyn    0.00150   0.780
+$metadyn    0.00075   0.780
+$metadyn    0.00300   0.468
+$metadyn    0.00150   0.468
+$metadyn    0.00075   0.468
+$metadyn    0.00300   0.281
+$metadyn    0.00150   0.281
+$metadyn    0.00075   0.281
+$metadyn    0.00100   0.100
+$metadyn    0.00500   0.800
+
+*******************************************************************************************
+**                        N E W    I T E R A T I O N    C Y C L E                        **
+*******************************************************************************************
+
+========================================
+            MTD Iteration  1
+========================================
+
+     ========================================
+     |         Meta-MD (MTD) Sampling       |
+     ========================================
+
+Starting Meta-MD   1 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0600
+     Vbias exp α /bohr⁻²:    1.30
+*Meta-MTD 1 finished*
+Starting Meta-MD   2 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0300
+     Vbias exp α /bohr⁻²:    1.30
+*Meta-MTD 2 finished*
+Starting Meta-MD   3 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0150
+     Vbias exp α /bohr⁻²:    1.30
+*Meta-MTD 3 finished*
+Starting Meta-MD   4 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0600
+     Vbias exp α /bohr⁻²:    0.78
+*Meta-MTD 4 finished*
+Starting Meta-MD   5 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0300
+     Vbias exp α /bohr⁻²:    0.78
+*Meta-MTD 5 finished*
+Starting Meta-MD   6 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0150
+     Vbias exp α /bohr⁻²:    0.78
+*Meta-MTD 6 finished*
+Starting Meta-MD   7 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0600
+     Vbias exp α /bohr⁻²:    0.47
+*Meta-MTD 7 finished*
+Starting Meta-MD   8 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0300
+     Vbias exp α /bohr⁻²:    0.47
+*Meta-MTD 8 finished*
+Starting Meta-MD   9 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0150
+     Vbias exp α /bohr⁻²:    0.47
+*Meta-MTD 9 finished*
+Starting Meta-MD  10 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0600
+     Vbias exp α /bohr⁻²:    0.28
+*Meta-MTD 10 finished*
+Starting Meta-MD  11 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0300
+     Vbias exp α /bohr⁻²:    0.28
+*Meta-MTD 11 finished*
+Starting Meta-MD  12 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0150
+     Vbias exp α /bohr⁻²:    0.28
+*Warning: Meta-MTD 12 seemingly failed (no xtb.trj)*
+Starting Meta-MD  13 with the settings:
+     MD time /ps        :     5.0
+     dt /fs             :     5.0
+     dumpstep(trj) /fs  :     100
+     dumpstep(Vbias)/ps :     1.0
+     Vbias factor k /Eh :  0.0200
+     Vbias exp α /bohr⁻²:    0.10
