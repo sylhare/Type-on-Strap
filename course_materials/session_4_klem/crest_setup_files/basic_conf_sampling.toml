@@ -1,9 +1,0 @@
-#This is a CREST input file
-input='struc.xyz'
-runtype='imtd-gc'
-
-#parallelization
-threads=8
-
-[[calculation.level]]
-method="gfnff"
