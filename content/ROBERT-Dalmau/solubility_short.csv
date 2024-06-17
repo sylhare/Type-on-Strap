@@ -1,0 +1,22 @@
+code_name,smiles,solubility
+mol_100,CC(C)c1ccccc1,-3.27
+mol_1000,Cc1ccc(O)cc1,-0.73
+mol_1001,CCOC=O,0.15
+mol_1002,CN(C)c1ccccc1,-1.92
+mol_1008,C=CC#N,0.15
+mol_1013,BrCCBr,-1.68
+mol_1032,Brc1ccccc1Br,-3.5
+mol_104,ClCCl,-0.63
+mol_1045,Sc1ccccc1,-2.12
+mol_1048,CSSC,-1.44
+mol_1050,Clc1ccccc1Br,-3.19
+mol_1058,Cc1ccccc1,-2.21
+mol_106,COC=O,0.58
+mol_1067,CCCC=O,-0.01
+mol_1069,CCCC,-2.57
+mol_1070,COc1ccccc1O,-1.96
+mol_1076,ICI,-2.34
+mol_1082,CC=CC=O,0.32
+mol_1083,CN(C)C(=O)N(C)C ,0.94
+mol_1089,ClCC,-1.06
+mol_109,CC(C)C,-2.55
