@@ -1,0 +1,59 @@
+#This is a CREST input file
+#https://crest-lab.github.io/crest-docs/page/documentation/inputfiles_examples.html#multicenter-oniom3-setup
+input='struc.xyz'  # coordinates will be read from this file
+runtype='ancopt'  # Geometry optimization runtype
+
+#parallelization
+threads=9
+
+#calculation data. The calculation object can contain several [[calculation.level]]s
+[calculation]
+type=0  # specify energy & gradient from [[calculation.level]] to be used
+        # if type=0, or it is absent, all energies and gradients will simply be added together.
+
+#calculation levels
+[[calculation.level]]   # a GFN-FF as outer layer
+method="gfnff"
+chrg=0
+
+#calculation levels
+[[calculation.level]]   # a GFN0-xTB calculation as basis
+method="gfn0"
+uhf=0
+chrg=0
+
+[[calculation.level]]   # GFN2-xTB for smallest fragments
+method="gfn2"
+uhf=0
+chrg=0
+
+# All data for lwONIOM must be contained in a corresponding [lwoniom]-block
+[lwoniom]
+# The systems total number of atoms must be specified
+natoms = 58
+# Then, the XYZ file name can be given.
+xyz = 'struc.xyz'
+# Optionally, some topology or bond order can be defined.
+# If this is left out, the connectivity is determined from vdW radii
+topo = 'example.wbo'
+ 
+# Next, fragments must be defined on an by-atom basis
+# An ascending fragment numbering is assumed, i.e., fragment.1 will be the parent system
+fragment.1 = 'all'   # fragment 1 contains all atoms
+fragment.2 = [1,2]   # fragment 2 contains atoms 1 (Cl) and 2 (Al)
+fragment.3 = "29-34" 
+fragment.4 = "3-8"
+fragment.5 = "22-27"
+fragment.6 = "11,13-16,19"
+
+# Finally, layers are defined on an by-fragment basis
+# As with the fragments, layers are given in ascending order
+# One layer can contain multiple (non-overlapping) fragments in MC-ONIOM, which is not the case here
+layer.1 = [1]  # layer 1 contains only fragment 1
+layer.2 = [2]
+layer.3 = [3,4,5,6]
+
+# Lastly, the layers must be attached to the respective [[calculation.level]]
+layerlevel.1 = 1
+layerlevel.2 = 2
+layerlevel.3 = 3
