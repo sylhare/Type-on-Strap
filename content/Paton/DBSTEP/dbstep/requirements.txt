@@ -1,0 +1,4 @@
+numpy
+numba
+scipy
+cclib

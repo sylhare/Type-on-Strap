@@ -1,0 +1,42 @@
+{% set name = "dbstep" %}
+{% set version = "1.1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  sha256: b7e3278219f67c6def9ba1754c193ffff18348db14e3d328eacb6e081773b92a
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - cclib
+    - numba
+    - numpy
+    - python
+    - scipy
+
+test:
+  imports:
+    - dbstep
+
+about:
+  home: "https://github.com/bobbypaton/DBSTEP"
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: "DFT Based Steric Parameters"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - luchini18
