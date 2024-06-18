@@ -1,0 +1,7 @@
+FILES=*xyz
+OPTIONS=$*
+for xyzfile in $FILES
+do
+  python -m dbstep $xyzfile --atom1 1 --atom2 2 $OPTIONS
+done
+

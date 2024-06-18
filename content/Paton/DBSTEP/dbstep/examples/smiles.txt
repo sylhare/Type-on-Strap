@@ -1,0 +1,6 @@
+CC(O)=O
+CCC(O)=O 
+CCCC(O)=O 
+CCCCC(O)=O
+CC(C)C(O)=O
+CCC(C)C(O)=O
