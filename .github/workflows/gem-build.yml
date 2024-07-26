@@ -24,7 +24,7 @@ jobs:
       - name: Install github-pages gem 2.7.4
         continue-on-error: true
         run: bundle install
-        working-directory: ./.github/workflows
+        working-directory: ./.github/workflows/ruby-2.7.4
         if: matrix.ruby == '2.7.4'
       - name: Install github-pages gem
         run: |
