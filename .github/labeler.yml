@@ -1,8 +1,8 @@
 question:
-  - '(?)'
+  - '(?|How|What|Why|When|Where|Who)'
 
 bug:
-  - '(bug|issue|problem)'
+  - '(bug|issue|problem|broken|does not work|not working)'
 
 enhancement:
   - '(enhancement|feature)'
