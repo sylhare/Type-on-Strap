@@ -1,5 +1,5 @@
 question:
-  - '(?|How|What|Why|When|Where|Who)'
+  - '(\?|How|What|Why|When|Where|Who)'
 
 bug:
   - '(bug|issue|problem|broken|error|fail|does not work|not working)'
