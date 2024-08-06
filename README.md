@@ -380,6 +380,7 @@ Use it in any markdown file. There are two fields in the _include_ you need to l
     - default is 2 columns
     - `column=3` set 3 columns
     - `column="auto"` makes as many columns as images
+  - _caption_: (OPTIONAL) Add a caption to the images
 
 #### Code highlight
 
