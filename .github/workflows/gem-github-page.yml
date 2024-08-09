@@ -36,5 +36,5 @@ jobs:
       - name: Build jekyll site
         run: bundle exec jekyll build
       - name: Start Jekyll site
-        run: bundle exec jekyll serve
-        timeout-minutes: 0.2
+        run: timeout 10s bundle exec jekyll serve
+        continue-on-error: true
