@@ -23,7 +23,7 @@ jobs:
           -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
           ${{ matrix.docker-image }}:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
 
-      - name: Install packages
+      - name: Pull docker images
         continue-on-error: true
         run: |
           docker pull sylhare/type-on-strap

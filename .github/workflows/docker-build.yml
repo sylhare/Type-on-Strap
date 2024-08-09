@@ -19,3 +19,8 @@ jobs:
         continue-on-error: true
         run: |
           cd assets && docker build .
+      - name: Pull docker images
+        continue-on-error: true
+        run: |
+          docker pull sylhare/type-on-strap
+          docker pull sylhare/jekyll
