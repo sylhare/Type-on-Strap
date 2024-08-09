@@ -1,0 +1,26 @@
+name: Build Docker with theme
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        with:
+          ruby-version: '3.3'
+        uses: ruby/setup-ruby@v1
+      - name: Build with Docker
+        continue-on-error: true
+        run: |
+          cd assets && docker build .
+      - name: Pull docker images
+        continue-on-error: true
+        run: |
+          docker pull sylhare/type-on-strap
+          docker pull sylhare/jekyll

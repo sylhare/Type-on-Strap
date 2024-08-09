@@ -1,4 +1,4 @@
-name: Build Ruby Gem
+name: Build theme as GitHub page
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: [ '3.1', '3.2', '3.3' ]
+        ruby: [ '2.7.4', '3.0', '3.3' ]
 
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +21,16 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Install github-pages gem 2.7.4
+        continue-on-error: true
+        run: bundle install
+        working-directory: ./.github/workflows/ruby-2.7.4
+        if: matrix.ruby == '2.7.4'
+      - name: Install github-pages gem
+        run: |
+          gem install github-pages
+          gem update --system
+        if: matrix.ruby != '2.7.4'
       - name: Install
         run: bundle install
       - name: Build jekyll site
@@ -28,17 +38,3 @@ jobs:
       - name: Start Jekyll site
         run: timeout 10s bundle exec jekyll serve
         continue-on-error: true
-      - name: Build the gem
-        continue-on-error: true
-        run: |
-          gem build *.gemspec
-          echo `find . -name "*.gem" | tail -1 | awk -F"[/]" '{print $2}'`
-      - name: Install theme gems
-        run: |
-          gem cleanup type-on-strap
-          gem install type-on-strap --source "https://rubygems.org" 
-          gem install jekyll-theme-type-on-strap --source "https://rubygems.org"
-      - name: GPR
-        run: |
-          gem cleanup type-on-strap
-          gem install type-on-strap --version "2.4.10" --source "https://rubygems.pkg.github.com/sylhare"
