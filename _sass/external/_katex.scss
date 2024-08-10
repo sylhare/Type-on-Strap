@@ -7,10 +7,12 @@ $katex-font-path: "../../assets/fonts/katex" !default;
   @media screen and (max-width: $sm-break) {
     overflow-x: auto;
   }
-  padding-bottom: 3px;
-  padding-top: 1px;
-  width: auto;
-  height: auto;
+  & {
+    padding-bottom: 3px;
+    padding-top: 1px;
+    width: auto;
+    height: auto;
+  }
 }
 
 .math-display {
