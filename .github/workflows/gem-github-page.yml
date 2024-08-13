@@ -1,4 +1,4 @@
-name: Build theme as GitHub page
+name: Type-on-strap CI (GitHub Pages)
 
 on:
   pull_request:
@@ -35,6 +35,12 @@ jobs:
         run: bundle install
       - name: Build jekyll site
         run: bundle exec jekyll build
+      # GitHub pages use docker jekyll/builder to deploy the site
+      - name: Build the site in the container
+        run: |
+          docker run \
+          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+          jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
       - name: Start Jekyll site
         run: timeout 10s bundle exec jekyll serve
         continue-on-error: true

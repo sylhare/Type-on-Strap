@@ -1,4 +1,4 @@
-name: Build Ruby Gem
+name: Type-on-strap CI
 
 on:
   pull_request:
@@ -25,6 +25,11 @@ jobs:
         run: bundle install
       - name: Build jekyll site
         run: bundle exec jekyll build
+      - name: Build the site in the container
+        run: |
+          docker run \
+          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+          sylhare/jekyll:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && jekyll build --future"
       - name: Start Jekyll site
         run: timeout 10s bundle exec jekyll serve
         continue-on-error: true
