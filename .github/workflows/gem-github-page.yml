@@ -1,4 +1,4 @@
-name: Build theme as GitHub page
+name: Type-on-strap CI (GitHub Pages)
 
 on:
   pull_request:

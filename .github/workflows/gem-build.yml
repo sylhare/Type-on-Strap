@@ -1,4 +1,4 @@
-name: Build Ruby Gem
+name: Type-on-strap CI
 
 on:
   pull_request:
