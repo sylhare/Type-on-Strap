@@ -1,11 +1,11 @@
-name: Build Ruby Gem
+name: Type-on-strap CI
 
 on:
   pull_request:
     branches: [ master ]
 
 jobs:
-  test:
+  ruby:
 
     runs-on: ubuntu-latest
     strategy:

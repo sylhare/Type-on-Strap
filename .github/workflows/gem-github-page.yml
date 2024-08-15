@@ -1,11 +1,11 @@
-name: Build theme as GitHub page
+name: Type-on-strap CI (GitHub Pages)
 
 on:
   pull_request:
     branches: [ master ]
 
 jobs:
-  test:
+  ruby:
 
     runs-on: ubuntu-latest
     strategy:
