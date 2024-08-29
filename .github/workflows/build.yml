@@ -1,8 +1,8 @@
-name: Build
+name: CI
 
 on:
   workflow_run:
-    workflows: ["Build with Docker"]
+    workflows: ["Build"]
     types:
       - completed
 
