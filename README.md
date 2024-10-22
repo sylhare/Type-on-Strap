@@ -1,6 +1,6 @@
-# Repository of the CAMLC24 micro-credential
+# Repository of the CAMLC workshop
 
-For more information about the micro-credential, please visit the [official webpage](https://jvalegre.github.io/).
+For more information about the micro-credential, please visit the [official webpage](https://camlcworkshop.github.io/).
 
 <br>
 <br>
