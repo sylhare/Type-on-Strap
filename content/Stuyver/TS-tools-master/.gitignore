@@ -1,5 +1,0 @@
-.xtboptok
-src/reaction_profile_generator/__pycache__/*
-.autode_calculations
-__pycache__/
-src/ts_tools/__pycache__/*.pyc

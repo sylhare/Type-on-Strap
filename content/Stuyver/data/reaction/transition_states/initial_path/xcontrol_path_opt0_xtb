@@ -1,8 +1,0 @@
-$constrain
-force constant=2
-distance:1, 6, 3.2313
-$
-$constrain
-force constant=2
-distance:1, 2, 1.9843
-$
