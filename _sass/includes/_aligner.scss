@@ -1,0 +1,33 @@
+/* --- Aligner --- */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 0.9% 0 1.5% 0;
+}
+
+.caption-style {
+  order: 1;
+  flex: 1 1 100%;
+  display: block;
+  font-style: italic;
+  font-size: 0.8em;
+  text-align: center;
+  color: var(--meta);
+  font-weight: 200;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.column {
+  flex: 1 0;
+
+  img {
+    min-width: 250px;
+  }
+  .single {
+    width: 100%;
+    display: block;
+  }
+}
