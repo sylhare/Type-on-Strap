@@ -27,11 +27,11 @@ It by default look into `assets/img/` so give the path from there, example:
 
 {% highlight ruby %}
 {% raw %}
-{% include aligner.html images="pexels/book-glass.jpeg,triangle.png" %}
+{% include aligner.html images="pexels/book-glass.jpeg,triangle.png" caption="A caption under the images" %}
 {% endraw %}
 {% endhighlight %}
 
-{% include aligner.html images="pexels/book-glass.jpeg,feature-img/desk-messy.jpeg" %}
+{% include aligner.html images="pexels/book-glass.jpeg,feature-img/desk-messy.jpeg" caption="A caption under the images" %}
 
 
 Here you have two images side by side, but you can set more and set the amount per columns 
@@ -50,9 +50,9 @@ However you can just use the Markdown way of doing it to get the image normal si
 
 {% highlight ruby %}
 {% raw %}
-# Markdown way (bigger)
+# Markdown way
 ![Travel]({{ "/assets/img/pexels/computer.jpeg" | relative_url}})
-# Aligner with only One (50% of width)
+# Aligner with only one image
 {% include aligner.html images="pexels/computer.jpeg" %}
 {% endraw %}
 {% endhighlight %}
