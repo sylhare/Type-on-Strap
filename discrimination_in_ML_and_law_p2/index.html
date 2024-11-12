@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact" />
+<meta name="author" content="<a href="fereshte-khani.github.io">Fereshte Khani</a>, <a href=https://cs.stanford.edu/~pliang"> Percy Liang</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-23T00:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact" />
+<script type="application/ld+json">
+{"url":"http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/"},"author":{"@type":"Person","name":"<a href=\"fereshte-khani.github.io\">Fereshte Khani</a>, <a href=https://cs.stanford.edu/~pliang\"> Percy Liang</a>"},"description":"The official Stanford AI Lab blog","headline":"From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact","dateModified":"2022-12-23T00:00:00-06:00","datePublished":"2022-12-23T00:00:00-06:00","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact  | The Stanford AI Lab Blog</title>
+    <meta name="description" content="A summary of the legal procedure for proving discrimination and its analogy to machine learning focusing on disparate impact">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact ">
+    
+    <meta name="twitter:description" content="A summary of the legal procedure for proving discrimination and its analogy to machine learning focusing on disparate impact">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/feature.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/feature.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">From Discrimination in Machine Learning to Discrimination in Law, Part 2: Disparate Impact </h1>
+    <p class="meta">
+    <a href="fereshte-khani.github.io">Fereshte Khani</a>, <a href=https://cs.stanford.edu/~pliang"> Percy Liang</a>
+    <div class="post-date">December 23, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+<style type="text/css">
+.ML-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+.ML-table thead tr {
+    background-color: lightgreen;
+    color: #ffffff;
+    text-align: left;
+    width: 100%;
+}
+.ML-table th,
+.ML-table td {
+    padding: 12px 15px;
+    width: 100%;
+}
+.ML-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: #f3f3f3;
+    width: 100%;
+}
+
+.ML-table tbody tr:last-of-type {
+    border-bottom: 2px solid lightgreen;
+    width: 100%;
+}
+
+.main-table {
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+.main-table thead tr {
+    background-color: lightblue;
+    color: #ffffff;
+    text-align: left;
+    width: 100%;
+}
+.main-table th,
+.main-table td {
+    padding: 12px 15px;
+    width: 100%;
+}
+.main-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: #f3f3f3;
+    width: 100%;
+
+}
+
+.main-table tbody tr:last-of-type {
+    border-bottom: 2px solid lightblue;
+    width: 100%;
+}
+</style>
+
+<!-- End Styles -->
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" padding="0" src="/blog/assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/image1.png" /></p>
+</div></figure>
+<blockquote>
+  <p>“Simple justice requires that public funds, to which all taxpayers of all races contribute, not be spent in any fashion which encourages, entrenches, subsidizes or results in racial discrimination.”</p>
+
+  <p>John F. Kennedy, 1963</p>
+</blockquote>
+
+<p>This blog post is the second of a series about discrimination in law and it explains one form of discrimination known as <strong>disparate impact</strong>  (see<a href="http://ai.stanford.edu/blog/discrimination_in_ML_and_law/"> first part</a> about disparate treatment). It is based on <a href="https://www.eeoc.gov/laws/guidance/cm-604-theories-discrimination">CM-604 Theories of Discrimination (Title VII) </a>and chapters 6 and 7 of <a href="https://www.justice.gov/crt/book/file/1364106/download">TITLE VI Legal Manual</a>.  This blog post assists researchers in identifying and mitigating discriminatory models by providing a parallel between proving discrimination in law and proving discrimination in machine learning.</p>
+
+<!-- | Machine Learning Analogy | |
+| --- | |
+| For each section, we give a brief history of related efforts in machine learning in a green box like this one! | |
+{: class="ML-table"} -->
+<!-- | Main Point |
+| --- |
+| We write the main point for each section in a blue box like this one! |
+{: class="main-table"} -->
+
+<table class="ML-table">
+  <thead>
+    <th>Machine Learning Analogy</th>
+    <th></th>
+  </thead>
+  <tr>
+    <td>For each section, we give a brief history of related efforts in machine learning in a green box like this one!</td>
+    <td></td>
+  </tr>
+</table>
+
+<table class="main-table">
+  <thead>
+    <th>Main Point</th>
+    <th></th>
+  </thead>
+  <tr>
+    <td>We write the main point for each section in a blue box like this one!</td>
+    <td></td>
+  </tr>
+</table>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" padding="0" src="/blog/assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/image2.png" />
+The U.S. Equal Employment Opportunity Commission (<a href="https://www.google.com/url?q=https://www.eeoc.gov/&amp;sa=D&amp;source=editors&amp;ust=1670524652983767&amp;usg=AOvVaw0ervdYN3tNvF2jxWino_lM">EEOC</a>) is responsible for enforcing federal laws that make it illegal to discriminate against a job applicant or an employee because of the protected attributes. Most employers with at least 15 employees are covered by EEOC laws. EEOC charges around 90000 cases each year, of which around 15% result in monetary benefit for the charging party. ( ~300 million dollars per year). The processing time for each charge usually takes ten months.</p>
+</div></figure>
+
+<h1 id="table-of-contents">Table of Contents</h1>
+
+<ul>
+  <li><a href="#protected-attributes">Protected Attributes</a></li>
+  <li><a href="#definition">Definition</a></li>
+  <li><a href="#legal-procedure">Legal Procedure</a>
+    <ul>
+      <li><a href="#example">Example</a></li>
+      <li><a href="#first-step-charging-party-provides-proof-of-disparate-impact">First Step: Charging Party Provides Proof of Disparate Impact</a>
+        <ul>
+          <li><a href="#a-identifying-the-facially-neutral-policy">(a) Identifying the Facially Neutral Policy</a></li>
+          <li><a href="#b-establishing-adversity-harm">(b) Establishing Adversity/Harm</a></li>
+          <li><a href="#c-establishing-disparity">(c) Establishing Disparity</a></li>
+          <li><a href="#d-establishing-causation">(d) Establishing Causation</a></li>
+        </ul>
+      </li>
+      <li><a href="#second-step-respondent-provides-legitimate-business-reasons-justifications">Second Step: Respondent Provides Legitimate Business Reasons (justifications)</a></li>
+      <li><a href="#third-step-charging-party-provides-a-less-discriminatory-alternative">Third step: Charging Party Provides a Less Discriminatory Alternative</a></li>
+    </ul>
+  </li>
+  <li><a href="#real-legal-cases7">Real Legal Cases</a>
+    <ul>
+      <li><a href="#age-discrimination">Age Discrimination</a></li>
+      <li><a href="#sex-discrimination">Sex Discrimination</a></li>
+      <li><a href="#race-discrimination">Race Discrimination</a></li>
+    </ul>
+  </li>
+  <li><a href="#other-types-of-discrimination">Other Types of Discrimination</a>
+    <ul>
+      <li><a href="#perpetuation-of-previous-discriminations">Perpetuation of Previous Discriminations</a></li>
+      <li><a href="#accommodation">Accommodation</a></li>
+      <li><a href="#retaliation">Retaliation</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+<h1 id="protected-attributes">Protected Attributes</h1>
+
+<p>Anti-discrimination laws are designed to prevent discrimination based on one of the following protected attributes:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Race_(human_categorization)">Race</a> – <a href="https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964">Civil Rights Act of 1964</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Religion">Religion</a> – <a href="https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964">Civil Rights Act of 1964</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/National_origin">National origin</a> – <a href="https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964">Civil Rights Act of 1964</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Ageism">Age</a> (40 and over) – <a href="https://en.wikipedia.org/wiki/Age_Discrimination_in_Employment_Act_of_1967">Age Discrimination in Employment Act of 1967</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Sex">Sex</a> –  Equal<a href="https://en.wikipedia.org/wiki/Equal_Pay_Act_of_1963"> Pay Act of 1963</a> and <a href="https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964">Civil Rights Act of 1964</a>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Sexual_orientation">Sexual orientation</a> and <a href="https://en.wikipedia.org/wiki/Gender_identity">gender identity</a> as of <a href="https://en.wikipedia.org/wiki/Bostock_v._Clayton_County">Bostock v. Clayton County</a> – <a href="https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964">Civil Rights Act of 1964</a><sup><sup id="fnref:newYorkTimesArticle" role="doc-noteref"><a href="#fn:newYorkTimesArticle" class="footnote">1</a></sup></sup></li>
+    </ul>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/Pregnancy">Pregnancy</a> – <a href="https://en.wikipedia.org/wiki/Pregnancy_Discrimination_Act">Pregnancy Discrimination Act</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Family">Familial status</a> – <a href="https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1968">Civil Rights Act of 1968</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Disability">Disability</a> status – <a href="https://en.wikipedia.org/wiki/Rehabilitation_Act_of_1973">Rehabilitation Act of 1973</a> and <a href="https://en.wikipedia.org/wiki/Americans_with_Disabilities_Act_of_1990">Americans with Disabilities Act of 1990</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Veteran">Veteran</a> status – <a href="https://en.wikipedia.org/wiki/Vietnam_Era_Veterans%27_Readjustment_Assistance_Act_of_1974">Vietnam Era Veterans’ Readjustment Assistance Act of 1974</a> and <a href="https://en.wikipedia.org/wiki/Uniformed_Services_Employment_and_Reemployment_Rights_Act">Uniformed Services Employment and Reemployment Rights Act</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Genetic_information">Genetic information</a> – <a href="https://en.wikipedia.org/wiki/Genetic_Information_Nondiscrimination_Act">Genetic Information Nondiscrimination Act</a> (GINA)</li>
+</ul>
+
+<h1 id="definition">Definition</h1>
+
+<p>Disparate impact occurs when policies/practices that <strong>appear neutral</strong> result in a <strong>disproportionate impact on a protected group</strong> without any <strong>business necessity</strong> <sup id="fnref:legalBook" role="doc-noteref"><a href="#fn:legalBook" class="footnote">2</a></sup>.</p>
+
+<p>Business necessity is context dependent; for example, a university that hires professors can argue that having a Ph.D. for employment is necessary (although this requirement might cause a disproportionate impact for different races); however, the university cannot argue something like physical strength as a business necessity (which lead to disproportionate impact for different genders).</p>
+
+<table class="ML-table">
+  <thead>
+    <tr>
+      <th>Disparate Impact in Machine Learning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Consider pedestrian detection models used in autonomous cars. Assume that the model prediction appears neutral and performs the same for black and white pedestrians in any situation. If there are more reported accidents with black pedestrians than the general population (e.g., the model performs poorly in black-dominated neighborhoods), and the developers cannot provide any business reason for this disparity then this can be considered as a <strong>disparate impact</strong> case. <br /> In contrast, if the model fails to recognize a black pedestrian in a specific situation but recognizes a white pedestrian in the same situation  (same place, same outfit, same time of the day, etc.), this can be considered a <strong>disparate treatment</strong> case.</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" padding="0" src="/blog/assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/image3.png" /></p>
+<figcaption>
+Disparate treatment means discriminating against protected groups by directly using their protected attributes or their strong proxies (e.g., not considering the disabled applications for hiring a math teacher). Disparate impact means discriminating against protected groups by having a neutral policy with disparate impacts on different groups without any business necessity (e.g., using strength tests for jobs like math teachers that do not need strength).
+</figcaption>
+</div></figure>
+
+<h1 id="legal-procedure">Legal Procedure</h1>
+
+<p>The legal procedure for proving disparate impact consists of three steps (figure below):</p>
+
+<ol>
+  <li>The charging party (the party that believes it has suffered from disparate impact) needs to show that a specific practice caused people in a protected group to be treated worse than people not in the protected class.</li>
+  <li>The respondent (the party that is accused of disparate impact, e.g., employer) attempts to show that it had a <em>legitimate business reason</em> for this specific practice.</li>
+  <li>If the business reason is legitimate, the charging party can show that the respondent could have achieved the same business goal by a less discriminatory method.</li>
+</ol>
+
+<p>In a disparate treatment case, the charging party must only prove that the correspondent is using the protected attribute for its decision. On the other hand, in the disparate impact case, in addition to proving that there is a disparate impact, the charging party needs to show that there is no business necessity for the policy or there is an alternative that leads to the same performance but less disparate impact.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" padding="0" src="/blog/assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/image1.png" /></p>
+<figcaption>
+The legal procedure for proving disparate impact has three steps: 1) The charging party needs to show that a specific practice harms people in a protected group 2) The respondent shows that it had a legitimate business reason, 3) if the business reason is legitimate, the charging party can show that the respondent can achieve the same business goal by a less discriminatory method.
+</figcaption>
+</div></figure>
+
+<h2 id="example">Example<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">3</a></sup></h2>
+
+<p>A middle school has a “zero tolerance” tardiness policy. Late students must stay in the principal’s office for the rest of the class period regardless of their reason for tardiness.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" padding="0" src="/blog/assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/image6.png" /></p>
+<figcaption>
+In a hypothetical school, Asian Americans live further away from school in comparison to other students; thus, they should use public transportation.  Referring students to the principal office because of tardiness affects Asian-American students more than other students. 
+</figcaption>
+</div></figure>
+
+<!-- [^legalExample]. -->
+
+<p><strong>Step 1: Proof of disparate impact:</strong> The evidence shows that Asian-American students are disproportionately losing instruction time under the school’s “zero tolerance” tardiness policy. A further investigation reveals that whites and Hispanics are more likely to live within walking distance of the school, while Asian-American students typically live farther away and must take public transportation. Even if they take the first bus available in the morning, they are often dropped off after school starts.</p>
+
+<p><strong>Step 2: Justification</strong>: As justification for the “zero tolerance” tardiness policy, the school articulates the goals of reducing disruption caused by tardiness and encouraging good attendance, all of which the federal funding agency accepts as important educational goals.</p>
+
+<p><strong>Step 3: Assessment of justification and alternatives</strong>: The plaintiff first assesses the justification— including whether the policy is reasonably likely to reduce tardiness for these students under these circumstances. If the justification is valid, the plaintiff would then investigate alternatives that would achieve the important educational goals while reducing the adverse impact on Asian-American students (e.g., aligning class schedules and bus schedules). If such alternatives are present, the school is violating Title VI.</p>
+
+<h2 id="first-step-charging-party-provides-proof-of-disparate-impact">First Step: Charging Party Provides Proof of Disparate Impact</h2>
+
+<p>Proving disparate impact involves four substeps:</p>
+
+<h4 id="a-identifying-the-facially-neutral-policy">(a) Identifying the Facially Neutral Policy</h4>
+
+<p>As the first step, the charging party should Identify the policy or practice that allegedly caused disparate harm.</p>
+
+<h4 id="b-establishing-adversity-harm">(b) Establishing Adversity/Harm</h4>
+
+<p>In the second step, the charging party should identify the kind of harm. Examples include fewer or inferior services or benefits, distribution of burdens and negative effects, threatened or imminent harm, etc.</p>
+
+<h4 id="c-establishing-disparity">(c) Establishing Disparity</h4>
+
+<p>In the third step, the charging party should show that a disproportionate share of the adversity/harm is on protected groups. For doing so, they first need to define the correct population base (individuals affected by the policy or who may be affected by changes to or elimination of the policy). Secondly, they should determine that the disparity is large enough to matter (i.e., is it sufficiently significant to establish a legal violation)<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">4</a></sup>.</p>
+
+<h4 id="d-establishing-causation">(d) Establishing Causation</h4>
+
+<p>In the last step, the charging party should show that the policy actually caused that effect. A disparate impact claim is not valid if the evidence shows that even without the challenged practice, the same disparate impact would have existed. In particular, the Supreme Court has emphasized that entities should not be “held liable for racial disparities they did not create.”<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">5</a></sup></p>
+
+<table class="ML-table">
+  <thead>
+    <tr>
+      <th>Machine Learning Analogy for Step 1: Proof of Disparate Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>We now briefly explain efforts in ML  for each step:</td>
+    </tr>
+    <tr>
+      <td><strong>Identifying the policy:</strong>  ML researchers usually investigate a specific ML application (e.g., a face recognition model). However, there are tasks where model predictions do not deterministically define the final decisions. For example, in risk assessment methods in criminal justice, the model’s scores are shown to the judges to decide, thus it is not clear how it changes the judge’s decision <sup id="fnref:albright2019" role="doc-noteref"><a href="#fn:albright2019" class="footnote">6</a></sup>. It is important to pinpoint the exact policy for investigation.</td>
+    </tr>
+    <tr>
+      <td><strong>Defining harm:</strong> There have been many proposals to define the harms of  ML models (e.g., false-positive parity <sup id="fnref:hardt" role="doc-noteref"><a href="#fn:hardt" class="footnote">7</a></sup>, demographic parity <sup id="fnref:kamiran2012" role="doc-noteref"><a href="#fn:kamiran2012" class="footnote">8</a></sup>, parity in amount of actions that need to be done to flip the decision <sup id="fnref:milli2019" role="doc-noteref"><a href="#fn:milli2019" class="footnote">9</a></sup>).</td>
+    </tr>
+    <tr>
+      <td><strong>Establishing disparity:</strong>  ML researchers usually assume they have access to the protected attributes.<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">10</a></sup> It is important to note that disparate impact (unlike disparate treatment) is very sensitive to the distribution of protected groups. The same policy could have significant disparate impact in one location but not another! Therefore, exactly understanding who is impacted by the model’s decision is crucial for this step.</td>
+    </tr>
+    <tr>
+      <td><strong>Establishing causation</strong>: As explained in step 1, it is a common practice to only investigate an ML model in isolation. In this case, model prediction is a causal outcome of the model itself! However, we should be careful when we study a process that is caused by interaction between humans and ML models. For example, in hiring through Linkedin, discrimination can happen because of the ML model recommendation or biased recruiters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="main-table">
+  <thead>
+    <tr>
+      <th>Main point of Step 1: Proof of Disparate Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Proving disparate impact involves four steps: 1) identifying the policy, 2) establishing harms, 3) establishing disparity, and 4) establishing causation. All of these components in both ML and law are hard to define and are highly context-dependent.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="second-step-respondent-provides-legitimate-business-reasons-justifications">Second Step: Respondent Provides Legitimate Business Reasons (justifications)</h2>
+
+<p>In this step, the respondent should articulate a “substantial legitimate justification” for the challenged policy or practice. Agencies should thoroughly investigate the facts to determine whether these rationales are supported by sufficient evidence.</p>
+
+<p><strong>Example</strong><sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">11</a></sup><strong>.</strong> Alexander v. Sandoval, 532 U.S. 275 (2001). James Alexander, Director of the Alabama Department of Public Safety, ordered that the test for Alabama driver’s license test needs to be done in English. Martha Sandoval sued Alexander and claimed that the English-only test policy was discriminatory. The state agency offered several justifications for the English-only rule: highway safety concerns, exam administration difficulties, exam integrity, and budgetary constraints.</p>
+
+<p>The district court found that the recipient had produced no evidence at trial that non-English speakers posed a greater driving safety risk than English speakers; the recipient had undermined its own safety argument by recognizing valid licenses from non-English speakers of other locales; making test accommodations for illiterate, deaf, and disabled drivers; and having previously offered the examination in fourteen languages without administrative difficulty.</p>
+
+<p>The court further noted that cost had not been a real factor in making the decision to administer the examination only in English and that the recipient could afford the costs of language assistance in light of its $50 million dollar budget. Affirming the district court, the Eleventh Circuit ruled that the state agency’s rationales constituted a pretext for the policy.</p>
+
+<table class="ML-table">
+  <thead>
+    <tr>
+      <th>Machine Learning efforts for Providing Legitimate Business Reasons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>At first, ML researchers accused several ML models of not satisfying demographic parity <sup id="fnref:pedreshi2008" role="doc-noteref"><a href="#fn:pedreshi2008" class="footnote">12</a></sup> (i.e., the prediction should be independent of protected attributes). In response, other ML researchers argued that the protected groups can have different base rates (e.g., in hiring, there might be a different number of qualified people in the different groups). As a result, equalized opportunity measure <sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">13</a></sup><sup id="fnref:hardt:1" role="doc-noteref"><a href="#fn:hardt" class="footnote">7</a></sup> was proposed. This measure considers the difference in base rate and asks to have the same acceptance rate for data points with the same ground truth (e.g., in hiring the same acceptance rate among qualified individuals in each group). ML researchers then accused several models of not satisfying equal opportunity. As a rebuttal, <sup id="fnref:sharad" role="doc-noteref"><a href="#fn:sharad" class="footnote">14</a></sup> argued that groups can have different risk distributions, thus making it hard for the models to satisfy equal opportunity.</td>
+    </tr>
+    <tr>
+      <td>A common practice in law is to consider some features (e.g., education) and then show that there are no disparities between groups conditioned on those features.  They then argue that such features are business necessities. In Machine learning error analysis and understanding what causes a group to have higher error is necessary for this step.</td>
+    </tr>
+    <tr>
+      <td>Finally, note that ML researchers show that the model satisfies some measures according to validation/test data. However, ML models usually work with historical data. The labels and features in training data can be biased (e.g., women who deserve promotion get no promotion in data or minorities who got arrested without any crime). In these cases, showing that the model does not demonstrate disparate impact or the distribution of the groups is the same for some features will not be accepted since the real distribution is different.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="main-table">
+  <thead>
+    <tr>
+      <th>Main Point of Step 2: Providing Legitimate Business Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ML researchers should put more effort into error analysis of ML models <sup id="fnref:errorAnalysisBesmira" role="doc-noteref"><a href="#fn:errorAnalysisBesmira" class="footnote">15</a></sup><sup id="fnref:errorAnalysisVisionBesmira" role="doc-noteref"><a href="#fn:errorAnalysisVisionBesmira" class="footnote">16</a></sup><sup id="fnref:checklist" role="doc-noteref"><a href="#fn:checklist" class="footnote">17</a></sup>. By error analysis, one can better understand if the disparity between groups is because of business necessity (e.g., population X has more images at night which cause bad performance for the pedestrian detection model) or cannot be explained by business necessity (e.g., the pedestrian detection model has bad performance in some neighborhoods).</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" padding="0" src="/blog/assets/img/posts/2022-12-23-discrimination_in_ML_and_law_p2/image4.png" /></p>
+<figcaption>
+A company can be alleged to have disparate impact if there is an alternative practice that satisfies the company goals with less disparate impacts on protected attributes. 
+</figcaption>
+</div></figure>
+
+<h2 id="third-step-charging-party-provides-a-less-discriminatory-alternative">Third step: Charging Party Provides a Less Discriminatory Alternative</h2>
+
+<p>If the justification were valid, the investigating agency should investigate if there are equally effective alternative practices with less disparate impact.</p>
+
+<table class="ML-table">
+  <thead>
+    <tr>
+      <th>Machine Learning efforts for Providing Less Discriminatory Alternatives</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>In deep learning networks, many models have the same performance on train and test but exhibit disparities in performance across groups <sup id="fnref:damour" role="doc-noteref"><a href="#fn:damour" class="footnote">18</a></sup>. ML researchers have put a lot of effort into finding alternatives that are less discriminatory! For example by adding a regularization term while training <sup id="fnref:khani2019mwld" role="doc-noteref"><a href="#fn:khani2019mwld" class="footnote">19</a></sup> <sup id="fnref:damour:1" role="doc-noteref"><a href="#fn:damour" class="footnote">18</a></sup>.</td>
+    </tr>
+    <tr>
+      <td>Model developers should always study the existence of alternatives with less discriminatory behavior, since the alternatives may be used as evidence for the disparate impact case.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="real-legal-cases">Real Legal Cases<sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote">20</a></sup></h1>
+
+<h3 id="age-discrimination"><a href="https://www.eeoc.gov/newsroom/allstate-pay-45-million-settle-age-bias-suit-0">Age Discrimination</a></h3>
+
+<p><em>“Under the Age Discrimination in Employment Act (ADEA), the EEOC charged that in the year 2000 Allstate adopted a hiring moratorium for a period of one year, or while severance benefits were being received, that applied to all its employee-sales agents who were part of its ‘</em>‘Preparing  For The Future Reorganization Program’<em>. The program was part of Allstate’s reorganization from employee agents to what the company considered independent contractors. The EEOC alleged that the policy had a disproportionate impact on Allstate’s employees over the age of 40 because more than 90 percent of the agents subjected to the hiring moratorium were 40 years of age or older.”</em></p>
+
+<p><strong>Ramifications:</strong> “Allstate Insurance Company, one of the nation’s largest insurers, for $4,500,000 to approximately 90 older former employees, in addition to significant remedial relief.”</p>
+
+<h3 id="sex-discrimination"><a href="https://www.eeoc.gov/newsroom/csx-transportation-pay-32-million-settle-eeoc-disparate-impact-sex-discrimination-case">Sex Discrimination</a></h3>
+
+<p><em>“CSXT Transportation conducted isokinetic strength testing as a requirement for workers to be hired for various jobs. The EEOC said that the strength test used by CSXT, known as the “IPCS Biodex” test, caused an unlawful discriminatory impact on female workers seeking jobs as conductors, material handler/clerks, and a number of other job categories. The EEOC also charged that CSXT used two other employment tests, a three-minute step test seeking to measure aerobic capacity and a discontinued arm endurance test, as a requirement for selection into certain jobs, and that those tests also caused an unlawful discriminatory effect on female workers.”</em></p>
+
+<p><strong>Ramifications:</strong> “CSXT had to pay them $3.2 Million to settle the disparate impact sex discrimination case.”</p>
+
+<h3 id="race-discrimination"><a href="https://www.eeoc.gov/newsroom/dollar-general-pay-6-million-settle-eeoc-class-race-discrimination-suit">Race Discrimination</a></h3>
+
+<p><em>“Dollar General, the largest small-box discount retailer in the United States, violated federal law by denying employment to African Americans at a significantly higher rate than white applicants for failing the company’s broad criminal background check. Employment screens that have a disparate impact on the basis of race violate Title VII of the Civil Rights Act of 1964, unless an employer can show the screen is job-related and is a business necessity.”</em></p>
+
+<p><strong>Ramifications:</strong> Dollar General had to pay $6 million and furnish other relief to settle a class race discrimination lawsuit brought by the U.S. Equal Employment Opportunity Commission (EEOC).</p>
+
+<hr />
+
+<h1 id="other-types-of-discrimination">Other Types of Discrimination</h1>
+
+<p>Title VII (<a href="https://www.eeoc.gov/laws/guidance/cm-604-theories-discrimination">Theories of discrimination</a>) prohibited 5 kinds of discrimination in employment. Our <a href="http://ai.stanford.edu/blog/discrimination_in_ML_and_law/">previous post</a> covered disparate treatment; this post covers disparate impact; for completeness, we will briefly mention other types of discrimination here.</p>
+
+<h2 id="perpetuation-of-previous-discriminations">Perpetuation of Previous Discriminations</h2>
+
+<p>This kind of discrimination occurs when a neutral employment system continues to perpetuate the effects of past discrimination.  For proving the perpetuation of past discrimination, the charging party must establish a causal connection between the past discrimination and the current policy’s adverse effects.</p>
+
+<p><strong>Example.</strong> Jamal claims that GE refuses to hire Blacks as summer employees.  GE contends that it gives preference to the children of employees.  Prior to 1964, GE employed very few Blacks due to discriminatory hiring practices.  The policy of giving a preference to the children of employees perpetuates GE’s past discriminatory practices.</p>
+
+<table class="ML-table">
+  <thead>
+    <tr>
+      <th>Perpetuation of Previous Discrimination in Machine Learning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>As there is almost no regulation regarding Machine learning models, these models can cause some discrimination that can get perpetuated. For example, assume company X gives access to its API only to the white majority and stores data from their interaction for training. As a result, the final model performs poorly for non-white groups. Company X can argue that collecting data from non-whites is very costly. This reason cannot be made since this behavior would be an instance of the perpetuation of previous discrimination.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="accommodation">Accommodation</h2>
+
+<p>This type of discrimination occurs by failing to accommodate a prospective or existing employee’s disability or religious practices. The charging party can establish a case by showing that they informed the respondent of the accommodation, but the respondent fails to accommodate (note that there is no need to compare similarly situated individuals or show adverse impacts). In response, the respondent can show that accommodation would have created an undue hardship on the conduct of its business.</p>
+
+<table class="ML-table">
+  <thead>
+    <tr>
+      <th>Accommodation in Machine Learning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The concept of accommodating in machine learning models is not immediately clear. Should features be chosen such that disabled people can provide data too? Should the task be defined in a way that can be applied to disabled people as well? Should the test data (for tasks such as pedestrian detection) report accuracy for disabled people (e.g., people with wheelchairs) separately? All of these could fall under the scope of discrimination wrt accommodation.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="retaliation">Retaliation</h2>
+
+<p>Title VII prohibits discrimination against individuals because they have filed a Title VII charge, have participated in a Title VII investigation, or have otherwise opposed Title VII discrimination.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Discrimination in law has been studied for over seven decades now. There are definitions and <em>clear procedures</em> for proving discrimination. The procedure involves two parties: (1) the charging party who tries to show discrimination has happened and (2) the respondent who tries to show that the charging party’s evidence is not valid. Understanding their process and the challenges will help ML researchers develop better methods to facilitate auditing models and develop mitigation methods.</p>
+
+<h1 id="acknowledgment">Acknowledgment</h1>
+
+<p>We would like to thank <a href="https://www.alextamkin.com/">Alex Tamkin</a>, <a href="https://jmschrei.github.io/">Jacob Schreiber</a>, <a href="http://www.neelguha.com/">Neel Guha</a>, <a href="https://www.peterhenderson.co/">Peter Henderson</a>, <a href="https://cs.stanford.edu/~megha/">Megha Srivastava</a>, and <a href="https://michaelzhang.xyz/">Michael Zhang</a> for their useful feedback on this blog post.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:newYorkTimesArticle" role="doc-endnote">
+      <p>https://www.nytimes.com/2020/06/15/us/gay-transgender-workers-supreme-court.html <a href="#fnref:newYorkTimesArticle" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:legalBook" role="doc-endnote">
+      <p>Paraphrased from Fick, Barbara J. (1997). The American Bar Association guide to workplace law : everything you need to know about your rights as an employee or employer (1st ed.). New York: Times Books.  <a href="https://en.wikipedia.org/wiki/ISBN_(identifier)">ISBN</a> <a href="https://en.wikipedia.org/wiki/Special:BookSources/9780812929287">9780812929287</a>. <a href="#fnref:legalBook" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:1" role="doc-endnote">
+      <p>Example from page 8 in section 7 of TITLE VI LEGAL MANUAL <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>In many cases, courts have shied away from drawing clear lines. See Clady v. Cty. of Los Angeles, 770 F.2d 1421, 1428–29 (9th Cir. 1985); accord Smith v. Xerox Corp., 196 F.3d at 366 (“[T]he substantiality of a disparity is judged on a case-by-case basis.”); Groves, 776 F. Supp. at 1526 (“There is no rigid mathematical threshold that must be met to demonstrate a sufficiently adverse impact.”). <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Inclusive Communities, 135 S. Ct. at 2523 (citing Wards Cove, 490 U.S. at 653) <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:albright2019" role="doc-endnote">
+      <p>Albright, Alex. “If you give a judge a risk score: evidence from Kentucky bail decisions.” <em>Harvard John M. Olin Fellow’s Discussion Paper</em> 85 (2019). <a href="#fnref:albright2019" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:hardt" role="doc-endnote">
+      <p>Hardt, Moritz, Eric Price, and Nati Srebro. “Equality of opportunity in supervised learning.” <em>Advances in neural information processing systems</em> 29 (2016): 3315-3323. <a href="#fnref:hardt" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:hardt:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:kamiran2012" role="doc-endnote">
+      <p>Kamiran, Faisal, and Toon Calders. “Data preprocessing techniques for classification without discrimination.” <em>Knowledge and Information Systems</em> 33.1 (2012): 1-33. <a href="#fnref:kamiran2012" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:milli2019" role="doc-endnote">
+      <p>Milli, Smitha, et al. “The social cost of strategic classification.” <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>. 2019. <a href="#fnref:milli2019" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>There are cases where the protected attributes are not known a priori. There are some methods to deal with disparity when protected attributes are not known, e.g.,  study the worst case group as a proxy for the protected groups in Hashimoto, Tatsunori, et al. “Fairness without demographics in repeated loss minimization.” <em>International Conference on Machine Learning</em>. PMLR, 2018 and Khani, Fereshte, Aditi Raghunathan, and Percy Liang. “Maximum weighted loss discrepancy.” <em>arXiv preprint arXiv:1906.03518</em> (2019). <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Example is taken from section 7 page 33 of <a href="https://www.justice.gov/crt/book/file/1364106/download">Legal Manual of title VI</a> <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:pedreshi2008" role="doc-endnote">
+      <p>Pedreshi, Dino, Salvatore Ruggieri, and Franco Turini. “Discrimination-aware data mining.” <em>Proceedings of the 14th ACM SIGKDD international conference on Knowledge discovery and data mining</em>. 2008. <a href="#fnref:pedreshi2008" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>Proposed as outcome test [^becker] in 1959. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:sharad" role="doc-endnote">
+      <p>Corbett-Davies, Sam, and Sharad Goel. “The measure and mismeasure of fairness: A critical review of fair machine learning.” arXiv preprint arXiv:1808.00023 (2018). <a href="#fnref:sharad" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:errorAnalysisBesmira" role="doc-endnote">
+      <p>Nushi, Besmira, Ece Kamar, and Eric Horvitz. “Towards accountable ai: Hybrid human-machine analyses for characterizing system failure.” <em>Proceedings of the AAAI Conference on Human Computation and Crowdsourcing</em>. Vol. 6. 2018. <a href="#fnref:errorAnalysisBesmira" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:errorAnalysisVisionBesmira" role="doc-endnote">
+      <p>Singla, Sahil, et al. “Understanding failures of deep networks via robust feature extraction.” <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>. 2021. <a href="#fnref:errorAnalysisVisionBesmira" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:checklist" role="doc-endnote">
+      <p>Ribeiro, Marco Tulio, et al. “Beyond accuracy: Behavioral testing of NLP models with CheckList.” <em>arXiv preprint arXiv:2005.04118</em> (2020). <a href="#fnref:checklist" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:damour" role="doc-endnote">
+      <p>D’Amour, Alexander, et al. “Underspecification presents challenges for credibility in modern machine learning.” Journal of Machine Learning Research (2020). <a href="#fnref:damour" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:damour:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:khani2019mwld" role="doc-endnote">
+      <p>Khani, Fereshte, Aditi Raghunathan, and Percy Liang. “Maximum weighted loss discrepancy.” <em>arXiv preprint arXiv:1906.03518</em> (2019). <a href="#fnref:khani2019mwld" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p>Examples from https://www.digitalhrtech.com/disparate-treatment/ <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/&text=From+Discrimination+in+Machine+Learning+to+Discrimination+in+Law%2C+Part+2%3A+Disparate+Impact+%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/&title=From+Discrimination+in+Machine+Learning+to+Discrimination+in+Law%2C+Part+2%3A+Disparate+Impact+%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/&title=From+Discrimination+in+Machine+Learning+to+Discrimination+in+Law%2C+Part+2%3A+Disparate+Impact+%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=From+Discrimination+in+Machine+Learning+to+Discrimination+in+Law%2C+Part+2%3A+Disparate+Impact+%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/discrimination_in_ML_and_law_p2/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ai">
+      <p><i class="fa fa-tag fa-fw"></i> ai</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#discrimination">
+      <p><i class="fa fa-tag fa-fw"></i> discrimination</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#disparate+impact">
+      <p><i class="fa fa-tag fa-fw"></i> disparate impact</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#fairness">
+      <p><i class="fa fa-tag fa-fw"></i> fairness</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#fairness+in+machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> fairness in machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#law">
+      <p><i class="fa fa-tag fa-fw"></i> law</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/corl-2022/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at CoRL 2022
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/iclr-2023/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at ICLR 2023
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
