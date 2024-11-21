@@ -1,8 +1,7 @@
 /* TYPE_ON_STRAP Main style sheet */
 
-/* Variables */
-// All the options to customize your theme in one file
-@import 'base/variables';
+/* Base */
+@use 'base/index' as base;
 
 /* External */
 // CSS from external sources
@@ -12,11 +11,6 @@
 @import 'external/katex';
 @import 'external/source-sans-pro';
 
-/* Base */
-// For general CSS in the theme
-@import 'base/global';
-@import 'base/highlight';
-@import 'base/utility';
 
 /* Includes */
 // Linked with the html in the _includes folder

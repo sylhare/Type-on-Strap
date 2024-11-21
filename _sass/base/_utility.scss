@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 // Mix-ins
 %padding-nav {
   padding: $padding-small $padding-x-large;
