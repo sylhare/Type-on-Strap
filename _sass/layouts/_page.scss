@@ -1,3 +1,6 @@
+@use '../base/variables' as *;
+@use '../base/utility' as *;
+
 .title-padder {
   padding: $title-padding;
 }
