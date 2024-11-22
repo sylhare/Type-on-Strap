@@ -1,3 +1,4 @@
+$katex-font-path: "../../assets/fonts/katex" !default;
 $font-family_1: KaTeX_Main;
 $font-family_2: KaTeX_SansSerif;
 $font-family_3: KaTeX_Typewriter;
@@ -181,7 +182,6 @@ $border-color_1: currentColor;
     font-family: $font-family_1;
   }
   .textsf {
-    font-family: $font-family_2;
     font-family: $font-family_2;
   }
   .texttt {
