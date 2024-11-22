@@ -1,8 +1,10 @@
 /*!
- * KaTeX v0.16.9
- * Plus added customizations for the theme and font path
+ * KaTeX v0.16.11
+ * Plus added customizations for the theme
  */
-$katex-font-path: "../../assets/fonts/katex" !default;
+
+@use "katex/katex";
+
 .katex-display {
   @media screen and (max-width: $sm-break) {
     overflow-x: auto;
@@ -20,4 +22,4 @@ $katex-font-path: "../../assets/fonts/katex" !default;
   width: 100%;
 }
 
-@import "katex/katex";
+
