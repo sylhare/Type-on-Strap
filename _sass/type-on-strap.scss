@@ -4,7 +4,13 @@
 @use 'external/reset';
 
 /* Base */
-@use 'base/index' as base;
+// All the options to customize your theme in one file
+@forward 'base/variables';
+@forward 'base/utility';
+
+// For general CSS in the theme
+@use 'base/global';
+@use 'base/highlight';
 
 /* Includes */
 // Linked with the html in the _includes folder
