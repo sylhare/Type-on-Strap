@@ -1,4 +1,4 @@
-@use '../base/variables' as *;
+@use '../base/variables';
 
 #archive,
 #categories {
@@ -50,7 +50,7 @@
     }
 
     .items {
-      padding-left: $padding-medium;
+      padding-left: variables.$padding-medium;
 
       .item {
         position: relative;

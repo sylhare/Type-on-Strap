@@ -1,4 +1,4 @@
-@use '../base/variables' as *;
+@use '../base/variables';
 @use '../base/utility' as *;
 
 #post-nav {
@@ -23,7 +23,7 @@
     width: 50%;
   }
 
-  @media screen and (max-width: $sm-break) {
+  @media screen and (max-width: variables.$sm-break) {
     a, p {
       font-size: 0.8em;
     }
