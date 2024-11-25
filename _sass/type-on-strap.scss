@@ -1,4 +1,7 @@
-/* TYPE_ON_STRAP Main style sheet */
+/* TYPE_ON_STRAP Main style */
+
+// Reset all styles
+@use 'external/reset';
 
 /* Base */
 @use 'base/index' as base;
@@ -25,10 +28,7 @@
 
 /* External */
 // CSS from external sources
-@import 'external/reset';
-@import 'external/font-awesome';
-@import 'external/pacifico';
-@import 'external/katex';
-@import 'external/source-sans-pro';
-
-
+@use 'external/font-awesome';
+@use 'external/pacifico';
+@use 'external/katex';
+@use 'external/source-sans-pro';
