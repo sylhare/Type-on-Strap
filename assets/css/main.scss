@@ -2,3 +2,17 @@
 ---
 
 @use "type-on-strap";
+
+/**
+
+CUSTOM STYLING
+
+In the case you want to add your own style on top of the type-on-strap one.
+You can add a custom scss file placed in the _sass folder using:
+
+@use 'custom';
+
+Put it right after this comment for your changes to be applied over the default style.
+(Once it processed into the main.css by Jekyll at run time)
+
+*/
