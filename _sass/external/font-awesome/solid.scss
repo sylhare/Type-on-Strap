@@ -3,13 +3,12 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  * Copyright 2024 Fonticons, Inc.
  */
-@use 'functions';
-@forward 'variables' show $fa-inverse, $fa-font-path;
-@use 'variables';
+@import 'functions';
+@import 'variables';
 
 :root, :host {
-  --#{variables.$fa-css-prefix}-style-family-classic: '#{ variables.$fa-style-family }';
-  --#{variables.$fa-css-prefix}-font-solid: normal 900 1em/1 '#{ variables.$fa-style-family }';
+  --#{$fa-css-prefix}-style-family-classic: '#{ $fa-style-family }';
+  --#{$fa-css-prefix}-font-solid: normal 900 1em/1 '#{ $fa-style-family }';
 }
 
 
@@ -17,12 +16,12 @@
   font-family: 'Font Awesome 6 Free';
   font-style: normal;
   font-weight: 900;
-  font-display: variables.$fa-font-display;
-  src: url('#{variables.$fa-font-path}/fa-solid-900.woff2') format('woff2'),
-    url('#{variables.$fa-font-path}/fa-solid-900.ttf') format('truetype');
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-solid-900.woff2') format('woff2'),
+    url('#{$fa-font-path}/fa-solid-900.ttf') format('truetype');
 }
 
 .fas,
-.#{variables.$fa-css-prefix}-solid {
+.#{$fa-css-prefix}-solid {
   font-weight: 900;
 }
