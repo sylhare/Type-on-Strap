@@ -1,3 +1,5 @@
+@use "functions";
+
 // variables
 // --------------------------
 
@@ -10,7 +12,7 @@ $fa-duotone-icon-property : --fa--fa;
 
 $fa-display               : inline-block !default;
 
-$fa-fw-width              : fa-divide(20em, 16) !default;
+$fa-fw-width              : functions.fa-divide(20em, 16) !default;
 $fa-inverse               : #fff !default;
 
 $fa-border-color          : #eee !default;
@@ -37,7 +39,7 @@ $fa-sizes: (
 ) !default;
 
 $fa-li-width              : 2em !default;
-$fa-li-margin             : $fa-li-width * fa-divide(5, 4) !default;
+$fa-li-margin             : $fa-li-width * functions.fa-divide(5, 4) !default;
 
 $fa-pull-margin           : .3em !default;
 
