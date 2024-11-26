@@ -1,40 +1,56 @@
-/* TYPE_ON_STRAP Main style */
+/* TYPE_ON_STRAP Main style sheet */
 
-// Reset all styles
-@use 'external/reset';
-
-/* Base */
+/* Variables */
 // All the options to customize your theme in one file
-@forward 'base/variables';
-@forward 'base/utility';
-
-// For general CSS in the theme
-@use 'base/global';
-@use 'base/highlight';
-
-/* Includes */
-// Linked with the html in the _includes folder
-@use 'includes/post_nav';
-@use 'includes/footer';
-@use 'includes/navbar';
-@use 'includes/share_buttons';
-@use 'includes/blog_nav';
-@use 'includes/gallery';
-@use 'includes/portfolio';
-@use 'includes/aligner';
-
-/* Posts */
-// Linked with the html in the _layouts folder
-@use 'layouts/posts';
-@use 'layouts/categories';
-@use 'layouts/blog';
-@use 'layouts/page';
-@use 'layouts/tags';
-@use 'layouts/search';
+@import 'base/variables';
 
 /* External */
 // CSS from external sources
-@use 'external/font-awesome';
-@use 'external/pacifico';
-@use 'external/katex';
-@use 'external/source-sans-pro';
+@import 'external/reset';
+@import 'external/font-awesome';
+@import 'external/pacifico';
+@import 'external/katex';
+@import 'external/source-sans-pro';
+
+/* Base */
+// For general CSS in the theme
+@import 'base/global';
+@import 'base/highlight';
+@import 'base/utility';
+
+/* Includes */
+// Linked with the html in the _includes folder
+@import 'includes/post_nav';
+@import 'includes/footer';
+@import 'includes/navbar';
+@import 'includes/share_buttons';
+@import 'includes/blog_nav';
+@import 'includes/gallery';
+@import 'includes/portfolio';
+@import 'includes/aligner';
+
+/* Posts */
+// Linked with the html in the _layouts folder
+@import 'layouts/posts';
+@import 'layouts/categories';
+@import 'layouts/blog';
+@import 'layouts/page';
+@import 'layouts/tags';
+@import 'layouts/search';
+
+/**
+
+CUSTOM STYLING
+
+In the case you want to add your own style on top of the type-on-strap one.
+You can add a custom scss file using:
+
+@import 'custom';
+
+Put it right after this comment for your changes to be applied over the default style.
+(Once it processed into the assets/css/main.css by Jekyll at run time)
+
+Then create your _custom.scss right next to type-on-strap.scss and add in it all
+of the unique scss that your blog needs.
+
+*/

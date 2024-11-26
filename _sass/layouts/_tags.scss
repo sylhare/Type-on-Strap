@@ -1,8 +1,6 @@
-@use '../base/variables';
-
 .tag-list {
   width: 100%;
-  padding-bottom: variables.$padding-x-small;
+  padding-bottom: $padding-x-small;
 
   a.button {
     margin: 0.1em;
@@ -30,7 +28,7 @@
 }
 
 .tag-anchor {
-  margin-top: variables.$padding-x-small;
+  margin-top: $padding-x-small;
 
   a {
     color: var(--link);
@@ -50,7 +48,7 @@
     margin-bottom: 0;
 
     a {
-      margin-left: variables.$padding-x-small;
+      margin-left: $padding-x-small;
     }
 
     .post-info {
@@ -65,7 +63,7 @@
     line-height: normal;
   }
 
-  @media screen and (max-width: variables.$sm-break) {
+  @media screen and (max-width: $sm-break) {
     .meta {
       display: none;
     }

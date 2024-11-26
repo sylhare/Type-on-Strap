@@ -4,10 +4,9 @@
  */
 
 @use "katex/katex";
-@use '../base/variables';
 
 .katex-display {
-  @media screen and (max-width: variables.$sm-break) {
+  @media screen and (max-width: $sm-break) {
     overflow-x: auto;
   }
   & {

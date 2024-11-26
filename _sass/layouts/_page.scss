@@ -1,12 +1,9 @@
-@use '../base/variables';
-@use '../base/utility' as *;
-
 .title-padder {
-  padding: variables.$title-padding;
+  padding: $title-padding;
 }
 
 h1.title {
-  @extend %subtle-txt-shadow;
+  @extend .subtle-txt-shadow;
   padding: 0.5em 0;
 }
 
