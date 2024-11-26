@@ -1,20 +1,18 @@
-@use "variables";
-
 // icons in a list
 // -------------------------
 
-.#{variables.$fa-css-prefix}-ul {
+.#{$fa-css-prefix}-ul {
   list-style-type: none;
-  margin-left: var(--#{variables.$fa-css-prefix}-li-margin, #{variables.$fa-li-margin});
+  margin-left: var(--#{$fa-css-prefix}-li-margin, #{$fa-li-margin});
   padding-left: 0;
 
   > li { position: relative; }
 }
 
-.#{variables.$fa-css-prefix}-li {
-  left: calc(-1 * var(--#{variables.$fa-css-prefix}-li-width, #{variables.$fa-li-width}));
+.#{$fa-css-prefix}-li {
+  left: calc(-1 * var(--#{$fa-css-prefix}-li-width, #{$fa-li-width}));
   position: absolute;
   text-align: center;
-  width: var(--#{variables.$fa-css-prefix}-li-width, #{variables.$fa-li-width});
+  width: var(--#{$fa-css-prefix}-li-width, #{$fa-li-width});
   line-height: inherit;
 }
