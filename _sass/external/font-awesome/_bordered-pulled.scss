@@ -1,20 +1,22 @@
+@use "variables";
+
 // bordered + pulled icons
 // -------------------------
 
-.#{$fa-css-prefix}-border {
-  border-color: var(--#{$fa-css-prefix}-border-color, #{$fa-border-color});
-  border-radius: var(--#{$fa-css-prefix}-border-radius, #{$fa-border-radius});
-  border-style: var(--#{$fa-css-prefix}-border-style, #{$fa-border-style});
-  border-width: var(--#{$fa-css-prefix}-border-width, #{$fa-border-width});
-  padding: var(--#{$fa-css-prefix}-border-padding, #{$fa-border-padding});
+.#{variables.$fa-css-prefix}-border {
+  border-color: var(--#{variables.$fa-css-prefix}-border-color, #{variables.$fa-border-color});
+  border-radius: var(--#{variables.$fa-css-prefix}-border-radius, #{variables.$fa-border-radius});
+  border-style: var(--#{variables.$fa-css-prefix}-border-style, #{variables.$fa-border-style});
+  border-width: var(--#{variables.$fa-css-prefix}-border-width, #{variables.$fa-border-width});
+  padding: var(--#{variables.$fa-css-prefix}-border-padding, #{variables.$fa-border-padding});
 }
 
-.#{$fa-css-prefix}-pull-left {
+.#{variables.$fa-css-prefix}-pull-left {
   float: left;
-  margin-right: var(--#{$fa-css-prefix}-pull-margin, #{$fa-pull-margin}); 
+  margin-right: var(--#{variables.$fa-css-prefix}-pull-margin, #{variables.$fa-pull-margin}); 
 }
 
-.#{$fa-css-prefix}-pull-right {
+.#{variables.$fa-css-prefix}-pull-right {
   float: right;
-  margin-left: var(--#{$fa-css-prefix}-pull-margin, #{$fa-pull-margin}); 
+  margin-left: var(--#{variables.$fa-css-prefix}-pull-margin, #{variables.$fa-pull-margin}); 
 }
