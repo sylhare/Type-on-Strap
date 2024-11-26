@@ -1,6 +1,3 @@
-@use '../base/variables';
-@use '../base/utility' as *;
-
 .comments {
   @extend %padding-post;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -17,7 +14,7 @@ article {
   }
 
   a:hover {
-    @extend %body-link;
+    @extend .body-link;
   }
 
   .footnotes {
@@ -96,13 +93,13 @@ header {
   }
 
   h1.title, .post-info {
-    @extend %txt-shadow;
+    @extend .txt-shadow;
   }
 
   header {
     color: var(--header-text);
     margin-bottom: 0;
-    padding: 3.6% variables.$padding-large;
+    padding: 3.6% $padding-large;
 
     .meta {
       color: var(--header-text);
@@ -121,25 +118,25 @@ header {
   }
 
   .feature-image-padding {
-    padding: variables.$feature-image-padding;
+    padding: $feature-image-padding;
   }
 }
 
 /*-- feature-image Responsive scrolling --*/
 .feature-image header {
-  @media screen and (max-width: variables.$break) {
-    padding: variables.$padding-large*1.5 variables.$padding-small;
+  @media screen and (max-width: $break) {
+    padding: $padding-large*1.5 $padding-small;
   }
 
-  @media screen and (min-width: variables.$break) {
+  @media screen and (min-width: $break) {
     background-size: 120% auto;
   }
 
-  @media screen and (max-width: variables.$break) {
+  @media screen and (max-width: $break) {
     background-size: 200% auto;
   }
 
-  @media screen and (max-width: variables.$sm-break) {
+  @media screen and (max-width: $sm-break) {
     background-size: 400% auto;
   }
 }
