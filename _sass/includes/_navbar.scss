@@ -1,3 +1,5 @@
+@use '../base/variables';
+
 // To clear things when we float the element inside nav and ul
 .clear {
   *zoom: 1;
@@ -47,7 +49,7 @@
   .site-title {
     float: left;
     font-weight: bold;
-    font-family: $font-family-logo;
+    font-family: variables.$font-family-logo;
     font-size: 1.3em;
   }
 }
@@ -90,7 +92,7 @@ nav {
 
 /* ---- Responsive ---- */
 
-@media (min-width: $break) {
+@media (min-width: variables.$break) {
   a#pull {
     display: none;
   }
@@ -100,7 +102,7 @@ nav {
   }
 }
 
-@media screen and (max-width: $break) {
+@media screen and (max-width: variables.$break) {
   .site-header {
     img.avatar {
       margin-top: -7px

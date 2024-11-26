@@ -1,3 +1,5 @@
+@use '../base/variables';
+
 #archive,
 #categories {
   .archive-clouds,
@@ -48,7 +50,7 @@
     }
 
     .items {
-      padding-left: $padding-medium;
+      padding-left: variables.$padding-medium;
 
       .item {
         position: relative;

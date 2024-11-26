@@ -1,3 +1,6 @@
+@use '../base/variables';
+@use '../base/utility' as *;
+
 /* --- Header text feature --- */
 .call-out {
   @extend %padding-header;
@@ -12,12 +15,12 @@
   background-size: cover;
 
   h1 {
-    font-family: $font-family-logo;
-    @extend .subtle-txt-shadow;
+    font-family: variables.$font-family-logo;
+    @extend %subtle-txt-shadow;
   }
 
   /* --- Responsive --- */
-  @media screen and (max-width: $m-break) {
+  @media screen and (max-width: variables.$m-break) {
     background-size: 170% auto;
   }
 
@@ -53,7 +56,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     p a {
-      @extend .body-link;
+      @extend %body-link;
     }
 
     .post-img {
@@ -61,12 +64,12 @@
       border-radius: 10px;
       overflow: hidden;
 
-      @media (min-width: $break) {
+      @media (min-width: variables.$break) {
         height: 250px;
       }
 
       //Smaller screen
-      @media screen and (max-width: $break) {
+      @media screen and (max-width: variables.$break) {
         height: 150px;
       }
 

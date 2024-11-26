@@ -1,3 +1,6 @@
+@use '../base/variables';
+@use '../base/utility' as *;
+
 /* --- Pagination --- */
 .pagination {
   @extend %padding-nav;
@@ -18,7 +21,7 @@
     display: inline-block;
     vertical-align: sub;
 
-    @media (max-width: $x-sm-break) {
+    @media (max-width: variables.$x-sm-break) {
       display: none;
     }
   }

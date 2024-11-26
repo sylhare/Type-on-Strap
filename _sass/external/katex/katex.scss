@@ -133,6 +133,7 @@ $border-color_1: currentColor;
   font-weight: 400;
   src: url("#{$katex-font-path}/KaTeX_Typewriter-Regular.woff2") format("woff2"),url("#{$katex-font-path}/KaTeX_Typewriter-Regular.woff") format("woff"),url("#{$katex-font-path}/KaTeX_Typewriter-Regular.ttf") format("truetype");
 }
+
 .katex {
   font: normal 1.21em KaTeX_Main, Times New Roman, serif;
   line-height: 1.2;
