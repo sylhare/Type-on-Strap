@@ -3,7 +3,7 @@
  * Plus added customizations for the theme
  */
 
-@use "katex/katex";
+@import "katex/katex";
 
 .katex-display {
   @media screen and (max-width: $sm-break) {
