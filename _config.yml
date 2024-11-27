@@ -50,6 +50,7 @@ collections:
 # BUILD SETTINGS
 sass:
   style: compressed
+  quiet_deps: true
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
 exclude: [".jekyll-cache", ".jekyll-metadata", ".idea", "vendor/*", "assets/node_modules/*"]
 
