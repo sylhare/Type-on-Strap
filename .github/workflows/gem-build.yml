@@ -41,4 +41,4 @@ jobs:
       - name: GPR
         run: |
           gem cleanup type-on-strap
-          gem install type-on-strap --version "2.4.10" --source "https://rubygems.pkg.github.com/sylhare"
+          gem install type-on-strap --version "2.4.11" --source "https://rubygems.pkg.github.com/sylhare"
