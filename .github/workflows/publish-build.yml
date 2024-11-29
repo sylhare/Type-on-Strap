@@ -3,13 +3,12 @@ name: Publish build
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
     tags:
       - v*
 
 jobs:
   build:
+    if: ${{ github.ref == 'refs/heads/master' }}
     name: Build
     runs-on: ubuntu-latest
     permissions:
