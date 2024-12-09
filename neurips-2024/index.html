@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/neurips-2024/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at NeurIPS 2024 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2024" />
+<meta name="author" content="Compiled by Ruhana Azam" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/neurips-2024/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/neurips-2024/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-08T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2024" />
+<script type="application/ld+json">
+{"headline":"Stanford AI Lab Papers and Talks at NeurIPS 2024","dateModified":"2024-12-08T00:00:00-08:00","datePublished":"2024-12-08T00:00:00-08:00","@type":"BlogPosting","description":"The official Stanford AI Lab blog","url":"http://ai.stanford.edu/blog/neurips-2024/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/neurips-2024/"},"author":{"@type":"Person","name":"Compiled by Ruhana Azam"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at NeurIPS 2024 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at NeurIPS, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2024">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at NeurIPS, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-11-30-neurips-2022/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-11-30-neurips-2022/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at NeurIPS 2024</h1>
+    <p class="meta">
+    Compiled by Ruhana Azam
+    <div class="post-date">December 8, 2024</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-30-neurips-2022/logo.png" /></p>
+
+<p>Join us at the <a href="https://nips.cc/">Thirty-Eighth Conference on Neural Information Processing Systems</a> (NeurIPS) 2024, taking place in Vancouver from December 10th - December 15th. Stanford Artificial Intelligence Laboratory (SAIL) researchers will be presenting at the <a href="#main-conference"><strong>main conference</strong></a>, at the <a href="#datasets-and-benchmarks-track"><strong>Datasets and Benchmarks track</strong></a> and the various <a href="#workshop-papers"><strong>workshops</strong></a>. Here’s some of the SAIL work you may run into at the conference!</p>
+
+<p>Interested in learning more about Stanford Artificial Intelligence Laboratory’s latest innovations? Our researchers welcome your questions - don’t hesitate to connect with the contact authors listed for each paper.</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h2 id="main-conference">Main Conference</h2>
+<h4 id="are-more-llm-calls-all-you-need-towards-the-scaling-properties-of-compound-ai-systems"><a href="https://openreview.net/pdf?id=m5106RRLgx">Are More LLM Calls All You Need? Towards the Scaling Properties of Compound AI Systems</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img8" />
+<strong>Authors</strong>: Lingjiao Chen, Jared Quincy Davis, Boris Hanin, Peter Bailis, Ion Stoica, Matei Zaharia, James Zou
+<br /><strong>Contact</strong>: lingjiao@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=m5106RRLgx">Paper</a> | <a href="https://x.com/james_y_zou/status/1852043499727925691">Blog Post</a> | <a href="https://github.com/lchen001/CompoundAIScalingLaws">Website</a>
+<br /><strong>Keywords</strong>: scaling laws; compound ai systems; language models</p>
+<hr />
+
+<h4 id="betterbench-assessing-ai-benchmarks-uncovering-issues-and-establishing-best-practices"><a href="https://openreview.net/forum?id=hcOq2buakM#discussion">BetterBench: Assessing AI Benchmarks, Uncovering Issues, and Establishing Best Practices</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img17" />
+<strong>Authors</strong>: Anka Reuel, Amelia Hardy, Chandler Smith, Max Lamparth, Malcolm Hardy, and Mykel J. Kochenderfer
+<br /><strong>Contact</strong>:  anka.reuel@stanford.edu, ahardy@stanford.edu
+<br /><strong>Award nominations:</strong> Spotlight (Datasets and Benchmarks Track)
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=hcOq2buakM#discussion">Paper</a> | <a href="https://betterbench.stanford.edu">Website</a>
+<br /><strong>Keywords</strong>: benchmarking, assessment, best practices, evaluation, benchmark</p>
+<hr />
+
+<h4 id="consent-in-crisis-the-rapid-decline-of-the-ai-data-commons"><a href="https://arxiv.org/abs/2407.14933">Consent in Crisis: The Rapid Decline of the AI Data Commons</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img5" />
+<strong>Authors</strong>: Shayne Longpre, Robert Mahari, Ariel N. Lee, Campbell S. Lund, Hamidah Oderinwale, William Brannon, Nayan Saxena, Naana Obeng-Marnu, Tobin South, Cole J Hunter, Kevin Klyman, Christopher Klamm, Hailey Schoelkopf, Nikhil Singh, Manuel Cherep, Ahmad Mustafa Anis, An Dinh, Caroline Shamiso Chitongo, Da Yin, Damien Sileo, Deividas Mataciunas, Diganta Misra, Emad A. Alghamdi, Enrico Shippole, Jianguo Zhang, Joanna Materzynska, Kun Qian, Kushagra Tiwary, Lester James Validad Miranda, Manan Dey, Minnie Liang, Mohammed Hamdy, Niklas Muennighoff, Seonghyeon Ye, Seungone Kim, Shrestha Mohanty, Vipul Gupta, Vivek Sharma, Vu Minh Chien, Xuhui Zhou, Yizhi LI, Caiming Xiong, Luis Villa, Stella Biderman, Hanlin Li, Daphne Ippolito, Sara Hooker, Jad Kabbara, Alex Pentland
+<br /><strong>Contact</strong>: data.provenance.init@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2407.14933">Paper</a> | <a href="https://www.dataprovenance.org/">Website</a>
+<br /><strong>Keywords</strong>: training data, audits, text</p>
+<hr />
+
+<h4 id="dart-eval-a-comprehensive-dna-language-model-evaluation-benchmark-on-regulatory-dna"><a href="https://openreview.net/forum?id=qR0x6H5WUX#discussion">DART-Eval: A Comprehensive DNA Language Model Evaluation Benchmark on Regulatory DNA</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img16" />
+<strong>Authors</strong>: Aman Patel*, Arpita Singhal*, Austin Wang*, Anusri Pampari, Maya Kasowski, Anshul Kundaje
+<br /><strong>Contact</strong>: arpitas@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=qR0x6H5WUX#discussion">Paper</a>
+<br /><strong>Keywords</strong>: dna, language models, llms, biology, foundation models, benchmarks, gene regulation, healthcare</p>
+<hr />
+
+<h4 id="geometric-trajectory-diffusion-models"><a href="https://arxiv.org/pdf/2410.13027">Geometric Trajectory Diffusion Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img13" />
+<strong>Authors</strong>: Jiaqi Han, Minkai Xu, Aaron Lou, Haotian Ye, Stefano Ermon
+<br /><strong>Contact</strong>: jiaqihan@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2410.13027">Paper</a> | <a href="https://github.com/hanjq17/GeoTDM">Website</a>
+<br /><strong>Keywords</strong>: diffusion models, trajectory generation</p>
+<hr />
+
+<h4 id="optimistic-verifiable-training-by-controlling-hardware-nondeterminism"><a href="https://arxiv.org/pdf/2403.09603">Optimistic Verifiable Training by Controlling Hardware Nondeterminism</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img10" />
+<strong>Authors</strong>: Megha Srivastava, Simran Arora, Dan Boneh
+<br /><strong>Contact</strong>: meghas@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2403.09603">Paper</a> | <a href="https://github.com/meghabyte/verifiable-training">Website</a>
+<br /><strong>Keywords</strong>: security, verification, robustness, reproducibility, systems</p>
+<hr />
+
+<h4 id="reft-representation-finetuning-for-language-models"><a href="https://arxiv.org/pdf/2404.03592">ReFT: Representation Finetuning for Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img12" />
+<strong>Authors</strong>: Zhengxuan Wu, Aryaman Arora, Zheng Wang, Atticus Geiger, Dan Jurafsky, Christopher D. Manning, Christopher Potts
+<br /><strong>Contact</strong>: wuzhengx@stanford.edu, aryamana@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2404.03592">Paper</a> | <a href="https://github.com/stanfordnlp/pyreft">Website</a>
+<br /><strong>Keywords</strong>: interpretability, efficient training</p>
+<hr />
+
+<h4 id="scaling-laws-with-vocabulary-larger-models-deserve-larger-vocabularies"><a href="https://arxiv.org/abs/2407.13623">Scaling Laws with Vocabulary: Larger Models Deserve Larger Vocabularies</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img3" />
+<strong>Authors</strong>: Chaofan Tao, Qian Liu, Longxu Dou, Niklas Muennighoff, Zhongwei Wan, Ping Luo, Min Lin, Ngai Wong
+<br /><strong>Contact</strong>: cftao@connect.hku.hk and liuqian.sea@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2407.13623">Paper</a> | <a href="https://github.com/sail-sg/scaling-with-vocab">Website</a>
+<br /><strong>Keywords</strong>: natural language processing, scaling laws, efficient neural networks, large language models</p>
+<hr />
+
+<h4 id="smoothie-label-free-language-model-routing"><a href="https://openreview.net/pdf?id=pPSWHsgqRp">Smoothie: Label Free Language Model Routing</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img14" />
+<strong>Authors</strong>: Neel Guha, Mayee F. Chen, Trevor Chow, Ishan S. Khare, Christopher Ré
+<br /><strong>Contact</strong>: neelguha@gmail.com
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=pPSWHsgqRp">Paper</a>
+<br /><strong>Keywords</strong>: routing, llms</p>
+<hr />
+
+<h4 id="streaming-detection-of-queried-event-start"><a href="https://arxiv.org/abs/2412.03567">Streaming Detection of Queried Event Start</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img19" />
+<strong>Authors</strong>: Cristóbal Eyzaguirre,  Eric Tang,  Shyamal Buch,  Adrien Gaidon,  Jiajun Wu,  Juan Carlos Niebles
+<br /><strong>Contact</strong>: ceyzagui@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2412.03567">Paper</a> | <a href="https://sdqesdataset.github.io">Website</a>
+<br /><strong>Keywords</strong>: streaming,video,vlm,cv,online</p>
+<hr />
+
+<h4 id="structured-flexibility-in-recurrent-neural-networks-via-neuromodulation"><a href="https://openreview.net/pdf?id=HbIBqn3grD">Structured flexibility in recurrent neural networks via neuromodulation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img1" />
+<strong>Authors</strong>: Julia Costacurta, Shaunak Bhandarkar, David Zoltowski, Scott Linderman
+<br /><strong>Contact</strong>: jcostac@stanford.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=HbIBqn3grD">Paper</a>
+<br /><strong>Keywords</strong>: recurrent neural networks, neuroscience</p>
+<hr />
+
+<h4 id="the-scandinavian-embedding-benchmarks-comprehensive-assessment-of-multilingual-and-monolingual-text-embedding"><a href="https://arxiv.org/abs/2406.02396">The Scandinavian Embedding Benchmarks: Comprehensive Assessment of Multilingual and Monolingual Text Embedding</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img4" />
+<strong>Authors</strong>: Kenneth Enevoldsen ~Kenneth_Enevoldsen1 , Márton Kardos, Niklas Muennighoff, Kristoffer Nielbo
+<br /><strong>Contact</strong>: kenneth.enevoldsen@cas.au.dk
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2406.02396">Paper</a>
+<br /><strong>Keywords</strong>: sentence embeddings, rag, low-resource nlp, danish, norwegian, swedish, scandinavian</p>
+<hr />
+
+<h4 id="towards-scalable-and-stable-parallelization-of-nonlinear-rnns"><a href="https://arxiv.org/abs/2407.19115">Towards Scalable and Stable Parallelization of Nonlinear RNNs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img11" />
+<strong>Authors</strong>: Xavier Gonzalez, Andrew Warrington, Jimmy T.H. Smith, Scott W. Linderman
+<br /><strong>Contact</strong>: xavier18@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2407.19115">Paper</a> | <a href="https://colab.research.google.com/github/lindermanlab/hackathons/blob/master/notebooks/elk.ipynb">Blog Post</a> | <a href="https://recorder-v3.slideslive.com/?share=95002&amp;s=f5e6f12c-a394-443a-8b64-6fe949eac4ec">Video</a>
+<br /><strong>Keywords</strong>: rnns, ssms, parallel algorithms, optimization</p>
+<hr />
+
+<h4 id="why-are-visually-grounded-language-models-bad-at-image-classification"><a href="https://arxiv.org/abs/2405.18415">Why are Visually-Grounded Language Models Bad at Image Classification?</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img20" />
+<strong>Authors</strong>: Yuhui Zhang, Alyssa Unell, Xiaohan Wang, Dhruba Ghosh, Yuchang Su, Ludwig Schmidt, Serena Yeung-Levy
+<br /><strong>Contact</strong>: yuhuiz@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2405.18415">Paper</a> | <a href="https://www.youtube.com/watch?v=jREnK9GmQ9o&amp;t=2s">Video</a> | <a href="https://yuhui-zh15.github.io/VLMClassifier-Website/">Website</a>
+<br /><strong>Keywords</strong>: vision language model, image classification</p>
+<hr />
+
+<h2 id="datasets-and-benchmarks-track">Datasets and Benchmarks Track</h2>
+<h4 id="unitox-leveraging-llms-to-curate-a-unified-dataset-of-drug-induced-toxicity-from-fda-labels"><a href="https://openreview.net/forum?id=Vb1vVr75JT">UniTox: Leveraging LLMs to Curate a Unified Dataset of Drug-Induced Toxicity from FDA Labels</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img6" />
+<strong>Authors</strong>: Jake Silberg, Kyle Swanson, Elana Simon, Angela Zhang, Zaniar Ghazizadeh, Scott Ogden, Hisham Hamadeh, James Zou
+<br /><strong>Contact</strong>: jsilberg@stanford.edu
+<br /><strong>Award nominations:</strong> Spotlight
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=Vb1vVr75JT">Paper</a> | <a href="https://zou-group.github.io/UniTox-website/">Blog Post</a> | <a href="https://github.com/jsilbergDS/UniTox">Website</a>
+<br /><strong>Keywords</strong>: large language model, gpt, biomedicine, drug discovery, drug toxicity, drug safety</p>
+<hr />
+
+<h2 id="workshop-papers">Workshop Papers</h2>
+<h4 id="ai-governance-and-the-developmental-immaturity-of-the-science-of-ai-safety">AI Governance and the Developmental Immaturity of the Science of AI Safety</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img7" />
+<strong>Authors</strong>: Rob Reich
+<br /><strong>Contact</strong>: reich@stanford.edu
+<br /><strong>Workshop</strong>: Regulatable ML Workshop
+<br /><strong>Keywords</strong>: ai governance, ai safety</p>
+<hr />
+
+<h4 id="on-short-textual-value-column-representation-using-symbol-level-language-models"><a href="https://openreview.net/forum?id=zuArE2o9CH">On Short Textual Value Column Representation Using Symbol Level Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img0" />
+<strong>Authors</strong>: Ron Begleiter, Nathan Roll
+<br /><strong>Contact</strong>: nroll@stanford.edu
+<br /><strong>Workshop</strong>: Table Representation Learning Workshop
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=zuArE2o9CH">Paper</a>
+<br /><strong>Keywords</strong>: symbol level language models, column matching</p>
+<hr />
+
+<h4 id="olmoe-open-mixture-of-experts-language-models"><a href="https://arxiv.org/abs/2409.02060">OLMoE: Open Mixture-of-Experts Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img2" />
+<strong>Authors</strong>: Niklas Muennighoff, Luca Soldaini, Dirk Groeneveld, Kyle Lo, Jacob Morrison, Sewon Min, Weijia Shi, Pete Walsh, Oyvind Tafjord, Nathan Lambert, Yuling Gu, Shane Arora, Akshita Bhagia, Dustin Schwenk, David Wadden, Alexander Wettig, Binyuan Hui, Tim Dettmers, Douwe Kiela, Ali Farhadi, Noah A. Smith, Pang Wei Koh, Amanpreet Singh, Hannaneh Hajishirzi
+<br /><strong>Contact</strong>: niklasm@stanford.edu
+<br /><strong>Workshop</strong>: Efficient Natural Language and Speech Processing Workshop
+<br /><strong>Award nominations:</strong> Oral (Spotlight)
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2409.02060">Paper</a> | <a href="https://contextual.ai/olmoe-mixture-of-experts/">Blog Post</a> | <a href="https://github.com/allenai/OLMoE">Website</a>
+<br /><strong>Keywords</strong>: large language models, mixture-of-experts, foundation models</p>
+<hr />
+
+<h4 id="measuring-free-form-decision-making-inconsistency-of-language-models-in-military-crisis-simulations"><a href="https://openreview.net/forum?id=qZ2CeIaYSu&amp;referrer=%5Bthe%20profile%20of%20Max%20Lamparth%5D(%2Fprofile%3Fid%3D~Max_Lamparth1)">Measuring Free-Form Decision-Making Inconsistency of Language Models in Military Crisis Simulations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img18" />
+<strong>Authors</strong>: Aryan Shrivastava, Jessica Hullman, Max Lamparth
+<br /><strong>Contact</strong>: lamparth@stanford.edu
+<br /><strong>Workshop</strong>: Socially Responsible Language Modelling Research Workshop
+<br /><strong>Links:</strong> <a href="https://openreview.net/forum?id=qZ2CeIaYSu&amp;referrer=%5Bthe%20profile%20of%20Max%20Lamparth%5D(%2Fprofile%3Fid%3D~Max_Lamparth1)">Paper</a>
+<br /><strong>Keywords</strong>: language models, ai safety, natural language processing, military, inconsistency, transparency</p>
+<hr />
+
+<h4 id="divshift-exploring-domain-specific-distribution-shift-in-large-scale-volunteer-collected-biodiversity-datasets-"><a href="https://arxiv.org/html/2410.19816">DivShift: Exploring Domain-Specific Distribution Shift in Large-Scale, Volunteer-Collected Biodiversity Datasets </a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img15" />
+<strong>Authors</strong>:  Elena Sierra, Lauren Gillespie, Salim Soltani, Moisés Expósito-Alonso, Teja Kattenborn
+<br /><strong>Contact</strong>: esierra@stanford.edu
+<br /><strong>Workshop</strong>: Tackling Climate Change with Machine Learning Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/html/2410.19816">Paper</a> | <a href="https://neurips.cc/virtual/2024/100533">Video</a>
+<br /><strong>Keywords</strong>: biodiversity, data bias</p>
+<hr />
+
+<h4 id="intuitions-of-compromise-utilitarianism-vs-conctractualism"><a href="https://arxiv.org/abs/2410.05496">Intuitions of Compromise: Utilitarianism vs. Conctractualism</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2024-12-08-neurips-2024/img9" />
+<strong>Authors</strong>: Jared Moore, Yejin Choi, Sydney Levine
+<br /><strong>Contact</strong>: jlcmoore@stanford.edu
+<br /><strong>Workshop</strong>: Pluralistic Alignment Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2410.05496">Paper</a> | <a href="https://github.com/jlcmoore/valueaggregation">Website</a>
+<br /><strong>Keywords</strong>: value aggregation, nash product, expected utility, compromise, moral decision making, social welfare</p>
+<hr />
+
+<p>We look forward to seeing you at NeurIPS this year!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/neurips-2024/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/neurips-2024/&text=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2024%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/neurips-2024/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/neurips-2024/&title=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2024%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/neurips-2024/&title=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2024%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2024%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/neurips-2024/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#NeurIPS">
+      <p><i class="fa fa-tag fa-fw"></i> NeurIPS</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/teaser-global/">
+      <p>Previous post</p>
+        Teaser: Unintended Impacts of Alignment on Global Representation
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
