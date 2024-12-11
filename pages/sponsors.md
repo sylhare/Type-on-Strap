@@ -11,7 +11,7 @@ position: 7
 
 <p align="justify">Thanks to the <a href='https://colegioquimicos.com/'>Colegio de Químicos de la Comunidad Valenciana</a>, two students will be awarded travel grants of 80 EUR each.</p>
 
-<p align="justify">Thanks to the <a href='https://www.csic.es/en'>Consejo Superior de Investigaciones Científicas (CSIC)</a>, the <a href='https://www.ciencia.gob.es/en/'>Ministry of Science, Innovation and Universities of Spain (MCIN)</a>, and <a href='https://next-generation-eu.europa.eu/index_en'>NextGenerationEU</a>, the CAMLC24 has achieved the category of micro-credential. Additionally, these organizations provide funds to cover trips and maintenance for the organizing committee.</p>
+<p align="justify">Thanks to the <a href='https://www.csic.es/en'>Consejo Superior de Investigaciones Científicas (CSIC)</a>, the <a href='https://www.ciencia.gob.es/en/'>Ministry of Science, Innovation and Universities of Spain (MCIN)</a>, and <a href='https://next-generation-eu.europa.eu/index_en'>NextGenerationEU</a>, the CAMLC25 has achieved the category of micro-credential. Additionally, these organizations provide funds to cover trips and maintenance for the organizing committee.</p>
 
 <!-- <html>
 <head>
