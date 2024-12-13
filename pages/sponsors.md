@@ -11,14 +11,18 @@ position: 7
 
 <p align="justify">Thanks to the <a href='https://colegioquimicos.com/'>Colegio de Químicos de la Comunidad Valenciana</a>, two students will be awarded travel grants of 80 EUR each.</p>
 
-<p align="justify">Thanks to the <a href='https://www.csic.es/en'>Consejo Superior de Investigaciones Científicas (CSIC)</a>, the <a href='https://www.ciencia.gob.es/en/'>Ministry of Science, Innovation and Universities of Spain (MCIN)</a>, and <a href='https://next-generation-eu.europa.eu/index_en'>NextGenerationEU</a>, the CAMLC24 has achieved the category of micro-credential. Additionally, these organizations provide funds to cover trips and maintenance for the organizing committee.</p>
+<p align="justify">Thanks to the <a href='https://www.csic.es/en'>Consejo Superior de Investigaciones Científicas (CSIC)</a>, the <a href='https://www.ciencia.gob.es/en/'>Ministry of Science, Innovation and Universities of Spain (MCIN)</a>, and <a href='https://next-generation-eu.europa.eu/index_en'>NextGenerationEU</a>, the CAMLC25 has achieved the category of micro-credential. Additionally, these organizations provide funds to cover trips and maintenance for the organizing committee.</p>
 
-<!-- <html>
+
+### Become a sponsor
+
+<html>
 <head>
 <style>
 #customers {
   border-collapse: collapse;
-  width: 100%;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 #customers td, #customers th {
@@ -32,20 +36,37 @@ position: 7
 
 <table id="customers">
   <tr>
-    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
     <td>
-      <a href="https://geqc.rseq.org/">
-        <img src="../assets/img/sponsors/geqc.png" width="370">
-      </a>
+      <img src="../assets/img/sponsors/gold.png" width="300">
     </td>
     <td>
-      <a href="https://colegioquimicos.com/">
-        <img src="../assets/img/sponsors/cqcv.jpg" width="200">
-      </a>
+      <img src="../assets/img/sponsors/silver.png" width="300">
+    </td>
+    <td>
+      <img src="../assets/img/sponsors/bronze.png" width="300">
     </td>
   </tr>
-</table>
+  <tr>
+    <td>
+      <b> Gold tier </b> (1 slot)<br>
+      Contribution: 1000€
+      Two options: <br>
+      - Stand and student <br>
+      - Two students
+    </td>
+    <td>
+      <b> Silver tier </b> (2 slot)<br>
+      Contribution: 500€
+      Two options: <br>
+      - One stand <br>
+      - One student
+    </td>
+    <td>
+      <b> Bronze tier </b> (endless slots)<br>
+      Contribution: Promoting article<br> <br> <br> 
+    </td>
+  </tr>
+<!-- </table> -->
 
-</body>
-</html> -->
-
+<!-- </body> -->
+<!-- </html> -->

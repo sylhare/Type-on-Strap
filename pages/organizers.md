@@ -5,7 +5,7 @@ feature-img: "assets/img/header/tab_back.png"
 position: 6
 ---
 
-### Meet the CAMLC24 team
+### Meet the CAMLC25 team
 
 <html>
 <head>
@@ -50,26 +50,56 @@ position: 6
         <br><p style="text-align: center;">Dr. Ruben Laplaza</p>
       </a>
     </td>
-  </tr>
-  <tr>
     <td>
       <a href="https://github.com/ddgunizar">
         <img src="../assets/img/people/david.png" width="200">
         <br><p style="text-align: center;">David Dalmau</p>
       </a>
     </td>
+  </tr>
+  <tr>
     <td>
-      <a href="https://github.com/iribirii">
+      <a href="https://iribirii.github.io">
         <img src="../assets/img/people/inigo.png" width="200">
-        <br><p style="text-align: center;">Iñigo Iribarren</p>
+        <br><p style="text-align: center;">Dr. Iñigo Iribarren</p>
       </a>
     </td>
     <td>
       <a href="https://thijsstuyver.com/">
         <img src="../assets/img/people/thijs.png" width="200">
-        <br><p style="text-align: center;">Thijs Stuyver</p>
+        <br><p style="text-align: center;">Dr. Thijs Stuyver</p>
       </a>
     </td>
+    <td>
+      <a href="https://coley.mit.edu/">
+        <img src="../assets/img/people/coley.png" width="200">
+        <br><p style="text-align: center;">Dr. Connor Coley</p>
+      </a>
+    </td>
+    <td>
+      <a href="https://doyle.chem.ucla.edu/abby/">
+        <img src="../assets/img/people/doyle.png" width="200">
+        <br><p style="text-align: center;">Dr. Abby Doyle</p>
+      </a>
+    </td>
+    <td>
+      <a href="https://chem.utah.edu/directory/sigman/">
+        <img src="../assets/img/people/sigman.png" width="200">
+        <br><p style="text-align: center;">Dr. Matt Sigman</p>
+      </a>
+    </td>
+  <tr>
+  </tr>
+    <td></td>
+    <td></td>
+    <td>
+      <a href="https://anatmilo.com/">
+        <img src="../assets/img/people/milo.png" width="200">
+        <br><p style="text-align: center;">Dr. Anat Milo</p>
+      </a>
+    </td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 
