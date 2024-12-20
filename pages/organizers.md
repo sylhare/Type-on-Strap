@@ -35,7 +35,7 @@ position: 6
     <td>
       <a href="https://patonlab.com/">
         <img src="../assets/img/people/rob.png" width="200">
-        <br><p style="text-align: center;">Dr. Robert Paton</p>
+        <br><p style="text-align: center;">Prof. Robert Paton</p>
       </a>
     </td>
     <td>
@@ -67,25 +67,25 @@ position: 6
     <td>
       <a href="https://thijsstuyver.com/">
         <img src="../assets/img/people/thijs.png" width="200">
-        <br><p style="text-align: center;">Dr. Thijs Stuyver</p>
+        <br><p style="text-align: center;">Prof. Thijs Stuyver</p>
       </a>
     </td>
     <td>
       <a href="https://coley.mit.edu/">
         <img src="../assets/img/people/coley.png" width="200">
-        <br><p style="text-align: center;">Dr. Connor Coley</p>
+        <br><p style="text-align: center;">Prof. Connor Coley</p>
       </a>
     </td>
     <td>
       <a href="https://doyle.chem.ucla.edu/abby/">
         <img src="../assets/img/people/doyle.png" width="200">
-        <br><p style="text-align: center;">Dr. Abby Doyle</p>
+        <br><p style="text-align: center;">Prof. Abby Doyle</p>
       </a>
     </td>
     <td>
       <a href="https://chem.utah.edu/directory/sigman/">
         <img src="../assets/img/people/sigman.png" width="200">
-        <br><p style="text-align: center;">Dr. Matt Sigman</p>
+        <br><p style="text-align: center;">Prof. Matt Sigman</p>
       </a>
     </td>
   <tr>
@@ -95,7 +95,7 @@ position: 6
     <td>
       <a href="https://anatmilo.com/">
         <img src="../assets/img/people/milo.png" width="200">
-        <br><p style="text-align: center;">Dr. Anat Milo</p>
+        <br><p style="text-align: center;">Prof. Anat Milo</p>
       </a>
     </td>
     <td></td>

@@ -42,9 +42,9 @@ position: 7
     </td>
     <td>
       <b> Gold tier </b> (1 slot)<br>
-      Contribution: 1000€
+      Contribution: 1000€ <br>
       Benefits: <br>
-      - Option A: Secure a slot to attend the workshop for one of your employees and bring a stand to the initial poster session and coffee.<br>
+      - Option A: Secure a slot to attend the workshop for one of your employees and a stand for the poster session and coffee breaks.<br>
       - Option B: Secure a slot to attend the workshop for two of your employees.
       - Public appearence as official sponsor.
     </td>
@@ -55,9 +55,9 @@ position: 7
     </td>
     <td>
       <b> Silver tier </b> (2 slot)<br>
-      Contribution: 500€
+      Contribution: 500€ <br>
       Benefits: <br>
-      - Option A: Bring a stand to the initial poster session and coffee.<br>
+      - Option A: Stand for the poster session and coffee breaks.<br>
       - Option B: Secure a slot to attend the workshop for one of your employees.
       - Public appearence as official sponsor.
     </td>
@@ -68,7 +68,7 @@ position: 7
     </td>
     <td>
       <b> Bronze tier </b> (endless slots)<br>
-      Contribution: < 500€ or promoting article<br> 
+      Contribution: < 500€ or free of charge promotion or advertisement <br> 
       Benefits: <br>
       - Public appearence as official sponsor.
     </td>

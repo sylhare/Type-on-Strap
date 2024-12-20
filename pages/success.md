@@ -7,6 +7,6 @@ hide: true
 
 ### Your application has been submitted successfully!
 
-Selected applicants will be notified no later than April 7.
+Selected applicants will be notified as soon as possible.
 
 <br>
