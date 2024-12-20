@@ -20,7 +20,7 @@ The "Cheminformatics, Automation and Machine Learning in Chemistry: from fundame
 
 ### When and where?
 
-The workshop will take place in <a href='https://www.google.es/maps/?q=Zaragoza&ll=41.589869299597,-0.95265175881282&hl=en'>Zaragoza</a> (Spain), 16 to 19th September 2025. 
+The workshop will take place in <a href='https://www.google.es/maps/?q=Zaragoza&ll=41.6533852,-0.8884661&hl=en'>Zaragoza</a> (Spain), 16 to 19th September 2025. 
 
 ### Requirements
 
