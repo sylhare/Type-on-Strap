@@ -18,6 +18,10 @@ The "Cheminformatics, Automation and Machine Learning in Chemistry: from fundame
 
 <br>
 
+### When and where?
+
+The workshop will take place in <a href='https://www.google.es/maps/?q=Zaragoza&ll=41.6533852,-0.8884661&hl=en'>Zaragoza</a> (Spain), 16 to 19th September 2025. 
+
 ### Requirements
 
 * Basic level of computational chemistry. Preferably, applicants should be familiar with using Gaussian or ORCA and running jobs with bash or SLURM scripts

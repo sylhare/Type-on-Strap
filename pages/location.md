@@ -5,13 +5,20 @@ feature-img: "assets/img/header/tab_back.png"
 position: 2
 ---
 
+### Zaragoza
+
+
+Zaragoza can be reached conveniently by train or bus from Madrid or Barcelona, and has a small airport on its own which services several european cities. More details on the location will be made public shortly! In the meantime, please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>.</p>
+
+<!--
 ### Residencia Universitaria de Jaca
 
 <p align="justify">
 <a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Huesca, Spain), <i>sessions are in-person only.</i> Participants can arrive at any time after 17:00 on June 16th (see <a href="#" id="aboutLink">Schedule</a>).
-
+-->
 
 <!-- JavaScript code to handle the click event and change the URL -->
+<!--
 <script>
 document.getElementById('aboutLink').addEventListener('click', function(e) {
     e.preventDefault(); // Prevents the default behavior of the link
@@ -33,7 +40,7 @@ On their webpage (follow the hyperlink), applicants can find instructions on how
 
 <br>
 <center><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2938.3596487725686!2d-0.556613024862697!3d42.568888271174245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd578092a9855555%3A0x4baa1306b4ffdc29!2sResidencia%20Universitaria%20de%20Jaca!5e0!3m2!1ses!2ses!4v1705167254537!5m2!1ses!2ses" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></center>
-
+-->
 <!--
 this is for including a map in the page, but we need a Google user with the credit card registered (even if showing a map is free)
 
