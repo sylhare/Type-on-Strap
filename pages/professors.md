@@ -1,6 +1,6 @@
 --- 
 layout: page
-title : Organizers
+title : Professors
 feature-img: "assets/img/header/tab_back.png"
 position: 6
 ---
@@ -53,7 +53,7 @@ position: 6
     <td>
       <a href="https://github.com/ddgunizar">
         <img src="../assets/img/people/david.png" width="200">
-        <br><p style="text-align: center;">David Dalmau</p>
+        <br><p style="text-align: center;">Dr. David Dalmau</p>
       </a>
     </td>
   </tr>
@@ -77,28 +77,43 @@ position: 6
       </a>
     </td>
     <td>
-      <a href="https://doyle.chem.ucla.edu/abby/">
+      <a href="https://doyle.chem.ucla.edu/">
         <img src="../assets/img/people/doyle.png" width="200">
         <br><p style="text-align: center;">Prof. Abby Doyle</p>
       </a>
     </td>
     <td>
-      <a href="https://chem.utah.edu/directory/sigman/">
+      <a href="https://www.sigmanlab.com/">
         <img src="../assets/img/people/sigman.png" width="200">
         <br><p style="text-align: center;">Prof. Matt Sigman</p>
       </a>
     </td>
   <tr>
   </tr>
-    <td></td>
-    <td></td>
     <td>
       <a href="https://anatmilo.com/">
         <img src="../assets/img/people/milo.png" width="200">
         <br><p style="text-align: center;">Prof. Anat Milo</p>
       </a>
     </td>
-    <td></td>
+    <td>
+      <a href="https://www.linkedin.com/in/guilianluchini/">
+        <img src="../assets/img/people/luchini.png" width="200">
+        <br><p style="text-align: center;">Dr. Luchini</p>
+      </a>
+    </td>
+    <td>
+      <a href="https://www.linkedin.com/in/jcadge/">
+        <img src="../assets/img/people/cadge.png" width="200">
+        <br><p style="text-align: center;">Jamie Cadge</p>
+      </a>
+    </td>
+    <td>
+      <a href="https://scholar.google.com/citations?user=-JMqeO0AAAAJ&hl=es">
+        <img src="../assets/img/people/moran.png" width="200">
+        <br><p style="text-align: center;">Dr. Lucia Moran</p>
+      </a>
+    </td>
     <td></td>
   </tr>
 </table>

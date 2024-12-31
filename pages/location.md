@@ -8,17 +8,9 @@ position: 2
 ### Zaragoza
 
 
-Zaragoza can be reached conveniently by train or bus from Madrid or Barcelona, and has a small airport on its own which services several european cities. More details on the location will be made public shortly! In the meantime, please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>.</p>
-
-<!--
-### Residencia Universitaria de Jaca
-
-<p align="justify">
-<a href='https://resijaca.unizar.es/'>Residencia Universitaria de Jaca</a> (Huesca, Spain), <i>sessions are in-person only.</i> Participants can arrive at any time after 17:00 on June 16th (see <a href="#" id="aboutLink">Schedule</a>).
--->
+Zaragoza (Spain) can be reached conveniently by train or bus from Madrid or Barcelona, and has a small airport on its own which services several european cities. Please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a> or <a href="mailto:ddalmau@unizar.es">ddalmau@unizar.es</a>.
 
 <!-- JavaScript code to handle the click event and change the URL -->
-<!--
 <script>
 document.getElementById('aboutLink').addEventListener('click', function(e) {
     e.preventDefault(); // Prevents the default behavior of the link
@@ -34,36 +26,15 @@ document.getElementById('aboutLink').addEventListener('click', function(e) {
 });
 </script>
 
-<br><br>
-
-On their webpage (follow the hyperlink), applicants can find instructions on how to reach the location by car, bus, or train. Please do not hesitate to contact us for more information at <a href="mailto:jv.alegre@csic.es">jv.alegre@csic.es</a>.</p>
-
 <br>
-<center><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2938.3596487725686!2d-0.556613024862697!3d42.568888271174245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd578092a9855555%3A0x4baa1306b4ffdc29!2sResidencia%20Universitaria%20de%20Jaca!5e0!3m2!1ses!2ses!4v1705167254537!5m2!1ses!2ses" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></center>
--->
-<!--
-this is for including a map in the page, but we need a Google user with the credit card registered (even if showing a map is free)
+<center><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5961.776328120097!2d-0.8963249251857801!3d41.65815827915816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5914b8634b40e1%3A0x71101f3cd13b7ef!2sDelegaci%C3%B3n%20del%20Consejo%20Superior%20de%20Investigaciones%20Cient%C3%ADficas%20en%20Arag%C3%B3n!5e0!3m2!1ses!2ses!4v1735642582234!5m2!1ses!2ses" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></center>
 
-<html>
-<body>
-
-<h1>My First Google Map</h1>
-
-<div id="googleMap" style="width:100%;height:400px;"></div>
-
-<script>
-function myMap() {
-var mapProp= {
-  center:new google.maps.LatLng(51.508742,-0.120850),
-  zoom:5,
-};
-var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-
-</body>
-</html> -->
-
-<br>
+<!-- to change the map:
+1. Open Google Maps.
+2. Go to the directions, map, or Street View image you'd like to embed.
+3. In the top left, click Menu.
+4. Click Share or embed map.
+5. Click Embed map.
+6. To the left of the text box, pick the size you want by clicking the Down arrow.
+7. Copy the text in the box.
+8. Only change the src="XXX" part, leave the sizes and so on the same -->
