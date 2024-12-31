@@ -1,4 +1,0 @@
-numpy
-numba
-scipy
-cclib
