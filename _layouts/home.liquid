@@ -6,23 +6,13 @@ layout: default
         {% assign image = site.header_feature_image | relative_url | split: '.' %}
         .call-out_img {
             background-image: url('{{ image | join: '.' }}');
+            background-size: contain;
+            border-bottom: 1px solid grey;
+            margin-bottom: 20px;
         }
-        {% if site.header_feature_image_responsive %}
-        @media screen and (max-width: 768px) {
-            .call-out_img {
-                background-image: url('{{ image[0] | append: '-medium.' | append: image[1] | default: image}}');
-            }
-        }
-        @media screen and (max-width: 576px) {
-            .call-out_img {
-                background-image: url('{{ image[0] | append: '-small.' | append: image[1] }}');
-            }
-        }
-        {% endif %}
     </style>
     <div id="main" class="call-out call-out_img">
     </div>
-<hr>
 <br>
 <H3 align="justify", style="margin-left:60px;margin-right:60px;">General information</H3>
 <p align="center">

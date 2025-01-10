@@ -99,7 +99,7 @@ header {
   header {
     color: var(--header-text);
     margin-bottom: -10px;
-    margin-top: -10px;
+    margin-top: 0px;
     padding: 2.5% $padding-large;
 
     .meta {
@@ -109,7 +109,7 @@ header {
   }
 
   .post-content {
-    @extend %padding-post;
+    padding: $padding-x-small 5%;
     padding-bottom: 0;
   }
 

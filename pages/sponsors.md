@@ -48,7 +48,7 @@ position: 7
       <hr>
       <b> Gold tier </b> (one sponsor only)<br><br>
       <u>Contribution:</u><br>
-      900€ <br><br>
+      1000€ <br><br>
       <u>Additional benefits:</u><br>
       - Option A: Secure 1) a slot to attend the workshop for one of your employees, and 2) a stand for the poster session and coffee breaks<br>
       - Option B: Secure two slots to attend the workshop for two of your employees<br>
