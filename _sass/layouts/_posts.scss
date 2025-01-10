@@ -98,8 +98,9 @@ header {
 
   header {
     color: var(--header-text);
-    margin-bottom: 0;
-    padding: 3.6% $padding-large;
+    margin-bottom: -10px;
+    margin-top: -10px;
+    padding: 2.5% $padding-large;
 
     .meta {
       color: var(--header-text);
