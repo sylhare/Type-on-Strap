@@ -38,7 +38,7 @@ def bond_featurizer(bond, flipped=False):
     
     return " ".join([atoms, btype, ring]).strip()
 
-def data_split(valid, test, train, preprocessor, sol):
+def test_select(valid, test, train, preprocessor, sol):
     train_dataset = tf.data.Dataset.from_generator(
         lambda: ((preprocessor(row.smiles, row.xtbjson, train=True), row['measured log solubility in mols per litre'])
                 for i, row in sol[sol.smiles.isin(train.smiles)].iterrows()),
@@ -122,6 +122,6 @@ def gnn_model():
 def gnn_data(valid, test, train, sol):
     
     # Define train, validation and test datasets
-    train_dataset, valid_dataset, test_dataset = data_split(valid, test, train, preprocessor, sol)
+    train_dataset, valid_dataset, test_dataset = test_select(valid, test, train, preprocessor, sol)
     
     return train_dataset, valid_dataset, test_dataset

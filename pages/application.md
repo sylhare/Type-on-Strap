@@ -14,4 +14,4 @@ Up to 35 attendees will be accepted. To register, applicants must complete the f
 </p><br>
 
 <p align="justify">
-<i>We are not accepting applications yet. We will be accepting application in early 2025, more details on the process will be posted soon!</i></p><br>
+<a href='https://docs.google.com/forms/d/e/1FAIpQLSd5O5LtxDw9IMLfRGrPsSzYgcsqA5T6XvYiwrcEXIQPvEHHlQ/viewform?usp=dialog'>Application Form</a></p><br>

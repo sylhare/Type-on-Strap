@@ -105,7 +105,7 @@ position: 6
     <td>
       <a href="https://www.linkedin.com/in/jcadge/">
         <img src="../assets/img/people/cadge.png" width="200">
-        <br><p style="text-align: center;">Jamie Cadge</p>
+        <br><p style="text-align: center;">Dr. Jamie Cadge</p>
       </a>
     </td>
     <td>
