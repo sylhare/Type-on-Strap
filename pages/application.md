@@ -14,4 +14,6 @@ Up to 35 attendees will be accepted. To register, applicants must complete the f
 </p><br>
 
 <p align="justify">
-<a href='https://docs.google.com/forms/d/e/1FAIpQLSd5O5LtxDw9IMLfRGrPsSzYgcsqA5T6XvYiwrcEXIQPvEHHlQ/viewform?usp=dialog'>Application Form</a></p><br>
+<a href='https://docs.google.com/forms/d/e/1FAIpQLSd5O5LtxDw9IMLfRGrPsSzYgcsqA5T6XvYiwrcEXIQPvEHHlQ/viewform?usp=dialog'>Application Form</a>
+<i>Deadline: February 28, 2025. Selected applicants will be notified no later than March 31.</i>
+</p><br>
