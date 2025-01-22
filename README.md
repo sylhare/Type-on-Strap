@@ -224,6 +224,31 @@ comments:
     label:                 # OPTIONAL: Adds an issue label in the issue
 ```
 
+#### Giscus
+
+[Giscus](https://giscus.app/) is another open source alternative linked to one's GitHub account.
+It stores the comments as GitHub discussions on a repository for each page.
+
+Install the giscus [app](https://github.com/apps/giscus) to your repo.
+After installing, add your info in the `_config.yml`:
+
+```yaml
+comments:
+  giscus:                   # Enable by filling below information. For more info, go to https://giscus.app
+    repo:                   # Your public comments repository (e.g. owner/repo)
+    repo-id:                # Your repo id, go to https://giscus.app to check it
+    category:               # Category to search discussions. When removed, discussions will be searched in all categories
+    category-id:            # Your category id, go to https://giscus.app to check it
+    mapping:                # Discussion mapping
+    term:                   # OPTIONAL: some mappings require specific term, go to https://giscus.app to check it
+    strict: 1               # OPTIONAL: Avoid mismatches on similar titles
+    reactions-enabled: 0    # OPTIONAL: Disable reactions
+    emit-metadata: 1        # OPTIONAL: Emit discussion metadata
+    input-position: top     # OPTIONAL: Place the comment box above the comments
+    theme:                  # OPTIONAL: Take the `color_theme` by default, or set a custom one like github-dark-orange
+    lang:                   # OPTIONAL: Choose the language. "en" is used by default
+```
+
 ### Math typesetting with KateX
 
 When KateX is set in `_config.yml`:

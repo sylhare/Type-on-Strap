@@ -1,0 +1,17 @@
+<script src="https://giscus.app/client.js"
+        data-repo="{{ site.comments.giscus.repo }}"
+        data-repo-id="{{ site.comments.giscus.repo-id }}"
+        {% if site.comments.giscus.category %}data-category="{{ site.comments.giscus.category }}"{% endif %}
+        data-category-id="{{ site.comments.giscus.category-id }}"
+        data-mapping="{{ site.comments.giscus.mapping }}"
+        {% if site.comments.giscus.term %}data-term="{{ site.comments.giscus.term }}"{% endif %}
+        data-strict="{% if site.comments.giscus.strict %}{{ site.comments.giscus.strict }}{% else %}0{% endif %}"
+        data-reactions-enabled="{% if site.comments.giscus.reactions-enabled %}{{ site.comments.giscus.reactions-enabled }}{% else %}1{% endif %}"
+        data-emit-metadata="{% if site.comments.giscus.emit-metadata %}{{ site.comments.giscus.emit-metadata }}{% else %}0{% endif %}"
+        data-input-position="{% if site.comments.giscus.input-position %}{{ site.comments.giscus.input-position }}{% else %}bottom{% endif %}"
+        data-theme="{% if site.comments.giscus.theme %}{{ site.comments.giscus.theme }}{% elsif site.color_theme == 'dark' %}dark{% else %}light{% endif %}"
+        data-lang="{% if site.comments.giscus.lang %}{{ site.comments.giscus.lang }}{% else %}en{% endif %}"
+        {% if site.comments.giscus.loading %}data-loading="{{ site.comments.giscus.loading }}"{% endif %}
+        crossorigin="anonymous"
+        async>
+</script>
