@@ -245,7 +245,7 @@ comments:
     reactions-enabled: 0    # OPTIONAL: Disable reactions
     emit-metadata: 1        # OPTIONAL: Emit discussion metadata
     input-position: top     # OPTIONAL: Place the comment box above the comments
-    theme:                  # OPTIONAL: Take the `color_theme` by default, or set a custom one like github-dark-orange
+    theme:                  # OPTIONAL: Take the `color_theme` by default, or set a custom one like dark_dimmed
     lang:                   # OPTIONAL: Choose the language. "en" is used by default
 ```
 
