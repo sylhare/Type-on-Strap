@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/teaching/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Productive Struggle: The Future of Human Learning in the Age of AI | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Productive Struggle: The Future of Human Learning in the Age of AI" />
+<meta name="author" content="<a href='https://rosewang2008.github.io/'>Rose E. Wang</a> and <a href='cs.stanford.edu/~megha'>Megha Srivastava</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/teaching/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/teaching/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-01-29T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Productive Struggle: The Future of Human Learning in the Age of AI" />
+<script type="application/ld+json">
+{"url":"http://ai.stanford.edu/blog/teaching/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/teaching/"},"author":{"@type":"Person","name":"<a href='https://rosewang2008.github.io/'>Rose E. Wang</a> and <a href='cs.stanford.edu/~megha'>Megha Srivastava</a>"},"description":"The official Stanford AI Lab blog","headline":"Productive Struggle: The Future of Human Learning in the Age of AI","dateModified":"2025-01-29T00:00:00-08:00","datePublished":"2025-01-29T00:00:00-08:00","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Productive Struggle: The Future of Human Learning in the Age of AI | The Stanford AI Lab Blog</title>
+    <meta name="description" content="What happens to human learning when superhuman intelligence is as accessible as a Google search?">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Productive Struggle: The Future of Human Learning in the Age of AI">
+    
+    <meta name="twitter:description" content="What happens to human learning when superhuman intelligence is as accessible as a Google search?">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-01-29-teaching/tutorcopilot.001.jpeg">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-01-29-teaching/tutorcopilot.001.jpeg">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Productive Struggle: The Future of Human Learning in the Age of AI</h1>
+    <p class="meta">
+    <a href='https://rosewang2008.github.io/'>Rose E. Wang</a> and <a href='cs.stanford.edu/~megha'>Megha Srivastava</a>
+    <div class="post-date">January 29, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <link rel="stylesheet" href="path_to_bigfoot/bigfoot-default.css" />
+
+<script src="path_to_bigfoot/bigfoot.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    bigfoot({
+      duplicateFootnoteStrategy: "combine", // Keeps repeated citations as popovers
+    });
+  });
+</script>
+
+<p>Walking through our computer science building, we can see ChatGPT on nearly every screen. Today, students can use AI at every stage of their learning process. For example, instead of struggling to figure out how to start a coding assignment, students can simply copy and paste the question into an AI model. Even if the solution doesn’t work perfectly out of the box, they can re-prompt the model with its own solution and an error description to receive a fixed solution.</p>
+
+<p>We can’t help but compare this to our own experiences learning to program during undergrad. We remember the struggle of writing our first lines of code, the days spent debugging with friends at the student center, and the feeling of success after a night’s sleep when finally fixing the bug. We didn’t enjoy being stuck in the moment; but now, we look back and understand that going through these surmountable struggles was important for our learning. Our <em>productive struggles</em> not only helped us provide the correct solution in the short run, but also how to write stronger, less error-prone code in the long run.</p>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-01-29-teaching/tweet.png" style="width: 70%;" /></div>
+<figcaption>
+  <b>Figure 1: </b>Productive struggle is important for human learning. Have we become too dependent on ChatGPT? <a href="https://x.com/daanksy/status/1872354066791346272" target="_blank">Source</a>
+</figcaption>
+</div></figure>
+
+<p>AI systems like ChatGPT are undeniably <em>exciting</em>, but they also challenge the very essence of how we, humans, learn. These systems excel at tasks that requires years of training to master, such as competitive mathematics or college-level programming <sup id="fnref:openaigpt4" role="doc-noteref"><a href="#fn:openaigpt4" class="footnote">1</a></sup>. They are also becoming <em>more accessible</em>, ready to be used whenever a task poses the slightest bit of difficulty for us. Despite progress in AI, skills such as literacy in both children and adults are declining <sup id="fnref:malkus2025aei" role="doc-noteref"><a href="#fn:malkus2025aei" class="footnote">2</a></sup>, raising the question: what aspects of learning do we want technology to cultivate?</p>
+
+<p>We need to struggle in order to develop new skills <sup id="fnref:warshauer2015teach" role="doc-noteref"><a href="#fn:warshauer2015teach" class="footnote">3</a></sup><sup id="fnref:hiebert2007math" role="doc-noteref"><a href="#fn:hiebert2007math" class="footnote">4</a></sup><sup id="fnref:dewey2011think" role="doc-noteref"><a href="#fn:dewey2011think" class="footnote">5</a></sup>. By “struggle”, we mean the effort students put into understanding a concept and working through challenges to uncover solutions that are not immediately obvious. While we may not enjoy the struggles of learning, struggle teaches persistence and deepens understanding. Our worry is that with AI, we may develop a habit of avoiding struggle, and that habit risks eroding the depth of our knowledge<sup id="fnref:comment" role="doc-noteref"><a href="#fn:comment" class="footnote">6</a></sup>.</p>
+
+<p><strong>How do we preserve meaningful learning in a world where answers are just a prompt away?</strong></p>
+
+<h2 id="the-evaluation-paradox"><strong>The Evaluation Paradox</strong></h2>
+
+<p>Our traditional paradigms for evaluating AI systems often rely on user satisfaction ratings or benchmark assessments — metrics that research has shown to be insufficient for education.  For example, Hiroko Warshauer and James Hiebert show that effective support for struggle  in pedagogical settings requires attention to multiple dimensions, such as the nature of a teacher’s language <sup id="fnref:warshauer2015struggle" role="doc-noteref"><a href="#fn:warshauer2015struggle" class="footnote">7</a></sup><sup id="fnref:warshauer2015teach:1" role="doc-noteref"><a href="#fn:warshauer2015teach" class="footnote">3</a></sup>, the design of tasks<sup id="fnref:hiebert1993math" role="doc-noteref"><a href="#fn:hiebert1993math" class="footnote">8</a></sup>, and the broader learning environment<sup id="fnref:yeager2019growth" role="doc-noteref"><a href="#fn:yeager2019growth" class="footnote">9</a></sup><sup id="fnref:noddings1985small" role="doc-noteref"><a href="#fn:noddings1985small" class="footnote">10</a></sup><sup id="fnref:schoenfeld1985ideas" role="doc-noteref"><a href="#fn:schoenfeld1985ideas" class="footnote">11</a></sup>. Furthermore, studies by Arthur Glenberg and Michael Pressley et al., have shown that students often overestimate their own understanding and may prefer systems that reduce struggle in the short term <sup id="fnref:glenberg1982illusion" role="doc-noteref"><a href="#fn:glenberg1982illusion" class="footnote">12</a></sup><sup id="fnref:pressley1990sometimes" role="doc-noteref"><a href="#fn:pressley1990sometimes" class="footnote">13</a></sup>. How is this paradox between user preference and their learning reflected in our current AI systems?</p>
+
+<p>In our work on evaluating interactions between humans and AI systems <sup id="fnref:lee2023evaluating" role="doc-noteref"><a href="#fn:lee2023evaluating" class="footnote">14</a></sup> —in this case, language models—for information-seeking tasks like  question answering, we also observed a disconnect between users’ views of helpfulness and their task performance: the language models which users self-reported as helpful were not always the ones that led to higher task accuracy (<strong>Figure 2</strong>)! This result was attributed to users putting misplaced trust on to the “confident” and “definitive” language generated by certain language models, particularly those with additional fine-tuning <sup id="fnref:srivastava2023halie" role="doc-noteref"><a href="#fn:srivastava2023halie" class="footnote">15</a></sup>. Only if these users encountered a confident-sounding answer that was obviously wrong, did their assessment of the language model rapidly decline. On the other hand, a few users working with language models that provided in-direct and lengthier answers trusted that their struggle was intentional and held value, including one participant who stated <em>“the task may not be as fun if the AI would give you all the answers!”</em><sup id="fnref:srivastava2023halie1" role="doc-noteref"><a href="#fn:srivastava2023halie1" class="footnote">16</a></sup>.</p>
+
+<figure class="figure"><div class="figure__main">
+<div style="border: 2px solid white;"><img class="postimage" src="/blog/assets/img/posts/2025-01-29-teaching/sailblog_halie.001.jpeg" style="width: 120%; height: auto;" /></div>
+
+<figcaption style="font-size: 14px;">
+ <b>Figure 2: </b>We asked users to answer College Chemistry questions from the <a href="https://arxiv.org/abs/2009.03300">MMLU dataset</a> while given access to different language models (LMs) for help. Those interacting with stronger LMs (e.g. instruction-tuned models) received more direct and confident responses than those interacting with weaker LMs, even in the presence of hallucinations. This resulted in a discrepancy between user helpfulness and task performance, suggesting overreliance that can hinder learning.
+</figcaption>
+</div></figure>
+
+<p>Another domain where this evaluation paradox occurs is rehabilitation technology, where it is crucial for the patient to trust that any robot-assisted therapy (e.g. repetitive movements) will actually lead to long-term improvement <sup id="fnref:kellmeyer2018social" role="doc-noteref"><a href="#fn:kellmeyer2018social" class="footnote">17</a></sup>. In our work on AI-assisted motor learning <sup id="fnref:srivastava2022teaching" role="doc-noteref"><a href="#fn:srivastava2022teaching" class="footnote">18</a></sup>, we again saw that users self-reported decreased preference for the type of AI-assistance that actually led to improved learning (<strong>Figure 3</strong>) . Our experiment asked participants to learn to control a vehicle in a simulated environment, and we found that our AI-based instruction encouraged participants to learn a new skill of successfully operating the vehicle in reverse. However, participants found reversing uncomfortable and frustrating. In this setting, AI succeeded at helping students learn a new skill, leading to overall task improvement, but failed to inspire student resilience.</p>
+
+<figure class="figure"><div class="figure__main">
+<div style="border: 2px solid white;"><img class="postimage" src="/blog/assets/img/posts/2025-01-29-teaching/sailblog_motor.gif" style="width: 120%; height: auto;" /></div>
+<figcaption style="font-size: 14px;">
+  <b>Figure 3: </b>Participants that received  <a href="https://arxiv.org/pdf/2211.14003">personalized AI training</a> in our parking simulator were encouraged to try to learn to reverse – a challenging skill that, when learned, leads to task improvement (e.g. taking less time to park). While participants found  personalized AI training less helpful (left) than the control training curricula, it led to higher task performance (middle) and usage of this skill in evaluation trials (right), showing how user preference is a poor proxy for learning gain. 
+</figcaption>
+</div></figure>
+
+<p>If student self-reported assessments and engagement isn’t necessarily reflective of learning, what then does good teaching look like when students are struggling? Can we help teachers guide their students through productive struggle with AI?</p>
+
+<h2 id="fostering-productive-struggle-by-empowering-teachers"><strong>Fostering Productive Struggle by Empowering Teachers</strong></h2>
+
+<p>While many people can be a teacher—from parents, mentors, tutors to traditional classroom teachers—good teachers are hard to come by. Good teachers gain their expertise through years of training or trial and error, and students who most need experienced teachers often have the least access to them <sup id="fnref:hong2022lowincome" role="doc-noteref"><a href="#fn:hong2022lowincome" class="footnote">19</a></sup><sup id="fnref:peske2006teaching" role="doc-noteref"><a href="#fn:peske2006teaching" class="footnote">20</a></sup><sup id="fnref:clotfelter2007high" role="doc-noteref"><a href="#fn:clotfelter2007high" class="footnote">21</a></sup>. This inequity impacts the quality of their education and the nature of how students struggle.</p>
+
+<p>One exciting direction is using AI to help human educators create better moments of productive struggle for their students. In earlier research, we observed that novice educators have difficulties helping struggling students, particularly under time pressure <sup id="fnref:wang2023bridging" role="doc-noteref"><a href="#fn:wang2023bridging" class="footnote">22</a></sup>. These educators were not sure how to nudge students and come up with the right thing to say on the spot. Without guidance on how to effectively foster productive struggle, they frequently defaulted to providing the solution to the student. This meant missed opportunities to turn a student’s struggle into meaningful learning!</p>
+
+<p>To address this, we developed Tutor CoPilot <sup id="fnref:wang2024tutor" role="doc-noteref"><a href="#fn:wang2024tutor" class="footnote">23</a></sup>, an AI-powered system designed to provide live suggestions to human tutors on how to foster productive struggle (<strong>Figure 4</strong>). Tutor CoPilot is a language model that generates expert-like suggestions on scaffolding the student’s learning, such as asking a guiding question or providing a hint. Unlike generic tools like ChatGPT that risk providing the answer to students or may not be able to engage a student for an entire hour of learning, Tutor CoPilot focuses on amplifying the tutor’s ability to foster productive struggle.</p>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-01-29-teaching/copilot.gif" style="width: 70%;" /></div>
+<figcaption>
+  <b>Figure 4:</b> Illustration of Tutor CoPilot. Tutor CoPilot provides real-time suggestions for tutors on how to help struggling students. These suggestions follow expert-informed strategies, like asking a guiding question or providing a hint.
+</figcaption>
+</div></figure>
+
+<p>We tested Tutor CoPilot to provide tutors guidance in a large randomized controlled trial and found that the technology improved student performance on math tests (<strong>Figure 5, left</strong>). But, what actually changed in the tutor’s instruction to enable students to learn better? Were the tutors actually fostering productive struggle? When we looked at all the tutors’ language, we found that tutors who had access to Tutor CoPilot were indeed using language that better scaffolded learning and fostered productive struggle, such as prompting students to explain their answers (<strong>Figure 5, right</strong>). Tutors who didn’t have access to Tutor CoPilot gave away the answer and solution strategy. <em>By improving how tutors foster productive struggle, students were learning better as a result!</em></p>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-01-29-teaching/tutorcopilot.001.jpeg" style="width: 100%;" /></div>
+<figcaption>
+  <b>Figure 5:</b> Tutor CoPilot results. (Left) We found that students working with tutors that had access to Tutor CoPilot were 4 percentage points (p.p.) more likely to pass their math lesson tests. (Right) Tutors with access to Tutor CoPilot used strategies that better fostered productive struggle, whereas tutors who didn’t have access gave away answers and gave generic encouragement to the students.
+</figcaption>
+</div></figure>
+
+<p>There are other exciting approaches that invite us to reimagine AI’s role in engaging real educators and students in productive struggle. For example, work from CU Boulder explores how AI can help students collaborate better with their peers by establishing community agreements <sup id="fnref:breideband2023community" role="doc-noteref"><a href="#fn:breideband2023community" class="footnote">24</a></sup>. Work from Amplify leverages technology to make classroom learning more social by enabling students to try different ideas, share their math observations and have more meaningful classroom discussions <sup id="fnref:meyer2024math" role="doc-noteref"><a href="#fn:meyer2024math" class="footnote">25</a></sup>. These examples illustrate how we can support learning by inviting student curiosity and empowering human relationships between students and educators via technology.</p>
+
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+
+<p>At its heart, learning is so much more than about just finding the right answer: it’s about building resilience, fostering curiosity, and enriching the journey of discovery for students <sup id="fnref:meyer2024amplify" role="doc-noteref"><a href="#fn:meyer2024amplify" class="footnote">26</a></sup>. Despite incredible advances in technology such as AI, human skills – from literacy to fine motor skills – are continuing to decline, with some blaming increased screen time and technology reliance<sup id="fnref:national2025why" role="doc-noteref"><a href="#fn:national2025why" class="footnote">27</a></sup>. In an era where AI can deliver instant solutions and gratification, we must reconsider how to actively preserve the essential aspects of learning.</p>
+
+<p>We believe AI’s role in education isn’t to eliminate struggle but to enhance it. Whether it’s by empowering educators with tools like Tutor CoPilot, or empowering students with inquiry-driven environments, we wish to ensure that AI supports deeper, more meaningful learning experiences. Let’s build a future where AI systems encourage—not shortcut—meaningful learning from the get-go!</p>
+
+<p>Contact: <a href="mailto:rewang@cs.stanford.edu">rewang@cs.stanford.edu</a>  and <a href="mailto:megha@cs.stanford.edu">megha@cs.stanford.edu</a></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:openaigpt4" role="doc-endnote">
+      <p>OpenAI. “GPT-4 Technical Report.” ArXiv abs/2303.08774 (2023): n. pag. <a href="#fnref:openaigpt4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:malkus2025aei" role="doc-endnote">
+      <p>Malkus, Nat. Testing Theories of Why: Four Keys to Interpreting US Student Achievement Trends. American Enterprise Institute, https://www.aei.org/research-products/report/testing-theories-of-why-four-keys-to-interpreting-us-student-achievement-trends/ <a href="#fnref:malkus2025aei" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:warshauer2015teach" role="doc-endnote">
+      <p>Warshauer, H.K. Productive struggle in middle school mathematics classrooms. J Math Teacher Educ 18, 375–400 (2015). https://doi.org/10.1007/s10857-014-9286-3 <a href="#fnref:warshauer2015teach" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:warshauer2015teach:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:hiebert2007math" role="doc-endnote">
+      <p>Hiebert, J., &amp; Grouws, D. A. (2007). The Effects of Classroom Mathematics Teaching on Students’ Learning. In F. Lester (Ed.), Second Handbook of Research on Mathematics Teaching and Learning (pp. 371-404). Charlotte, NC: Information Age. <a href="#fnref:hiebert2007math" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dewey2011think" role="doc-endnote">
+      <p>Dewey, John. How We Think. D. C. HEATH &amp; CO., PUBLISHERS, 1910, www.gutenberg.org/files/37423/37423-h/37423-h.htm. <a href="#fnref:dewey2011think" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:comment" role="doc-endnote">
+      <p>Do we still need to learn certain skills if AI can do them better? Yes. The calculator didn’t make learning mathematics obsolete—students still need to master the principles of mathematics, including arithmetic. Similarly, even if AI can generate code, mastering the principles is still important for understanding, debugging and adapting that code. <a href="#fnref:comment" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:warshauer2015struggle" role="doc-endnote">
+      <p>Warshauer, Hiroko K. “Strategies to Support Productive Struggle.” Mathematics Teaching in the Middle School, vol. 20, no. 7, National Council of Teachers of Mathematics, Mar. 2015, pp. 390-393. JSTOR, https://www.jstor.org/stable/10.5951/mathteacmiddscho.20.7.0390. <a href="#fnref:warshauer2015struggle" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:hiebert1993math" role="doc-endnote">
+      <p>Hiebert, James, and Diana Wearne. “Instructional Tasks, Classroom Discourse, and Students’ Learning in Second-Grade Arithmetic.” American Educational Research Journal, vol. 30, no. 2, Summer 1993, pp. 393-425. <a href="#fnref:hiebert1993math" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:yeager2019growth" role="doc-endnote">
+      <p>Yeager, David S., et al. “A National Experiment Reveals Where a Growth Mindset Improves Achievement.” Nature, vol. 573, 2019, pp. 364-369. <a href="#fnref:yeager2019growth" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:noddings1985small" role="doc-endnote">
+      <p>Noddings, Nel. “Small Groups as a Setting for Research on Mathematical Problem Solving.” Teaching and Learning Mathematical Problem Solving: Multiple Research Perspectives, edited by Edward A. Silver, 1st ed., Routledge, 1985. <a href="#fnref:noddings1985small" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:schoenfeld1985ideas" role="doc-endnote">
+      <p>Schoenfeld, Alan H. “Ideas in the Air: Speculations on Small Group Learning, Environmental and Cultural Influences on Cognition, and Epistemology.” Teaching and Learning Mathematical Problem Solving: Multiple Research Perspectives, edited by Edward A. Silver, Routledge, 1985. <a href="#fnref:schoenfeld1985ideas" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:glenberg1982illusion" role="doc-endnote">
+      <p>Glenberg, Arthur M., Alex Cherry Wilkinson, and William Epstein. “The Illusion of Knowing: Failure in the Self-Assessment of Comprehension.” Memory &amp; Cognition, vol. 10, 1982, pp. 597-602. <a href="#fnref:glenberg1982illusion" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:pressley1990sometimes" role="doc-endnote">
+      <p>Pressley, Michael, et al. “Sometimes adults miss the main ideas and do not realize it: Confidence in responses to short-answer and multiple-choice comprehension questions.” Reading Research Quarterly, 1990: 232-249. <a href="#fnref:pressley1990sometimes" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lee2023evaluating" role="doc-endnote">
+      <p>Lee, Mina, and Megha Srivastava and Amelia Hardy and John Thickstun et al. “Evaluating Human-Language Model Interaction.” Transactions on Machine Learning Research, vol. 9, 2023. <a href="#fnref:lee2023evaluating" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:srivastava2023halie" role="doc-endnote">
+      <p>Srivastava, Megha, and John Thickstun. “Observations from HALIE: A Closer Look at Human-LM Interactions in Information-Seeking Contexts.” Center for Research on Foundation Models Blog, Stanford University, 2023. <a href="#fnref:srivastava2023halie" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:srivastava2023halie1" role="doc-endnote">
+      <p>Srivastava, Megha, and John Thickstun. “Observations from HALIE: A Closer Look at Human-LM Interactions in Information-Seeking Contexts.” Center for Research on Foundation Models Blog, Stanford University, 2023. <a href="#fnref:srivastava2023halie1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:kellmeyer2018social" role="doc-endnote">
+      <p>Kellmeyer, Philipp, et al. “Social Robots in Rehabilitation: A Question of Trust.” Science Robotics, vol. 3, no. 21, 22 Aug. 2018, DOI: 10.1126/scirobotics.aat1587. <a href="#fnref:kellmeyer2018social" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:srivastava2022teaching" role="doc-endnote">
+      <p>Srivastava, Megha et al. "Assistive Teaching of Motor Control Tasks to Humans" Advances in Neural Information Processing Systems 36 (2022). https://arxiv.org/pdf/2211.14003 <a href="#fnref:srivastava2022teaching" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:hong2022lowincome" role="doc-endnote">
+      <p>Hong, Joe, and Erica Yee. “Low-Income Students Are More Likely to Be in Classrooms with Underqualified Teachers.” KQED, 21 July 2022, https://www.kqed.org. <a href="#fnref:hong2022lowincome" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:peske2006teaching" role="doc-endnote">
+      <p>Peske, Heather G., and Kati Haycock. Teaching Inequality: How Poor and Minority Students Are Shortchanged on Teacher Quality. The Education Trust, 2006. <a href="#fnref:peske2006teaching" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:clotfelter2007high" role="doc-endnote">
+      <p>Clotfelter, Charles T., et al. “High Poverty Schools and the Distribution of Teachers and Principals.” North Carolina Review, 2007. <a href="#fnref:clotfelter2007high" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:wang2023bridging" role="doc-endnote">
+      <p>Wang, Rose E., et al. “Bridging the Novice-Expert Gap via Models of Decision-Making: A Case Study on Remediating Math Mistakes.” NAACL 2024, https://arxiv.org/abs/2310.10648. <a href="#fnref:wang2023bridging" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:wang2024tutor" role="doc-endnote">
+      <p>Wang, Rose E., et al. “Tutor CoPilot: A Human-AI Approach for Scaling Real-Time Expertise.” arXiv, 26 Jan. 2025, https://arxiv.org/abs/2410.03017. <a href="#fnref:wang2024tutor" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:breideband2023community" role="doc-endnote">
+      <p>Breideband, Thomas, et al. “The Community Builder (CoBi): Helping Students to Develop Better Small Group Collaborative Learning Skills.” CSCW ‘23 Companion: Companion Publication of the 2023 Conference on Computer Supported Cooperative Work and Social Computing, 2023. <a href="#fnref:breideband2023community" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:meyer2024math" role="doc-endnote">
+      <p>Meyer, Dan. “The Math Kids Most Want to Learn.” Dan Meyer Blog, 19 June 2024. https://danmeyer.substack.com/p/the-math-kids-most-want-to-learn <a href="#fnref:meyer2024math" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:meyer2024amplify" role="doc-endnote">
+      <p>Meyer, Dan. “Amplify Desmos Math is More than a Curriculum.” Dan Meyer Blog, 18 August 2024. https://danmeyer.substack.com/p/amplify-desmos-math-is-more-than <a href="#fnref:meyer2024amplify" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:national2025why" role="doc-endnote">
+      <p>National Geographic. “Kids are losing fine motor skills – and screens might be to blame. 28 January 2025. <a href="#fnref:national2025why" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/teaching/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/teaching/&text=Productive+Struggle%3A+The+Future+of+Human+Learning+in+the+Age+of+AI%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/teaching/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/teaching/&title=Productive+Struggle%3A+The+Future+of+Human+Learning+in+the+Age+of+AI%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/teaching/&title=Productive+Struggle%3A+The+Future+of+Human+Learning+in+the+Age+of+AI%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Productive+Struggle%3A+The+Future+of+Human+Learning+in+the+Age+of+AI%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/teaching/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#AI">
+      <p><i class="fa fa-tag fa-fw"></i> AI</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#NLP">
+      <p><i class="fa fa-tag fa-fw"></i> NLP</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#education">
+      <p><i class="fa fa-tag fa-fw"></i> education</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#human-AI+interaction">
+      <p><i class="fa fa-tag fa-fw"></i> human-AI interaction</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/minivla/">
+      <p>Previous post</p>
+        MiniVLA: A Better VLA with a Smaller Footprint
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
