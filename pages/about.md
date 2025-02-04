@@ -8,7 +8,7 @@ position: 1
 ### The CAMLC25 micro-credential
 <p align="justify">
 
-The "Cheminformatics, Automation and Machine Learning in Chemistry: from fundamental concepts to emerging techniques" (or CAMLC for short) micro-credential aims to introduce attendees to the use and development of emerging digital technologies in chemistry. Initially, attendees will review various functions of Python, particularly those related to modules commonly used in cheminformatics. Once users are familiar with Python environments and Jupyter Notebooks, machine learning and data science will be introduced, with a focus on state-of-the-art implementations in the field of chemistry. It is particularly relevant for attendees who work with the following:</p>
+The second edition of the "Cheminformatics, Automation and Machine Learning in Chemistry: from fundamental concepts to emerging techniques" (or CAMLC for short) micro-credential aims to introduce attendees to the use and development of emerging digital technologies in chemistry. Initially, attendees will review various functions of Python, particularly those related to modules commonly used in cheminformatics. Once users are familiar with Python environments and Jupyter Notebooks, machine learning and data science will be introduced, with a focus on state-of-the-art implementations in the field of chemistry. It is particularly relevant for attendees who work with the following:</p>
 
 * Homogeneous or finite systems<br>
 <i>Note: the workshop is not recommended for researchers working on PBC-materials or MD-enzymes)</i><br>
