@@ -8,8 +8,6 @@
   {% capture _head %}{% include default/head.liquid %}{% endcapture %}
   {{ _head | split: " " | join: " "}}
   <body>
-    {% capture _navbar %}{% include default/navbar.liquid %}{% endcapture %}
-    {{ _navbar | split: " " | join: " "}}
     <div class="content">
       {{ content }}
     </div>

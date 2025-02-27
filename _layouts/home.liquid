@@ -23,6 +23,8 @@ layout: default
     <div id="main" class="call-out call-out_img">
         <h1> {{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>"}} </h1>
     </div>
+    {% capture _navbar %}{% include default/navbar.liquid %}{% endcapture %}
+    {{ _navbar | split: " " | join: " "}}
     {% capture _blog %}{% include blog/blog.liquid %}{% endcapture %}
     {{ _blog | split: " " | join: " "}}
 </div>
