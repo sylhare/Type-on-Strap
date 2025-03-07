@@ -90,7 +90,7 @@ nav {
 
 /* ---- Responsive ---- */
 
-@media (min-width: $break) {
+@media (min-width: $break + 1) {
   a#pull {
     display: none;
   }
