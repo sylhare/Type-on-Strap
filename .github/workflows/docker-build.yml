@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # The jekyll/builder is used by GitHub pages
-        docker-image: [ 'jekyll/builder', 'sylhare/jekyll' ]
+        # The jekyll/builder was replaced by the action jekyll-build-pages
+        docker-image: [ 'sylhare/jekyll' ]
 
     steps:
       - uses: actions/checkout@v4
