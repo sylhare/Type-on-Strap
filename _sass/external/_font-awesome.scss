@@ -2,14 +2,11 @@
  * Type-on-strap Font Awesome kit v6.7.1
  * Find the version and license of the included Font Awesome here: _sass/external/font-awesome/fontawesome.scss
  */
-$fa-font-path: "../fonts/font-awesome" !default;
 $fa-inverse: var(--background);
+$fa-font-path: "../fonts/font-awesome" !default;
 
-@use 'font-awesome/fontawesome' with (
-  $fa-font-path: $fa-font-path,
-  $fa-inverse: $fa-inverse
-);
-@use 'font-awesome/brands';
-@use 'font-awesome/regular';
-@use 'font-awesome/solid';
-@use 'font-awesome/v4-shims';
+@import 'font-awesome/fontawesome';
+@import 'font-awesome/brands';
+@import 'font-awesome/regular';
+@import 'font-awesome/solid';
+@import 'font-awesome/v4-shims';

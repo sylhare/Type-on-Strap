@@ -6,6 +6,6 @@
 // V4 shims compile (Web Fonts-based)
 // -------------------------
 
-@use 'functions';
-@forward 'variables' show $fa-inverse, $fa-font-path;
-@use 'shims';
+@import 'functions';
+@import 'variables';
+@import 'shims';
