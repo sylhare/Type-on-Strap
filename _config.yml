@@ -3,7 +3,7 @@ baseurl: ""
 url: "https://feltapiacontreas.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
-title: Roca de Guía                                   # site's title
+title: Blog                                   # site's title
 description: "A blog about me and my career"      # used by search engines
 avatar: assets/img/triangle.png                      # Empty for no avatar in navbar
 favicon: "" #assets/favicon.ico                             # Icon displayed in the tab
