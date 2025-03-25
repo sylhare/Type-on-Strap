@@ -14,6 +14,7 @@ Up to 35 attendees will be accepted. To register, applicants must complete the f
 </p><br>
 
 <p align="justify">
-<a href='https://docs.google.com/forms/d/e/1FAIpQLSd5O5LtxDw9IMLfRGrPsSzYgcsqA5T6XvYiwrcEXIQPvEHHlQ/viewform?usp=dialog'>Application Form</a><br>
-<i>Deadline (extended due to a new agreement with the Digital Discovery journal): March 25, 2025 (17:00 CET). Selected applicants will be notified no later than April 6.</i>
+<!-- <a href='https://docs.google.com/forms/d/e/1FAIpQLSd5O5LtxDw9IMLfRGrPsSzYgcsqA5T6XvYiwrcEXIQPvEHHlQ/viewform?usp=dialog'>Application Form</a><br>
+<i>Deadline (extended due to a new agreement with the Digital Discovery journal): March 25, 2025 (17:00 CET). Selected applicants will be notified no later than April 6.</i> -->
+<i>Applications are closed, selected applicants will be notified no later than April 6.</i>
 </p><br>
