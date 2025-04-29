@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/verbatim-memorization/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Demystifying Verbatim Memorization in Large Language Models | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Demystifying Verbatim Memorization in Large Language Models" />
+<meta name="author" content="<a href='https://explanare.github.io/'>Jing Huang</a>, <a href='https://cs.stanford.edu/~diyiy/'>Diyi Yang</a>, <a href="https://stanford.edu/~cgpotts/">Christopher Potts</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/verbatim-memorization/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/verbatim-memorization/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-28T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Demystifying Verbatim Memorization in Large Language Models" />
+<script type="application/ld+json">
+{"datePublished":"2025-04-28T00:00:00-07:00","author":{"@type":"Person","name":"<a href='https://explanare.github.io/'>Jing Huang</a>, <a href='https://cs.stanford.edu/~diyiy/'>Diyi Yang</a>, <a href=\"https://stanford.edu/~cgpotts/\">Christopher Potts</a>"},"url":"http://ai.stanford.edu/blog/verbatim-memorization/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/verbatim-memorization/"},"description":"The official Stanford AI Lab blog","@type":"BlogPosting","headline":"Demystifying Verbatim Memorization in Large Language Models","dateModified":"2025-04-28T00:00:00-07:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Demystifying Verbatim Memorization in Large Language Models | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Verbatim memorization is intertwined with the LM’s general capabilities.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Demystifying Verbatim Memorization in Large Language Models">
+    
+    <meta name="twitter:description" content="Verbatim memorization is intertwined with the LM’s general capabilities.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/PATH TO MAIN IMAGE ">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/PATH TO MAIN IMAGE ">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Demystifying Verbatim Memorization in Large Language Models</h1>
+    <p class="meta">
+    <a href='https://explanare.github.io/'>Jing Huang</a>, <a href='https://cs.stanford.edu/~diyiy/'>Diyi Yang</a>, <a href="https://stanford.edu/~cgpotts/">Christopher Potts</a>
+    <div class="post-date">April 28, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <link rel="stylesheet" href="path_to_bigfoot/bigfoot-default.css" />
+
+<script src="path_to_bigfoot/bigfoot.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    bigfoot({
+      duplicateFootnoteStrategy: "combine", // Keeps repeated citations as popovers
+    });
+  });
+</script>
+
+<h2 id="what-is-verbatim-memorization">What is verbatim memorization?</h2>
+
+<p>In December 2023, The New York Times filed a lawsuit against OpenAI, alleging unauthorized use of its articles to train GPT models. The lawsuit included a 127-page exhibit<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> demonstrating how GPT-4 could reproduce substantial portions of copyrighted articles verbatim when prompted with the opening sentences, as shown in Figure 1.</p>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-28-verbatim-memorization/nyt-lawsuit-ex-j.png" style="width: 90%; padding-bottom:5px" /></div>
+<figcaption>
+  <b>Figure 1: </b> Examples of GPT-4 outputs The New York Times’s copyrighted articles verbatim.
+</figcaption>
+</div></figure>
+
+<p>This phenomenon is known as verbatim memorization. The term, also referred to as “extractable memorization”<sup id="fnref:carlini2023" role="doc-noteref"><a href="#fn:carlini2023" class="footnote">2</a></sup> or “eidetic memorization”<sup id="fnref:carlini2021" role="doc-noteref"><a href="#fn:carlini2021" class="footnote">3</a></sup>, refers to Large Language Models (LLMs) generating long sequences of texts that are exact matches of sequences in their training data.
+This ability to reproduce training data verbatim raises questions about potential liability under the Digital Millennium Copyright Act (DMCA), as some legal interpretations suggest that copyright infringement claims require publishers to demonstrate that the distributed work is “close to identical” to the original<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">4</a></sup>, a requirement that would be satisfied in cases of verbatim memorization.</p>
+
+<p>How do LLMs memorize these long paragraphs verbatim? In our <a href="https://aclanthology.org/2024.emnlp-main.598/">recent paper</a>, we aim to understand verbatim memorization in connection to language modeling capabilities. In this blog post, we walk through our findings using a series of examples. Overall, we show that verbatim memorization is intertwined with the LM’s general capabilities, which poses challenges to both characterizing and controlling verbatim memorization.</p>
+
+<h2 id="measuring-verbatim-memorization">Measuring verbatim memorization</h2>
+
+<p>The examples provided in The New York Times lawsuit demonstrate a straightforward approach to detect verbatim memorization. This closely resembles <a href="https://openreview.net/pdf?id=TatRHT_1cK">KL-extractability</a>, the most widely adopted metric for measuring verbatim memorization in LLMs. Given a prefix of K tokens, the model generates a continuation of L tokens, usually through greedy decoding. If the L tokens match a substring in any training example, we say the L tokens are verbatim memorized.</p>
+
+<p>The assumption behind this behavioral measure is that generating a training sequence verbatim implies the model has memorized the sequence from the training data. However, such direct replication does not necessarily prove memorization. This straightforward “extractability” metric can create illusions of memorization.</p>
+
+<h5 id="the-illusion-of-single-shot-verbatim-memorization">The illusion of single-shot verbatim memorization</h5>
+
+<p>Consider the following example from the <a href="https://huggingface.co/EleutherAI/pythia-6.9b-deduped">Pythia 6.9B</a> model:</p>
+
+<blockquote>
+  <p><strong>Prompt:</strong> normal; AST: aspartate aminotransferase (i.e. SGOT:<br />
+<strong>Output:</strong>  serum glutamic oxaloacetic transaminase); ALT: alanine aminotransferase (i.e. SGPT: serum glutamic</p>
+</blockquote>
+
+<p>Is the output verbatim memorized? It surly is according to the KL-extractability definition. What makes this instance more intriguing is that the output sequence occurs only once in the pre-training data<sup id="fnref:infinigram" role="doc-noteref"><a href="#fn:infinigram" class="footnote">5</a></sup>. One may consider this as a piece of evidence that verbatim memorization can happen from just one exposure during training. However, we have found another explanation.</p>
+
+<p>What we have observed is actually an illusion of verbatim memorization resulting from the metric we use. How do we know? We can prove this by examining a model <em>M</em> trained on the entire training corpus minus this one sequence and its duplicates. If <em>M</em> can still generate the same sequence, we know that the output wasn’t simply copied from training data, since the sequence was never present in <em>M</em>’s training. We tested our hypothesis on the example above using an earlier checkpoint—a checkpoint before the sequence was ever encountered—and verified that the model could still generate the sequence verbatim.</p>
+
+<h5 id="measuring-memorization-requires-counterfactuals">Measuring memorization requires counterfactuals</h5>
+<p>This illusion suggests that measuring verbatim memorization fundamentally requires answering a <a href="https://plato.stanford.edu/entries/counterfactuals/">counterfactual</a> question: what would happen if the model has never seen this sequence? In the example above, we approximate this counterfactual with an earlier checkpoint. For general cases, existing work has constructed this counterfactual by training a model from scratch on the original training corpus with a specific sequence hold out<sup id="fnref:zhang2023" role="doc-noteref"><a href="#fn:zhang2023" class="footnote">6</a></sup>. However, training from scratch is computationally expensive. In our work, we take advantage of intermediate checkpoints and construct the counterfactual by continuing pre-training with sequence injection.</p>
+
+<h5 id="constructing-counterfactuals-with-the-sequence-injection-framework">Constructing counterfactuals with the sequence injection framework</h5>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-28-verbatim-memorization/framework.svg" style="width: 90%;" /></div>
+<figcaption>
+  <b>Figure 2: </b> An overview of our sequence injection framework.
+</figcaption>
+</div></figure>
+
+<p>As shown in Figure 2, we branch off a model checkpoint to create a control model and a treatment model. For the control model, we continue pre-training from the checkpoint, while for the treatment model, we continue pre-training on a minimally altered dataset, where a sequence is injected at a fixed frequency. Our framework allows us to decouple factors that are hard to control in previous observational work, such as the frequency and the content of the sequence.</p>
+
+<h2 id="verbatim-memorization-is-intertwined-with-the-lms-general-capabilities">Verbatim memorization is intertwined with the LM’s general capabilities</h2>
+
+<p>With our sequence injection framework, we analyze how verbatim memorization is connected to LM’s general capabilities and the implications on post-training treatments and the implications on post-training treatments.</p>
+
+<h5 id="factors-contributing-to-verbatim-memorization">Factors contributing to verbatim memorization</h5>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-28-verbatim-memorization/checkpoint-vs-mem-length.png" style="width: 90%;" /></div>
+<figcaption>
+  <b>Figure 3: </b> Pythia checkpoint vs. verbatim memorization length of the original and shuffled sequences.
+</figcaption>
+</div></figure>
+
+<p>We first quantify the role of model quality, sequence repetitions, and sequence structures in verbatim memorization:</p>
+<ul>
+  <li><strong>Higher quality models memorize more</strong>: For a given model size, later checkpoints memorize more injected sequences, as shown in Figure 3 solid blue lines.</li>
+  <li><strong>Repetitions are necessary for verbatim memorization</strong>: A non-trivial amount of repetitions in the training data is necessary for a sequence to be verbatim memorized by the model.</li>
+  <li><strong>Sequences without structures are harder to memorize</strong>: Sequences with tokens randomly shuffled are harder to be verbatim memorized by the later checkpoints where the model has fully acquired the syntactic structures, as shown in Figure 3 dotted orange curves.</li>
+</ul>
+
+<p>Moreover, these findings suggest that the ability to verbatim memorize training data is likely tied to the language modeling capability, as sequences that are better recognized by the language model, i.e., sequences with lower <a href="https://huggingface.co/docs/transformers/en/perplexity">perplexity</a>, are more likely to be verbatim memorized under the pre-training setup.</p>
+
+<h5 id="memorized-information-is-stored-in-a-set-of-distributed-and-abstract-states">Memorized information is stored in a set of distributed and abstract states</h5>
+<p>We further examine the relationship between verbatim memorization and general language model capabilities by analyzing internal representations. In particular, if the verbatim memorized content can be localized to a sparse set of model representations, it would be feasible to remove verbatim memorized information without degrading general quality.</p>
+
+<p>We seek to localize a memorized sequence by identifying the causal connections between the prompt tokens and the verbatim memorized tokens, i.e., which tokens in the prompt control the generation of which memorized tokens. We use interventions to test whether a causal connection exists<sup id="fnref:geiger2021" role="doc-noteref"><a href="#fn:geiger2021" class="footnote">7</a></sup>. Specifically, we replace a hidden state of a prompt that triggers verbatim memorization with a hidden state extracted from a random sampled prompt. If the model still produces the same verbatim memorized output, we know that the hidden state does not causally encode the memorized information. However, if the model no longer produces the verbatim continuation, we know the hidden state causally encodes the verbatim memorized sequences.</p>
+
+<p>Let’s use the opening of the Harry Potter and the Philosopher’s Stones (a.k.a. Harry Potter and the Sorcerer’s Stone) as an example, a sentence that is verbatim memorized by most 7B-scale LLMs.</p>
+
+<blockquote>
+  <p><strong>Prompt:</strong> Mr. and Mrs. Dursley, of number four Privet Drive, were proud to say that they were perfectly normal,<br />
+<strong>Output:</strong> thank you very much</p>
+</blockquote>
+
+<p>How does the model correctly generate the iconic continuation “thank you very much”? We intervene on every hidden state of the prompt and highlight the ones that have causal effects on generating the memorized tokens in Figure 4.</p>
+
+<figure class="figure"><div class="figure__main">
+<div style="display: flex">
+<img class="postimage" src="/blog/assets/img/posts/2025-04-28-verbatim-memorization/causal-intervention-hp-thank.png" style="width: 46%; padding: 0;" />
+<img class="postimage" src="/blog/assets/img/posts/2025-04-28-verbatim-memorization/causal-intervention-hp-much.png" style="width: 50%; padding: 0;" />
+</div>
+<figcaption>
+  <b>Figure 4: </b> Left panel: An example of a memorized token “thank” that depends on the trigger prompt “Mr. and Mrs. Dursley”. Right panel: An example of a memorized token “much” that does not depend on the trigger prompt. Darker color: Perturbing the hidden state at this location has a higher probability of changing the next token prediction to a non-memorized token.
+</figcaption>
+</div></figure>
+
+<p>Surprisingly, not all tokens in the verbatim memorized sequence are causally dependent on the trigger prompt. For example, in the Figure 4 right panel, the generated token “much” only causally depends on “very” and “thank”. This suggests that verbatim memorization could not be localized to the representations of the prompt. Instead, verbatim memorized information is distributed across tokens, including the generated tokens.</p>
+
+<p>Moreover, most memorized tokens depend on abstract features produced by middle layers. For example, in Figure 4 left panel, the generation of “thank” depends on features of the name “Dursley” at layer 9, e.g., characters related to Harry Potter. Behaviorally, this means prompts with similar high-level features can trigger the same continuation, as shown below.</p>
+
+<blockquote>
+  <p><strong>The following prompts trigger the same memorized continuation “perfectly normal, thank you very much”:</strong> <br />
+Mr. and Mrs. Dursley, of number four Privet Drive, were proud to say that they were <br />
+Mrs. and Mr. Dursley, of number four, Privet Drive, were proud to say that they
+were <br />
+Mr and Mrs Weasley, residing at four Privet Drive, were proud to say they were <br />
+Mr and Mrs Slytherin, of number twenty-one, Privet Drive, were proud to say that they were <br />
+The Dursley family, of number four, Privet Drive, were pleased to declare that
+they were</p>
+</blockquote>
+
+<p>The fact that not all verbatim memorized tokens are causally dependent on the prompt suggests models might only memorize information about a subset of tokens, filling in the gaps with a general language model. Moreover, the so-called “verbatim” memorization actually depends on a set of abstract states that encode high-level semantics learned by LLMs as opposed to token-level information.</p>
+
+<h2 id="unlearning-methods-fail-to-remove-the-verbatim-memorized-information">Unlearning methods fail to remove the verbatim memorized information</h2>
+<p>If verbatim memorization is entangled with general language modeling capabilities, how well can we remove verbatim memorized information from LLMs without degrading the model? A potential solution proposed in the literature is unlearning, which includes a family of post-training techniques that aim to forget information present in a model’s training data<sup id="fnref:maini2024" role="doc-noteref"><a href="#fn:maini2024" class="footnote">8</a></sup>.</p>
+
+<p>Guided by our insights on how large models store verbatim memorized information, we develop two sets of stress tests to evaluate unlearning methods that localize and remove verbatim memorized information: (1) Position-based perturbations, where we evaluate prompts that cover different spans of a memorized sequence (2) Semantic-based perturbations, where we evaluate variations of the prompt with similar word substitutions, with examples shown below. Memorized outputs are <span style="color:#820000">highlighted in red</span>.</p>
+
+<blockquote>
+  <h6 id="original-test-examples">Original Test Examples</h6>
+  <p><strong>Original Prompt:</strong> From fairest creatures we desire increase,\n That thereby beauty’s rose might never die.\n But as the riper should by time decease <br />
+<strong>Original Output:</strong> <span style="color:#820000">,\n His tender heir might bear his memory:\n But thou, contracted to thine own bright eyes,\n Feed’st thy light’s flame with self-substantial fuel,\n Making a famine where abundance lies,\n Thyself thy foe</span> <br />
+<strong>Unlearned Output:</strong> \n So too our own, to our own selves, shall grow\n\n The world is a book, and those who do not travel read only a page.\n\n The world is a book, and those who do not travel read only</p>
+  <h6 id="stress-test-examples">Stress Test Examples</h6>
+  <p><strong>Perturbed Prompt:</strong> From fairest creatures we desire increase,\n That thereby beauty’s rose might never die.\n But as the riper should by time decease,<strong>\n His tender heir might bear his memory:\n But thou, contracted to thine own bright eyes,\n Feed’st thy light’s</strong> <br />
+<strong>Unlearned Output:</strong> <span style="color:#820000"> flame with self-substantial fuel,\n Making a famine where abundance lies,\n Thyself thy foe</span> <br />
+<br />
+<strong>Perturbed Prompt:</strong> From fairest creatures we desire increase,\n That <strong>thereThrough</strong> beauty’s rose might never die.\n But as the riper should by time decease** <br />
+<strong>Unlearned Output:</strong> <span style="color:#820000"> ,\n His tender heir might bear his memory:\n But </span>you, whose beauty is for aye the same,\n O, you must not dearer be than you are!\n\n The poem is a parody of the famous “Ode \</p>
+</blockquote>
+
+<p>We evaluate three commonly used unlearning methods, including gradient ascent<sup id="fnref:gradascent" role="doc-noteref"><a href="#fn:gradascent" class="footnote">9</a></sup>, sparse fine-tuning (gradient difference + weights masking)<sup id="fnref:graddiff" role="doc-noteref"><a href="#fn:graddiff" class="footnote">10</a></sup>, and also a pruning-based method<sup id="fnref:pruning" role="doc-noteref"><a href="#fn:pruning" class="footnote">11</a></sup> on a set of 90 verbatim memorized sequences, each with at least 50 tokens.</p>
+
+<p>For all three methods, the perturbed prompts increase the length of extracted verbatim memorized outputs by 10–15 tokens. Our results suggest that these unlearning methods do not actually remove the verbatim memorized information. The unlearned models can still generate the memorized texts when prompted with variants of the prefix.</p>
+
+<h2 id="rethinking-verbatim-memorization">Rethinking verbatim memorization</h2>
+
+<p>Verbatim memorization is a pressing issue for LLM research, as it has ramifications for copyright and other legal issues. Our findings suggest that verbatim memorization is fundamentally intertwined with LLM’s general language modeling capabilities, which poses challenges to both characterizing and controlling verbatim memorization for LLM policymakers and practitioners.</p>
+
+<p>In terms of identifying verbatim memorized instances, we likely need more rigorous evidence than simply showing the generated text is in the training corpus, as we have demonstrated that such reproductions can happen even when the generated sequence itself is not present in the training data. This phenomenon could potentially inform us on how to characterize verbatim memorization in future copyright frameworks.</p>
+
+<p>In terms of treatment, post-training mitigations will face trade-offs between failures in removing verbatim memorized information and degradation of general model quality. However, if we consider other stages in the LLM development cycle, there are alternative approaches to mitigate verbatim memorization: deduplication of training data, interventions during training such as redesigning the training objective, or even building an ecosystem that properly attributes the value of training data to its creators. We hope the findings from our work will help motivate this community to explore more solutions in these spaces, which will likely also improve our understanding of LLMs.</p>
+
+<!---References-->
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The New York Times Company v. Microsoft Corporation et al., No. 1:2023cv11195 - Document 1-68. Exhibit J: ONE HUNDRED EXAMPLES OF GPT-4 MEMORIZING CONTENT FROM THE NEW YORK TIMES. <a href="https://nytco-assets.nytimes.com/2023/12/Lawsuit-Document-dkt-1-68-Ex-J.pdf">URL</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:carlini2023" role="doc-endnote">
+      <p>Nicholas Carlini, Daphne Ippolito, Matthew Jagielski, Katherine Lee, Florian Tramer, and Chiyuan Zhang. 2023. Quantifying memorization across neural language models. In The Eleventh International Conference on Learning Representations. <a href="#fnref:carlini2023" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:carlini2021" role="doc-endnote">
+      <p>Nicholas Carlini, Chang Liu, Úlfar Erlingsson, Jernej Kos, and Dawn Song. 2019. The secret sharer: Evaluating and testing unintended memorization in neural networks. In 28th USENIX Security Symposium (USENIX Security 19), pages 267–284, Santa Clara, CA. USENIX Association. <a href="#fnref:carlini2021" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>The New York Times Company v. Microsoft Corporation et al., No. 1:2023cv11195 - Document 514. <a href="https://fingfx.thomsonreuters.com/gfx/legaldocs/znpnjnkgqpl/NYT%20OPENAI%20COPYRIGHT%20LAWSUIT%20mtdruling.pdf">URL</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:infinigram" role="doc-endnote">
+      <p>We count the number of times that a sequence occurs in the Pile, Pythia’s pre-training corpus, using the <a href="https://huggingface.co/spaces/liujch1998/infini-gram">infini-gram</a> tool. <a href="#fnref:infinigram" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:zhang2023" role="doc-endnote">
+      <p>Chiyuan Zhang, Daphne Ippolito, Katherine Lee, Matthew Jagielski, Florian Tramèr, and Nicholas Carlini. 2023. Counterfactual memorization in neural language models. In Thirty-seventh Conference on Neural Information Processing Systems. <a href="#fnref:zhang2023" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:geiger2021" role="doc-endnote">
+      <p>Atticus Geiger, Hanson Lu, Thomas Icard, and Christopher Potts. 2021. Causal abstractions of neural networks. In Advances in Neural Information Processing Systems, volume 34, pages 9574–9586. <a href="#fnref:geiger2021" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:maini2024" role="doc-endnote">
+      <p>Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary C Lipton, and J Zico Kolter. 2024. Tofu: A task of fictitious unlearning for llms. First Conference on Language Modeling. <a href="#fnref:maini2024" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:gradascent" role="doc-endnote">
+      <p>See “Gradient Ascent” in Section 3.2 Unlearning Algorithm. Pratyush Maini, Zhili Feng, Avi Schwarzschild, Zachary C Lipton, and J Zico Kolter. 2024. Tofu: A task of fictitious unlearning for llms. First Conference on Language Modeling. <a href="https://arxiv.org/pdf/2401.06121">URL</a> <a href="#fnref:gradascent" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:graddiff" role="doc-endnote">
+      <p>See Section 5.2 Contrastive Objective. Niklas Stoehr, Mitchell Gordon, Chiyuan Zhang, and Owen Lewis. 2024. Localizing paragraph memorization in language models. <a href="https://arxiv.org/pdf/2403.19851">URL</a> <a href="#fnref:graddiff" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:pruning" role="doc-endnote">
+      <p>See “Hard Concrete” in Section 4 Localization Methods. Ting-Yun Chang, Jesse Thomason, and Robin Jia. 2024. Do localization methods actually localize memorized data in LLMs? A tale of two benchmarks. <a href="https://aclanthology.org/2024.naacl-long.176.pdf">URL</a> <a href="#fnref:pruning" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/verbatim-memorization/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/verbatim-memorization/&text=Demystifying+Verbatim+Memorization+in+Large+Language+Models%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/verbatim-memorization/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/verbatim-memorization/&title=Demystifying+Verbatim+Memorization+in+Large+Language+Models%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/verbatim-memorization/&title=Demystifying+Verbatim+Memorization+in+Large+Language+Models%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Demystifying+Verbatim+Memorization+in+Large+Language+Models%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/verbatim-memorization/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ML">
+      <p><i class="fa fa-tag fa-fw"></i> ML</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#NLP">
+      <p><i class="fa fa-tag fa-fw"></i> NLP</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/naacl-2025/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at NAACL 2025
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
