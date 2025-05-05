@@ -1,6 +1,6 @@
 {
   "name": "type-on-strap-helper",
-  "version": "1.0.0",
+  "version": "2.4.12",
   "description": "Gulp file to manage the Type on Strap jekyll theme",
   "main": "gulpfile.js",
   "scripts": {
