@@ -14,7 +14,7 @@ Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) 
 * Multi comments 💬 options  
 * Tags compatibility 🏷
 * Handle _Bootstrap_'ed pages: [Get Bootstrap](http://getbootstrap.com/)
-* 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
+* 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/sylhare/Simple-Jekyll-Search)
 * Math Rendering : [KateX](https://github.com/Khan/KaTeX)
 * Diagram Rendering: [Mermaid-js](https://github.com/mermaid-js/mermaid)
 * 🖋 Nice fonts: [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
@@ -507,7 +507,7 @@ gallery: "assets/img/pexels"
 
 ### Feature: Search 🔍
 
-The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
+The search feature is based on [Simple-Jekyll-search](https://github.com/sylhare/Simple-Jekyll-Search) 
 there is a `search.liquid` file that will create a list of all the site posts, pages and portfolios. 
 Then there's a script displaying the formatted results in the _search page_.
 
