@@ -12,4 +12,7 @@
       {{ site.data.language.str_months[x] | default: date | date: "%B" }} {{ date | date: "%d, %Y" }}
     </p>
   {%- if author.url -%}</a>{%- endif -%}
+  {% if include.last_modified %}
+    <p class="meta">Last updated: {{ include.last_modified | date: site.data.language.str_date_format | default: '%B %-d, %Y' }}</p>
+  {% endif %}
 </div>
