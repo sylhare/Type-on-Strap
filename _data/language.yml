@@ -18,6 +18,7 @@ str_months: [January, February, March, April, May, June, July, August, September
 str_dark: 'Dark'
 str_light: 'Light'
 str_date_format: '%B %-d, %Y'
+str_last_modified: 'Last modified on'
 
 # Localization settings
 cusdis_lang: # zh-cn, es, tr, pt-BR

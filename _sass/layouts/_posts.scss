@@ -52,16 +52,29 @@ header {
   text-transform: uppercase;
 }
 
+.last-modified {
+  color: var(--meta);
+  font-size: 0.8em;
+  font-style: italic;
+  margin-top: 0.5em;
+}
+
 /* --- Post info --- */
 .post-info {
-  /* For border in author
-  border: 1px solid var(--border);
-  padding-left: 0.5em;
-  */
   border-radius: 1em;
   padding-right: 0.5em;
   display: inline-flex;
   flex-direction: column;
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .meta:only-child {
+      margin: 0 auto;
+    }
+  }
 
   a {
     display: flex;
@@ -83,6 +96,16 @@ header {
     height: 100%;
     margin-right: 0.5em;
   }
+
+  .meta-separator {
+    color: var(--meta);
+    margin: 0 0.5em;
+    white-space: nowrap;
+  }
+
+  .meta {
+    white-space: nowrap;
+  }
 }
 
 /* --- Feature image --- */
@@ -102,7 +125,7 @@ header {
     margin-bottom: 0;
     padding: 3.6% $padding-large;
 
-    .meta {
+    .meta, .meta-separator, .last-modified {
       color: var(--header-text);
       filter: opacity(0.7);
     }
