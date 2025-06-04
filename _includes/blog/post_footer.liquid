@@ -39,6 +39,11 @@
         {% include blog/post_nav.liquid %}
     {% endif %}
 
+    <!-- Giscus -->
+    {% if site.comments.giscus.repo and site.comments.giscus.repo-id and site.comments.giscus.category-id and site.comments.giscus.mapping %}
+        {% include social/giscus.liquid %}
+    {% endif %}
+
     <!--Utterances-->
     {% if site.comments.utterances.repo and site.comments.utterances.issue-term %}
         {% include social/utterances.liquid %}
