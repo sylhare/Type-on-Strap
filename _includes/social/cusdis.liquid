@@ -1,13 +1,13 @@
 <div class="comments" id="cusdis_thread"
   data-host="https://cusdis.com"
-  data-app-id="{% if site.comments.cusdis_app_id %}{{ site.comments.cusdis_app_id }}{% else %}{{ site.cusdis_app_id }}{% endif %}"
+  data-app-id="{% if site.data.comments.cusdis.app_id %}{{ site.data.comments.cusdis.app_id }}{% elsif site.comments.cusdis_app_id %}{{ site.comments.cusdis_app_id }}{% else %}{{ site.cusdis_app_id }}{% endif %}"
   data-page-id="{{ page.relative_path }}"
   data-page-url="{{ page.url | absolute_url }}"
   data-page-title="{{ page.title }}"
   data-theme="{{ site.color_theme }}"
 ></div>
 
-{% if site.data.language.cusdis_lang %}
-<script defer src="https://cusdis.com/js/widget/lang/{{ site.data.language.cusdis_lang }}.js"></script>
+{% if site.data.comments.cusdis.lang or site.data.language.cusdis_lang %}
+<script defer src="https://cusdis.com/js/widget/lang/{% if site.data.comments.cusdis.lang %}{{ site.data.comments.cusdis.lang }}{% else %}{{ site.data.language.cusdis_lang }}{% endif %}.js"></script>
 {% endif %}
 <script defer src="https://cusdis.com/js/cusdis.es.js"></script>

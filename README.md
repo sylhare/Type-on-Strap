@@ -68,6 +68,7 @@ Here are the main files of the template
 ├── _config.yml                # sample configuration
 ├── _data
 |  ├── authors.yml             # Update the post authors configurations 
+|  ├── comments.yml            # Comments configuration (Disqus, Cusdis, Utterances, Giscus)
 |  ├── language.yml            # Localization configuration
 |  ├── biblio.yml              # To create a reference bibliography
 |  ├── social.yml              # Social configurations to share posts (RSS, shares, ...)
@@ -183,12 +184,15 @@ It will use the [Google Tag Manager](https://support.google.com/analytics/answer
 
 ### Comments 💬
 
+Type-on-Strap supports multiple comment systems. 
+Use `_data/comments.yml` for all comment configurations
+
 #### Disqus
 
 If you have a [Disqus](https://disqus.com/) account, you can show a comments section below each post.
 
 To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) 
-to your project's `_config.yml` file:
+to your project's `_data/comments.yml.yml` file:
 
 ```yml
 comments:
@@ -200,7 +204,7 @@ comments:
 [Cusdis](https://cusdis.com/) is an open-source alternative to Disqus.
 You can read more about it in the [documentation](https://cusdis.com/doc#/)
 
-To enable it, set your Cusdis name in `_config.yml`:
+To enable it, set your Cusdis name in `_data/comments.yml.yml`:
 
 ```yaml
 comments:
@@ -213,7 +217,7 @@ comments:
 It stores the comments as GitHub issues on a repository for each page.
 
 Install the utterance [app](https://github.com/apps/utterances) to your repo.
-After installing, add your info in the `_config.yml`:
+After installing, add your info in the `_data/comments.yml.yml`:
 
 ```yaml
 comments:
@@ -230,7 +234,7 @@ comments:
 It stores the comments as GitHub discussions on a repository for each page.
 
 Install the giscus [app](https://github.com/apps/giscus) to your repo.
-After installing, add your info in the `_config.yml`:
+After installing, add your info in the `_data/comments.yml.yml`:
 
 ```yaml
 comments:

@@ -1,8 +1,8 @@
 <script src="https://utteranc.es/client.js"
-        repo='{{ site.comments.utterances.repo }}'
-        issue-term="{{ site.comments.utterances.issue-term}}"
-        theme="{% if site.comments.utterances.theme %}{{ site.comments.utterances.theme }}{% elsif site.color_theme == 'dark' %}github-dark{% else %}github-light{% endif %}"
-		{% if site.comments.utterances.label %}label="{{ site.comments.utterances.label }}"{% endif %}
+        repo='{% if site.data.comments.utterances.repo %}{{ site.data.comments.utterances.repo }}{% else %}{{ site.comments.utterances.repo }}{% endif %}'
+        issue-term="{% if site.data.comments.utterances.issue-term %}{{ site.data.comments.utterances.issue-term }}{% else %}{{ site.comments.utterances.issue-term }}{% endif %}"
+        theme="{% if site.data.comments.utterances.theme %}{{ site.data.comments.utterances.theme }}{% elsif site.comments.utterances.theme %}{{ site.comments.utterances.theme }}{% elsif site.color_theme == 'dark' %}github-dark{% else %}github-light{% endif %}"
+		{% if site.data.comments.utterances.label or site.comments.utterances.label %}label="{% if site.data.comments.utterances.label %}{{ site.data.comments.utterances.label }}{% else %}{{ site.comments.utterances.label }}{% endif %}"{% endif %}
         crossorigin="anonymous"
         async>
 </script>

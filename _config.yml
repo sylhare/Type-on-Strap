@@ -21,27 +21,13 @@ post_navigation: true
 color_image: /assets/img/lineart.png                    # A bit transparent for color posts.
 
 # Features
-# More in the _data folder for share buttons, author and language
+# More in the _data folder for comments, share buttons, author and language
 # For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
 katex: true                                             # Enable if using math markup
 mermaid: default                                        # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
 google_analytics:                                       # Measurement ID, e.g. "G-00000"
 cookie_consent: false                                   # To respect the usage of cookies
 color_theme: auto                                       # auto, dark or light
-
-# Comments options
-comments:
-  disqus_shortname:                                     # Your discus shortname for comments
-  cusdis_app_id:                                        # Your cusdis data-app-id
-  utterances:                                           # Enable by filling below information. For more info, go to https://utteranc.es
-    repo:                                               # your public comments repository (e.g. owner/repo)
-    issue-term:                                         # Issue term (e.g. "comment" consider issues with this word in the title as comments)
-  giscus:                                               # Enable by filling below information. For more info, go to https://giscus.app
-    repo:                                               # Your public comments repository (e.g. owner/repo)
-    repo-id:                                            # Your repo id, go to https://giscus.app to check it
-    category:                                           # Category to search discussions. When removed, discussions will be searched in all categories.
-    category-id:                                        # Your category id, go to https://giscus.app to check it
-    mapping:                                            # Discussion mapping
 
 # PAGINATION
 paginate: 5

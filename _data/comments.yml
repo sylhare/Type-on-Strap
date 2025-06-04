@@ -1,0 +1,34 @@
+# Comments configuration
+# Configure different comment systems here
+
+# Disqus configuration
+disqus:
+  shortname:                    # Your Disqus shortname
+
+# Cusdis configuration  
+cusdis:
+  app_id:                       # Your Cusdis app ID
+  lang:                         # Language code (e.g., zh-cn, es, tr, pt-BR)
+
+# Utterances configuration
+utterances:
+  repo:                         # Your public comments repository (e.g. owner/repo)
+  issue-term:                   # Issue term (e.g. "comment" - considers issues with this word in the title as comments)
+  theme:                        # OPTIONAL: Take the `color_theme` by default, or set a custom one like github-dark-orange
+  label:                        # OPTIONAL: Adds an issue label in the issue
+
+# Giscus configuration
+giscus:
+  repo:                         # Your public comments repository (e.g. owner/repo)
+  repo-id:                      # Your repo id, go to https://giscus.app to check it
+  category:                     # Category to search discussions. When removed, discussions will be searched in all categories
+  category-id:                  # Your category id, go to https://giscus.app to check it
+  mapping:                      # Discussion mapping (e.g. pathname, url, title, og:title)
+  term:                         # OPTIONAL: Some mappings require specific term, go to https://giscus.app to check it
+  strict: 0                     # OPTIONAL: Avoid mismatches on similar titles (0 or 1)
+  reactions-enabled: 1          # OPTIONAL: Enable reactions (0 or 1)
+  emit-metadata: 0              # OPTIONAL: Emit discussion metadata (0 or 1)
+  input-position: bottom        # OPTIONAL: Place the comment box (top or bottom)
+  theme:                        # OPTIONAL: Take the `color_theme` by default, or set a custom one like dark_dimmed
+  lang: en                      # OPTIONAL: Choose the language. "en" is used by default
+  loading:                      # OPTIONAL: Loading behavior (lazy or eager) 
