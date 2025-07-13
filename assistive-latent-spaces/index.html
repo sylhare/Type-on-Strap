@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/assistive-latent-spaces/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Controlling Assistive Robots with Learned Latent Actions | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Controlling Assistive Robots with Learned Latent Actions" />
+<meta name="author" content="<a href='https://www.dylanlosey.com/'>Dylan Losey</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="For the nearly one million American adults living with physical disabilities, taking a bite of food or pouring a glass of water presents a significant challenge. Assistive robots—such as wheelchair-mounted robotic arms—promise to solve this problem. Users control these robots by interacting with a joystick, guiding the robot arm to complete everyday tasks without relying on a human caregiver. Unfortunately, the very dexterity that makes these arms useful also renders them difficult for users to control. Our insight is that we can make assistive robots easier for humans to control by learning an intuitive and meaningful control mapping that translates simple joystick motions into complex robot behavior. In this blog post, we describe our self-supervised algorithm for learning the latent space, and summarize the results of user studies that test our approach on cooking and eating tasks. You can find a more in-depth description in this paper and the accompanying video." />
+<meta property="og:description" content="For the nearly one million American adults living with physical disabilities, taking a bite of food or pouring a glass of water presents a significant challenge. Assistive robots—such as wheelchair-mounted robotic arms—promise to solve this problem. Users control these robots by interacting with a joystick, guiding the robot arm to complete everyday tasks without relying on a human caregiver. Unfortunately, the very dexterity that makes these arms useful also renders them difficult for users to control. Our insight is that we can make assistive robots easier for humans to control by learning an intuitive and meaningful control mapping that translates simple joystick motions into complex robot behavior. In this blog post, we describe our self-supervised algorithm for learning the latent space, and summarize the results of user studies that test our approach on cooking and eating tasks. You can find a more in-depth description in this paper and the accompanying video." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/assistive-latent-spaces/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/assistive-latent-spaces/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-11T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Controlling Assistive Robots with Learned Latent Actions" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Controlling Assistive Robots with Learned Latent Actions","dateModified":"2019-11-11T00:00:00-08:00","datePublished":"2019-11-11T00:00:00-08:00","description":"For the nearly one million American adults living with physical disabilities, taking a bite of food or pouring a glass of water presents a significant challenge. Assistive robots—such as wheelchair-mounted robotic arms—promise to solve this problem. Users control these robots by interacting with a joystick, guiding the robot arm to complete everyday tasks without relying on a human caregiver. Unfortunately, the very dexterity that makes these arms useful also renders them difficult for users to control. Our insight is that we can make assistive robots easier for humans to control by learning an intuitive and meaningful control mapping that translates simple joystick motions into complex robot behavior. In this blog post, we describe our self-supervised algorithm for learning the latent space, and summarize the results of user studies that test our approach on cooking and eating tasks. You can find a more in-depth description in this paper and the accompanying video.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/assistive-latent-spaces/"},"url":"http://ai.stanford.edu/blog/assistive-latent-spaces/","author":{"@type":"Person","name":"<a href='https://www.dylanlosey.com/'>Dylan Losey</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Controlling Assistive Robots with Learned Latent Actions | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We want to make it easier for humans to teleoperate dexterous robots. We present a learning approach that embeds high-dimensional robot actions into an intui...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Controlling Assistive Robots with Learned Latent Actions">
+    
+    <meta name="twitter:description" content="We want to make it easier for humans to teleoperate dexterous robots. We present a learning approach that embeds high-dimensional robot actions into an intuitive, human-controllable, and low-dimensional latent space.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2019-11-10-assistive-latent-spaces/image0.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2019-11-10-assistive-latent-spaces/image0.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Controlling Assistive Robots with Learned Latent Actions</h1>
+    <p class="meta">
+    <a href='https://www.dylanlosey.com/'>Dylan Losey</a>
+    <div class="post-date">November 11, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>For the nearly one million American adults living with physical disabilities, taking a bite of food or pouring a glass of water presents a significant challenge. Assistive robots—such as wheelchair-mounted robotic arms—promise to solve this problem. Users control these robots by interacting with a joystick, guiding the robot arm to complete everyday tasks without relying on a human caregiver. Unfortunately, the very <strong>dexterity</strong> that makes these arms useful also renders them <strong>difficult</strong> for users to control. Our insight is that we can make assistive robots easier for humans to control by <strong>learning</strong> an intuitive and meaningful control mapping that translates simple joystick motions into complex robot behavior. In this blog post, we describe our self-supervised algorithm for learning the latent space, and summarize the results of user studies that test our approach on cooking and eating tasks. You can find a more in-depth description in this <a href="https://arxiv.org/abs/1909.09674">paper</a> and the accompanying <a href="https://youtu.be/wjnhrzugBj4">video</a>.</p>
+
+<p><strong>Motivation.</strong> Almost 10% of all American adults living with physical disabilities need assistance when eating<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>. This percentage increases for going to the bathroom (14%), getting around the home (16%), or putting on clothes (23%). Wheelchair-mounted robotic arms can help users complete some of these everyday tasks.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_50" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image1.jpg" /></p>
+</div></figure>
+
+<p>Unfortunately, because robotic arms are hard for humans to control, even simple tasks remain challenging to complete. Consider the task shown in the video below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image2.gif" /></p>
+</div></figure>
+
+<p>The user is trying to control their assistive robot to grab some food. In the process, they must precisely position the robot’s gripper next to the container, and then carefully guide this container up and out of the shelf. The human’s input is—by necessity—<strong>low-dimensional</strong>. But the robot arm is <strong>high-dimensional</strong>: it has many degrees-of-freedom (or DoFs), and the user needs to coordinate all of these interconnected DoFs to complete the task.</p>
+
+<p>In practice, controlling assistive robots can be quite difficult due to the unintuitive mapping from low-dimensional human inputs to high-dimensional robot actions. Look again at the joystick interface in the above video—<strong>do you notice how the person keeps tapping the side? They are doing this to toggle between control modes</strong>. Only after the person finds the right control mode are they able to make the robot take the action that they intended. And, as shown, often the person has to switch control modes multiple times to complete a simple task. A recent study<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup> found that able-bodied users spent <strong>20%</strong> of their time <strong>changing the robot’s control mode!</strong> The goal of our research is to address this problem and enable seamless control of assistive robots.</p>
+
+<p><strong>Our Vision.</strong> We envision a setting where the assistive robot has access to task-related demonstrations. These demonstrations could be provided by a caregiver, the user, or even be collected on another robot. What’s important is that the demonstrations show the robot which <strong>high-dimensional</strong> actions it should take in relevant situations. For example, here we provide kinesthetic demonstrations of high-dimensional reaching and pouring motions:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image3.gif" /></p>
+</div></figure>
+
+<p>Once the robot has access to these demonstrations, it will learn a <strong>low-dimensional</strong> embedding that interpolates between different demonstrated behaviors and enables the user to guide the arm along task-relevant motions. The end-user then leverages the learned embedding to make the robot perform their desired tasks <strong>without switching modes</strong>. Returning to our example, here the robot learns that one joystick DoF controls the arm’s reaching motion, and the other moves the arm along a pouring motion:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image4.gif" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image5.gif" /></p>
+</div></figure>
+
+<p>Typically, completing these motions would require multiple mode switches (e.g., intermittently changing the robot’s position and orientation). But now—since the robot has learned a task-related embedding—the user can complete reaching and pouring with just a single joystick (and no mode switching)! In practice, this embedding captures a continuous set of behaviors, and allows the person to control and interpolate between these robot motions by moving the joystick.</p>
+
+<p><strong>Insight and Contributions.</strong> Inspired by the difficulties that today’s users face when controlling assistive robotic arms, we propose an approach that learns teleoperation strategies directly from data. Our insight is that:</p>
+
+<p style="text-align: center;"><strong><em>High-dimensional robot actions can often be embedded into intuitive, human-controllable, and low-dimensional latent spaces</em></strong></p>
+
+<p>You can think a <strong>latent space</strong> as a manifold that captures the most important aspects of your data (e.g., if your data is a matrix, then the latent space could be the first few eigenvectors of that matrix). In what follows, we first formalize a list of properties that intuitive and human-controllable latent spaces must satisfy, and evaluate how different autoencoder models capture these properties. Next, we perform two user studies where we compare our learning method to other state-of-the-art approaches, including shared autonomy and mode switching.</p>
+
+<h2 id="learning-user-friendly-latent-spaces">Learning User-Friendly Latent Spaces</h2>
+
+<p>Here we formalize the properties that user-friendly latent space should have, and then describe models that can capture these properties.</p>
+
+<p><strong>Notation.</strong> Let \(s\) be the robot’s current state. In our experiments, \(s\) contained the configuration of the robot’s arm and the position of objects in the workspace; but the state \(s\) can also consist of other types of observations, such as camera images. The robot takes high-dimensional actions \(a\), and these actions cause the robot to change states according to the transition function \(T(s, a)\). In practice, \(a\) often corresponds to the joint velocities of the robot arm.</p>
+
+<p>We assume that the robot has access to a dataset of task-related demonstrations. Formally, this dataset \(D\) contains a set of state-action pairs: \(D = \{(s_0, a_0), (s_1, a_1), \ldots \}\). Using the dataset, the robot attempts to learn a latent action space \(Z\) that is of lower dimension than the original action space. In our experiments, \(Z\) was the same dimension as the joystick interface so that users could input latent action \(z\). The robot also learns a decoder \(\phi(z,s)\) that inputs the latent action \(z\) and the robot’s current state \(s\), and outputs the high-dimensional robot action \(a\).</p>
+
+<p><strong>User-Friendly Properties.</strong> Using this notation, we can formulate the properties that the learned latent space \(Z\) should have. We focus on three properties: <strong>controllability</strong>, <strong>consistency</strong>, and <strong>scaling</strong>.</p>
+
+<ol>
+  <li><strong>Controllability.</strong> Let \(s_i\) and \(s_j\) be a pair of states from the dataset \(D\), and let the robot start in state \(s_0 = s_i\). We say that a latent space \(Z\) is controllable if, for every such pair of states, there exists a sequence of latent actions \(\{z_1, z_2, \ldots, z_k\}\) such that \(s_k = s_j\). In other words, a latent space is controllable if it can move the robot between any start and goal states within the dataset.</li>
+  <li><strong>Consistency.</strong> Let \(d_m\) be a task-dependent metric that captures similarity. For instance, in a pouring task, \(d_m\) could measure the orientation of the robot’s gripper. We say that a latent space \(Z\) is consistent if, for two states \(s_1\) and \(s_2\) that are nearby, the change caused by the latent action \(z\) is similar: \(d_m\big(T(s_1, \phi(z, s_1)),~T(s_2, \phi(z, s_2))\big) &lt; \epsilon\). Put another way, a latent space is consistent if the same latent action causes the robot to behave similarly in nearby states.</li>
+  <li><strong>Scaling.</strong> Let \(s'\) be the next state that the robot visits after taking latent action \(z\) in the current state \(s\), such that \(s' = T(s, \phi(z,s))\). We say that a latent space scales if the distance between \(s\) and \(s'\) increases to infinity as the magnitude of \(z\) increases to infinity. Intuitively, this means that larger latent actions should cause bigger changes in the robot’s state.</li>
+</ol>
+
+<p><strong>Models.</strong> Now that we have introduced the properties that a user-friendly latent space should have, we can explore how different embeddings capture these properties. It may be helpful for readers to think about <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">principal component analysis</a> as a simple way to find linear embeddings. Building on this idea, we utilize a more general class of <strong>autoencoders</strong>, which learn nonlinear low-dimensional embeddings in a self-supervised manner.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> Consider the model shown below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image6.png" /></p>
+</div></figure>
+
+<p>The robot learns the latent space using this model structure. Here \(s\) and \(a\) are state-action pairs sampled from the demonstration dataset \(D\), and the model <strong>encodes</strong> each state-action pair into a latent action \(z\). Then, using \(z\) and the current state \(s\), the robot <strong>decodes</strong> the latent action to reconstruct a high-dimensional action \(\hat{a}\). Ideally, \(\hat{a}\) will perfectly match \(a\), so that the robot correctly reconstructs the original action.</p>
+
+<p>Of course, when the end-user controls their assistive robot, the robot no longer knows exactly what action \(a\) it should perform. Instead, the robot uses the latent space that it has learned to predict the human’s intention:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image7.png" /></p>
+</div></figure>
+
+<p>Here \(z\) is the person’s input on the joystick, and \(s\) is the state that the robot currently sees (e.g., its current configuration and the position of objects within the workspace). Using this information, the robot reconstructs a high-dimensional action \(\hat{a}\). The robot then uses this reconstructed action to move the assistive arm.</p>
+
+<p><strong>State Conditioning.</strong> We want to draw attention to one particularly important part of these models. Imagine that you are using a joystick to control your assistive robot, and the assistive robot is holding a glass of water. Within this context, you might expect for one joystick DoF to pour the water. But now imagine a different context: the robot is holding a fork to help you eat. Here it no longer makes sense for the joystick to pour—instead, the robot should use the fork to pick up morsels of food.</p>
+
+<p>Hence, the <strong>meaning of the user’s joystick input</strong> (pouring, picking up) often <strong>depends on the current context</strong> (holding glass, using fork). So that the robot can associate meanings with latent actions, we <strong>condition</strong> the interpretation of the latent action on the robot’s current state. Look again at the models shown above: during both training and control, the robot reconstructs the high-dimensional action \(\hat{a}\) based on both \(z\) and \(s\).</p>
+
+<p>Because recognizing the current context is crucial for correctly interpreting the human’s input, we train models that reconstruct the robot action based on both the latent input <em>and the robot state</em>. More specifically, we hypothesize that <strong>conditional variational autoencoders (cVAEs)</strong> will capture the meaning of the user’s input while also learning a consistent and scalable latent space. Conditional variational autoencoders are like typical <a href="https://en.wikipedia.org/wiki/Autoencoder">autoencoders</a>, but with two additional tricks: (1) the latent space is normalized into a consistent range, and (2) the decoder depends on both \(z\) and \(s\). The model we looked at above is actually an example of a cVAE! Putting controllability, consistency, and scaling together—while recognizing that meaning depends on context—we argue that conditional variational autoencoders are well suited to learn user-friendly latent spaces.</p>
+
+<p><strong>Algorithm.</strong> Our approach to learning and leveraging these embeddings is summarized below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image8.png" /></p>
+</div></figure>
+
+<p>Using a dataset of state-action pairs that were collected offline, the robot trains an autoencoder (e.g., a cVAE) to best reconstruct the actions from that dataset. Next, the robot aligns its learned latent space with the joystick DoF (e.g., set up / down on the joystick to correspond to pouring / straightening the glass). In our experiments, we manually performed this alignment, but it is also possible for the robot to learn this alignment by querying the user. With these steps completed, the robot is ready for online control! At each timestep that the person interacts with the robot, their joystick inputs are treated as \(z\), and the robot uses the learned decoder \(\phi(z, s)\) to reconstruct high-dimensional actions.</p>
+
+<p><strong>Simulated Example.</strong> To demonstrate that the conditional variational autoencoder (cVAE) model we described does capture our desired properties, let’s look at a simulated example. In this example, a planar robotic arm with five joints is trying to move its end-effector along a sine wave. Although the robot’s action is 5-DoF, we embed it into a 1-DoF latent space. Ideally, pressing left on the joystick should cause the robot to move left along the sine wave, and pressing right on the joystick should cause the robot to move right along the sine wave. We train the latent space with a total of 1000 state-action pairs, where each state-action pair noisily moved the robot along the sine wave.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image9.png" /></p>
+</div></figure>
+
+<p>Above you can see how latent actions control the robot at <em>three different states</em> along the sine wave. At each state we apply five different latent actions: \(z = \{-1, -0.5, 0, 0.5, 1 \}\). What’s interesting is that the learned latent space is <strong>consistent</strong>: at each of the three states, applying negative latent actions causes the robot to move left along the sine wave, and applying positive latent actions cause the robot to move right along the sine wave. These actions also <strong>scale</strong>: larger inputs cause greater movement.</p>
+
+<p>So the conditional variational autoencoder learns a consistent and scalable mapping—but it is also controllable? And do we actually need state conditioning to complete this simple task? Below we compare the cVAE (shown in orange) to a <em>variational autoencoder</em> (VAE, shown in gray). The only difference between these two models is that the variational autoencoder does not consider the robot’s current state when decoding the user’s latent input.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image10.png" /></p>
+</div></figure>
+
+<p>Both robots start on the left in a state slightly off of the sine wave, and at each timestep we apply the latent action \(z=+1\). As you can see, only the state conditioned model (the cVAE) correctly follows the sine wave! We similarly observe that the state conditioned model is more <strong>controllable</strong> when looking at 1000 other example simulations. In each, we randomly selected the start and goal states from the dataset \(D\). Across all of these simulations, the state conditioned cVAE has an average error of 0.1 units between its final state and the goal state. By contrast, the VAE is 0.95 units away from the goal—even worse than the principal component analysis baseline (which is 0.9 units from goal).</p>
+
+<p>Viewed together, these simulated results suggest that model structure which we described above (a conditional variational autoencoder) produces a controllable, consistent, and scalable latent space. These properties are desirable in user-friendly latent spaces, since they enable the human to perform tasks easily and intuitively.</p>
+
+<h2 id="leveraging-learned-latent-spaces">Leveraging Learned Latent Spaces</h2>
+
+<p>We conducted two user studies where participants teleoperated a robotic arm using a joystick. In the first study, we compared our proposed approach to shared autonomy when the robot has a <strong>discrete</strong> set of possible goals. In the second study, we compared our approach to mode switching when the robot has a <strong>continuous</strong> set of possible goals. We also asked participants for their subjective feedback about the learned latent space—was it actually user-friendly?</p>
+
+<h3 id="discrete-goals-latent-actions-vs-shared-autonomy">Discrete Goals: Latent Actions vs. Shared Autonomy</h3>
+
+<p>Imagine that you’re working with the assistive robot to grab food from your plate. Here we placed three marshmallows on a table in front of the user, and the person needs to make the robot grab one of these marshmallows using their joystick.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image11.gif" /></p>
+</div></figure>
+
+<p>Importantly, the robot does not know which marshmellow the human wants! Ideally, the robot will make this task easier by learning a simple mapping between the person’s inputs and their desired marshmallow.</p>
+
+<p><strong>Shared Autonomy.</strong> As a baseline, we compared our method to shared autonomy. Within shared autonomy the robot maintains a belief (i.e., a probability distribution) over the possible goals, and updates this belief based on the user’s inputs<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup>. As the robot becomes more confident about which discrete goal the human wants to reach, it provides increased assistance to move towards that goal; however, the robot does not directly learn an embedding between its actions and the human’s inputs.</p>
+
+<p><strong>Experimental Overview.</strong> We compared five different ways of controlling the robot. The first four come from the <a href="http://harp.ri.cmu.edu/harmonic/">HARMONIC dataset</a> developed by the HARP Lab at Carnegie Mellon University:</p>
+
+<ul>
+  <li><strong>No assist.</strong> The user directly controls the end-effector position and orientation by switching modes.</li>
+  <li><strong>Low Assist / High Assist / Full Assist</strong>. The robot interpolates between the human’s input and it’s shared autonomy action. Within the HARMONIC dataset the <em>High Assist</em> was most effective: here the shared autonomy action is weighted twice as important as the human’s input.</li>
+  <li><strong>cVAE</strong>. Our approach, where the robot learns a latent space that the human can control. We trained our model on demonstrations from the HARMONIC dataset.</li>
+</ul>
+
+<p>Our participant pool consisted of ten Stanford University affiliates who provided informed consent. Participants followed the same protocol as used when collecting the HARMONIC dataset: they were given up to five minutes to practice, and then performed five recorded trials (e.g., picking up a marshmallow). Before each trial they indicated which marshmallow they wanted to pick up.</p>
+
+<p><strong>Results.</strong> We found that participants who controlled the robot using our learned embedding were able to successfully pick up their desired marshmallow almost 90% of the time:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image12.png" /></p>
+</div></figure>
+
+<p>When breaking these results down, we also found that our approach led to completing the task (a) in less time, (b) with fewer inputs, and (c) with more direct robot motions. See the box-and-whisker plots below, where an asterisk denotes statistical significance:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image13.png" /></p>
+</div></figure>
+
+<p>Why did learning a latent space outperform the shared autonomy benchmarks? We think this improvement occurred because our approach <strong>constrained</strong> the robot’s motion into a useful region. More specifically, the robot learned to always move its end-effector into a planar manifold above the plate. The human could then control the robot’s state within this <strong>embedded manifold</strong> to easily position the fork above their desired marshmallow:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image14.png" /></p>
+</div></figure>
+
+<p>These plots show trajectories from the <em>High Assist</em> condition in the HARMONIC dataset (on left) and trajectories from participants leveraging our <em>cVAE</em> method (on right). Comparing the two plots, it is clear that learning a latent space <strong>reduced the movement variance</strong>, and <strong>guided the participants towards the goal region</strong>. Overall, our first user study suggests that learned latent spaces are effective in shared autonomy settings because they encode implicit, user-friendly constraints.</p>
+
+<h3 id="continuous-goals-latent-actions-vs-switching-modes">Continuous Goals: Latent Actions vs. Switching Modes</h3>
+
+<p>Once the robot knows that you are reaching for a goal, it can provide structured assistance. But what about open-ended scenarios where there could be an infinite number of goals? Imagine that you are trying to cook an apple pie with the help of your assistive robotic arm. You might need to get ingredients from the shelves, pour them into the bowl, recycle empty containers (or return filled containers to the shelves), and stir the mixture. Here shared autonomy does not really make sense—there aren’t a discrete set of goals we might be reaching for! Instead, the robot must assist you through a variety of continuous subtasks. Put another way, we need methods that enable the user to provide and control the robot towards continuous goals. Our approach offers one promising solution: equipped with latent actions, the user can control the robot through a continuous manifold.</p>
+
+<p><strong>End-Effector.</strong> As a baseline, we asked participants to complete these cooking tasks while using the mode switching strategy that is currently employed by assistive robotic arms. We refer to this strategy as <em>End-Effector</em>. To get a better idea of how it works, look at the gamepads shown below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image15.png" /></p>
+</div></figure>
+
+<p>Within <strong>End-Effector</strong>, participants used two joysticks to control either the position or rotation of the robot’s gripper. To change between linear and angular control they needed to <strong>switch between modes</strong>. By contrast, our <strong>Latent Actions</strong> approach only used a single 2-DoF joystick. Here there was <strong>no mode switching</strong>; instead, the robot leveraged its current state to interpret the meaning behind the human’s input, and then reconstructed the intended action.</p>
+
+<p><strong>Experimental Overview.</strong> We designed a cooking task where eleven participants made a simplified apple pie. Each participant completed the experiment twice: once with the <em>End-Effector</em> control mode and once with our proposed <em>Latent Action</em> approach. We alternated the order in which participants used each control mode.</p>
+
+<p><strong>Training and Data Efficiency.</strong> In total, we trained the latent action approach with less than <strong>7 minutes</strong> of kinesthetic demonstrations. These demonstrations were task-related, and consisted of things like moving between shelves, picking up ingredients, pouring into a bowl, and stirring the bowl. The robot then learned the latent space using its onboard computer in less than <strong>2 minutes</strong>. We are particularly excited about this data efficiency, which we attribute in part to the simplicity of our models.</p>
+
+<p><strong>Results.</strong> We show some video examples from our user studies below. In each, the <em>End-Effector</em> condition is displayed on the left, and the <em>Latent Action</em> approach is provided on the right. At the top, we label the part of the task that the participant is currently completing. Notice that each of the videos is sped up (3x or 4x speed): this can cause the robot’s motion to seem “jerky,” when actually the user is just making incremental inputs.</p>
+
+<p><strong>Task 1: Adding Eggs.</strong> The user controls the robot to pick up a container of eggs, pour the eggs into the bowls, and then dispose of the container:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image16.gif" /></p>
+</div></figure>
+
+<p><strong>Task 2: Adding Flour.</strong> The user teleoperates the robot to pick up some flour, pour the flour into the bowls, and then return the flour to the shelf:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image17.gif" /></p>
+</div></figure>
+
+<p><strong>Task 3: Add Apple &amp; Stir.</strong> The user guides the robot to pick up the apple, place it into the bowl, and then stir the mixture. You’ll notice that in the <em>End-Effector</em> condition this person got stuck at the limits of the robot’s workspace, and had to find a different orientation for grasping the apple.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image18.gif" /></p>
+</div></figure>
+
+<p><strong>Task 4: Making an Apple Pie.</strong> After the participant completed the first three tasks, we <strong>changed</strong> the setup. We moved the recycling container, the bowl, and the shelf, and then instructed participants to redo all three subtasks <strong>without any reset</strong>. This was more challenging than the previous tasks, since the robot had to understand a wider variety of human intentions.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image19.gif" /></p>
+</div></figure>
+
+<p>Across each of these tasks, participants were able to cook more quickly using the <em>Latent Action</em> approach. We also found that our approach reduced the amount of joystick input; hence, using an embedding reduced both user time and effort.</p>
+
+<p><strong>Subjective Responses.</strong> After participants completed all of the tasks shown above, we asked them for their opinions about the robot’s teleoperation strategy. Could you predict what action the robot would take? Was it hard to adapt to the robot’s decoding of your inputs? Could you control the robot to reach your desired state? For each of these questions, participants provided their assessment on a 7-point scale. Here a 7 means agreement (it was predictable, adaptable, controllable, etc.), and a 1 means that the user did not like that strategy.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image20.png" /></p>
+</div></figure>
+
+<p>Summarizing these results, participants thought that our approach required less effort (ease), made it easier to complete the task (easier), and produced more natural robot motion (natural). For the other questions, any differences were not statistically significant.</p>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+
+<p>We explored how we can leverage latent representations to make it easier for users to control assistive robotic arms. Our main insight is that we can embed the robot’s high-dimensional actions into a low-dimensional latent space. This latent action space can be learned directly from task-related data:</p>
+
+<ul>
+  <li>In order to be useful for human operators, the learned latent space should be controllable, consistent and scalable.</li>
+  <li>Based on our simulations and experiments, state conditioned autoencoders appear to satisfy these properties.</li>
+  <li>We can leverage these learned embeddings during tasks with either discrete or continuous goals (such as cooking and eating).</li>
+  <li>These models are data efficient: in our cooking experiments, the robot used its onboard computer to train on data from less than 7 minutes of kinesthetic demonstrations.</li>
+</ul>
+
+<p>Overall, this work is a step towards assistive robots that can seamlessly collaborate with and understand their human users.</p>
+
+<p>If you have any questions, please contact Dylan Losey at: <a href="mailto:dlosey@stanford.edu">dlosey@stanford.edu</a></p>
+
+<p>Our team of collaborators is shown below!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-11-10-assistive-latent-spaces/image21.png" /></p>
+</div></figure>
+
+<hr />
+
+<p>This blog post is based on the 2019 paper Controlling Assistive Robots with Learned Latent Actions by Dylan P. Losey, Krishnan Srinivasan, Ajay Mandlekar, Animesh Garg, and Dorsa Sadigh.</p>
+
+<p>For further details on this work, check out the <a href="https://arxiv.org/abs/1909.09674">paper on Arxiv</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+
+      <p>D. M. Taylor, <em>Americans With Disabilities: 2014</em>. US Census Bureau, 2018. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+
+      <p>L. V. Herlant, R. M. Holladay, and S. S. Srinivasa, “Assistive teleoperation of robot arms via automatic time-optimal mode switching,” in <em>ACM/IEEE International Conference on Human Robot Interaction (HRI)</em>, 2016, pp. 35–42. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+
+      <p>C. Doersch, “Tutorial on variational autoencoders,” <em>arXiv preprint</em> arXiv:1606.05908, 2016. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+
+      <p>S. Javdani, H. Admoni, S. Pellegrinelli, S. S. Srinivasa, and J. A. Bagnell, “Shared autonomy via hindsight optimization for teleoperation and teaming,” <em>The International Journal of Robotics Research</em>, vol. 37, no. 7, pp. 717–742, 2018. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/assistive-latent-spaces/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/assistive-latent-spaces/&text=Controlling+Assistive+Robots+with+Learned+Latent+Actions%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/assistive-latent-spaces/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/assistive-latent-spaces/&title=Controlling+Assistive+Robots+with+Learned+Latent+Actions%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/assistive-latent-spaces/&title=Controlling+Assistive+Robots+with+Learned+Latent+Actions%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Controlling+Assistive+Robots+with+Learned+Latent+Actions%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/assistive-latent-spaces/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#assistance">
+      <p><i class="fa fa-tag fa-fw"></i> assistance</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#learning">
+      <p><i class="fa fa-tag fa-fw"></i> learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#teleoperation">
+      <p><i class="fa fa-tag fa-fw"></i> teleoperation</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/roboturk/">
+      <p>Previous post</p>
+        RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/robonet/">
+      <p>Next post</p>
+        RoboNet: A Dataset for Large-Scale Multi-Robot Learning
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

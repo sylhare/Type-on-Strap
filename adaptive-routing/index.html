@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/adaptive-routing/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Adaptive Energy-Efficient Routing for Autonomous Vehicles | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Adaptive Energy-Efficient Routing for Autonomous Vehicles" />
+<meta name="author" content="<a href='https://web.stanford.edu/~shushman/'>Shushman Choudhury</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A team of aerial and terrestrial robots is sent to analyze previously unexplored terrain by taking photographs and soil samples. Only the aerial robots — drones — can obtain high quality images of tall structures. Imagine that, instead of flying directly from the mission hub to their respective destinations, the drones docked on the ground vehicles for segments of their routes and flew off for a short time to capture some data before swiftly docking back on to a (potentially different) vehicle. Drones are more energy-constrained and sensitive to atmospheric disturbances than their terrestrial counterparts. With such coordination, we could improve energy-efficiency and allow for broader coverage and longer missions." />
+<meta property="og:description" content="A team of aerial and terrestrial robots is sent to analyze previously unexplored terrain by taking photographs and soil samples. Only the aerial robots — drones — can obtain high quality images of tall structures. Imagine that, instead of flying directly from the mission hub to their respective destinations, the drones docked on the ground vehicles for segments of their routes and flew off for a short time to capture some data before swiftly docking back on to a (potentially different) vehicle. Drones are more energy-constrained and sensitive to atmospheric disturbances than their terrestrial counterparts. With such coordination, we could improve energy-efficiency and allow for broader coverage and longer missions." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/adaptive-routing/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/adaptive-routing/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-18T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Adaptive Energy-Efficient Routing for Autonomous Vehicles" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Adaptive Energy-Efficient Routing for Autonomous Vehicles","dateModified":"2019-07-18T00:00:00-07:00","datePublished":"2019-07-18T00:00:00-07:00","description":"A team of aerial and terrestrial robots is sent to analyze previously unexplored terrain by taking photographs and soil samples. Only the aerial robots — drones — can obtain high quality images of tall structures. Imagine that, instead of flying directly from the mission hub to their respective destinations, the drones docked on the ground vehicles for segments of their routes and flew off for a short time to capture some data before swiftly docking back on to a (potentially different) vehicle. Drones are more energy-constrained and sensitive to atmospheric disturbances than their terrestrial counterparts. With such coordination, we could improve energy-efficiency and allow for broader coverage and longer missions.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/adaptive-routing/"},"url":"http://ai.stanford.edu/blog/adaptive-routing/","author":{"@type":"Person","name":"<a href='https://web.stanford.edu/~shushman/'>Shushman Choudhury</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Adaptive Energy-Efficient Routing for Autonomous Vehicles | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We ...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Adaptive Energy-Efficient Routing for Autonomous Vehicles">
+    
+    <meta name="twitter:description" content="We introduce the problem of real-time routing for an autonomous vehicle that can use multiple modes of transportation through other vehicles in the area. We also propose a scalable and performant planning algorithm for solving such problems.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Adaptive Energy-Efficient Routing for Autonomous Vehicles</h1>
+    <p class="meta">
+    <a href='https://web.stanford.edu/~shushman/'>Shushman Choudhury</a>
+    <div class="post-date">July 18, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><em>A team of aerial and terrestrial robots is sent to analyze previously unexplored  terrain by taking photographs and soil samples. Only the aerial robots — drones — can obtain high quality images of tall structures. Imagine that, instead of flying directly from the mission hub to their respective destinations, the drones docked on the ground vehicles for segments of their routes and flew off for a short time to capture some data before swiftly docking back on to a (potentially different) vehicle.
+Drones are more energy-constrained and sensitive to atmospheric disturbances than their terrestrial counterparts. With such coordination, we could improve energy-efficiency and allow for broader coverage and longer missions.</em></p>
+
+<div style="text-align: center"><img src="/blog/assets/img/posts/2019-07-18-adaptive-routing/gif-1-street-vid.gif" width="800" /></div>
+
+<p><strong>We are interested in the planning and real-time execution of routes for autonomous vehicles, in settings where the vehicle can use multiple modes of transportation</strong> (through other vehicles in the area). The transportation options are updated dynamically and not known in advance. We design a planning and control framework for judiciously choosing transit options and making the corresponding connections in time. The GIF above shows a qualitative example using real GPS data from north San Francisco, in which drones can land on certain cars. A longer, annotated video is <a href="https://youtu.be/c3nfTa8BA-E">available</a> on YouTube.</p>
+
+<h3 id="dynamic-real-time-multimodal-routing-dreamr">Dynamic Real-time Multimodal Routing (DREAMR)</h3>
+
+<p>The same methodology used for the coordinated exploration problem above can also be applied to package delivery.  Alphabet’s Wing has <a href="https://www.youtube.com/watch?v=prhDrfUgpB0&amp;t=149s">already rolled out in Australia</a>, and diverse companies like <a href="https://www.theverge.com/2017/2/28/14761578/ford-delivery-drone-self-driving-concept-mwc">Ford</a> and <a href="https://www.youtube.com/watch?v=xx9_6OyjJrQ">UPS</a> have been interested in augmenting delivery drones through ground vehicles. By piggybacking on ground vehicles like cars or trucks in addition to flying en route to their own destination, drones can significantly extend their effective ranges. There is a whole host of relevant multi-robot applications like <a href="https://emerj.com/ai-sector-overviews/search-and-rescue-robots-current-applications/">search-and-rescue</a> and <a href="https://www.smithsonianmag.com/science-nature/drones-better-counting-wildlife-than-people-180968276/">wildlife monitoring</a> that could benefit from such coordination during routing.</p>
+
+<p>To formalize our use cases of interest, we introduce the problem class of Dynamic Real-time Multimodal Routing (DREAMR).  Ultimately, we are interested in <strong>routing</strong> the autonomous agent, and in doing so in <strong>real-time</strong> rather than on request. The agent has access to a <strong>dynamic</strong> or rapidly-changing set of transit options, in which it can use multiple modes of transportation (we refer to this as <strong>multimodal</strong>), in addition to moving by itself. In this post, we will explain how DREAMR  problems are difficult and propose an algorithmic framework to solve them. For simplicity, we will continue to use the example of drones planning over car routes, as in figure 1.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png"><img class="postimage" src="/blog/assets/img/posts/2019-07-18-adaptive-routing/fig1_roads_png.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Fig. 1: The DREAMR problem requires real-time decisions for an agent to traverse a network of dynamic transit routes. The example of drones riding on cars is purely illustrative; our framework permits other agent dynamics and transit route properties.</p>
+</figcaption></figure>
+
+<h3 id="understanding-dreamr">Understanding DREAMR</h3>
+
+<p>Problems like DREAMR are quite ubiquitous in everyday life. One example is that of public transit planning with, say, Google Maps. In areas with many and varied transit options, Maps provides numerous solutions for commuting between two locations, which involve walking to some stop, using a mode of transportation for some distance, and then either walking the rest of the way or transferring to a potentially different mode of transportation, and so on. Indeed, there has been extensive work on such <strong>multimodal route planning for humans</strong> with public transit (this <a href="https://i11www.iti.kit.edu/extra/publications/p-mmrp-09.pdf">master’s thesis</a> is a decade old but provides a summary of the research in the area and this <a href="https://arxiv.org/pdf/1504.05140.pdf">survey</a> provides a more recent review).</p>
+
+<p>Compared to the well-studied multimodal route planning problem, the DREAMR setting has two major differences, which primarily contribute to its difficulty. First, the <strong>transit networks of DREAMR have much more variability</strong>. Public transit has a specific timetable with well-defined stops. In our case, the ‘stops’ depend upon the current vehicles, and the route network changes from one problem instance to another (think of an Uber or Lyft server of currently active cars and their routes). Second, <strong>we need real-time control, not one-time solutions</strong>. The uncertainty in the drone control and the car route traversal may have downstream effects on making timed connections, and we have to account for this during planning. We concretely capture these challenges by formulating DREAMR as a Markov Decision Process (MDP), which is a mathematical framework for modeling sequential decision-making under uncertainty.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-07-18-adaptive-routing/graph_layer_png.png"><img class="postimage" src="/blog/assets/img/posts/2019-07-18-adaptive-routing/graph_layer_png.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Fig. 2: Every DREAMR route is composed of three kinds of sub-routes: Constrained Flight (time-constrained), Riding, and Unconstrained Flight.</p>
+
+</figcaption></figure>
+
+<p>Existing off-the-shelf methods for multimodal route planning or Markov Decision Processes cannot be applied naively to solve DREAMR problems. However, two forms of <strong>underlying structure</strong> will help us cut them down to size — the DREAMR solution routes can be <strong>decomposed</strong> into simpler sub-routes, as illustrated in figure 2, and there is <strong>partial controllability</strong> in the system, i.e. drones can be controlled but not cars. We look to exploit this structure intelligently and efficiently in our decision-making framework.</p>
+
+<h3 id="solving-dreamr-with-hierarchical-hybrid-planning">Solving DREAMR with Hierarchical Hybrid Planning</h3>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-07-18-adaptive-routing/hhp-structure.png"><img class="postimage" src="/blog/assets/img/posts/2019-07-18-adaptive-routing/hhp-structure.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Fig. 3: Our approach exploits the sequential dependency structure for the decisions to be made in DREAMR problems. The choice of transit option defines possible connection points, i.e. where the drone can board a car and alight from it. The chosen connection point determines the appropriate control strategy, i.e. accelerate, decelerate, maintain.</p>
+</figcaption></figure>
+
+<p>Our planning algorithm relies on analyzing the sequential structure between the decisions that need to be made for DREAMR problems, as illustrated in figure 3. The algorithm is <strong>hierarchical</strong>, i.e. there is a <em>global</em> layer that repeatedly computes a good nominal route from the drone’s current location to the destination, and a <em>local</em> layer that controls the drone to make the next transit connection for the chosen route. The nature of the decisions is <strong>hybrid</strong> — the transit choices and connection points are discrete (e.g. choosing a specific metro station) while the control actions are continuous (e.g. velocity or acceleration). Interleaving planning and execution allows adapting to changes such as switching to a new car route that is more helpful, or abandoning a timed connection that is likely to fail when the target car abruptly speeds up.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-07-18-adaptive-routing/hhp-behavior.png"><img class="postimage" src="/blog/assets/img/posts/2019-07-18-adaptive-routing/hhp-behavior.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Fig. 4: The global layer (left) decides which transit options and connection points to aim for; the local layer (middle) controls the agent under uncertainty to make the timed connections; the interleaving (right) responds to better transit options and abrupt speedups/delays.</p>
+
+</figcaption></figure>
+
+<p>In our work, we solve large and complex DREAMR problems by introducing <strong>carefully chosen representations and abstractions</strong>. These choices allow us to combine, in a principled manner, ideas and techniques from diverse decision-making topics. Concepts from heuristic graph search (over routes), planning under uncertainty (to robustly make timed connections), and hierarchical planning (for interleaving) are all necessary to address the various challenges of DREAMR problems and obtain a balance between scalable and good quality solutions. The various technical details are discussed in the paper.</p>
+
+<h3 id="peeking-at-some-results">Peeking at some Results</h3>
+
+<p>For the experiments, we designed a large-scale simulation setup with hundreds of car routes and thousands of route waypoints on a 10 km x 10 km grid (roughly the size of north San Francisco). The routes are highly variable; new routes can be added after the episode begins and the expected arrival times at current route waypoints are continuously updated. Each time we run the simulation, we give our drones a different start and goal location. For evaluation, we care about two aspects of our approach — scalability to large network sizes and performance of the solution trajectories with respect to the given criteria (energy and time).</p>
+
+<p><strong><em>Scalability.</em></strong> To evaluate scalability, we examine the search query time for the global route planning layer as the size of the route network, i.e. the number of route waypoints, increases. Even for networks of up to 10000 waypoints and potentially 10<sup>8</sup> connections, the search query time for a route is <strong>0.6 seconds</strong> for the first search (usually the hardest search problem) and <strong>30 - 75 milliseconds</strong> for the subsequent updates. These results are competitive with <a href="https://ieeexplore.ieee.org/abstract/document/8538625/">state-of-the-art work</a> on multimodal route planning for humans over public transit networks.  Specifically, on public transit networks of 4 x 10<sup>6</sup> edges (connections), our average query time of 8.19 ms is comparable to theirs of 14.97 ms. The comparison is not exactly apples-to-apples, however, as they have slightly different technical specifications.</p>
+
+<p><strong><em>Performance.</em></strong> We also examine the tradeoff between energy expended and elapsed time for the solution trajectories obtained by our method, over a wide range of DREAMR scenarios. Our key observation here is that our trajectories have a significantly better tradeoff compared to a deterministic replanning-based method. In particular, <strong>the performance gap increases as energy saving is prioritized</strong>; more timed connections are attempted , and our approach is much more robust and adaptive in making those timed connections than the baseline. Furthermore, the routes executed by our method <strong>save up to 60% energy by judiciously choosing transit options</strong>. Some qualitative behavior is demonstrated below (with the longer annotated version <a href="https://www.youtube.com/watch?v=e5IcB79TEXY&amp;feature=youtu.be">here</a>)</p>
+
+<div style="text-align: center"><img src="/blog/assets/img/posts/2019-07-18-adaptive-routing/gif-2-qualitative.gif" width="800" /></div>
+
+<h3 id="the-bottom-line">The Bottom Line</h3>
+
+<p>There are several challenges for multimodal routing in dynamic transit networks, whether it be for delivering packages in cities or mapping unknown terrain. Robots must be able to make complex decisions about where to go and how quickly to get there. Our work is a first step towards framing, understanding, and solving such decision-making problems.</p>
+
+<p>For hierarchical approaches to large and difficult decision-making problems, a <strong>smart decomposition into subproblems and recombination of sub-solutions is crucial</strong>. The choices of representation and abstraction we use efficiently unite various planning techniques while retaining the generality of the Markov Decision Process formulation and being able to accommodate various different algorithms for each module.</p>
+
+<p>The intelligent abstractions we propose enable us to plan over long horizons while still being computationally efficient. In particular, we achieve better agent behavior by planning under uncertainty. The consideration of uncertainty at the planning stage comes at an increased computational cost because the algorithm has to reason about potentially infinite future scenarios. For complex domains like DREAMR, with space and time constraints for switching between different transit options, <strong>explicitly accounting for the downstream effects of uncertainty appears to be worth the extra computational cost</strong>.</p>
+
+<p>There are a few interesting directions in which to take this work. We are currently looking at the extension to controlling multiple drones (or autonomous vehicles in general) which brings with it several fascinating challenges in multi-agent planning and scheduling. We’re also examining the underlying Markov Decision Process model for DREAMR and thinking about other robotics decision-making problems that it can represent. And of course, one day soon this technology might come to a delivery drone near you.</p>
+
+<p><strong>N.B.</strong> A performant implementation is crucial for real-time decision-making applications,. We used the <a href="https://julialang.org/">Julia</a> programming language for fast numerical computations; in particular, we relied heavily on the <a href="https://github.com/JuliaPOMDP/POMDPs.jl">POMDPs.jl</a> library for modeling and solving Markov Decision Processes.</p>
+
+<p><br /></p>
+
+<p>Our work is presented in the <em>IEEE Intelligent Vehicles Symposium 2019</em> paper:<br />
+<strong>Dynamic Real-time Multimodal Routing with Hierarchical Hybrid Planning</strong>.<br />
+Shushman Choudhury, Jacob P. Knickerbocker, and Mykel J. Kochenderfer<br />
+<a href="https://arxiv.org/abs/1902.01560">Paper</a> <a href="https://github.com/sisl/DreamrHHP">Code</a><br />
+<em>Shushman Choudhury is supported by the Ford Motor Company.</em>
+<br /></p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/adaptive-routing/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/adaptive-routing/&text=Adaptive+Energy-Efficient+Routing+for+Autonomous+Vehicles%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/adaptive-routing/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/adaptive-routing/&title=Adaptive+Energy-Efficient+Routing+for+Autonomous+Vehicles%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/adaptive-routing/&title=Adaptive+Energy-Efficient+Routing+for+Autonomous+Vehicles%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Adaptive+Energy-Efficient+Routing+for+Autonomous+Vehicles%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/adaptive-routing/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#multimodal">
+      <p><i class="fa fa-tag fa-fw"></i> multimodal</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#planning">
+      <p><i class="fa fa-tag fa-fw"></i> planning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#routing">
+      <p><i class="fa fa-tag fa-fw"></i> routing</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#transit+networks">
+      <p><i class="fa fa-tag fa-fw"></i> transit networks</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/quizbot/">
+      <p>Previous post</p>
+        Towards an Educational Revolution Through Chatbots
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/controllable-dialogue/">
+      <p>Next post</p>
+        What makes a good conversation?
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

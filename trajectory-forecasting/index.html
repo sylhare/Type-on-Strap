@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/trajectory-forecasting/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving" />
+<meta name="author" content="<a href="http://www.borisivanovic.com">Boris Ivanovic</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Merging into traffic is one of the most common day-to-day maneuvers we perform as drivers, yet still poses a major problem for self-driving vehicles. The reason that humans can naturally navigate through many social interaction scenarios, such as merging in traffic, is that they have an intrinsic capacity to reason about other people’s intents, beliefs, and desires, using such reasoning to predict what might happen in the future and make corresponding decisions1. However, many current autonomous systems do not use such proactive reasoning, which leads to difficulties when deployed in the real world. For example, there have been numerous instances of self-driving vehicles failing to merge into traffic, getting stuck in intersections, and making unnatural decisions that confuse others. As a result, imbuing autonomous systems with the ability to reason about other agents’ actions could enable more informed decision making and proactive actions to be taken in the presence of other intelligent agents, e.g., in human-robot interaction scenarios. Indeed, the ability to predict other agents’ behaviors (also known as multi-agent behavior prediction) has already become a core component of modern robotic systems. This holds especially true in safety-critical applications such as autonomous vehicles, which are currently being tested in the real world and targeting widespread deployment in the near future2. The diagram below illustrates a scenario where predicting the motion of other agents may help inform an autonomous vehicle’s path planning and decision making. Here, an autonomous vehicle is deciding whether to stay put or continue driving, depending on surrounding pedestrian movement. The red paths indicate future navigational plans for the vehicle, depending on its eventual destination. Gweon and Saxe provide a good overview of this concept, commonly known as “theory of mind”, in this book chapter. &#8617; For example, both Uber and Waymo provide safety reports discussing what they have learned from real-world testing as well as their strategies for developing safe self-driving vehicles that can soon operate among humans. &#8617;" />
+<meta property="og:description" content="Merging into traffic is one of the most common day-to-day maneuvers we perform as drivers, yet still poses a major problem for self-driving vehicles. The reason that humans can naturally navigate through many social interaction scenarios, such as merging in traffic, is that they have an intrinsic capacity to reason about other people’s intents, beliefs, and desires, using such reasoning to predict what might happen in the future and make corresponding decisions1. However, many current autonomous systems do not use such proactive reasoning, which leads to difficulties when deployed in the real world. For example, there have been numerous instances of self-driving vehicles failing to merge into traffic, getting stuck in intersections, and making unnatural decisions that confuse others. As a result, imbuing autonomous systems with the ability to reason about other agents’ actions could enable more informed decision making and proactive actions to be taken in the presence of other intelligent agents, e.g., in human-robot interaction scenarios. Indeed, the ability to predict other agents’ behaviors (also known as multi-agent behavior prediction) has already become a core component of modern robotic systems. This holds especially true in safety-critical applications such as autonomous vehicles, which are currently being tested in the real world and targeting widespread deployment in the near future2. The diagram below illustrates a scenario where predicting the motion of other agents may help inform an autonomous vehicle’s path planning and decision making. Here, an autonomous vehicle is deciding whether to stay put or continue driving, depending on surrounding pedestrian movement. The red paths indicate future navigational plans for the vehicle, depending on its eventual destination. Gweon and Saxe provide a good overview of this concept, commonly known as “theory of mind”, in this book chapter. &#8617; For example, both Uber and Waymo provide safety reports discussing what they have learned from real-world testing as well as their strategies for developing safe self-driving vehicles that can soon operate among humans. &#8617;" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/trajectory-forecasting/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/trajectory-forecasting/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-25T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving","dateModified":"2020-06-25T00:00:00-07:00","datePublished":"2020-06-25T00:00:00-07:00","description":"Merging into traffic is one of the most common day-to-day maneuvers we perform as drivers, yet still poses a major problem for self-driving vehicles. The reason that humans can naturally navigate through many social interaction scenarios, such as merging in traffic, is that they have an intrinsic capacity to reason about other people’s intents, beliefs, and desires, using such reasoning to predict what might happen in the future and make corresponding decisions1. However, many current autonomous systems do not use such proactive reasoning, which leads to difficulties when deployed in the real world. For example, there have been numerous instances of self-driving vehicles failing to merge into traffic, getting stuck in intersections, and making unnatural decisions that confuse others. As a result, imbuing autonomous systems with the ability to reason about other agents’ actions could enable more informed decision making and proactive actions to be taken in the presence of other intelligent agents, e.g., in human-robot interaction scenarios. Indeed, the ability to predict other agents’ behaviors (also known as multi-agent behavior prediction) has already become a core component of modern robotic systems. This holds especially true in safety-critical applications such as autonomous vehicles, which are currently being tested in the real world and targeting widespread deployment in the near future2. The diagram below illustrates a scenario where predicting the motion of other agents may help inform an autonomous vehicle’s path planning and decision making. Here, an autonomous vehicle is deciding whether to stay put or continue driving, depending on surrounding pedestrian movement. The red paths indicate future navigational plans for the vehicle, depending on its eventual destination. Gweon and Saxe provide a good overview of this concept, commonly known as “theory of mind”, in this book chapter. &#8617; For example, both Uber and Waymo provide safety reports discussing what they have learned from real-world testing as well as their strategies for developing safe self-driving vehicles that can soon operate among humans. &#8617;","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/trajectory-forecasting/"},"url":"http://ai.stanford.edu/blog/trajectory-forecasting/","author":{"@type":"Person","name":"<a href=\"http://www.borisivanovic.com\">Boris Ivanovic</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Recent advances in deep generative modeling have brought forth a paradigm shift in trajectory forecasting. In this blog post, we provide an overview of exist...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving">
+    
+    <meta name="twitter:description" content="Recent advances in deep generative modeling have brought forth a paradigm shift in trajectory forecasting. In this blog post, we provide an overview of existing work, highlight new opportunities, and present our latest work on developing methods that are cognizant of their downstream use cases.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-06-25-trajectory-forecasting/thumbnail.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-06-25-trajectory-forecasting/thumbnail.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Back to the Future: Planning-Aware Trajectory Forecasting for Autonomous Driving</h1>
+    <p class="meta">
+    <a href="http://www.borisivanovic.com">Boris Ivanovic</a>
+    <div class="post-date">June 25, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Merging into traffic is one of the most common day-to-day maneuvers we perform as drivers, <a href="https://www.wired.com/story/self-driving-cars-merging-highways">yet still poses a major problem for self-driving vehicles</a>. The reason that humans can naturally navigate through many social interaction scenarios, such as merging in traffic, is that they have an intrinsic capacity to reason about other people’s intents, beliefs, and desires, using such reasoning to predict what might happen in the future and make corresponding decisions<sup id="fnref:GweonSaxe2013" role="doc-noteref"><a href="#fn:GweonSaxe2013" class="footnote">1</a></sup>. However, many current autonomous systems do not use such proactive reasoning, which leads to difficulties when deployed in the real world. For example, there have been numerous instances of self-driving vehicles failing to merge into traffic, getting stuck in intersections, and making unnatural decisions that confuse others. As a result, imbuing autonomous systems with the ability to reason about other agents’ actions could enable more informed decision making and proactive actions to be taken in the presence of other intelligent agents, e.g., in human-robot interaction scenarios. Indeed, the ability to predict other agents’ behaviors (also known as multi-agent behavior prediction) has already become a core component of modern robotic systems. This holds especially true in safety-critical applications such as autonomous vehicles, which are currently being tested in the real world and targeting widespread deployment in the near future<sup id="fnref:waymouber" role="doc-noteref"><a href="#fn:waymouber" class="footnote">2</a></sup>. The diagram below illustrates a scenario where predicting the motion of other agents may help inform an autonomous vehicle’s path planning and decision making. Here, an autonomous vehicle is deciding whether to stay put or continue driving, depending on surrounding pedestrian movement. The red paths indicate future navigational plans for the vehicle, depending on its eventual destination.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/hero.png" /></p>
+</div></figure>
+
+<p>At a high level, <b>trajectory forecasting</b> is the problem of predicting the path (trajectory) \(y\) that some sentient agent (e.g., a bicyclist, pedestrian, car driver, or bus driver) will move along in the future given the trajectory \(x\) that agent moved along in the past. In scenarios with multiple agents, we are also given their past trajectories, which can be used to infer how they interact with each other. Trajectories of length \(T\) are usually represented as a sequence of positional waypoints \(\{(p_1, p_2)_i\}_{i=1...T}\) (e.g., GPS coordinates). Since we aim to make good predictions, we evaluate methods by some metric that compares the predicted trajectory \(\widehat{y}\) against the actual trajectory the agent takes (denoted earlier as \(y\)).</p>
+
+<p>In this post, we will dive into methods for trajectory forecasting, building a taxonomy along the way that organizes approaches by their methodological choices and output structures. We will discuss common evaluation schemes, present new ones, and suggest ways to compare otherwise disparate approaches. Finally, we will highlight shortcomings in existing methods that complicate their integration in downstream robotic use cases. Towards this end, we will present a new approach for trajectory forecasting that addresses these shortcomings, achieves state-of-the-art experimental performance, and enables new avenues of deployment on real-world autonomous systems.</p>
+
+<h2 id="1-methods-for-multi-agent-trajectory-forecasting">1. Methods for Multi-Agent Trajectory Forecasting</h2>
+
+<p>There are many approaches for multi-agent trajectory forecasting, ranging from classical, physics-based models to deterministic regressors to generative probabilistic models<sup id="fnref:review" role="doc-noteref"><a href="#fn:review" class="footnote">3</a></sup>. To explore them in a structured manner, we will first group methods by the assumptions they make followed by the technical approaches they employ, building a taxonomy of trajectory forecasting methodologies along the way.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-02.png" /></p>
+</div></figure>
+
+<p>The first major assumption that approaches make is about the structure, if any, the problem possesses. In trajectory forecasting, this is manifested by approaches being either <b>ontological</b> or <b>phenomenological</b>. Ontological approaches (sometimes referred to as theory of mind) generally postulate (assume) some structure about the problem, whether that be a set of rules that agents follow or rough formulations of agents’ internal decision-making schemes. Phenomenological approaches do not make such assumptions, instead relying on a wealth of data to gleam agent behaviors without reasoning about underlying motivations.</p>
+
+<h3 id="11-ontological-approaches">1.1. Ontological Approaches</h3>
+
+<p>One of the simplest (and sometimes most effective) approaches for trajectory forecasting is classical mechanics. Usually, one assumes that they have a model that can predict the agent’s future state (also known as a dynamics model). With a dynamics model, one can predict the state (e.g., position, velocity, acceleration) of the agent several timesteps into the future. Such a simple approach is remarkably powerful, sometimes outperforming state-of-the-art approaches on real-world pedestrian modeling tasks<sup id="fnref:GavrilaSchoeller" role="doc-noteref"><a href="#fn:GavrilaSchoeller" class="footnote">4</a></sup>. However, pure dynamics integration alone does not account for the topology of the environment or interactions among agents, both of which are dominant effects. There have since been many approaches that mathematically formulate and model these interactions, exemplary methods include the <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.62.1805">intelligent driver model</a>, <a href="https://mtreiber.de/publications/MOBIL_TRB.pdf">MOBIL model</a>, and <a href="https://doi-org.stanford.idm.oclc.org/10.1103/PhysRevE.51.4282">Social Forces model</a>.</p>
+
+<p>More recently, inverse reinforcement learning (IRL) has emerged as a major ontological approach for trajectory forecasting. Given a set of agent trajectories in a scene \(\xi\), IRL attempts to learn the behavior and motivations of the agents. In particular, IRL formulates the motivation of an agent (e.g., crossing a sidewalk or turning right) with a mathematical formula, referred to as the reward function, shown below.</p>
+
+<figure class="figure"><div class="figure__main">
+\[R(s) = w^T \phi(s),\]
+</div></figure>
+
+<p>where \(R(s)\) refers to the reward value at a specific state \(s\) (e.g., position, velocity, acceleration), \(w\) is a set of weights to be learned, and \(\phi(s)\) is a set of extracted features that characterize the state \(s\). Thus, the IRL problem is to find the best weights \(w\). The main idea here is that solving a reinforcement learning problem with a successfully-learned reward function would yield a policy that matches \(\xi\), the original agent trajectories.</p>
+
+<p>Unfortunately, there can be many such reward functions under which the original demonstrations are recovered. Thus, we need a way to choose between possible reward functions. A very popular choice is to pick the reward function with maximum entropy. This follows the <a href="https://en.wikipedia.org/wiki/Principle_of_maximum_entropy">principle of maximum entropy</a>, which states that the most appropriate distribution to model a given set of data is the one with highest entropy among all feasible possibilities<sup id="fnref:principleentropy" role="doc-noteref"><a href="#fn:principleentropy" class="footnote">5</a></sup>. A reason why one would want to do this is that maximizing entropy minimizes the amount of prior information built into the model; there is less risk of overfitting to a specific dataset. This is named <a href="https://www.aaai.org/Papers/AAAI/2008/AAAI08-227.pdf">Maximum Entropy (MaxEnt) IRL</a>, and has seen widespread use in modeling real-world navigation and driving behaviors.</p>
+
+<p>To encode this maximum entropy choice into the IRL formulation from above, trajectories with higher rewards are valued exponentially more. Formally,</p>
+
+<figure class="figure"><div class="figure__main">
+\[p(\xi | w) \propto \exp \left(\sum_{s \in \xi} R(s)\right) = \sum_{s \in \xi} w^T \phi(s).\]
+</div></figure>
+
+<p>This distribution over paths also gives us a policy which can be sampled from. Specifically, the probability of an action is weighted by the expected exponentiated rewards of all trajectories that begin with that action.</p>
+
+<p>Wrapping up, ontological approaches provide a structured method for learning how sentient agents make decisions. Due to their strong structural assumptions, they are both very sample-efficient (there are not many parameters to learn), computationally-efficient to optimize, and generally easier to pair with decision making systems (e.g., <a href="https://arxiv.org/abs/1904.05423">game theory</a>). However, these strong structural assumptions also limit the maximum performance that an ontological approach may achieve. For example, what if the expert’s actual reward function was non-linear, had different terms than the assumed reward function, or was non-Markovian (i.e., had a history dependency)? In these cases, the assumed model would necessarily underfit the observed data. Further, data availability is growing at an exponential rate, with terabytes of autonomous driving data publicly being released every few months (companies have access to orders of magnitude more internally). With so much data, it becomes natural to consider phenomenological approaches<sup id="fnref:anca" role="doc-noteref"><a href="#fn:anca" class="footnote">6</a></sup>, which form the other main branch of our trajectory forecasting taxonomy.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-03.png" /></p>
+</div></figure>
+
+<p>Including these two ontological approaches in our trajectory forecasting taxonomy yields the above tree. Next, we will dive into mainline phenomenological approaches.</p>
+
+<h3 id="12-phenomenological-approaches">1.2. Phenomenological Approaches</h3>
+
+<p>Phenomenological approaches are methods that make minimal assumptions about the structure of agents’ decision-making process. Instead, they rely on powerful general modeling techniques and a wealth of observation data to capture the kind of complexity encountered in environments with multiple interacting agents.</p>
+
+<p>There have been a plethora of data-driven approaches for trajectory forecasting, mainly utilizing regressive methods such as Gaussian Process Regression (GPR)<sup id="fnref:gpr" role="doc-noteref"><a href="#fn:gpr" class="footnote">7</a></sup> and deep learning, namely Long Short-Term Memory (LSTM) networks<sup id="fnref:lstmmethods" role="doc-noteref"><a href="#fn:lstmmethods" class="footnote">8</a></sup> and Convolutional Neural Networks (CNNs)<sup id="fnref:cnnmethods" role="doc-noteref"><a href="#fn:cnnmethods" class="footnote">9</a></sup>, to good effect. Of these, LSTMs generally outperform GPR methods and are faster to evaluate online. As a result, they are commonly found as a core component of human trajectory models<sup id="fnref:lstmcoremethods" role="doc-noteref"><a href="#fn:lstmcoremethods" class="footnote">10</a></sup>. The reason why LSTMs perform well is that they are a purpose-built deep learning architecture for modeling temporal sequence data. Thus, practitioners usually model trajectory forecasting as a time series prediction problem and apply LSTM networks.</p>
+
+<p>While these methods have enjoyed strong performance, there is a subtle point that limits their application to safety-critical problems such as autonomous driving: they only produce a single deterministic trajectory forecast. Safety-critical systems need to reason about many possible future outcomes, ideally with the likelihoods of each occurring, to make safe decisions online. As a result, methods that simultaneously forecast multiple possible future trajectories have been sought after recently.</p>
+
+<p>Generative approaches in particular have emerged as state-of-the-art trajectory forecasting methods due to recent advancements in deep generative models<sup id="fnref:deepgenmodels" role="doc-noteref"><a href="#fn:deepgenmodels" class="footnote">11</a></sup>. Notably, they have caused a paradigm shift from focusing on predicting the single best trajectory to producing a <b>distribution</b> of potential future trajectories. This is advantageous in autonomous systems as full distribution information is more useful for downstream tasks, e.g., motion planning and decision making, where information such as variance can be used to make safer decisions. Most works in this category use a deep recurrent backbone architecture (like an LSTM) with a latent variable model, such as a <a href="https://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models">Conditional Variational Autoencoder (CVAE)</a>, to explicitly encode multimodality<sup id="fnref:cvaemethods" role="doc-noteref"><a href="#fn:cvaemethods" class="footnote">12</a></sup>, or a <a href="https://papers.nips.cc/paper/5423-generative-adversarial-nets">Generative Adversarial Network (GAN)</a> to implicitly do so<sup id="fnref:ganmethods" role="doc-noteref"><a href="#fn:ganmethods" class="footnote">13</a></sup>. Common to both approach styles is the need to produce position distributions. GAN-based models can directly produce these and CVAE-based recurrent models usually rely on a bivariate Gaussian or bivariate Gaussian Mixture Model (GMM) to output position distributions. Including the two in our taxonomy balances out the right branch.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-04.png" /></p>
+</div></figure>
+
+<p>The main difference between GAN-based and CVAE-based approaches is in the form of their resulting output distribution. At a high level, GANs are generative models that generate data which, in aggregate, match the distribution \(p(y)\) of its training dataset \(\mathcal{D}\). They achieve this by learning to map samples \(x\) from a known distribution \(K\) to samples \(y\) of an unknown distribution \(\mathcal{D}\) for which we have samples, i.e., the training dataset. Intuitively, this is very similar to <a href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">inverse transform sampling</a>, which is a method for generating samples from any probability distribution given its cumulative distribution function. This is roughly illustrated below, where samples from a simple uniform distribution are mapped to a standard Gaussian distribution.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/ITS.jpeg" /></p>
+<figcaption>Sourced from <a href="https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29">this excellent article</a> on understanding GANs.</figcaption>
+</div></figure>
+
+<p>Thus, GANs can be viewed as learning an inverse transformation which maps a sample of a “simple” random variable \(x \sim p(x)\) to a sample of a “complex” random variable \(y \sim p(y \mid x)\) (conditioned on \(x\) because that is the value being mapped to \(y\)). Thinking about this from the perspective of trajectory forecasting, \(x\) is usually the trajectory history of the agent, information about neighboring agents, environmental information, etc. and \(y\) is the trajectory forecast we are looking to output. Thus, it makes sense that one would want to produce predictions \(y \sim p(y \mid x)\) conditioned on past observations \(x\). However, this sampling-based structure also means that GANs can only produce empirical, and not analytical, distributions. Specifically, obtaining statistical properties like the mean and variance from a GAN can only be done approximately, through repeated sampling.</p>
+
+<p>On the other hand, CVAEs tackle the problem of representing \(p(y \mid x)\) by decomposing it into subcomponents specified by the value of a latent variable \(z\). Formally,</p>
+
+<figure class="figure"><div class="figure__main">
+\[p(y \mid x) = \sum_z p(y \mid x, z) p(z \mid x).\]
+</div></figure>
+
+<p>Note that the sum in the above equation implies that \(z\) is discrete (has finitely-many values). The latent variable \(z\) can also be continuous, but there is work showing that discrete latent spaces lead to better performance (this also holds true for trajectory forecasting)<sup id="fnref:discretez" role="doc-noteref"><a href="#fn:discretez" class="footnote">14</a></sup>, so for this post we will only concern ourselves with a discrete \(z\). By decomposing \(p(y \mid x)\) in this way, one can produce an analytic output distribution. This is very similar to GMMs, which also decompose their desired \(p(\text{data})\) distribution in this manner to produce an analytic distribution. This completes our taxonomy, and broadly summarizes current approaches for multi-agent trajectory forecasting.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-05.png" /></p>
+</div></figure>
+
+<p>With such a variety of approach styles, how do we know which is best? How can we determine if, for example, an approach that produces an analytic distribution outperforms a deterministic regressor?</p>
+
+<h2 id="2-benchmarking-performance-in-trajectory-forecasting">2. Benchmarking Performance in Trajectory Forecasting</h2>
+
+<p>With such a broad range of approaches and output structures, it can be difficult to evaluate progress in the field. Even phrasing the question introduces biases towards methods. For example, asking the following excludes generative or probabilistic approaches: Given a trajectory forecast \(\{\widehat{y}_1, ..., \widehat{y}_T\}\) and the ground truth future trajectory \(\{y_1, ..., y_T\}\), how does one evaluate how “close” the forecast is to the ground truth? We will start with this question, even if it is exclusionary for certain classes of methods.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-07.png" /></p>
+</div></figure>
+
+<p>Illustrated above, one of the most common ways is to directly compare them side-by-side, i.e., measure how far \(\widehat{y}_i\) is from \(y_i\) for each \(i\) and then average these distances to obtain the average error over the prediction horizon. This is commonly known as <b>Average Displacement Error (ADE)</b> and is usually reported in units of length, e.g., meters:</p>
+
+<figure class="figure"><div class="figure__main">
+\[ADE(\widehat{y}, y) = \frac{1}{T} \sum_{i=1}^T ||\widehat{y}_i - y_i||_2^2.\]
+</div></figure>
+
+<p>Often, we are also interested in the displacement error of only the final predicted point, illustrated below (in particular, only \(\widehat{y}_3\) and \(y_3\) are compared).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-08.png" /></p>
+</div></figure>
+
+<p>This provides a measure of a method’s error at the end of the prediction horizon, and is frequently referred to as <b>Final Displacement Error (FDE)</b>. It is also usually reported in units of length.</p>
+
+<figure class="figure"><div class="figure__main">
+\[FDE(\widehat{y}, y) = || \widehat{y}_T - y_T ||_2^2.\]
+</div></figure>
+
+<p>ADE and FDE are the two main metrics used to evaluate deterministic regressors. While these metrics are natural for the task, easy to implement, and interpretable, they generally fall short in capturing the nuances of more sophisticated methods (see more on this below). It is for this reason, perhaps, that they have historically led to somewhat inconsistent reported results. For instance, there are contradictions between the results reported by the same authors in <a href="https://arxiv.org/abs/1803.10892">Gupta et al. (2018)</a> and <a href="http://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Alahi et al. (2016)</a>. Specifically, in Table 1 of <a href="http://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Alahi et al. (2016)</a>, Social LSTM convincingly outperforms a baseline LSTM without pooling. However, in Table 1 of <a href="https://arxiv.org/abs/1803.10892">Gupta et al. (2018)</a>, Social LSTM is actually worse than the same baseline on average. Further, the values reported by Social Attention in <a href="https://arxiv.org/abs/1710.04689">Vemula et al. (2018)</a> seem to have unusually high ratios of FDE to ADE. Nearly every other published method has FDE/ADE ratios around \(2-3\times\) whereas Social Attention’s are around \(3-12\times\). Social Attention’s reported errors on the UCY - University dataset are especially striking, as its FDE after 12 timesteps is \(3.92\), which is \(12\times\) its ADE of \(0.33\). This would make its prediction error on the other 11 timesteps essentially zero.</p>
+
+<p>As mentioned earlier, safety-critical systems need to reason about many possible future outcomes, ideally with the likelihoods of each occurring, so that safe decision-making can take place which considers a whole range of possible futures. In this context, ADE and FDE are unsatisfactory because they focus on evaluating a single trajectory forecast. This leaves the following question: How do we evaluate generative approaches which produce many forecasts simultaneously, or even full distributions over forecasts?</p>
+
+<p>Given the ground truth future trajectory \(\{y_1, ..., y_T\}\) and the ability to sample trajectory forecasts \(\{\widehat{y}_1, ..., \widehat{y}_T\}\), how does one evaluate how “good” the samples are with respect to the ground truth? One initial idea, illustrated below, is to sample \(N\) forecasts from the model and then return the performance of the best forecast. This is usually referred to as <b>Best-of-N (BoN)</b>, along with the underlying performance metric used. For example, a Best-of-N ADE metric is illustrated below, since \(N = 3\) and we measure the ADE of the best forecast, i.e., the forecast with minimum ADE.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-09.png" /></p>
+</div></figure>
+
+<p>This is the main metric used by generative methods that produce empirical distributions, such as GAN-based approaches. The idea behind this evaluation scheme is to identify if the ground truth is near the forecasts produced by a few samples from the model (\(N\) is usually chosen to be small, e.g., \(20\)). Implicitly, this evaluation metric selects one sample as the best prediction and then evaluates it with the ADE/FDE metrics from before. However, this is inappropriate for autonomous driving because it requires knowledge of the future (in order to select the best prediction) and it is unclear how to relate BoN performance to the real world. It is also difficult to objectively compare methods using BoN because approaches that produce wildly different output samples may yield similar BoN metric values, as illustrated below.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/BoN_bad_example.png" /></p>
+<figcaption>This is a figure from <a href="https://arxiv.org/abs/1810.05993">our recent trajectory forecasting work</a> at ICCV 2019 which compares versions of our method, the Trajectron, with that of the (generative, empirical) <a href="https://arxiv.org/abs/1803.10892">Social GAN</a>. If one were to use a Best-of-N ADE or FDE metric on these outputs, both methods might perform similarly even though Social GAN produces outputs with significantly higher variance.</figcaption>
+</div></figure>
+
+<p>To address these shortcomings in the Best-of-N metric, we proposed a new evaluation scheme for generative, empirical methods in our recent ICCV 2019 paper<sup id="fnref:trajectron" role="doc-noteref"><a href="#fn:trajectron" class="footnote">15</a></sup>. Illustrated below, one starts by sampling many trajectories (\(\sim 10^3\), to obtain a representative set of outputs) from the methods being compared. A <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation">Kernel Density Estimate</a> (KDE; a statistical tool that fits a probability density function to a set of samples) is then fit at each prediction timestep to obtain a probability density function (pdf) of the sampled positions at each timestep. From these pdfs, we compute the mean log-likelihood of the ground truth trajectory. This metric is called the KDE-based Negative Log-Likelihood (KDE NLL) and is reported in logarithmic units, i.e., nats.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Sail toyota_blog-10.png" /></p>
+</div></figure>
+
+<p>KDE NLL does not suffer from the same downsides that BoN does, as (1) methods with wildly different outputs will yield wildly different KDEs, and (2) it does not require looking into the future during evaluation. Additionally, it fairly estimates a method’s NLL without any assumptions on the method’s output distribution structure; both empirical and analytical distributions can be sampled from. Thus, KDE NLL can be used to compare methods across taxonomy groups.</p>
+
+<p>While KDE NLL can compare generative methods, deterministic lines of work are still disparate in their metrics and evaluating across the generative/deterministic boundary remains difficult. We also tried to tackle this in our 2019 ICCV paper, settling on the following comparison where we compared boxplots of generative methods alongside ADE and FDE (shown below) values from deterministic methods. The methods were trained and evaluated on the <a href="https://ieeexplore.ieee.org/document/5459260">ETH</a> and <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2007.01089.x">UCY</a> pedestrian datasets, containing thousands of rich multi-human interaction scenarios.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/fse_boxplots.png" /></p>
+</div></figure>
+
+<p>Even though we created the above figure, it is not immediately obvious how to interpret it. Should one compare means and medians? Should one try statistical hypothesis tests between error distributions and mean error values from deterministic values? Unfortunately, using boxplots (as we did in our ICCV work) disregards the possibility for multimodal error distributions (i.e., a distribution with many peaks). Another possibility may be to let dataset curators decide the most relevant metrics for their dataset, e.g., the nuScenes dataset (a large-scale autonomous driving dataset from nuTonomy) has <a href="https://www.nuscenes.org/prediction">a prediction challenge</a> with specific evaluation metrics. This may yield proper comparisons for a specific dataset, but it still allows for biases towards certain kinds of approaches and makes it difficult to compare approaches across datasets. For example, evaluating generative approaches with ADE and FDE ignores variance, which may make two different methods appear to perform the same (see trajectory samples from Trajectron vs. Social GAN in the earlier qualitative plot).</p>
+
+<p>Overall, there is still much work to be done in standardizing metrics across approach styles and datasets. Some open questions in this direction are:</p>
+<ul>
+  <li>Do we really care equally about each waypoint in ADE? We know that forecasts degrade with prediction horizon, so why not focus on earlier or later prediction points more?</li>
+  <li>Why even aggregate displacement errors? We could compare the distribution of displacement errors per timestep, e.g., using a statistical hypothesis test like the t-test.</li>
+  <li>For methods that also produce variance information, why not weigh their predictions by \(1/\text{Var}(\widehat{y}_i)\)? This would enable methods to specify their own uncertainties and be rewarded, e.g., if they are making bad predictions in weird scenarios, but alerting that they are uncertain.</li>
+  <li>Since these forecasts are ultimately being used for decision making and control, a control-aware metric would be useful. For instance, we may want to evaluate an output’s control feasibility by how many control constraint violations there are on average over the course of a forecast.</li>
+</ul>
+
+<p>We will now discuss our newly-released method for trajectory forecasting that addresses these cross-taxonomy evaluation quandaries by being explicitly designed to be simultaneously comparable with both generative and deterministic approaches. Further, this approach also addresses how to include system dynamics and additional data sources (e.g., maps, camera images, LiDAR point clouds) such that its forecasts are all physically-realizable by the modeled agent and consider the topology of the surrounding environment.</p>
+
+<h2 id="3-trajectron-dynamically-feasible-trajectory-forecasting-with-heterogeneous-data">3. Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data</h2>
+
+<p>As mentioned earlier, nearly every trajectory forecasting method directly produces positions as their output. Unfortunately, this output structure makes it difficult to integrate with downstream planning and control modules, especially since purely-positional trajectory predictions do not respect dynamics constraints, e.g., the fact that a car cannot move sideways, which could lead to models producing trajectory forecasts that are unrealizable by the underlying control variables, e.g., predicting that a car will move sideways.</p>
+
+<p>Towards this end, we have developed <b>Trajectron++</b>, a significant addition to the Trajectron framework, that addresses this shortcoming. In contrast to existing approaches, Trajectron++ explicitly accounts for system dynamics, and leverages heterogeneous input data (e.g., maps, camera images, LIDAR point clouds) to produce state-of-the-art trajectory forecasting results on a variety of large-scale real-world datasets and agent types.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/Trajectron++.png" /></p>
+</div></figure>
+
+<p>Trajectron++ is a graph-structured generative (CVAE-based) neural architecture that forecasts the trajectories of a general number of diverse agents while incorporating agent dynamics and heterogeneous data (e.g., semantic maps). It is designed to be tightly integrated with robotic planning and control frameworks; for example, it can produce predictions that are optionally conditioned on ego-agent motion plans. At a high level, it operates by first creating a spatiotemporal graph representation of a scene from its topology. Then, a similarly-structured deep learning architecture is generated that forecasts the evolution of node attributes, producing agent trajectories. An example of this is shown below.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/frame_to_graph.png" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/architecture_diagram.png" /></p>
+<figcaption>A scene around the ego-vehicle in the nuScenes dataset is shown. From the distances between different agents (e.g., pedestrians, cars), a spatiotemporal graph is built (left) which then dictates how the corresponding neural network architecture (right) is constructed. The architecture models agents by encoding the agent’s history and local interactions (edges).</figcaption>
+</div></figure>
+
+<p>We will focus on two aspects of our model, each of which address one of the problems we previously highlighted (considering dynamics and comparing across the trajectory forecasting taxonomy).</p>
+
+<h3 id="31-incorporating-system-dynamics-into-generative-trajectory-forecasting">3.1. Incorporating System Dynamics into Generative Trajectory Forecasting</h3>
+
+<p>One of the main contributions of Trajectron++ is presenting a method for producing dynamically-feasible output trajectories. Most CVAE-based generative methods capture fine-grained uncertainty in their outputs by producing the parameters of a bivariate Gaussian distribution (i.e., its mean and covariance) and then sampling position waypoints from it. However, this direct modeling of position is ignorant of an agent’ governing dynamics and relies on the neural network architecture to learn dynamics.</p>
+
+<p>While neural networks can do this, we are already good at modeling the dynamics of many systems, including pedestrians (as single integrators) and vehicles (e.g., as dynamically-extended unicycles)<sup id="fnref:unicycle" role="doc-noteref"><a href="#fn:unicycle" class="footnote">16</a></sup>. Thus, Trajectron++ instead focuses on forecasting distributions of <b>control sequences</b> which are then integrated through the agent’s dynamics to produce positions. This ensures that the output trajectories are physically realizable as they have associated control strategies. Note that the full distribution itself is integrated through the dynamics. This can be done for each latent behavior mode via the Kalman Filter prediction equations (for linear dynamics models) or the Extended Kalman Filter prediction equations (for nonlinear dynamics models).</p>
+
+<p>As a bonus, adding agent dynamics to the model yields noticeable performance improvements across all evaluation metrics. Broadly, this makes sense as the model’s loss function (the standard Evidence Lower Bound CVAE loss) can now be directly specified over the desired quantity (position) while still respecting dynamic constraints.</p>
+
+<h3 id="32-leveraging-heterogeneous-data-sources">3.2. Leveraging Heterogeneous Data Sources</h3>
+
+<p>An additional feature of Trajectron++ is its ability to combine data from a variety of sources to produce forecasts. In particular, the presence of a single backbone representation vector, denoted \(e_x\) in the above architecture diagram, enables for the seamless addition of new data via concatenation. To illustrate this, we show the benefits of including high-definition maps in the figure below. In it, we can see that the model is able to improve its predictions in turns, better reflecting the local lane geometry.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/qual_nuScenes_no_map.png" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2020-06-25-trajectory-forecasting/qual_nuScenes_map.png" /></p>
+<figcaption><b>Left:</b> Without map information, the model tends to undershoot turns. <b>Right:</b> Encoding a local map of the agent's surroundings notably increases Trajectron++'s accuracy and confidence in turns. It is able to use semantic labels (shown in color) to reason about where agents can go.</figcaption>
+</div></figure>
+
+<h3 id="33-simultaneously-producing-both-generative-and-deterministic-outputs">3.3. Simultaneously Producing Both Generative and Deterministic Outputs</h3>
+
+<p>A key feature of the Trajectron and Trajectron++ models is their combination of a CVAE with a Gaussian output. Specifically, the “GMM” in the above architecture diagram only has one component, i.e., it is just a multivariate Gaussian. Thus, the model’s overall output is</p>
+
+<figure class="figure"><div class="figure__main">
+\[p(y \mid x) = \sum_z p(y \mid x, z) p(z \mid x) = \sum_z p(z \mid x) p(y \mid x, z) = \sum_z \pi_z(x) \mathcal{N}(y; \mu(x, z), \Sigma(x, z)),\]
+</div></figure>
+
+<p>which is the definition of a GMM! Thus, each component \(z\), which is meant to model high-level latent behaviors, ends up specifying a set of parameters for a Gaussian output distribution over control variables. With such a form, we can easily produce both generative and deterministic outputs. The following are the main four outputs that Trajectron++ can produce.</p>
+<ul>
+  <li><b>Most Likely (ML):</b> This is the model’s deterministic and most-likely single output. The high-level latent behavior mode and output trajectory are the modes of their respective distributions, where</li>
+</ul>
+<figure class="figure"><div class="figure__main">
+\[z_\text{mode} = \arg \max_z p(z \mid x), \ \ \ \ \ \ \ \ y = \arg \max_{y} p(y \mid x, z_\text{mode}).\]
+</div></figure>
+
+<ul>
+  <li>\(z_{\text{mode}}\): Predictions from the model’s most-likely high-level latent behavior mode, where</li>
+</ul>
+<figure class="figure"><div class="figure__main">
+\[z_\text{mode} = \arg \max_z p(z \mid x), \ \ \ \ \ \ \ \ y \sim p(y \mid x, z_\text{mode}).\]
+</div></figure>
+
+<ul>
+  <li><b>Full:</b> The model’s full sampled output, where \(z\) and \(y\) are sampled sequentially according to</li>
+</ul>
+<figure class="figure"><div class="figure__main">
+\[z \sim p(z \mid x), \ \ \ \ \ \ \ \ y \sim p(y \mid x, z).\]
+</div></figure>
+
+<ul>
+  <li><b>Distribution:</b> Due to the use of a discrete Categorical latent variable and Gaussian output structure, the model can provide an analytic output distribution by directly computing</li>
+</ul>
+<figure class="figure"><div class="figure__main">
+\[p(y \mid x) = \sum_z p(y \mid x, z) p(z \mid x).\]
+</div></figure>
+
+<p>Thus, to compare against deterministic methods we use Trajectron++’s most-likely prediction with ADE and FDE. To compare against generative empirical or analytical methods, we use any of \(z_{\text{mode}}\), <b>Full</b>, or <b>Distribution</b> with KDE NLL. In summary, Trajectron++ can be directly compared to any method that produces either a single trajectory or a distribution thereof.</p>
+
+<p>Trajectron++ serves as a first step along a broader research thrust to better integrate modern trajectory forecasting approaches with robotic planning, decision making, and control. In particular, we are broadening our focus from purely minimizing benchmark error to also considering the advancements needed to successfully deploy modern trajectory forecasting methods to the real world, where properties like runtime, scalability, and data dependence play increasingly important roles. This in turn raises further research questions, for example:</p>
+<ul>
+  <li>What output representation best suits downstream planners? Predicting positional information alone makes it difficult to use some planning, decision making, and control algorithms.</li>
+  <li>What is required of perception? How difficult is it to obtain the desired input information?</li>
+</ul>
+
+<p>Some research groups are already tackling these types of questions<sup id="fnref:tackling" role="doc-noteref"><a href="#fn:tackling" class="footnote">17</a></sup>, viewing trajectory forecasting as a modular component that is integrated with perception, planning, and control modules.</p>
+
+<h2 id="4-conclusion">4. Conclusion</h2>
+
+<p>Now that there is a large amount of publicly-available trajectory forecasting data, we have crossed the threshold where data-driven, phenomenological approaches generally surpass the performance of ontological methods. In particular, recent advances in deep generative modeling have brought forth a probabilistic paradigm shift in multi-agent trajectory forecasting, leading to new considerations about evaluation metrics and downstream use cases.</p>
+
+<p>In this post, we constructed a taxonomy of existing mainline approaches (e.g., Social Forces and IRL) and newer research (e.g., GAN-based and CVAE-based approaches), discussed their evaluation schemes and suggested ways to compare approaches across taxonomy groups, and highlighted shortcomings that complicate their integration in downstream robotic use cases. Towards this end, we present Trajectron++, a novel phenomenological trajectory forecasting approach that incorporates dynamics knowledge and the capacity for heterogeneous data inclusion. As a step towards the broader research thrust of integrating trajectory forecasting with autonomous systems, Trajectron++ produces dynamically-feasible trajectories in a wide variety of output formats depending on the specific downstream use case. It achieves state-of-the-art performance on both generative and deterministic benchmarks, and enables new avenues of deployment on real-world autonomous systems.</p>
+
+<p>There are still many open questions, especially in terms of standard evaluation metrics, model interpretability, and broader architectural considerations stemming from future integration with downstream planning and control algorithms. This especially rings true now that deep learning approaches have outweighed others in popularity and performance, and are targeting deployment on real-world safety-critical robotic systems.</p>
+
+<hr />
+
+<p><strong>This blog post is based on the following paper:</strong></p>
+<ul>
+  <li><a href="https://arxiv.org/abs/2001.03093">Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data</a> by Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, and Marco Pavone.<sup id="fnref:equal" role="doc-noteref"><a href="#fn:equal" class="footnote">18</a></sup></li>
+</ul>
+
+<p>All of our code, models, and data are available <a href="https://github.com/StanfordASL/Trajectron-plus-plus">here</a>. If you have any questions, please contact <a href="http://www.borisivanovic.com">Boris Ivanovic</a>.</p>
+
+<h5 id="acknowledgements">Acknowledgements</h5>
+
+<p class="small-text">
+Many thanks to Karen Leung and Marco Pavone for comments and edits on this blog post, Matteo Zallio for visually communicating our ideas, and Andrei Ivanovic for proofreading.
+</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:GweonSaxe2013" role="doc-endnote">
+      <p>Gweon and Saxe provide a good overview of this concept, commonly known as “theory of mind”, in <a href="https://sll.stanford.edu/docs/2013_Gweon_Saxe.pdf">this book chapter</a>. <a href="#fnref:GweonSaxe2013" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:waymouber" role="doc-endnote">
+      <p>For example, both <a href="https://uber.app.box.com/v/UberATGSafetyReport?uclick_id=ca1e0dcb-2648-4441-8cf4-35a4add66220">Uber</a> and <a href="https://waymo.com/safety/">Waymo</a> provide safety reports discussing what they have learned from real-world testing as well as their strategies for developing safe self-driving vehicles that can soon operate among humans. <a href="#fnref:waymouber" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:review" role="doc-endnote">
+      <p>An excellent recent review can be found in <a href="https://arxiv.org/abs/1905.06113">Rudenko et al. (2019)</a>. <a href="#fnref:review" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:GavrilaSchoeller" role="doc-endnote">
+      <p>Examples include <a href="https://link-springer-com.stanford.idm.oclc.org/chapter/10.1007/978-3-642-40602-7_18">Schneider and Gavrila (2013)</a> and <a href="https://arxiv.org/abs/1903.07933">Schöller et al. (2020)</a>. <a href="#fnref:GavrilaSchoeller" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:principleentropy" role="doc-endnote">
+      <p>See <a href="https://doi.org/10.1103%2FPhysRev.106.620">Jaynes (1957a)</a> and <a href="https://doi.org/10.1103%2FPhysRev.108.171">Jaynes (1957b)</a> for more details. <a href="#fnref:principleentropy" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:anca" role="doc-endnote">
+      <p>See <a href="https://arxiv.org/abs/1901.01291">Swamy et al. (2020)</a> for a deeper dive into comparisons between ontological and phenomenological methods. <a href="#fnref:anca" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:gpr" role="doc-endnote">
+      <p>E.g., <a href="http://www.gaussianprocess.org/gpml/">Rasmussen and Williams (2006)</a>, <a href="http://www.dgp.toronto.edu/~jmwang/gpdm/pami_with_errata.pdf">Wang et al. (2008)</a>. <a href="#fnref:gpr" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lstmmethods" role="doc-endnote">
+      <p>E.g., <a href="http://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Alahi et al. (2016)</a>, <a href="http://timallanwheeler.com/aboutme/papers/morton2016human.pdf">Morton et al. (2017)</a>, <a href="https://arxiv.org/abs/1710.04689">Vemula et al. (2018)</a>. <a href="#fnref:lstmmethods" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cnnmethods" role="doc-endnote">
+      <p>E.g., <a href="http://openaccess.thecvf.com/content_CVPR_2019/html/Zeng_End-To-End_Interpretable_Neural_Motion_Planner_CVPR_2019_paper.html">Zeng et al. (2019)</a>, <a href="http://proceedings.mlr.press/v87/casas18a.html">Casas et al. (2018)</a>, <a href="https://arxiv.org/abs/1910.08041">Jain et al. (2019)</a>, <a href="https://arxiv.org/abs/1910.08233">Casas et al. (2019)</a> <a href="#fnref:cnnmethods" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lstmcoremethods" role="doc-endnote">
+      <p>E.g., <a href="http://openaccess.thecvf.com/content_cvpr_2016/html/Alahi_Social_LSTM_Human_CVPR_2016_paper.html">Alahi et al. (2016)</a>, <a href="https://arxiv.org/abs/1511.05298">Jain et al. (2016)</a>, <a href="https://arxiv.org/abs/1710.04689">Vemula et al. (2018)</a>. <a href="#fnref:lstmcoremethods" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:deepgenmodels" role="doc-endnote">
+      <p>Especially <a href="https://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models">Sohn et al. (2015)</a> and <a href="https://papers.nips.cc/paper/5423-generative-adversarial-nets">Goodfellow et al. (2014)</a>. <a href="#fnref:deepgenmodels" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cvaemethods" role="doc-endnote">
+      <p>Here is a partial list of primarily CVAE-based methods: <a href="https://arxiv.org/abs/1704.04394">Lee et al. (2017)</a>, <a href="https://arxiv.org/abs/1710.09483">Schmerling et al. (2018)</a>, <a href="https://arxiv.org/abs/1803.02015">Ivanovic et al. (2018)</a>, <a href="https://arxiv.org/abs/1805.05499">Deo and Trivedi (2018)</a>, <a href="https://arxiv.org/abs/1711.10061">Sadeghian et al. (2018)</a>, <a href="https://arxiv.org/abs/1810.05993">Ivanovic and Pavone (2019)</a>, <a href="https://arxiv.org/abs/1905.01296">Rhinehart et al. (2019)</a>. <a href="#fnref:cvaemethods" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ganmethods" role="doc-endnote">
+      <p>Here is a partial list of primarily GAN-based methods: <a href="https://arxiv.org/abs/1803.10892">Gupta et al. (2018)</a>, <a href="https://arxiv.org/abs/1806.01482">Sadeghian et al. (2019)</a>, <a href="https://arxiv.org/abs/1907.03395">Kosaraju et al. (2019)</a>. <a href="#fnref:ganmethods" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:discretez" role="doc-endnote">
+      <p>E.g., <a href="https://arxiv.org/abs/1611.01144">Jang et al. (2017)</a>, <a href="https://arxiv.org/abs/1611.00712">Maddison et al. (2017)</a>, <a href="https://arxiv.org/abs/1705.00470">Moerland et al. (2017)</a>. <a href="#fnref:discretez" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:trajectron" role="doc-endnote">
+      <p>Ivanovic and Pavone, <a href="https://arxiv.org/abs/1810.05993">The Trajectron: Probabilistic Multi-Agent Trajectory Modeling with Dynamic Spatiotemporal Graphs</a>, IEEE/CVF International Conference on Computer Vision (ICCV) 2019. <a href="#fnref:trajectron" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:unicycle" role="doc-endnote">
+      <p>For more information, see <a href="https://borrelli.me.berkeley.edu/pdfpub/IV_KinematicMPC_jason.pdf">Kong et al. (2015)</a> and <a href="https://arxiv.org/abs/1604.07446">Paden et al. (2016)</a>. <a href="#fnref:unicycle" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:tackling" role="doc-endnote">
+      <p>E.g., <a href="https://arxiv.org/abs/2003.07847">Weng et al. (2020)</a>, <a href="http://www.cs.toronto.edu/~wenjie/papers/cvpr19/nmp.pdf">Zeng et al. (2019)</a>. <a href="#fnref:tackling" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:equal" role="doc-endnote">
+      <p>* denotes equal contribution <a href="#fnref:equal" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/trajectory-forecasting/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/trajectory-forecasting/&text=Back+to+the+Future%3A+Planning-Aware+Trajectory+Forecasting+for+Autonomous+Driving%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/trajectory-forecasting/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/trajectory-forecasting/&title=Back+to+the+Future%3A+Planning-Aware+Trajectory+Forecasting+for+Autonomous+Driving%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/trajectory-forecasting/&title=Back+to+the+Future%3A+Planning-Aware+Trajectory+Forecasting+for+Autonomous+Driving%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Back+to+the+Future%3A+Planning-Aware+Trajectory+Forecasting+for+Autonomous+Driving%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/trajectory-forecasting/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#autonomous+driving">
+      <p><i class="fa fa-tag fa-fw"></i> autonomous driving</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#human-robot+interaction">
+      <p><i class="fa fa-tag fa-fw"></i> human-robot interaction</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#prediction">
+      <p><i class="fa fa-tag fa-fw"></i> prediction</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/cvpr-2020/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at CVPR 2020
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/acl-2020/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at ACL 2020
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

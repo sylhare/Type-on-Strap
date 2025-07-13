@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/controllable-fairness/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Controllable Fairness in Machine Learning | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Controllable Fairness in Machine Learning" />
+<meta name="author" content="<a href="http://pkalluri.github.io">Pratyusha Kalluri</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TLDR: How do we finely control the fairness of machine learning systems? In our AISTATS 2019 paper, we introduce a theoretically grounded method for learning controllable fair representations. Using our method, a party who is concerned with fairness (like a data collector, community organizer, or regulatory body) can convert data to representations with controllable limits on unfairness, then release only the representations. This controls how much downstream machine learning models can discriminate." />
+<meta property="og:description" content="TLDR: How do we finely control the fairness of machine learning systems? In our AISTATS 2019 paper, we introduce a theoretically grounded method for learning controllable fair representations. Using our method, a party who is concerned with fairness (like a data collector, community organizer, or regulatory body) can convert data to representations with controllable limits on unfairness, then release only the representations. This controls how much downstream machine learning models can discriminate." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/controllable-fairness/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/controllable-fairness/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-27T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Controllable Fairness in Machine Learning" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Controllable Fairness in Machine Learning","dateModified":"2019-05-27T00:00:00-07:00","datePublished":"2019-05-27T00:00:00-07:00","description":"TLDR: How do we finely control the fairness of machine learning systems? In our AISTATS 2019 paper, we introduce a theoretically grounded method for learning controllable fair representations. Using our method, a party who is concerned with fairness (like a data collector, community organizer, or regulatory body) can convert data to representations with controllable limits on unfairness, then release only the representations. This controls how much downstream machine learning models can discriminate.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/controllable-fairness/"},"url":"http://ai.stanford.edu/blog/controllable-fairness/","author":{"@type":"Person","name":"<a href=\"http://pkalluri.github.io\">Pratyusha Kalluri</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Controllable Fairness in Machine&nbsp;Learning | The Stanford AI Lab Blog</title>
+    <meta name="description" content="An overview of our AISTATS 2019 paper on learning controllable fair representations">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Controllable Fairness in Machine&nbsp;Learning">
+    
+    <meta name="twitter:description" content="An overview of our AISTATS 2019 paper on learning controllable fair representations">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-05-27-controllable-fairness/fair.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-05-27-controllable-fairness/fair.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Controllable Fairness in Machine&nbsp;Learning</h1>
+    <p class="meta">
+    <a href="http://pkalluri.github.io">Pratyusha Kalluri</a>
+    <div class="post-date">May 27, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <blockquote>
+  <p>TLDR: How do we finely control the fairness of machine learning systems? In our <a href="https://arxiv.org/abs/1812.04218">AISTATS 2019 paper</a>, we introduce a theoretically grounded method for learning <i>controllable fair representations</i>. Using our method, a party who is concerned with fairness (like a data collector, community organizer, or regulatory body) can convert data to representations with <em>controllable limits on unfairness</em>, then release only the representations. This controls how much downstream machine learning models can discriminate.</p>
+</blockquote>
+
+<!-- *An overview of our paper [Learning Controllable Fair Representations](https://arxiv.org/abs/1812.04218).* -->
+
+<p>Machine learning systems are increasingly used during high-stakes decisions, influencing credit scores, criminal sentences, and more. This raises an urgent question: <span><em>how do we ensure these systems do not discriminate based on race, gender, disability, or other minority status?</em></span> Many researchers have responded by introducing <em>fair machine learning models</em> that balance accuracy and fairness; but this leaves it up to institutions — corporations, governments, etc. — to choose to use these fair models, when some of these instutitions may be agnostic or even adversarial to fairness.</p>
+
+<p>Interestingly, some researchers have introduced methods for learning <em>fair representations</em> <sup id="fnref:madras" role="doc-noteref"><a href="#fn:madras" class="footnote">1</a></sup>. Using such methods, a party who is concerned with fairness (like a data collector, community organizer, or regulatory body) can convert data to fair representations, then release only the representations, making it much more difficult for any downstream machine learning models to discriminate.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-27-controllable-fairness/fair-repr-diagram.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-05-27-controllable-fairness/fair-repr-diagram.png" /></a></p>
+<figcaption>
+    The goal is to learn and release well-controlled fair representations of data, <br /> inhibiting downstream machine learning models from discriminating.
+</figcaption>
+</div></figure>
+<p><br /></p>
+
+<p><span style="background-color: gainsboro;"> <strong><em>In this post, we introduce a theoretically grounded approach to learning fair representations, and we discover that a range of existing methods are special cases of our approach.</em></strong> </span> Additionally, we note that all existing methods for learning fair representations can be said to <em>balance</em> usefulness and fairness, producing somewhat-useful-and-somewhat-fair representations. The concerned party must then run the learning process many times until they find representations they find satisfying. Based on our theoretical approach,<span style="background-color: gainsboro;"> <strong><em>we introduce a new method where the concerned party can control the fairness of representations by requesting specific limits on unfairness.</em></strong> </span>Compared to earlier fair representations, ours can be learned more quickly, are able to satisfy requests for many notions of fairness simultaneously, and contain more useful information.</p>
+
+<h3 id="a-theoretical-approach-to-fair-representations">A theoretical approach to fair representations</h3>
+
+<p>We assume we are given a set of data points (\(x\)), typically representing people, and their sensitive attributes (\(u\)), typically their race, gender, or other minority status. We must learn a model (\(q_\phi\)) mapping any data point to a new representation (\(z\)). Our goal is two-fold: our representations should be <span style="background-color:#b2e1ff">expressive</span> — containing plenty of useful information about the data point; and our representations should be <span style="background-color:#ffb77c">fair</span> — containing limited information about the sensititve attributes, so it is difficult to discriminate downstream <sup id="fnref:demographic_parity" role="doc-noteref"><a href="#fn:demographic_parity" class="footnote">2</a></sup>. Note that merely removing sensitive attributes (e.g. race) from the data would not satisfy this notion of fairness, as downstream machine learning models could then discriminate based on correlated features (e.g. zipcode) — a practice called “redlining”.</p>
+
+<p>First, we translate our goal into the information theoretical concept of <em>mutual information</em>. The mutual information between two variables is formally defined as the Kullback-Leibler divergence between the joint probability of the variables and the product of the marginal probabilities of the variables: \(I(u;v) = D_{KL}(P_{(u,v)}\mid\mid P_u \otimes P_v)\); intuitively, it’s the amount of information that is shared. Our goals can be made concrete as follows:</p>
+
+<ul>
+  <li><span style="background-color:#b2e1ff">To achieve expressiveness, we want to maximize the mutual information between the data point \(x\) and the representation \(z\) conditioned on the sensitive attributes \(u\): \(\max I(x;z \mid u)\).
+(By conditioning on the sensitive attributes, we make sure we do not encourage information in the data point that is correlated with the sensitive attributes to appear in our representation.)</span></li>
+  <li><span style="background-color:#ffb77c">To achieve fairness, we want to limit the mutual information between the representation \(z\) and the sensitive attributes \(u\): \(I(z;u)&lt;\epsilon\), where \(\epsilon\) has been set by the concerned party. </span></li>
+</ul>
+
+<p>Next, because both mutual information terms are difficult to optimize, we need to find approximations:</p>
+
+<ul>
+  <li><span style="background-color:#b2e1ff"> Instead of maximizing \(I(x;z \mid u)\), we maximize a lower bound \(-L_r \leq I(x;z \mid u)\), which relies on us introducing a new model \(p_\theta(x \mid z,u)\). Intuitively, maximizing \(-L_r\) encourages a mapping such that the new model \(p_\theta\) that takes the representation \(z\) plus the sensitive attributes \(u\) can successfully reconstruct the data point \(x\). </span></li>
+  <li><span style="background-color:#ffb77c"> Instead of constraining \(I(z;u)\), we can constrain an upper bound \(C_1 \geq I(z;u)\). Intuitively, constraining \(C_1\) discourages complex representations. </span><br /><br /> 
+<span style="background-color:#ffb77c"> <i>Or</i>, we can alternatively constrain \(C_2\), a tighter approximation of \(I(z;u)\), which relies on us introducing a new model \(p_\psi(u \mid z)\). Intuitively, constraining \(C_2\) discourages a mapping where the new model \(p_\psi\) that takes the representation \(z\) is able to reconstruct the sensitive attributes \(u\). </span></li>
+</ul>
+
+<p>Putting it all together, our final objective is to find the models \(q_\phi\), \(p_\theta\), and \(p_\psi\) that encourage the successful reconstruction of the data points, while constraining the complexity of the representations, and constraining the reconstruction of the sensitive attributes:</p>
+
+<!-- Putting it all together, our final objective is to find the model $$q_\phi$$ that minimizes (and along the way the model $$p_\theta$$ that minimizes and the adversarial model $$p_\psi$$ that maximizes) the following:
+ -->
+
+<div class="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: left">Our “hard-constrained” objective for learning fair representations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left">\(\min_{\theta,\phi}\max_{\psi}\) <span style="background-color:#b2e1ff">\(L_r\)</span> \(\text{s.t. }\) <span style="background-color:#ffb77c">\(C_1&lt; \epsilon_1\)</span>, <span style="background-color:#ffb77c">\(C_2&lt; \epsilon_2\)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>where \(\epsilon_1\) and \(\epsilon_2\) are limits that have been set by the concerned party.</p>
+
+<p>This gives us a principled approach to learning fair representations. And we are rewarded with a neat discovery: it turns out that a range of existing methods for learning fair representations optimize the dual — a “soft-regularized” version — of our objective!</p>
+
+<!-- <br>corresponding to our "hard-constrained" objective -->
+
+<div class="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">The “soft-regularized” loss function for learning fair representations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">\(\min_{\theta,\phi}\max_{\psi}\) <span style="background-color:#b2e1ff">\(L_r\)</span>\(+\)<span style="background-color:#ffb77c">\(\lambda_1 C_1\)</span>\(+\)<span style="background-color:#ffb77c">\(\lambda_2 C_2\)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p><br /></p>
+
+<div class="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Existing methods</th>
+        <th style="text-align: center">The <span style="background-color:#ffb77c">\(\lambda_1\)</span> they use</th>
+        <th style="text-align: center">The <span style="background-color:#ffb77c">\(\lambda_2\)</span> they use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">Zemel et al. 2013<sup id="fnref:zemel" role="doc-noteref"><a href="#fn:zemel" class="footnote">3</a></sup></td>
+        <td style="text-align: center">\(0\)</td>
+        <td style="text-align: center">\(A_z/A_x\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">Edwards and Storkey 2015<sup id="fnref:edwards" role="doc-noteref"><a href="#fn:edwards" class="footnote">4</a></sup></td>
+        <td style="text-align: center">\(0\)</td>
+        <td style="text-align: center">\(\alpha/\beta\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">Madras et al. 2018<sup id="fnref:madras2" role="doc-noteref"><a href="#fn:madras2" class="footnote">5</a></sup></td>
+        <td style="text-align: center">\(0\)</td>
+        <td style="text-align: center">\(\gamma/\beta\)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">Louizos et al. 2015<sup id="fnref:louizos" role="doc-noteref"><a href="#fn:louizos" class="footnote">6</a></sup></td>
+        <td style="text-align: center">\(1\)</td>
+        <td style="text-align: center">\(\beta\)</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>We see that our framework generalizes a range of existing methods!</p>
+
+<h3 id="learning-controllable-fair-representations">Learning controllable fair representations</h3>
+
+<!-- As we'll now see, our theoretical approach gets us a long way towards learning controllable fair representations.  -->
+<p>Let’s now take a closer look at the “soft-regularized” loss function. It should feel intuitive that existing methods for learning fair representations produce somewhat-useful-and-somewhat-fair representations, with the <i>balance between expressiveness and fairness</i> controlled by the choice of \(\lambda\)s. If only we could optimize our “hard-constrained” objective instead; then the concerned party could instead set \(\epsilon\) to request <i>specific limits on unfairness</i> . . .</p>
+
+<p>Luckily, there’s a way! We introduce:
+<!-- The trick is that we should minimize $$L_r$$, $$C_1$$, and $$C_2$$ (like the "soft-regularized" loss function), but whenever we are concerned about unfairness because $$C_1 > \epsilon_1$$  or $$C_2 > \epsilon_2$$, the $$\lambda$$s should place additional emphasis on the unsatisfied constraint until $$C_1$$ and $$C_2$$ return to satisfying the limits set by the concerned party. And wh, optimizing $$L_r$$ will be prioritized, encouraging expressive representations. --></p>
+
+<div class="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Our loss function for learning controllable fair representations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">\(\max_{\lambda \geq 0}\min_{\theta,\phi}\max_{\psi}\)<span style="background-color:#b2e1ff">\(L_r\)</span>\(+\)<span style="background-color:#ffb77c">\(\lambda_1 (C_1-\epsilon_1)\)</span>\(+\)<span style="background-color:#ffb77c">\(\lambda_2 (C_2-\epsilon_2)\)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>Intuitively, this loss function dictates that whenever we should be concerned about unfairness because \(C_1 &gt; \epsilon_1\)  or \(C_2 &gt; \epsilon_2\), the \(\lambda\)s will place additional emphasis on the unsatisfied constraint; this additional emphasis will persist until \(C_1\) and \(C_2\) return to satisfying the limits \(\epsilon\) set by the concerned party. The rest of the time, when \(C_1\) and \(C_2\) are safely within the limits, minimizing \(L_r\) will be prioritized, encouraging expressive representations.</p>
+
+<h3 id="results">Results</h3>
+
+<p>With this last piece of the puzzle in place, all that’s left to do is evaluate whether our theory leads to learning controllable fair representations in practice. To evaluate, we learn representations of three real-world datasets:</p>
+
+<ul>
+  <li>the UCI <span><strong>German</strong></span> credit dataset of 1,000 individuals, where the binary sensitive attribute <code class="language-plaintext highlighter-rouge">age&lt;50</code> / <code class="language-plaintext highlighter-rouge">age&gt;50</code> was to be protected</li>
+  <li>the UCI <strong>Adult</strong> dataset of 40,000 adults from the US Census, where the binary sensitive attribute <code class="language-plaintext highlighter-rouge">Man</code> / <code class="language-plaintext highlighter-rouge">Woman</code> was to be protected<sup id="fnref:binary_gender" role="doc-noteref"><a href="#fn:binary_gender" class="footnote">7</a></sup></li>
+  <li>and the Heritage <strong>Health</strong> dataset of 60,000 patients, where the sensitive attribute to be protected was the intersection of age and gender: the age-group (of 9 possible age-groups) \(\times\) the gender (<code class="language-plaintext highlighter-rouge">Man</code> / <code class="language-plaintext highlighter-rouge">Woman</code>)<sup id="fnref:binary_gender2" role="doc-noteref"><a href="#fn:binary_gender2" class="footnote">8</a></sup></li>
+</ul>
+
+<p>Sure enough, our results confirm that, in all three sets of learned representations, the concerned party’s choices for \(\epsilon_1\) and \(\epsilon_2\) control the approximations of unfairness \(C_1\)and \(C_2\).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-27-controllable-fairness/german_C.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-05-27-controllable-fairness/german_C.png" /></a>
+<a href="/blog/assets/img/posts/2019-05-27-controllable-fairness/adult_C.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-05-27-controllable-fairness/adult_C.png" /></a>
+<a href="/blog/assets/img/posts/2019-05-27-controllable-fairness/health_C.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-05-27-controllable-fairness/health_C.png" /></a></p>
+<figcaption>
+    For all three datasets, we learn representations such that <br /> C<sub>1</sub> &asymp; &straightepsilon;<sub>1</sub> is satisfied and C<sub>2</sub> &asymp; &straightepsilon;<sub>2</sub> is satisfied.
+</figcaption>
+</div></figure>
+<p><br /></p>
+
+<!-- These results demonstrate that we have done what we set out to do: we have introduced a method where the concerned party can control the fairness of representations by requesting specific limits on unfairness. -->
+
+<p>Our results also demonstrate that, compared to existing methods, our method can produce more expressive representations.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-27-controllable-fairness/expressiveness.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-05-27-controllable-fairness/expressiveness.png" /></a></p>
+<figcaption>
+    For a range of constraints &straightepsilon;<sub>2</sub>, our method (dark blue) <br /> learns more expressive representations than existing methods (light blue).
+</figcaption>
+</div></figure>
+<p><br /></p>
+
+<p>And our method is able to take care of many notions of fairness simultaneously.</p>
+
+<div class="center">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center"> </th>
+        <th style="text-align: center">\(I(x;z \mid u)\)</th>
+        <th style="text-align: center">\(C_1\)</th>
+        <th style="text-align: center">\(C_2\)</th>
+        <th style="text-align: center">\(I_{EO}\)</th>
+        <th style="text-align: center">\(I_{EOpp}\)</th>
+      </tr>
+      <tr>
+        <th style="text-align: center"> </th>
+        <th style="text-align: center">(higher is expressive)</th>
+        <th style="text-align: center">(lower is fairer)</th>
+        <th style="text-align: center">(lower is fairer)</th>
+        <th style="text-align: center">(lower is fairer)</th>
+        <th style="text-align: center">(lower is fairer)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center"><em>constraints</em></td>
+        <td style="text-align: center"> </td>
+        <td style="text-align: center"><em>&lt; 10</em></td>
+        <td style="text-align: center"><em>&lt; .1</em></td>
+        <td style="text-align: center"><em>&lt; .1</em></td>
+        <td style="text-align: center"><em>&lt; .1</em></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">our method</td>
+        <td style="text-align: center"><span style="background-color:#b2e1ff">9.94</span></td>
+        <td style="text-align: center"><span style="background-color:#ffecdd">9.95</span></td>
+        <td style="text-align: center"><span style="background-color:#ffb77c">0.08</span></td>
+        <td style="text-align: center"><span style="background-color:#ffb77c">0.09</span></td>
+        <td style="text-align: center"><span style="background-color:#ffb77c">0.04</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">existing methods</td>
+        <td style="text-align: center"><span style="background-color:#e8f6ff">9.34</span></td>
+        <td style="text-align: center"><span style="background-color:#ffb77c">9.39</span></td>
+        <td style="text-align: center"><span style="background-color:#ffecdd">0.09</span></td>
+        <td style="text-align: center"><span style="background-color:#ffecdd">0.10</span></td>
+        <td style="text-align: center"><span style="background-color:#ffecdd">0.07</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<figure class="figure"><div class="figure__main">
+<figcaption>
+    When learning representations of the Adult dataset that satisfy many fairness constraints (on demographic parity, equality of odds, and equality of opportunity), our method learns representations that are more expressive and are better on all but one measure of fairness.
+</figcaption>
+</div></figure>
+<p><br /></p>
+
+<!-- <span style="text-align: center;"><span style="color:green">&#8718;</span> Our loss function for learning controllable fair representations<br>
+<span style="color:blue">&#8718;</span> The "soft-regularized loss function for learning fair representations</span> -->
+
+<p>While these last two results may seem surprising, they occur because existing methods require the concerned party to run the learning process many times until they find representations they find <em>roughly</em> satisfying, while our method directly optimizes for the representations that are as expressive as possible while equally satisfying all of the concerned party’s limits on unfairness of the representations.</p>
+
+<h3 id="takeaways">Takeaways</h3>
+
+<p>To complement <em>fair machine learning models</em> that corporations and governments can choose to use, this work takes a step towards putting control of fair machine learning in the hands of a party concerned with fairness, such as a data collector, community organizer, or regulatory body. We contribute a theoretical approach to learning fair representations that make it much more difficult for downstream machine learning models to discriminate, and we contribute a new method that allows the concerned party to control the fairness of the representations by requesting specific limits on unfairness, \(\epsilon\).</p>
+
+<p>When working on fair machine learning, it is particularly important to acknowledge limitations and blind-spots; or we risk building toy solutions, while overshadowing others’ work towards equity. A major limitation of our work is that the concerned party’s \(\epsilon\) limits an <em>appoximation</em> of unfairness, and we hope that future work can go further and map \(\epsilon\) to formal guarantees about the fairness of downstream machine learning. Another potential limitation of this work is that we, like much of the fair machine learning community, center <em>demographic parity</em>, <em>equality of odds</em>, and <em>equality of opportunity</em> notions of fairness. We believe that future work will need to develop deeper connections to social-justice-informed notions of equity if it is to avoid shallow technosolutionism and build more equitable machine learning<sup id="fnref:onuoha" role="doc-noteref"><a href="#fn:onuoha" class="footnote">9</a></sup>.</p>
+
+<blockquote>
+  <p>This post is based on our AISTATS 2019 paper: <br />
+<a href="https://arxiv.org/abs/1812.04218">Learning Controllable Fair Representations</a> <br />
+Jiaming Song*, Pratyusha Kalluri*, Aditya Grover, Shengjia Zhao, Stefano Ermon<br /></p>
+</blockquote>
+
+<!-- ##### Footnotes -->
+<!-- * footnotes will be placed here. This line is necessary -->
+<!-- {:footnotes} -->
+
+<!-- ##### References -->
+<!-- = E_{q_\phi(x,z,u)}[\log p_\theta(x \mid z,u)]  -->
+<!-- = E_{q_\phi(x,u)}[D_{KL} (q_\phi(z \mid x,u)\mid\mid p(z))]  -->
+<!-- where $$D_{KL}$$ is the KL-divergence — roughly, a measure of the distance from the simple distribution $$p$$ to our model $$q_\phi$$.  -->
+<!-- = E_{q_\phi(z,u)}[\log p_\psi(u \mid z)/p(u)] \geq I(z;u) - \ell -->
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:madras" role="doc-endnote">
+      <p>Madras, David, Elliot Creager, Toniann Pitassi, and Richard Zemel. “Learning Adversarially Fair and Transferable Representations.” In ICML, 2018. <a href="#fnref:madras" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:demographic_parity" role="doc-endnote">
+      <p>For conciseness, we focus on <em>demographic parity</em>, a pretty intuitive and strict notion of fairness, but our approach works with many notions of fairness, as shown in our results. <a href="#fnref:demographic_parity" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:zemel" role="doc-endnote">
+      <p>Zemel, Rich, Yu Wu, Kevin Swersky, Toni Pitassi, and Cynthia Dwork. “Learning Fair Representations.” In ICML, 2013. <a href="#fnref:zemel" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:edwards" role="doc-endnote">
+      <p>Edwards, Harrison, and Amos Storkey. “Censoring Representations with an Adversary.” In ICLR, 2015. <a href="#fnref:edwards" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:madras2" role="doc-endnote">
+      <p>Madras, David, Elliot Creager, Toniann Pitassi, and Richard Zemel. “Learning Adversarially Fair and Transferable Representations.” In ICML, 2018. <a href="#fnref:madras2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:louizos" role="doc-endnote">
+      <p>Louizos, Christos, Kevin Swersky, Yujia Li, Max Welling, and Richard Zemel. “The Variational Fair Autoencoder.” In ICLR, 2016. <a href="#fnref:louizos" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:binary_gender" role="doc-endnote">
+      <p>Gender is not binary, and the treatment of gender as binary when using these datasets is problematic and a limitation of this work. <a href="#fnref:binary_gender" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:binary_gender2" role="doc-endnote">
+      <p>Gender is not binary, and the treatment of gender as binary when using these datasets is problematic and a limitation of this work. <a href="#fnref:binary_gender2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:onuoha" role="doc-endnote">
+      <p>For more on this, we strongly recommend reading “A People’s Guide to AI” by Mimi Onuoha and Mother Cyborg. Allied Media Projects. 2018. <a href="#fnref:onuoha" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/controllable-fairness/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/controllable-fairness/&text=Controllable+Fairness+in+Machine%26nbsp%3BLearning%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/controllable-fairness/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/controllable-fairness/&title=Controllable+Fairness+in+Machine%26nbsp%3BLearning%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/controllable-fairness/&title=Controllable+Fairness+in+Machine%26nbsp%3BLearning%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Controllable+Fairness+in+Machine%26nbsp%3BLearning%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/controllable-fairness/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#deep+learning">
+      <p><i class="fa fa-tag fa-fw"></i> deep learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#fairness">
+      <p><i class="fa fa-tag fa-fw"></i> fairness</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#parity">
+      <p><i class="fa fa-tag fa-fw"></i> parity</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#unsupervised+representation+learning">
+      <p><i class="fa fa-tag fa-fw"></i> unsupervised representation learning</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/generate-human-object/">
+      <p>Previous post</p>
+        Learning to Generate Human–Object Interactions
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/training-data-abstractions/">
+      <p>Next post</p>
+        Powerful Abstractions for Programmatically Building and Managing Training Sets
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

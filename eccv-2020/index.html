@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/eccv-2020/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at ECCV 2020 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at ECCV 2020" />
+<meta name="author" content="Compiled by <a href='https://ai.stanford.edu/~optas/'>Panos Achlioptas</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The European Conference on Computer Vision (ECCV) 2020 is being hosted virtually from August 23rd - 28th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford! List of Accepted Papers Contact and Human Dynamics from Monocular Video Authors: Davis Rempe, Leonidas J. Guibas, Aaron Hertzmann, Bryan Russell, Ruben Villegas, Jimei Yang Contact: drempe@stanford.edu Links: Paper | Video Keywords: 3d human pose, 3d human motion, pose estimation, dynamics, physics-based, contact, trajectory optimization, character animation, deep learning Curriculum DeepSDF Authors: Yueqi Duan, Haidong Zhu, He Wang, Li Yi, Ram Nevatia, Leonidas J. Guibas Contact: duanyq19@stanford.edu Links: Paper Keywords: shape representation, implicit function, deepsdf, curriculum learning Deformation-Aware 3D Model Embedding and Retrieval Authors: Mikaela Angelina Uy, Jingwei Huang, Minhyuk Sung, Tolga Birdal, Leonidas Guibas Contact: mikacuy@stanford.edu Links: Paper | Video Keywords: 3d model retrieval, deformation-aware embedding, non- metric embedding Generative Sparse Detection Networks for 3D Single-shot Object Detection Authors: JunYoung Gwak, Christopher Choy, Silvio Savarese Contact: jgwak@cs.stanford.edu Links: Paper | Video Keywords: single shot detection, 3d object detection, generative sparsenetwork, point cloud Learning 3D Part Assembly from A Single Image Authors: Yichen Li, Kaichun Mo, Lin Shao, Minhyuk Sung, Leonidas Guibas Contact: liyichen@cs.stanford.edu Links: Paper | Video Keywords: 3d vision, vision for robotics, 3d representation Learning Predictive Models From Observation and Interaction Authors: Karl Schmeckpeper, Annie Xie, Oleh Rybkin, Stephen Tian, Kostas Daniilidis, Sergey Levine, Chelsea Finn Contact: cbfinn@cs.stanford.edu Links: Paper | Video Keywords: video prediction, visual planning, action representations, robotic manipulation PT2PC: Learning to Generate 3D Point Cloud Shapes from Part Tree Conditions Authors: Kaichun Mo, He Wang, Xinchen Yan, Leonidas J. Guibas Contact: kaichunm@stanford.edu Links: Paper | Video Keywords: 3d vision and graphics, generative adversarial network, 3d point cloud Pix2Surf: Learning Parametric 3D Surface Models of Objects from Images Authors: Jiahui Lei, Srinath Sridhar, Paul Guerrero, Minhyuk Sung, Niloy Mitra, Leonidas J. Guibas Contact: lei_jiahui@zju.edu.cn, ssrinath@cs.stanford.edu Links: Paper | Video Keywords: 3d reconstruction, multi-view, single-view, parametrization Quaternion Equivariant Capsule Networks for 3D Point Clouds Authors: Yongheng Zhao, Tolga Birdal, Jan Eric Lenssen, Emanuele Menegatti, Leonidas Guibas, Federico Tombari Contact: tbirdal@stanford.edu Links: Paper Keywords: equivariance, 3d point clouds, quaternion, weiszfeld algorithm, capsule networks, dynamic routing, riemannian ReferIt3D: Neural Listeners for Fine-Grained 3D Object Identification in Real-World Scenes Authors: Panos Achlioptas, Ahmed Abdelreheem, Fei Xia, Mohamed Elhoseiny, Leonidas J. Guibas Contact: panos@cs.stanford.edu Links: Paper | Video Keywords: 3d neural-listeners, spatial relations, object identification, referential language Robust and On-the-fly Dataset Denoising for Image Classification Authors: Jiaming Song, Yann Dauphin, Michael Auli, Tengyu Ma Contact: tsong@cs.stanford.edu Links: Paper Keywords: web supervision, noisy labels, robust data denoising RubiksNet: Learnable 3D-Shift for Efficient Video Action Recognition Authors: Linxi Fan*, Shyamal Buch*, Guanzhi Wang, Ryan Cao, Yuke Zhu, Juan Carlos Niebles, Li Fei-Fei Contact: {jimfan,shyamal}@cs.stanford.edu Links: Paper | Video | Website Keywords: efficient action recognition, spatiotemporal, learnable shift, budget-constrained, video understanding Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data Authors: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone Contact: borisi@stanford.edu Links: Paper | Blog Post Keywords: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data Authors: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone Contact: borisi@stanford.edu Links: Paper | Blog Post Keywords: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving Procedure Planning in Instructional Videos Authors: Chein-Yi Chang, De-An Huang, Danfei Xu, Ehsan Adeli, Li Fei-Fei, Juan Carlos Niebles Contact: cy3@stanford.edu Links: Paper | Website Keywords: latent space planning, task planning, video understanding, representation for action and skill We look forward to seeing you at ECCV 2020!" />
+<meta property="og:description" content="The European Conference on Computer Vision (ECCV) 2020 is being hosted virtually from August 23rd - 28th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford! List of Accepted Papers Contact and Human Dynamics from Monocular Video Authors: Davis Rempe, Leonidas J. Guibas, Aaron Hertzmann, Bryan Russell, Ruben Villegas, Jimei Yang Contact: drempe@stanford.edu Links: Paper | Video Keywords: 3d human pose, 3d human motion, pose estimation, dynamics, physics-based, contact, trajectory optimization, character animation, deep learning Curriculum DeepSDF Authors: Yueqi Duan, Haidong Zhu, He Wang, Li Yi, Ram Nevatia, Leonidas J. Guibas Contact: duanyq19@stanford.edu Links: Paper Keywords: shape representation, implicit function, deepsdf, curriculum learning Deformation-Aware 3D Model Embedding and Retrieval Authors: Mikaela Angelina Uy, Jingwei Huang, Minhyuk Sung, Tolga Birdal, Leonidas Guibas Contact: mikacuy@stanford.edu Links: Paper | Video Keywords: 3d model retrieval, deformation-aware embedding, non- metric embedding Generative Sparse Detection Networks for 3D Single-shot Object Detection Authors: JunYoung Gwak, Christopher Choy, Silvio Savarese Contact: jgwak@cs.stanford.edu Links: Paper | Video Keywords: single shot detection, 3d object detection, generative sparsenetwork, point cloud Learning 3D Part Assembly from A Single Image Authors: Yichen Li, Kaichun Mo, Lin Shao, Minhyuk Sung, Leonidas Guibas Contact: liyichen@cs.stanford.edu Links: Paper | Video Keywords: 3d vision, vision for robotics, 3d representation Learning Predictive Models From Observation and Interaction Authors: Karl Schmeckpeper, Annie Xie, Oleh Rybkin, Stephen Tian, Kostas Daniilidis, Sergey Levine, Chelsea Finn Contact: cbfinn@cs.stanford.edu Links: Paper | Video Keywords: video prediction, visual planning, action representations, robotic manipulation PT2PC: Learning to Generate 3D Point Cloud Shapes from Part Tree Conditions Authors: Kaichun Mo, He Wang, Xinchen Yan, Leonidas J. Guibas Contact: kaichunm@stanford.edu Links: Paper | Video Keywords: 3d vision and graphics, generative adversarial network, 3d point cloud Pix2Surf: Learning Parametric 3D Surface Models of Objects from Images Authors: Jiahui Lei, Srinath Sridhar, Paul Guerrero, Minhyuk Sung, Niloy Mitra, Leonidas J. Guibas Contact: lei_jiahui@zju.edu.cn, ssrinath@cs.stanford.edu Links: Paper | Video Keywords: 3d reconstruction, multi-view, single-view, parametrization Quaternion Equivariant Capsule Networks for 3D Point Clouds Authors: Yongheng Zhao, Tolga Birdal, Jan Eric Lenssen, Emanuele Menegatti, Leonidas Guibas, Federico Tombari Contact: tbirdal@stanford.edu Links: Paper Keywords: equivariance, 3d point clouds, quaternion, weiszfeld algorithm, capsule networks, dynamic routing, riemannian ReferIt3D: Neural Listeners for Fine-Grained 3D Object Identification in Real-World Scenes Authors: Panos Achlioptas, Ahmed Abdelreheem, Fei Xia, Mohamed Elhoseiny, Leonidas J. Guibas Contact: panos@cs.stanford.edu Links: Paper | Video Keywords: 3d neural-listeners, spatial relations, object identification, referential language Robust and On-the-fly Dataset Denoising for Image Classification Authors: Jiaming Song, Yann Dauphin, Michael Auli, Tengyu Ma Contact: tsong@cs.stanford.edu Links: Paper Keywords: web supervision, noisy labels, robust data denoising RubiksNet: Learnable 3D-Shift for Efficient Video Action Recognition Authors: Linxi Fan*, Shyamal Buch*, Guanzhi Wang, Ryan Cao, Yuke Zhu, Juan Carlos Niebles, Li Fei-Fei Contact: {jimfan,shyamal}@cs.stanford.edu Links: Paper | Video | Website Keywords: efficient action recognition, spatiotemporal, learnable shift, budget-constrained, video understanding Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data Authors: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone Contact: borisi@stanford.edu Links: Paper | Blog Post Keywords: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data Authors: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone Contact: borisi@stanford.edu Links: Paper | Blog Post Keywords: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving Procedure Planning in Instructional Videos Authors: Chein-Yi Chang, De-An Huang, Danfei Xu, Ehsan Adeli, Li Fei-Fei, Juan Carlos Niebles Contact: cy3@stanford.edu Links: Paper | Website Keywords: latent space planning, task planning, video understanding, representation for action and skill We look forward to seeing you at ECCV 2020!" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/eccv-2020/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/eccv-2020/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-23T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at ECCV 2020" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Papers and Talks at ECCV 2020","dateModified":"2020-08-23T00:00:00-07:00","datePublished":"2020-08-23T00:00:00-07:00","description":"The European Conference on Computer Vision (ECCV) 2020 is being hosted virtually from August 23rd - 28th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford! List of Accepted Papers Contact and Human Dynamics from Monocular Video Authors: Davis Rempe, Leonidas J. Guibas, Aaron Hertzmann, Bryan Russell, Ruben Villegas, Jimei Yang Contact: drempe@stanford.edu Links: Paper | Video Keywords: 3d human pose, 3d human motion, pose estimation, dynamics, physics-based, contact, trajectory optimization, character animation, deep learning Curriculum DeepSDF Authors: Yueqi Duan, Haidong Zhu, He Wang, Li Yi, Ram Nevatia, Leonidas J. Guibas Contact: duanyq19@stanford.edu Links: Paper Keywords: shape representation, implicit function, deepsdf, curriculum learning Deformation-Aware 3D Model Embedding and Retrieval Authors: Mikaela Angelina Uy, Jingwei Huang, Minhyuk Sung, Tolga Birdal, Leonidas Guibas Contact: mikacuy@stanford.edu Links: Paper | Video Keywords: 3d model retrieval, deformation-aware embedding, non- metric embedding Generative Sparse Detection Networks for 3D Single-shot Object Detection Authors: JunYoung Gwak, Christopher Choy, Silvio Savarese Contact: jgwak@cs.stanford.edu Links: Paper | Video Keywords: single shot detection, 3d object detection, generative sparsenetwork, point cloud Learning 3D Part Assembly from A Single Image Authors: Yichen Li, Kaichun Mo, Lin Shao, Minhyuk Sung, Leonidas Guibas Contact: liyichen@cs.stanford.edu Links: Paper | Video Keywords: 3d vision, vision for robotics, 3d representation Learning Predictive Models From Observation and Interaction Authors: Karl Schmeckpeper, Annie Xie, Oleh Rybkin, Stephen Tian, Kostas Daniilidis, Sergey Levine, Chelsea Finn Contact: cbfinn@cs.stanford.edu Links: Paper | Video Keywords: video prediction, visual planning, action representations, robotic manipulation PT2PC: Learning to Generate 3D Point Cloud Shapes from Part Tree Conditions Authors: Kaichun Mo, He Wang, Xinchen Yan, Leonidas J. Guibas Contact: kaichunm@stanford.edu Links: Paper | Video Keywords: 3d vision and graphics, generative adversarial network, 3d point cloud Pix2Surf: Learning Parametric 3D Surface Models of Objects from Images Authors: Jiahui Lei, Srinath Sridhar, Paul Guerrero, Minhyuk Sung, Niloy Mitra, Leonidas J. Guibas Contact: lei_jiahui@zju.edu.cn, ssrinath@cs.stanford.edu Links: Paper | Video Keywords: 3d reconstruction, multi-view, single-view, parametrization Quaternion Equivariant Capsule Networks for 3D Point Clouds Authors: Yongheng Zhao, Tolga Birdal, Jan Eric Lenssen, Emanuele Menegatti, Leonidas Guibas, Federico Tombari Contact: tbirdal@stanford.edu Links: Paper Keywords: equivariance, 3d point clouds, quaternion, weiszfeld algorithm, capsule networks, dynamic routing, riemannian ReferIt3D: Neural Listeners for Fine-Grained 3D Object Identification in Real-World Scenes Authors: Panos Achlioptas, Ahmed Abdelreheem, Fei Xia, Mohamed Elhoseiny, Leonidas J. Guibas Contact: panos@cs.stanford.edu Links: Paper | Video Keywords: 3d neural-listeners, spatial relations, object identification, referential language Robust and On-the-fly Dataset Denoising for Image Classification Authors: Jiaming Song, Yann Dauphin, Michael Auli, Tengyu Ma Contact: tsong@cs.stanford.edu Links: Paper Keywords: web supervision, noisy labels, robust data denoising RubiksNet: Learnable 3D-Shift for Efficient Video Action Recognition Authors: Linxi Fan*, Shyamal Buch*, Guanzhi Wang, Ryan Cao, Yuke Zhu, Juan Carlos Niebles, Li Fei-Fei Contact: {jimfan,shyamal}@cs.stanford.edu Links: Paper | Video | Website Keywords: efficient action recognition, spatiotemporal, learnable shift, budget-constrained, video understanding Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data Authors: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone Contact: borisi@stanford.edu Links: Paper | Blog Post Keywords: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data Authors: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone Contact: borisi@stanford.edu Links: Paper | Blog Post Keywords: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving Procedure Planning in Instructional Videos Authors: Chein-Yi Chang, De-An Huang, Danfei Xu, Ehsan Adeli, Li Fei-Fei, Juan Carlos Niebles Contact: cy3@stanford.edu Links: Paper | Website Keywords: latent space planning, task planning, video understanding, representation for action and skill We look forward to seeing you at ECCV 2020!","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/eccv-2020/"},"url":"http://ai.stanford.edu/blog/eccv-2020/","author":{"@type":"Person","name":"Compiled by <a href='https://ai.stanford.edu/~optas/'>Panos Achlioptas</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at ECCV 2020 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at ECCV 2020, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at ECCV 2020">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at ECCV 2020, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-08-23-eccv-2020/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-08-23-eccv-2020/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at ECCV 2020</h1>
+    <p class="meta">
+    Compiled by <a href='https://ai.stanford.edu/~optas/'>Panos Achlioptas</a>
+    <div class="post-date">August 23, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/logo.png" /></p>
+
+<p>The <a href="https://eccv2020.eu/">European Conference on Computer Vision</a> (ECCV) 2020 is being hosted virtually from August 23rd - 28th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="contact-and-human-dynamics-from-monocular-video"><a href="https://geometry.stanford.edu/projects/human-dynamics-eccv-2020/content/contact-and-dynamics-2020.pdf">Contact and Human Dynamics from Monocular Video</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img6.png" />
+<strong>Authors</strong>: Davis Rempe, Leonidas J. Guibas, Aaron Hertzmann, Bryan Russell, Ruben Villegas, Jimei Yang
+<br /><strong>Contact</strong>: drempe@stanford.edu
+<br /><strong>Links:</strong> <a href="https://geometry.stanford.edu/projects/human-dynamics-eccv-2020/content/contact-and-dynamics-2020.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=qR9KW6JzXX4">Video</a>
+<br /><strong>Keywords</strong>: 3d human pose, 3d human motion, pose estimation, dynamics, physics-based, contact, trajectory optimization, character animation, deep learning</p>
+<hr />
+
+<h4 id="curriculum-deepsdf"><a href="https://arxiv.org/pdf/2003.08593.pdf">Curriculum DeepSDF</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img4.png" />
+<strong>Authors</strong>: Yueqi Duan, Haidong Zhu, He Wang, Li Yi, Ram Nevatia, Leonidas J. Guibas
+<br /><strong>Contact</strong>: duanyq19@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2003.08593.pdf">Paper</a>
+<br /><strong>Keywords</strong>: shape representation, implicit function, deepsdf, curriculum learning</p>
+<hr />
+
+<h4 id="deformation-aware-3d-model-embedding-and-retrieval"><a href="https://arxiv.org/pdf/2004.01228.pdf">Deformation-Aware 3D Model Embedding and Retrieval</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img2.png" />
+<strong>Authors</strong>: Mikaela Angelina Uy, Jingwei Huang, Minhyuk Sung, Tolga Birdal, Leonidas Guibas
+<br /><strong>Contact</strong>: mikacuy@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2004.01228.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=u_8DJ06SQdw&amp;t">Video</a>
+<br /><strong>Keywords</strong>: 3d model retrieval, deformation-aware embedding, non- metric embedding</p>
+<hr />
+
+<h4 id="generative-sparse-detection-networks-for-3d-single-shot-object-detection"><a href="https://arxiv.org/abs/2006.12356">Generative Sparse Detection Networks for 3D Single-shot Object Detection</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img11.png" />
+<strong>Authors</strong>: JunYoung Gwak, Christopher Choy, Silvio Savarese
+<br /><strong>Contact</strong>: jgwak@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2006.12356">Paper</a> | <a href="https://www.youtube.com/watch?v=g8UqlJZVnFo">Video</a>
+<br /><strong>Keywords</strong>: single shot detection, 3d object detection, generative sparsenetwork, point cloud</p>
+<hr />
+
+<h4 id="learning-3d-part-assembly-from-a-single-image"><a href="https://arxiv.org/abs/2003.09754">Learning 3D Part Assembly from A Single Image</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img5.png" />
+<strong>Authors</strong>: Yichen Li, Kaichun Mo, Lin Shao, Minhyuk Sung, Leonidas Guibas
+<br /><strong>Contact</strong>: liyichen@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.09754">Paper</a> | <a href="https://youtu.be/gtaBaEAs22s">Video</a>
+<br /><strong>Keywords</strong>: 3d vision, vision for robotics, 3d representation</p>
+<hr />
+
+<h4 id="learning-predictive-models-from-observation-and-interaction"><a href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650698.pdf">Learning Predictive Models From Observation and Interaction</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img3.png" />
+<strong>Authors</strong>: Karl Schmeckpeper, Annie Xie, Oleh Rybkin, Stephen Tian, Kostas Daniilidis, Sergey Levine, Chelsea Finn
+<br /><strong>Contact</strong>: cbfinn@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650698.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=jWbwh4uZFgU&amp;feature=emb_title">Video</a>
+<br /><strong>Keywords</strong>: video prediction, visual planning, action representations, robotic manipulation</p>
+<hr />
+
+<h4 id="pt2pc-learning-to-generate-3d-point-cloud-shapes-from-part-tree-conditions"><a href="https://arxiv.org/abs/2003.08624">PT2PC: Learning to Generate 3D Point Cloud Shapes from Part Tree Conditions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img7.png" />
+<strong>Authors</strong>: Kaichun Mo, He Wang, Xinchen Yan, Leonidas J. Guibas
+<br /><strong>Contact</strong>: kaichunm@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.08624">Paper</a> | <a href="https://www.youtube.com/watch?v=GZGxaFx-kgw">Video</a>
+<br /><strong>Keywords</strong>: 3d vision and graphics, generative adversarial network, 3d point cloud</p>
+<hr />
+
+<h4 id="pix2surf-learning-parametric-3d-surface-models-of-objects-from-images"><a href="https://geometry.stanford.edu/projects/pix2surf/pub/pix2surf.pdf">Pix2Surf: Learning Parametric 3D Surface Models of Objects from Images</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img1.jpg" />
+<strong>Authors</strong>: Jiahui Lei, Srinath Sridhar, Paul Guerrero, Minhyuk Sung, Niloy Mitra, Leonidas J. Guibas
+<br /><strong>Contact</strong>: lei_jiahui@zju.edu.cn, ssrinath@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://geometry.stanford.edu/projects/pix2surf/pub/pix2surf.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=jaxB0VSuvms">Video</a>
+<br /><strong>Keywords</strong>: 3d reconstruction, multi-view, single-view, parametrization</p>
+<hr />
+
+<h4 id="quaternion-equivariant-capsule-networks-for-3d-point-clouds"><a href="https://arxiv.org/pdf/1912.12098.pdf">Quaternion Equivariant Capsule Networks for 3D Point Clouds</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img0.png" />
+<strong>Authors</strong>: Yongheng Zhao, Tolga Birdal, Jan Eric Lenssen, Emanuele Menegatti, Leonidas Guibas, Federico Tombari
+<br /><strong>Contact</strong>: tbirdal@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/1912.12098.pdf">Paper</a>
+<br /><strong>Keywords</strong>: equivariance, 3d point clouds, quaternion, weiszfeld algorithm, capsule networks, dynamic routing, riemannian</p>
+<hr />
+
+<h4 id="referit3d-neural-listeners-for-fine-grained-3d-object-identification-in-real-world-scenes"><a href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123460409.pdf">ReferIt3D: Neural Listeners for Fine-Grained 3D Object Identification in Real-World Scenes</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img12.png" />
+<strong>Authors</strong>: Panos Achlioptas, Ahmed Abdelreheem, Fei Xia, Mohamed Elhoseiny, Leonidas J. Guibas
+<br /><strong>Contact</strong>: panos@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123460409.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=yEdf24hF_sY&amp;feature=emb_logo">Video</a>
+<br /><strong>Keywords</strong>: 3d neural-listeners, spatial relations, object identification, referential language</p>
+<hr />
+
+<h4 id="robust-and-on-the-fly-dataset-denoising-for-image-classification"><a href="https://arxiv.org/abs/2003.10647">Robust and On-the-fly Dataset Denoising for Image Classification</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img9.jpg" />
+<strong>Authors</strong>: Jiaming Song, Yann Dauphin, Michael Auli, Tengyu Ma
+<br /><strong>Contact</strong>: tsong@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.10647">Paper</a>
+<br /><strong>Keywords</strong>: web supervision, noisy labels, robust data denoising</p>
+<hr />
+
+<h4 id="rubiksnet-learnable-3d-shift-for-efficient-video-action-recognition"><a href="https://stanfordvl.github.io/rubiksnet-site/assets/eccv20.pdf">RubiksNet: Learnable 3D-Shift for Efficient Video Action Recognition</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img10.png" />
+<strong>Authors</strong>: Linxi Fan*, Shyamal Buch*, Guanzhi Wang, Ryan Cao, Yuke Zhu, Juan Carlos Niebles, Li Fei-Fei
+<br /><strong>Contact</strong>: {jimfan,shyamal}@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://stanfordvl.github.io/rubiksnet-site/assets/eccv20.pdf">Paper</a> | <a href="https://youtu.be/3alaXltwEWw">Video</a> | <a href="https://rubiksnet.stanford.edu">Website</a>
+<br /><strong>Keywords</strong>: efficient action recognition, spatiotemporal, learnable shift, budget-constrained, video understanding</p>
+<hr />
+
+<h4 id="trajectron-dynamically-feasible-trajectory-forecasting-with-heterogeneous-data"><a href="https://arxiv.org/abs/2001.03093">Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img8.png" />
+<strong>Authors</strong>: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone 
+<br /><strong>Contact</strong>: borisi@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2001.03093">Paper</a> | <a href="https://ai.stanford.edu/blog/trajectory-forecasting/">Blog Post</a> 
+<br /><strong>Keywords</strong>: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving</p>
+<h4 id="trajectron-dynamically-feasible-trajectory-forecasting-with-heterogeneous-data-1"><a href="https://arxiv.org/abs/2001.03093">Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img8.png" />
+<strong>Authors</strong>: Tim Salzmann*, Boris Ivanovic*, Punarjay Chakravarty, Marco Pavone 
+<br /><strong>Contact</strong>: borisi@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2001.03093">Paper</a> | <a href="https://ai.stanford.edu/blog/trajectory-forecasting/">Blog Post</a> 
+<br /><strong>Keywords</strong>: trajectory forecasting, spatiotemporal graph modeling, human-robot interaction, autonomous driving</p>
+<h4 id="procedure-planning-in-instructional-videos"><a href="https://arxiv.org/abs/1907.01172">Procedure Planning in Instructional Videos</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-08-23-eccv-2020/img13.png" />
+<strong>Authors</strong>: Chein-Yi Chang, De-An Huang, Danfei Xu, Ehsan Adeli, Li Fei-Fei, Juan Carlos Niebles
+<br /><strong>Contact</strong>: cy3@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1907.01172">Paper</a> | <a href="http://ai.stanford.edu/~cy3/publication/ppiv">Website</a> 
+<br /><strong>Keywords</strong>: latent space planning, task planning, video understanding, representation for action and skill</p>
+
+<hr />
+
+<p>We look forward to seeing you at ECCV 2020!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/eccv-2020/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/eccv-2020/&text=Stanford+AI+Lab+Papers+and+Talks+at+ECCV+2020%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/eccv-2020/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/eccv-2020/&title=Stanford+AI+Lab+Papers+and+Talks+at+ECCV+2020%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/eccv-2020/&title=Stanford+AI+Lab+Papers+and+Talks+at+ECCV+2020%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+ECCV+2020%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/eccv-2020/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ECCV">
+      <p><i class="fa fa-tag fa-fw"></i> ECCV</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#vision">
+      <p><i class="fa fa-tag fa-fw"></i> vision</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/icml-2020/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at ICML 2020
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/meta-exploration/">
+      <p>Next post</p>
+        Explore then Execute: Adapting without Rewards via Factorized Meta-Reinforcement Learning
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

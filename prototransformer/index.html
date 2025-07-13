@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/responsive.css"> 
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/prototransformer/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Meta-Learning Student Feedback to 16,000 Solutions | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Meta-Learning Student Feedback to 16,000 Solutions" />
+<meta name="author" content="<a href="https://www.mikehwu.com/">Mike Wu</a>, <a href="https://stanford.edu/~cpiech/bio/index.html">Chris Piech</a>, and <a href="https://ai.stanford.edu/~cbfinn/">Chelsea Finn</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[July 20, 2021] Our work was recently covered by the New York Times here. You can also find a technical preprint here." />
+<meta property="og:description" content="[July 20, 2021] Our work was recently covered by the New York Times here. You can also find a technical preprint here." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/prototransformer/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/prototransformer/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Meta-Learning Student Feedback to 16,000 Solutions" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Meta-Learning Student Feedback to 16,000 Solutions","dateModified":"2021-07-20T00:00:00-07:00","datePublished":"2021-07-20T00:00:00-07:00","description":"[July 20, 2021] Our work was recently covered by the New York Times here. You can also find a technical preprint here.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/prototransformer/"},"url":"http://ai.stanford.edu/blog/prototransformer/","author":{"@type":"Person","name":"<a href=\"https://www.mikehwu.com/\">Mike Wu</a>, <a href=\"https://stanford.edu/~cpiech/bio/index.html\">Chris Piech</a>, and <a href=\"https://ai.stanford.edu/~cbfinn/\">Chelsea Finn</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Meta-Learning Student Feedback to 16,000 Solutions | The Stanford AI Lab Blog</title>
+    <meta name="description" content="A meta-learning system for automatic feedback to student code education with applications to university level courses and a large scale online learning platf...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Meta-Learning Student Feedback to 16,000 Solutions">
+    
+    <meta name="twitter:description" content="A meta-learning system for automatic feedback to student code education with applications to university level courses and a large scale online learning platform.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-07-20-prototransformer/main.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-07-20-prototransformer/main.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Meta-Learning Student Feedback to 16,000 Solutions</h1>
+    <p class="meta">
+    <a href="https://www.mikehwu.com/">Mike Wu</a>, <a href="https://stanford.edu/~cpiech/bio/index.html">Chris Piech</a>, and <a href="https://ai.stanford.edu/~cbfinn/">Chelsea Finn</a>
+    <div class="post-date">July 20, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><strong>[July 20, 2021]</strong> <em>Our work was recently covered by the New York Times <a href="https://www.nytimes.com/2021/07/20/technology/ai-education-neural-networks.html">here</a>. You can also find a technical preprint <a href="https://drive.google.com/file/d/1BPzSmk01mtLG8bVQxOzBUdqGqqu7Vk3R/view?usp=sharing">here</a>.</em></p>
+
+<p><strong>tl;dr.</strong>
+With the rise of large online computer science courses, there
+is an abundance of high-quality content. At the same time, the sheer
+size of these courses makes high-quality feedback to student work more
+and more difficult. Talk to any educator, and they will tell you how
+instrumental instructor feedback is to a student’s learning process.
+Unfortunately, giving personalized feedback isn’t cheap: for a large
+online coding course, this could take months of labor. Today, large
+online courses either don’t offer feedback at all or take shortcuts that
+sacrifice the quality of the feedback given.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image4.png" /></p>
+</div></figure>
+<p>Several computational approaches have been proposed to automatically
+produce personalized feedback, but each falls short: they either require
+too much upfront work by instructors or are limited to very simple
+assignments. A scalable algorithm for feedback to student code that
+works for university-level content remains to be seen. Until now, that
+is. In a recent paper, we proposed a new AI system based on
+meta-learning that trains a neural network to ingest student code and
+output feedback. Given a new assignment, this AI system can quickly
+adapt with little instructor work. On a dataset of student solutions to
+Stanford’s CS106A exams, we found the AI system to match human
+instructors in feedback quality.  </p>
+
+<p>To test the approach in a real-world setting, we deployed the AI system
+at Code in Place 2021, a large online computer science course spun out
+of Stanford with over 12,000 students, to provide feedback to an
+end-of-course diagnostic assessment. The students’ reception to the
+feedback was overwhelmingly positive: across 16,000 pieces of feedback
+given, students agreed with the AI feedback 97.9% of the time, compared
+to 96.7% agreement to feedback provided by human instructors. This is,
+to the best of our knowledge, the first successful deployment of machine
+learning based feedback to open-ended student work.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image10.png" /></p>
+</div></figure>
+
+<p>In the middle of the pandemic, while everyone is forced to social
+distance in the confines of their own homes, thousands of people across
+the world were hard at work figuring out why their code was stuck in an
+infinite loop.  Stanford CS106A, one of the university’s most popular
+courses and its largest introductory programming offering with nearly
+1,600 students every year, grew even bigger.  Dubbed <a href="https://codeinplace.stanford.edu">Code in Place</a>,
+CS106A instructors Chris Piech, Mehran Sahami and Julie Zelenski wanted
+to make the curriculum and teaching philosophy of CS106A publicly
+available as an uplifting learning experience for students and adults
+alike during a difficult time. In its inaugural showing in April ‘20,
+Code in Place pulled together 908 volunteer teachers to run an online
+course for 10,428 students from around the world. One year later, with
+the pandemic still in full force in many areas of the world, Code in
+Place kicked off again, growing to over 12,000 students and 1,120
+volunteer teachers.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image3.png" /></p>
+<figcaption>Heatmap of the population of students for Code in Place '20.
+</figcaption>
+</div></figure>
+
+<p>While crowd-sourcing a teaching team did make a lot of things possible
+for Code in Place that usual online courses lack, there are still limits
+to what can be done with a class of this scale.  In particular, one of
+the most challenging hurdles was providing <strong>high-quality feedback</strong> to
+10,000 students.</p>
+
+<h2 id="what-is-feedback">What is feedback?</h2>
+<p>Everyone knows high quality content is an important
+ingredient for learning, but another equally important but more subtle
+ingredient is getting high quality feedback. Knowing the breakdown of
+what you did well and what the areas for improvement are, is fundamental
+to understanding.  Think back to when you first got started programming:
+for me, small errors that might be obvious to someone more experienced,
+cause a lot of frustration. This is where feedback comes in, helping
+students overcome this initial hurdle with instructor guidance.
+Unfortunately, feedback is something online code education has struggled
+with. With popular “massively open online courses” (MOOCs), feedback on
+student code boils down to compiler error messages, standardized
+tooltips, or multiple-choice quizzes.</p>
+
+<p>You can find an example of each below. On the left, multiple choice
+quizzes are simple to grade and can easily assign numeric scores to
+student work. However, feedback is limited to showing the right answer,
+which does little to help students understand their underlying
+misconceptions. The middle picture shows an example of an opaque
+compiler error complaining about a syntax issue. As a beginner learning
+to code, error messages are very intimidating and difficult to
+interpret. Finally, on the right, we see an example of a standardized
+tooltip: upon making a mistake, a pre-specified message is shown.
+Pre-specified messages tend to be very vague: here, the tooltip just
+tells us our solution is wrong and to try something different.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image6.png" /></p>
+<figcaption>Examples of student feedback in three different MOOCS.</figcaption>
+</div></figure>
+
+<p>It makes a lot of sense why MOOCs settle for subpar feedback: it’s
+really difficult to do otherwise! Even for Stanford CS106A, the teaching
+team is constantly fighting the clock in office hours in an attempt to
+help everyone. Outside of Stanford, where classes may be more
+understaffed, instructors are already unable to provide this level of
+individualized support. With large online courses, the sheer size makes
+any hope of providing feedback unimaginable. Last year, Code in Place
+gave a diagnostic assessment during the course for students to summarize
+what they have learned. However, there was no way to give feedback
+scalably to all these student solutions. The only option was to release
+the correct solutions online for students to compare to their own work,
+displacing the burden of feedback onto the students.</p>
+
+<p>Code in Place and its MOOC cousins are examples of a trend of education
+moving online, which might only grow given the lasting effects of the
+pandemic. This shift surfaces a very important challenge: can we provide
+feedback at scale?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image5.png" /></p>
+<figcaption>
+A coding exercise on Code.org. There are four blocks to choose from to assemble a program.
+</figcaption>
+</div></figure>
+
+<h2 id="the-feedback-challenge">The feedback challenge.</h2>
+
+<p>In 2014, Code.org, one
+of the largest online platforms for code education, launched an
+initiative to crowdsource thousands of instructors to provide feedback
+to student solutions [1,2]. The hope of the initiative was to tag enough
+student solutions with feedback so that for a new student, Code.org
+could automatically provide feedback by matching the student’s solution
+to a bank of solutions already annotated with feedback by an instructor.
+Unfortunately, Code.org quickly found that even after thousands of
+aggregate hours spent providing feedback, instructors were only
+scratching the surface. New students were constantly coming up with new
+mistakes and new strategies. The initiative was cancelled after two
+years and has not been reproduced since.  </p>
+
+<p>We might ask: why did this happen? What is it about feedback that makes
+it so difficult to scale? In our research, we came up with two parallel
+explanations.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image7.png" /></p>
+<figcaption>
+Distribution of student solutions in four settings: block programs (Code.org), free response (Power), CS1 university assignments (Liftoff and Pyramid). The dotted line represents a Zipf distribution.
+</figcaption>
+</div></figure>
+
+<p>First, <strong>providing feedback to student code is hard work</strong>.  As an
+instructor, every student solution requires me to reason about the
+student’s thought process to uncover what misconceptions they might have
+had. If you have ever had to debug someone else’s code, providing
+feedback is at least as hard as that. In a previous <a href="https://arxiv.org/abs/1809.01357">research paper</a>, we found that producing
+feedback for only 800 block-based programs took a teaching team a
+collective 24.9 hours. If we were to do that for all of Code in Place,
+it would take 8 months of work.</p>
+
+<p>Second, <strong>students approach the same programming problem in an exponential
+number of ways</strong>. Almost every new student solution will be unique, and a
+single misconception can manifest itself in seemingly infinite ways. As
+a concrete example, even after seeing a million solutions to a Code.org
+problem, there is still a 15% chance that a new student generates a
+solution never seen before. Perhaps not coincidentally, it turns out the
+distribution of student code closely follows the famous Zipf
+distribution, which reveals an extremely “long tail” of rare solutions
+that only one student will ever submit. Moreover, this close
+relationship to Zipf doesn’t just apply to Code.org; it is a much more
+general phenomenon. We see similar patterns for student work for
+university level programming assignments in Python and Java, as well as
+free response solutions to essay-like prompts.</p>
+
+<p>So, if asking instructors to manually provide feedback at scale is
+nearly impossible, what else can we do?</p>
+
+<h2 id="automating-feedback-">Automating feedback.  </h2>
+
+<p>“If humans can’t do it, maybe machines
+can” (famous last words).  After all, machines process information a lot
+faster than humans do. There have been several approaches applying
+computational techniques to provide feedback, the simplest of which is
+unit tests. An instructor can write a collection of unit tests for the
+core concepts and use them to evaluate student solutions. However, unit
+tests expect student code to compile and, often, student code does not
+due to errors. If we wish to give feedback on partially complete
+solutions, we need to be able to handle non-compiling code. Given the
+successes of AI and deep learning in computer vision and natural
+language, there have been attempts of designing AI systems to
+automatically provide feedback, even when student code does not compile.</p>
+
+<h3 id="supervised-learning">Supervised Learning</h3>
+<p>Given a dataset of student code, we can ask an
+instructor to provide feedback for each of the solutions, creating a
+labeled dataset. This can be used to train a deep learning model to
+predict feedback for a new student solution.  While this is great in
+theory, in practice, compiling a sufficiently large and diverse dataset
+is difficult.  In machine learning, we are accustomed to datasets with
+millions of labeled examples since annotating an image is both cheap and
+requires no domain knowledge.  On the other hand, annotating student
+code with feedback is both time-consuming and needs expertise, limiting
+datasets to be a few thousand examples in size.  Given the Zipf-like
+nature of student code, it is very unlikely that a dataset of this size
+can capture all the different ways students approach a problem. This is
+reflected in practice as supervised attempts perform poorly on new
+student solutions.</p>
+
+<h3 id="generative-grading">Generative Grading</h3>
+
+<p>While annotating student code is difficult work,
+instructors are really good at thinking about how students would tackle
+a coding problem and what mistakes they might make along the way.
+Generative grading [2,3] asks instructors to distill this intuition
+about student cognition into an algorithm called a probabilistic
+grammar. Instructors specify what misconceptions a student might make
+and how that translates to code. For example, if a student forgets a
+stopping criterion resulting in an infinite loop, their program likely
+contains a “while” statement with no “break” condition. Given such an
+algorithm, we can run it forward to generate a full student solution
+with all misconceptions already labeled. Doing this repeatedly, we
+curate a large dataset to train a supervised model. This approach was
+very successful on block-based code, where performance rivaled human
+instructors.  However, the success of it hinges on a good algorithm.
+While tractable for block-based programs, it became exceedingly
+difficult to build a good algorithm for university level assignments
+where student code is much more complex.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image8.png" /></p>
+<figcaption>
+The supervised approach requires the instructor to curate a dataset of student solutions with feedback where as the generative grading approach requires the instructor to build an algorithm to generate annotated data. In contrast, the meta-learning approach requires the instructor to annotate feedback for K examples across N programming problems. K is typically very small (~10) and N not much larger (~100).
+</figcaption>
+</div></figure>
+
+<p>The supervised approach requires the instructor to curate a dataset of
+student solutions with feedback where as the generative grading approach
+requires the instructor to build an algorithm to generate annotated
+data. In contrast, the meta-learning approach requires the instructor to
+annotate feedback for K examples across N programming problems. K is
+typically very small (~10) and N not much larger (~100).</p>
+
+<h2 id="meta-learning-how-to-give-feedback">Meta-learning how to give feedback.</h2>
+
+<p>So far, neither approach is quite
+right. In different ways, supervised learning and generative grading
+both expect too much from the instructor. As they stand, for every new
+coding exercise, the instructor would have to put in days, if not weeks
+to months of effort. In an ideal world, we would shift more of the
+burden of feedback onto the AI system. While we would still like
+instructors to play a role, the AI system should bear the onus of
+quickly adapting to every new exercise. To accomplish this, we built an
+AI system to “learn how to learn” to give feedback.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image2.png" /></p>
+<figcaption>
+An example rubric used to provide feedback for a string insertion task.
+</figcaption>
+</div></figure>
+
+<p>Meta-learning is an old idea from the 1990s [9, 10] that has seen a
+resurgence in the last five years. Recall that in supervised learning a
+model is trained to solve a single task; in meta-learning, we solve many
+tasks at once. The catch is that we are limited to a handful of labeled
+examples for every task. Whereas supervised learning gets lots of labels
+for one task, we spread the annotation effort evenly across many tasks,
+leaving us with a few labels per task. In research literature, this is
+called the few-shot classification problem. The upside to meta-learning
+is that after training, if your model is presented with a new task that
+it has not seen before, it can quickly adapt to solve it with only a
+“few shots” (i.e., a few annotations from the new task).</p>
+
+<p>So, <strong>what does meta-learning for feedback look like?</strong> To answer that, we
+first need to describe what composes a “task” in the world of
+educational feedback. Last year, we compiled a dataset of student
+solutions from eight CS106A exams collected over the last three academic
+years.  Each exam consists of four to six programming exercises in which
+the student must write code (but is unable to run or compile it for
+testing). Every student solution is annotated by an instructor using a
+<strong>feedback rubric</strong> containing a list of misconceptions tailored to a single
+problem. As an example, consider a coding exercise that asks the student
+to write a Python program that requires string insertion. A potential
+feedback rubric is shown in the left image: possible misconceptions are
+inserting at the wrong location or inserting the wrong string. So, we
+can treat every misconception as its own task. The string insertion
+example would comprise of four tasks.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image9.png" /></p>
+<figcaption>
+Examples of predictions made by the AI system.
+</figcaption>
+</div></figure>
+
+<p>One of the key ideas of this approach is to frame
+the <strong>feedback challenge as a few-shot classification problem</strong>. Remember
+that the reasons why previous methods for automated feedback struggled
+were the (1) high cost of annotation and (2) diversity of student
+solutions. Casting feedback as a few-shot problem cleverly circumvents
+both challenges. First, meta-learning can leverage previous data on old
+exams to learn to provide feedback to a new exercise with very little
+upfront cost. We only need to label a few examples for the new exercise
+to adapt the meta-learner and importantly, do not need to train a new
+model from scratch. Second, there are two ways to handle diversity: you
+can go for “depth” by training on a lot of student solutions for a
+single problem to see different strategies, or you can go for “breadth”
+and get sense of diverse strategies through student solutions on a lot
+of different problems. Meta-learning focuses its efforts on capturing
+“breadth”, accumulating more generalizable knowledge that can be shared
+across problems.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image1.png" /></p>
+<figcaption>
+Comparison of the average precision of the meta-learner to human instructors and a supervised baseline.
+</figcaption>
+</div></figure>
+
+<p>We will leave the details of the meta-learner to the technical report.
+In short, we propose a new deep neural network called a <strong>ProtoTransformer
+Network</strong> that combines the strengths of BERT from natural language
+processing and Prototypical Networks from few-shot learning literature.
+This architecture, in tandem with technical innovations – creating
+synthetic tasks for code, self-supervised pretraining on unlabeled code,
+careful encoding of variable and function names, and adding question and
+rubric descriptions as side information – together produce a highly
+performant AI system for feedback. To help ground this in context, we
+include three examples on the bottom of the last page of the AI system
+predicting feedback to student code. The predictions were taken from
+actual model output on student submissions.</p>
+
+<h3 id="main-results">Main Results</h3>
+<p>Aside from looking at qualitative examples, we can
+measure its performance quantitatively by evaluating the correctness of
+the feedback an AI system gave on exercises not used in training. A
+piece of feedback is considered correct if a human instructor annotated
+the student solution with it.</p>
+
+<p>We consider two experimental settings for evaluation:</p>
+
+<ul>
+  <li>
+    <p><strong>Held-out Questions</strong>: we randomly pick 10% of questions across all exams
+to evaluate the meta-learner. This simulates instructors providing
+feedback for part of every exam, leaving a few questions for the AI to
+give feedback for.</p>
+  </li>
+  <li>
+    <p><strong>Held-out Exams</strong>: we hold out an entire exam for evaluation. This is a
+much harder setting as we know nothing about the new exam but also most
+faithfully represents an autonomous feedback system.</p>
+  </li>
+</ul>
+
+<p>We measure the performance of human instructors by asking several
+teaching assistants to grade the same student solution and recording
+agreement. We also compare the meta-learner to a supervised baseline. As
+shown in the graph on the previous page, the meta-learner outperforms
+the supervised baseline by up to 24 percentage points, showcasing the
+utility of meta-learning. More surprisingly, we find that the
+meta-learner surpasses human performance by 6% in held-out questions.
+ However, there is still room for improvement as we fall short 8% to
+human performance on held-out exams – a harder challenge. Despite this,
+we find these results encouraging: previous methods for feedback could
+not handle the complexity of university assignments, let alone approach,
+or match the performance of instructors.</p>
+
+<h2 id="automated-feedback-for-code-in-place">Automated feedback for Code in Place.</h2>
+<p>Taking a step back, we began
+with the challenge of feedback, an important ingredient to a student’s
+learning process that is frustratingly difficult to scale, especially
+for large online courses. Many attempts have been made towards this,
+some based on crowdsourcing human effort and others based on
+computational approaches with and without AI, but all of which have
+faced roadblocks. In late May ‘21, we built and tested an approach based
+on meta-learning, showing surprisingly strong results on university
+level content. But admittedly, the gap between ML research and
+deployment can be large, and it remained to be shown that our approach
+can give high quality feedback at scale in <strong>a live application</strong>. Come
+June, Code in Place ‘21 was gearing up for its diagnostic assessment.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image4.png" /></p>
+<figcaption>
+Meta-learned feedback deployed to Code in Place '21.
+</figcaption>
+</div></figure>
+
+<p>In an amazing turnout, Code in Place ‘21 had 12,000 students. But
+grading 12,000 students each solving 5 problems would be beyond
+intractable. To put it into numbers, it would take <strong>8 months</strong> of human
+labor, or more than <strong>400 teaching assistants</strong> working standard
+nine-to-five shifts to manually grade all 60,000 solutions.</p>
+
+<p>The Code in Place ‘21 diagnostic contained five new questions that were
+not in the CS106A dataset used to train the AI system. However, the
+questions were similar in difficulty and scope, and correct solutions
+were roughly the same length as those in CS106A. Because the AI system
+was trained with meta-learning, it could quickly adapt to these new
+questions. Volunteers from the teaching team helped annotate a small
+portion of the student solutions that the AI meta-learning algorithm
+requires.</p>
+
+<p>To showcase feedback to students, we were joined by Alan Chang and together we built an application for students
+to see their solutions and AI feedback (see image above). We were
+transparent in informing students that an AI was providing feedback. For
+each predicted misconception, we associated it with a message (shown in
+the blue box) to the student. We carefully crafted the language of these
+messages to be helpful and supportive of the student’s learning. We also
+provided finer grained feedback by highlighting portions of the code
+that the AI system weighted more strongly in making its prediction. In
+the image above, the student forgot to cast the height to an integer. In
+fact, the highlighted line should be height = int(input(…)), which the
+AI system picked up on.</p>
+
+<h3 id="human-versus-ai-feedback">Human versus AI Feedback</h3>
+
+<p>For each question, we asked the student to
+rate the correctness of the feedback provided by clicking either a
+“thumbs up” or a “thumbs down” before they can proceed to the next
+question (see lower left side of the image above). Additionally, after a
+student reviewed all their feedback, we asked them to rate the AI system
+holistically on a five-point scale.  As part of the deployment, some of
+the student solutions were given feedback by humans but students did not
+know which ones. So, we can compare students’ holistic and per-question
+rating when given AI feedback versus instructor feedback.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_actual" src="/blog/assets/img/posts/2021-07-20-prototransformer/image11.png" /></p>
+<figcaption>
+Results from deploying AI feedback to Code in Place 2021. (left) Comparison of student-rated correctness of human feedback versus AI feedback. (right) Comparison of ai feedback quality across different genders and countries of origin.
+</figcaption>
+</div></figure>
+
+<p>Here’s what we found:</p>
+
+<ul>
+  <li><strong>1,096</strong> students responded to a survey after receiving <strong>15,134</strong> pieces
+of feedback. The reception was overwhelmingly positive: Across all
+15k pieces of feedback, students agreed with AI suggestions <strong>97.9% ±
+0.001</strong> of the time.</li>
+  <li>We compared student agreement with AI feedback against agreement
+with instructor feedback, where we surprisingly found the AI system
+surpass human instructors: <strong>97.9% &gt; 96.7%</strong> (p-value 0.02). The
+improvement was driven by higher student ratings on <em>constructive
+feedback</em> – times when the algorithm suggested an improvement.</li>
+  <li>On the five-point scale, the average holistic rating of usefulness
+by students was <strong>4.6 ± 0.018 out of 5</strong>.</li>
+  <li>Given the wide diversity of students participating in Code in Place,
+we segmented the quality of AI feedback by gender and country, where
+we found no statistically significant difference across
+groups.</li>
+</ul>
+
+<p>To the best of our knowledge, this was both the first successful
+deployment of AI-driven feedback to open-ended student work and the
+first successful deployment of prototype networks in a live application.
+With promising results in both a research and a real-world setting, we
+are optimistic about the future of artificial intelligence in code
+education and beyond.</p>
+
+<h2 id="how-could-ai-feedback-impact-teaching">How could AI feedback impact teaching?</h2>
+
+<p>A successful deployment of an
+automated feedback system raises several important questions about the
+role of AI in education and more broadly, society.</p>
+
+<p>To start, we emphasize that what makes Code in Place so successful is
+its amazing teaching team made up of over 1,000 section leaders. While
+feedback is an important part of the learning experience, it is one
+component of a larger ecosystem. We should not incorrectly conclude from
+our results that AI can automate teaching or replace instructors – nor
+should the system be used for high-stakes grading. Instead, we should
+view AI feedback as another tool in the toolkit for instructors to
+better shape an amazing learning experience for students.</p>
+
+<p>Further, we should evaluate our AI systems with a double bottom line of
+both performance and fairness. Our initial experiments suggest that the
+AI is not biased but our initial results are being supplemented by a
+more thorough audit. To minimize the chance of providing incorrect
+feedback to student work, future research should encourage AI systems to
+learn to say: “I don’t know”.</p>
+
+<p>Third, we find it important that progress in education research be
+public and available for others to critique and build upon.</p>
+
+<p>Finally, this research opens so many directions moving forward. We hope
+to use this work to enable teachers to better reach their potential.
+Moreover, an AI feedback makes it scalable to study not just students’
+final solutions, but the process of how students solve their
+assignments. Finally, there is a novel opportunity for computational
+approaches towards unraveling the science of how students learn.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>Many thanks to Chelsea Finn, Chris Piech, and Noah
+Goodman for their guidance. Special thanks to Chris for his support the
+last three years through the successes and failures towards AI feedback
+prediction. Also, thanks to Alan Cheng, Milan Mosse, Ali Malik, Yunsung
+Kim, Juliette Woodrow, Vrinda Vasavada, Jinpeng Song, and John Mitchell
+for great collaborations. Thank you to Mehran Sahami, Julie Zelenki,
+Brahm Capoor and the Code in Place team who supported this project.
+Thank you to the section leaders who provided all the human feedback
+that the AI was able to learn from. Thank you to the Stanford Institute
+for Human-Centered Artificial Intelligence (in particular the Hoffman-Yee Research Grant) and the Stanford
+Interdisciplinary Graduate Fellowship for their support.</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/prototransformer/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/prototransformer/&text=Meta-Learning+Student+Feedback+to+16%2C000+Solutions%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/prototransformer/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/prototransformer/&title=Meta-Learning+Student+Feedback+to+16%2C000+Solutions%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/prototransformer/&title=Meta-Learning+Student+Feedback+to+16%2C000+Solutions%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Meta-Learning+Student+Feedback+to+16%2C000+Solutions%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/prototransformer/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#automatic+feedback">
+      <p><i class="fa fa-tag fa-fw"></i> automatic feedback</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#code+education">
+      <p><i class="fa fa-tag fa-fw"></i> code education</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#code+in+place">
+      <p><i class="fa fa-tag fa-fw"></i> code in place</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#prototype+network">
+      <p><i class="fa fa-tag fa-fw"></i> prototype network</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#transformer">
+      <p><i class="fa fa-tag fa-fw"></i> transformer</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/wilds/">
+      <p>Previous post</p>
+        WILDS: A Benchmark of in-the-Wild Distribution Shifts
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/acl-2021/">
+      <p>Next post</p>
+        Stanford AI Lab Papers at ACL-IJCNLP 2021
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

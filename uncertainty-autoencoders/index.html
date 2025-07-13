@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/uncertainty-autoencoders/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization" />
+<meta name="author" content="<a href='https://aditya-grover.github.io'>Aditya Grover</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TL;DR: Compressed sensing techniques enable efficient acquisition and recovery of sparse, high-dimensional data signals via low-dimensional projections. In our AISTATS 2019 paper, we introduce uncertainty autoencoders (UAE) where we treat the low-dimensional projections as noisy latent representations of an autoencoder and directly learn both the acquisition (i.e., encoding) and amortized recovery (i.e., decoding) procedures via a tractable variational information maximization objective. Empirically, we obtain on average a 32% improvement over competing methods on the task of statistical compressed sensing of high-dimensional data." />
+<meta property="og:description" content="TL;DR: Compressed sensing techniques enable efficient acquisition and recovery of sparse, high-dimensional data signals via low-dimensional projections. In our AISTATS 2019 paper, we introduce uncertainty autoencoders (UAE) where we treat the low-dimensional projections as noisy latent representations of an autoencoder and directly learn both the acquisition (i.e., encoding) and amortized recovery (i.e., decoding) procedures via a tractable variational information maximization objective. Empirically, we obtain on average a 32% improvement over competing methods on the task of statistical compressed sensing of high-dimensional data." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/uncertainty-autoencoders/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/uncertainty-autoencoders/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-17T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization","dateModified":"2019-04-17T00:00:00-07:00","datePublished":"2019-04-17T00:00:00-07:00","description":"TL;DR: Compressed sensing techniques enable efficient acquisition and recovery of sparse, high-dimensional data signals via low-dimensional projections. In our AISTATS 2019 paper, we introduce uncertainty autoencoders (UAE) where we treat the low-dimensional projections as noisy latent representations of an autoencoder and directly learn both the acquisition (i.e., encoding) and amortized recovery (i.e., decoding) procedures via a tractable variational information maximization objective. Empirically, we obtain on average a 32% improvement over competing methods on the task of statistical compressed sensing of high-dimensional data.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/uncertainty-autoencoders/"},"url":"http://ai.stanford.edu/blog/uncertainty-autoencoders/","author":{"@type":"Person","name":"<a href='https://aditya-grover.github.io'>Aditya Grover</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization | The Stanford AI Lab Blog</title>
+    <meta name="description" content="On uncertainty autoencoders, a new framework for statistical compressed sensing and unsupervised representation learning that unifies several lines of relate...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization">
+    
+    <meta name="twitter:description" content="On uncertainty autoencoders, a new framework for statistical compressed sensing and unsupervised representation learning that unifies several lines of related work in dimensionality reduction, compressed sensing, and generative modeling.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/thumb.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/thumb.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization</h1>
+    <p class="meta">
+    <a href='https://aditya-grover.github.io'>Aditya Grover</a>
+    <div class="post-date">April 17, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <blockquote>
+  <p>TL;DR: Compressed sensing techniques enable efficient acquisition and recovery of sparse, high-dimensional data signals via low-dimensional projections. In our <a href="https://arxiv.org/pdf/1812.10539">AISTATS 2019 paper</a>, we introduce uncertainty autoencoders (UAE) where we treat the low-dimensional projections as noisy latent representations of an autoencoder and directly learn both the acquisition (i.e., encoding) and amortized recovery (i.e., decoding) procedures via a tractable variational information maximization objective. Empirically, we obtain on average a 32% improvement over competing methods on the task of statistical compressed sensing of high-dimensional data.</p>
+</blockquote>
+
+<p>The broad goal of unsupervised representation learning is to learn transformations of the input data which succinctly capture the statistics of an underlying data distribution. A plethora of learning objectives and algorithms have been proposed in prior work, motivated from the perspectives of latent variable generative modeling, dimensionality reduction, and others. In this post, we will describe a new framework for unsupervised representation learning inspired from compressed sensing. We begin with a primer of statistical compressed sensing.</p>
+
+<h3 id="statistical-compressed-sensing">Statistical Compressed Sensing</h3>
+
+<p>Systems which can <strong>efficiently acquire and accurately recover</strong> high-dimensional signals form the basis of compressed sensing. These systems enjoy widespread use. For example, compressed sensing has been successfully applied to a wide range of applications such as designing power-efficient single-pixel cameras and accelerating scanning times of MRI for medical imaging, among many others.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/process.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/process.png" /></a></p>
+</div></figure>
+
+<p>A compressed sensing pipeline consists of two components:</p>
+
+<ul>
+  <li><strong>Acquisition:</strong> A mapping \(f: \mathbb{R}^n \to \mathbb{R}^m\) between high-dimensional signals \(x \in \mathbb{R}^n\) to measurements \(y \in \mathbb{R}^m\)</li>
+</ul>
+
+\[\begin{aligned}
+y &amp;= f(x) + \epsilon
+\end{aligned}\]
+
+<p>where \(\epsilon\) is any external noise in the measurement process. The acquisition process is said to be efficient when \(m \ll n\).</p>
+
+<ul>
+  <li><strong>Recovery:</strong> A mapping \(g: \mathbb{R}^m \to \mathbb{R}^n\) between the measurements \(y\) to the recovered data signals \(\hat{x}\). Recovery is accurate if a normed loss e.g., \(\Vert \hat{x} - x \Vert_2\) is small.</li>
+</ul>
+
+<p>In <strong>standard compressed sensing</strong>, the acquistion mapping \(f\) is typically linear in \(x\) (i.e., \(f(x) = Wx\) for some matrix \(W \in \mathbb{R}^{m\times n}\)). In such a case, the system is underdetermined since we have more variables (\(n\)) than constraints (\(m\)). To guarantee unique, non-trivial recovery, we assume the signals are sparse in an appropriate basis (e.g., Fourier basis for audio, wavelet basis for images). Thereafter, acquisition via certain classes of random matrices and recovery by solving a LASSO optimization method guarantees unique recovery with high probability using only a few measurements (roughly logarithmic in the data dimensionality).</p>
+
+<p>In this work, we consider the setting of <strong>statistical compressed sensing</strong> where we have access to a dataset \(\mathcal{D}\) of training data signals \(x\). We assume that every signal \(x \stackrel{i.i.d.}{\sim} q_{\textrm{data}}\) for some unknown data distribution \(q_{\textrm{data}}\). One way to think about acquisition and recovery in this setting is to consider a game between an agent and nature.</p>
+
+<p><strong>At training time:</strong></p>
+
+<ol>
+  <li>Nature shows the agent a finite dataset \(\mathcal{D}\) of high-dimensional signals.</li>
+  <li>Agent learns the acquistion and recovery mappings  \(f\) and \(g\) by optimizing a suitable objective.</li>
+</ol>
+
+<p><strong>At test time:</strong></p>
+
+<ol>
+  <li>Nature shows the agent the compressed measurements \(y = f(x) + \epsilon\) for one or more test signals \(x \stackrel{i.i.d.}{\sim} q_{\textrm{data}}\).</li>
+  <li>Agent recovers the signal as \(\hat{x} = g(y)\) and incurs an \(\ell_2\)-norm loss \(\Vert \hat{x} - x \Vert_2\).</li>
+</ol>
+
+<p>To play this game, the agent’s task is to choose the acquisition and recovery mappings \(f\) and \(g\) such that the test loss is minimized.</p>
+
+<h3 id="uncertainty-autoencoders">Uncertainty Autoencoders</h3>
+
+<p>In practice, there are two sources of uncertainty in recovering the signal \(x\) from the measurements \(y\) alone, even if the agent is allowed to pick an acquisition mapping \(f\). One is due to the stochastic measurement noise \(\epsilon\). Second, the acquisition mapping \(f\) is typically parameterized with a family of finite-precision restricted mappings \(\Phi\) (e.g., linear mappings as in standard compressed sensing or more generally neural networks). Given that the dimensionality of the measurements \(y\) is smaller than that of the signal \(x\), such restrictions would prohibit learning a bijective mapping even in the absence of noise.</p>
+
+<p>For the illustrative case where the mapping \(f\) is linear, we established that exact recovery is not possible. Then what are some other ways to efficiently acquire data? In the figure below, we consider a toy setting where the true data distribution is an equally-weighted mixture of two 2D Gaussians stretched along orthogonal directions. We sample 100 points (black) from this mixture and consider two methods to reduce the dimensionality of these points to one dimension.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/gmm.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/gmm.png" /></a></p>
+</div></figure>
+
+<p>One option is to project the data along directions that account most for the variability in the data using principal component analysis (PCA). For the 2D example above, this is shown via the blue points on the magenta line. This line captures a large fraction of the variance in the data but collapses data sampled from the bottom right Gaussian into a narrow region. When multiple datapoints are collapsed into overlapping, densely clustered regions in the low-dimensional space, disambiguating the association between the low-dimensional projections and the original datapoints is difficult during recovery.</p>
+
+<p>Alternatively, we can consider the projections (red points) on the green axis. These projections are more spread out and suggest that recovery is easier, even if doing so increases the total variance in the projected space compared to PCA. Next, we present the UAE framework which learns precisely the aforementioned low-dimensional projections that make recovery more accurate<sup id="fnref:pca" role="doc-noteref"><a href="#fn:pca" class="footnote">1</a></sup>.</p>
+
+<p>Probabilistically, the joint distribution of the signal \(x\) and measurements \(y\) is given as \(q(x, y) = q_{\textrm{data}} (x) q_\phi (y \vert x)\). E.g., if we model the noise as centered isotropic Gaussian, the likelihood \(q_\phi(y \vert x)\) can be expressed as \(q_\phi(y \vert x) = \mathcal{N}(y \mid f_\phi(x), \sigma^2)\). To learn the parameters \(\phi\in \Phi\) that best facilitate recovery in the presence of uncertainty, consider the following objective</p>
+
+\[\phi^\ast = \arg\max_{\phi \in \phi} E_{q_\phi(x, y)}[\log q_\phi(x \vert y)] : = \mathcal{L}(\phi).\]
+
+<p>The above objective maximizes the log-posterior probability of recovering \(x\) from the measurements \(y\), consistent with the agent’s goal at test time as mentioned above.</p>
+
+<h4 id="variational-information-maximization">Variational Information Maximization</h4>
+
+<p>Alternatively, one can interpret the above as maximizing the mutual information between the signals \(x\) and the measurements \(y\). To see the connection, note that the data entropy \(H(x)\) is a constant and does not affect the optima. Hence, we can rewrite the objective as</p>
+
+\[\phi^\ast = \arg\max_{\phi \in \Phi} E_{q_\phi(x, y)}[\log q_\phi(x \vert y)] + H(X) = -H_\phi(X \vert Y) + H (X) = I_\phi(X;Y).\]
+
+<p>Evaluating (and optimizing) the mutual information is unfortunately non-trivial and intractable in the current setting. To get around this difficulty while also permitting fast recovery, we propose to use an amortized variant of the variational lower bound on mutual information due to <sup id="fnref:mi_lb" role="doc-noteref"><a href="#fn:mi_lb" class="footnote">2</a></sup>.</p>
+
+<p>In particular, we consider a parameterized, variational approximation \(p_\theta (x \vert y )\)  to the true posterior \(q_\phi( x \vert y)\). Here, \(\theta \in \Theta\) denote the variational parameters. Substituting the variational distribution gives us the following lower bound to the original objective</p>
+
+\[\mathcal{L}(\phi) \geq  E_{q_\phi(x, y)}[\log p_\theta(x \vert y)] := \mathcal{L}(\phi, \theta).\]
+
+<p>The above expression defines the learning objective for <strong>uncertainty autoencoders</strong>, where <strong>acquisition can be seen as encoding the data signals</strong> and <strong>recovery corresponds to decoding the signals from the measurements</strong>.</p>
+
+<h4 id="example">Example</h4>
+
+<p>In practice, the expectation in the UAE objective is evaluated via Monte Carlo: the data signal \(x\) is sampled from the training dataset \(\mathcal{D}\), and the measurements \(y\) are sampled from an assumed noise model that permits reparameterization (e.g., isotropic Gaussian). Depending on the accuracy metric of interest for recovery, we can make a distributional assumption on the amortized variational distribution \(p_\theta(x \vert y)\) (e.g., Gaussian with fixed variance for \(\ell_2\), Laplacian for \(\ell_1\)) and map the measurements \(y\) to the sufficient statistics of \(p_\theta(x \vert y)\) via the recovery mapping \(g_\theta\).</p>
+
+<p>As an illustration, consider an isotropic Gaussian noise model \(q_\phi(y \vert x)\) with known scalar variance \(\sigma^2\). If we also let the variational distribution \(p_\theta(x \vert y)\) be an isotropic Gaussian with fixed scalar variance, we obtain the following objective maximized by an uncertainty autoencoder (UAE)</p>
+
+\[\mathcal{L}(\phi, \theta) \approx - c \sum_{x \in \mathcal{D}} \sum_{y \sim \mathcal{N}(y \mid f_\phi(x), \sigma^2)} \Vert x - g_\theta(y)\Vert_2\]
+
+<p>for some positive normalization constant \(c\) that is independent of \(\phi\) and \(\theta\).</p>
+
+<h3 id="comparison-with-commonly-used-autoencoders">Comparison with commonly used autoencoders</h3>
+
+<p>Even beyond statistical compressive sensing, UAEs present an alternate framework for unsupervised representation learning where the compressed measurements can be interpreted as the latent representations. Below, we discuss how UAEs computationally differ and relate to commonly used autoencoders.</p>
+
+<ul>
+  <li><em>Standard autoencoders (AE):</em> In the absence of any noise in the latent space, the UAE learning objective reduces to that of an AE.</li>
+  <li><em>Denoising autoencoders (DAE)<sup id="fnref:dae" role="doc-noteref"><a href="#fn:dae" class="footnote">3</a></sup>:</em> A DAE
+adds noise in the observed space (i.e., to the data signals), whereas a UAE models the uncertainty in the latent space.</li>
+  <li><em>Variational autoencoders (VAE)<sup id="fnref:vae" role="doc-noteref"><a href="#fn:vae" class="footnote">4</a></sup>:</em> A VAE
+regularizes the latent space to follow a prior distribution. There is no explicit prior in a UAE, and consequently no KL divergence regularization of the distribution over the latent space<sup id="fnref:bvae" role="doc-noteref"><a href="#fn:bvae" class="footnote">5</a></sup>. This avoids pitfalls of representation learning with VAEs where the latent representations are ignored in the presence of powerful decoders<sup id="fnref:vlae" role="doc-noteref"><a href="#fn:vlae" class="footnote">6</a></sup>.</li>
+</ul>
+
+<p><em>Does a UAE permit out-of-sample generalization, like a DAE or a VAE?</em>
+Yes! Under suitable assumptions, we show that a UAE learns an implicit generative model of the data signal distribution and can be used to define a Markov chain Monte Carlo sampler. See Theorem 1 and Corollary 1 in the <a href="https://arxiv.org/pdf/1812.10539">paper</a> for more details.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/markovchain.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/markovchain.png" /></a></p>
+<figcaption>
+	Illustration of the Markov chain sampler for q<sub>data</sub> based on UAE.
+</figcaption>
+</div></figure>
+
+<h3 id="overview-of-experimental-results">Overview of experimental results</h3>
+
+<p>We present some experimental results on statistical compressive sensing of image datasets below for varying numbers of measurements \(m\) and random Gaussian noise.  We compare against two baselines:</p>
+<ul>
+  <li>LASSO in an appropriate sparsity-inducing basis</li>
+  <li>CS-VAE/DCGAN<sup id="fnref:csgm" role="doc-noteref"><a href="#fn:csgm" class="footnote">7</a></sup>, a recently proposed compressed sensing method that searches the latent space of pretrained generative models such as VAEs and GANs for the latent vectors that minimize the recovery loss.</li>
+</ul>
+
+<h4 id="mnist">MNIST</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist.png"><img class="postimage_50" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist.png" /></a></p>
+<figcaption>
+	Test <i>l</i><sub>2</sub> reconstruction error (per image) for varying <i>m</i>.
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist_reconstr.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/mnist_reconstr.png" /></a></p>
+<figcaption>
+	Reconstructions for <i>m</i>=25 measurements.
+</figcaption>
+</div></figure>
+
+<h4 id="celeba">CelebA</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba.png"><img class="postimage_50" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba.png" /></a></p>
+<figcaption>
+	Test <i>l</i><sub>2</sub> reconstruction error (per image) for varying <i>m</i>.
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba_reconstr.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-04-17-uncertainty_autoencoders/celeba_reconstr.png" /></a></p>
+<figcaption>
+	Reconstructions for <i>m</i>=50 measurements.
+</figcaption>
+</div></figure>
+
+<p>On average, we observe a 32% improvement across all datasets and measurements. For results on more datasets and tasks involving applications of UAE to transfer learning and supervised learning, check out our paper below!</p>
+
+<blockquote>
+  <p>Uncertainty Autoencoders: Learning Compressed Representations via Variational Information  Maximization. 
+Aditya Grover, Stefano Ermon. 
+AISTATS, 2019.
+<a href="https://arxiv.org/pdf/1812.10539">paper</a>, <a href="https://github.com/aditya-grover/uae">code</a></p>
+</blockquote>
+
+<p>This post was shared earlier on the <a href="https://ermongroup.github.io/blog/uae/">Ermon group blog</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:pca" role="doc-endnote">
+      <p>We show in Theorem 2 in the paper that in the case of a Gaussian noise model, PCA is a special case of the information maximizing objective for a linear encoder and optimal (potentially non-linear) decoder under suitable assumptions. <a href="#fnref:pca" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:mi_lb" role="doc-endnote">
+      <p>Agakov, David Barber Felix. “The IM Algorithm: a Variational Approach to Information Maximization.” In Advances in Neural Information Processing Systems, 2004. <a href="#fnref:mi_lb" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dae" role="doc-endnote">
+      <p>Vincent, Pascal, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol. “Extracting and Composing Robust Features with Denoising Autoencoders.” In ICML, 2008. <a href="#fnref:dae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:vae" role="doc-endnote">
+      <p>Kingma, Diederik P, and Max Welling. “Auto-Encoding Variational Bayes.” In ICLR, 2014. <a href="#fnref:vae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:bvae" role="doc-endnote">
+      <p>While not discussed in the original paper, the UAE objective can be seen as a special case of the \(\beta\)-VAE objective for \(\beta=0\). Higgins, Irina, Loic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, and Alexander Lerchner. 2016. “Beta-Vae: Learning Basic Visual Concepts with a Constrained Variational Framework.” In ICLR, 2017. <a href="#fnref:bvae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:vlae" role="doc-endnote">
+      <p>Chen, Xi, Diederik P Kingma, Tim Salimans, Yan Duan, Prafulla Dhariwal, John Schulman, Ilya Sutskever, and Pieter Abbeel. “Variational Lossy Autoencoder.” In ICLR, 2017. <a href="#fnref:vlae" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:csgm" role="doc-endnote">
+      <p>Bora, Ashish, Ajil Jalal, Eric Price, and Alexandros G Dimakis. 2017. “Compressed Sensing Using Generative Models.” In ICML, 2017. <a href="#fnref:csgm" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/uncertainty-autoencoders/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/uncertainty-autoencoders/&text=Uncertainty+Autoencoders%3A+Learning+Compressed+Representations+via+Variational+Information+Maximization%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/uncertainty-autoencoders/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/uncertainty-autoencoders/&title=Uncertainty+Autoencoders%3A+Learning+Compressed+Representations+via+Variational+Information+Maximization%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/uncertainty-autoencoders/&title=Uncertainty+Autoencoders%3A+Learning+Compressed+Representations+via+Variational+Information+Maximization%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Uncertainty+Autoencoders%3A+Learning+Compressed+Representations+via+Variational+Information+Maximization%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/uncertainty-autoencoders/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#compressed+sensing">
+      <p><i class="fa fa-tag fa-fw"></i> compressed sensing</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#deep+learning">
+      <p><i class="fa fa-tag fa-fw"></i> deep learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#unsupervised+representation+learning">
+      <p><i class="fa fa-tag fa-fw"></i> unsupervised representation learning</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/weak-supervision/">
+      <p>Previous post</p>
+        Weak Supervision: A New Programming Paradigm for Machine Learning
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/reliable-ai/">
+      <p>Next post</p>
+        Progress Toward Safe and Reliable AI
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

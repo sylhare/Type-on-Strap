@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/beyond-local-pattern-matching/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Beyond Local Pattern Matching: Recent Advances in Machine Reading | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Beyond Local Pattern Matching: Recent Advances in Machine Reading" />
+<meta name="author" content="<a href='http://qipeng.me/'>Peng Qi</a> and <a href='https://cs.stanford.edu/~danqi/'>Danqi Chen</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Have you ever Googled some random question, such as how many countries are there in the world, and been impressed to see Google presenting the precise answer to you rather than just a list of links? This feature is clearly nifty and useful, but is also still limited; a search for a slightly more complex question such as how long do I need to bike to burn the calories in a Big Mac will not yield a nice answer, even though any person could look over the content of the first or second link and find the answer." />
+<meta property="og:description" content="Have you ever Googled some random question, such as how many countries are there in the world, and been impressed to see Google presenting the precise answer to you rather than just a list of links? This feature is clearly nifty and useful, but is also still limited; a search for a slightly more complex question such as how long do I need to bike to burn the calories in a Big Mac will not yield a nice answer, even though any person could look over the content of the first or second link and find the answer." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/beyond-local-pattern-matching/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/beyond-local-pattern-matching/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-26T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Beyond Local Pattern Matching: Recent Advances in Machine Reading" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Beyond Local Pattern Matching: Recent Advances in Machine Reading","dateModified":"2019-02-26T00:00:00-08:00","datePublished":"2019-02-26T00:00:00-08:00","description":"Have you ever Googled some random question, such as how many countries are there in the world, and been impressed to see Google presenting the precise answer to you rather than just a list of links? This feature is clearly nifty and useful, but is also still limited; a search for a slightly more complex question such as how long do I need to bike to burn the calories in a Big Mac will not yield a nice answer, even though any person could look over the content of the first or second link and find the answer.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/beyond-local-pattern-matching/"},"url":"http://ai.stanford.edu/blog/beyond-local-pattern-matching/","author":{"@type":"Person","name":"<a href='http://qipeng.me/'>Peng Qi</a> and <a href='https://cs.stanford.edu/~danqi/'>Danqi Chen</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Beyond Local Pattern Matching: Recent Advances in Machine Reading | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Summarizing two new datasets meant to enable more conversational, explainable, and capable QA systems.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Beyond Local Pattern Matching: Recent Advances in Machine Reading">
+    
+    <meta name="twitter:description" content="Summarizing two new datasets meant to enable more conversational, explainable, and capable QA systems.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/thumb.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/thumb.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Beyond Local Pattern Matching: Recent Advances in Machine Reading</h1>
+    <p class="meta">
+    <a href='http://qipeng.me/'>Peng Qi</a> and <a href='https://cs.stanford.edu/~danqi/'>Danqi Chen</a>
+    <div class="post-date">February 26, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Have you ever Googled some random question, such as <em>how many countries are there in the world</em>, and been impressed to see Google presenting the precise answer to you rather than <em>just</em> a list of links? This feature is clearly nifty and useful, but is also still limited; a search for a slightly more complex question such as <em>how long do I need to bike to burn the calories in a Big Mac</em> will not yield a nice answer, even though any person could look over the content of the first or second link and find the answer.</p>
+
+<figure>
+    <p>
+    <img class="postimagehalf" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img1.png" />
+    <img class="postimagehalf" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img2.png" />
+    <figcaption>
+        Example search results from Google, as of the writing of this article.
+    </figcaption>
+    </p>
+</figure>
+
+<p>In today’s age of information explosion, when too much new knowledge is generated every day in text (among other modalities) for any single person to digest, enabling machines to read large amounts of text and answer questions for us is one of the most crucial and practical tasks in the field of natural language understanding. Solving the task of machine reading, or question answering, will lay an important cornerstone towards a powerful and knowledgeable AI system like the librarian in the movie <em>Time Machine</em>:</p>
+
+<figure class="video_container">
+<iframe class="video" src="https://www.youtube.com/embed/CQbkhYg2DzM?start=91" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</figure>
+
+<p>Recently, large-scale question answering datasets like the <a href="https://rajpurkar.github.io/SQuAD-explorer/">Stanford Question Answering Dataset (SQuAD)</a> and <a href="http://nlp.cs.washington.edu/triviaqa/">TriviaQA</a> have fueled much of the progress in this direction. By allowing researchers to train powerful and data-hungry deep learning models, these datasets have already enabled impressive results such as an algorithm that can answer many arbitrary questions by finding the appropriate answer in Wikipedia pages – removing the need for a human to do all the hard work themselves.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img3.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img3.png" /></a></p>
+</div></figure>
+
+<p>SQuAD consists of 100k+ examples collected from 500+ Wikipedia articles. For each paragraph in the article, a list of questions are posed <em>independently</em> and these questions are required to be answered by <em>a contiguous span</em> in the paragraph (see the examples above based on Wikipedia article <a href="https://en.wikipedia.org/wiki/Super_Bowl_50">Super Bowl 50</a>), also known as “extractive question answering”.</p>
+
+<p>However, as impressive as such results may seem, these datasets have significant drawbacks that are limiting further advancements in this area. In fact, researchers have shown that models trained with these datasets are not actually learning very sophisticated language understanding and are instead largely drawing on simple pattern-matching heuristics.<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">2</a></sup></p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img4.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img4.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>From Jia and Liang. Short added sentences showcase that the model learn to pattern-match city names, rather than truly understanding the question and answer.</p>
+</figcaption></figure>
+
+<p>In this blog post, we introduce two recent datasets collected by the Stanford NLP Group with an aim to further advance the field of machine reading. Specifically, these datasets aim at incorporating more “reading” and “reasoning” in the task of question answering, to move beyond questions that can be answered by simple pattern matching. The first of the two, CoQA, attacks the problem from a conversational angle, by introducing a context-rich interface of a natural dialog about a paragraph of text. The second, HotpotQA<sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote">3</a></sup>, goes beyond the scope of one paragraph and instead presents the challenge of reasoning over multiple documents to arrive at the answer, as we will introduce in detail below.</p>
+
+<h2 id="coqa-question-answering-through-conversations">CoQA: Question Answering through Conversations</h2>
+
+<h3 id="what-is-coqa">What is CoQA?</h3>
+
+<p>Most current question answering systems are limited to answering questions independently (as the SQuAD examples shown above). Though this sort of question-answer exchange does sometimes happen between people, it is more common to seek information by engaging in conversations involving a series of interconnected questions and answers. CoQA is a <strong>Co</strong>nversational <strong>Q</strong>uestion <strong>A</strong>nswering dataset that we developed to address this limitation with a goal of driving the development of conversational AI systems.<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">4</a></sup>  Our dataset contains 127k questions with answers, obtained from 8k conversations about text passages from seven diverse domains.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img5.png"><img class="postimage_50" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img5.png" /></a></p>
+</div></figure>
+
+<p>As is shown above, a CoQA example consists of a text passage (collected from a CNN news article in this example) and a conversation about the content of the passage. In this conversation, each turn contains a question and an answer, and every question after the first is dependent on the conversation thus far. Unlike SQuAD and many other existing datasets, the conversation history is indispensable for answering many questions. For example, the second question Q2 (where?) is impossible to answer without knowing what has already been said. It is also worth noting that the entity of focus can actually change through a conversation, for example, “his” in Q4, “he” in Q5, and “them” in Q6 all refer to different entities, which makes understanding these questions more challenging.</p>
+
+<p>In addition to the key insight that the CoQA’s questions require understanding in a conversational context, CoQA  has other many other appealing features:</p>
+
+<ul>
+  <li>
+    <p>An important feature is that we didn’t restrict the answers to be a contiguous span in the passage, as SQuAD does. We think that many questions are not able to be answered by a single span in the passage, which will limit the naturalness of the conversations. For example, for a question like <em>How many?</em>, the answer can be simply <em>three</em> despite text in the passage not spelling this out directly. At the same time, we hope that our dataset supports a reliable automatic evaluation and obtains a high human agreement. To approach this, we asked the annotators to first highlight a text span (acting as a rationale to support the answer, see R1, R2 etc in the example) and then edit the text span into a natural answer. These rationales can be leveraged in training (but not in testing).</p>
+  </li>
+  <li>
+    <p>Most existing QA datasets mainly focus on a single domain, which makes it hard to test the generalization ability of existing models. Another important feature of CoQA is that this dataset is collected from seven different domains — children’s stories, literature, middle and high school English exams, news, Wikipedia, Reddit and science. The last two are used for out-of-domain evaluation.</p>
+  </li>
+</ul>
+
+<p>We conducted an in-depth analysis of our dataset. As presented in the following table, we find that our dataset exhibits a rich set of linguistic phenomena. Nearly 27.2% of the questions require pragmatic reasoning such as common sense and presupposition. For example, the question <em>Was he loud and boisterous?</em> is not a direct paraphrase of the rationale <em>he dropped his feet with the lithe softness of a cat</em> but the rationale combined with world knowledge can answer this question. Only 29.8% of the questions can be answered with simple lexical matching (i.e. directly mapping words in the question to the passage).</p>
+
+<p>We also find that only 30.5% of the questions do not rely on coreference with the conversational history and are answerable on their own. For the rest, 49.7% of the questions contain explicit coreference markers such as <em>he</em>, <em>she</em>, or <em>it</em>, and the remaining 19.8% of questions (e.g., <em>Where?</em>) refer to an entity or event <em>implicitly</em>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png"><img class="postimage_75" style="max-width: 750px;" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img6.png" /></a></p>
+</div></figure>
+
+<p>Compared to the question distribution of SQuAD 2.0, we find that our questions are much shorter than the SQuAD questions (5.5 vs 10.1 words on average), which reflects the conversational nature of our dataset.  Our dataset also presents a richer variety of questions; while nearly half of SQuAD questions are dominated by <em>what</em> questions, the distribution of CoQA is spread across multiple question types. Several sectors indicated by prefixes <em>did</em>, <em>was</em>, <em>is</em>, <em>does</em> are frequent in CoQA but are completely absent in SQuAD.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img7.png"><img class="postimage" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img7.png" /></a></p>
+</div></figure>
+
+<h3 id="recent-progress">Recent Progress</h3>
+
+<p>Since we launched <a href="https://stanfordnlp.github.io/coqa/">the CoQA challenge</a> in August 2018, it received a great deal of attention and became one of the most competitive benchmarks in our community. We are amazed that a lot of progress has been made since then, especially after Google’s BERT models <sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">5</a></sup> were released last November — which have lifted the performance of all the current systems by a large margin.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img8.png"><img class="postimage" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img8.png" /></a></p>
+</div></figure>
+
+<p>The state-of-the-art ensemble system “BERT+MMFT+ADA”  from Microsoft Research Asia achieved 87.5% in-domain F1 accuracy and 85.3% out-of-domain F1 accuray. These numbers are not only approaching human performance, but also are over 20 points higher than the baseline models that we developed 6 months ago (our research community is moving very fast!). We look forward to seeing these papers and open-sourced systems in the near future.</p>
+
+<h2 id="hotpotqa-machine-reading-over-multiple-documents">HotpotQA: Machine Reading over Multiple Documents</h2>
+
+<p>Besides diving deeply into a given paragraph of context through an prolonged conversation, we also often find ourselves in need of reading through multiple documents to find out facts about the world.</p>
+
+<p>For instance, one might wonder, <em>in which state was Yahoo! founded?</em> Or, <em>does Stanford have more computer science researchers or Carnegie Mellon University?</em> Or simply, <em>How long do I need to run to burn the calories of a Big Mac?</em></p>
+
+<p>The Web contains the answers to many of these questions, but not always in a readily available form, or even in one place. For example, if we take <a href="https://en.wikipedia.org/">Wikipedia</a> as the source of knowledge to answer our first question (about where Yahoo! was founded), we will initially be baffled that none of the pages of <a href="https://en.wikipedia.org/wiki/Yahoo!">Yahoo!</a> or those of its co-founders <a href="https://en.wikipedia.org/wiki/Jerry_Yang">Jerry Yang</a> and <a href="https://en.wikipedia.org/wiki/David_Filo">David Filo</a> mention this information.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">6</a></sup></p>
+
+<p>To answer this question, one would need to laboriously browse multiple Wikipedia articles, until they come across the following article titled <a href="https://en.wikipedia.org/wiki/History_of_Yahoo!">History of Yahoo!</a>:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img9.gif"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img9.gif" /></a></p>
+</div></figure>
+
+<p>As one can see, we can answer the question in the following steps of reasoning:</p>
+
+<ul>
+  <li>We note that the first sentence of this article states that <em>Yahoo!</em> was founded at <a href="https://en.wikipedia.org/wiki/Stanford_University">Stanford University</a>.</li>
+  <li>Then, we can look up Stanford University in Wikipedia (in this case we simply clicked on the link), to find out where it’s located in</li>
+  <li>The Stanford University page tells us that it is located in California.</li>
+  <li>Finally, we can combine these two facts to arrive at the answer to the original question: <em>Yahoo!</em> was founded in the State of <em>California</em>.</li>
+</ul>
+
+<p>Note that to answer this question, two skills were essential: (1) <em>a bit of detective work</em> to find out about what documents, or supporting facts, to use that could lead to an answer to our question, and (2) the ability to <em>reason with multiple supporting facts</em> to arrive at the final answer.</p>
+
+<p>These are important capabilities for machine reading systems to acquire in order for them to effectively assist us in digesting the ever-growing ocean of information and knowledge in the form of text. Unfortunately, because existing datasets have thus focused on finding answers within single documents, falling short at tackling this challenge, we undertook the effort of making that possible by compiling the <a href="https://hotpotqa.github.io/">HotpotQA</a> dataset.</p>
+
+<h3 id="what-is-hotpotqa">What is HotpotQA?</h3>
+
+<p>HotpotQA is a large-scale question answering (QA) dataset containing about 113,000 question-answer pairs that have the characteristics of those we mentioned above.<sup id="fnref:8" role="doc-noteref"><a href="#fn:8" class="footnote">7</a></sup> That is, the questions require QA systems to be able to sift through large quantities of text documents to find information pertinent to generating an answer, and to reason with the multiple supporting facts it found to arrive at the final answer (see below for an example).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png"><img class="postimage_75" style="max-width: 750px;" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img10.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>An example question from HotpotQA</p>
+</figcaption></figure>
+
+<p>The questions and answers are collected in the context of the entire English Wikipedia, and covers a diverse range of topics ranging from science, astronomy, and geography, to entertainment, sports, and legal cases.</p>
+
+<p>The questions require many challenging types of reasoning to answer. For example, in the <em>Yahoo!</em> example, one would need to first infer the relation between Yahoo! and the “missing link” essential to answering the question, <em>Stanford University</em>, and then leverage the fact that <em>Stanford University</em> is located in <em>California</em> to arrive at the final answer. Schematically, the inference chain looks like the following:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img11.gif"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img11.gif" /></a></p>
+</div></figure>
+
+<p>Here, we call <em>Stanford University</em> the <span style="color:#ff7f00">bridge entity</span> in the context, as it bridges between the known entity <em>Yahoo!</em> and the intended answer <em>California</em>. We observe that in fact many of the questions one would be interested in involve such bridge entities in some way.</p>
+
+<p>For example, consider the following question: <em>Which team does the player named 2015 Diamond Head Classic’s MVP play for?</em></p>
+
+<p>In this question, we can first ask ourselves who the <a href="https://en.wikipedia.org/wiki/2015_Diamond_Head_Classic">2015 Diamond Head Classic</a>’s MVP is, before looking up which team that player is currently playing for. In this question, the MVP player (<a href="https://en.wikipedia.org/wiki/Buddy_Hield">Buddy Hield</a>) serves as the <span style="color:#ff7f00">bridge entity</span> that leads us to the answer. The subtle difference from how we reasoned in the <em>Yahoo!</em> case is that here <em>Buddy Hield</em> is the answer to part of the original question, whereas <em>Stanford University</em> isn’t.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img12.gif"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img12.gif" /></a></p>
+</div></figure>
+
+<p>One could also easily conjure up interesting questions where the <span style="color:#ff7f00">bridge entity</span> is the answer, for instance: <em>Which movie featuring Ed Harris is based on a French novel?</em> (The answer is <a href="https://en.wikipedia.org/wiki/Snowpiercer"><em>Snowpiercer</em></a>.)</p>
+
+<p>Obviously, these bridge entity questions probably don’t cover all of the interesting questions one could try to answer by reasoning over multiple facts collected on Wikipedia. In HotpotQA, we include a new type of questions – comparison questions – to represent a more diverse set of reasoning skills and language understanding capabilities.</p>
+
+<p>We have already seen one example of a comparison question: <em>does Stanford have more computer science researchers or Carnegie Mellon University?</em></p>
+
+<p>To successfully answer these questions, a QA system needs to be able to not only find the relevant supporting facts (in this case, how many computer science researchers Stanford and CMU have, respectively), but also to compare them in a meaningful way to yield the final answer. The latter could prove quite challenging for current QA systems, as our analysis of the dataset show, because it could involve numerical comparison, time comparison, counting, and even simple arithmetic.</p>
+
+<p>The former problem of finding relevant supporting facts is not easy, either, and could even be more challenging. Although it is often relatively easy to locate the relevant facts for comparison questions, it is highly non-trivial for bridge entity questions.</p>
+
+<p>In our experiments with a traditional information retrieval (IR) approach, which ranks all Wikipedia articles from most relevant to least relevant given the question as the query. As a result, we see that on average, out of the two paragraphs that are necessary to correctly answer the question (which we call the “gold paragraphs”), only about 1.1 can be found in the top 10 results. In the plot for IR rankings of gold paragraphs below, both the <span style="color:#66aadd">higher-ranking paragraph</span> and the <span style="color:orange">lower-ranking one</span> exhibit a heavy tailed distribution.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img13.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img13.png" /></a></p>
+</div></figure>
+
+<p>More specifically, while more than 80% of the higher-ranking paragraphs can be found in the Top 10 IR results, only less than 30% of the lower-ranking ones can be found in the same range.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">8</a></sup> We calculated that if one naively reads all of the top ranked documents until both of the gold supporting paragraphs have been found, on average this amounts to reading about 600 documents to answer each question – and even after all that the algorithm still can’t reliably tell if we have indeed found both already!</p>
+
+<p>This calls for new methods to tackle the problem of machine reading in the wild when multiple steps of reasoning are required, as progress in this direction will greatly facilitate the development of more effective information access systems.</p>
+
+<h3 id="towards-explainable-qa-systems">Towards Explainable QA systems</h3>
+
+<p>Another important and desirable trait of good question answering systems is <em>explainability</em>. In fact, a QA system that simply spits out an answer with no explanation or demonstrations to help verify its answers is almost useless, because the user wouldn’t be able to trust its answers even if they appear to be correct most of the time. Unfortunately, this has been a problem with many state-of-the-art question answering systems.</p>
+
+<p>To this end, when collecting the data for HotpotQA we also asked our annotators to specify the supporting sentences they used to arrive at the final answer, and released these as part of the dataset.</p>
+
+<p>In the actual example below from the dataset, sentences <span style="color:#33a02c">in green</span> serve as the supporting facts that underpin the answer (although through numerous steps of reasoning in this case). For more examples of (less dense) supporting facts, the reader is invited to view examples through the <a href="https://hotpotqa.github.io/explorer.html">HotpotQA data explorer</a>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img14.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-02-26-beyond_local_pattern_matching/img14.png" /></a></p>
+</div></figure>
+
+<p>In our experiments, we have seen that these supporting facts not only allow humans to more easily check the answer provided by QA systems, but they also improve the performance of the systems themselves at finding the desired answer more accurately by providing the model with stronger supervision that previous question answering datasets in this direction lacked.</p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>With the abundance of human knowledge recorded in writing, and more and more of it being digitized every second, we believe that there is immense value in integrating this knowledge with systems that automates the reading and reasoning and answers our questions, while maintaining an explainable interface to us. It is high time that we move beyond developing question answering systems that merely look at a few paragraphs and sentences, and answer questions with a black box implementation in a single turn that ends up mostly matching word patterns.</p>
+
+<p>To this end, CoQA considers a series of questions that would arise in a natural dialog given a shared context, with challenging questions that require reasoning beyond one dialog turn; HotpotQA, on the other hand, focuses on multi-document reasoning, and challenges the research community to develop new methods to acquire supporting information in a large corpus.</p>
+
+<p>We believe that both datasets will fuel significant development in question answering systems, and we look forward to new insights that these systems will bring to the community.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Danqi Chen, Adam Fisch, Jason Weston, Antoine Bordes. Reading Wikipedia to Answer Open-Domain Questions. ACL 2017. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p>See, for instance, “Robin Jia and Percy Liang. Adversarial Examples for Evaluating Reading Comprehension Systems. EMNLP 2017.” <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p>In collaboration with our great collaborators from <a href="https://www.cs.cmu.edu/">Carnegie Mellon University</a> and <a href="https://mila.quebec/en/">Mila</a>. <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Siva Reddy*, Danqi Chen*, and Christopher D. Manning. <a href="https://arxiv.org/pdf/1808.07042.pdf">CoQA: A Conversational Question Answering Challenge</a>. TACL 2019. (* indicates equal contribution) “CoQA” is pronounced as <em>coca</em>. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>https://github.com/google-research/bert <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>At least they did not mention it as of the writing of this article. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:8" role="doc-endnote">
+      <p>Zhilin Yang*, Peng Qi*, Saizheng Zhang*, Yoshua Bengio, William W. Cohen, Ruslan Salakhutdinov, Christopher D. Manning. <a href="https://arxiv.org/pdf/1809.09600.pdf">HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering</a>. EMNLP 2018. (* indicates equal contribution) <a href="#fnref:8" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>And this is with 25% of the questions being comparison questions, where the names of both entities are specified in the question. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/beyond-local-pattern-matching/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/beyond-local-pattern-matching/&text=Beyond+Local+Pattern+Matching%3A+Recent+Advances+in+Machine+Reading%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/beyond-local-pattern-matching/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/beyond-local-pattern-matching/&title=Beyond+Local+Pattern+Matching%3A+Recent+Advances+in+Machine+Reading%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/beyond-local-pattern-matching/&title=Beyond+Local+Pattern+Matching%3A+Recent+Advances+in+Machine+Reading%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Beyond+Local+Pattern+Matching%3A+Recent+Advances+in+Machine+Reading%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/beyond-local-pattern-matching/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#qa">
+      <p><i class="fa fa-tag fa-fw"></i> qa</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/ethical-best-practices/">
+      <p>Previous post</p>
+        In Favor of Developing Ethical Best Practices in AI Research
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/weak-supervision/">
+      <p>Next post</p>
+        Weak Supervision: A New Programming Paradigm for Machine Learning
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/responsive.css"> 
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>An Introduction to Knowledge Graphs | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="An Introduction to Knowledge Graphs" />
+<meta name="author" content="<a href='https://www.linkedin.com/in/vinay-k-chaudhri-849556/'>Vinay K. Chaudhri</a>, <a href='https://www.linkedin.com/in/nchittar/'>Naren Chittar</a>, <a href='http://logic.stanford.edu/people/genesereth/genesereth.html'>Michael Genesereth</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Knowledge Graphs (KGs) have emerged as a compelling abstraction for organizing the world’s structured knowledge, and as a way to integrate information extracted from multiple data sources. Knowledge graphs have started to play a central role in representing the information extracted using natural language processing and computer vision. Domain knowledge expressed in KGs is being input into machine learning models to produce better predictions. Our goals in this blog post are to (a) explain the basic terminology, concepts, and usage of KGs, (b) highlight recent applications of KGs that have led to a surge in their popularity, and (c) situate KGs in the overall landscape of AI. This blog post is a good starting point before reading a more extensive survey or following research seminars on this topic." />
+<meta property="og:description" content="Knowledge Graphs (KGs) have emerged as a compelling abstraction for organizing the world’s structured knowledge, and as a way to integrate information extracted from multiple data sources. Knowledge graphs have started to play a central role in representing the information extracted using natural language processing and computer vision. Domain knowledge expressed in KGs is being input into machine learning models to produce better predictions. Our goals in this blog post are to (a) explain the basic terminology, concepts, and usage of KGs, (b) highlight recent applications of KGs that have led to a surge in their popularity, and (c) situate KGs in the overall landscape of AI. This blog post is a good starting point before reading a more extensive survey or following research seminars on this topic." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-10T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="An Introduction to Knowledge Graphs" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"An Introduction to Knowledge Graphs","dateModified":"2021-05-10T00:00:00-07:00","datePublished":"2021-05-10T00:00:00-07:00","description":"Knowledge Graphs (KGs) have emerged as a compelling abstraction for organizing the world’s structured knowledge, and as a way to integrate information extracted from multiple data sources. Knowledge graphs have started to play a central role in representing the information extracted using natural language processing and computer vision. Domain knowledge expressed in KGs is being input into machine learning models to produce better predictions. Our goals in this blog post are to (a) explain the basic terminology, concepts, and usage of KGs, (b) highlight recent applications of KGs that have led to a surge in their popularity, and (c) situate KGs in the overall landscape of AI. This blog post is a good starting point before reading a more extensive survey or following research seminars on this topic.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/"},"url":"http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/","author":{"@type":"Person","name":"<a href='https://www.linkedin.com/in/vinay-k-chaudhri-849556/'>Vinay K. Chaudhri</a>, <a href='https://www.linkedin.com/in/nchittar/'>Naren Chittar</a>, <a href='http://logic.stanford.edu/people/genesereth/genesereth.html'>Michael Genesereth</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>An Introduction to Knowledge Graphs | The Stanford AI Lab Blog</title>
+    <meta name="description" content="What are Knowledge Graphs and how are they useful in search, data integration and AI?">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="An Introduction to Knowledge Graphs">
+    
+    <meta name="twitter:description" content="What are Knowledge Graphs and how are they useful in search, data integration and AI?">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">An Introduction to Knowledge Graphs</h1>
+    <p class="meta">
+    <a href='https://www.linkedin.com/in/vinay-k-chaudhri-849556/'>Vinay K. Chaudhri</a>, <a href='https://www.linkedin.com/in/nchittar/'>Naren Chittar</a>, <a href='http://logic.stanford.edu/people/genesereth/genesereth.html'>Michael Genesereth</a>
+    <div class="post-date">May 10, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Knowledge Graphs (KGs) have emerged as a compelling abstraction for organizing the world’s structured knowledge, and as a way to integrate information extracted from multiple data sources. Knowledge graphs have started to play a central role in representing the information extracted using natural language processing and computer vision. Domain knowledge expressed in KGs is being input into machine learning models to produce better predictions. Our goals in this blog post are to (a) explain the basic terminology, concepts, and usage of KGs, (b) highlight recent applications of KGs that have led to a surge in their popularity, and (c) situate KGs in the overall landscape of AI. This blog post is a good starting point before reading a more <a href="https://arxiv.org/pdf/2003.02320">extensive survey</a> or following <a href="http://cs520.stanford.edu">research seminars</a> on this topic.</p>
+
+<h3 id="knowledge-graph-definition">Knowledge Graph Definition</h3>
+
+<p>A directed labeled graph is a 4-tuple G = (N, E, L, f), where N is a set of nodes, E ⊆ N × N is a set of edges, L is a set of labels, and f: E→L, is an assignment function from edges to labels. An assignment of a label B to an edge E=(A,C) can be viewed as a triple (A, B, C) and visualized as shown in Figure 1.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image3.jpg" /></p>
+</div></figure>
+
+<p>A knowledge graph is a directed labeled graph in which we have associated domain specific meanings with nodes and edges. Anything can act as a node, for example, people, company, computer, etc. An edge label captures the relationship of interest between the nodes, for example, a friendship relationship between two people, a customer relationship between a company and person, or a network connection between two computers, etc.</p>
+
+<p>The directed labeled graph representation is used in a variety of ways depending on the needs of an application. A directed labeled graph such as the one in which the nodes are people, and the edges capture the parent relationship is also known as a data graph. A directed labeled graph in which the nodes are classes of objects (e.g., Book, Textbook, etc.), and the edges capture the subclass relationship, is also known as a taxonomy. In some data models, given a triple (A,B,C), we refer to A, B, C as the subject, the predicate, and the object of the triple respectively.</p>
+
+<p>A knowledge graph serves as a data structure in which an application stores information. The information could be added to the knowledge graph through a combination of human input, automated and semi-automated methods. Regardless of the method of knowledge entry, it is expected that the recorded information can be easily understood and verified by humans.</p>
+
+<p>Many interesting computations over a graph can be reduced to navigating it. For example, in a friendship KG, to calculate the friends of friends of a person A, we can navigate the graph from A to all nodes B connected to it by a relation labeled as friend, and then recursively to all nodes C connected by the friend relation to each B.</p>
+
+<h3 id="recent-applications-of-knowledge-graphs">Recent Applications of Knowledge Graphs</h3>
+
+<p>Use of directed labeled graphs as a data structure for storing information, and the use of graph algorithms to manipulate that information is not new. Within computer science, there have been many uses of a directed graph representation, for example, <a href="https://www.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811">data flow graphs</a>, <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.49.9419&amp;rep=rep1&amp;type=pdf">binary decision diagrams</a>, <a href="https://www.sciencedirect.com/science/article/pii/0167642387900359">state charts</a>, etc. We consider here two concrete applications that have led to a recent surge in the popularity of knowledge graphs: organizing information over the internet and data integration in enterprises. While discussing these applications, we also highlight what is new and different in the use of knowledge graphs.</p>
+
+<h4 id="organizing-knowledge-over-the-internet">Organizing Knowledge over the Internet</h4>
+
+<p>Consider the Google search for “Winterthur Zurich” which returns the result shown in the left panel of Figure 2 and a relevant portion from Wikipedia in the panel on the right. The portion of the Wikipedia page shown in the panel on the right is also known as an Infobox.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image7.jpg" />
+Figure 2: An example use of a knowledge graph in the results of a web search</p>
+</div></figure>
+
+<p>As part of the search results, we see facts such as Winterthur is in the country Switzerland, its elevation is 430 meters, etc. This information is directly extracted from the Infoboxes from the Wikipedia page for Winterthur. Some of the data in the Wikipedia Infoboxes is populated by querying a KG called <a href="https://www.wikidata.org">Wikidata</a>. The data from a KG can enhance the web search in even deeper ways than illustrated in the above example, as we next discuss.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Winterthur">Wikipedia page for Winterthur</a> lists its twin towns: two are in Switzerland, one in Czech Republic, and one in Austria. The city of Ontario in California that has a <a href="https://en.wikipedia.org/wiki/Ontario,_California">Wikipedia page titled, Ontario, California</a>, lists Winterthur as its sister city. Sister city and twin city relationships are identical as well as reciprocal. Thus, if a city A is a sister (twin) city of another city B, then B must be a sister (twin) city of A. As “Sister cities” and “Twin towns” are section headings in Wikipedia, with no definition or relationship specified between the two, it is difficult to detect this discrepancy. In contrast, in the <a href="https://www.wikidata.org/wiki/Q9125">Wikidata representation of Winterthur</a>, there is a relationship called <a href="https://www.wikidata.org/wiki/Property:P190">twinned administrative body</a> that lists the city of Ontario. As this relationship is defined to be a symmetric relationship in the KG, the <a href="https://www.wikidata.org/wiki/Q488134">Wikidata page for the city of Ontario</a> automatically includes Winterthur. Wikidata solves the problem of identifying equivalent relationships through the effort of its curators, and by using a KG as a storage and inference mechanism. To the degree the Wikidata KG is fully integrated into Wikipedia, the discrepancies of missing links considered in the example considered here will naturally disappear. We can visualize the two way relationship between Winterthur and Ontario in Figure 3. The KG in Figure 3 also shows other objects to which Winterthur and Ontario are connected.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image1.jpg" />
+Figure 3: A fragment of the Wikidata knowledge graph</p>
+</div></figure>
+
+<p>Wikidata includes data from several independent providers such as the Library of Congress. By using the Wikidata identifier for Winterthur, the information released by the <a href="https://id.loc.gov/authorities/names/n50013808.html?">Library of Congress</a> can be easily linked with other information about Winterthur present in Wikidata. Wikidata makes it easy to establish such links by publishing the definitions of relationships used in it in <a href="https://dl.acm.org/doi/pdf/10.1145/2844544">Schema.Org</a>.</p>
+
+<p>A well-documented list of relations in Schema.Org, also known as the relation vocabulary, gives us, at least, two advantages. First, it is easier to <a href="https://link.springer.com/chapter/10.1007/978-3-319-91452-7_48">write queries that span across multiple datasets</a> because queries can be framed using relations that are common to those sources. Without the usage of such common relationships across multiple sources, we would need to determine semantic relationships between them and provide appropriate translations. One example of a query that goes across multiple sources is: Display on a map the birth cities of people who died in Winterthour? Second, search engines can use such queries to retrieve information from the KG and display the query results as shown in Figure 2. Use of structured information returned in the <a href="https://cacm.acm.org/magazines/2019/8/238342-industry-scale-knowledge-graphs/">search results</a> is now a standard feature for the leading search engines.</p>
+
+<p>A <a href="https://www.wikidata.org/wiki/Special:Statistics">recent version of Wikidata</a> had over 90 million objects, with over one billion relationships among those objects. Wikidata makes connections across over 4872 different catalogs in 414 different languages published by independent data providers. As per a recent estimate, 31% of the websites, and over 12 million data providers are currently using the vocabulary of Schema.Org to publish annotations to their web pages.</p>
+
+<p>What is particularly new and exciting about the Wikidata knowledge graph? First, it is a graph of unprecedented scale, and is one of the largest knowledge graphs available today. Second, even though Wikidata is manually curated, the cost of curation <a href="https://dl.acm.org/doi/pdf/10.1145/2872427.2874809"> is shared by a community</a> of contributors. Third, some of the data in Wikidata may come from <a href="http://raphaelhoffmann.com//publications/kdd08.pdf">automatically extracted information</a>, but it must be easily understood and verified as per the Wikidata editorial policies. Fourth, there is an explicit effort to provide semantic definitions of different relation names through the vocabulary in <a href="https://schema.org/">Schema.Org</a>. Finally, the primary driving use case for Wikidata is to improve the <a href="https://cacm.acm.org/magazines/2019/8/238342-industry-scale-knowledge-graphs/">web search</a>. Even though Wikidata has several applications using it for analysis and visualization, its use over the web continues to be the most compelling and easily understood application.</p>
+
+<h4 id="data-integration-in-enterprises">Data Integration in Enterprises</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image5.png" />
+Figure 4: 360-degree view of a customer is created by integrating external data with internal company information</p>
+</div></figure>
+
+<p>Many financial institutions are <a href="https://www.youtube.com/watch?v=K583G3Qqiy4">interested</a> in better managing their customer relationships through a 360-degree view, i.e., a view that integrates external information about a customer with internal information about the same customer. For example, one can integrate publicly available information from financial news, commercially sourced and curated data about supply chain relationships with internal customer information to create such a 360-degree view. To understand how such a view is useful, let us consider an example scenario. Financial news reports that “Acma Retail Inc’’ has filed for bankruptcy due to the pandemic, because of which many of its suppliers will face financial stress. Such stress can pass deep down into its supply chain and trigger financial difficulties for other clients. For example, if a company A who is a supplier for Acma is undergoing financial stress, a similar stress will be experienced by companies who are suppliers of A. Such supply chain relationships are curated as part of a commercially available dataset called <a href="http://www.factset.com">Factset</a>. In a 360-degree view, the data from Factset and the financial news are integrated with the internal customer databases. The resulting KG accurately tracks Acma supply chain, identifies stressed suppliers with different revenue exposure, and identifies companies whose risk may be worth monitoring.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image4.jpg" /></p>
+</div></figure>
+
+<p>To create the 360-degree view of a customer, the data integration process begins with business analysts sketching out a schema of the key entities, events and the relationships they are interested in tracking. The visual nature of the KG schemas makes it easier for the business experts to engage and specify their requirements. The data from the individual sources is then loaded into a knowledge graph engine. The storage format of triples allows us to translate only those relationships that are of immediate relevance to the schema defined by the business domain experts. Rest of the data can still be loaded as triples but does not require us to incur the upfront cost of relating them into the defined schema. As the KGs use a generic schema of triples, changing requirements during the analysis process are easier to incorporate. Finally, the storage format mirrors the schema that the domain experts define.</p>
+
+<p>What is particularly new and exciting about the use of knowledge graphs for data integration? First, a generic schema of triples substantially reduces the cost of starting with a data integration project.  Second, it is much easier to adapt a triple-based schema in response to changes than the comparable effort required to adapt a traditional relational database. Third, and finally, modern KG engines are highly optimized for answering questions that require traversing the graph relationships in the data. For the example schema of Figure 5, a graph engine has built in operations to identify the central suppliers in a supply chain network, closely related groups of customers or suppliers, and spheres of influence of different suppliers. All of these computations leverage domain-independent graph algorithms such as centrality detection and community detection. Because of ease of creating and visualizing the schema, and the built in analytics operations, KGs are becoming a popular solution for turning data into intelligence.</p>
+
+<h3 id="knowledge-graphs-in-artificial-intelligence">Knowledge Graphs in Artificial Intelligence</h3>
+
+<p>AI agents maintain representations of the real world and use them for reasoning. Coming up with a good representation is a problem central to AI as it allows an agent to store information and derive new conclusions from it. We begin this section by a quick review of the previous work on knowledge representation in AI, situate KGs within that context, and then provide more details about how the modern AI algorithms use KGs to store their output as well as consume them to incorporate domain knowledge.</p>
+
+<p>Knowledge graphs, also known as <a href="https://apps.dtic.mil/sti/pdfs/ADA022584.pdf">semantic networks</a> in the context of AI, have been used as a store of world knowledge for AI agents since the early days of the field, and have been applied in <a href="https://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=BA19E284CA21E1209466E31E6FF88E5A?doi=10.1.1.151.207&amp;rep=rep1&amp;type=pdf">all areas of computer science</a>. There are many other schemes that parallel semantic networks, such as <a href="http://www.jfsowa.com/krbook/">conceptual graphs</a>, <a href="https://www.amazon.com/Description-Logic-Handbook-Implementation-Applications/dp/0521150116">description logics</a>, and <a href="https://www.doc.ic.ac.uk/~rak/papers/KELPS%202015.pdf">rule languages</a>. In some cases, <a href="https://www.amazon.com/Probabilistic-Graphical-Models-Principles-Computation/dp/0262013193/">probabilistic graphical models</a> can capture uncertain knowledge.</p>
+
+<p>A widely known application of approaches that originated from semantic networks is in capturing <a href="https://pdfs.semanticscholar.org/5120/f65919f77859a974fcc1ad08f72b2918b8ec.pdf">ontologies</a>. An ontology is a formal specification of the relationships that are used in a knowledge graph. For example, in Figure 3, the concepts such as City, Country, etc. and relationships such as part of, same as, etc, and their formal definitions constitute an ontology. Using this ontology, we can draw inferences such as Winterthur is located in Switzerland.</p>
+
+<p>To make the internet more intelligent, <a href="http://w3.org">the World Wide Web Consortium</a> (W3C) standardized a family of knowledge representation languages that are now widely used for capturing knowledge on the internet. These languages include the <a href="https://www.w3.org/RDF/">Resource Description Framework</a> (RDF), the <a href="https://www.w3.org/OWL">Web Ontology Language</a>(OWL), and the <a href="https://www.w3.org/Submission/SWRL/">Semantic Web Rule Language</a> (SWRL).</p>
+
+<p>The prior work on knowledge representation in AI that we have just reviewed has been driven in a top-down manner, that is, we first develop a model of the world, and then use reasoning algorithms to draw conclusions from them. Currently, there is a surge of activity on bottom up approaches to AI, that is, developing algorithms that can process the data from which algorithms can draw conclusions and insights. For the rest of the section, we will discuss the role KGs are playing both in storing the learned knowledge, and in providing a source of domain knowledge input to the AI algorithms.</p>
+
+<h4 id="knowledge-graphs-as-the-output-of-machine-learning">Knowledge Graphs as the output of Machine Learning</h4>
+
+<p>Even though Wikidata has had success in engaging a community of volunteer curators, manual creation of knowledge graphs is, in general, expensive. Therefore, any automation we can achieve for creating a knowledge graph is highly desired. Until a few years ago, both natural language processing (NLP) and computer vision (CV) algorithms were struggling to do well on entity recognition from text and object detection from images. Because of recent progress, these algorithms are starting to move beyond the basic recognition tasks to extracting relationships among objects necessitating a representation in which the extracted relations could be stored for further processing and reasoning. We will now discuss how the automation possible through NLP and CV techniques is facilitating the creation of knowledge graphs.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image2.jpg" /></p>
+</div></figure>
+
+<p><a href="https://web.stanford.edu/~jurafsky/slp3/17.pdf">Entity extraction and relation extraction</a> from text are two fundamental tasks in NLP. Methods for performing entity and relation extraction include rule-based methods, and machine learning. The rule-based approaches leverage the syntactical structure of the sentence or specify how entities or relationships could be identified in the input text. The machine learning approaches leverage sequence labeling algorithms or language models for both entity and relation extraction.</p>
+
+<p>The extracted information from multiple portions of the text needs to be correlated, and knowledge graphs provide a natural medium to accomplish such a goal. For example, from the sentence shown in Figure 6, we can extract the entities Albert Einstein, Germany, Theoretical Physicist, and Theory of Relativity; and the relations born in, occupation and developed. Once this snippet of knowledge is incorporated into a larger KG, we can use <a href="https://www.amazon.com/Introduction-Programming-Synthesis-Artificial-Intelligence/dp/1681737248/">logical inference</a> to get additional links (shown by dotted edges) such as a Theoretical Physicist is a kind of Physicist who practices Physics, and that Theory of Relativity is a branch of Physics.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2021-05-10-introduction-to-knowledge-graphs/image6.jpg" /></p>
+</div></figure>
+
+<p><a href="https://www.amazon.com/Computer-Vision-Modern-Approach-2nd-dp-9332550115/dp/9332550115/">A holy grail of computer vision</a> is the complete understanding of an image, that is, detecting objects, describing their attributes, and recognizing their relationships. Understanding images would enable important applications such as image search, question answering, and robotic interactions. Much progress has been made in recent years towards this goal, including image classification and object detection. Computer vision algorithms make heavy use of machine learning methods such as classification, clustering, nearest neighbors, and the deep learning methods such as recurrent neural networks.</p>
+
+<p>From the image shown in Figure 7, an <a href="https://arxiv.org/pdf/1904.11622.pdf">image understanding system</a> should produce a KG shown to the right. The nodes in the knowledge graph are the outputs of an object detector. Current research in computer vision focuses on developing techniques that can correctly infer the relationships between the objects, such as, man holding a bucket, and horse feeding from the bucket, etc. The KG shown to the right is an example of a knowledge graph which provides foundation for <a href="https://arxiv.org/pdf/1511.03416.pdf">visual question answering.</a></p>
+
+<h4 id="knowledge-graphs-as-input-to-machine-learning">Knowledge Graphs as input to Machine Learning</h4>
+
+<p>Machine learning algorithms can perform better if they can incorporate domain knowledge. KGs are a useful data structure for capturing domain knowledge, but machine learning algorithms require that any symbolic or discrete structure, such as a graph, should first be converted into a numerical form. We can convert symbolic inputs into a numerical form using a technique known as <a href="https://nlp.stanford.edu/projects/glove/">embeddings</a>. To illustrate this, we will consider word embeddings and graph embeddings.</p>
+
+<p>Word embeddings were <a href="https://arxiv.org/abs/1301.3781">originally developed</a> for calculating similarity between words. To understand the word embeddings, we consider the following set of sentences.</p>
+
+<p>I like knowledge graphs.</p>
+
+<p>I like databases.</p>
+
+<p>I enjoy running.</p>
+
+<p>In the above set of sentences, we count how often a word appears next to another word and record the counts in a matrix. For example, the word I appears next to the word like twice, and next to the word enjoy once, and therefore, its counts for these two words are 2 and 1 respectively, and 0 for every other word. We can calculate the counts for the other words in a similar manner as shown in Table 1. Such a matrix is often referred to as word co-occurrence counts. The <a href="https://www.aclweb.org/anthology/D14-1162.pdf">meaning</a> of each word is captured by the vector in the row corresponding to that word. To calculate similarity between words, we calculate the similarity between the vectors corresponding to them. In practice, we are interested in text that may contain millions of words, and a more compact representation is desired. As the co-occurrence matrix is sparse, we can use techniques from Linear Algebra (e.g., singular value decomposition) to reduce its dimensions. The resulting vector corresponding to a word is known as its word embedding. Typical word embeddings in use today rely on vectors of length 200.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">counts</th>
+      <th>I</th>
+      <th style="text-align: center">like</th>
+      <th style="text-align: center">enjoy</th>
+      <th style="text-align: center">Knowledge</th>
+      <th style="text-align: center">graphs</th>
+      <th style="text-align: center">database</th>
+      <th style="text-align: center">running</th>
+      <th>.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">I</td>
+      <td>0</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">like</td>
+      <td>2</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">enjoy</td>
+      <td>1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">knowledge</td>
+      <td>0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">graphs</td>
+      <td>0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">databases</td>
+      <td>0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">running</td>
+      <td>0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.</td>
+      <td>0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 1: Matrix of co-occurrence counts</p>
+
+<p>A sentence is a sequence of words, and word embeddings calculate co-occurrences of words in it. We can generalize this idea to node embeddings for a graph in the following manner: (a) traverse the graph using a random walk giving us a path through the graph (b) obtain a set of paths through repeated traversals of the graph (c) calculate co-occurrences of nodes on these paths just like we calculated co-occurrences of words in a sentence (d) each row in the matrix of co-occurrence counts give us a vector for the node corresponding to it (e) use suitable dimensionality reduction techniques to obtain a smaller vector which is referred to as a node embedding.</p>
+
+<p>We can encode the whole graph into a vector which is known as its graph embedding. There are many approaches to calculate graph embeddings, but perhaps, the simplest approach is to add the vectors representing node embeddings for each of the nodes in the graph to obtain a vector representing the whole graph.</p>
+
+<p>We used the example of word embeddings as precursor to explaining graph embeddings primarily for pedagogical purposes. Indeed, both have similar objectives: while word embeddings capture the meaning of words and help calculate similarity between them, node embeddings capture the meaning of nodes in a graph and help calculate similarity between them. There is also a great deal of similarity between the methods used for calculating them.</p>
+
+<p>Word embeddings and graph embeddings are a way to give a symbolic input to a machine learning algorithm. A common application of word embeddings is to learn a language model that can predict what word is likely to appear next in a sequence of words. A more advanced application of word embeddings is to use them with a KG – for example, the embedding for a more frequent word could be reused for a less frequent word as long as the knowledge graph encodes that the less frequent word is its hyponym. A straightforward use for the graph embeddings calculated from a friendship graph is to recommend new friends. A more advanced use of graph embedding involves link prediction, for example, in a company graph, we can use link prediction to identify potential new customers.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>A directed labeled graph is a fundamental construct in discrete mathematics, and has applications in all areas of computer science. Most notable uses of directed labeled graphs in AI and databases have taken the form of data graphs, taxonomies and ontologies. Traditionally, such applications have been small and have been created by a top down design and through manual knowledge engineering.</p>
+
+<p>Distinguishing characteristics of the modern knowledge graphs from the classical knowledge graphs are: scale, bottom up development and multiple modes of construction. The early semantic networks in AI never reached the size and scale of the knowledge graphs that we see today. Difficulty in coming up with a top down schema design for data integration and the data driven nature of machine learning have forced a bottom up methodology for creating the knowledge graphs. Finally, for creating modern knowledge graphs we are supplementing manual knowledge engineering techniques with significant automation and crowdsourcing.</p>
+
+<p>The confluence of the above trends establishes a new importance for the theory and algorithms for classical knowledge graphs. Even when we create a knowledge graph in a bottom up manner, the design of its schema and its semantic definition are still important. While automation may speed up some steps for creating a knowledge graph, manual validation and human oversight are still essential. This synergy sets up an exciting uncharted frontier for jointly leveraging classical knowledge graph techniques and modern tools of machine learning, crowdsourcing, and scalable computing.</p>
+
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/&text=An+Introduction+to+Knowledge+Graphs%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/&title=An+Introduction+to+Knowledge+Graphs%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/&title=An+Introduction+to+Knowledge+Graphs%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=An+Introduction+to+Knowledge+Graphs%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/introduction-to-knowledge-graphs/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#Data+Integration">
+      <p><i class="fa fa-tag fa-fw"></i> Data Integration</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#Knowledge+Representation">
+      <p><i class="fa fa-tag fa-fw"></i> Knowledge Representation</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#NLP">
+      <p><i class="fa fa-tag fa-fw"></i> NLP</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#Search">
+      <p><i class="fa fa-tag fa-fw"></i> Search</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#Vision">
+      <p><i class="fa fa-tag fa-fw"></i> Vision</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/iclr-2021/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at ICLR 2021
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/in-context-learning/">
+      <p>Next post</p>
+        Extrapolating to Unnatural Language Processing with GPT-3's In-context Learning: The Good, the Bad, and the Mysterious
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

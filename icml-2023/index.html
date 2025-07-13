@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/icml-2023/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at ICML 2023 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at ICML 2023" />
+<meta name="author" content="Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/icml-2023/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/icml-2023/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-25T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at ICML 2023" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Papers and Talks at ICML 2023","dateModified":"2023-07-25T00:00:00-07:00","datePublished":"2023-07-25T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/icml-2023/"},"url":"http://ai.stanford.edu/blog/icml-2023/","author":{"@type":"Person","name":"Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at ICML 2023 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at ICML 2023, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at ICML 2023">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at ICML 2023, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2023-07-25-icml-2023/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2023-07-25-icml-2023/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at ICML 2023</h1>
+    <p class="meta">
+    Compiled by <a href='https://cs.stanford.edu/~dorarad/'>Drew A. Hudson</a>
+    <div class="post-date">July 25, 2023</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/logo.png" /></p>
+
+<p>The <a href="https://icml.cc">International Conference on Machine Learning</a> (ICML) 2023 is being hosted July 23th - 29th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h3 id="main-conference">Main Conference</h3>
+<h4 id="towards-learning-geometry-eigen-lengths-crucial-for-fitting-tasks">Towards Learning Geometry Eigen-Lengths Crucial for Fitting Tasks</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img33" />
+<strong>Authors</strong>: Yijia Weng, Kaichun Mo, Ruoxi Shi, Yanchao Yang, Leonidas Guibas
+<br /><strong>Contact</strong>: yijiaw@stanford.edu
+<br /><strong>Keywords</strong>: geometric learning, eigen-length</p>
+<hr />
+
+<h4 id="data-feedback-loops-model-driven-amplification-of-dataset-biases"><a href="https://arxiv.org/abs/2209.03942">Data Feedback Loops: Model-driven Amplification of Dataset Biases</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img20" />
+<strong>Authors</strong>: Rohan Taori, Tatsunori B. Hashimoto
+<br /><strong>Contact</strong>: rtaori@stanford.edu
+<br /><strong>Award nominations:</strong> Oral
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2209.03942">Paper</a> | <a href="https://github.com/rtaori/data_feedback">Website</a>
+<br /><strong>Keywords</strong>: feedback loops, bias amplification, deep learning, self-supervised learning, cv, nlp</p>
+<hr />
+
+<h4 id="deja-vu-contextual-sparsity-for-efficient-llms-at-inference-time"><a href="https://openreview.net/pdf?id=wIPIhHd00i">Deja Vu: Contextual Sparsity for Efficient LLMs at Inference Time</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img19" />
+<strong>Authors</strong>: Zichang Liu, Jue Wang, Tri Dao, Tianyi Zhou, Binhang Yuan, Zhao Song, Anshumali Shrivastava, Ce Zhang, Yuandong Tian, Christopher Re, Beidi Chen
+<br /><strong>Contact</strong>: beidic@andrew.cmu.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=wIPIhHd00i">Paper</a>
+<br /><strong>Keywords</strong>: large language models, efficient inference</p>
+<hr />
+
+<h4 id="detectgpt-zero-shot-machine-generated-text-detection-using-probability-curvature"><a href="https://openreview.net/pdf?id=UiAyIILXRd">DetectGPT: Zero-Shot Machine-Generated Text Detection using Probability Curvature</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img30" />
+<strong>Authors</strong>: Eric Mitchell, Yoonho Lee, Alexander Khazatsky, Christopher D Manning, Chelsea Finn
+<br /><strong>Contact</strong>: eric.mitchell@cs.stanford.edu
+<br /><strong>Award nominations:</strong> Selected for oral presentation at the conference
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=UiAyIILXRd">Paper</a> | <a href="https://ericmitchell.ai/detectgpt/">Website</a>
+<br /><strong>Keywords</strong>: detection; zero-shot; language generation; curvature; deepfake</p>
+<hr />
+
+<h4 id="discover-and-cure-concept-aware-mitigation-of-spurious-correlation"><a href="https://arxiv.org/abs/2305.00650">Discover and Cure: Concept-aware Mitigation of Spurious Correlation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img24" />
+<strong>Authors</strong>: Shirley Wu, Mert Yuksekgonul, Linjun Zhang, James Zou
+<br /><strong>Contact</strong>: shirwu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2305.00650">Paper</a>
+<br /><strong>Keywords</strong>: spurious correlation, generalization, interpretability, concept</p>
+<hr />
+
+<h4 id="long-horizon-temperature-scaling"><a href="https://arxiv.org/abs/2302.03686">Long Horizon Temperature Scaling</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-12-rss-2023/img2" />
+<strong>Authors</strong>: Andy Shih, Dorsa Sadigh, Stefano Ermon
+<br /><strong>Contact</strong>: andyshih@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2302.03686">Paper</a> | <a href="https://github.com/AndyShih12/LongHorizonTemperatureScaling">Website</a>
+<br /><strong>Keywords</strong>: temperature scaling, long horizon, nonmyopic, autoregressive models, diffusion models, inference, tractability</p>
+<hr />
+
+<h4 id="emergence-of-sparse-representations-from-noise"><a href="https://openreview.net/pdf?id=cxYaBAXVKg">Emergence of Sparse Representations from Noise</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img31" />
+<strong>Authors</strong>: Trenton Bricken, Rylan Schaeffer, Bruno Olshausen, Gabriel Kreiman
+<br /><strong>Contact</strong>: trenton- bricken@g.harvard.edu
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=cxYaBAXVKg">Paper</a>
+<br /><strong>Keywords</strong>: sparsity, neural networks, neuroscience</p>
+<hr />
+
+<h4 id="flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu"><a href="https://arxiv.org/pdf/2303.06865.pdf">FlexGen: High-Throughput Generative Inference of Large Language Models with a Single GPU</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img18" />
+<strong>Authors</strong>: Ying Sheng, Lianmin Zheng, Binhang Yuan, Zhuohan Li, Max Ryabinin, Daniel Y. Fu, Zhiqiang Xie, Beidi Chen, Clark Barrett, Joseph E. Gonzalez, Percy Liang, Christopher Ré, Ion Stoica, Ce Zhang
+<br /><strong>Contact</strong>: ying1123@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2303.06865.pdf">Paper</a> | <a href="https://github.com/FMInference/FlexGen">Website</a>
+<br /><strong>Keywords</strong>: large language models, memory optimizations, offloading, compression, generative pre-trained transformers</p>
+<hr />
+
+<h4 id="generating-language-corrections-for-teaching-physical-control-tasks"><a href="https://arxiv.org/abs/2306.07012">Generating Language Corrections for Teaching Physical Control Tasks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img17" />
+<strong>Authors</strong>: Megha Srivastava, Noah Goodman, Dorsa Sadigh
+<br /><strong>Contact</strong>: meghas@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.07012">Paper</a>
+<br /><strong>Keywords</strong>: education, language, human-ai interaction</p>
+<hr />
+
+<h4 id="hyena-hierarchy-towards-larger-convolutional-language-models"><a href="https://arxiv.org/abs/2302.10866">Hyena Hierarchy: Towards Larger Convolutional Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img32" />
+<strong>Authors</strong>: Michael Poli, Stefano Massaroli, Eric Nguyen, Daniel Y. Fu, Tri Dao, Stephen Baccus, Yoshua Bengio, Stefano Ermon, Christopher Ré
+<br /><strong>Contact</strong>: poli@stanford.edu
+<br /><strong>Award nominations:</strong> Oral
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2302.10866">Paper</a> | <a href="https://ermongroup.github.io/blog/hyena/">Blog Post</a>
+<br /><strong>Keywords</strong>: long context, long convolution, large language models</p>
+<hr />
+
+<h4 id="learning-in-pomdps-is-sample-efficient-with-hindsight-observability"><a href="https://arxiv.org/abs/2301.13857">Learning in POMDPs is Sample-Efficient with Hindsight Observability</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img15" />
+<strong>Authors</strong>: Jonathan N. Lee, Alekh Agarwal, Christoph Dann, Tong Zhang
+<br /><strong>Contact</strong>: jnl@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2301.13857">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning, partial observability, hindsight observability, pomdp, homdp, regret, learning theory, theory, sample complexity</p>
+<hr />
+
+<h4 id="causal-proxy-models-for-concept-based-model-explanations"><a href="https://arxiv.org/abs/2209.14279">Causal Proxy Models For Concept-Based Model Explanations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img27" />
+<strong>Authors</strong>: Zhengxuan Wu, Karel D’Oosterlinck, Atticus Geiger, Amir Zur, Christopher Potts
+<br /><strong>Contact</strong>: kldooste@stanford.edu 
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2209.14279">Paper</a> | <a href="https://github.com/frankaging/Causal-Proxy-Model">Website</a>
+<br /><strong>Keywords</strong>: explainability, causality, concept-based explanations, causal explanations</p>
+<hr />
+
+<h4 id="modeling-dynamic-environments-with-scene-graph-memory"><a href="https://www.scenegraphmemory.com/">Modeling Dynamic Environments with Scene Graph Memory</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img29" />
+<strong>Authors</strong>: Andrey Kurenkov, Michael Lingelbach,Tanmay Agarwal, Emily Jin, Chengshu Li, Ruohan Zhang, Li Fei-Fei, Jiajun Wu, Silvio Savarese, Roberto Martín-Martín
+<br /><strong>Contact</strong>: andreyk@stanford.edu
+<br /><strong>Links:</strong> <a href="https://www.scenegraphmemory.com/">Paper</a>
+<br /><strong>Keywords</strong>: graph neural network, embodied ai, link prediction</p>
+<hr />
+
+<h4 id="motion-question-answering-via-modular-motion-programs"><a href="https://arxiv.org/pdf/2305.08953.pdf">Motion Question Answering via Modular Motion Programs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img26" />
+<strong>Authors</strong>: Mark Endo*, Joy Hsu*, Jiaman Li, Jiajun Wu
+<br /><strong>Contact</strong>: markendo@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2305.08953.pdf">Paper</a> | <a href="https://web.stanford.edu/~markendo/projects/human_motion_qa">Website</a>
+<br /><strong>Keywords</strong>: question answering, human motion understanding, neuro-symbolic learning</p>
+<hr />
+
+<h4 id="one-sided-matrix-completion-from-two-observations-per-row"><a href="https://arxiv.org/abs/2306.04049">One-sided matrix completion from two observations per row</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img21" />
+<strong>Authors</strong>: Steven Cao, Percy Liang, Gregory Valiant
+<br /><strong>Contact</strong>: shcao@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.04049">Paper</a>
+<br /><strong>Keywords</strong>: machine learning, icml, matrix completion, subspace estimation, high-dimensional statistics, random matrix theory</p>
+<hr />
+
+<h4 id="optimal-sets-and-solution-paths-of-relu-networks"><a href="https://arxiv.org/abs/2306.00119">Optimal Sets and Solution Paths of ReLU Networks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img25" />
+<strong>Authors</strong>: Aaron Mishkin, Mert Pilanci
+<br /><strong>Contact</strong>: mishkin@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.00119">Paper</a>
+<br /><strong>Keywords</strong>: convex optimization, relu networks, regularization path</p>
+<hr />
+
+<h4 id="out-of-domain-robustness-via-targeted-augmentations"><a href="https://arxiv.org/abs/2302.11861">Out-of-Domain Robustness via Targeted Augmentations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img23" />
+<strong>Authors</strong>: Irena Gao*, Shiori Sagawa*, Pang Wei Koh, Tatsunori Hashimoto, Percy Liang
+<br /><strong>Contact</strong>: irena@cs.stanford.edu, ssagawa@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2302.11861">Paper</a>
+<br /><strong>Keywords</strong>: robustness, data augmentation</p>
+<hr />
+
+<h4 id="phd"><a href="https://arxiv.org/abs/2305.01140">PhD</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img16" />
+<strong>Authors</strong>: Minkai Xu, Alexander Powers, Ron Dror, Stefano Ermon, Jure Leskovec
+<br /><strong>Contact</strong>: minkai@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2305.01140">Paper</a> | <a href="https://github.com/MinkaiXu/GeoLDM">Website</a>
+<br /><strong>Keywords</strong>: generative models, geometric representation learning, drug discovery</p>
+<hr />
+
+<h4 id="reflected-diffusion-models"><a href="https://arxiv.org/abs/2304.04740">Reflected Diffusion Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img13" />
+<strong>Authors</strong>: Aaron Lou, Stefano Ermon
+<br /><strong>Contact</strong>: aaronlou@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2304.04740">Paper</a> | <a href="https://aaronlou.com/blog/2023/reflected-diffusion/">Blog Post</a>
+<br /><strong>Keywords</strong>: diffusion models</p>
+<hr />
+
+<h4 id="sequence-modeling-with-multiresolution-convolutional-memory"><a href="https://arxiv.org/abs/2305.01638">Sequence Modeling with Multiresolution Convolutional Memory</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img22" />
+<strong>Authors</strong>: Jiaxin Shi, Ke Alexander Wang, Emily B. Fox
+<br /><strong>Contact</strong>: ishijiaxin@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2305.01638">Paper</a> | <a href="https://github.com/thjashin/multires-conv">Website</a>
+<br /><strong>Keywords</strong>: long-range, sequence modeling, convolution, multiresolution, wavelets, parameter-efficient</p>
+<hr />
+
+<h4 id="simple-embodied-language-learning-as-a-byproduct-of-meta-reinforcement-learning"><a href="https://arxiv.org/abs/2306.08400">Simple Embodied Language Learning as a Byproduct of Meta-Reinforcement Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img34" />
+<strong>Authors</strong>: Evan Zheran Liu, Sahaana Suri, Tong Mu, Allan Zhou, Chelsea Finn
+<br /><strong>Contact</strong>: evanliu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.08400">Paper</a>
+<br /><strong>Keywords</strong>: meta-reinforcement learning, language learning, reinforcement learning</p>
+<hr />
+
+<h4 id="simple-hardware-efficient-long-convolutions-for-sequence-modeling"><a href="https://arxiv.org/abs/2302.06646">Simple Hardware-Efficient Long Convolutions for Sequence Modeling</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img14" />
+<strong>Authors</strong>: Daniel Y. Fu, Elliot L. Epstein, Eric Nguyen, Armin W. Thomas, Michael Zhang, Tri Dao, Atri Rudra, Christopher Ré
+<br /><strong>Contact</strong>: danfu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2302.06646">Paper</a> | <a href="https://hazyresearch.stanford.edu/blog/2023-02-15-long-convs">Blog Post</a>
+<br /><strong>Keywords</strong>: convolutions, sequence modeling</p>
+<hr />
+
+<h4 id="vima-general-robot-manipulation-with-multimodal-prompts"><a href="https://arxiv.org/abs/2210.03094">VIMA: General Robot Manipulation with Multimodal Prompts</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img28" />
+<strong>Authors</strong>: Yunfan Jiang, Agrim Gupta, Zichen Zhang, Guanzhi Wang, Yongqiang Dou, Yanjun Chen, Li Fei-Fei, Anima Anandkumar, Yuke Zhu, Linxi Fan
+<br /><strong>Contact</strong>: yunfanj@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2210.03094">Paper</a> | <a href="https://vimalabs.github.io/">Website</a>
+<br /><strong>Keywords</strong>: robot learning, foundation model, transformer, multi-task learning</p>
+
+<hr />
+
+<h3 id="workshops">Workshops</h3>
+<h4 id="multilegalpile-a-689gb-multilingual-legal-corpus"><a href="https://arxiv.org/abs/2306.02069">MultiLegalPile: A 689GB Multilingual Legal Corpus</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img1" />
+<strong>Authors</strong>: Joel Niklaus, Veton Matoshi, Matthias Stürmer, Ilias Chalkidis, Daniel E. Ho
+<br /><strong>Contact</strong>: jniklaus@stanford.edu
+<br /><strong>Workshop</strong>: DMLR
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.02069">Paper</a>
+<br /><strong>Keywords</strong>: legal, law, corpus, language models, pretraining, large</p>
+<hr />
+
+<h4 id="leveraging-side-information-for-communication-efficient-federated-learning"><a href="https://arxiv.org/pdf/2306.12625.pdf">Leveraging Side Information for Communication-Efficient Federated Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img12" />
+<strong>Authors</strong>: Berivan Isik, Francesco Pase, Deniz Gunduz, Sanmi Koyejo, Tsachy Weissman, Michele Zorzi 
+<br /><strong>Contact</strong>: berivan0@stanford.edu
+<br /><strong>Workshop</strong>: Workshop on Federated Learning and Analytics,
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2306.12625.pdf">Paper</a>
+<br /><strong>Keywords</strong>: federated learning, compression, importance sampling</p>
+<hr />
+
+<h4 id="lexinvariant-language-models"><a href="https://arxiv.org/abs/2305.16349">Lexinvariant Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img4" />
+<strong>Authors</strong>: Qian Huang, Eric Zelikman, Sarah Li Chen, Yuhuai Wu, Gregory Valiant, Percy Liang
+<br /><strong>Contact</strong>: qhwang@stanford.edu
+<br /><strong>Workshop</strong>: ICML 2023 Workshop on Structured Probabilistic Inference &amp; Generative Modeling
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2305.16349">Paper</a>
+<br /><strong>Keywords</strong>: large language model, in-context learning, pretraining</p>
+<hr />
+
+<h4 id="is-pre-training-truly-better-than-meta-learning"><a href="https://arxiv.org/abs/2306.13841">Is Pre-training Truly Better Than Meta-Learning?</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img8" />
+<strong>Authors</strong>: Brando Miranda, Patrick Yu, Saumya Goyal, Yu-Xiong Wang, Sanmi Koyejo
+<br /><strong>Contact</strong>: brando9@stanford.edu
+<br /><strong>Workshop</strong>: ICML data centric workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.13841">Paper</a>
+<br /><strong>Keywords</strong>: meta-learning, general intelligence, machine learning, llm, pre-training, few-shot learning</p>
+<hr />
+
+<h4 id="layer-wise-feedback-alignment-is-conserved-in-deep-neural-networks"><a href="https://arxiv.org/abs/2306.01870">Layer-Wise Feedback Alignment is Conserved in Deep Neural Networks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img9" />
+<strong>Authors</strong>: Zachary Robertson, Oluwasanmi Koyejo
+<br /><strong>Contact</strong>: zroberts@stanford.edu
+<br /><strong>Workshop</strong>: Localized Learning Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.01870">Paper</a>
+<br /><strong>Keywords</strong>: deep learning, bio-plausible, implicit bias</p>
+<hr />
+
+<h4 id="h2o-heavy-hitter-oracle-for-efficient-generative-inference-of-large-language-models"><a href="https://arxiv.org/pdf/2306.14048.pdf">H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img2" />
+<strong>Authors</strong>: Zhenyu Zhang, Ying Sheng, Tianyi Zhou, Tianlong Chen, Lianmin Zheng, Ruisi Cai, Zhao Song, Yuandong Tian, Christopher Ré, Clark Barrett, Zhangyang Wang, Beidi Chen.
+<br /><strong>Contact</strong>: zhenyu.zhang@utexas.edu
+<br /><strong>Workshop</strong>: Efficient Systems for Foundation Models (ES-FoMo) Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2306.14048.pdf">Paper</a> | <a href="https://github.com/FMInference/H2O">Website</a>
+<br /><strong>Keywords</strong>: large language models; efficient generative inference</p>
+<hr />
+
+<h4 id="gpt-zip-deep-compression-of-finetuned-large-language-models"><a href="https://openreview.net/pdf?id=hO0c2tG2xL">GPT-Zip: Deep Compression of Finetuned Large Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img10" />
+<strong>Authors</strong>: Berivan Isik, Hermann Kumbong, Wanyi Ning, Xiaozhe Yao, Sanmi Koyejo, Ce Zhang
+<br /><strong>Contact</strong>: berivan0@stanford.edu
+<br /><strong>Workshop</strong>: Workshop on Efficient Systems for Foundation Models
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=hO0c2tG2xL">Paper</a>
+<br /><strong>Keywords</strong>: large language models, model compression, finetuning, scalable machine learning</p>
+<hr />
+
+<h4 id="exact-optimality-in-communication-privacy-utility-tradeoffs"><a href="https://arxiv.org/pdf/2306.04924.pdf">Exact Optimality in Communication-Privacy-Utility Tradeoffs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img11" />
+<strong>Authors</strong>: Berivan Isik, Wei-Ning Chen, Ayfer Ozgur, Tsachy Weissman, Albert No
+<br /><strong>Contact</strong>: berivan0@stanford.edu
+<br /><strong>Workshop</strong>: Workshop on Federated Learning and Analytics in Practice
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2306.04924.pdf">Paper</a>
+<br /><strong>Keywords</strong>: distributed mean estimation, differential privacy, compression</p>
+<hr />
+
+<h4 id="do-users-write-more-insecure-code-with-ai-assistants"><a href="https://arxiv.org/pdf/2211.03622.pdf">Do Users Write More Insecure Code with AI Assistants?</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img0" />
+<strong>Authors</strong>: Neil Perry*, Megha Srivastava*, Deepak Kumar, Dan Boneh
+<br /><strong>Contact</strong>: meghas@stanford.edu
+<br /><strong>Workshop</strong>: Challenges in Deployable Generative AI Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2211.03622.pdf">Paper</a>
+<br /><strong>Keywords</strong>: generative ai, code generation, human-ai interaction</p>
+<hr />
+
+<h4 id="dissenting-explanations-leveraging-disagreement-to-reduce-model-overreliance"><a href="https://arxiv.org/abs/2307.07636">Dissenting Explanations: Leveraging Disagreement to Reduce Model Overreliance</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img3" />
+<strong>Authors</strong>: Omer Reingold, Judy Hanwen Shen, Aditi Talati
+<br /><strong>Contact</strong>: jhshen@stanford.edu 
+<br /><strong>Workshop</strong>: HCI &amp; AI Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2307.07636">Paper</a>
+<br /><strong>Keywords</strong>: explainability, model multiplicity</p>
+<hr />
+
+<h4 id="--prodigy-enabling-in-context-learning-over-graphs"><a href="https://arxiv.org/pdf/2305.12600.pdf">	 PRODIGY: Enabling In-context Learning Over Graphs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img5" />
+<strong>Authors</strong>: Qian Huang, Hongyu Ren, Peng Chen, Gregor Kržmanc, Daniel Zeng, Percy Liang, Jure Leskovec
+<br /><strong>Contact</strong>: qhwang@stanford.edu
+<br /><strong>Workshop</strong>: ICML 2023 Workshop on Structured Probabilistic Inference &amp; Generative Modeling
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2305.12600.pdf">Paper</a> | <a href="https://github.com/snap-stanford/prodigy">Website</a>
+<br /><strong>Keywords</strong>: graph ml, in-context learning, pretraining</p>
+<hr />
+
+<h4 id="--prodigy-enabling-in-context-learning-over-graphs-1"><a href="https://arxiv.org/pdf/2305.12600.pdf">	 PRODIGY: Enabling In-context Learning Over Graphs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img5" />
+<strong>Authors</strong>: Qian Huang, Hongyu Ren, Peng Chen, Gregor Kržmanc, Daniel Zeng, Percy Liang, Jure Leskovec
+<br /><strong>Contact</strong>: qhwang@stanford.edu
+<br /><strong>Workshop</strong>: ICML 2023 Workshop on Structured Probabilistic Inference &amp; Generative Modeling
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2305.12600.pdf">Paper</a> | <a href="https://github.com/snap-stanford/prodigy">Website</a>
+<br /><strong>Keywords</strong>: graph ml, in-context learning, pretraining</p>
+<h4 id="thomas-learning-to-explore-human-preference-via-probabilistic-reward-model">Thomas: Learning to Explore Human Preference via Probabilistic Reward Model</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img6" />
+<strong>Authors</strong>: Sang T. Truong, Duc Nguyen, Tho Quan, Sanmi Koyejo
+<br /><strong>Contact</strong>: sttruong@cs.stanford.edu
+<br /><strong>Workshop</strong>: ICML 2023 Workshop: The Many Facets of Preference-Based Learning
+<br /><strong>Keywords</strong>: preference learning, active learning, bayesian neural networks, thompson sampling</p>
+<hr />
+
+<h4 id="beyond-scale-the-diversity-coefficient-as-a-data-quality-metric-demonstrates-llms-are-pre-trained-on-formally-diverse-data"><a href="https://arxiv.org/abs/2306.13840">Beyond Scale: the Diversity Coefficient as a Data Quality Metric Demonstrates LLMs are Pre-trained on Formally Diverse Data</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2023-07-25-icml-2023/img7" />
+<strong>Authors</strong>: Alycia Lee, Brando Miranda, Sanmi Koyejo
+<br /><strong>Contact</strong>: brando9@stanford.edu
+<br /><strong>Workshop</strong>: ICML data centric workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2306.13840">Paper</a>
+<br /><strong>Keywords</strong>: data centric, diversity, llm, foundation model</p>
+<hr />
+
+<p>We look forward to seeing you at ICML!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/icml-2023/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/icml-2023/&text=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2023%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/icml-2023/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/icml-2023/&title=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2023%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/icml-2023/&title=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2023%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2023%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/icml-2023/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ICML">
+      <p><i class="fa fa-tag fa-fw"></i> ICML</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ML">
+      <p><i class="fa fa-tag fa-fw"></i> ML</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/rss-2023/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at RSS 2023
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/codebook-features/">
+      <p>Next post</p>
+        Codebook Features: Sparse and Discrete Interpretability for Neural Networks
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

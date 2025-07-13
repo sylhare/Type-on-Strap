@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/text-causal-inference/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Text Feature Selection for Causal Inference | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Text Feature Selection for Causal Inference" />
+<meta name="author" content="<a href="https://cs.stanford.edu/~rpryzant/"> Reid Pryzant </a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Making Causal Inferences with Text" />
+<meta property="og:description" content="Making Causal Inferences with Text" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/text-causal-inference/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/text-causal-inference/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-05T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Text Feature Selection for Causal Inference" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Text Feature Selection for Causal Inference","dateModified":"2019-12-05T00:00:00-08:00","datePublished":"2019-12-05T00:00:00-08:00","description":"Making Causal Inferences with Text","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/text-causal-inference/"},"url":"http://ai.stanford.edu/blog/text-causal-inference/","author":{"@type":"Person","name":"<a href=\"https://cs.stanford.edu/~rpryzant/\"> Reid Pryzant </a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Text Feature Selection for Causal Inference | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Algorithms and a python package for measuring the importance of ngram features on an outcome, while controlling for confounds.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Text Feature Selection for Causal Inference">
+    
+    <meta name="twitter:description" content="Algorithms and a python package for measuring the importance of ngram features on an outcome, while controlling for confounds.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-12-5-text-causal-inference/thumb.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-12-5-text-causal-inference/thumb.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Text Feature Selection for Causal Inference</h1>
+    <p class="meta">
+    <a href="https://cs.stanford.edu/~rpryzant/"> Reid Pryzant </a>
+    <div class="post-date">December 5, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h2 id="making-causal-inferences-with-text">Making Causal Inferences with Text</h2>
+
+<p>Identifying the linguistic features that cause people to act a certain way after reading a text, regardless of confounding variables, is something people do all the time without even realizing it. For example,</p>
+
+<ul>
+  <li>Consider <strong>university course catalogues</strong>. Students peruse these each semester before signing up. What’s the magic 200-word blurb that jives with students enough to sign up? What kind of writing style recommendations could you give to <em>any</em> professor, regarding <em>any</em> subject?</li>
+  <li>Consider <strong>crowdfunding campaigns</strong> <a href="https://www.cc.gatech.edu/~dyang888/docs/naacl19.pdf">[1]</a>. We want to know which writing styles pull in the most money, but the effect of language is confounded by the subject of the campaign – a campaign for someone’s medical bills will be written differently than a campaign for building wells. We want to find writing styles that could help <em>any</em> campaign.</li>
+  <li>Consider <strong>comments on reddit</strong>, where each post has a popularity score. Say that we’re interested in finding what writing styles will help posts become popular. Some authors list their genders on reddit, and a user’s gender may also affect popularity through tone, style, or topic choices <a href="https://arxiv.org/pdf/1905.12741.pdf">[2]</a>. How do you decide what kind of language to reccomend to <em>any</em> person, <em>regardless</em> of their gender.</li>
+</ul>
+
+<p>Across three papers, we develop <strong>adversarial learning-based approaches</strong> for these kinds of tasks as well as a <strong>theory of causal inference</strong> to formalize the relationship between text and causality. Our method involves:</p>
+
+<ol>
+  <li>
+    <p><strong>Training</strong> a model which predicts outcomes from text. We control for confounds with adversarial learning <a href="https://www.aclweb.org/anthology/N19-1069">[3]</a>, <a href="https://arxiv.org/abs/1505.07818">[4]</a> or residualization <a href="http://www.sfs.uni-tuebingen.de/~hbaayen/publications/baayenKuperman2009MS.pdf">[5]</a>.</p>
+  </li>
+  <li>
+    <p><strong>Interpreting</strong> the models’ learned parameters to identify the most important words and phrases for the outcome, regardless of confounders.</p>
+  </li>
+</ol>
+
+<p>Compared to other feature selection methods, ours picks features that are <strong>more predictive of the outcome</strong> and <strong>less affected by confounding variables</strong> across four domains: <strong>e-commerce product descriptions</strong> (predictive of sales, regardless of brand), <strong>search advertisements</strong> (predictive of click-through rate, regardless of landing page), <strong>university course descriptions</strong> (predictive of enrollment, regardless of subject), and <strong>financial complaints</strong> (predictive of a short response time, regardless of topic).</p>
+
+<h2 id="formalizing-textual-causality">Formalizing Textual Causality</h2>
+
+<p>Our goal is to find features of text(s) <em>T</em> which are predictive of some desired target variable(s) <em>Y</em> but unrelated to confounding variable(s) <em>C</em> (i.e. the <span style="color:blue"><em>blue</em></span>  bit in the figure below). This is equivalent to picking a lexicon <em>L</em> such that when words in <em>T</em> belonging to <em>L</em> are selected, the resulting set <em>L(T)</em> can explain <em>Y</em> but not <em>C</em>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig1.png" style="width: 50%; height: 50%" /></p>
+</div></figure>
+
+<p>In the paper, we formalize this intuitive goal into maximizing an <strong>informativeness coefficient</strong></p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig2.png" style="width: 75%; height: 75%" /></p>
+</div></figure>
+
+<p>which measures the explanatory power of the lexicon <em>L(T)</em>  beyond the information already contained in the confounders <em>C</em>. The   <span style="color:red"><em>red</em></span>  tells us how much variation in <em>Y</em> is explainable by both <em>L(T)</em>  and  <em>C</em>. The <span style="color:blue"><em>blue</em></span> fixes <em>C</em>, letting us focus on <em>L(T)</em>’s unique effects. In our paper, we show that under some conditions this coefficient is equivalent to the strength of <em>T</em>’s causal effects on <em>Y</em>! <a href="http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf">[6]</a></p>
+
+<p><strong>In practice</strong> <em>I(L)</em> can be estimated by this sequence of steps:</p>
+
+<ol>
+  <li>Training a classifier A that predicts <em>Y</em> from <em>L(T)</em> and <em>C</em></li>
+  <li>Training a classifier <em>B</em> that predicts <em>Y</em> from <em>C</em>.</li>
+  <li>Measuring <em>error(B)</em> - <em>error(A)</em></li>
+</ol>
+
+<p>We continue by introducing two methods for coming up with the best lexicon <em>L(T)</em>.</p>
+
+<h2 id="method-1-adversarial-learning">Method 1: Adversarial Learning</h2>
+
+<p>First, we encode <em>T</em> into a vector <em>e</em> via an attentional bi-LSTM. We then feed <em>e</em> into a series of feedforward neural networks which are trained to predict each target and confounding variable using a cross-entropy loss function. As gradients back-propagate from the confound prediction heads to the encoder, we pass them through a <em>gradient reversal layer</em>. In other words, If the cumulative loss of the target variables is <em>L_t</em> and that of the confounds is <em>L_c</em>, then the loss which is implicitly used to train the encoder is <em>L_e = L_t - L_c</em>. The encoder is encouraged to learn representations of the text which are unrelated to the confounds.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig3.png" style="width: 65%; height: 65%" /></p>
+</div></figure>
+
+<p>To get the “importance” of each feature, we simply look at the attention scores of the model, since ngrams the model focused on while making <em>Y</em>-predictions in a <em>C</em>-invariant way are themselves predictive of <em>Y</em> but not <em>C</em>!</p>
+
+<h2 id="method-2-deep-residualization">Method 2: Deep Residualization</h2>
+
+<p>Recall that we can estimate <em>I(L)</em> by measuring the amount by which <em>L</em> can further improve predictions of <em>Y</em> compared to predictions of <em>Y</em> made from just <em>C</em>. Our Deep Residualization algorithm is directly motivated by this. It first predicts <em>Y</em> from <em>C</em> as well as possible, and then seeks to fine-tune those predictions using a bag-of-words representation of the text <em>T</em>. The parameters are then updated using the loss from both prediction steps. This two-stage prediction process implicitly controls for <em>C</em> because <em>T</em> is being used to explain the part of <em>Y</em>’s variance that the confounds can’t explain.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig4.png" style="width: 65%; height: 65%" /></p>
+</div></figure>
+
+<p>Then to get the “importance” of each feature, we trace all possible paths between the feature and output, multiply weights along these paths, then sum across paths.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig5.png" style="width: 65%; height: 65%" /></p>
+</div></figure>
+
+<h2 id="social-science-applications">Social Science Applications</h2>
+
+<p>Armed with our theoretical framework and algorithms, we can now pick words and phrases that are strongly associated with arbitrary outcomes, regardless of confounding information. In our papers, we do this for four domains:</p>
+<ul>
+  <li><strong>Product descriptions</strong> for chocolate and health products on the Japanese e-commerce website Rakuten. We want to find language that explains sales, but not brand or price.</li>
+  <li><strong>Written  complaints</strong> to the Consumer Financial Protection Bureau (CFPB). We want to find language that predicts short response time, regardless of the financial product the complaint is about.</li>
+  <li><strong>Search advertisements</strong> for real estate, job listings, and apparel on the website Google.com. We want to find language that predicts a high click-through rate (CTR), regardless of the landing page the ad points to.</li>
+  <li><strong>Course descriptions</strong> and enrollment figures for 6 years of undergraduate offerings at Stanford University. We want to find language that boosts enrollment, regardless of subject and requirements.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig6.png" style="width: 75%; height: 75%" /></p>
+</div></figure>
+
+<p>As we can see, in each setting one or both of our proposed methods outperform a number of existing feature selection algorithms: Residualized Regressions (RR), Regression with Confound features (RC), Mixed-effects Regression (MR), Mutual information (MI), and Log-Odds Ratio (OR).</p>
+
+<p>Furthermore, we can interpret features these algorithms are selecting to learn about the linguistic dynamics of the associated domains!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-12-5-text-causal-inference/fig7.png" style="width: 90%; height: 90%" /></p>
+</div></figure>
+
+<ul>
+  <li>Appeals to <strong>politeness</strong> and <strong>seasonality</strong> appear to help make for successful Japanese product descriptions – an interesting intersection of language and culture.</li>
+  <li>Concrete <strong>details</strong> (“multiple”, “xx/xx/xxxx”) and <strong>already having taken some steps</strong> (“submitted”, “ago”) appears important for writing a complaint that will get handled quickly.</li>
+  <li>Appeals to authority (“®“, “Official site”) and personalization (“your” “personalized”) are helpful for search advertising creatives.</li>
+  <li><strong>Student choice</strong> (“or”) and <strong>dynamic activities</strong> (“eating”, “doing”, “guest”, “project”) make for successful course descriptions.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This work presented two methods for identifying text features which best explain an outcome, controlling for confounding variables we are not interested in. This method is generally applicable to a variety of data science and social science applications. In the future, we hope to strengthen the method’s theoretical guarantees in a causal inference framework.</p>
+
+<p><strong>The algorithms in this blog post have been <a href="https://github.com/rpryzant/causal_selection">open-sourced</a>! Install via pip:</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install causal-selection
+</code></pre></div></div>
+
+<p><em>This post was based on the following papers:</em></p>
+<ol>
+  <li>
+    <p><em><a href="https://nlp.stanford.edu/pubs/pryzant2018lexicon.pdf">Deconfounded Lexicon Induction for Interpretable Social Science<br />
+</a></em></p>
+  </li>
+  <li>
+    <p><em><a href="https://nlp.stanford.edu/pubs/pryzant2018emnlp.pdf">Interpretable Neural Architectures for Attributing an Ad’s Performance to its Writing Style</a></em></p>
+  </li>
+  <li>
+    <p><em><a href="https://nlp.stanford.edu/pubs/pryzant2017sigir.pdf">Predicting Sales from the Language of Product Descriptions 
+</a></em></p>
+  </li>
+</ol>
+
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/text-causal-inference/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/text-causal-inference/&text=Text+Feature+Selection+for+Causal+Inference%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/text-causal-inference/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/text-causal-inference/&title=Text+Feature+Selection+for+Causal+Inference%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/text-causal-inference/&title=Text+Feature+Selection+for+Causal+Inference%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Text+Feature+Selection+for+Causal+Inference%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/text-causal-inference/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#causal+inference">
+      <p><i class="fa fa-tag fa-fw"></i> causal inference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#feature+selection">
+      <p><i class="fa fa-tag fa-fw"></i> feature selection</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#interpretability">
+      <p><i class="fa fa-tag fa-fw"></i> interpretability</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/robonet/">
+      <p>Previous post</p>
+        RoboNet: A Dataset for Large-Scale Multi-Robot Learning
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/modeling-risky-humans/">
+      <p>Next post</p>
+        When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

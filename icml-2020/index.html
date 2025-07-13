@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/icml-2020/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at ICML 2020 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at ICML 2020" />
+<meta name="author" content="Compiled by <a href='https://www.siddkaramcheti.com/'>Sidd Karamcheti</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/icml-2020/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/icml-2020/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-11T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at ICML 2020" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Papers and Talks at ICML 2020","dateModified":"2020-07-11T00:00:00-07:00","datePublished":"2020-07-11T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/icml-2020/"},"url":"http://ai.stanford.edu/blog/icml-2020/","author":{"@type":"Person","name":"Compiled by <a href='https://www.siddkaramcheti.com/'>Sidd Karamcheti</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at ICML 2020 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at ICML 2020, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at ICML 2020">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at ICML 2020, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-07-11-icml-2020/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-07-11-icml-2020/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at ICML 2020</h1>
+    <p class="meta">
+    Compiled by <a href='https://www.siddkaramcheti.com/'>Sidd Karamcheti</a>
+    <div class="post-date">July 11, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/logo.png" /></p>
+
+<p>The <a href="https://icml.cc/">International Conference on Machine Learning</a> (ICML) 2020 is being hosted virtually from July 13th - July 18th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="active-world-model-learning-in-agent-rich-environments-with-progress-curiosity">Active World Model Learning in Agent-rich Environments with Progress Curiosity</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img0" />
+<strong>Authors</strong>: Kuno Kim, Megumi Sano, Julian De Freitas, Nick Haber, Daniel Yamins
+<br /><strong>Contact</strong>: khkim@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://vimeo.com/389619940">Video</a>
+<br /><strong>Keywords</strong>: curiosity, active learning, world models, animacy, attention</p>
+<hr />
+
+<h4 id="graph-structure-of-neural-networks">Graph Structure of Neural Networks</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img22" />
+<strong>Authors</strong>: Jiaxuan You, Jure Leskovec, Kaiming He, Saining Xie
+<br /><strong>Contact</strong>: jiaxuan@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2007.06559.pdf">Paper</a>
+<br /><strong>Keywords</strong>: neural network design, network science, deep learning</p>
+<hr />
+
+<h4 id="a-distributional-framework-for-data-valuation"><a href="https://arxiv.org/abs/2002.12334">A Distributional Framework For Data Valuation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img11" />
+<strong>Authors</strong>: Amirata Ghorbani, Michael P. Kim, James Zou
+<br /><strong>Contact</strong>: jamesz@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.12334">Paper</a>
+<br /><strong>Keywords</strong>: shapley value, data valuation, machine learning, data markets</p>
+<hr />
+
+<h4 id="a-general-recurrent-state-space-framework-for-modeling-neural-dynamics-during-decision-making"><a href="https://arxiv.org/abs/2001.04571">A General Recurrent State Space Framework for Modeling Neural Dynamics During Decision-Making</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img4" />
+<strong>Authors</strong>: David Zoltowski, Jonathan Pillow, Scott Linderman
+<br /><strong>Contact</strong>: scott.linderman@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2001.04571">Paper</a>
+<br /><strong>Keywords</strong>: computational neuroscience, dynamical systems, variational inference</p>
+<hr />
+
+<h4 id="an-imitation-learning-approach-for-cache-replacement"><a href="https://arxiv.org/abs/2006.16239">An Imitation Learning Approach for Cache Replacement</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img21" />
+<strong>Authors</strong>: Evan Zheran Liu, Milad Hashemi, Kevin Swersky, Parthasarathy Ranganathan, Junwhan Ahn
+<br /><strong>Contact</strong>: evanliu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2006.16239">Paper</a>
+<br /><strong>Keywords</strong>: imitation learning, cache replacement, benchmark</p>
+<hr />
+
+<h4 id="an-investigation-of-why-overparameterization-exacerbates-spurious-correlations-"><a href="https://arxiv.org/abs/2005.04345">An Investigation of Why Overparameterization Exacerbates Spurious Correlations </a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img13" />
+<strong>Authors</strong>: Shiori Sagawa*, Aditi Raghunathan*, Pang Wei Koh*, Percy Liang 
+<br /><strong>Contact</strong>: ssagawa@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2005.04345">Paper</a>
+<br /><strong>Keywords</strong>: robustness, spurious correlations, overparameterization</p>
+<hr />
+
+<h4 id="better-depth-width-trade-offs-for-neural-networks-through-the-lens-of-dynamical-systems"><a href="https://arxiv.org/abs/2003.00777">Better Depth-Width Trade-offs for Neural Networks through the Lens of Dynamical Systems.</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img8" />
+<strong>Authors</strong>: Vaggos Chatziafratis, Sai Ganesh Nagarajan, Ioannis Panageas
+<br /><strong>Contact</strong>: vaggos@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.00777">Paper</a>
+<br /><strong>Keywords</strong>: expressivity, depth, width, dynamical systems</p>
+<hr />
+
+<h4 id="bridging-the-gap-between-f-gans-and-wasserstein-gans"><a href="https://arxiv.org/abs/1910.09779">Bridging the Gap Between f-GANs and Wasserstein GANs</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img18" />
+<strong>Authors</strong>: Jiaming Song, Stefano Ermon
+<br /><strong>Contact</strong>: jiaming.tsong@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.09779">Paper</a>
+<br /><strong>Keywords</strong>: gans, generative models, f-divergence, wasserstein distance</p>
+<hr />
+
+<h4 id="concept-bottleneck-models"><a href="https://arxiv.org/abs/2007.04612">Concept Bottleneck Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img30" />
+<strong>Authors</strong>: Pang Wei Koh, Thao Nguyen, Yew Siang Tang, Stephen Mussmann, Emma Pierson, Been Kim, Percy Liang
+<br /><strong>Contact</strong>: pangwei@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2007.04612">Paper</a>
+<br /><strong>Keywords</strong>: concepts, intervention, interpretability</p>
+<hr />
+
+<h4 id="domain-adaptive-imitation-learning"><a href="https://arxiv.org/abs/1910.00105">Domain Adaptive Imitation Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img1" />
+<strong>Authors</strong>: Kuno Kim, Yihong Gu, Jiaming Song, Shengjia Zhao, Stefano Ermon
+<br /><strong>Contact</strong>: khkim@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.00105">Paper</a>
+<br /><strong>Keywords</strong>: imitation learning, domain adaptation, reinforcement learning, generative adversarial networks, cycle consistency</p>
+<hr />
+
+<h4 id="encoding-musical-style-with-transformer-autoencoders"><a href="https://arxiv.org/abs/1912.05537">Encoding Musical Style with Transformer Autoencoders</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img15" />
+<strong>Authors</strong>: Kristy Choi, Curtis Hawthorne, Ian Simon, Monica Dinculescu, Jesse Engel
+<br /><strong>Contact</strong>: kechoi@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1912.05537">Paper</a> | <a href="https://magenta.tensorflow.org/transformer-autoencoder">Blog Post</a> | <a href="https://icml.cc/virtual/2020/paper/5978">Video</a>
+<br /><strong>Keywords</strong>: sequential, network, and time-series modeling; applications - music</p>
+<hr />
+
+<h4 id="fair-generative-modeling-via-weak-supervision"><a href="https://arxiv.org/abs/1910.12008">Fair Generative Modeling via Weak Supervision</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img16" />
+<strong>Authors</strong>: Kristy Choi, Aditya Grover, Trisha Singh, Rui Shu, Stefano Ermon
+<br /><strong>Contact</strong>: kechoi@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.12008">Paper</a> | <a href="https://icml.cc/virtual/2020/paper/6697">Video</a>
+<br /><strong>Keywords</strong>: deep learning - generative models and autoencoders; fairness, equity, justice, and safety</p>
+<hr />
+
+<h4 id="fast-and-three-rious-speeding-up-weak-supervision-with-triplet-methods"><a href="https://arxiv.org/abs/2002.11955">Fast and Three-rious: Speeding Up Weak Supervision with Triplet Methods</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img3" />
+<strong>Authors</strong>: Daniel Y. Fu, Mayee F. Chen, Frederic Sala, Sarah M. Hooper, Kayvon Fatahalian, Christopher Ré
+<br /><strong>Contact</strong>: danfu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.11955">Paper</a> | <a href="http://hazyresearch.stanford.edu/flyingsquid">Blog Post</a> | <a href="https://www.youtube.com/watch?v=pHadwUKCoNE">Video</a>
+<br /><strong>Keywords</strong>: weak supervision, latent variable models</p>
+<hr />
+
+<h4 id="flexible-and-efficient-long-range-planning-through-curious-exploration"><a href="https://arxiv.org/abs/2004.10876">Flexible and Efficient Long-Range Planning Through Curious Exploration</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img2" />
+<strong>Authors</strong>: Aidan Curtis, Minjian Xin, Dilip Arumugam, Kevin Feigelis, Daniel Yamins
+<br /><strong>Contact</strong>: yamins@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2004.10876">Paper</a> | <a href="https://neuroailab.github.io/CuriousSamplePlanner/">Blog Post</a> | <a href="https://youtu.be/7DSW8Dy9ADQ">Video</a>
+<br /><strong>Keywords</strong>: planning, deep learning, sparse reinforcement learning, curiosity</p>
+<hr />
+
+<h4 id="formulazero-distributionally-robust-online-adaptation-via-offline-population-synthesis"><a href="https://arxiv.org/abs/2003.03900">FormulaZero: Distributionally Robust Online Adaptation via Offline Population Synthesis</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img17" />
+<strong>Authors</strong>: Aman Sinha, Matthew O’Kelly, Hongrui Zheng, Rahul Mangharam, John Duchi, Russ Tedrake
+<br /><strong>Contact</strong>: amans@stanford.edu, mokelly@seas.upenn.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.03900">Paper</a> | <a href="https://youtu.be/7Yat9FZzE4g">Video</a>
+<br /><strong>Keywords</strong>: distributional robustness, online learning, autonomous driving, reinforcement learning, simulation, mcmc</p>
+<hr />
+
+<h4 id="goal-aware-prediction-learning-to-model-what-matters"><a href="https://proceedings.icml.cc/static/paper_files/icml/2020/2981-Paper.pdf">Goal-Aware Prediction: Learning to Model what Matters</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img28" />
+<strong>Authors</strong>: Suraj Nair, Silvio Savarese, Chelsea Finn
+<br /><strong>Contact</strong>: surajn@stanford.edu
+<br /><strong>Links:</strong> <a href="https://proceedings.icml.cc/static/paper_files/icml/2020/2981-Paper.pdf">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning, visual planning, robotics</p>
+<hr />
+
+<h4 id="graph-based-self-supervised-program-repair-from-diagnostic-feedback"><a href="https://arxiv.org/abs/2005.10636">Graph-based, Self-Supervised Program Repair from Diagnostic Feedback</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img14" />
+<strong>Authors</strong>: Michihiro Yasunaga, Percy Liang
+<br /><strong>Contact</strong>: myasu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2005.10636">Paper</a> | <a href="https://cs.stanford.edu/~myasu/files/DrRepair_slides.pdf">Blog Post</a> | <a href="https://icml.cc/virtual/2020/paper/6722#">Video</a>
+<br /><strong>Keywords</strong>: program repair, program synthesis, self-supervision, pre-training, graph</p>
+<hr />
+
+<h4 id="interpretable-off-policy-evaluation-in-reinforcement-learning-by-highlighting-influential-transitions"><a href="https://arxiv.org/abs/2002.03478">Interpretable Off-Policy Evaluation in Reinforcement Learning by Highlighting Influential Transitions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img24" />
+<strong>Authors</strong>: Omer Gottesman, Joseph Futoma, Yao Liu, Sonali Parbhoo, Leo Anthony Celi, Emma Brunskill, Finale Doshi-Velez
+<br /><strong>Contact</strong>: gottesman@fas.harvard.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.03478">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning, off-policy evaluation, interpretability</p>
+<hr />
+
+<h4 id="learning-near-optimal-policies-with-low-inherent-bellman-error"><a href="https://arxiv.org/abs/2003.00153">Learning Near Optimal Policies with Low Inherent Bellman Error</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img20" />
+<strong>Authors</strong>: Andrea Zanette, Alessandro Lazaric, Mykel Kochenderfer, Emma Brunskill
+<br /><strong>Contact</strong>: zanette@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.00153">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning, exploration, function approximation</p>
+<hr />
+
+<h4 id="maximum-likelihood-with-bias-corrected-calibration-is-hard-to-beat-at-label-shift-domain-adaptation"><a href="https://arxiv.org/abs/1901.06852">Maximum Likelihood With Bias-Corrected Calibration is Hard-To-Beat at Label Shift Domain Adaptation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img34" />
+<strong>Authors</strong>: Amr Alexandari*, Anshul Kundaje†, Avanti Shrikumar*† (*co-first †co-corresponding) 
+<br /><strong>Contact</strong>: avanti@cs.stanford.edu, amr.alexandari@gmail.com, akundaje@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1901.06852">Paper</a> | <a href="https://kundajelab.github.io/publication/2020/07/08/max-likelihood-with-bias-corrected-calibration-label-shift-domain-adaptation.html">Blog Post</a> | <a href="https://www.youtube.com/watch?v=ZBXjE9QTruE">Video</a>
+<br /><strong>Keywords</strong>: domain adaptation, label shift, calibration, maximum likelihood</p>
+<hr />
+
+<h4 id="ngboost-natural-gradient-boosting-for-probabilistic-prediction"><a href="https://arxiv.org/abs/1910.03225">NGBoost: Natural Gradient Boosting for Probabilistic Prediction</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img7" />
+<strong>Authors</strong>: Tony Duan*, Anand Avati*, Daisy Yi Ding, Sanjay Basu, Andrew Ng, Alejandro Schuler
+<br /><strong>Contact</strong>: avati@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.03225">Paper</a>
+<br /><strong>Keywords</strong>: gradient boosting, uncertainty estimation, natural gradient</p>
+<hr />
+
+<h4 id="on-the-expressivity-of-neural-networks-for-deep-reinforcement-learning"><a href="https://arxiv.org/abs/1910.05927">On the Expressivity of Neural Networks for Deep Reinforcement Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img33" />
+<strong>Authors</strong>: Kefan Dong, Yuping Luo, Tianhe Yu, Chelsea Finn, Tengyu Ma
+<br /><strong>Contact</strong>: kefandong@gmail.com
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.05927">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning</p>
+<hr />
+
+<h4 id="on-the-generalization-effects-of-linear-transformations-in-data-augmentation"><a href="https://arxiv.org/abs/2005.00695">On the Generalization Effects of Linear Transformations in Data Augmentation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img5" />
+<strong>Authors</strong>: Sen Wu, Hongyang Zhang, Gregory Valiant, Christopher Ré
+<br /><strong>Contact</strong>: senwu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2005.00695">Paper</a> | <a href="http://hazyresearch.stanford.edu/data-aug-part-3">Blog Post</a> | <a href="Waiting for ICML to release the video link">Video</a>
+<br /><strong>Keywords</strong>: data augmentation, generalization</p>
+<hr />
+
+<h4 id="predictive-coding-for-locally-linear-control"><a href="https://arxiv.org/abs/2003.01086">Predictive Coding for Locally-Linear Control</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img32" />
+<strong>Authors</strong>: Rui Shu*, Tung Nguyen*, Yinlam Chow, Tuan Pham, Khoat Than, Mohammad Ghavamzadeh, Stefano Ermon, Hung Bui
+<br /><strong>Contact</strong>: ruishu@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.01086">Paper</a> | <a href="https://youtu.be/BTU3rWLXTjY">Video</a>
+<br /><strong>Keywords</strong>: representation learning, information theory, generative models, planning, control</p>
+<hr />
+
+<h4 id="robustness-to-spurious-correlations-via-human-annotations"><a href="https://cs.stanford.edu/~megha/papers/icml2020.pdf">Robustness to Spurious Correlations via Human Annotations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img31" />
+<strong>Authors</strong>: Megha Srivastava, Tatsunori Hashimoto, Percy Liang
+<br /><strong>Contact</strong>: megha@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://cs.stanford.edu/~megha/papers/icml2020.pdf">Paper</a>
+<br /><strong>Keywords</strong>: robustness, distribution shift, crowdsourcing, human-in-the-loop</p>
+<hr />
+
+<h4 id="sample-amplification-increasing-dataset-size-even-when-learning-is-impossible"><a href="https://arxiv.org/abs/1904.12053">Sample Amplification: Increasing Dataset Size even when Learning is Impossible</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img19" />
+<strong>Authors</strong>: Brian Axelrod, Shivam Garg, Vatsal Sharan, Gregory Valiant
+<br /><strong>Contact</strong>: shivamgarg@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1904.12053">Paper</a> | <a href="https://slideslive.com/38923099/contributed-talk-sample-ampification-increasing-dataset-size-even-when-learning-is-impossible">Video</a>
+<br /><strong>Keywords</strong>: learning theory, sample amplification, generative models</p>
+<hr />
+
+<h4 id="scalable-identification-of-partially-observed-systems-with-certainty-equivalent-em"><a href="https://arxiv.org/abs/2006.11615">Scalable Identification of Partially Observed Systems with Certainty-Equivalent EM</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img27" />
+<strong>Authors</strong>: Kunal Menda, Jean de Becdelièvre, Jayesh K. Gupta, Ilan Kroo, Mykel J. Kochenderfer, Zachary Manchester
+<br /><strong>Contact</strong>: kmenda@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2006.11615">Paper</a> | <a href="https://youtu.be/WzXO--ohv3g">Video</a>
+<br /><strong>Keywords</strong>: system identification; time series and sequence models</p>
+<hr />
+
+<h4 id="the-implicit-and-explicit-regularization-effects-of-dropout"><a href="https://arxiv.org/abs/2002.12915">The Implicit and Explicit Regularization Effects of Dropout</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img29" />
+<strong>Authors</strong>: Colin Wei, Sham Kakade, Tengyu Ma
+<br /><strong>Contact</strong>: colinwei@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.12915">Paper</a>
+<br /><strong>Keywords</strong>: dropout, deep learning theory, implicit regularization</p>
+<hr />
+
+<h4 id="training-deep-energy-based-models-with-f-divergence-minimization"><a href="https://arxiv.org/abs/2003.03463">Training Deep Energy-Based Models with f-Divergence Minimization</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img6" />
+<strong>Authors</strong>: Lantao Yu, Yang Song, Jiaming Song, Stefano Ermon
+<br /><strong>Contact</strong>: lantaoyu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.03463">Paper</a>
+<br /><strong>Keywords</strong>: energy-based models; f-divergences; deep generative models</p>
+<hr />
+
+<h4 id="two-routes-to-scalable-credit-assignment-without-weight-symmetry"><a href="https://arxiv.org/abs/2003.01513">Two Routes to Scalable Credit Assignment without Weight Symmetry</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img12" />
+<strong>Authors</strong>: Daniel Kunin*, Aran Nayebi*, Javier Sagastuy-Brena*, Surya Ganguli, Jonathan M. Bloom, Daniel L. K. Yamins
+<br /><strong>Contact</strong>: jvrsgsty@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2003.01513">Paper</a> | <a href="https://www.youtube.com/watch?v=fC_E0dO3Rfo">Video</a>
+<br /><strong>Keywords</strong>: learning rules, computational neuroscience, machine learning</p>
+<hr />
+
+<h4 id="understanding-self-training-for-gradual-domain-adaptation"><a href="https://arxiv.org/abs/2002.11361">Understanding Self-Training for Gradual Domain Adaptation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img25" />
+<strong>Authors</strong>: Ananya Kumar, Tengyu Ma, Percy Liang
+<br /><strong>Contact</strong>: ananya@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.11361">Paper</a> | <a href="https://icml.cc/virtual/2020/paper/6815">Video</a>
+<br /><strong>Keywords</strong>: domain adaptation, self-training, semi-supervised learning</p>
+<hr />
+
+<h4 id="understanding-and-mitigating-the-tradeoff-between-robustness-and-accuracy"><a href="https://arxiv.org/abs/2002.10716">Understanding and Mitigating the Tradeoff between Robustness and Accuracy</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img26" />
+<strong>Authors</strong>: Aditi Raghunathan*, Sang Michael Xie*, Fanny Yang, John C. Duchi, Percy Liang
+<br /><strong>Contact</strong>: aditir@stanford.edu, xie@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.10716">Paper</a> | <a href="https://youtu.be/SkKFAY0GiZk">Video</a>
+<br /><strong>Keywords</strong>: adversarial examples, adversarial training, robustness, accuracy, tradeoff, robust self-training</p>
+<hr />
+
+<h4 id="understanding-the-curse-of-horizon-in-off-policy-evaluation-via-conditional-importance-sampling"><a href="https://arxiv.org/abs/1910.06508">Understanding the Curse of Horizon in Off-Policy Evaluation via Conditional Importance Sampling</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img23" />
+<strong>Authors</strong>: Yao Liu, Pierre-Luc Bacon, Emma Brunskill
+<br /><strong>Contact</strong>: yaoliu@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.06508">Paper</a>
+<br /><strong>Keywords</strong>: reinforcement learning, off-policy evaluation, importance sampling</p>
+<hr />
+
+<h4 id="visual-grounding-of-learned-physical-models"><a href="https://arxiv.org/abs/2004.13664">Visual Grounding of Learned Physical Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img35" />
+<strong>Authors</strong>: Yunzhu Li, Toru Lin*, Kexin Yi*, Daniel M. Bear, Daniel L. K. Yamins, Jiajun Wu, Joshua B. Tenenbaum, Antonio Torralba
+<br /><strong>Contact</strong>: liyunzhu@mit.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2004.13664">Paper</a> | <a href="https://youtu.be/P_LrG0lzc-0">Video</a>
+<br /><strong>Keywords</strong>: intuitive physics, visual grounding, physical reasoning</p>
+<hr />
+
+<h4 id="learning-to-simulate-complex-physics-with-graph-networks"><a href="https://arxiv.org/abs/2002.09405">Learning to Simulate Complex Physics with Graph Networks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img9" />
+<strong>Authors</strong>: Alvaro Sanchez-Gonzalez, Jonathan Godwin, Tobias Pfaff, Rex Ying, Jure Leskovec, Peter W. Battaglia
+<br /><strong>Contact</strong>: rexying@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.09405">Paper</a>
+<br /><strong>Keywords</strong>: simulation, graph neural networks</p>
+<hr />
+
+<h4 id="coresets-for-data-efficient-training-of-machine-learning-models"><a href="https://arxiv.org/abs/1906.01827">Coresets for Data-Efficient Training of Machine Learning Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img36" />
+<strong>Authors</strong>: Baharan Mirzasoleiman, Jeff Bilmes, Jure Leskovec
+<br /><strong>Contact</strong>: baharanm@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1906.01827">Paper</a> | <a href="https://icml.cc/virtual/2020/paper/6325">Video</a>
+<br /><strong>Keywords</strong>: Coresets, Data-efficient training, Submodular optimization, Incremental gradient methods</p>
+<hr />
+
+<h4 id="which-tasks-should-be-learned-together-in-multi-task-learning"><a href="http://taskgrouping.stanford.edu/">Which Tasks Should be Learned Together in Multi-Task Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img37" />
+<strong>Authors</strong>: Trevor Standley, Amir Zamir, Dawn Chen, Leonidas Guibas, Jitendra Malik, Silvio Savarese
+<br /><strong>Contact</strong>: tstand@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1905.07553">Paper</a> | <a href="https://www.youtube.com/watch?v=qCRdrczbqUo">Video</a>
+<br /><strong>Keywords</strong>: machine learning, multi-task learning, computer vision</p>
+<hr />
+
+<h4 id="accelerated-message-passing-for-entropy-regularized-map-inference"><a href="https://arxiv.org/abs/2007.00699">Accelerated Message Passing for Entropy-Regularized MAP Inference</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img38" />
+<strong>Authors</strong>: Jonathan N. Lee, Aldo Pacchiano, Peter Bartlett, Michael I. Jordan
+<br /><strong>Contact</strong>: jnl@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2007.00699">Paper</a>
+<br /><strong>Keywords</strong>: graphical models, map inference, message passing, optimization</p>
+<hr />
+
+<h4 id="on-learning-sets-of-symmetric-elements"><a href="https://arxiv.org/abs/2002.08599">On Learning Sets of Symmetric Elements</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img39" />
+<strong>Authors</strong>: Haggai Maron, Or Litany, Gal Chechik, Ethan Fetaya
+<br /><strong>Contact</strong>: or.litany@gmail.com
+<br /><strong>Links</strong>: <a href="https://arxiv.org/abs/2002.08599">Paper</a>
+<br /><strong>Keywords</strong>: equivariance, sets, pointclouds, graphs
+<br /><b>Outstanding Paper Award</b></p>
+<hr />
+
+<h4 id="individual-calibration-with-randomized-forecasting"><a href="https://arxiv.org/abs/2006.10288">Individual Calibration with Randomized Forecasting</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-07-11-icml-2020/img40" />
+<strong>Authors</strong>: Shengjia Zhao, Tengyu Ma, Stefano Ermon
+<br /><strong>Contact</strong>: sjzhao@stanford.edu
+<br /><strong>Links</strong>: <a href="https://arxiv.org/abs/2006.10288">Paper</a>
+<br /><strong>Keywords</strong>: calibration, uncertainty estimation</p>
+<hr />
+
+<p>We look forward to seeing you at ICML 2020!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/icml-2020/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/icml-2020/&text=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2020%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/icml-2020/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/icml-2020/&title=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2020%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/icml-2020/&title=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2020%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+ICML+2020%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/icml-2020/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ICLR">
+      <p><i class="fa fa-tag fa-fw"></i> ICLR</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/rss-2020/">
+      <p>Previous post</p>
+        Stanford Papers and Workshops at RSS 2020
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/eccv-2020/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at ECCV 2020
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

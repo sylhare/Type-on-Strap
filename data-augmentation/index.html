@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/data-augmentation/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Automating Data Augmentation: Practice, Theory and New Direction | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Automating Data Augmentation: Practice, Theory and New Direction" />
+<meta name="author" content="<a href='http://yixuanli.net/'>Sharon Y. Li</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model in applications such as image and text classification. Heuristic data augmentation schemes are often tuned manually by human experts with extensive domain knowledge, and may result in suboptimal augmentation policies. In this blog post, we provide a broad overview of recent efforts in this exciting research area, which resulted in new algorithms for automating the search process of transformation functions, new theoretical insights that improve the understanding of various augmentation techniques commonly used in practice, and a new framework for exploiting data augmentation to patch a flawed model and improve performance on crucial subpopulation of data." />
+<meta property="og:description" content="Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model in applications such as image and text classification. Heuristic data augmentation schemes are often tuned manually by human experts with extensive domain knowledge, and may result in suboptimal augmentation policies. In this blog post, we provide a broad overview of recent efforts in this exciting research area, which resulted in new algorithms for automating the search process of transformation functions, new theoretical insights that improve the understanding of various augmentation techniques commonly used in practice, and a new framework for exploiting data augmentation to patch a flawed model and improve performance on crucial subpopulation of data." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/data-augmentation/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/data-augmentation/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-24T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Automating Data Augmentation: Practice, Theory and New Direction" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Automating Data Augmentation: Practice, Theory and New Direction","dateModified":"2020-04-24T00:00:00-07:00","datePublished":"2020-04-24T00:00:00-07:00","description":"Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model in applications such as image and text classification. Heuristic data augmentation schemes are often tuned manually by human experts with extensive domain knowledge, and may result in suboptimal augmentation policies. In this blog post, we provide a broad overview of recent efforts in this exciting research area, which resulted in new algorithms for automating the search process of transformation functions, new theoretical insights that improve the understanding of various augmentation techniques commonly used in practice, and a new framework for exploiting data augmentation to patch a flawed model and improve performance on crucial subpopulation of data.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/data-augmentation/"},"url":"http://ai.stanford.edu/blog/data-augmentation/","author":{"@type":"Person","name":"<a href='http://yixuanli.net/'>Sharon Y. Li</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Automating Data Augmentation: Practice, Theory and New Direction | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model. In this blog post, we provide an overview of recent w...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Automating Data Augmentation: Practice, Theory and New Direction">
+    
+    <meta name="twitter:description" content="Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model. In this blog post, we provide an overview of recent work on the practice, theory and new direction of data augmentation research.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-04-20-data-augmentation/thumbnail.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-04-20-data-augmentation/thumbnail.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Automating Data Augmentation: Practice, Theory and New Direction</h1>
+    <p class="meta">
+    <a href='http://yixuanli.net/'>Sharon Y. Li</a>
+    <div class="post-date">April 24, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <blockquote>
+  <p>Data augmentation is a de facto technique used in nearly every state-of-the-art machine learning model in applications such as image and text classification. Heuristic data augmentation schemes are often tuned manually by human experts with extensive domain knowledge, and may result in suboptimal augmentation policies. In this blog post, we provide a broad overview of recent efforts in this exciting research area, which resulted in new algorithms for automating the search process of transformation functions, new theoretical insights that improve the understanding of various augmentation techniques commonly used in practice, and a new framework for exploiting data augmentation to patch a flawed model and improve performance on crucial subpopulation of data.</p>
+</blockquote>
+
+<h2 id="why-data-augmentation">Why Data Augmentation?</h2>
+
+<p>Modern machine learning models, such as deep neural networks, may have billions of parameters and require massive labeled training datasets—which are often not available. The technique of artificially expanding labeled training datasets—known as data augmentation—has quickly become critical for combating this data scarcity problem. Today, data augmentation is used as a secret sauce in nearly every state-of-the-art model for image classification, and is becoming increasingly common in other modalities such as natural language understanding as well. The goal of this blog post is to provide an overview of recent efforts in this exciting research area.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/2020-04-20-data-augmentation/fig1.png"><img class="postimage_95" src="/blog/assets/img/posts/2020-04-20-data-augmentation/fig1.png" /></a></p>
+<figcaption>
+Figure 1. Heuristic data augmentations apply a deterministic sequence of transformation functions tuned by human experts.The augmented data will be used for training downstream models.
+  </figcaption>
+</div></figure>
+
+<p>Heuristic data augmentation schemes often rely on the composition of a set of simple transformation functions (TFs) such as rotations and flips (see Figure 1). When chosen carefully, data augmentation schemes tuned by human experts can improve model performance. However, such heuristic strategies in practice can cause large variances in end model performance, and may not produce augmentations needed for state-of-the-art models.</p>
+
+<h2 id="the-open-challenges-in-data-augmentation">The Open Challenges in Data Augmentation</h2>
+
+<p>The limitations of conventional data augmentation approaches reveal huge opportunities for research advances. Below we summarize a few challenges that motivate some of the works in the area of data augmentation.</p>
+
+<ul>
+  <li>
+    <p>From <strong>manual</strong> to <strong>automated</strong> search algorithms: As opposed to performing suboptimal manual search, how can we design learnable algorithms to find augmentation strategies that can outperform human-designed heuristics?</p>
+  </li>
+  <li>
+    <p>From <strong>practical</strong> to <strong>theoretical</strong> understanding: Despite the rapid progress of creating various augmentation approaches pragmatically, understanding their benefits remains a mystery because of a lack of analytic tools. How can we theoretically understand various data augmentations used in practice?</p>
+  </li>
+  <li>
+    <p>From <strong>coarse-grained</strong> to <strong>fine-grained</strong> model quality assurance: While most existing data augmentation approaches focus on improving the overall performance of a model, it is often imperative to have a finer-grained perspective on critical subpopulations of data. When a model exhibits inconsistent predictions on important subgroups of data, how can we exploit data augmentations to mitigate the performance gap in a prescribed way?</p>
+  </li>
+</ul>
+
+<p>In this blog, we will describe ideas and recent research works leading the way to overcome these challenges above.</p>
+
+<h2 id="practical-methods-of-learnable-data-augmentations">Practical Methods of Learnable Data Augmentations</h2>
+
+<p>Learnable data augmentation is promising, in that it allows us to search for more powerful parameterizations and compositions of transformations. Perhaps the biggest difficulty with automating data augmentation is how to search over the space of transformations. This can be prohibitive due to the large number of transformation functions and associated parameters in the search space. How can we design learnable algorithms that explore the space of transformation functions efficiently and effectively, and find augmentation strategies that can outperform human-designed heuristics? In response to the challenge, we highlight a few recent methods below.</p>
+
+<p><strong>TANDA: Transformation Adversarial Networks for Data Augmentations</strong></p>
+
+<p>To address this problem, TANDA (<a href="https://arxiv.org/abs/1709.01643">Ratner et al. 2017</a>) proposes a framework to learn augmentations, which models data augmentations as sequences of Transformation Functions (TFs) provided by users. For example, these might include <em>“rotate 5 degrees”</em> or <em>“shift by 2 pixels”</em>. At the core, this framework consists of two components (1) <strong>learning a TF sequence generator</strong> that results in useful augmented data points, and (2) <strong>using the sequence generator</strong> to augment training sets for a downstream model. In particular, the TF sequence generator is trained to produce realistic images by having to fool a discriminator network, following the GANs framework (<a href="https://arxiv.org/abs/1406.2661">Goodfellow et al. 2014</a>). The underlying assumption here is that the transformations would either lead to realistic images, or indistinguishable garbage images that are off the manifold. As shown in Figure 1, the objective for the generator is to produce sequences of TFs such that the augmented data point can fool the discriminator; whereas the objective for the discriminator is to produce values close to 1 for data points in the original training set and values close to 0 for augmented data points.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/2020-04-20-data-augmentation/fig2.png"><img class="postimage_95" src="/blog/assets/img/posts/2020-04-20-data-augmentation/fig2.png" /></a></p>
+<figcaption>
+Figure 2. Automating data augmentation with TANDA (Ratner et al. 2017). A TF sequence generator is trained adversarially to produce augmented images that are realistic compared to training data. 
+  </figcaption>
+</div></figure>
+
+<p><strong>AutoAugment and Further Improvement</strong>
+Using a similar framework, AutoAugment (<a href="https://arxiv.org/abs/1805.09501">Cubuk et al. 2018</a>) developed by Google demonstrated state-of-the-art performance using learned augmentation policies. In this work, a TF sequence generator learns to directly optimize for validation accuracy on the end model. Several subsequent works including RandAugment (<a href="https://arxiv.org/abs/1909.13719">Cubuk et al. 2019</a>) and Adversarial AutoAugment (<a href="https://arxiv.org/abs/1912.11188">Zhang et al. 2019</a>) have been proposed to reduce the computational cost of AutoAugment, establishing new state-of-the-art performance on image classification benchmarks.</p>
+
+<h2 id="theoretical-understanding-of-data-augmentations">Theoretical Understanding of Data Augmentations</h2>
+
+<p>Despite the rapid progress of practical data augmentation techniques, precisely understanding their benefits remains a mystery. Even for simpler models, it is not well-understood how training on augmented data affects the learning process, the parameters, and the decision surface. This is exacerbated by the fact that data augmentation is performed in diverse ways in modern machine learning pipelines, for different tasks and domains, thus precluding a general model of transformation. How can we theoretically characterize and understand the effect of various data augmentations used in practice? To address this challenge, our lab has studied data augmentation from a kernel perspective, as well as under a simplified linear setting.</p>
+
+<p><strong>Data Augmentation As a Kernel</strong></p>
+
+<p><a href="http://proceedings.mlr.press/v97/dao19b/dao19b.pdf">Dao et al. 2019</a> developed a theoretical framework by modeling data augmentation as a Markov Chain, in which augmentation is performed via a random sequence of transformations, akin to how data augmentation is performed in practice. We show that the effect of applying the Markov Chain on the training dataset (combined with a k-nearest neighbor classifier) is akin to using a kernel classifier, where the kernel is a function of the base transformations.</p>
+
+<p>Built on the connection between kernel theory and data augmentation, Dao et al. 2019 show that a kernel classifier on augmented data approximately decomposes into two components: (i) an averaged version of the transformed features, and (ii) a data-dependent variance regularization term. This suggests a more nuanced explanation of data augmentation—namely, that it improves generalization both by inducing invariance and by reducing model complexity. Dao et al. 2019 validate the quality of our approximation empirically, and draw connections to other generalization-improving techniques, including recent work on invariant learning (<a href="https://papers.nips.cc/paper/8199-learning-invariances-using-the-marginal-likelihood">van der Wilk et al. 2018</a>) and robust optimization (<a href="https://papers.nips.cc/paper/6890-variance-based-regularization-with-convex-objectives.pdf">Namkoong &amp; Duchi, 2017</a>).</p>
+
+<p><strong>Data Augmentation Under A Simplified Linear Setting</strong></p>
+
+<p>One limitation of the above works is that it is challenging to pin down the effect of applying a particular transformation on the resulting kernel. Furthermore, it is not yet clear how to apply data augmentation efficiently on kernel methods to get comparable performance to neural nets. In more recent work, we consider a simpler linear setting that is capable of modeling a wide range of linear transformations commonly used in image augmentation, as shown in Figure 3.</p>
+
+<p><strong>Theoretical Insights</strong>. We offer several theoretical insights by considering an over-parametrized linear model, where the training data lies in a low-dimensional subspace. We show that label-invariant transformations can add new information to the training data, and estimation error of the ridge estimator can be reduced by adding new points that are outside the span of the training data. In addition, we show that mixup (<a href="https://arxiv.org/pdf/1710.09412.pdf">Zhang et al., 2017</a> can play an effect of regularization through shrinking the weight of the training data relative to the L2 regularization term on the training data.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/2020-04-20-data-augmentation/fig3.png"><img class="postimage_95" src="/blog/assets/img/posts/2020-04-20-data-augmentation/fig3.png" /></a></p>
+<figcaption>
+Figure 3. Illustration of common linear transformations applied in data augmentation. 
+  </figcaption>
+</div></figure>
+
+<p><strong>Theory-inspired New State-of-the-art</strong>. One insight from our theoretical investigation is that different (compositions of) transformations show very different end performance. Inspired by this observation, we’d like to make use of the fact that certain transformations are better performing than others. We propose an uncertainty-based random sampling scheme which, among the transformed data points, picks those with the highest losses, i.e. those “providing the most information” (see Figure 4). Our sampling scheme achieves higher accuracy by finding more useful transformations compared to RandAugment on three different CNN architectures, establishing new state-of-the-art performance on common benchmarks. For example, our method outperforms RandAugment by <strong>0.59</strong>% on CIFAR-10 and <strong>1.24</strong>% on CIFAR-100 using Wide-ResNet-28-10. Please check out our full paper <a href="http://stanford.edu/~senwu/publications/data_augmentation_draft.pdf">here</a>. Our code will be released soon for you to try out!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/2020-04-20-data-augmentation/fig4.png"><img class="postimage_95" src="/blog/assets/img/posts/2020-04-20-data-augmentation/fig4.png" /></a></p>
+<figcaption>
+Figure 4. Uncertainty-based random sampling scheme for data augmentation. Each transformation function is randomly sampled from a set of pre-specified operations. We select among the transformed data points with highest loss for end model training. 
+  </figcaption>
+</div></figure>
+
+<h2 id="new-direction-data-augmentations-for-model-patching">New Direction: Data Augmentations for Model Patching</h2>
+
+<p>Most machine learning research carried out today is still solving fixed tasks. However, in the real world, machine learning models in deployment can fail due to unanticipated changes in data distribution. This raises the concerning question of how we can move from model building to model maintenance in an adaptive manner. In our latest work, we propose model patching—the first framework that exploits data augmentation to mitigate the performance issues of a flawed model in deployment.</p>
+
+<p><strong>A Medical Use Case of Model Patching</strong></p>
+
+<p>To provide a concrete example, in skin cancer detection, researchers have shown that standard classifiers have drastically different performance on two subgroups of the cancerous class, due to the classifier’s association between colorful bandages with benign images (see Figure 5, left). This subgroup performance gap has also been studied in parallel research from our group (<a href="https://arxiv.org/abs/1909.12475">Oakden-Rayner et al., 2019</a>), and arises due to classifier’s reliance on subgroup-specific features, e.g. colorful bandages.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/2020-04-20-data-augmentation/fig5.png"><img class="postimage_95" src="/blog/assets/img/posts/2020-04-20-data-augmentation/fig5.png" /></a></p>
+<figcaption>
+Figure 5: A standard model trained on a skin cancer dataset exhibits a subgroup performance gap between images of malignant cancers with and without colored bandages. GradCAM illustrates that the vanilla model spuriously associates the colored spot with benign skin lesions. With model patching, the malignancy is predicted correctly for both subgroups.
+  </figcaption>
+</div></figure>
+
+<p>In order to fix such flaws in a deployed model, domain experts have to resort to manual data cleaning to erase the differences between subgroups, e.g. removing markings on skin cancer data with Photoshop (<a href="https://www.ncbi.nlm.nih.gov/pubmed/31411641">Winkler et al. 2019</a>), and retrain the model with the modified data. This can be extremely laborious! Can we somehow learn transformations that allow augmenting examples to balance population among groups in a prescribed way? This is exactly what we are addressing through this new framework of model patching.</p>
+
+<p><strong>CLAMP: Class-conditional Learned Augmentations for Model Patching</strong></p>
+
+<p>The conceptual framework of model patching consists of two stages (as shown in Figure 6).</p>
+
+<ul>
+  <li><strong>Learn inter-subgroup transformations</strong> between different subgroups. These transformations are class-preserving maps that allow semantically changing a datapoint’s subgroup identity (e.g. add or remove colorful bandages).</li>
+  <li><strong>Retrain to patch the model</strong> with augmented data, encouraging the classifier to be robust to their variations.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/2020-04-20-data-augmentation/fig6.png"><img class="postimage_95" src="/blog/assets/img/posts/2020-04-20-data-augmentation/fig6.png" /></a></p>
+<figcaption>
+Figure 6: Model Patching framework with data augmentation. The highlighted box contains samples from a class with differing performance between subgroups A and B. Conditional generative models are trained to transform examples from one subgroup to another (A-&gt;B and B-&gt;A) respectively. 
+  </figcaption>
+</div></figure>
+
+<p>We propose CLAMP, an instantiation of our first end-to-end model patching framework. We  combine a novel consistency regularizer with a robust training objective that is inspired by recent work of Group Distributionally Robust Optimization (GDRO, <a href="https://arxiv.org/abs/1911.08731">Sagawa et al. 2019</a>). We extend GDRO to a class-conditional training objective that jointly optimizes for the worst-subgroup performance in each class. CLAMP is able to balance the performance of subgroups within each class, reducing the performance gap by up to <strong>24</strong>x. On a skin cancer detection dataset ISIC, CLAMP improves robust accuracy by <strong>11.7</strong>% compared to the robust training baseline. Through visualization, we also show in Figure 5 that CLAMP successfully removes the model’s reliance on the spurious feature (colorful bandages), shifting its attention to the skin lesion—true feature of interest.</p>
+
+<p>Our results suggest that the model patching framework is a promising direction for automating the process of model maintenance. In fact, model patching is becoming a late breaking area that would alleviate the major problem in safety-critical systems, including healthcare (e.g. <a href="https://ai.facebook.com/blog/fastmri-leverages-adversarial-learning-to-remove-image-artifacts/">improving models to produce MRI scans free of artifact</a>) and autonomous driving (e.g. improving perception models that may have poor performance on irregular objects or road conditions). We envision that model patching can be widely useful for many other domain applications. If you are intrigued by the latest research on model patching, please follow our <a href="https://github.com/HazyResearch">Hazy Research repository</a> on Github where the code will be released soon. If you have any feedback for our drafts and latest work, we’d like to hear from you!</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+  <li><a href="https://hazyresearch.stanford.edu/data-aug-part-1">Automating the Art of Data Augmentation (Part I: Overview)</a></li>
+  <li><a href="https://hazyresearch.stanford.edu/data-aug-part-2">Automating the Art of Data Augmentation (Part II: Practical Methods)</a></li>
+  <li><a href="https://hazyresearch.stanford.edu/data-aug-part-3">Automating the Art of Data Augmentation (Part III: Theory)</a></li>
+  <li><a href="https://hazyresearch.stanford.edu/data-aug-part-4">Automating the Art of Data Augmentation (Part IV: New Direction)</a></li>
+</ul>
+
+<p><strong>Acknowledgments</strong></p>
+
+<p>Thanks to members of Hazy Research who provided feedback on the blog post. Special thanks to Sidd Karamcheti and Andrey Kurenkov from the SAIL blog team for the editorial help.</p>
+
+<p><strong>About the Author</strong></p>
+
+<p><a href="http://yixuanli.net/">Sharon Y. Li </a>is a postdoctoral fellow at Stanford, working with <a href="https://cs.stanford.edu/~chrismre/">Chris Ré</a>. She is an incoming Assistant Professor in the department of Computer Sciences at University of Wisconsin-Madison. Her research focuses on developing machine learning models and systems that can reduce human supervision during training, and enhance reliability during deployment in the wild.</p>
+
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/data-augmentation/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/data-augmentation/&text=Automating+Data+Augmentation%3A+Practice%2C+Theory+and+New+Direction%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/data-augmentation/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/data-augmentation/&title=Automating+Data+Augmentation%3A+Practice%2C+Theory+and+New+Direction%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/data-augmentation/&title=Automating+Data+Augmentation%3A+Practice%2C+Theory+and+New+Direction%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Automating+Data+Augmentation%3A+Practice%2C+Theory+and+New+Direction%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/data-augmentation/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tag</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/cavin/">
+      <p>Previous post</p>
+        Sequential Problem Solving by Hierarchical Planning in Latent Spaces
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/iclr-2020/">
+      <p>Next post</p>
+        SAIL at ICLR 2020: Accepted Papers and Videos
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

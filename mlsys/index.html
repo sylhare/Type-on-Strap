@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/mlsys/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>The Coming Wave of ML Systems | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="The Coming Wave of ML Systems" />
+<meta name="author" content="<a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>, <a href="https://w4nderlu.st/about">Piero Molino</a>, <a href='http://www.danfu.org/'>Dan Fu</a>, <a href="https://krandiash.github.io/">Karan Goel</a>, <a href="https://www.cs.stanford.edu/~fiodar/">Fiodar Kazhamakia</a>, and <a href="https://cs.stanford.edu/people/matei/">Matei Zaharia</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="AI and ML products now permeate every aspect of our digital lives–from recommendations of what to watch, to divining our search intent, to powering increasingly-present virtual assistants in consumer and enterprise settings. While quality improvements are the main focus of traditional ML and AI research, a second and arguably less well understood benefit of machine learning is that it can dramatically reshape the practice of building applications. With an eye toward generations of compiler, database, and operating systems work, they may inspire new foundational questions for how to build the next generation of AI-powered systems." />
+<meta property="og:description" content="AI and ML products now permeate every aspect of our digital lives–from recommendations of what to watch, to divining our search intent, to powering increasingly-present virtual assistants in consumer and enterprise settings. While quality improvements are the main focus of traditional ML and AI research, a second and arguably less well understood benefit of machine learning is that it can dramatically reshape the practice of building applications. With an eye toward generations of compiler, database, and operating systems work, they may inspire new foundational questions for how to build the next generation of AI-powered systems." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/mlsys/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/mlsys/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-13T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Coming Wave of ML Systems" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"The Coming Wave of ML Systems","dateModified":"2020-10-13T00:00:00-07:00","datePublished":"2020-10-13T00:00:00-07:00","description":"AI and ML products now permeate every aspect of our digital lives–from recommendations of what to watch, to divining our search intent, to powering increasingly-present virtual assistants in consumer and enterprise settings. While quality improvements are the main focus of traditional ML and AI research, a second and arguably less well understood benefit of machine learning is that it can dramatically reshape the practice of building applications. With an eye toward generations of compiler, database, and operating systems work, they may inspire new foundational questions for how to build the next generation of AI-powered systems.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/mlsys/"},"url":"http://ai.stanford.edu/blog/mlsys/","author":{"@type":"Person","name":"<a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>, <a href=\"https://w4nderlu.st/about\">Piero Molino</a>, <a href='http://www.danfu.org/'>Dan Fu</a>, <a href=\"https://krandiash.github.io/\">Karan Goel</a>, <a href=\"https://www.cs.stanford.edu/~fiodar/\">Fiodar Kazhamakia</a>, and <a href=\"https://cs.stanford.edu/people/matei/\">Matei Zaharia</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>The Coming Wave of ML Systems | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Introducing the Stanford MLSys Seminar Series on the frontier of machine learning systems. How does ML change the modern programming stack, and what does it ...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="The Coming Wave of ML Systems">
+    
+    <meta name="twitter:description" content="Introducing the Stanford MLSys Seminar Series on the frontier of machine learning systems. How does ML change the modern programming stack, and what does it mean for how people will build and deploy applications in the future?">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-10-13-mlsys/mlsys.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-10-13-mlsys/mlsys.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">The Coming Wave of ML Systems</h1>
+    <p class="meta">
+    <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>, <a href="https://w4nderlu.st/about">Piero Molino</a>, <a href='http://www.danfu.org/'>Dan Fu</a>, <a href="https://krandiash.github.io/">Karan Goel</a>, <a href="https://www.cs.stanford.edu/~fiodar/">Fiodar Kazhamakia</a>, and <a href="https://cs.stanford.edu/people/matei/">Matei Zaharia</a>
+    <div class="post-date">October 13, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>AI and ML products now permeate every aspect of our digital lives–from recommendations of what to watch, to divining our search intent, to powering increasingly-present virtual assistants in consumer and enterprise settings. While quality improvements are the main focus of traditional ML and AI research, a second and arguably less well understood benefit of machine learning is that it can dramatically reshape the practice of building applications. With an eye toward generations of compiler, database, and operating systems work, they may inspire new foundational questions for how to build the next generation of AI-powered systems.</p>
+
+<p>Tools are important. They are the scaffolding of the machine learning revolution: the widespread adoption of tools like PyTorch and TensorFlow (building on earlier academic prototypes like Theano and Torch) enabled users to more easily assemble models due to both well-suited domain-specific languages and a rich collection of building blocks. Supported by large companies, these tools have spawned a rich ecosystem to which new building blocks are contributed almost daily and which even contains tools for deployment (eg TFX and TorchScript). Moving from the era of bespoke AI tools to a shared communal foundation has seen stunning productivity gains–on a personal note, it was wild to live through and modestly contribute to.</p>
+
+<p>With the stunning success of these platforms, these libraries have moved the pain point for engineers who build and maintain these products. To understand what might be next, perhaps we can take a page from computing history? One view is that the current generation of tools are akin to software libraries, but they lack some of the features that distinguish long-lived computing systems, such as:</p>
+<ul>
+  <li>monitoring and lifecycle management (most ML systems only deal with training monitoring),</li>
+  <li>support collaboration of all stakeholders around the life of the product (most ML systems lack a model management solution),</li>
+  <li>end-to-end data flow debugging and monitoring (most ML systems don’t manage training data production pipelines)</li>
+  <li>… and many more …
+Understanding this thought has been a driving force behind our recent work.
+We presented some of our initial ideas in the <a href="https://www.youtube.com/watch?v=CR1g2-ZqswE">MLSys keynote</a> and described some of our thoughts for production and research systems.</li>
+</ul>
+
+<p>While we contend entirely new ways of building these systems are possible, we are at the start of this journey. There is preliminary evidence that there’s something here: these new breed of systems have found their way into industry products used by billions of people every day like Google
+[<a href="https://ai.googleblog.com/2019/03/harnessing-organizational-knowledge-for.html">data programming</a>,
+<a href="https://research.google/pubs/pub48846/">information extraction</a>],
+YouTube [<a href="https://arxiv.org/abs/2008.09983">multi-modal</a>],
+multiple Apple products [<a href="https://arxiv.org/abs/1909.05372">Overton</a>],
+Uber [<a href="https://eng.uber.com/cota/">customer support</a>,
+<a href="https://eng.uber.com/uber-eats-graph-learning/">food recommendation</a>,
+<a href="https://eng.uber.com/introducing-ludwig/">Ludwig open-sourced</a>], and many more.</p>
+
+<p>The goal of this post is to introduce the Stanford MLSys Seminar Series to hopefully engage more of the community around ideas to build these systems. If you’re interested in this area or you have a topic you’d like to see, let us know!
+Please visit the webpage at <a href="http://mlsys.stanford.edu">mlsys.stanford.edu</a> to see our preliminary thoughts and the schedule of our first speakers. We welcome your feedback!</p>
+
+<p>One outcome of the course is to articulate the challenges that we’ve seen, solicit challenges from the community, and try to make the field more accessible for academic research. If we’re lucky, we may just help to spawn the next major subfield of computer science!</p>
+
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/mlsys/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/mlsys/&text=The+Coming+Wave+of+ML+Systems%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/mlsys/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/mlsys/&title=The+Coming+Wave+of+ML+Systems%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/mlsys/&title=The+Coming+Wave+of+ML+Systems%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=The+Coming+Wave+of+ML+Systems%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/mlsys/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/gti/">
+      <p>Previous post</p>
+        GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/adaptive-risk-minimization/">
+      <p>Next post</p>
+        Adapting on the Fly to Test Time Distribution Shift
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

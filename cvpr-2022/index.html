@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/cvpr-2022/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at CVPR 2022 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at CVPR 2022" />
+<meta name="author" content="Compiled by <a href='https://cs.stanford.edu/~dorarad'>Drew A. Hudson</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/cvpr-2022/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/cvpr-2022/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-21T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at CVPR 2022" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Papers and Talks at CVPR 2022","dateModified":"2022-06-21T00:00:00-07:00","datePublished":"2022-06-21T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/cvpr-2022/"},"url":"http://ai.stanford.edu/blog/cvpr-2022/","author":{"@type":"Person","name":"Compiled by <a href='https://cs.stanford.edu/~dorarad'>Drew A. Hudson</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at CVPR 2022 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at CVPR 2022, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at CVPR 2022">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at CVPR 2022, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-06-21-cvpr-2022/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-06-21-cvpr-2022/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at CVPR 2022</h1>
+    <p class="meta">
+    Compiled by <a href='https://cs.stanford.edu/~dorarad'>Drew A. Hudson</a>
+    <div class="post-date">June 21, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/logo.png" /></p>
+
+<p>The <a href="https://cvpr2022.thecvf.com/">Conference on Computer Vision and Pattern Recognition</a> (CVPR) 2022 is taking place June 19-24. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="fixing-malfunctional-objects-with-learned-physical-simulation-and-functional-prediction"><a href="https://arxiv.org/abs/2205.02834">Fixing Malfunctional Objects With Learned Physical Simulation and Functional Prediction</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img0" />
+<strong>Authors</strong>: Yining Hong, Kaichun Mo, Li Yi, Leonidas J. Guibas, Antonio Torralba, Joshua Tenenbaum, Chuang Gan
+<br /><strong>Contact</strong>: kaichun@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2205.02834">Paper</a> | <a href="https://www.youtube.com/watch?v=-dLJxewGqf4">Video</a> | <a href="http://fixing-malfunctional.csail.mit.edu/">Website</a>
+<br /><strong>Keywords</strong>: fixing malfunctional 3d shapes, shape functionality, dynamic model</p>
+<hr />
+
+<h4 id="generating-useful-accident-prone-driving-scenarios-via-a-learned-traffic-prior"><a href="https://nv-tlabs.github.io/STRIVE/docs/strive.pdf">Generating Useful Accident-Prone Driving Scenarios via a Learned Traffic Prior</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img4" />
+<strong>Authors</strong>: Davis Rempe, Jonah Philion, Leonidas Guibas, Sanja Fidler, Or Litany
+<br /><strong>Contact</strong>: drempe@stanford.edu
+<br /><strong>Links:</strong> <a href="https://nv-tlabs.github.io/STRIVE/docs/strive.pdf">Paper</a> | <a href="https://nv-tlabs.github.io/STRIVE/">Website</a>
+<br /><strong>Keywords</strong>: autonomous vehicles, adversarial scenario generation, traffic simulation</p>
+<hr />
+
+<h4 id="measuring-compositional-consistency-for-video-question-answering"><a href="https://arxiv.org/pdf/2204.07190.pdf">Measuring Compositional Consistency for Video Question Answering</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img6" />
+<strong>Authors</strong>: Mona Gandhi, Mustafa Omer Gul, Eva Prakash, Madeleine Grunde-McLaughlin, Ranjay Krishna, Maneesh Agrawala
+<br /><strong>Contact</strong>: momergul@alumni.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2204.07190.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=7S1mZ5-G5VU">Video</a> | <a href="https://agqa-decomp.cs.washington.edu/">Website</a>
+<br /><strong>Keywords</strong>: compositionality, video question answering, evaluation, dataset, metrics</p>
+<hr />
+
+<h4 id="mind-the-gap-understanding-the-modality-gap-in-multi-modal-contrastive-representation-learning"><a href="https://arxiv.org/pdf/2203.02053.pdf">Mind the Gap: Understanding the Modality Gap in Multi-modal Contrastive Representation Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img9" />
+<strong>Authors</strong>: Weixin Liang*, Yuhui Zhang*, Yongchan Kwon*, Serena Yeung, James Zou
+<br /><strong>Contact</strong>: yuhuiz@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2203.02053.pdf">Paper</a> | <a href="https://modalitygap.readthedocs.io">Website</a>
+<br /><strong>Keywords</strong>: multi-modal representation learning, contrastive representation learning, cone effect, modality gap</p>
+<hr />
+
+<h4 id="multi-objective-diverse-human-motion-prediction-with-knowledge-distillation"><a href="https://openaccess.thecvf.com/content/CVPR2022/html/Ma_Multi-Objective_Diverse_Human_Motion_Prediction_With_Knowledge_Distillation_CVPR_2022_paper.html">Multi-Objective Diverse Human Motion Prediction with Knowledge Distillation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img7" />
+<strong>Authors</strong>: Hengbo Ma, Jiachen Li, Ramtin Hosseini, Masayoshi Tomizuka, Chiho Choi
+<br /><strong>Contact</strong>: hengbo_ma@berkeley.edu; jiachen_li@stanford.edu
+<br /><strong>Award nominations:</strong> Oral presentation
+<br /><strong>Links:</strong> <a href="https://openaccess.thecvf.com/content/CVPR2022/html/Ma_Multi-Objective_Diverse_Human_Motion_Prediction_With_Knowledge_Distillation_CVPR_2022_paper.html">Paper</a>
+<br /><strong>Keywords</strong>: human motion prediction, robotics</p>
+<hr />
+
+<h4 id="objectfolder-20-a-multisensory-object-dataset-for-sim2real-transfer"><a href="https://arxiv.org/pdf/2204.02389.pdf">ObjectFolder 2.0: A Multisensory Object Dataset for Sim2Real Transfer</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img1" />
+<strong>Authors</strong>: Ruohan Gao*, Zilin Si*, Yen-Yu Chang*, Samuel Clarke, Jeannette Bohg, Li Fei-Fei, Wenzhen Yuan, Jiajun Wu
+<br /><strong>Contact</strong>: rhgao@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2204.02389.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=e5aToT3LkRA">Video</a> | <a href="https://ai.stanford.edu/~rhgao/objectfolder2.0/">Website</a>
+<br /><strong>Keywords</strong>: multisensory, object, dataset, sim2real</p>
+<hr />
+
+<h4 id="partglot-learning-shape-part-segmentation-from-language-reference-games"><a href="https://arxiv.org/abs/2112.06390">PartGlot: Learning Shape Part Segmentation from Language Reference Games</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img8" />
+<strong>Authors</strong>:  Juil Koo, Ian Huang, Panos Achlioptas, Leonidas Guibas, Minhyuk Sung
+<br /><strong>Contact</strong>: ianhuang@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2112.06390">Paper</a> | <a href="https://kaistackr-my.sharepoint.com/:v:/g/personal/mhsung_kaist_ac_kr/EXxmDprIWGFKnNsqA9qycPwBqOo7mK47uiw9I2ljzbfbgw?e=WZFsYw">Video</a> | <a href="https://github.com/63days/PartGlot/">Website</a>
+<br /><strong>Keywords</strong>: language grounding, semantic part segmentation, multimodal learning, natural language processing, 3d vision</p>
+<hr />
+
+<h4 id="point2cyl-reverse-engineering-3d-objects-from-point-clouds-to-extrusion-cylinders"><a href="https://arxiv.org/pdf/2112.09329.pdf">Point2Cyl: Reverse Engineering 3D Objects from Point Clouds to Extrusion Cylinders</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img10" />
+<strong>Authors</strong>: Mikaela Angelina Uy*, Yen-yu Chang*, Minhyuk Sung, Purvi Goel, Joseph Lambourne, Tolga Birdal, Leonidas Guibas
+<br /><strong>Contact</strong>: mikacuy@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2112.09329.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=4R4Pi8qWXmo">Video</a> | <a href="https://point2cyl.github.io">Website</a>
+<br /><strong>Keywords</strong>: reverse engineering, cad, shape modeling, editing, segmentation, point clouds</p>
+<hr />
+
+<h4 id="programmatic-concept-learning-for-human-motion-description-and-synthesis"><a href="https://sumith1896.github.io/motion-concepts/static/motion-concepts.pdf">Programmatic Concept Learning for Human Motion Description and Synthesis</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img5" />
+<strong>Authors</strong>: Sumith Kulal*, Jiayuan Mao*, Alex Aiken §, Jiajun Wu§
+<br /><strong>Contact</strong>: sumith@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://sumith1896.github.io/motion-concepts/static/motion-concepts.pdf">Paper</a> | <a href="https://sumith1896.github.io/motion-concepts/">Website</a>
+<br /><strong>Keywords</strong>: hierarchical representation, human motion, video understanding, video synthesis</p>
+<hr />
+
+<h4 id="revisiting-the-video-in-video-language-understanding"><a href="https://stanfordvl.github.io/atp-revisit-video-lang/">Revisiting the “Video” in Video-Language Understanding</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img3" />
+<strong>Authors</strong>: Shyamal Buch, Cristóbal Eyzaguirre, Adrien Gaidon, Jiajun Wu, Li Fei-Fei, Juan Carlos Niebles
+<br /><strong>Contact</strong>: shyamal@cs.stanford.edu
+<br /><strong>Award nominations:</strong> Oral Presentation
+<br /><strong>Links:</strong> <a href="https://stanfordvl.github.io/atp-revisit-video-lang/">Paper</a> | <a href="https://stanfordvl.github.io/atp-revisit-video-lang/">Website</a>
+<br /><strong>Keywords</strong>: video understanding, vision and language, multimodal</p>
+<hr />
+
+<h4 id="rotationally-equivariant-3d-object-detection"><a href="https://arxiv.org/pdf/2204.13630.pdf">Rotationally Equivariant 3D Object Detection</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-21-cvpr-2022/img2" />
+<strong>Authors</strong>: Hong-Xing Yu, Jiajun Wu, Li Yi
+<br /><strong>Contact</strong>: koven@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2204.13630.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=hv7Lh56KXQU">Video</a> | <a href="https://kovenyu.com/eon/">Website</a>
+<br /><strong>Keywords</strong>: rotation equivariance, detection, object</p>
+
+<hr />
+
+<p>We look forward to seeing you at CVPR!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/cvpr-2022/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/cvpr-2022/&text=Stanford+AI+Lab+Papers+and+Talks+at+CVPR+2022%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/cvpr-2022/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/cvpr-2022/&title=Stanford+AI+Lab+Papers+and+Talks+at+CVPR+2022%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/cvpr-2022/&title=Stanford+AI+Lab+Papers+and+Talks+at+CVPR+2022%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+CVPR+2022%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/cvpr-2022/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#CVPR">
+      <p><i class="fa fa-tag fa-fw"></i> CVPR</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/icra-2022/">
+      <p>Previous post</p>
+        Stanford AI Lab Robotics Papers (ICRA and RSS 2022)
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/naacl-2022/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at NAACL 2022
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

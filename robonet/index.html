@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/robonet/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>RoboNet: A Dataset for Large-Scale Multi-Robot Learning | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="RoboNet: A Dataset for Large-Scale Multi-Robot Learning" />
+<meta name="author" content="<a href="https://sudeepdasari.github.io/"> Sudeep Dasari </a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This post is cross-listed at the BAIR Blog and the CMU ML blog." />
+<meta property="og:description" content="This post is cross-listed at the BAIR Blog and the CMU ML blog." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/robonet/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/robonet/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-26T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="RoboNet: A Dataset for Large-Scale Multi-Robot Learning" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"RoboNet: A Dataset for Large-Scale Multi-Robot Learning","dateModified":"2019-11-26T00:00:00-08:00","datePublished":"2019-11-26T00:00:00-08:00","description":"This post is cross-listed at the BAIR Blog and the CMU ML blog.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/robonet/"},"url":"http://ai.stanford.edu/blog/robonet/","author":{"@type":"Person","name":"<a href=\"https://sudeepdasari.github.io/\"> Sudeep Dasari </a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>RoboNet: A Dataset for Large-Scale Multi-Robot Learning | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We collected a diverse dataset of robotic experience and investigated how it can enable robots to learn skills faster in new environments.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="RoboNet: A Dataset for Large-Scale Multi-Robot Learning">
+    
+    <meta name="twitter:description" content="We collected a diverse dataset of robotic experience and investigated how it can enable robots to learn skills faster in new environments.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-11-26-robonet/bg-masthead.jpg">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-11-26-robonet/bg-masthead.jpg">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">RoboNet: A Dataset for Large-Scale Multi-Robot Learning</h1>
+    <p class="meta">
+    <a href="https://sudeepdasari.github.io/"> Sudeep Dasari </a>
+    <div class="post-date">November 26, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><em>This post is cross-listed at the <a href="http://bair.berkeley.edu/blog/2019/11/26/robo-net/">BAIR Blog</a> and the <a href="https://blog.ml.cmu.edu/2019/11/26/robonet/">CMU ML blog</a>.</em></p>
+
+<p>In the last decade, we’ve seen learning-based systems provide transformative solutions for a wide range of perception and reasoning problems, from <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">recognizing objects in images</a> to <a href="https://ai.googleblog.com/2019/10/exploring-massively-multilingual.html">recognizing and translating human speech</a>. Recent progress in deep reinforcement learning (i.e. integrating deep neural networks into reinforcement learning systems) suggests that the same kind of success could be realized in automated decision making domains. If fruitful, this line of work could allow learning-based systems to tackle active control tasks, such as robotics and autonomous driving, alongside the passive perception tasks to which they have already been successfully applied.</p>
+
+<p>While deep reinforcement learning methods - like <a href="https://bair.berkeley.edu/blog/2018/12/14/sac/">Soft Actor Critic</a> - can learn impressive motor skills, they are challenging to train on large and broad data that is not from the target environment. In contrast, the success of deep networks in fields like computer vision was arguably predicated just as much on large datasets, such as <a href="http://www.image-net.org/">ImageNet</a>, as it was on large neural network architectures. This suggests that applying data-driven methods to robotics will require not just the development of strong reinforcement learning methods, but also access to large and diverse datasets for robotics. Not only can large datasets enable models that generalize effectively, but they can also be used to <em>pre-train</em> models that can then be adapted to more specialized tasks using much more modest datasets. Indeed, “ImageNet pre-training” has become a default approach for tackling diverse tasks with small or medium datasets - like <a href="https://medium.com/geoai/reconstructing-3d-buildings-from-aerial-lidar-with-ai-details-6a81cb3079c0">3D building reconstruction</a>. Can the same kind of approach be adopted to enable broad generalization and transfer in active control domains, such as robotics?</p>
+
+<p>Unfortunately, the design and adoption of large datasets in reinforcement learning and robotics has proven challenging. Since every robotics lab has their own hardware and experimental set-up, it is not apparent how to move towards an “ImageNet-scale” dataset for robotics that is useful for the entire research community. Hence, we propose to collect data across multiple different settings, including from varying camera viewpoints, varying environments, and even varying robot platforms. Motivated by the success of large-scale data-driven learning, we created RoboNet, an extensible and diverse dataset of robot interaction collected across <a href="https://bair.berkeley.edu/">four</a> <a href="https://ai.stanford.edu/">different</a> <a href="https://www.grasp.upenn.edu/">research</a> <a href="https://ai.google/research/teams/brain/robotics/">labs</a>. The collaborative nature of this work allows us to easily capture diverse data in various lab settings across a wide variety of objects, robotic hardware, and camera viewpoints. Finally, we find that pre-training on RoboNet offers substantial performance gains compared to training from scratch in entirely new environments.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-26-robonet/hypothesis.png" /></p>
+
+<figcaption>
+Our goal is to pre-train reinforcement learning models on a sufficiently diverse dataset and then transfer knowledge (either zero-shot or with fine-tuning) to a different test environment.
+</figcaption>
+</div></figure>
+
+<h2 id="collecting-robonet">Collecting RoboNet</h2>
+
+<p>RoboNet consists of 15 million video frames, collected by different robots interacting with different objects in a table-top setting. Every frame includes the image recorded by the robot’s camera, arm pose, force sensor readings, and gripper state. The collection environment, including the camera view, the appearance of the table or bin, and the objects in front of the robot are varied between trials. Since collection is entirely autonomous, large amounts can be cheaply collected across multiple institutions. A sample of RoboNet along with data statistics is shown below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-26-robonet/tile_plus_data.gif" /></p>
+<figcaption>
+A sample of data from RoboNet alongside a summary of the current dataset. Note that any GIF compression artifacts in this animation are not present in the dataset itself.
+</figcaption>
+</div></figure>
+
+<h2 id="how-can-we-use-robonet">How can we use RoboNet?</h2>
+
+<p>After collecting a diverse dataset, we experimentally investigate how it can be used to enable <em>general</em> skill learning that transfers to new environments. First, we pre-train <a href="https://alexlee-gk.github.io/video_prediction/">visual dynamics models</a> on a subset of data from RoboNet, and then fine-tune them to work in an unseen test environment using a small amount of new data. The constructed test environments (one of which is visualized below) all include different lab settings, new cameras and viewpoints, held-out robots, and novel objects purchased after data collection concluded.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-26-robonet/test.jpg" style="width: 50%; height: 50%" /></p>
+<figcaption>
+Example test environment constructed in a new lab, with a temporary uncalibrated camera, and a new Baxter robot. Note that while Baxters are present in RoboNet that data is <b>not</b> included during model pre-training.
+</figcaption>
+</div></figure>
+
+<p>After tuning, we deploy the learned dynamics models in the test environment to perform control tasks - like picking and placing objects - using the <a href="https://bair.berkeley.edu/blog/2018/11/30/visual-rl/">visual foresight</a> model based reinforcement learning algorithm. Below are example control tasks executed in various test environments.</p>
+
+<figure class="figure"><div class="figure__main">
+<figure class="postfigurethird">
+  <img src="/blog/assets/img/posts/2019-11-26-robonet/align_tshirt.gif" class="postimage_unpadded" />
+  <figcaption>
+  Kuka can align shirts next to the others
+  </figcaption>
+</figure>
+<figure class="postfigurethird">
+  <img src="/blog/assets/img/posts/2019-11-26-robonet/color_stripe_front.gif" class="postimage_unpadded" />
+  <figcaption>
+  Baxter can sweep the table with cloth
+  </figcaption>
+</figure>
+<figure class="postfigurethird">
+  <img src="/blog/assets/img/posts/2019-11-26-robonet/marker_marker.gif" class="postimage_unpadded" />
+  <figcaption>
+  Franka can grasp and reposition the markers
+  </figcaption>
+</figure>
+<figure class="postfigurethird">
+  <img src="/blog/assets/img/posts/2019-11-26-robonet/move_plate.gif" class="postimage_unpadded" />
+  <figcaption>
+  Kuka can move the plate to the edge of the table
+  </figcaption>
+</figure>
+<figure class="postfigurethird">
+  <img src="/blog/assets/img/posts/2019-11-26-robonet/socks_right.gif" class="postimage_unpadded" />
+  <figcaption>
+  Baxter can pick up and reposition socks 
+  </figcaption>
+</figure>
+<figure class="postfigurethird">
+  <img src="/blog/assets/img/posts/2019-11-26-robonet/towel_stack.gif" class="postimage_unpadded" />
+  <figcaption>
+  Franka can stack the towel on the pile
+  </figcaption>
+</figure>
+<figcaption>
+Here you can see examples of visual foresight fine-tuned to perform basic control tasks in three entirely different environments. For the experiments, the target robot and environment was subtracted from RoboNet during pre-training. Fine-tuning was accomplished with data collected in one afternoon.
+</figcaption>
+</div></figure>
+
+<p>We can now numerically evaluate if our pre-trained controllers can pick up skills in new environments faster than a randomly initialized one. In each environment, we use a standard set of benchmark tasks to compare the performance of our pre-trained controller against the performance of a model trained only on data from the new environment. The results show that the fine-tuned model is ~4x more likely to complete the benchmark task than the one trained without RoboNet. Impressively, the pre-trained models can even slightly outperform models trained from scratch on significantly (5-20x) more data from the test environment. This suggests that transfer from RoboNet does indeed offer large performance gains compared to training from scratch!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-26-robonet/graphs_franka_kuka.png" /></p>
+<figcaption>
+We compare the performance of fine-tuned models against their counterparts trained from scratch in two different test environments (with different robot platforms).
+</figcaption>
+</div></figure>
+
+<p>Clearly fine-tuning is better than training from scratch, but is training on all of RoboNet always the best way to go? To test this, we compare pre-training on various subsets of RoboNet versus training from scratch. As seen before, the model pre-trained on all of RoboNet (excluding the Baxter platform) performs substantially better than the random initialization model. However, the “RoboNet pre-trained” model is outperformed by a model trained on a subset of RoboNet data collected on the Sawyer robot - the single-arm variant of Baxter.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-26-robonet/graphs_baxter.png" style="width: 60%; height: 60%" /></p>
+<figcaption>
+Models pre-trained on various subsets of RoboNet are compared to one trained from scratch in an unseen (during pre-training) Baxter control environment
+</figcaption>
+</div></figure>
+
+<p>The similarities between the Baxter and Sawyer likely partly explain our results, but why does simply adding data to the training set hurt performance after fine-tuning? We theorize that this effect occurs due to model under-fitting. In other words, RoboNet is an extremely challenging dataset for a visual dynamics model, and imperfections in the model predictions result in bad control performance. However, larger models with more parameters tend to be more powerful, and thus make better predictions on RoboNet (visualized below). Note that increasing the number of parameters greatly improves prediction quality, but even large models with 500M parameters (middle column in the videos below) are still quite blurry. This suggests ample room for improvement, and we hope that the development of newer more powerful models will translate to better control performance in the future.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-26-robonet/compar_ppt.gif" style="width: 50%; height: 50%" /></p>
+<figcaption>
+We compare video prediction models of various size trained on RoboNet. A 75M parameter model (right-most column) generates significantly blurrier predictions than a large model with 500M parameters (center column). 
+</figcaption>
+</div></figure>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>This work takes the first step towards creating learned robotic agents that can operate in a wide range of environments and across different hardware. While our experiments primarily explore model-based reinforcement learning, we hope that RoboNet will inspire the broader robotics and reinforcement learning communities to investigate how to scale model-based <em>or</em> model-free RL algorithms to meet the complexity and diversity of the real world.</p>
+
+<p>Since the dataset is extensible, we encourage other researchers to <a href="https://docs.google.com/forms/d/e/1FAIpQLSeV1XGvPQ6xTyEKGoTIbJWbKOCsUJ4gTRJ5fOQMWmlBowQwQQ/viewform">contribute</a> the data generated from their experiments back into RoboNet. After all, any data containing robot telemetry and video could be useful to someone else, so long as it contains the right documentation. In the long term, we believe this process will iteratively strengthen the dataset, and thus allow our algorithms that use  it to achieve greater levels of generalization across tasks, environments, robots, and experimental set-ups.</p>
+
+<p>For more information please refer to the the <a href="https://www.robonet.wiki/">project website</a>. We’ve also open sourced our <a href="https://github.com/SudeepDasari/RoboNet">code-base</a> and the entire <a href="https://github.com/SudeepDasari/RoboNet/wiki/Getting-Started">RoboNet dataset</a>.</p>
+
+<p>Finally, I would like to thank Sergey Levine, Chelsea Finn, and Frederik Ebert for their helpful feedback on this post, as well as the editors of the BAIR, SAIL, and CMU MLD blogs.</p>
+
+<p><strong>This blog post was based on the following paper:</strong>  <a href="https://arxiv.org/abs/1910.11215">RoboNet: Large-Scale Multi-Robot Learning</a>. S. Dasari, F. Ebert, S. Tian, S. Nair, B. Bucher, K. Schmeckpeper, S. Singh, S. Levine, C. Finn. In Conference on Robot Learning, 2019. (<a href="https://arxiv.org/pdf/1910.11215.pdf">pdf</a>)</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/robonet/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/robonet/&text=RoboNet%3A+A+Dataset+for+Large-Scale+Multi-Robot+Learning%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/robonet/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/robonet/&title=RoboNet%3A+A+Dataset+for+Large-Scale+Multi-Robot+Learning%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/robonet/&title=RoboNet%3A+A+Dataset+for+Large-Scale+Multi-Robot+Learning%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=RoboNet%3A+A+Dataset+for+Large-Scale+Multi-Robot+Learning%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/robonet/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#model-based+learning">
+      <p><i class="fa fa-tag fa-fw"></i> model-based learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#rl">
+      <p><i class="fa fa-tag fa-fw"></i> rl</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/assistive-latent-spaces/">
+      <p>Previous post</p>
+        Controlling Assistive Robots with Learned Latent Actions
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/text-causal-inference/">
+      <p>Next post</p>
+        Text Feature Selection for Causal Inference
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

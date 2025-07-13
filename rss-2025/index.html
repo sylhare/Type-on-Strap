@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/rss-2025/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at RSS | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at RSS" />
+<meta name="author" content="Compiled by <a href='https://cs.stanford.edu/~megha'>Megha Srivastava</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/rss-2025/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/rss-2025/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-21T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at RSS" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Papers and Talks at RSS","dateModified":"2025-06-21T00:00:00-07:00","datePublished":"2025-06-21T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/rss-2025/"},"url":"http://ai.stanford.edu/blog/rss-2025/","author":{"@type":"Person","name":"Compiled by <a href='https://cs.stanford.edu/~megha'>Megha Srivastava</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at RSS | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at RSS 2025, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at RSS">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at RSS 2025, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-06-21-rss-2025/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-06-21-rss-2025/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at RSS</h1>
+    <p class="meta">
+    Compiled by <a href='https://cs.stanford.edu/~megha'>Megha Srivastava</a>
+    <div class="post-date">June 21, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/logo.png" /></p>
+
+<p>The <a href="https://roboticsconference.org/">Robotics: Science and Systems</a> (RSS) 2025 is being hosted in Los Angeles from June 21st-25th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="slap-shortcut-learning-for-abstract-planning">SLAP: Shortcut Learning for Abstract Planning</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img6" />
+<strong>Authors</strong>: Y. Isabel Liu, Bowen Li, Benjamin Eysenbach, Tom Silver
+<br /><strong>Contact</strong>: isabel.liu@princeton.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Keywords</strong>: robotics and control, reinforcement learning algorithms</p>
+<hr />
+
+<h4 id="cupid-curating-data-your-robot-loves-with-influence-functions">CUPID: Curating Data your Robot Loves with Influence Functions</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img2" />
+<strong>Authors</strong>: Christopher Agia, Rohan Sinha, Jingyun Yang, Rika Antonova, Marco Pavone, Haruki Nishimura, Masha Itkina Jeannette Bohg
+<br /><strong>Contact</strong>: cagia@stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Keywords</strong>: imitation learning, data curation, influence functions</p>
+<hr />
+
+<h4 id="compliant-residual-dagger-improving-real-world-contact-rich-manipulation-with-human-corrections">Compliant Residual DAgger: Improving Real-World Contact-Rich Manipulation with Human Corrections</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img11" />
+<strong>Authors</strong>: Xiaomeng Xu*, Yifan Hou*, Zeyi Liu, Shuran Song
+<br /><strong>Contact</strong>: xuxm@stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Keywords</strong>: dagger, compliance control, contact-rich manipulation</p>
+<hr />
+
+<h4 id="learning-long-context-diffusion-policies-via-past-token-prediction">Learning Long-Context Diffusion Policies via Past-Token Prediction</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img4" />
+<strong>Authors</strong>: Marcel Torne, Andy Tang, Yuejiang Liu, Chelsea Finn
+<br /><strong>Contact</strong>: marcelto@stanford.edu, yuejiang.liu@stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Keywords</strong>: robot learning, diffusion policy, long context</p>
+<hr />
+
+<h4 id="scaffolding-dexterous-manipulation-with-vision-language-models">Scaffolding Dexterous Manipulation with Vision-Language Models</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img14" />
+<strong>Authors</strong>: Vincent de Bakker, Joey Hejna, Tyler Ga Wei Lum, Onur Celik, Aleksandar Taranovic, Denis Blessing, Gerhard Neumann, Jeannette Bohg, Dorsa Sadigh
+<br /><strong>Contact</strong>: debakker@cs.stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Award nominations:</strong> Spotlight
+<br /><strong>Keywords</strong>: dexterous manipulation, vision-language models, reinforcement learning</p>
+<hr />
+
+<h4 id="self-guided-action-diffusion">Self-Guided Action Diffusion</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img9" />
+<strong>Authors</strong>: Rhea Malhotra, Yuejiang Liu, Chelsea Finn
+<br /><strong>Contact</strong>: rheamal@stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Award nominations:</strong> Firestone Medal for Research
+<br /><strong>Keywords</strong>: inference-time adaptation, trajectory coherence, temporal consistency, policy generalization</p>
+<hr />
+
+<h4 id="behavior-robot-suite-streamlining-real-world-whole-body-manipulation-for-everyday-household-activities"><a href="https://arxiv.org/abs/2503.05652">BEHAVIOR Robot Suite: Streamlining Real-World Whole-Body Manipulation for Everyday Household Activities</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img3" />
+<strong>Authors</strong>: Yunfan Jiang, Ruohan Zhang, Josiah Wong, Chen Wang, Yanjie Ze, Hang Yin, Cem Gokmen, Shuran Song, Jiajun Wu, Li Fei-Fei
+<br /><strong>Contact</strong>: yunfanj@cs.stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Award nominations:</strong> Spotlight Presentation
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2503.05652">Paper</a> | <a href="https://x.com/YunfanJiang/status/1899113026663682432">Blog Post</a> | <a href="https://x.com/YunfanJiang/status/1899113026663682432">Video</a> | <a href="https://behavior-robot-suite.github.io/">Website</a>
+<br /><strong>Keywords</strong>: whole-body manipulation, mobile manipulation, household tasks, imitation learning</p>
+<hr />
+
+<h4 id="deformable-cargo-transport-in-microgravity-with-astrobee"><a href="https://arxiv.org/pdf/2505.01630">Deformable Cargo Transport in Microgravity with Astrobee</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img5" />
+<strong>Authors</strong>: Daniel Morton, Rika Antonova, Brian Coltin, Marco Pavone, Jeannette Bohg
+<br /><strong>Contact</strong>: dmorton@stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Award nominations:</strong> Best paper finalist for the Space Robotics Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2505.01630">Paper</a> | <a href="https://www.youtube.com/watch?v=ihLSNh-Ei5k">Video</a> | <a href="https://github.com/danielpmorton/pyastrobee">Website</a>
+<br /><strong>Keywords</strong>: space robotics, manipulation, deformables</p>
+<hr />
+
+<h4 id="phd-student-computer-science"><a href="https://arxiv.org/abs/2502.19645">PhD Student (Computer Science)</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img7" />
+<strong>Authors</strong>: Moo Jin Kim, Chelsea Finn, Percy Liang
+<br /><strong>Contact</strong>: moojink@stanford.edu
+<br /><strong>Venue</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2502.19645">Paper</a> | <a href="https://youtu.be/T3Zkkr_NTSA?feature=shared">Video</a> | <a href="https://openvla-oft.github.io/">Website</a>
+<br /><strong>Keywords</strong>: vision-language-action models, imitation learning, robotic manipulation</p>
+<hr />
+
+<h4 id="real-time-out-of-distribution-failure-prevention-via-multi-modal-reasoning"><a href="https://arxiv.org/abs/2505.10547">Real-Time Out-of-Distribution Failure Prevention via Multi-Modal Reasoning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img13" />
+<strong>Authors</strong>: Milan Ganai, Rohan Sinha, Christopher Agia, Daniel Morton, Marco Pavone
+<br /><strong>Contact</strong>: mganai@cs.stanford.edu
+<br /><strong>Venue</strong>: Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2505.10547">Paper</a> | <a href="https://www.youtube.com/watch?v=a0XZgwoNLos">Video</a> | <a href="https://milanganai.github.io/fortress/">Website</a>
+<br /><strong>Keywords</strong>: multi-modal reasoning, semantic safety, ood reliability</p>
+<hr />
+
+<h4 id="robopanoptes-the-all-seeing-robot-with-whole-body-dexterity"><a href="https://arxiv.org/abs/2501.05420">RoboPanoptes: The All-Seeing Robot with Whole-body Dexterity</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img10" />
+<strong>Authors</strong>: Xiaomeng Xu, Dominik Bauer, Shuran Song
+<br /><strong>Contact</strong>: xuxm@stanford.edu
+<br /><strong>Venue</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2501.05420">Paper</a> | <a href="https://www.youtube.com/watch?v=Pa1kGAZcxrA">Video</a> | <a href="https://robopanoptes.github.io">Website</a>
+<br /><strong>Keywords</strong>: whole-body dexterity, whole-body vision</p>
+<hr />
+
+<h4 id="robot-learning-with-super-linear-scaling"><a href="https://arxiv.org/abs/2412.01770">Robot Learning with Super-Linear Scaling</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img8" />
+<strong>Authors</strong>: Marcel Torne Villasevil, Arhan Jain, Jiayi Yuan, Vidyaaranya Macha, Lars Lien Ankile, Anthony Simeonov, Pulkit Agrawal, Abhishek Gupta
+<br /><strong>Contact</strong>: marcelto@stanford.edu
+<br /><strong>Venue</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2412.01770">Paper</a> | <a href="https://www.youtube.com/watch?v=s7U2Nk3oPog">Video</a> | <a href="https://casher-robot-learning.github.io/CASHER/">Website</a>
+<br /><strong>Keywords</strong>: robot learning: reinforcement learning, robot modeling &amp; simulation, grasping &amp; manipulation</p>
+<hr />
+
+<h4 id="self-supervised-multi-future-occupancy-forecasting-for-autonomous-driving"><a href="https://arxiv.org/abs/2407.21126">Self-supervised Multi-future Occupancy Forecasting for Autonomous Driving</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img12" />
+<strong>Authors</strong>: Bernard Lange, Masha Itkina, Jiachen Li, Mykel J. Kochenderfer
+<br /><strong>Contact</strong>: blange@stanford.edu
+<br /><strong>Venue</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2407.21126">Paper</a>
+<br /><strong>Keywords</strong>: autonomous driving, world model</p>
+<hr />
+
+<h4 id="unified-video-action-model"><a href="https://arxiv.org/pdf/2503.00200">Unified Video Action Model</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-21-rss-2025/img1" />
+<strong>Authors</strong>: Shuang Li, Yihuai Gao, Dorsa Sadigh, Shuran Song
+<br /><strong>Contact</strong>: lishuang@stanford.edu
+<br /><strong>Venue</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2503.00200">Paper</a> | <a href="https://unified-video-action-model.github.io/">Website</a>
+<br /><strong>Keywords</strong>: robot learning, imitation learning, video action models</p>
+<hr />
+
+<p>We look forward to seeing you at RSS!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/rss-2025/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/rss-2025/&text=Stanford+AI+Lab+Papers+and+Talks+at+RSS%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/rss-2025/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/rss-2025/&title=Stanford+AI+Lab+Papers+and+Talks+at+RSS%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/rss-2025/&title=Stanford+AI+Lab+Papers+and+Talks+at+RSS%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+RSS%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/rss-2025/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#RSS">
+      <p><i class="fa fa-tag fa-fw"></i> RSS</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/faact-2025/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at FAccT
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/robopanoptes/">
+      <p>Next post</p>
+        How Machine Learning Brings <br> Unconventional Robots to Life
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

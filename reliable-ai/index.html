@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/reliable-ai/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Progress Toward Safe and Reliable AI | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Progress Toward Safe and Reliable AI" />
+<meta name="author" content="<a href='https://seglash.people.stanford.edu/'>Steve Eglash</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Artificial intelligence and particularly machine learning have recently demonstrated tremendous achievements, and the future seems brighter still. However, these systems aren’t perfect and there is huge risk when they are deployed in applications where mistakes lead to the loss of human life or of hundreds of millions of dollars. Think of applications like commercial aircraft collision avoidance, financial transactions, or control of massive power generating or chemical manufacturing plants." />
+<meta property="og:description" content="Artificial intelligence and particularly machine learning have recently demonstrated tremendous achievements, and the future seems brighter still. However, these systems aren’t perfect and there is huge risk when they are deployed in applications where mistakes lead to the loss of human life or of hundreds of millions of dollars. Think of applications like commercial aircraft collision avoidance, financial transactions, or control of massive power generating or chemical manufacturing plants." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/reliable-ai/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/reliable-ai/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-02T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Progress Toward Safe and Reliable AI" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Progress Toward Safe and Reliable AI","dateModified":"2019-05-02T00:00:00-07:00","datePublished":"2019-05-02T00:00:00-07:00","description":"Artificial intelligence and particularly machine learning have recently demonstrated tremendous achievements, and the future seems brighter still. However, these systems aren’t perfect and there is huge risk when they are deployed in applications where mistakes lead to the loss of human life or of hundreds of millions of dollars. Think of applications like commercial aircraft collision avoidance, financial transactions, or control of massive power generating or chemical manufacturing plants.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/reliable-ai/"},"url":"http://ai.stanford.edu/blog/reliable-ai/","author":{"@type":"Person","name":"<a href='https://seglash.people.stanford.edu/'>Steve Eglash</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Progress Toward Safe and Reliable AI | The Stanford AI Lab Blog</title>
+    <meta name="description" content="An overview of research at SAIL related to new techniques that allow us to look inside the black box of neural networks, to how it is possible to find and re...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Progress Toward Safe and Reliable AI">
+    
+    <meta name="twitter:description" content="An overview of research at SAIL related to new techniques that allow us to look inside the black box of neural networks, to how it is possible to find and remove bias, and to how safety in autonomous systems can be assured.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-05-02-reliable-ai/thumb.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-05-02-reliable-ai/thumb.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Progress Toward Safe and Reliable AI</h1>
+    <p class="meta">
+    <a href='https://seglash.people.stanford.edu/'>Steve Eglash</a>
+    <div class="post-date">May 2, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Artificial intelligence and particularly machine learning have recently demonstrated tremendous achievements, and the future seems brighter still. However, these systems aren’t perfect and there is huge risk when they are deployed in applications where mistakes lead to the loss of human life or of hundreds of millions of dollars.  Think of applications like commercial aircraft collision avoidance, financial transactions, or control of massive power generating or chemical manufacturing plants.</p>
+
+<p>In order for society to continue to deploy advanced AI systems in such mission critical applications we need these systems to be <strong>verifiable</strong> (provably acting in the correct way for a range of inputs), <strong>reliable</strong> (behaving as expected, even for novel inputs), <strong>robust against adversarial attacks</strong> (not brittle or vulnerable to noise or specific inputs when deployed), <strong>auditable</strong> (open to checking their internal state when any given decision is made), <strong>explainable</strong> (structured so that the data, scenarios, and assumptions that led to a given recommendation are clear), and <strong>unbiased</strong> (not showing unintended preference towards certain types of actions).  This is a lofty set of requirements, without a doubt. Fortunately, some of the world’s best AI researchers are now working on exactly this.  At Stanford AI Lab and the larger Stanford research community, these researchers include professors <a href="http://theory.stanford.edu/~barrett/">Clark Barrett</a>, <a href="https://profiles.stanford.edu/david-dill">David Dill</a>, <a href="http://people.eecs.berkeley.edu/~cbfinn/">Chelsea Finn</a>, <a href="http://mykel.kochenderfer.com/">Mykel Kochenderfer</a>, <a href="https://sites.google.com/site/anshulkundaje/">Anshul Kundaje</a>, <a href="https://cs.stanford.edu/~pliang/">Percy Liang</a>, <a href="https://ai.stanford.edu/~tengyuma/">Tengyu Ma</a>, <a href="https://web.stanford.edu/~subh/">Subhasish Mitra</a>, <a href="http://web.stanford.edu/~pavone/">Marco Pavone</a>, <a href="https://omereingold.wordpress.com/">Omer Reingold</a>, <a href="https://dorsa.fyi/">Dorsa Sadigh</a>, and <a href="https://sites.google.com/site/jamesyzou/">James Zou</a>.</p>
+
+<p>In this article, we will take a look at a few examples of current research that are leading the way toward safe and reliable AI.  We will see how new techniques allow us to look inside the black box of neural networks, how it is possible to find and remove bias, and how safety in autonomous systems can be assured.</p>
+
+<h2 id="looking-inside-the-black-box-of-neural-networks--verification-and-interpretability">Looking Inside the Black Box of Neural Networks:  Verification and Interpretability</h2>
+
+<p>While neural networks have played a critical role in recent AI achievements, they are black box function approximators with limited interpretability.  They can also fail in the presence of small adversarial perturbations, despite being expected to generalize from finite training data to previously unseen inputs, which makes the robustness of one’s algorithm hard to verify.  Let’s take a look at two examples of current research that allow us to examine the inner workings of neural networks.  The first example is about verification and the second interpretability.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/dnn.png"><img class="postimage_75" src="/blog/assets/img/posts/2019-05-02-reliable-ai/dnn.png" /></a></p>
+</div></figure>
+
+<p><strong>Verification of Deep Neural Networks</strong></p>
+
+<p>We would like to ensure that neural networks will work for every possible set of circumstances, but verification is experimentally beyond the reach of existing tools.  Currently, dedicated tools can only handle very small networks, for example a single hidden layer with 10 – 20 hidden nodes.  Katz et al. <a href="https://arxiv.org/abs/1702.01135">[G. Katz, C. Barrett, D. L. Dill, K. Julian, and M. J. Kochenderfer, “Reluplex: An efficient SMT solver for verifying deep neural networks,” in International Conference on Computer-Aided Verification, 2017.]</a> developed Reluplex, a new algorithm for error-checking neural networks.  Reluplex blends linear programming techniques with SMT (satisfiability modulo theories) solving techniques in which neural networks are encoded as linear arithmetic constraints.  The key insight is to avoid testing paths that mathematically can never occur, which allows testing neural networks that are orders of magnitude larger than was previously possible, for example, a fully connected neural network with 8 layers and 300 nodes each.</p>
+
+<p>Reluplex makes it possible to prove properties of networks over a range of inputs.  It enables measuring formal adversarial robustness, or in other words the minimum or threshold adversarial signal that can produce spurious results.  See Raghunathan et al. <a href="https://openreview.net/pdf?id=Bys4ob-Rb">[A. Raghunathan, J. Steinhardt, and P. Liang, “Certified Defenses against Adversarial Examples,” in International Conference on Learning Representations, 2018.]</a> for another example of evaluating robustness to adversarial examples.</p>
+
+<p><strong>Reluplex Case Study:  Unmanned Aircraft Collision Avoidance</strong></p>
+
+<p>Reluplex was applied to test a neural network fit to an early prototype of ACAS Xu <a href="https://arxiv.org/abs/1810.04240">[K. Julian, M. J. Kochenderfer, and M. P. Owen, “Deep neural network compression for aircraft collision avoidance systems,” Journal of Guidance, Control, and Dynamics, 2018.]</a>, an airborne collision-avoidance system for drones.  As shown in the figure, the system considers two drones:  your own drone, “Ownship,” which is controlled by the ACAS Xu software, and another drone, “Intruder,” which we observe.  The goal is to guide Ownship and avoid collisions with Intruder.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/reluplex.png"><img class="postimage_50" src="/blog/assets/img/posts/2019-05-02-reliable-ai/reluplex.png" /></a></p>
+</div></figure>
+
+<p>In one scenario the researchers were asked to show that if Intruder approaches from the left, then the system would advise Ownship to turn strong right.  The researchers proved in 1.5 hours using modest compute resources that the network functions correctly for this scenario in every case.  A more complicated second scenario considered a situation where Intruder and Ownship are at different altitudes and additionally where Ownship had received a previous advisory to turn weak left.  This illustrates the sort of complexity that can arise in such systems.  In this case the network should advise COC (clear of conflict, that is, maintain current course) or weak left.  The researchers found a counter example in 11 hours using modest compute resources, and the counter example was later corrected in a different network.</p>
+
+<p><strong>Understanding Model Predictions</strong></p>
+
+<p>Can we explain why neural networks make specific predictions?  That is the question that Koh and Liang asked <a href="https://arxiv.org/pdf/1703.04730.pdf">[Understanding black-box predictions via influence functions. Pang Wei Koh, Percy Liang. International Conference on Machine Learning (ICML), 2017.]</a>.  This is important when deep learning models are used to decide who gets financial loans or health insurance, and many other applications.  When AI systems are explainable they are likely to enable better decisions, the development of improved models, and greater discovery, trust, and oversight.  The researchers’ approach is to identify the training data points most responsible for a given prediction.  Their key insight is to use “influence functions” calculated by mathematically answering the question “how would the model’s predictions change if we did not have this training point?”.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/influence.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-05-02-reliable-ai/influence.png" /></a></p>
+</div></figure>
+
+<p>In the above figure, if the pixels of the white dog are responsible for activating the part of the neural network that identifies this image as a dog then the system is behaving reasonably.  On the other hand, if the pixels of the ocean waves are generating the output “dog” then this system becomes brittle — other images with only ocean waves could be incorrectly classified as a “dog.”  By being able to correctly identify that the pixels of the white dog have a higher influence than the ocean waves, our system can become more robust to noisy inputs.</p>
+
+<h2 id="finding-and-removing-bias">Finding and Removing Bias</h2>
+<p>It’s no surprise that AI systems reflect societal bias.  Zou and Schiebinger <a href="https://www.nature.com/articles/d41586-018-05707-8">[Design AI so that it’s fair.  James Zou and Londa Schiebinger.  Nature (2018).]</a> point out that bias can result from two sources:  training data and algorithms.  Bias in training data can result from some groups being over- or under-represented in a dataset, and the solution is to investigate how training data is curated.  Algorithms can amplify bias because a typical machine learning program tries to maximize the overall prediction accuracy across the training data, so the solution is to investigate how bias is propagated and amplified.</p>
+
+<p><strong>Geometry Captures Semantics</strong></p>
+
+<p>Bolukbasi et al. <a href="https://arxiv.org/pdf/1607.06520.pdf">[Man is to Computer Programmer as Woman is to Homemaker?  Debiasing Word Embeddings.  Tolga Bolukbasi, Kai-Wei Chang, James Zou, Venkatesh Saligrama, and Adam Kalai.  Neural Information Processing Systems (NIPS 2016).]</a> used word pairings to examine bias.  For example, consider the question, man is to king as woman is to what?  Any five year-old can answer this question.  Man is to king as woman is to queen.  The researchers answered word pairing questions using the Word2Vec model trained using the Google News corpus.  Every word is mapped to a point in a high-dimensional space.  The relation between words is shown by the vector connecting those words.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/geom_bias.png"><img class="postimage_50" src="/blog/assets/img/posts/2019-05-02-reliable-ai/geom_bias.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>A two-dimensional projection of the high-dimensional space of word embeddings, in which the vector connecting woman to queen is the same length and direction as the vector connecting man to king.</p>
+</figcaption></figure>
+
+<p>The Google News corpus is huge and many of its authors are professional journalists, so we might naively expect a model trained using this data to be free of bias. However with a moment’s reflection we realize that this model will probably reflect society’s biases, since it is after all trained on data generated by our society.  That’s exactly what we will see.</p>
+
+<p>Let’s take a look at another word pairing:  he is to brother as she is to what?  Again, any five year-old can answer that he is to brother as she is to sister.  We are off to a good start, but as you can see in the below figure, things start to go downhill rapidly.  Some of the word pairings display bias (he is to doctor as she is to nurse, he is to computer programmer as she is to homemaker) and some are downright weird (she is to pregnancy as he is to kidney stone).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/bias_table.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-05-02-reliable-ai/bias_table.png" /></a></p>
+</div></figure>
+
+<p>The researchers found that it is possible to reduce gender bias by removing gender stereotypes such as the association between receptionist and female while preserving desired associations such as that between queen and female.  In order to do this they distinguish between gender-specific words that are associated with gender by definition, like brother, sister, businessman, and businesswoman, and the remaining gender-neutral words.  Geometrically, they identified two orthogonal dimensions — the difference between the embeddings of the words he and she and a direction that captures gender neutrality.  Their debiasing algorithm removes the gender pair associations for gender-neutral words by collapsing the gender-neutral direction.  This sort of debiasing is used by Google, Twitter, Facebook, Microsoft, and others.</p>
+
+<p><strong>Achieving Fairness Without Demographics</strong></p>
+
+<p>Hashimoto et al. <a href="https://arxiv.org/pdf/1806.08010.pdf">[Fairness without demographics in repeated loss minimization. Tatsunori B. Hashimoto, Megha Srivastava, Hongseok Namkoong, Percy Liang. International Conference on Machine Learning (ICML), 2018.]</a> wondered if it is possible to develop fair systems even when we don’t have demographic information.  The problem is that small groups have a low representation in minimizing the average training loss.  Group labels may be unavailable due to cost or privacy reasons, or the protected group may not be identified or known.  The current approach, known as empirical risk minimization, can make the problem worse by shrinking the minority group in the input data over time.  The goal is to protect all groups—even minority groups—even without demographic labels.  The solution developed by these researchers is an approach based on “distributionally robust optimization” which minimizes loss over all groups.</p>
+
+<p>The goal of distributionally robust optimization is to control the worst-case risks over all groups.  Intuitively, the approach is to upweight examples with high loss.  Groups suffering high loss are over-represented relative to the original mixture which adjusts the model to have fewer high loss examples, making it unlikely that some groups will have disproportionately high error.  Intuitively, data points relating to minority groups would be the ones to suffer from high loss by default, so this approach can help avoid that.</p>
+
+<h2 id="assuring-safe-autonomous-systems">Assuring Safe Autonomous Systems</h2>
+
+<p>Robots, drones, and autonomous vehicles need algorithms for safe learning, planning, and control.  As these systems explore their environment, they have to deal with uncertainty about what their own actions will do, dynamic surroundings, and unpredictable human interactions.  In each of the following two examples, the researchers model the autonomous robot and the human as a system.</p>
+
+<p><strong>Data-Driven Probabilistic Modeling for Human-Robot Interactions</strong></p>
+
+<p>Professor Marco Pavone’s research seeks to develop a decision-making and control stack for safe human-robot vehicle interactions in settings where there are multiple distinct courses of action.  In this example, the researchers are motivated by the example of traffic weaving at highway on-ramps and off-ramps.  Their approach is to first learn multimodal probability distributions over future human actions from a dataset of vehicle interaction samples, and then perform real-time robot policy construction through massively parallel sampling of human responses to candidate robot action sequences <a href="https://arxiv.org/pdf/1710.09483.pdf">[E. Schmerling, K. Leung, W. Vollprecht, and M. Pavone, “Multimodal Probabilistic Model-Based Planning for Human-Robot Interaction,” in Proc. IEEE Conf. on Robotics and Automation, Brisbane, Australia, 2018]</a>.  This framework does not place any assumptions on human motivations, which enables the modeling of a wide variety of human driving behaviors.  Significantly, the model includes high-level stochastic decision making and low-level safety preserving control.  To account for the fact that humans can occasionally defy the robot’s predictions, the framework is augmented with a low-level tracking controller that projects the stochastic planner’s desired trajectory into a set of safety-preserving controls whenever safety is threatened.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/robocar.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-05-02-reliable-ai/robocar.png" /></a></p>
+</div></figure>
+
+<p><strong>Safely Learning a Human’s Internal State</strong></p>
+
+<p>Dorsa Sadigh <a href="http://iliad.stanford.edu/pdfs/publications/sadigh2018planning.pdf">[Planning for cars that coordinate with people: leveraging effects on human actions for planning and active information gathering over human internal state. Sadigh, D., Landolfi, N., Sastry, S. S., Seshia, S. A., Dragan, A. D. SPRINGER. 2018: 1405–26]</a> and Mykel Kochenderfer are teaching autonomous vehicles to learn the internal state of human drivers.  They do this by modeling the interaction between autonomous vehicles and humans as a dynamical system.  Of course, there is direct control over the actions of the autonomous vehicle, but these actions affect the human’s actions, so there is also indirect control over the human’s actions.</p>
+
+<p>Imagine you are attempting to change lanes on a crowded highway.  You might nudge or move slowly into the new lane from your current lane while observing the reactions of other drivers.  If the other driver slows and opens a gap then you continue the lane change, but if the other driver speeds up and blocks you then you return to your lane and try again later.  This approach does roughly that, by having the robot maximize its own reward function as it usually does except that this reward function can now directly depend on what the human does in response.  Because drivers respond to the actions of other drivers, we have an opportunity to do active information gathering.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2019-05-02-reliable-ai/auto_car.png"><img class="postimage_100" src="/blog/assets/img/posts/2019-05-02-reliable-ai/auto_car.png" /></a></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>A visual explanation of the approach. The equation states that the robot’s reward function incorporates a tradeoff between reaching its goal and active information gathering.  In the left-hand image we see the orange autonomous vehicle nudge the white human vehicle, emulating the human behavior shown in the right hand image.</p>
+</figcaption></figure>
+
+<h2 id="the-future">The Future</h2>
+
+<p>In the near future we will enjoy safe and reliable AI systems that are verifiable, auditable, explainable, unbiased, and robust.  Research such as the works from the Stanford AI Lab as well as work from other labs is providing the innovative technological solutions that will make this possible.  But technical solutions aren’t sufficient;  success requires that these solutions are implemented with care and with social awareness to determine what values we want to incorporate in these systems.  Recently, we are seeing the rise of human-centered approaches to AI that consider human factors and societal impact.  Such approaches will hopefully lead to AI systems that work in ways that are safe, reliable, and reasonable even in unexpected situations with culturally diverse users.</p>
+
+<p><strong>Acknowledgments</strong></p>
+
+<p>Thanks to all of the researchers who allowed their work to be summarized here.  Special thanks to Clark Barrett, Mykel Kochenderfer, Percy Liang, Marco Pavone, Dorsa Sadigh, and James Zou.</p>
+
+<p><strong>About the Author</strong></p>
+
+<p><a href="https://seglash.people.stanford.edu/">Steve Eglash</a> is Director of Research at the Stanford Institute for Human-Centered Artificial Intelligence (<a href="https://hai.stanford.edu/">Stanford HAI</a>).  Stanford HAI works to advance AI technology and applications, as well as to understand and influence the interaction of AI with society.  Steve’s group is responsible for research programs and external partnerships.</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/reliable-ai/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/reliable-ai/&text=Progress+Toward+Safe+and+Reliable+AI%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/reliable-ai/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/reliable-ai/&title=Progress+Toward+Safe+and+Reliable+AI%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/reliable-ai/&title=Progress+Toward+Safe+and+Reliable+AI%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Progress+Toward+Safe+and+Reliable+AI%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/reliable-ai/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#interpretability">
+      <p><i class="fa fa-tag fa-fw"></i> interpretability</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#rl">
+      <p><i class="fa fa-tag fa-fw"></i> rl</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#safety">
+      <p><i class="fa fa-tag fa-fw"></i> safety</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/uncertainty-autoencoders/">
+      <p>Previous post</p>
+        Uncertainty Autoencoders: Learning Compressed Representations via Variational Information Maximization
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/generate-human-object/">
+      <p>Next post</p>
+        Learning to Generate Human–Object Interactions
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

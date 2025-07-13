@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/learning-from-partners/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Learning from My Partner’s Actions: Roles in Decentralized Robot Teams | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Learning from My Partner’s Actions: Roles in Decentralized Robot Teams" />
+<meta name="author" content="<a href='https://www.dylanlosey.com/'>Dylan Losey</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="When teams of humans and robots work together to complete a task, communication is often necessary. For instance, imagine that you are working with a robot partner to move a table, and you notice that your partner is about to back into an obstacle they cannot see. One option is explicitly communicating with your teammate by telling them about the obstacle. But humans utilize more than just language—we also implicitly communicate through our actions. Returning to the example, we might physically guide our teammate away from the obstacle, and leverage our own forces to intuitively inform them about what we have observed. In this blog post, we explore how robot teams should harness the implicit communication contained within actions to learn about the world. We introduce a collaborative strategy where each robot alternates roles within the team, and demonstrate that roles enable accurate and useful communication. Our results suggest that teams which implicitly communicate with roles can match the optimal behavior of teams that explicitly communicate via messages. You can find our original paper on this research here." />
+<meta property="og:description" content="When teams of humans and robots work together to complete a task, communication is often necessary. For instance, imagine that you are working with a robot partner to move a table, and you notice that your partner is about to back into an obstacle they cannot see. One option is explicitly communicating with your teammate by telling them about the obstacle. But humans utilize more than just language—we also implicitly communicate through our actions. Returning to the example, we might physically guide our teammate away from the obstacle, and leverage our own forces to intuitively inform them about what we have observed. In this blog post, we explore how robot teams should harness the implicit communication contained within actions to learn about the world. We introduce a collaborative strategy where each robot alternates roles within the team, and demonstrate that roles enable accurate and useful communication. Our results suggest that teams which implicitly communicate with roles can match the optimal behavior of teams that explicitly communicate via messages. You can find our original paper on this research here." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/learning-from-partners/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/learning-from-partners/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-28T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Learning from My Partner’s Actions: Roles in Decentralized Robot Teams" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Learning from My Partner’s Actions: Roles in Decentralized Robot Teams","dateModified":"2019-10-28T00:00:00-07:00","datePublished":"2019-10-28T00:00:00-07:00","description":"When teams of humans and robots work together to complete a task, communication is often necessary. For instance, imagine that you are working with a robot partner to move a table, and you notice that your partner is about to back into an obstacle they cannot see. One option is explicitly communicating with your teammate by telling them about the obstacle. But humans utilize more than just language—we also implicitly communicate through our actions. Returning to the example, we might physically guide our teammate away from the obstacle, and leverage our own forces to intuitively inform them about what we have observed. In this blog post, we explore how robot teams should harness the implicit communication contained within actions to learn about the world. We introduce a collaborative strategy where each robot alternates roles within the team, and demonstrate that roles enable accurate and useful communication. Our results suggest that teams which implicitly communicate with roles can match the optimal behavior of teams that explicitly communicate via messages. You can find our original paper on this research here.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/learning-from-partners/"},"url":"http://ai.stanford.edu/blog/learning-from-partners/","author":{"@type":"Person","name":"<a href='https://www.dylanlosey.com/'>Dylan Losey</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Learning from My Partner’s Actions: Roles in Decentralized Robot Teams | The Stanford AI Lab Blog</title>
+    <meta name="description" content="When groups robots work together, their actions communicate valuable information. We introduce a collaborative learning and control strategy that enables rob...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Learning from My Partner’s Actions: Roles in Decentralized Robot Teams">
+    
+    <meta name="twitter:description" content="When groups robots work together, their actions communicate valuable information. We introduce a collaborative learning and control strategy that enables robots to harness the information contained within their partner's actions.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2019-10-28-learning-from-partners/image1.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2019-10-28-learning-from-partners/image1.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Learning from My Partner’s Actions: Roles in Decentralized Robot Teams</h1>
+    <p class="meta">
+    <a href='https://www.dylanlosey.com/'>Dylan Losey</a>
+    <div class="post-date">October 28, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>When teams of humans and robots work together to complete a task, communication is often necessary. For instance, imagine that you are working with a robot partner to move a table, and you notice that your partner is about to back into an obstacle they cannot see. One option is <strong>explicitly</strong> communicating with your teammate by telling them about the obstacle. But humans utilize more than just language—we also <strong>implicitly</strong> communicate through our actions. Returning to the example, we might physically guide our teammate away from the obstacle, and leverage our own forces to intuitively inform them about what we have observed. In this blog post, we explore how robot teams should harness the implicit communication contained within actions to <strong>learn</strong> about the world. We introduce a collaborative strategy where each robot alternates roles within the team, and demonstrate that roles enable accurate and useful communication. Our results suggest that teams which implicitly communicate with roles can match the optimal behavior of teams that explicitly communicate via messages. You can find our original paper on this research <a href="https://arxiv.org/abs/1910.07613">here</a>.</p>
+
+<p><strong>Motivation.</strong> Consider the task shown below. Two robots are holding a metal rod, and they both want to place this rod on the ground:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image13.png" /></p>
+</div></figure>
+
+<p>Because the robots share a common goal, they should <strong>collaborate</strong>, and work with one another to complete the task. But—although robots share a goal—they have different information about the world! The robot on the left (we’ll refer to it as <em>robot #1</em>) sees a nearby pile of boxes:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image4.png" /></p>
+</div></figure>
+
+<p>The robot on the right (we’ll refer to it as <em>robot #2</em>) doesn’t see these boxes. Instead, it observes a pile of books that robot #1 cannot detect:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image2.png" /></p>
+</div></figure>
+
+<p>Both agents have incomplete observations of the world—they see some, but not all, of the obstacles in their way. Without a common understanding of all of the obstacles, it is hard for the robots to collaborate!</p>
+
+<p>What’s most important here is that the robots are <strong>decentralized</strong>: i.e., each robot has its <em>own</em> controller, and makes its decisions <em>independent</em> of its partner. Because the robots are independent, one naive strategy would simply be for each robot to simply try and avoid the obstacles that it can see. In other words, robot #1 will move to avoid the boxes, and robot #2 will move to avoid the books. Under this strategy, the two agents make no effort to communicate: instead, they solve the problem <strong>while ignoring the actions that their partner makes</strong>. But ignoring our partner’s actions means that we miss out on valuable information, which here causes the independently acting robots to <em>collide</em> with the boxes!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image3.gif" /></p>
+</div></figure>
+
+<p>These robots are <em>intelligent</em>: they devise plans to optimally complete the task while accounting for what they can observe. But they aren’t <em>collaborative</em>: <strong>they fail to harness the information that is contained within their partner’s decisions</strong>. Striking the balance between actions that optimally solve the task and actions that communicate about the world is notoriously difficult (see <a href="https://en.wikipedia.org/wiki/Witsenhausen%27s_counterexample">Witsenhausen’s counterexample</a>). The goal of our research is to develop robots that <strong>learn</strong> from their partner’s actions in order to successfully collaborate during tasks that require communication.</p>
+
+<p><strong>Insight and Contributions.</strong> Correctly interpreting the meaning behind our partner’s actions is hard. Take the video above, and assume you have no prior knowledge over what the robots are trying to do: at each given timestep, they could be exploiting what they know, actively giving information to their partner, or even actively gathering information from their teammate. Robots—like people—can take actions for <em>many different reasons</em>. So when we observe our partner applying a force, what (if anything) should we learn from that action? And how do we select actions that our partner can also interpret? Our insight is that we can use <strong>roles</strong>:</p>
+
+<p style="text-align: center;"><strong><em>Collaborative teammates can learn from each other’s actions when the team is separated into roles, and each role provides a distinct reason for acting</em></strong></p>
+
+<p>In what follows, we formalize the concept of roles, and demonstrate that robots which alternate roles can accurately exchange information through their actions. Next, we implement roles in simulated and real robot teams, and explore how they facilitate learning. Although this research focuses on teams composed entirely of robots, we are excited about leveraging the insights gained from these settings to also enable implicit communication in human-robot teams.</p>
+
+<h2 id="learning-in-real-time-with-roles">Learning in Real-Time with Roles</h2>
+
+<p>Here we mathematically define our problem setting and show why roles are necessary. We also use our theoretical results to answer questions such as: What is the best way to change roles? When do we need to alternate roles? And how should I behave within each role?</p>
+
+<p>For simplicity, we will focus on teams with <strong>two robots</strong>. However, the ideas which we discuss here can also be extended to teams with an arbitrary number of members!</p>
+
+<p><strong>Notation.</strong> Let \(s\) be the <strong>state</strong> of the world, which contains all the relevant information needed to represent the robots and environment. We break this state into two components: \(s = [s_1, s_2]\). Here \(s_1\) is the state of robot #1 (e.g., its arm configuration and the position of the <em>boxes</em>) and \(s_2\) is the state of robot #2 (e.g., its arm configuration and the position of the <em>books</em>). These states capture the different information available to each agent, and are shown in the thought bubbles below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image10.png" /></p>
+</div></figure>
+
+<p>So the states \(s_1\) and \(s_2\) express what each agent knows. But how can the robots gain new information about what they don’t know? We assert that robots should leverage their partner’s <strong>actions</strong>. Returning to the image above, \(a_1\) is the action taken by robot #1 (and observed by robot #2), while \(a_2\) is the action taken by robot #2 (and observed by robot #1). In this example, actions are the physical forces and torques that the robots apply to the metal rod.</p>
+
+<p>Under our approach, each robot utilizes these observed actions—in addition to their own state—to make decisions. More formally, each agent has a <strong>policy</strong> that defines the likelihood of taking a specific action as a function of their current state and their partner’s action. For instance, we write the policy of robot #1 as: \(\pi_1(a_1 \mid s_1,a_2)\). A key here is that these decision making policies depend on how the robot’s partner behaves!</p>
+
+<p><strong>Interpreting My Partner’s Actions.</strong> Let’s imagine that we are robot #1. If we know the full state \(s\), we can make optimal decisions. But we don’t; we only have access to \(s_1\), and we are relying on \(a_2\) to learn about the rest of the state that we cannot directly observe (i.e., \(s_2\)). Put another way, we need to <em>interpret</em> what our partner’s actions mean about the world. But this is hard: people and robots can choose actions for many different reasons.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image12.png" /></p>
+</div></figure>
+
+<p>Consider the example above. In each block, we observe the <em>same robot action</em>, but we interpret it in a different way based on what we think our partner is doing.</p>
+
+<ul>
+  <li><strong>Exploiting Information</strong>: our partner is moving to the right in order to avoid an obstacle we cannot see.</li>
+  <li><strong>Active Information Giving</strong>: our partner is purposely trying to convey information to us by exaggerating their behavior and moving towards the obstacle.</li>
+  <li><strong>Active Information Gathering</strong>: our partner is trying to elicit information from us by pulling us in a different direction and watching how we respond.</li>
+</ul>
+
+<p>Based on what we think our partner is trying to do (exploit, give, or gather) we assign a different meaning to the same action (obstacle in center, obstacle on right, no obstacle at all). Put another way, we need to understand how our partner makes decisions in order to correctly interpret their actions.</p>
+
+<p><strong>Infinite Recursion.</strong> This intuition matches our mathematical findings. When deriving the optimal policy for robot #1, we discover that our policy <em>depends</em> on our partner’s policy:</p>
+
+\[\textcolor{blue}{\pi_1(a_1 ~|~ s_1, a_2)} = f_1(..., \textcolor{orange}{\pi_2(a_2 ~|~ s_2, a_1)}, …)\]
+
+<p>And, similarly, our partner’s policy <em>depends</em> on our own policy:</p>
+
+\[\textcolor{orange}{\pi_2(a_2 ~|~ s_2, a_1)} = f_2(..., \textcolor{blue}{\pi_1(a_1 ~|~ s_1, a_2)}, …)\]
+
+<p>This interdependence results in infinite recursion. Putting the above equations into words, when solving for my partner’s policy I need to solve for my partner’s understanding of my policy, which in turn relies on my partners understanding of my understanding of their policy, and so on. Expressed more simply: when robot teammates have no context for interpreting their partner’s actions, they fall down an infinite rabbithole of <strong>what do you think I think you think…</strong><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<p><strong>Introducing Roles.</strong> Roles provide the structure necessary for breaking this recursion and understanding what our partner is trying to do. We introduce two classes of roles: a <strong>speaker</strong> and a <strong>listener</strong>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image9.png" /></p>
+</div></figure>
+
+<p>As shown above, speakers make decisions based only on their current state. Here robot #1 is the speaker, and it chooses an action to avoid the boxes. Because the listener knows that its partner is <strong>exploiting what it sees</strong>, it can correctly interpret what these actions mean. Returning to the diagram, robot #2 listens to robot #1, and realizes that \(a_1\) indicates that there is an obstacle next to the books. Equipped with this learned information, now robot #2 also moves left to avoid the books!</p>
+
+<p><strong>Understanding Roles.</strong> We explore how roles can help robot teams communicate and learn within simple contexts<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>. In these simplified settings, we derive theoretical answers to the following questions:</p>
+
+<ul>
+  <li><strong>Do robots need to alternate roles?</strong> Yes. If teammates never change speaker and listener roles, the closed-loop team can actually become unstable. Intuitively, imagine that you are always a speaker. You can use your actions to tell your partner about what you see, but you never get the chance to learn from their actions and update your own behavior!</li>
+  <li><strong>How should robots alternate roles?</strong> Changing roles at a predetermined frequency. We have a theorem that demonstrates that the team’s performance improves the faster that the agents change roles. One key advantage of this switching strategy is that it requires no common signals during the task (with the exception of a world clock that both agents can access).</li>
+  <li><strong>How effective are roles?</strong> In certain scenarios, decentralized robots that leverage roles can match the optimal behavior of centralized teams (in which both robots already know the entire state). Hence, when we use roles, we enable implicit communication to be just as expressive as explicit communication.</li>
+  <li><strong>What if I only have a noisy observation of my partner’s actions?</strong> As long as this noise is unbiased (i.e., zero mean), it’s fine to treat your noisy observations as if they are your partner’s true actions. Sensor noise is common, so it’s important that our approach is robust to this observation noise.</li>
+  <li><strong>When I’m the speaker, how should I behave?</strong> Usually the speaker should simply exploit what they observe; however, there are also cases where the speaker should actively give information and <em>exaggerate</em> its behavior<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup>. We are excited that this exaggeration arises naturally as a result of optimizing our roles, without being preprogrammed.</li>
+</ul>
+
+<p><strong>Summarizing Roles.</strong> When teammates try to interpret their partner’s actions without any prior information they easily get confused. There are many different ways to explain any given action, which makes it hard to determine what—if anything—the robot should learn. We resolve this confusion by introducing speaker and listener roles for decentralized robot teams. These roles provide a clear reason for acting, and enable the listener to correctly interpret and learn from the speaker’s choices. We emphasize that the resulting learning is <strong>real-time</strong>: the robots don’t need access to offline training, simulations or additional demonstrations<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup>. Instead, they <strong>learn during the current task</strong> by alternating roles.</p>
+
+<h2 id="leveraging-roles-in-robot-teams">Leveraging Roles in Robot Teams</h2>
+
+<p>We evaluate how robot teams can leverage roles in <strong>simulated</strong> and <strong>real</strong> environments. In the simulation experiments, we explore how different amounts of communication affect performance, and compare our role allocation strategy to teams that communicate via explicit messages. In the robot experiments, we revisit the motivation example from the beginning of this blog post, and demonstrate how roles enable real-time learning and collaboration. Our simulation and experimental settings involve nonlinear dynamics, and are more complex than the simple settings in which we theoretically analyzed roles.</p>
+
+<h3 id="simulations-understanding-the-spectrum-of-communication">Simulations: Understanding the Spectrum of Communication</h3>
+
+<p>Imagine that you are working with a partner to carry a table across the room. There are many objects within the room that you both need to avoid, but you can’t see all of these obstacles. Instead, you need to rely on your partner for information!</p>
+
+<p><strong>Spectrum.</strong> We explore how a team of robot agents can complete this table carrying task under different levels of communication.</p>
+
+<ul>
+  <li><strong>Centralized</strong>. Both agents know exactly what the full state is, and there is no need for communication.</li>
+  <li><strong>Explicit</strong>. Each agent sends a message containing the position and geometry of the nearest obstacle to its teammate.</li>
+  <li><strong>Roles (Dynamic)</strong>. The team divides into speaker and listener roles, and the agents implicitly communicate through actions.</li>
+  <li><strong>Roles (Static)</strong>. One agent is always a speaker, and the partner is always a listener. The agents do not change roles.</li>
+</ul>
+
+<p>Viewed together, these different types of communication form a spectrum. Within this spectrum, we are interested in how using and alternating roles compares to the alternatives.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image7.gif" /></p>
+</div></figure>
+
+<p><strong>Experimental Overview.</strong> Above is one example of the table carrying task. The table starts in the bottom left corner, and the agents work together to collectively transport this table to the goal region (red circle, top right). Here the agents are the circles at the ends of the table—notice that one agent is colored a \(\mathbf{\textcolor{gray}{\text{light gray}}}\), and the other agent is a \(\mathbf{\textcolor{black}{\text{dark gray}}}\). The static circles are obstacles that the team is trying to avoid. Importantly, the color of these circles matches the color of the robot which can observe them: e.g., only the dark gray agent that starts on the right can see the bottom left obstacle. In our experiments, we vary the <strong>number of obstacles</strong>, and test how frequently each type of team <strong>successfully reaches the goal</strong>.</p>
+
+<p><strong>Results.</strong> We found that robots which implicitly communicate via roles approach the performance of teams that explicitly communicate by sending messages. See the example below:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image17.png" /></p>
+</div></figure>
+
+<p>On the top, we observe that <em>Explicit</em> and <em>Roles (Dynamic)</em> teams avoid the obstacles, while teams that maintain fixed roles fail. On the bottom, we visualize how implicit communication works in practice. (1) when the speaker approaches an obstacle it can observe, it abruptly moves to the right. (2) the listener realizes that the speaker must have changed directions for a reason, and similarly moves to avoid the obstacle which it cannot directly observe.</p>
+
+<p>Aggregating our results over 1000 randomly generated environments, we find that <em>Explicit</em> and <em>Roles (Dynamic)</em> perform similarly across the board:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image11.png" /></p>
+</div></figure>
+
+<p>This plot shows the fraction of trials in which each team reached the goal: higher is better! Imagine that you could only <em>talk</em> to your partner about the obstacle locations every 4 timesteps: in this case, our simulated teams reach the goal around 80% of the time. But what if you never spoke, and instead changed <em>roles</em> every 4 timesteps? Interestingly, the simulated teams in this condition perform about the same, and still reach the goal about 80% of the time! Our results demonstrate the power of using roles to structure implicit communication. But—in order to be effective—these roles must <em>change</em> within the task. When the team does not change roles, their performance falls below the <em>Explicit</em> baseline.</p>
+
+<h3 id="experiments-using-roles-to-learn-and-collaborate">Experiments: Using Roles to Learn and Collaborate</h3>
+
+<p>Now that we understand what roles are, and can use them to solve a simulated task, let’s return to the problem which originally motivated our research. We have two robots that are trying to place a rod down on the table. These robots are controlled on separate computers, and cannot send messages to one another; instead, they need to communicate information about the world through their actions.</p>
+
+<p><strong>Independent vs. Roles.</strong> The robots attempt to complete the task in two different scenarios. We’ve already talked about the first, where each robot tries to <em>independently</em> solve the problem while ignoring their partner’s actions. Now let’s explore the second, where the robot follow and exchange <em>roles</em> during interaction.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image16.png" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image1.png" /></p>
+</div></figure>
+
+<p>Above we display the plans that <strong>independent robots (left)</strong> and <strong>robots using roles (right)</strong> come up with. When the robots plan to avoid what they can see, they end up moving in different directions: robot #1 wants to go in front of the boxes, while robot #2 moves behind the books. During implementation, these conflicting plans apply opposite forces along the rod and ultimately cancel each other out. Because the robots fail to collaborate, a collision occurs!</p>
+
+<p>By contrast, robots that leverage roles to communicate about the world can coordinate their actions in real-time to avoid both the boxes and the books:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image15.gif" /></p>
+</div></figure>
+
+<p>Breaking down this video, you’ll notice that at the start the robots are moving right down the middle (and look like they might fail again). But as robot #1 gets closer to the boxes, it starts to veer to the left—robot #2 learns from this action, updates its understanding of the world, and changes its behavior to avoid the boxes!</p>
+
+<p><strong>Collaboration.</strong> When we compare the performance of independent robots to robots that use roles, one key difference is how these teams <strong>coordinate</strong> their behavior. Since both robots have the same objective (putting the rod on the table) it makes sense that they should <em>align</em> their decisions and <em>agree</em> in their plans. But—because these robots are controlled independently—it’s not obvious how to coordinate.</p>
+
+<p>These same problems arise when humans work with robots (or other humans). Because we have our own ideas, observations, and understanding of the world, we come up with plans that may not match our teammate! Our experiments, however, indicate that roles can help bridge this gap:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image8.png" /></p>
+</div></figure>
+
+<p>Above we plot the amount of resistance force that the robots are applying to each other when carrying the metal rod (lower is better). In \(\mathbf{\textcolor{gray}{\text{gray}}}\) we plot robots that act independently—these two agents resist one another, ultimately leading to the collision we marked with an “x”. The \(\mathbf{\textcolor{orange}{\text{orange}}}\) plots are much better; here the teammates use roles to implicitly communicate and recover a coordinated policy. <strong>What’s key here is that roles not only enable <em>learning</em>, but this learning is also <em>useful</em> for improving teamwork and increasing collaboration</strong>.</p>
+
+<h1 id="key-takeaways">Key Takeaways</h1>
+
+<p>We explored how we can harness the implicit information contained within actions to learn about the world. Our main insight is that introducing roles enables teammates to correctly interpret the meaning behind their partner’s actions. Once these roles are defined, robots can learn in real-time and coordinate with their teammates. <strong>To summarize our findings</strong>:</p>
+
+<ul>
+  <li>Without any imposed structure, learning from our partner’s actions leads to infinite recursion (what do you think I think you think…).</li>
+  <li>Robots that alternate roles are able to implicitly communicate through their actions and learn in real-time, without offline training or demonstrations.</li>
+  <li>This communication is informative: teams that learn from their partner’s actions via roles are able to understand as much about the world as teams that explicitly communicate by speaking or sending messages.</li>
+  <li>This communication is useful: robots that learn via roles are more collaborative, and better align their actions with their partner.</li>
+</ul>
+
+<p>Overall, this work is a step towards human-robot teams that can seamlessly communicate during interaction.</p>
+
+<p>If you have any questions, please contact Dylan Losey at: <a href="mailto:dlosey@stanford.edu">dlosey@stanford.edu</a> or Mengxi Li at: <a href="mailto:mengxili@stanford.edu">mengxili@stanford.edu</a>. Dylan Losey and Mengxi Li contributed equally to this research.</p>
+
+<p>Our team of collaborators is shown below!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-10-28-learning-from-partners/image6.png" /></p>
+</div></figure>
+
+<hr />
+
+<p>This blog post is based on the CoRL 2019 paper Learning from My Partner’s Actions: Roles in Decentralized Robot Teams by Dylan P. Losey, Mengxi Li, Jeannette Bohg, and Dorsa Sadigh.</p>
+
+<p>For further details on this work, check out the <a href="https://arxiv.org/abs/1910.07613">paper on Arxiv</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+
+      <p>Hedden, Trey, and Jun Zhang. “What do you think I think you think?: Strategic reasoning in matrix games.” <em>Cognition</em> 85.1 (2002): 1-36. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+
+      <p>We consider controllable linear dynamical systems that use linear feedback control laws. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+
+      <p>Dragan, Anca D., Kenton CT Lee, and Siddhartha S. Srinivasa. “Legibility and predictability of robot motion.” <em>ACM/IEEE International Conference on Human-Robot Interaction</em>, 2013. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+
+      <p>This makes our problem setting different from multi-agent reinforcement learning, where the robots have access to training data and offline simulations. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/learning-from-partners/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/learning-from-partners/&text=Learning+from+My+Partner%E2%80%99s+Actions%3A+Roles+in+Decentralized+Robot+Teams%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/learning-from-partners/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/learning-from-partners/&title=Learning+from+My+Partner%E2%80%99s+Actions%3A+Roles+in+Decentralized+Robot+Teams%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/learning-from-partners/&title=Learning+from+My+Partner%E2%80%99s+Actions%3A+Roles+in+Decentralized+Robot+Teams%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Learning+from+My+Partner%E2%80%99s+Actions%3A+Roles+in+Decentralized+Robot+Teams%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/learning-from-partners/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#communication">
+      <p><i class="fa fa-tag fa-fw"></i> communication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#control">
+      <p><i class="fa fa-tag fa-fw"></i> control</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#learning">
+      <p><i class="fa fa-tag fa-fw"></i> learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#multi-agent+systems">
+      <p><i class="fa fa-tag fa-fw"></i> multi-agent systems</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/answering-complex-questions/">
+      <p>Previous post</p>
+        Answering Complex Open-domain Questions at Scale
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/roboturk/">
+      <p>Next post</p>
+        RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

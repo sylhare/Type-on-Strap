@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/roboturk/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation" />
+<meta name="author" content="<a href="http://web.stanford.edu/~amandlek/">Ajay Mandlekar</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Large datasets have been shown to facilitate robot intelligence. By collecting diverse datasets for tasks such as grasping and stacking, robots are able to learn from this data to grasp and stack challenging, novel objects they haven’t seen before." />
+<meta property="og:description" content="Large datasets have been shown to facilitate robot intelligence. By collecting diverse datasets for tasks such as grasping and stacking, robots are able to learn from this data to grasp and stack challenging, novel objects they haven’t seen before." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/roboturk/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/roboturk/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-08T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation","dateModified":"2019-11-08T00:00:00-08:00","datePublished":"2019-11-08T00:00:00-08:00","description":"Large datasets have been shown to facilitate robot intelligence. By collecting diverse datasets for tasks such as grasping and stacking, robots are able to learn from this data to grasp and stack challenging, novel objects they haven’t seen before.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/roboturk/"},"url":"http://ai.stanford.edu/blog/roboturk/","author":{"@type":"Person","name":"<a href=\"http://web.stanford.edu/~amandlek/\">Ajay Mandlekar</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We built a system that enables collecting large-scale robot manipulation datasets with human supervision and used it to collect the largest robot dataset eve...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation">
+    
+    <meta name="twitter:description" content="We built a system that enables collecting large-scale robot manipulation datasets with human supervision and used it to collect the largest robot dataset ever collected via teleoperation.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-11-08-roboturk/mandlekar_iros19.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-11-08-roboturk/mandlekar_iros19.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">RoboTurk: Human Reasoning and Dexterity for Large-Scale Dataset Creation</h1>
+    <p class="meta">
+    <a href="http://web.stanford.edu/~amandlek/">Ajay Mandlekar</a>
+    <div class="post-date">November 8, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Large datasets have been shown to facilitate robot intelligence. By collecting diverse datasets for tasks such as grasping and stacking, robots are able to learn from this data to grasp and stack challenging, novel objects they haven’t seen before.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/robot_intelligence_1.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/robot_intelligence_2.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/robot_intelligence_3.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/robot_intelligence_4.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+Large-datasets facilitate robot intelligence by enabling robots to interact with challenging objects that they have not encountered before. 
+</figcaption>
+</div></figure>
+
+<p>While these results are impressive, they are still limited in critical ways compared to human intelligence. Today, robot intelligence is narrow-minded - they usually only find one way to solve a problem. By contrast, humans are really good at reasoning about creative ways to solve a problem and physically manipulating objects to make it happen.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/need_human_1.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/need_human_2.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+Robot intelligence is narrow-minded (left) while human intelligence allows for creative problem solving that is enabled by rich manipulation ability (right).
+</figcaption>
+</div></figure>
+
+<p>How can we help our robots cross this gap in problem solving ability? We assert that one way is to let our robots learn from <strong>data that captures human intelligence</strong>. In this blog post, we describe how we built a data collection platform that enables collecting datasets that captures human intelligence.</p>
+
+<h2 id="what-kind-of-data-captures-human-intelligence">What kind of data captures human intelligence?</h2>
+
+<p><strong>Diversity</strong>. The data should be diverse in the kinds of problem-solving strategies demonstrated. Consider the example below, where we would like to fit an item into a container. If the item is small, you could toss it in, and if it’s already near the container you could probably push it in. If it’s large, you would have to stuff it in. As humans, we have a good sense of when we should try these different approaches – robots <em>should learn from all of these strategies</em> – it might need any of them in a given situation.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/diversity_strategies.png" /></p>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<p><strong>Dexterity</strong>. The data should contain instances of dexterous manipulation so that the robot can learn fine-grained manipulation behaviors. We want our robots to <em>understand how they can physically manipulate objects</em> to achieve desired outcomes.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/dexterity_manipulation.png" /></p>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<p><strong>Large-Scale</strong>. Finally, there should be a large amount of data. This is important – we are very good at problem solving in countless situations, but robots aren’t able to do this yet. The more data we show them, the more likely that they’ll acquire this <em>general problem-solving ability</em> too.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/large_scale_situations.jpg" /></p>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<h2 id="collecting-data-that-captures-human-intelligence">Collecting data that captures human intelligence</h2>
+
+<p>There are several methods that have been used to collect robotic data in the past. Here, we evaluate the ability of each method to collect desirable data for generalization.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/robonet.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/collecting_2.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/collecting_3_crop.mp4" type="video/mp4" />
+</video>
+<figcaption>
+Prior data collection methodologies include autonomous data collection (left), human supervision with web interfaces (middle), and human teleoperation with motion interfaces (right).
+</figcaption>
+</div></figure>
+
+<ul>
+  <li><strong>Autonomous Data Collection</strong>: Many data collection mechanisms and algorithms such as Self-Supervised Learning<sup id="fnref:SSL" role="doc-noteref"><a href="#fn:SSL" class="footnote">1</a></sup><sup id="fnref:robonet" role="doc-noteref"><a href="#fn:robonet" class="footnote">2</a></sup> and Deep Reinforcement Learning<sup id="fnref:qtopt" role="doc-noteref"><a href="#fn:qtopt" class="footnote">3</a></sup> use <strong>random exploration</strong> to collect their data. While this allows the robot to autonomously collect data, the data is strongly correlated and <strong>lacks diverse problem-solving strategies</strong>. This is because data is collected purely at random at first, and over time, methods converge to specific solution strategies.
+<br /><br /></li>
+  <li><strong>Human Supervision with Web Interfaces</strong>: By contrast, human supervision allows for direct specification of task solutions. Prior mechanisms<sup id="fnref:roboflow" role="doc-noteref"><a href="#fn:roboflow" class="footnote">4</a></sup> have allowed humans to leverage <strong>graphical web interfaces</strong> to guide robots through tasks. While such data collection schemes allow for diverse data to be collected at scale through humans, the interfaces <strong>limit the dexterity</strong> of the robot motions that can be demonstrated. For example, in the middle video above, a user has specified a program for the robot to execute, and the robot takes care of picking up the cups using simple top-down grasps. The human does not have much of a say in <em>how</em> the task is done.<br />
+<br /></li>
+  <li><strong>Human Teleoperation with Motion Interfaces</strong>: Others have developed <strong>motion interfaces</strong> to enable a direct one-to-one mapping between human motion and the end effector of the arm. One such example<sup id="fnref:deep_imitation" role="doc-noteref"><a href="#fn:deep_imitation" class="footnote">5</a></sup> is a person using a Virtual Reality headset and controller to guide the arm through a pick-and-place task. By offering users full control over how the arm accomplishes the task, these interfaces allow for data that is both diverse and dexterous. However, they <strong>do not allow for large-scale data collection</strong>, since the special hardware needed to develop such interfaces is not widely available.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/comparison_table.png" /></p>
+<figcaption>
+Comparison of data collection methodologies. RoboTurk is the only mechanism that is able to collect data that is diverse and dexterous at scale. 
+</figcaption>
+</div></figure>
+
+<p><strong>Our goal was to develop a data collection mechanism that captures human intelligence</strong> by collecting data that has diverse problem-solving strategies, dexterous object manipulation, and that could be collected at scale. To address this challenge, we developed <a href="http://roboturk.stanford.edu/">RoboTurk</a>.</p>
+
+<h2 id="roboturk">RoboTurk</h2>
+
+<p><a href="http://roboturk.stanford.edu/">RoboTurk</a> is a platform that allows remote users to teleoperate simulated and real robots in real-time with only a smartphone and a web browser. Our platform supports many simultaneous users, each controlling their own robot remotely. <strong>A new user can get started in less than 5 minutes</strong> - all they need to do is download our smartphone application and go to our website, and they are ready to start collecting data.</p>
+
+<figure>
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/sys_fig.png" class="postimagehalf" />
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/phone_pairing.mp4" type="video/mp4" />
+</video>
+<figcaption>
+RoboTurk is a platform that allows remote users to teleoperate robots in real-time with only a smartphone and a web browser. The platform supports many simultaneous users, each controlling their own robot (left). New users can get started in less than 5 minutes by downloading our smartphone app and visiting our website (right).
+</figcaption>
+</figure>
+
+<p>Our platform enables people to control robots in real-time from anywhere - libraries, cafes, homes, and even the top of a mountain.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/alps.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/places.mp4" type="video/mp4" />
+</video>
+<figcaption>
+RoboTurk enables remote teleoperation and data collection from anywhere - even in the Alps!
+</figcaption>
+</div></figure>
+
+<h3 id="user-interface-to-enable-dexterity">User Interface to enable Dexterity</h3>
+
+<p>Users receive a video stream of the robot workspace in their web browser and use their phone to guide the robot through a task. The motion of the phone is coupled to the motion of the robot, allowing for natural and dexterous control of the arm.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/teleop_video.mp4" type="video/mp4" />
+</video>
+<figcaption>
+Users receive a video stream of the robot workspace in their web browser and use their phone to guide the robot through a task. The motion of the phone is coupled to the motion of the robot, allowing for natural and dexterous control of the arm.
+</figcaption>
+</div></figure>
+
+<p>We conducted a user study and showed that our user interface compares favorably with virtual reality controllers, which use special external tracking for the controllers, and significantly outperforms other interfaces such as a keyboard and a 3D mouse. This demonstrates that our user interface is both <strong>natural</strong> for humans to efficiently complete tasks and <strong>scalable</strong> to ensure that anyone with a smartphone can participate in data collection.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/ui_diagram.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/ui_comparison.png" class="postimagehalf" /></p>
+<figcaption>
+User study to compare different interfaces for teleoperation. Our phone interface allows humans to complete tasks just as efficiently as Virtual Reality interfaces but without the need for special hardware.
+</figcaption>
+</div></figure>
+
+<h3 id="diversity-through-worldwide-teleoperation">Diversity through Worldwide Teleoperation</h3>
+
+<p>Enabling remote data collection with consumer-grade hardware allows many different people to easily provide data, naturally resulting in datasets that are diverse. To test the capability of RoboTurk to enable remote data collection, we tried controlling robot simulations hosted on servers in China from our lab in California, a distance of over 5900 miles! We found that is possible to collect quality demonstrations using RoboTurk regardless of the distance between user and server.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/worldwide_1.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/worldwide_2.png" class="postimagehalf" /></p>
+<figcaption>
+Comparing teleoperation efficiency from Stanford to Oregon versus from Stanford to China. Large distances do not impede the ability of operators to collect successful task demonstrations.
+</figcaption>
+</div></figure>
+
+<p>More recently, we tried <strong>teleoperating our physical robot arms located at Stanford from Macau</strong>. We found that our system provided real-time teleoperation of our robot arms even at a distance of over 11,000 km, all on a cellular network connection.</p>
+
+<figure>
+<video autoplay="" loop="" muted="" playsinline="" class="postimageactual">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/macau.mp4" type="video/mp4" />
+</video>
+<figcaption>
+Real-time teleoperation of our Stanford robot arms from Macau, on a cellular network connection.
+</figcaption>
+</figure>
+
+<h3 id="large-scale-data-collection">Large-Scale Data Collection</h3>
+
+<figure>
+<video autoplay="" loop="" muted="" playsinline="" class="postimageactual">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/pilot_dataset_vid.mp4" type="video/mp4" />
+</video>
+<figcaption>
+Our Pilot Dataset, which was collected in just 22 hours, has over 2000 task demonstrations.
+</figcaption>
+</figure>
+
+<p>RoboTurk enables collect large amounts of data in a matter of hours. In our <a href="https://arxiv.org/abs/1811.02790">first publication</a>, we used RoboTurk to collect a <a href="http://roboturk.stanford.edu/dataset.html">Pilot Dataset</a> consisting of over 2000 task demonstrations in just 22 hours of total system usage. We also leveraged the demonstrations for policy learning and showed that using more demonstrations enables higher quality policies to be learned.</p>
+
+<figure>
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/increasing_data.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/pegs_agent.gif" class="postimagethird" />
+<figcaption>
+The demonstrations we collected enable fast policy learning, with more data leading to higher quality policies (left). A policy trained using the data is able to efficiently complete the task (right).
+</figcaption>
+</figure>
+
+<p>In summary, RoboTurk is able to collect data that embodies human intelligence:</p>
+
+<ul>
+  <li><strong>Diversity</strong>. RoboTurk can be used to collect <em>diverse</em> data by leveraging many simultaneous human users for data collection.
+<br /><br /></li>
+  <li><strong>Dexterity</strong>. RoboTurk offers full 6-DoF control of the robot arm through a natural phone interface, allowing for <em>dexterity</em> in the data.
+<br /><br /></li>
+  <li><strong>Large-Scale</strong>. RoboTurk allows for <em>large-scale</em> data collection by allowing people to collect data from anywhere using just a smartphone and web browser. Our pilot dataset was collected in just 22 hours of system operation.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/qualities_1.png" class="postimagethird" />
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/qualities_2.png" class="postimagethird" />
+<img src="/blog/assets/img/posts/2019-11-08-roboturk/qualities_3.png" class="postimagethird" /></p>
+<figcaption>
+RoboTurk enables diversity through many users (left), dexterity through fine-grained 6-DoF control (middle), and can be used to collect data at scale (right).
+</figcaption>
+</div></figure>
+
+<h2 id="collecting-data-on-physical-robots">Collecting Data on Physical Robots</h2>
+
+<p>In our <a href="https://arxiv.org/abs/1811.02790">initial publication</a>, we used RoboTurk to collect a large dataset using robot manipulation tasks developed using <a href="http://www.mujoco.org">MuJoCo</a> and <a href="https://github.com/StanfordVL/robosuite">robosuite</a>. However, there are several interesting tasks that cannot be modeled in simulation, and we did not want to restrict ourselves to those that could. Thus, we extended RoboTurk to enable data collection with real robot arms, and used it to collect <a href="http://roboturk.stanford.edu/realrobotdataset">the largest robot manipulation dataset collected via teleoperation</a>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/mandlekar_iros19.png" /></p>
+<figcaption>
+We collected data on three Sawyer robot arms - each of which had a front-facing webcam and a top-down Kinect depth camera mounted in the workspace of the robot arm.
+</figcaption>
+</div></figure>
+
+<p>The dataset consists of RGB images from a front-facing RGB camera (which is also the teleoperator video stream view) at 30Hz, RGB and Depth images from a top-down Kinectv2 sensor also at 30Hz, and robot sensor readings at 100Hz.</p>
+
+<p>We collected our dataset using 54 different participants over the course of 1 week. Every user participated in a supervised hour of remote data collection, including a brief 5 minute tutorial at the beginning of the session. Afterwards, they were given the option to collect data without supervision for all subsequent collection. The users who participated in our data collection study collected the data from a variety of locations. All locations were remote - no data collection occurred in front of the actual robot arms.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/tasks.png" /></p>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<p>We designed three robotic manipulation tasks for data collection, shown above. These tasks were chosen with care in order to make sure that the data collected would be useful for robot generalization. Each task admits <em>diverse</em> solution strategies, which encouraged our diverse set of users to experiment with different solution strategies, requires <em>dexterous</em> manipulation to solve, and the robot needs to learn to <em>generalize</em> to several scenarios. We also note that the tasks would be incredibly difficult to simulate, making physical data collection necessary.</p>
+
+<ul>
+  <li><strong>Object Search</strong>. The goal of this task is to search for a set of target objects within a cluttered bin and fit them into a specific box. There are three target object categories: <em>plush animals</em>, <em>plastic water bottles</em>, and <em>paper napkins</em>. A target category is randomly selected and relayed to the operator, who must use the robot arm to find all three objects corresponding to the target category and place each item into its corresponding hole. This task requires <strong>precise manipulation</strong> due to the bin containing many rigid and deformable objects in clutter, the need to search for hidden objects, and tight object placement.
+<!-- The objects also have interesting properties - the paper napkins appear in crumpled and unfolded configurations, and the crushed plastic water bottles are challenging to detect and grasp due to their translucence and arbitrary rigid shape. --></li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/object_search_task_1.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/object_search_task_2.mp4" type="video/mp4" />
+</video>
+<figcaption>
+In the Object Search task, the goal is to search for target objects (left) and fit them into a specific box (right).
+</figcaption>
+</div></figure>
+
+<ul>
+  <li><strong>Tower Creation</strong>. In this task, an assortment of cups and bowls are arranged on the table. The goal of the task is to create the tallest tower possible by stacking the cups and bowls on top of each other. This task requires <strong>physical reasoning</strong>: operators must use a geometric understanding of objects and dexterous placement to carefully craft their towers while maintaining tower stability.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/tower_creation_task_1.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/tower_creation_task_2.mp4" type="video/mp4" />
+</video>
+<figcaption>
+In the Tower Creation task, the goal is to stack cups and bowls (left) to build the tallest tower possible (right).
+</figcaption>
+</div></figure>
+
+<ul>
+  <li><strong>Laundry Layout</strong>. This task starts with a hand towel, a pair of jeans, or a t-shirt placed on the table. The goal is to use the robot arm to straighten the item so that it lies flat on the table with no folds. On every task reset we randomly place the item into a new configuration. This task requires <strong>generalization</strong> over several different item configurations.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/laundry_layout_task_1.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/laundry_layout_task_2.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/laundry_layout_task_3.mp4" type="video/mp4" />
+</video>
+<figcaption>
+In the Laundry Layout task, the goal is to layout towels (left), jeans (middle), and t-shirts (right).
+</figcaption>
+</div></figure>
+
+<h3 id="data-collection">Data Collection</h3>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dataset_video.mp4" type="video/mp4" />
+</video>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<p>We collected over 111 hours of total robot manipulation data in just 1 week across 54 users on our 3 manipulation tasks, with over 2000 successful demonstrations in total. This makes our dataset 1-2 orders of magnitude larger than most other datasets in terms of interaction time. The number of task demonstrations in our dataset also compares favorably with the number of demonstrations in large datasets such as <a href="https://sites.google.com/view/mimedataset">MIME</a><sup id="fnref:MIME" role="doc-noteref"><a href="#fn:MIME" class="footnote">6</a></sup>, but the tasks that we collected data on are more difficult to complete, as they take on the order of minutes to complete successfully, as opposed to seconds. Some other notable datasets collected by humans include <a href="https://sites.google.com/view/daml">DAML</a><sup id="fnref:DAML" role="doc-noteref"><a href="#fn:DAML" class="footnote">7</a></sup>, <a href="https://sites.google.com/view/vrlfd">Deep Imitation</a><sup id="fnref:deep_imitation:1" role="doc-noteref"><a href="#fn:deep_imitation" class="footnote">5</a></sup>, and <a href="https://cirl.lcsr.jhu.edu/research/hmm/datasets/jigsaws_release/">JIGSAWS</a><sup id="fnref:JIGSAWS" role="doc-noteref"><a href="#fn:JIGSAWS" class="footnote">8</a></sup>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/dataset_comparison.png" /></p>
+<figcaption>
+Our dataset is the largest robot manipulation dataset ever collected using teleoperation.
+</figcaption>
+</div></figure>
+
+<p>Here is an assortment of randomly sampled demonstrations from our dataset.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/mosaic_1_5x.mp4" type="video/mp4" />
+</video>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/mosaic_2_5x.mp4" type="video/mp4" />
+</video>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/mosaic_3_5x.mp4" type="video/mp4" />
+</video>
+<figcaption>
+</figcaption>
+</div></figure>
+
+<h2 id="platform-evaluation">Platform Evaluation</h2>
+
+<h3 id="diverse-solution-strategies">Diverse Solution Strategies</h3>
+
+<p>On the <em>Tower Creation</em> task, <strong>our users surprised us by building intricate structures out of the simple sets of cups and bowls</strong>. We also saw a great deal of diversity in the towers that people chose to build.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/diversity_transition.mp4" type="video/mp4" />
+</video>
+<figcaption>
+Our users surprised us by building intricate structures out of the simple sets of cups and bowls.
+</figcaption>
+</div></figure>
+
+<p>Some <strong>notable emergent solution strategies</strong> that were observed include building an inverted cone and alternating cups and bowls for stability, as well as flipping over a bowl for the base of the tower and grouping 3 cups together to form a stable platform. In particular, we had no idea that it was even possible to control the robot to flip a bowl over - it truly speaks to the power of human creativity coupled with the dexterity that the interface enables.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-11-08-roboturk/diversity_3.jpg" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-11-08-roboturk/diversity_4.jpg" /></p>
+<figcaption>
+Notable strategies included building an inverted cone (left) and alternating cups and bowls for stability (right).
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-11-08-roboturk/diversity_5.jpg" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-11-08-roboturk/diversity_6.jpg" /></p>
+<figcaption>
+Notable strategies included flipping over a bowl for the base of the tower (left) and grouping 3 cups together to form a stable platform (right).
+</figcaption>
+</div></figure>
+
+<p>The users themselves were diverse - their skill levels varied significantly. This can be seen from the large variation in average task completion time per user on the <em>Object Search</em> and <em>Laundry Layout</em> tasks in the plot below. <strong>User variation naturally emerges from collecting across 54 different people and ensures data diversity.</strong> Note that most users were determined to use all 5 of their allotted minutes for the <em>Tower Creation</em> task.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/completion_per_user.png" /></p>
+<figcaption>
+Average task completion times per user, sorted from fastest to slowest. Users exhibit large variation in skill level, ensuring data diversity.
+</figcaption>
+</div></figure>
+
+<h3 id="diverse-and-dexterous-manipulation">Diverse and Dexterous Manipulation</h3>
+
+<p>Next, we present some qualitative examples of diverse and dexterous behaviors in the <em>Object Search</em> task.</p>
+
+<p>In the examples below, the operators used three different strategies to manipulate the plastic water bottle into a favorable place in order to grasp it successfully:</p>
+
+<ul>
+  <li><strong>move to grasp</strong> (left): the operator moves the bottle into a convenient position to grasp it</li>
+  <li><strong>flip to grasp</strong> (middle): the operator flips the water bottle to orient it for a grasp</li>
+  <li><strong>approach from angle</strong> (right): the operator angles the arm underneath the bottle and the cloth in order to grasp the bottle successfully</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_1.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_2.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_3.mp4" type="video/mp4" />
+</video>
+<figcaption>
+The operators carefully manipulated objects in order to grasp them successfully.
+</figcaption>
+</div></figure>
+
+<p>In the examples below, the operators decided to extract items from the clutter in order to successfully grasp them.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_4.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_5.mp4" type="video/mp4" />
+</video>
+<figcaption>
+The operators extracted items from the clutter in order to successfully grasp them.
+</figcaption>
+</div></figure>
+
+<p>The examples below show three different strategies we observed for placing target objects into the correct container:</p>
+
+<ul>
+  <li><strong>clever grasp</strong> (left): by using a strategic grasp, the operator is able to simply drop the bottle into the container</li>
+  <li><strong>stuff</strong> (middle): the operator stuffs the napkin into the container</li>
+  <li><strong>strategic object use</strong> (right): the operator uses one object to poke the other object into the container.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_6.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_7.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagethird">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/dext_8.mp4" type="video/mp4" />
+</video>
+<figcaption>
+The operators used different strategies to fit items into the containers.
+</figcaption>
+</div></figure>
+
+<h3 id="scaling-to-new-users">Scaling to New Users</h3>
+
+<p>All 54 of our users were new, non-expert users. We found that <strong>users with no experience started generating useful data in a matter of minutes.</strong></p>
+<ul>
+  <li>On <em>Object Search</em>, new users were able to successfully pick and place a target object for the first time within 2 minutes of interaction time on average.</li>
+  <li>On <em>Laundry Layout</em>, new users were able to successfully layout their first towel in less than 4 minutes of interaction on average.</li>
+</ul>
+
+<p>This corroborates the results of our user exit survey - <strong>a majority (60.8%) of users reported that they felt comfortable using the system within 15 minutes</strong>, while 96% felt comfortable within an hour.</p>
+
+<p>Furthermore, we witnessed <strong>significant user improvement over time</strong>. As shown below, users learned to complete the task more efficiently over time as they collected more demonstrations. Furthermore, users moved the orientation of the phone more with increasing experience, suggesting that they learned to leverage full 6-DoF control to generate dexterous task solutions of increasing quality.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/experience_wide.png" /></p>
+<figcaption>
+Users improved significantly over time. They completed tasks faster and controlled the phone orientation more, allowing them to take advantage of full 6-DoF control to generate better task solutions.
+</figcaption>
+</div></figure>
+
+<h2 id="leveraging-the-dataset">Leveraging the Dataset</h2>
+
+<p>We provide some examples applications for our dataset. However, we emphasize that our dataset can be useful for several other applications as well, such as multimodal density estimation, policy learning, and hierarchical task planning.</p>
+
+<h3 id="reward-learning">Reward Learning</h3>
+
+<p>Consider the problem of learning a policy to imitate a specific video demonstration. Prior work has approached this problem by learning an embedding space over visual observations and then crafting a reward function to imitate a reference trajectory based on distances in the embedding space. This reward function can then be used with reinforcement learning to learn a policy that imitates the trajectory. Taking inspiration from this approach, we trained a modified version of <a href="https://sermanet.github.io/tcn/">Time Contrastive Networks</a> (TCN)<sup id="fnref:TCN" role="doc-noteref"><a href="#fn:TCN" class="footnote">9</a></sup> on Laundry Layout demonstrations and investigate some interesting properties of the embedding space.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-11-08-roboturk/reward_curve.png" class="postimagehalf" /></p>
+<figcaption>
+Learned embedding distances to a desired target frame provide a meaningful reward function for imitation learning as well as a useful metric for task progress.
+</figcaption>
+</div></figure>
+
+<p>In the figure above, we consider the frame embeddings along a single <em>Laundry Layout</em> demonstration. We plot the negative L2 distance of the frame embeddings with respect to the embedding of a target frame near the end of the video, where the target frame depicts a successful task completion with the towel lying flat on the table. The figure demonstrates that distances in this embedding space with a suitable target frame yield a reasonable reward function that could be used to imitate task demonstrations purely from visual observations.</p>
+
+<p>Furthermore, embedding distances capture task semantics to a certain degree and could even be used to measure task progress. For example, in frames 3 and 5, the towel is nearly flat on the table, and the embedding distance to frame 6 is correspondingly small. By contrast, in frames 2 and 4, the robot is holding the towel a significant distance away from the table, and the distance to frame 6 is correspondingly large.</p>
+
+<p>Here is a video that shows how the reward function varies along this demonstration.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/tcn_plot.mp4" type="video/mp4" />
+</video>
+<figcaption>
+The learned reward function decreases when the towel moves away from the table and increases when the towel returns to the table. The reward steadlily increases as the towel becomes more flat, and the task comes closer to completion.
+</figcaption>
+</div></figure>
+
+<h3 id="behavioral-cloning">Behavioral Cloning</h3>
+
+<p>To demonstrate that the data collected by our platform can be used for policy learning, we leveraged a subset of data to train a policy on some <em>Laundry Layout</em> task instances using behavioral cloning. The trained policy is shown below.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2019-11-08-roboturk/bc.mp4" type="video/mp4" />
+</video>
+<figcaption>
+This policy trained with behavioral cloning is able to solve some Laundry Layout task instances.
+</figcaption>
+</div></figure>
+
+<h2 id="download-our-datasets">Download our datasets!</h2>
+
+<p>Our simulation dataset is available on our <a href="http://roboturk.stanford.edu">website</a> and our real robot dataset will be available <a href="http://roboturk.stanford.edu/realrobotdataset">shortly</a>!</p>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li>RoboTurk is a <strong>platform to collect datasets that embody human intelligence</strong>. The data contains diverse problem-solving strategies and dexterous object manipulation, and is large-scale.
+<br /><br /></li>
+  <li>We <strong>introduce three challenging manipulation tasks</strong>: <em>Object Search</em>, <em>Tower Creation</em>, and <em>Laundry Layout</em>. These tasks admit diverse solutions and strategies and require dexterous manipulation to solve. Significant generalization capability is also required for robots to solve these tasks due to the large variation in task instance.
+<br /><br /></li>
+  <li>We present the <a href="http://roboturk.stanford.edu/realrobotdataset">largest known human teleoperated robot manipulation dataset</a> consisting of <strong>over 111 hours of data across 54 users</strong>. The dataset was collected in 1 week on 3 Sawyer robot arms using the RoboTurk platform.
+<br /><br /></li>
+  <li>We evalaute our platform and show that the data collected consists of diverse and dexterous task solutions, and that <strong>first-time users start generating useful data in minutes</strong> and improve significantly over time. 
+<br /><br /></li>
+  <li>The <strong>dataset has several applications</strong> such as multimodal density estimation, video prediction, reward function learning, policy learning and hierarchical task planning, and more.</li>
+</ul>
+
+<hr />
+
+<p>This blog post is based on the following papers:</p>
+
+<ul>
+  <li>
+    <p><a href="https://arxiv.org/abs/1811.02790">“RoboTurk: A Crowdsourcing Platform for Robotic Skill Learning through Imitation”</a> by Ajay Mandlekar, Yuke Zhu, Animesh Garg, Jonathan Booher, Max Spero, Albert Tung, Julian Gao, John Emmons, Anchit Gupta, Emre Orbay, Silvio Savarese, and Li Fei-Fei (<a href="https://sites.google.com/a/robot-learning.org/corl2017/corl2018">CORL 2018</a>).</p>
+  </li>
+  <li>
+    <p><a href="http://roboturk.stanford.edu/roboturk_iros2019.pdf">“Scaling Robot Supervision to Hundreds of Hours with RoboTurk: Robotic Manipulation Dataset through Human Reasoning and Dexterity”</a> by Ajay Mandlekar, Jonathan Booher, Max Spero, Albert Tung, Anchit Gupta, Yuke Zhu, Animesh Garg, Silvio Savarese, and Li Fei-Fei (<a href="https://www.iros2019.org/">IROS 2019</a>).</p>
+  </li>
+</ul>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:SSL" role="doc-endnote">
+      <p>Levine, S., Pastor, P., Krizhevsky, A., &amp; Quillen, D. (2016, October). Learning hand-eye coordination for robotic grasping with large-scale data collection. In International Symposium on Experimental Robotics (pp. 173-184). Springer, Cham. <a href="#fnref:SSL" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:robonet" role="doc-endnote">
+      <p>Dasari, S., Ebert, F., Tian, S., Nair, S., Bucher, B., Schmeckpeper, K., … &amp; Finn, C. (2019). RoboNet: Large-Scale Multi-Robot Learning. arXiv preprint arXiv:1910.11215. <a href="#fnref:robonet" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:qtopt" role="doc-endnote">
+      <p>Quillen, D., Jang, E., Nachum, O., Finn, C., Ibarz, J., &amp; Levine, S. (2018, May). Deep reinforcement learning for vision-based robotic grasping: A simulated comparative evaluation of off-policy methods. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 6284-6291). IEEE. <a href="#fnref:qtopt" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:roboflow" role="doc-endnote">
+      <p>Alexandrova, S., Tatlock, Z., &amp; Cakmak, M. (2015, May). RoboFlow: A flow-based visual programming language for mobile manipulation tasks. In 2015 IEEE International Conference on Robotics and Automation (ICRA) (pp. 5537-5544). IEEE. <a href="#fnref:roboflow" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:deep_imitation" role="doc-endnote">
+      <p>Zhang, T., McCarthy, Z., Jow, O., Lee, D., Chen, X., Goldberg, K., &amp; Abbeel, P. (2018, May). Deep imitation learning for complex manipulation tasks from virtual reality teleoperation. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 1-8). IEEE. <a href="#fnref:deep_imitation" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:deep_imitation:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:MIME" role="doc-endnote">
+      <p>Sharma, P., Mohan, L., Pinto, L., &amp; Gupta, A. (2018). Multiple interactions made easy (mime): Large scale demonstrations data for imitation. arXiv preprint arXiv:1810.07121. <a href="#fnref:MIME" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:DAML" role="doc-endnote">
+      <p>Yu, T., Finn, C., Xie, A., Dasari, S., Zhang, T., Abbeel, P., &amp; Levine, S. (2018). One-shot imitation from observing humans via domain-adaptive meta-learning. arXiv preprint arXiv:1802.01557. <a href="#fnref:DAML" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:JIGSAWS" role="doc-endnote">
+      <p>Yixin Gao, S. Swaroop Vedula, Carol E. Reiley, Narges Ahmidi, Balakrishnan Varadarajan, Henry C. Lin, Lingling Tao, Luca Zappella, Benjam ́ın B ́ejar, David D. Yuh, Chi Chiung Grace Chen, Ren ́e Vidal, Sanjeev Khudanpur and Gregory D. Hager, The JHU-ISI Gesture and Skill Assessment Working Set (JIGSAWS): A Surgical Activity Dataset for Human Motion Modeling, In Modeling and Monitoring of Computer Assisted Interventions (M2CAI) – MICCAI Workshop, 2014. <a href="#fnref:JIGSAWS" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:TCN" role="doc-endnote">
+      <p>Sermanet, P., Lynch, C., Chebotar, Y., Hsu, J., Jang, E., Schaal, S., … &amp; Brain, G. (2018, May). Time-contrastive networks: Self-supervised learning from video. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 1134-1141). IEEE. <a href="#fnref:TCN" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/roboturk/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/roboturk/&text=RoboTurk%3A+Human+Reasoning+and+Dexterity+for+Large-Scale+Dataset+Creation%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/roboturk/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/roboturk/&title=RoboTurk%3A+Human+Reasoning+and+Dexterity+for+Large-Scale+Dataset+Creation%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/roboturk/&title=RoboTurk%3A+Human+Reasoning+and+Dexterity+for+Large-Scale+Dataset+Creation%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=RoboTurk%3A+Human+Reasoning+and+Dexterity+for+Large-Scale+Dataset+Creation%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/roboturk/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#il">
+      <p><i class="fa fa-tag fa-fw"></i> il</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#rl">
+      <p><i class="fa fa-tag fa-fw"></i> rl</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/learning-from-partners/">
+      <p>Previous post</p>
+        Learning from My Partner’s Actions: Roles in Decentralized Robot Teams
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/assistive-latent-spaces/">
+      <p>Next post</p>
+        Controlling Assistive Robots with Learned Latent Actions
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

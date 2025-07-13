@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/modeling-risky-humans/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans" />
+<meta name="author" content="<a href='https://github.com/minaek'>Minae Kwon</a> and <a href='https://www.dylanlosey.com/'>Dylan Losey</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A key component of human-robot collaboration is the ability for robots to predict human behavior. Robots do this by building models of human decision making. One way to model humans is to pretend that they are also robots, and assume users will always choose the optimal action that leads to the best outcomes. It’s also possible to account for human limitations, and relax this assumption so that the human is noisily rational (their actions will usually lead to the ideal outcome, but are also somewhat random)." />
+<meta property="og:description" content="A key component of human-robot collaboration is the ability for robots to predict human behavior. Robots do this by building models of human decision making. One way to model humans is to pretend that they are also robots, and assume users will always choose the optimal action that leads to the best outcomes. It’s also possible to account for human limitations, and relax this assumption so that the human is noisily rational (their actions will usually lead to the ideal outcome, but are also somewhat random)." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/modeling-risky-humans/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/modeling-risky-humans/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-17T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans","dateModified":"2020-03-17T00:00:00-07:00","datePublished":"2020-03-17T00:00:00-07:00","description":"A key component of human-robot collaboration is the ability for robots to predict human behavior. Robots do this by building models of human decision making. One way to model humans is to pretend that they are also robots, and assume users will always choose the optimal action that leads to the best outcomes. It’s also possible to account for human limitations, and relax this assumption so that the human is noisily rational (their actions will usually lead to the ideal outcome, but are also somewhat random).","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/modeling-risky-humans/"},"url":"http://ai.stanford.edu/blog/modeling-risky-humans/","author":{"@type":"Person","name":"<a href='https://github.com/minaek'>Minae Kwon</a> and <a href='https://www.dylanlosey.com/'>Dylan Losey</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans | The Stanford AI Lab Blog</title>
+    <meta name="description" content="To create human-like robots, we need to understand how humans behave. We present a modeling approach enables robots to anticipate that humans will make subop...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans">
+    
+    <meta name="twitter:description" content="To create human-like robots, we need to understand how humans behave. We present a modeling approach enables robots to anticipate that humans will make suboptimal choices when risk and uncertainty are involved.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2020-03-17-modeling-risky-humans/image1.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2020-03-17-modeling-risky-humans/image1.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans</h1>
+    <p class="meta">
+    <a href='https://github.com/minaek'>Minae Kwon</a> and <a href='https://www.dylanlosey.com/'>Dylan Losey</a>
+    <div class="post-date">March 17, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>A key component of human-robot collaboration is the ability for robots to predict human behavior. Robots do this by building <strong>models</strong> of human decision making. One way to model humans is to pretend that they are also robots, and assume users will always choose the <strong>optimal</strong> action that leads to the best outcomes. It’s also possible to account for human limitations, and relax this assumption so that the human is <strong>noisily rational</strong> (their actions will usually lead to the ideal outcome, but are also somewhat random).</p>
+
+<p>Both of these models work well when humans receive deterministic rewards: e.g., gaining either \(\$100\) or \(\$130\) with certainty. But in real-world scenarios, humans often need to make decisions under risk and uncertainty: i.e., gaining \(\$100\) all the time or \(\$130\) about \(80\)% of the time. In these uncertain settings, humans tend to make <strong>suboptimal</strong> choices and select the risk-averse option — even though it leads to worse expected outcomes! Our insight is that we should take risk into account when modeling humans in order to better understand and predict their behavior.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image1.png" /></p>
+</div></figure>
+
+<p>In this blog post, we describe our Risk-Aware model and compare it to the state-of-the-art Noisy Rational model. We also summarize the results from user studies that test how well Risk-Aware robots predict human behavior, and how Risk-Aware robots can leverage this model to improve safety and efficiency in human-robot collaboration. Please refer to our <a href="https://arxiv.org/abs/2001.04377">paper</a> and the accompanying <a href="https://www.youtube.com/watch?v=PnBNI1ms0iw&amp;t=92s">video</a> for more details and footage of the experiments.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>When robots collaborate with humans, they must anticipate how the human will behave for seamless and safe interaction. Consider the scenario shown below, where an autonomous car is waiting at an intersection. The autonomous car (<em>red</em>) wants to make an unprotected left turn, but a human driven car (<em>blue</em>) is approaching in the oncoming lane.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image2.gif" /></p>
+</div></figure>
+
+<p>The stoplight has just turned <em>yellow</em> for the human driven car. It is unclear whether the driver will <strong>accelerate</strong> — and try to make the light — or <strong>stop</strong> and play it safe. If the autonomous car thinks that the human will stop, it makes sense for the autonomous car to turn right; but if the robot anticipates that the human may try and make the light, it should wait for the human to go! Put another way, the robot needs to correctly anticipate what the human will do. And in order to do that, the robot needs to correctly model the human — i.e., correctly interpret how the human will make their decisions.</p>
+
+<p><strong>Background.</strong> Previous work has explored different approaches for robots tomodel humans. One common approach is to assume that humans also act like robots, and make perfectly <strong><em>rational</em></strong> decisions to maximize their <a href="https://en.wikipedia.org/wiki/Utility">utility</a> or reward<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>. But we know that this isn’t always true: humans often make mistakes or suboptimal decisions, particularly when we don’t have much time to make a decision, or when the decision requires thinking about complex trade-offs. In recognition of this, today’s robots typically anticipate that humans will make <strong><em>noisily rational</em></strong> choices<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>. A noisily rational human is most likely to choose the best option, but there is also a nonzero chance that this human may act suboptimally, and select an action with lower expected reward. Put another way, this human is usually right, but occasionally they can make mistakes.</p>
+
+<p><strong>What’s Missing?</strong> Modeling people as noisily rational makes sense when humans are faced with deterministic decisions. Let’s go back to our driving example, where the autonomous car needs to predict whether or not the human will try to run the light. Here, a deterministic decision occurs when the light will definitely turn red in \(5\) seconds: the human knows if they will make the light, and can accelerate or decelerate accordingly. But in real world settings, we often do not know exactly what will happen as a consequence of our actions. Instead, we must deal with uncertainty by estimating risk! Returning to our example, imagine that if the human accelerates there is a \(95\)% chance of making the light and saving commute time, and a \(5\)% chance of running a red light and getting fined. It makes sense for the human to stop (since decelerating leads to the most reward in expectation), but a risk-seeking driver may still attempt to make the light.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image3.gif" /></p>
+</div></figure>
+
+<p>Assuming that humans are rational or noisily rational doesn’t make sense in scenarios with risk and uncertainty. Here we need models that can incorporate the cognitive biases in human decision making, and recognize that it is likely that the human car will try and run the light, even though it is not optimal!</p>
+
+<p><strong>Insight and Contributions.</strong> When robots model humans as noisily rational, they <strong><em>miss out</em></strong> on how risk biases human decision-making. Instead, we assert:</p>
+
+<p style="text-align: center;"><strong><em>To ensure safe and efficient interaction, robots must recognize that people behave suboptimally when risk is involved.</em></strong></p>
+
+<p>Inspired by work in behavioral economics, we propose using Cumulative Prospect Theory<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> as a Risk-Aware model for human-robot interaction. As we’ll show, using the Risk-Aware model is practically useful because it improves safety and efficiency in human-robot collaboration tasks.</p>
+
+<h2 id="modeling-humans-noisy-rational-vs-risk-aware">Modeling Humans: Noisy Rational vs Risk-Aware</h2>
+
+<p>Here we will formalize how we model human decision-making, and then compare the state-of-the-art Noisy Rational human model to our proposed Risk-Aware model.</p>
+
+<p><strong>Notation.</strong> We assume a setting where the human needs to select from a discrete set of actions \(\mathcal{A}_H\). Taking an action \(a_H \in \mathcal{A}_H\) may lead to several possible states, or outcomes. Returning to our driving example, the set of actions is \(\mathcal{A}_H = \{accelerating, stopping\}\), and choosing to accelerate may lead to making or running the light. Based on the outcome, the human receives some reward — ideally, the human will obtain as much reward as possible. For a given human action \(a_H\), we can express the expected reward across all possible outcomes as:</p>
+
+\[R_H(a_H) = p^{(1)}R^{(1)}_H(a_H) + p^{(2)}R^{(2)}_H(a_H), \cdots, p^{(K)}R^{(K)}_H(a_H)\]
+
+<p>where \(p^{(k)}\) is the probability of outcome \(k\), and there are \(K\) possible outcomes. Overall, this equation tells us how <em>valuable</em> the choice \(a_H\) is to the human<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup>.</p>
+
+<p><strong>The Rational Model.</strong> If the human behaved like a robot — and made perfectly rational decisions — then we might anticipate that the human will choose the action that leads to the highest reward \(R_H(a_H)\). Let’s use the <a href="https://en.wikipedia.org/wiki/Boltzmann_distribution">Boltzmann distribution</a> to write the probability of choosing action \(a_H\), and model the human as always choosing the action with the highest reward:</p>
+
+\[a_H^* = \text{arg}\max_{a_H} \frac{exp(R_H(a_H))}{\sum_{a \in \mathcal{A}_H}exp(R_H(a))}\]
+
+<p>Our rational model is fairly straightforward: the human <strong>always</strong> chooses the most likely action. But we know this isn’t the case; humans often make mistakes, have cognitive biases, and select suboptimal options. In fact, <a href="https://en.wikipedia.org/wiki/Herbert_A._Simon">Herbert Simon</a> received a Nobel Prize and Turing Award for researching this very trend!</p>
+
+<p><strong>The Noisy Rational Model.</strong> We can relax our model so that the human <strong>usually</strong> chooses the best action:</p>
+
+\[P(a_H) = \frac{exp(\theta \cdot R_H(a_H))}{\sum_{a\in \mathcal{A}_H}exp(\theta \cdot R_H(a))}\]
+
+<p>where \(\theta \in [0, \infty]\) is a temperature parameter, commonly referred to as the rationality coefficient. Tuning \(\theta\) tells us how frequently the human chooses the best action. When \(\theta \rightarrow \infty\), the human always picks the best action, and when \(\theta = 0\), the human chooses actions uniformly at random.</p>
+
+<p><strong>Uncertainty and Biases.</strong> One problem with the Noisy Rational model is that — no matter how we tune \(\theta\) — the model never thinks that a suboptimal action is most likely. This is problematic in real-world scenarios because humans exhibit <a href="https://en.wikipedia.org/wiki/List_of_cognitive_biases">cognitive biases</a> that make it more likely for us to choose suboptimal options! Moving forward, we want to retain the general structure of the Noisy Rational model, while expanding this model to also recognize that there are situations where suboptimal actions are the most likely choices.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image4.png" /></p>
+</div></figure>
+
+<p><strong>Our Risk-Aware Model.</strong> Drawing from behavioral economics, we adopt <a href="https://en.wikipedia.org/wiki/Cumulative_prospect_theory">Cumulative Prospect Theory</a> as a way to incorporate human biases under risk and uncertainty. This model captures both optimal and suboptimal decision-making by transforming the rewards and the probabilities associated with each outcome. We won’t go over all the details here, but we can summarize some of the <em>major changes</em> from the previous models.</p>
+
+<ol>
+  <li>
+    <p><strong>Transformed rewards.</strong> There is often a difference between the true reward associated with a state and the reward the human perceives. For example, humans perceive the differences between large rewards (e.g., \(\$1\) million vs. \(\$1.01\) million) as smaller than the differences between low rewards (e.g., \(\$1\) vs. \(\$10,001\)). More formally, if the original reward of outcome \(k\) is \(R^{(k)}_H(a_H)\), we will write the human’s transformed reward as \(v\big(R^{(k)}_H(a_H)\big)\).</p>
+  </li>
+  <li>
+    <p><strong>Transformed probabilities.</strong> Humans can also exaggerate the likelihood of outcomes when making decisions. Take playing the lottery: even if the probability of winning is almost zero, we buy tickets thinking we have a chance. We capture this in our Cumulative Prospect Theory model, so that if \(p^{(k)}\) is the true probability of outcome \(k\), then \(\pi_k\) is the transformed probability that the human perceives.</p>
+  </li>
+</ol>
+
+<p>With these two transformations in mind, let’s rewrite the expected reward that the human associates with an action:</p>
+
+\[R_H^{CPT}(a_H) = \pi_1\cdot v\big(R^{(1)}_H(a_H)\big) + \pi_2\cdot v\big(R^{(2)}_H(a_H)\big), \cdots, \pi_K \cdot v\big(R^{(K)}_H(a_H)\big)\]
+
+<p>What’s important here is that the expected reward that the human <strong>perceives</strong> is different than the <strong>real</strong> expected reward. This gap between perception and reality allows for the robot to anticipate that humans will choose suboptimal actions:</p>
+
+\[P(a_H) = \frac{exp(\theta \cdot R_H^{CPT}(a_H))}{\sum_{a \in \mathcal{A}_H}exp(\theta \cdot R_H^{CPT}(a))}\]
+
+<p>Comparing our result to the Noisy Rational model, we use the same probability distribution to explain human actions, but now Risk-Aware robots transform both the rewards and probabilities to match known cognitive biases.</p>
+
+<p><strong>Summary.</strong> We have outlined two key ways in which we can model how humans make decisions in real-world scenarios. Under the Noisy Rational model, the optimal action is always the most likely human action. By contrast, our Risk-Aware model is able to predict both optimal and suboptimal behavior by non-linearly transforming rewards and probabilities.</p>
+
+<h2 id="are-risk-aware-robots-better-at-predicting-human-actions">Are Risk-Aware Robots Better at Predicting Human Actions?</h2>
+
+<p>Now that we’ve established how we are going to model humans, we want to determine whether these models are accurate. More specifically, we will compare our proposed Risk-Aware model to the current state-of-the-art Noisy Rational model. We will stick with our motivating scenario, where an autonomous car is trying to guess whether or not the human driven car will speed through a yellow light.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image5.png" /></p>
+</div></figure>
+
+<p><strong>Autonomous Driving Task.</strong> Let’s say that you are the human driver (<em>blue</em>). Your car is a rental, and you are currently on your way to return it. If the light turns red — and you speed through — you will have to pay a \(\$500\) fine. But slowing down and stopping at the yellow light will prevent you from returning the rental car on time, which also has an associated late penalty. Would you <strong>accelerate</strong> (and potentially run the red light) or <strong>stop</strong> (and return the rental car with a late penalty)?</p>
+
+<p><strong>Experimental Overview.</strong> We recruited \(30\) human drivers, and asked them what action they would choose (accelerate or stop). To better understand what factors affected their decision, we varied the amount of <strong>information, time, and risk</strong> in the driving scenario:</p>
+
+<ul>
+  <li><strong>Information</strong>. We varied how much information the human drivers had about the likelihood of the light turning red. Participants were either given NO information (so that they had to rely on their personal prior), IMPLICIT information (where they got to observe the experiences of previous drivers), or EXPLICIT information (where they knew the exact probability).</li>
+  <li><strong>Time.</strong> We varied how quickly the human drivers had to make their decision. In TIMED, participants were forced to choose to stop or accelerate in under \(8\) seconds. In NOT TIMED, the participants could deliberate as long as necessary.</li>
+  <li><strong>Risk.</strong> Finally, we adjusted the type of uncertainty the human drivers faced when making their decision. In HIGH RISK the light turned red \(95\)% of the time, so that stopping was the optimal action. By contrast, in LOW RISK the light only turned red in \(5\)% of trials, so that accelerating became the optimal action.</li>
+</ul>
+
+<p><strong>Results.</strong> We measured how frequently the human drivers chose each action across each of these different scenarios. We then explored how well the Noisy Rational and Risk-Averse models captured these action distributions.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image6.png" /></p>
+</div></figure>
+
+<p><strong>Action Distribution.</strong> Across all of our surveyed factors (information, time, and risk), our users preferred to stop at the light. We find that the most interesting comparison is between the High and Low Risk columns. Choosing to stop was the optimal option in the High Risk case (i.e. where the light turns red \(95\)% of the time) but stopping was actually the <strong>suboptimal</strong> decision in the Low Risk case when the light rarely turns red. Because humans behaved optimally in some scenarios and suboptimally in others, the autonomous car interacting with these human drivers must be able to anticipate both optimal and suboptimal behavior.</p>
+
+<p><strong>Modeling.</strong> Now that we know what the actual human drivers would do, how accurately can we predict these actions? We computed the Noisy Rational and Risk-Aware models that best fit our action distributions. To measure the accuracy of these models, we compared the divergence between the true action distribution and the models’ prediction (<em>lower is better</em>):</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image7.png" /></p>
+</div></figure>
+
+<p>On the left you can see the High Risk case, where humans usually made optimal decisions. Here both models did an equally good job of modeling the human drivers. <strong>In the Low Risk case, however, only the Risk Aware model was able to capture the user’s tendency to make suboptimal but safe choices.</strong></p>
+
+<p><strong>Why Risk-Aware is More Accurate.</strong> To understand why Risk Aware was able to get both of these scenarios right, let’s look at the human model. More specifically, let’s look at how the Risk-Aware model transformed the probabilities and rewards:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image8.png" /></p>
+</div></figure>
+
+<p>On the left we’re again looking at the High Risk scenario: the Risk-Aware model barely changes the probability and reward here. But when the light rarely turns red in Low Risk, the models diverge! The Risk-Aware model recognizes that human drivers overestimate both the <strong>probability</strong> that the light will turn red and the <strong>penalty</strong> for running the light. This enables the Risk-Aware model to explain why human drivers prefer to stop, even though accelerating is the optimal action.</p>
+
+<p><strong>Summary.</strong> When testing how human drivers make decisions under uncertainty, we found scenarios where the suboptimal decision was actually the most likely human action. While Noisy Rational models are unable to explain or anticipate these actions, our Risk-Aware model recognized that humans were playing it safe: overestimating the probability of a red light and underestimating the reward for making the light. Accounting for these biases enabled the Risk-Aware model to more accurately anticipate what the human driver would do.</p>
+
+<h2 id="robots-that-plan-with-risk-aware-models">Robots that Plan with Risk-Aware Models</h2>
+
+<p>We now know that Risk-Aware models can better predict suboptimal human behavior. But why is this useful? One application would be to leverage these models to improve safety and efficiency in human-robot teams. To test the usefulness of the Risk-Aware model, we performed a user study with a robotic arm, where participants collaborated with the robot to stack cups into a tower.</p>
+
+<p><strong>Collaborative Cup Stacking Task.</strong> The collaborative cup stacking task is shown below.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image9.gif" /></p>
+</div></figure>
+
+<p>The human and robot are trying to stack all five cups to form a tower. There are two possible tower configurations: an <strong>efficient but unstable tower</strong>, which is more likely to fall, or an <strong>inefficient but stable tower</strong>, which requires more robot movement to assemble. Users were awarded \(20\) points for building the stable tower (which never fell) and \(105\) for building the unstable tower (which fell \(\approx 80\)% of the time). You can see examples of both types of towers below, with the <strong>efficient</strong> tower on the left and the <strong>stable</strong> tower on the right:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image10.gif" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image11.gif" /></p>
+</div></figure>
+
+<p>If the tower fell over, the human and robot team received no points! Looking at the expected reward, we see that building the efficient but unstable tower is actually the rational choice. But — building on our previous example — we recognize that actual users may prefer to play it safe, and go with the guaranteed success. Indeed, this tendency to avoid risk was demonstrated in our <em>preliminary</em> studies, where <strong>\(84\)%</strong> of the time users preferred to make the <strong>stable</strong> tower!</p>
+
+<p><strong>Experimental Overview.</strong> Each participant had \(10\) familiarization trials to practice building towers with the robot. During these trials, users learned about the probabilities of each type of tower collapsing from experience. In half of the familiarization trials, the robot modeled the human with the Noisy Rational model, and in the rest the robot used the Risk-Aware model. After the ten familiarization trials, users built the tower once with the Noisy Rational robot and the Risk-Aware robot. We measured <strong>efficiency (completion time)</strong> and <strong>safety (trajectory length)</strong> during collaboration. Because the robot had to replan longer trajectories when it interfered with the human, shorter trajectory lengths indicate safer interactions.</p>
+
+<p><strong>Model Predictions.</strong> The robot tried building the tower with two different models of the human: the Noisy Rational baseline and our Risk-Aware model. Planning with these models led the robot to choose two different trajectories:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image12.png" /></p>
+</div></figure>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image13.gif" /></p>
+</div></figure>
+
+<p><strong>Aggressive but Rational.</strong> When the robot is using the <strong>Noisy Rational</strong> model, it immediately goes for the closer cup, since this behavior is more efficient. Put another way, the robot using the Noisy Rational model <strong>incorrectly anticipates</strong> that the human wants to make the efficient but unstable tower. This erroneous prediction causes the human and robot to clash, and the robot has to undo its mistake (as you can see in the video above).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image14.png" /></p>
+</div></figure>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image15.gif" /></p>
+</div></figure>
+
+<p><strong>Conservative and Risk-Aware.</strong> A <strong>Risk-Aware</strong> robot gets this prediction right: it correctly anticipates that the human is overly concerned about the tower falling, and starts to build the less efficient but stable tower. Having the right prediction here prevents the human and robot from reaching for the same cup, so that they more seamlessly collaborate during the task!</p>
+
+<p><strong>Results.</strong> In our in-person user studies, participants chose to build the stable tower \(75\)% of the time. The suboptimal choice was more likely — which the Noisy Rational model failed to recognize. By contrast, our Risk-Aware robot was able to anticipate what the human would try to do, and could correctly guess which cup it should pick up. This improved prediction accuracy resulted in human-robot teams that completed the task more <strong>efficiently</strong> (in less time) and <strong>safely</strong> (following a shorter trajectory):</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image16.png" /></p>
+</div></figure>
+
+<p>We also surveyed users to find their subjective response when working with these different robots. Our questions covered how enjoyable the interaction was (Enjoy), how well the robot understood human behavior (Understood), how accurately the robot predicted which cups they would stack (Predict), and how efficient users perceived the robot to be (Efficient). After they completed the task with both Noisy Rational and Risk-Aware robots, we also asked which type of robot they would rather work with (Prefer) and which robot better anticipated their behavior (Accurate):</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image17.png" /></p>
+</div></figure>
+
+<p>The participants’ responses to our survey are shown above. Each question was on a \(7\)-point Likert scale, where higher scores indicate agreement. We found that participants preferred the Risk-Aware robot, and thought it was more efficient than the alternative. The other scales favor Risk-Aware, but were not statistically significant.</p>
+
+<p><strong>Summary.</strong> Being able to correctly predict that humans will make suboptimal decisions is important for robot planning. We incorporated our Risk-Aware model into a robot working with a human during a collaborative task. This model led to improved safety and efficiency, and people also subjectively perceived the Risk-Aware robot as a better teammate.</p>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+
+<p>We explored how we can better model human decision making under risk and uncertainty. Our main insight is that when humans are uncertain, robots should recognize that people behave suboptimally. We extended state-of-the-art prediction models to account for these suboptimal decisions:</p>
+
+<ul>
+  <li>Existing Rational and Noisy Rational models anticipate that the best option is always most likely to be chosen.</li>
+  <li>We adopted Cumulative Prospect Theory from behavioral economics, and showed how it can explain and predict suboptimal decisions.</li>
+  <li>In both an autonomous driving task and a collaborative block stacking task we found that the Risk-Aware model more accurately predicted human actions.</li>
+  <li>Incorporating risk into robot predictions of human actions improves safety and efficiency.</li>
+</ul>
+
+<p>Overall, this work is a step towards robots that can seamlessly anticipate what humans will do and collaborate in interactive settings.</p>
+
+<p>If you have any questions, please contact Minae Kwon at: <a href="mailto:mnkwon@stanford.edu">mnkwon@stanford.edu</a></p>
+
+<p>Our team of collaborators is shown below!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-03-17-modeling-risky-humans/image18.png" /></p>
+</div></figure>
+
+<hr />
+
+<p>This blog post is based on the 2020 paper <em>When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans</em> by Minae Kwon, Erdem Biyik, Aditi Talati, Karan Bhasin, Dylan P. Losey, and Dorsa Sadigh.</p>
+
+<p>For further details on this work, check out the <a href="https://arxiv.org/abs/2001.04377">paper on Arxiv</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+
+      <p>Pieter Abbeel and Andrew Ng, “Apprenticeship learning via inverse reinforcement learning,” <em>ICML</em> 2004. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+
+      <p>Brian Ziebart et al., “Maximum entropy inverse reinforcement learning,” <em>AAAI</em> 2008. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+
+      <p>Amos Tversky and Daniel Kahneman, “Advances in prospect theory: Cumulative representation of uncertainty,” <em>Journal of Risk and Uncertainty</em> 1992. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+
+      <p>In this blog post we will deal with single-decision tasks. The generalization to longer horizon, multi-step games is straightforward using value functions, and you can read more about it in our paper! <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/modeling-risky-humans/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/modeling-risky-humans/&text=When+Humans+Aren%E2%80%99t+Optimal%3A+Robots+that+Collaborate+with+Risk-Aware+Humans%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/modeling-risky-humans/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/modeling-risky-humans/&title=When+Humans+Aren%E2%80%99t+Optimal%3A+Robots+that+Collaborate+with+Risk-Aware+Humans%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/modeling-risky-humans/&title=When+Humans+Aren%E2%80%99t+Optimal%3A+Robots+that+Collaborate+with+Risk-Aware+Humans%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=When+Humans+Aren%E2%80%99t+Optimal%3A+Robots+that+Collaborate+with+Risk-Aware+Humans%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/modeling-risky-humans/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#cognitive+modeling">
+      <p><i class="fa fa-tag fa-fw"></i> cognitive modeling</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#human-robot+interaction">
+      <p><i class="fa fa-tag fa-fw"></i> human-robot interaction</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#prediction">
+      <p><i class="fa fa-tag fa-fw"></i> prediction</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/text-causal-inference/">
+      <p>Previous post</p>
+        Text Feature Selection for Causal Inference
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/contextual/">
+      <p>Next post</p>
+        BERT, ELMo, & GPT-2: How Contextual are Contextualized Word Representations?
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/controllable-dialogue/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>What makes a good conversation? | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="What makes a good conversation?" />
+<meta name="author" content="<a href='http://www.abigailsee.com/'>Abigail See</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Looking into multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance." />
+<meta property="og:description" content="Looking into multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/controllable-dialogue/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/controllable-dialogue/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-18T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="What makes a good conversation?" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"What makes a good conversation?","dateModified":"2019-08-18T00:00:00-07:00","datePublished":"2019-08-18T00:00:00-07:00","description":"Looking into multiple attributes of generated text and human-evaluate multiple aspects of conversational quality, in order to investigate how effectively we can control these attributes and how these attributes affect conversational quality and chatbot performance.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/controllable-dialogue/"},"url":"http://ai.stanford.edu/blog/controllable-dialogue/","author":{"@type":"Person","name":"<a href='http://www.abigailsee.com/'>Abigail See</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>What makes a good conversation? | The Stanford AI Lab Blog</title>
+    <meta name="description" content="The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="What makes a good conversation?">
+    
+    <meta name="twitter:description" content="The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-08-18-controllable-dialogue/personachat.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-08-18-controllable-dialogue/personachat.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">What makes a good conversation?</h1>
+    <p class="meta">
+    <a href='http://www.abigailsee.com/'>Abigail See</a>
+    <div class="post-date">August 18, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><em>This post was originally on <a href="http://www.abigailsee.com/2019/08/13/what-makes-a-good-conversation.html">Abigail See’s website</a> and has been replicated here with permission.</em></p>
+
+<h3 id="the-natural-language-generation-task-spectrum">The Natural Language Generation task spectrum</h3>
+
+<p>I think of Natural Language Generation (NLG) tasks as existing on the following spectrum:<sup id="fnref:sasha" role="doc-noteref"><a href="#fn:sasha" class="footnote">1</a></sup></p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/NLG_spectrum_summ_img.png" alt="Diagram of natural language generation tasks" />
+    
+    
+        <p class="image-caption"></p>
+    
+</figure>
+
+<p>On the left are tasks like Machine Translation (MT), which are <strong>less open-ended</strong> (i.e. there is a relatively narrow range of correct outputs given the input).
+Given the close correspondence between input and output, these tasks can be accomplished mostly (but not entirely) by decisions at the word/phrase level.
+On the right are tasks like Story Generation and Chitchat Dialogue, which are <strong>more open-ended</strong> (i.e. there is a huge range of appropriate outputs given the input).
+For these tasks, the ability to make high-level decisions (e.g. ‘what should happen next in the story?’ or ‘should we change the subject of discussion?’) is central to the task.</p>
+
+<p>While <strong>neural Language Model (LM)</strong> based approaches have been successful for tasks on the left, they have well-documented difficulties with tasks on the right, such as repetitious and generic output (under certain decoding algorithms, such as beam search<sup id="fnref:beam" role="doc-noteref"><a href="#fn:beam" class="footnote">2</a></sup>).
+More broadly, neural LMs seem to struggle to make the high-level decisions that are necessary to sustain a long story or dialogue.</p>
+
+<p>One way to address these open-ended NLG issues is to add <strong>control</strong> – that is, the ability to specify desired attributes of the generated text at test time.
+For example, if we can control the repetitiveness or genericness of the text, we can fix those related problems.
+Furthermore, if we can control certain high-level attributes of the text (e.g. whether to change the subject, or whether to ask a question), then perhaps we can make some high-level decisions <em>for</em> the neural LM.</p>
+
+<p>The last part of our NLG task spectrum is <strong>evaluation</strong>.
+For the tasks on the left, evaluation is difficult.
+Useful automatic metrics exist, though they are imperfect – the MT and summarization communities continue to get value from BLEU and ROUGE, despite their well-documented problems.
+For <em>open-ended</em> NLG however, evaluation is even more difficult.
+In the absence of useful automatic metrics to capture overall quality, we rely on human evaluation.
+Even that is complex – when evaluating dialogue, should we evaluate single turns or multiple turns?
+Should evaluators take part in conversations interactively or not?
+What questions should be asked, and how should they be phrased?</p>
+
+<h3 id="three-research-questions">Three research questions</h3>
+
+<p>In this work, we use chitchat dialogue as a setting to better understand the issues raised above.
+In particular, we <strong>control multiple attributes of generated text</strong> and <strong>human-evaluate multiple aspects of conversational quality</strong>, in order to answer <strong>three main research questions</strong>:</p>
+
+<p><strong><a href="#research-question-1-how-effectively-can-we-control-the-attributes">Research Question 1</a>: How effectively can we control the attributes?</strong>
+<br />
+<strong>Quick answer</strong>: Pretty well! But some control methods only work for some attributes.</p>
+
+<p><strong><a href="#research-question-2-how-do-the-controllable-attributes-affect-conversational-quality-aspects">Research Question 2</a>: How do the controllable attributes affect aspects of conversational quality?</strong>
+<br />
+<strong>Quick answer</strong>: Strongly – we improve several conversational aspects (such as interestingness and listening) by controlling repetition, question-asking, and specificity vs genericness.</p>
+
+<p><strong><a href="#research-question-3-can-we-use-control-to-make-a-better-chatbot-overall">Research Question 3</a>: Can we use control to make a better chatbot overall?</strong>
+<br />
+<strong>Quick answer</strong>: Yes! Though the answer can depend on the definition of ‘better overall’.</p>
+
+<h3 id="the-personachat-task">The PersonaChat task</h3>
+
+<p>We use <a href="https://arxiv.org/pdf/1801.07243.pdf">PersonaChat</a>, a chitchat dataset containing conversations between two participants who each have a ‘persona’.
+Our task is to build a chatbot that can converse with a human in this setting.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/personachat.png" alt="Example of a PersonaChat conversation" />
+    
+    
+        <p class="image-caption">In the PersonaChat task, both participants are supplied with a persona and instructed to get to know each other.</p>
+    
+</figure>
+
+<p>The PersonaChat task was the focus of the <a href="http://convai.io/">NeurIPS 2018 ConvAI2 Competition</a>.
+Most of the top-scoring teams built neural sequence generation systems without control mechanisms (see the <a href="https://arxiv.org/pdf/1902.00098.pdf">competition report</a>).
+In particular, the winning team <em>Lost in Conversation</em> used a finetuned version of OpenAI’s <a href="https://openai.com/blog/language-unsupervised/">GPT</a> language model, which is pretrained on a very large amount of text (985 million words).</p>
+
+<p>We use a simple baseline – a standard LSTM-based sequence-to-sequence architecture with attention.
+On each turn, the bot’s persona is concatenated with the dialogue history to form the input sequence, and the output is generated using beam search.<sup id="fnref:beam:1" role="doc-noteref"><a href="#fn:beam" class="footnote">2</a></sup>
+We pretrain this model on 2.5 million Twitter message/response pairs, then finetune it on PersonaChat.</p>
+
+<h3 id="four-controllable-attributes-of-text">Four controllable attributes of text</h3>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/controllable_attributes.png" alt="Diagram of the controllable text attributes" />
+    
+    
+        <p class="image-caption">We control four attributes of the output text.</p>
+    
+</figure>
+
+<p>Neural LMs often produce repetitive, generic or irrelevant text, especially when decoding using beam search.<sup id="fnref:beam:2" role="doc-noteref"><a href="#fn:beam" class="footnote">2</a></sup>
+Motivated by this, we control the <strong>repetitiveness</strong>, <strong>specificity</strong> and <strong>response-relatedness</strong> of the output text.
+We measure these attributes as follows: repetitiveness as n-gram overlap, specificity as word rareness, and response-relatedness as the embedding similarity of the bot’s response to the human’s last utterance.</p>
+
+<p>Lastly, we also control the rate at which the bot asks <strong>questions</strong> (here we regard an utterance to contain a question if and only if it contains ‘?’).
+Question-asking is an essential component of chitchat, but one that must be balanced carefully.
+By controlling question-asking, we can find and understand the right balance.</p>
+
+<h3 id="aspects-of-conversational-quality">Aspects of conversational quality</h3>
+
+<p>To evaluate our chatbots, we ask crowdworkers to chat with our bots for six turns before asking them to rate several different aspects of the conversation (most are on a scale from 1 to 4).</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/quality_aspects_low.png" alt="Diagram of the lower-level aspects of conversational quality" />
+    
+    
+        <p class="image-caption">We collect human evaluations for six lower-level aspects of conversational quality.</p>
+    
+</figure>
+
+<p>Some of the aspects – such as <strong>avoiding repetition</strong>, <strong>making sense</strong>, and <strong>fluency</strong> – are designed to capture certain basic error classes (like repeating oneself, saying nonsensical things, or disjointed language).
+The others – <strong>interestingness</strong>, <strong>listening</strong>, and <strong>inquisitiveness</strong> – encompass other important elements of conversation, each of which must be balanced.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/quality_aspects_high.png" alt="Diagram of the overall judgments of conversational quality" />
+    
+    
+        <p class="image-caption">We also collect human evaluations for two definitions of overall quality - humanness and engagingness.</p>
+    
+</figure>
+
+<p>Lastly, we ask the crowdworker to rate the bot with respect to two different notions of overall quality.
+To measure <strong>humanness</strong>, we ask the crowdworker whether they think they spoke to a bot or a human (i.e. a Turing test question).
+To measure <strong>engagingness</strong>, we ask the crowdworker how much they enjoyed the conversation.</p>
+
+<p>Many dialogue studies use either engagingness or humanness as a single stand-alone quality metric.
+In particular, in the ConvAI2 competition, only engagingness was used for human evaluation.
+Given that we use the exact same wording of the engagingness question, our evaluation is a <em>superset</em> of ConvAI2’s.</p>
+
+<h3 id="control-methods">Control methods</h3>
+
+<p>In this work, we use two simple existing methods to produce text with some desired attribute, and use them both to control all four of our text attributes.
+Aside from helping us build a better chatbot, this also allows us to understand and directly compare the relative effectiveness of the control methods themselves.</p>
+
+<h4 id="control-method-1-conditional-training-ct">Control method 1: Conditional Training (CT)</h4>
+
+<p>A standard sequence-to-sequence model learns \(P(y \vert x)\), the conditional probability of the output text \(y\) given the input text \(x\).</p>
+
+<p>A Conditional Training model (<a href="https://aclweb.org/anthology/D16-1140">Kikuchi et al 2016</a>, <a href="https://aclweb.org/anthology/W18-1505">Peng et al 2018</a>, <a href="https://aclweb.org/anthology/W18-2706">Fan et al 2018</a>) learns \(P(y\vert x,z)\), the conditional probability of the output text \(y\) given the input text \(x\) <em>and</em> a control variable \(z\), which specifies the desired output attribute.
+For example, to control specificity, we might set \(z\) to HIGH or LOW to get a very specific or a very generic response to <em>What’s your favorite hobby?</em></p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/CT.gif" alt="Animation showing how to control text output with Conditional Training" />
+    
+    
+        <p class="image-caption">Controlling specificity with Conditional Training</p>
+    
+</figure>
+
+<p>The CT model is trained to predict \(y\) given \(x\) and \(z\) (where \(z\) is provided via automatic annotation).
+Then at test time, \(z\) can be chosen by us.</p>
+
+<p>Several researchers have proposed versions of this method (<a href="https://aclweb.org/anthology/D16-1140">Kikuchi et al 2016</a>, <a href="https://aclweb.org/anthology/W18-1505">Peng et al 2018</a>, <a href="https://aclweb.org/anthology/W18-2706">Fan et al 2018</a>), using various methods to incorporate \(z\) into the model.
+We represent \(z\) with a learned embedding, and find that concatenating \(z\) to each decoder input is most effective.
+We can even concatenate <em>multiple</em> control embeddings \(z_1, z_2, ..., z_n\) and learn \(P(y \vert x, z_1, z_2, ... z_n )\) if we wish to simultaneously control several attributes.</p>
+
+<h4 id="control-method-2-weighted-decoding-wd">Control method 2: Weighted Decoding (WD)</h4>
+
+<p>Weighted Decoding (<a href="https://aclweb.org/anthology/P17-4008">Ghazvininejad et al 2017</a>, <a href="https://aclweb.org/anthology/D18-1431">Baheti et al 2018</a>) is a technique applied during decoding to increase or decrease the probability of words with certain <em>features</em>.</p>
+
+<p>For example, to control specificity with Weighted Decoding, we use the rareness of a word as a feature.
+On each step of the decoder, we update the probability of each word in the vocabulary, in proportion to its rareness.
+The size of the update is controlled by a weight parameter, which we choose – allowing us to encourage more specific or more generic output.
+In the example below, we increase the probability of rarer words, thus choosing <em>I like watching sunrises</em> rather than <em>I like watching movies</em>.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/WD.gif" alt="Animation showing how to control text output with Weighted Decoding" />
+    
+    
+        <p class="image-caption">Controlling specificity with Weighted Decoding</p>
+    
+</figure>
+
+<p>This method requires no special training and can be applied to modify any decoding algorithm (beam search, greedy search, top-<em>k</em> sampling, etc).
+Weighted Decoding can be used to control multiple attributes at once, and it can be applied alongside Conditional Training.</p>
+
+<h3 id="research-question-1-how-effectively-can-we-control-the-attributes">Research Question 1: How effectively can we control the attributes?</h3>
+
+<p>We find that <strong>Weighted Decoding</strong> is effective to control attributes that can be easily defined at the word-level, like <font color="#0f9d58">repetition, specificity</font>, and <font color="#0f9d58">response-relatedness</font> (shown below).
+However, the method yields degenerate output when the feature weight is too high – for example, devolving into a long list of related words (<em>drinks, espresso, latte, tea</em>).</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/controlling_response_rel.png" alt="Example responses with varied response-relatedness" />
+    
+    
+        <p class="image-caption">Controlling response-relatedness with Weighted Decoding (WD). By increasing response-relatedness, we obtain a more on-topic response (<i>I do, usually at starbucks</i>).</p>
+    
+</figure>
+
+<p>Because Weighted Decoding controls attributes using word-level features, it cannot control attributes such as <font color="#db4437">question-asking</font>, which are more naturally defined at the sentence-level.</p>
+
+<p>We find that <strong>Conditional Training</strong> is effective to control simple attributes of the output text, such as <font color="#0f9d58">specificity</font> and <font color="#0f9d58">question-asking</font>.
+In particular, it usually produces output that is well-formed and has the desired attribute – this makes it less risky than Weighted Decoding (see below for example).</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/controlling_specificity.png" alt="Example responses with varied specificity" />
+    
+    
+        <p class="image-caption">Controlling specificity with Weighted Decoding (WD) and Conditional Training (CT). By increasing specificity, we obtain more interesting, personalized responses.</p>
+    
+</figure>
+
+<p>However, we find Conditional Training is less effective at learning to control <em>relationships</em> between the input and output, such as <font color="#db4437">response-relatedness</font>.
+In addition, Conditional Training can’t control attributes without sufficient training data – meaning it is ineffective to control <font color="#db4437">repetition</font>, because our training data does not contain the kind of severely repetitive output we wish to prevent.</p>
+
+<p>Overall, though the control methods didn’t work for every attribute, we find that each of our four attributes can be satisfactorily controlled by at least one of the two methods.</p>
+
+<h3 id="research-question-2-how-do-the-controllable-attributes-affect-conversational-quality-aspects">Research Question 2: How do the controllable attributes affect conversational quality aspects?</h3>
+
+<p>We find that <strong>reducing repetition</strong> gives large boosts to <font color="#0f9d58">all human evaluation scores</font>.
+This is not surprising, as our beam search baseline model repeats itself a lot (especially across utterances), creating a very frustrating user experience.
+However, this does demonstrate the importance of multi-turn evaluation (as opposed to single response evaluation), as it is necessary to detect across-utterance repetition.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/norep_base.png" alt="An example chat between the bot and a human" width="700" />
+    
+    
+        <p class="image-caption">After reducing repetition, our bot has mostly safe but generic conversations.</p>
+    
+</figure>
+
+<p>After reducing repetition, we find that by <strong>increasing question-asking</strong> rate to 65.7%, we achieve better <font color="#0f9d58">inquisitiveness, interestingness</font> and <font color="#0f9d58">engagingness</font>.
+Interestingly, this rate is higher than both the baseline (50%) and humans (28.8%) – implying that, in chitchat settings such as these, more question-asking is often received well.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/ques.png" alt="An example chat between the bot and a human" width="700" />
+    
+    
+        <p class="image-caption">Our increased question-asking bot is more engaging, often commenting and asking a question in the same turn.</p>
+    
+</figure>
+
+<p>By <strong>increasing specificity</strong> to around human levels, we obtain improvements to <font color="#0f9d58">interestingness, listening</font> and <font color="#0f9d58">engagingness</font>.
+However, finding the right balance is difficult – increasing specificity too much leads to lower <font color="#db4437">making sense</font> and <font color="#db4437">fluency</font> scores.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/spec.png" alt="An example chat between the bot and a human" width="700" />
+    
+    
+        <p class="image-caption">Our increased specificity bot typically offers more interesting details about itself.</p>
+    
+</figure>
+
+<p>Lastly, we were unable to obtain an improvement in any of our evaluation categories by controlling <strong>response-relatedness</strong>.
+Though we hoped that increasing response-relatedness would create a chatbot that appears more attentive, friendly and interested in the user, crowdworkers did not rate the ‘more responsive’ bots better overall.
+In particular, these bots received lower average scores for <font color="#db4437">fluency</font> and <font color="#db4437">making sense</font>, and consequently lower overall scores for <font color="#db4437">humanness</font> and <font color="#db4437">engagingness</font> too.
+As with specificity, attempting higher response-relatedness is a risky strategy, as it increases the chance of the bot saying something that sounds unnatural or nonsensical.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/resp.png" alt="An example chat between the bot and a human" width="700" />
+    
+    
+        <p class="image-caption">Our increased-responsiveness bot can give good relevant responses (e.g. <i>costco</i>), but tends to mirror the user too much (<i>relax</i>) and makes false connections (<i>mickey d's</i> is slang for McDonalds, which is unrelated to Mickey Mouse).</p>
+    
+</figure>
+
+<p>You can browse more example conversations by following the instructions <a href="https://parl.ai/projects/controllable_dialogue">here</a>.</p>
+
+<h3 id="research-question-3-can-we-use-control-to-make-a-better-chatbot-overall">Research Question 3: Can we use control to make a better chatbot overall?</h3>
+
+<p>The first answer is <strong>yes</strong>!
+By controlling repetition, specificity and question-asking, we achieve
+<strong>near-human engagingness</strong> (i.e. enjoyability) ratings.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/engagingness.png" alt="Bar chart showing the increased engagingness of the models" />
+    
+    
+        <p class="image-caption">Engagingness (i.e. enjoyability) ratings for humans and selected models.</p>
+    
+</figure>
+
+<p>In particular, our raw engagingness score matches that of the ConvAI2 competition winner’s GPT-based model.<sup id="fnref:convai2" role="doc-noteref"><a href="#fn:convai2" class="footnote">3</a></sup>
+This is especially notable because our model is much less deep (a 2-layer LSTM-based model vs a 12-layer Transformer-based model), and is trained on 12 times less data.</p>
+
+<p>However, on the <strong>humanness</strong> (i.e. Turing test) metric, all our models are <strong>nowhere near human-level</strong>!</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/humanness.png" alt="Bar chart showing the limited humanness of the models" />
+    
+    
+        <p class="image-caption">Humanness (i.e. Turing test) ratings for humans and selected models.</p>
+    
+</figure>
+
+<p>These results show that <strong>our bots are (almost) as engaging as humans, but they’re clearly non-human</strong>.
+How is this possible?
+There are many ways a bot can reveal itself as non-human – for example, through logical errors, unnatural style, or poor social skills – but despite these flaws, the bot can still be enjoyable.
+As a concrete example, the last chat in the previous section was rated enjoyable (3/4) but obviously non-human (1/4).</p>
+
+<p>Clearly, our results demonstrate that <strong>engagingness is not the same as humanness</strong>.
+While both metrics are frequently used alone for evaluation, our results show the importance of measuring both (or at least, thinking carefully about which you want to use).</p>
+
+<p>Another possible explanation for our finding, is that the <strong>human ‘engagingness’ performance may be artificially low</strong>.
+We observe that crowdworkers chatting for money (using artificial personas) seem to be less engaging conversationalists than people who are genuinely chatting for fun.
+Though we did not formally test this hypothesis, it may explain why the human-level engagingness scores are easy to match.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+
+<ul>
+  <li>If you’re building an end-to-end neural sequence generation dialogue system, then <strong>control is probably a good idea</strong>. Using simple control mechanisms, we matched the performance of a GPT-based contest winner. We expect these techniques would yield even better results when applied to a highly pretrained language model like GPT.
+<br /><br /></li>
+  <li>If you want to control a fairly <strong>simple attribute</strong> of the output text, and you have sufficient <strong>training examples</strong> of the attribute, then Conditional Training is probably a good idea.
+<br /><br /></li>
+  <li>If you <strong>don’t have the training data</strong>, or the attribute is <strong>harder to learn</strong>, then Weighted Decoding may be more effective – though you need to be careful as the method can produce degenerate output.
+<br /><br /></li>
+  <li><strong>Multi-turn phenomena</strong> (such as repetition across utterances, and question-asking frequency) are important to conversations – so we need <strong>multi-turn eval</strong> to detect them.
+<br /><br /></li>
+  <li><strong>Engagingness is not the same as humanness</strong>, so think carefully about which to use as an overall quality metric.
+<br /><br /></li>
+  <li>We suspect that <strong>paid crowdworkers are not very engaging conversationalists</strong>, and perhaps aren’t even good judges of whether a conversation is engaging.
+Humans chatting for fun may be a better source of genuine judgments.
+<br /><br /></li>
+  <li>Whether you’re a human or a bot: <strong>Don’t repeat yourself. Don’t be boring. Ask more questions.</strong>
+<br /><br /></li>
+</ul>
+
+<h3 id="outlook">Outlook</h3>
+
+<p>This project involved a lot of manual tuning of control parameters, as we attempted to find the best combination of settings for the four attributes.
+This was a long and laborious process, requiring not only many hours of crowdworker evaluation time, but also many hours of our own evaluation time as we chatted to the bots.</p>
+
+<p>I’m reminded of <a href="http://www.foddy.net/Athletics.html">QWOP</a> – a simple game in which you press four buttons (Q, W, O and P) to control the individual muscles in a runner’s legs.
+Though the aim of the game is to run as far as possible, the entertainment comes from the absurd difficulty of the task.</p>
+
+<!-- from here: https://superdevresources.com/image-caption-jekyll/ -->
+<figure>
+    
+      <img class="postimage_100" src="/blog/assets/img/posts/2019-08-18-controllable-dialogue/qwop.gif" alt="Animation from the game QWOP" />
+    
+    
+        <p class="image-caption">QWOP is a game in which you attempt to run by pressing four buttons that each control a different part of the runner's legs.</p>
+    
+</figure>
+
+<p>Manually controlling four low-level text attributes is <em>not</em> the most principled, nor the most scalable way to build a good conversational dialogue system – just as manually controlling the four parts of the runner’s legs is not the most principled way to run a marathon.
+However, for the neural sequence generation systems we are using today, this kind of control can be useful and effective – getting us a little further down the track, if not all the way to the finish line.</p>
+
+<hr />
+<p>This blog post is based on the <a href="https://naacl2019.org/">NAACL 2019</a> paper <strong>What makes a good conversation? How controllable attributes affect human judgments</strong> by Abigail See, Stephen Roller, Douwe Kiela and Jason Weston.</p>
+
+<p><em>For further details on this work, check out the <a href="https://www.aclweb.org/anthology/N19-1170">paper</a> or our <a href="https://cs.stanford.edu/people/abisee/naacl2019slides.pdf">presentation slides</a> .</em></p>
+
+<p><em>The code, data, pretrained models, and an interactive demo are available <a href="https://parl.ai/projects/controllable_dialogue">here</a>.</em></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:sasha" role="doc-endnote">
+      <p>Sasha Rush showed a similar diagram during his talk at the NeuralGen 2019 workshop. See “Open Questions” slide <a href="http://nlp.seas.harvard.edu/slides/Pre-training%20for%20Generation.pdf">here</a>. <a href="#fnref:sasha" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:beam" role="doc-endnote">
+      <p>Since we carried out this research in 2018, it has become clearer that likelihood-maximizing decoding algorithms (such as greedy decoding and beam search) are a key cause of repetitive and generic text (<a href="https://arxiv.org/pdf/1904.09751.pdf">Holtzman et al, 2019</a>), and that sampling-based methods such as top-<em>k</em> sampling (<a href="https://arxiv.org/abs/1805.04833">Fan et al 2018</a>, <a href="https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">Radford et al 2019</a>) may fare better for open-ended NLG tasks. In retrospect, beam search is perhaps <em>not</em> the best choice of decoding algorithm for our chitchat setting. Though we didn’t experiment with sampling-based decoding algorithms, it would be interesting to see whether the control methods described here are as reliable under sampling-based decoding. <a href="#fnref:beam" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:beam:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a> <a href="#fnref:beam:2" class="reversefootnote" role="doc-backlink">&#8617;<sup>3</sup></a></p>
+    </li>
+    <li id="fn:convai2" role="doc-endnote">
+      <p>Though we used the exact same wording as ConvAI2 for our Engagingness question, the comparison of raw scores should be considered as a rough indication of a similar overall quality, <em>not</em> an exact comparison. <a href="#fnref:convai2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/controllable-dialogue/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/controllable-dialogue/&text=What+makes+a+good+conversation%3F%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/controllable-dialogue/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/controllable-dialogue/&title=What+makes+a+good+conversation%3F%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/controllable-dialogue/&title=What+makes+a+good+conversation%3F%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=What+makes+a+good+conversation%3F%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/controllable-dialogue/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ai">
+      <p><i class="fa fa-tag fa-fw"></i> ai</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#chatbots">
+      <p><i class="fa fa-tag fa-fw"></i> chatbots</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/adaptive-routing/">
+      <p>Previous post</p>
+        Adaptive Energy-Efficient Routing for Autonomous Vehicles
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/topologylayer/">
+      <p>Next post</p>
+        A Topology Layer for Machine Learning
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

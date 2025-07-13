@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/scalar-probing/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Do Language Models Know How Heavy an Elephant Is? | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Do Language Models Know How Heavy an Elephant Is?" />
+<meta name="author" content="<a href='https://twitter.com/xikun_zhang_'>Xikun Zhang</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="How heavy is an elephant? How expensive is a wedding ring?" />
+<meta property="og:description" content="How heavy is an elephant? How expensive is a wedding ring?" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/scalar-probing/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/scalar-probing/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-17T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Do Language Models Know How Heavy an Elephant Is?" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Do Language Models Know How Heavy an Elephant Is?","dateModified":"2021-02-17T00:00:00-08:00","datePublished":"2021-02-17T00:00:00-08:00","description":"How heavy is an elephant? How expensive is a wedding ring?","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/scalar-probing/"},"url":"http://ai.stanford.edu/blog/scalar-probing/","author":{"@type":"Person","name":"<a href='https://twitter.com/xikun_zhang_'>Xikun Zhang</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Do Language Models Know How Heavy an Elephant Is? | The Stanford AI Lab Blog</title>
+    <meta name="description" content="The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Do Language Models Know How Heavy an Elephant Is?">
+    
+    <meta name="twitter:description" content="The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-02-17-scalar-probing/image1.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-02-17-scalar-probing/image1.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+  <figure>
+    
+    <img class="postimagehalf" src="https://ai.stanford.edu/blog/assets/img/posts/2021-02-17-scalar-probing/image1.png">
+    
+  </figure>
+
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Do Language Models Know How Heavy an Elephant Is?</h1>
+    <p class="meta">
+    <a href='https://twitter.com/xikun_zhang_'>Xikun Zhang</a>
+    <div class="post-date">February 17, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>How heavy is an elephant? How expensive is a wedding ring?</p>
+
+<p>Humans have a pretty good sense of <em>scale</em>, or reasonable ranges of these
+<em>numeric attributes</em>, of different objects, but do pre-trained language
+representations? Although pre-trained Language Models (LMs) like
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1810.04805&amp;sa=D&amp;source=editors&amp;ust=1613552260369000&amp;usg=AOvVaw2sJUKWCZGDMLa3LWoqOEZ7">BERT</a> have
+shown a remarkable ability to learn all kinds of knowledge, including
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1909.01066&amp;sa=D&amp;source=editors&amp;ust=1613552260369000&amp;usg=AOvVaw27gyPje50D9HeU8ZaY_8VY">factual
+knowledge</a>,
+it remains unclear whether their representations can capture these types
+of numeric attributes from text alone without explicit training data.</p>
+
+<!-- ![](/assets/img/posts/2021-02-17-scalar-probing/image1.png) -->
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" style="max-width: 500px" src="/blog/assets/img/posts/2021-02-17-scalar-probing/image1.png" /></p>
+</div></figure>
+
+<p>In our <a href="https://www.google.com/url?q=https://arxiv.org/abs/2010.05345&amp;sa=D&amp;source=editors&amp;ust=1613552260370000&amp;usg=AOvVaw2jns7eFEtJBLkPB-VDrx6F">recent
+paper</a>,
+we measure the amount of scale information that is captured in several
+kinds of pre-trained text representations and show that, although
+generally a <strong>significant amount</strong> of such information is captured, there is
+still a <strong>large gap</strong> between their current performance and the theoretical
+upper bound. We identify that specifically those text representations
+that are <strong>contextual</strong> and <strong>good at numerical reasoning</strong> capture scale
+better. We also come up with a <strong>new version of BERT</strong>, called <em>NumBERT</em>, with
+improved numerical reasoning by <strong>replacing numbers in the pretraining
+text corpus with their scientific notation</strong>, which more readily exposes
+the magnitude to the model, and demonstrate that NumBERT representations
+capture scale significantly better than all those previous text
+representations.</p>
+
+<h1 id="scalar-probing">Scalar Probing</h1>
+
+<p>In order to understand to what extent pre-trained text representations, like
+BERT representations, capture scale information, we propose a task
+called <em>scalar probing</em>: probing the ability to predict a
+<em>distribution</em> over values of a scalar attribute of an object. In this
+work, we focus specifically on three kinds of scalar attributes: weight,
+length, and price.</p>
+
+<p>Here is the basic architecture of our scalar probing task:</p>
+
+<!-- ![](images/image2.png) -->
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" style="max-width: 900px" src="/blog/assets/img/posts/2021-02-17-scalar-probing/image2.png" /></p>
+</div></figure>
+
+<p>In this example, we are trying to see whether the representation of
+“dog” extracted by a pre-trained encoder can be used to predict/recover
+the distribution of the weight of a dog through a linear model. We probe
+three baseline language representations:
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1301.3781&amp;sa=D&amp;source=editors&amp;ust=1613552260374000&amp;usg=AOvVaw08p9HhtI6FTvvcqpFd5NDn">Word2vec</a>,
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1802.05365&amp;sa=D&amp;source=editors&amp;ust=1613552260374000&amp;usg=AOvVaw1ngIpQf6a40ItFoq0MM78w">ELMo</a>,
+and
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1810.04805&amp;sa=D&amp;source=editors&amp;ust=1613552260374000&amp;usg=AOvVaw1BGbokiyXp_QdBgvlV6B2J">BERT</a>.
+Since the latter two are contextual representations that operate on
+sentences instead of words, we feed in sentences constructed using fixed
+templates. For example, for weight, we use the template “The X is
+heavy”, where X is the object in interest.</p>
+
+<p>We explore the kind of probe that predicts a <em>point estimate</em> of the value
+and the kind that predicts the <em>full distribution</em>. For predicting a point
+estimate, we use a standard linear <strong>R</strong>e<strong>GR</strong>ession (we denote as “<strong>rgr</strong>”)
+trained to predict the log of the median of all values for each object
+for the scale attribute under consideration. We predict the log because,
+again, we care about the general scale rather than the exact value. The
+loss is calculated using the prediction and the log of the median of the
+ground-truth distribution. For predicting the full distribution, we use
+a linear softmax <strong>M</strong>ulti-<strong>C</strong>lass <strong>C</strong>lassifier (we denote as “<strong>mcc</strong>”) producing a
+categorical distribution over the 12 orders of magnitude. The
+categorical distribution predicted using the NumBERT (our improved
+version of BERT; will be introduced <a href="#numbert">later</a>) representations is shown as
+the orange histogram in the above example.</p>
+
+<p>The ground-truth distributions we use come from the <a href="https://www.google.com/url?q=https://arxiv.org/abs/1906.01327&amp;sa=D&amp;source=editors&amp;ust=1613552260377000&amp;usg=AOvVaw3IFP_sUANrnAsBdvZRbBJV">Distributions over
+Quantities</a> (DoQ)
+dataset which consists of <em>empirical counts</em> of scalar attribute values
+associated with &gt;350K nouns, adjectives, and verbs over 10 different
+attributes, <em>automatically extracted</em> from a large web text corpus. Note
+that during the construction of the dataset, all units for a certain
+attribute are first unified to a single one (e.g.
+centimeter/meter/kilometer -&gt; meter) and the numeric values are scaled
+accordingly. We convert the collected counts for each object-attribute
+pair in DoQ into a <em>categorical distribution over 12 orders of magnitude</em>.
+In the above example of the weight of a dog, the ground-truth
+distribution is shown as the grey histogram, which is concentrated
+around 10-100kg.</p>
+
+<p><strong>The better the predictive performance is across all the object-attribute
+pairs we are dealing with, the better the pre-trained representations
+encode the corresponding scale information.</strong></p>
+
+<h1 id="numbert"><a name="numbert"></a>NumBERT</h1>
+
+<p>Before looking at the scalar probing results of these different language
+presentations, let’s also think about what kind of representations might
+be good at capturing scale information and how to improve existing LMs
+to capture scale better. All of these models are trained using large
+online text corpora like Wikipedia, news, etc. How can their
+representations pick up scale information from all this text?</p>
+
+<p>Here is a piece of text from the first document I got when I searched on
+Google “elephant weight”:</p>
+
+<blockquote>
+  <p>“…African elephants can range from 5,000 pounds to more than 14,000 pounds (6,350 kilograms)…”</p>
+</blockquote>
+
+<p>So it is highly likely that <strong>the learning of scale is partly mediated by
+the transfer of scale information from the numbers</strong> (here “5,000”,
+“14,000”, etc.) <strong>to nouns</strong> (here “elephants”) and <strong>numeracy</strong>, i.e. the
+ability to reason about numbers, <strong>is probably important for representing
+scale</strong>!</p>
+
+<p>However, <a href="https://www.google.com/url?q=https://www.aclweb.org/anthology/D19-1534/&amp;sa=D&amp;source=editors&amp;ust=1613552260381000&amp;usg=AOvVaw294kIi9L87A-KaO__fkYLk">previous
+work</a> has
+shown that existing pre-trained text representations, including BERT,
+ELMo, and Word2Vec, are not good at reasoning over numbers. For example,
+beyond the magnitude of ~500, they cannot even decode a number from its
+word embedding, e.g. embedding(“710”) \(\nrightarrow\) 710. Thus, we propose to improve
+the numerical reasoning abilities of these representations by replacing
+every instance of a number in the LM training data with its <em>scientiﬁc
+notation</em>, and re-pretraining BERT (which we call <em>NumBERT</em>). This enables
+the model to more easily associate objects in the sentence directly with
+the <em>magnitude</em> expressed in the <em>exponent</em>, ignoring the relatively
+insigniﬁcant mantissa.
+<!-- ![](images/image4.png) --></p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" style="max-width: 900px" src="/blog/assets/img/posts/2021-02-17-scalar-probing/image4.png" /></p>
+</div></figure>
+
+<h1 id="results">Results</h1>
+
+<h3 id="scalar-probing-1">Scalar Probing</h3>
+<!-- ![](images/image6.png) -->
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" style="max-width: 500px" src="/blog/assets/img/posts/2021-02-17-scalar-probing/image6.png" /></p>
+</div></figure>
+
+<p>The above table shows the results of scalar probing on the DoQ data. We
+use three evaluation metrics: <em>Accuracy</em>, <em>Mean Squared Error (MSE)</em>, and
+<em>Earth Mover’s distance (EMD)</em>, and we do the experiments in four domains:
+<em>Lengths</em>, <em>Masses</em>, <em>Prices</em> and <em>Animal Masses</em> (a subset of Masses). For MSE
+and EMD, the best possible score is 0, while we compute a loose <em>upper
+bound</em> of accuracy by sampling from the ground-truth distribution and
+evaluating against the mode. This upper bound achieves accuracies of
+0.570 for lengths, 0.537 for masses, and 0.476 for prices.</p>
+
+<p>For the <em>Aggregate</em> baseline, for each attribute, we compute the empirical
+distribution over buckets across all objects in the training set, and
+use that as the predicted distribution for all objects in the test set.
+Compared with this baseline, we can see that the <strong>mcc</strong> probe over the best
+text representations capture about <strong>half</strong> (as measured by accuracy) to <strong>a
+third</strong> (by MSE and EMD) of the distance to the upper bound mentioned
+above, suggesting that <strong>while a signiﬁcant amount of scalar information
+is available, there is a long way to go to support robust commonsense
+reasoning</strong>.</p>
+
+<p>Specifically, <strong>NumBERT representations do consistently better than all
+the others</strong> on <em>Earth Mover’s Distance</em> (EMD), which is the <em>most
+robust</em> metric because of its <a href="https://www.google.com/url?q=https://ieeexplore.ieee.org/document/710701&amp;sa=D&amp;source=editors&amp;ust=1613552260385000&amp;usg=AOvVaw221Lk2TXvCNo_SHGAj7IN6">better convergence
+properties</a> and
+<a href="https://www.google.com/url?q=http://proceedings.mlr.press/v97/liu19b.html&amp;sa=D&amp;source=editors&amp;ust=1613552260386000&amp;usg=AOvVaw1Q1SF3K0mlfjt8HERQiUVj">robustness to adversarial perturbations of the data
+distribution</a>. <strong>Word2Vec
+performs signiﬁcantly worse than the contextual representations</strong> – even
+though the task is <em>noncontextual</em> (since we do not have different
+ground-truths for an object occurring in different contexts in our
+setting). Also, despite being weaker than BERT on downstream NLP tasks,
+<strong>ELMo does better on scalar probing</strong>, consistent with it <a href="https://www.google.com/url?q=https://www.aclweb.org/anthology/D19-1534/&amp;sa=D&amp;source=editors&amp;ust=1613552260387000&amp;usg=AOvVaw366Vf1Or1N_arhzIwSF0a4">being better at
+numeracy</a> due
+to its <em>character-level tokenization</em>.</p>
+
+<h3 id="zero-shot-transfer">Zero-shot transfer</h3>
+
+<p>We note that DoQ is derived heuristically from web text and contains
+noise. So we also evaluate probes trained on DoQ on 2 datasets
+containing <em>ground truth labels</em> of scalar attributes:
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1706.03799&amp;sa=D&amp;source=editors&amp;ust=1613552260388000&amp;usg=AOvVaw1TjMr0Kp_kSo377e-Vl7KB">VerbPhysics</a> and
+<a href="https://www.google.com/url?q=https://jmcauley.ucsd.edu/data/amazon/&amp;sa=D&amp;source=editors&amp;ust=1613552260388000&amp;usg=AOvVaw006j3ja6jmqXMQh2XejA0G">Amazon Price
+Dataset</a>.
+The ﬁrst is a human labeled dataset of relative comparisons, e.g.
+(person, fox, weight, bigger). Predictions for this task are made by
+comparing the point estimates for <strong>rgr</strong> and highest-scoring buckets for
+<strong>mcc</strong>. The second is a dataset of empirical distributions of product
+prices on Amazon. We retrained a probe on DoQ prices using 12 power-of-4
+buckets to support ﬁner grained predictions.</p>
+
+<!-- ![](images/image3.png)![](images/image5.png) -->
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" style="max-width: 400px" src="/blog/assets/img/posts/2021-02-17-scalar-probing/image3.png" /></p>
+
+<p><img class="postimage_unpadded" style="max-width: 400px" src="/blog/assets/img/posts/2021-02-17-scalar-probing/image5.png" /></p>
+</div></figure>
+
+<p>The results are shown in the tables above. On VerbPhysics (the table on
+the top), <strong>rgr</strong>+NumBERT performed best, approaching the performance of
+using DoQ as an oracle, though short of <a href="https://www.google.com/url?q=https://www.aclweb.org/anthology/P18-2102/&amp;sa=D&amp;source=editors&amp;ust=1613552260389000&amp;usg=AOvVaw1sQRwGz2TwHxKQUagdmqsf">specialized
+models</a> for
+this task. Scalar probes trained with <strong>mcc</strong> perform poorly, possibly
+because a ﬁner-grained model of predicted distribution is not useful for
+the 3-class comparative task. On the Amazon Price Dataset (the table on
+the bottom) which is a full distribution prediction task, <strong>mcc</strong>+NumBERT did
+best on both distributional metrics. On both zero-shot transfer tasks,
+<strong>NumBERT representations were the best</strong> across all conﬁgurations of
+metrics/objectives, suggesting that manipulating numeric representations
+of the text in the pre-training corpora can signiﬁcantly improve
+performance on scale prediction.</p>
+
+<h1 id="moving-forward">Moving Forward</h1>
+
+<p>In the work above, we introduce a new task called <em>scalar probing</em> used to
+measure how much information of numeric attributes of objects
+pre-trained text representations have captured and find out that while
+there is a <strong>significant amount of scale information</strong> in object
+representations (half to a third to the theoretical upper bound), these
+models are <strong>far from achieving common sense scale understanding</strong>. We also
+come up with an <strong>improved version of BERT</strong>, called <em>NumBERT</em>, whose
+representations <strong>capture scale information significantly better</strong> than all
+the previous ones.</p>
+
+<p>Scalar probing opens up new exciting research directions to explore. For
+example, lots of work has pre-trained large-scale <em>vision &amp; language
+models</em>, like
+<a href="https://www.google.com/url?q=https://arxiv.org/abs/1908.02265&amp;sa=D&amp;source=editors&amp;ust=1613552260391000&amp;usg=AOvVaw3-rig6UgNOniW4jV0cJEzz">ViLBERT</a> and
+<a href="https://www.google.com/url?q=https://cdn.openai.com/papers/Learning_Transferable_Visual_Models_From_Natural_Language_Supervision.pdf&amp;sa=D&amp;source=editors&amp;ust=1613552260392000&amp;usg=AOvVaw0FSByZ1nvSs_nkiucRIZ4N">CLIP</a>.
+Probing their representations to see how much scale information has been
+captured and performing systematic comparisons between them and
+representations learned by language-only models can be quite
+interesting.</p>
+
+<p>Also, models learning text representations that predict scale better can
+have a <strong>great real-world impact</strong>. Consider a web query like:</p>
+
+<blockquote>
+  <p>“How tall is the tallest building in the world?”</p>
+</blockquote>
+
+<p>With a common sense understanding of what a reasonable range of heights
+for “building” is, we can detect errors in the current web QA system when there are mistakes in
+retrieval or parsing, e.g. when a wikipedia sentence about a building is
+mistakenly parsed as being 19 miles high instead of meters.</p>
+
+<p>Check out the paper <a href="https://www.google.com/url?q=https://arxiv.org/abs/2010.05345&amp;sa=D&amp;source=editors&amp;ust=1613552260393000&amp;usg=AOvVaw1QGVJEuhUKZ9jhfPl06j56">Do Language Embeddings Capture
+Scales?</a> by
+Xikun Zhang, Deepak Ramachandran, Ian Tenney, Yanai Elazar, and Dan
+Roth.</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/scalar-probing/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/scalar-probing/&text=Do+Language+Models+Know+How+Heavy+an+Elephant+Is%3F%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/scalar-probing/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/scalar-probing/&title=Do+Language+Models+Know+How+Heavy+an+Elephant+Is%3F%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/scalar-probing/&title=Do+Language+Models+Know+How+Heavy+an+Elephant+Is%3F%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Do+Language+Models+Know+How+Heavy+an+Elephant+Is%3F%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/scalar-probing/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#analysis">
+      <p><i class="fa fa-tag fa-fw"></i> analysis</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#bert">
+      <p><i class="fa fa-tag fa-fw"></i> bert</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#bertology">
+      <p><i class="fa fa-tag fa-fw"></i> bertology</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#interpretability">
+      <p><i class="fa fa-tag fa-fw"></i> interpretability</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#probing">
+      <p><i class="fa fa-tag fa-fw"></i> probing</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/removing-spuriousfeature/">
+      <p>Previous post</p>
+        Removing Spurious Features can Hurt Accuracy and Affect Groups Disproportionately
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/neural-mechanics/">
+      <p>Next post</p>
+        Neural Mechanics: Symmetry and Broken Conservation Laws In Deep Learning Dynamics
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

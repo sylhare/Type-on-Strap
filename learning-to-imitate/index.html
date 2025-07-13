@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/learning-to-imitate/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Learning to Imitate | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Learning to Imitate" />
+<meta name="author" content="<a href="https://cs.stanford.edu/~divgarg/">Divyansh Garg</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/learning-to-imitate/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/learning-to-imitate/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-01T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Learning to Imitate" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Learning to Imitate","dateModified":"2022-11-01T00:00:00-07:00","datePublished":"2022-11-01T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/learning-to-imitate/"},"url":"http://ai.stanford.edu/blog/learning-to-imitate/","author":{"@type":"Person","name":"<a href=\"https://cs.stanford.edu/~divgarg/\">Divyansh Garg</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Learning to Imitate | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Introduce a simple, stable, and data-efficient framework for learning via imitation of a few experts">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Learning to Imitate">
+    
+    <meta name="twitter:description" content="Introduce a simple, stable, and data-efficient framework for learning via imitation of a few experts">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-11-01-learning-to-imitate/approach.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-11-01-learning-to-imitate/approach.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Learning to Imitate</h1>
+    <p class="meta">
+    <a href="https://cs.stanford.edu/~divgarg/">Divyansh Garg</a>
+    <div class="post-date">November 1, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_50" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image8.gif" /></p>
+<figcaption>
+Artificial Intelligence (AI) playing Minecraft and exploring the world to find caves after being trained on only a few videos of human players, using our new approach (<a href="https://arxiv.org/abs/2106.12142">IQ-Learn</a>). <i>Many approaches have difficulty doing anything in an open-world Minecraft map, but IQ-Learn can navigate the world with ease.</i>
+  </figcaption>
+</div></figure>
+
+<p>A key aspect of human learning is imitation: the capability to mimic and learn behavior from a teacher or an expert. This is an important ability for acquiring new skills, such as walking, biking, or speaking a new language. Although current Artificial Intelligence (AI) systems are capable of complex decision-making, such as mastering Go, playing complex strategic games like Starcraft, or manipulating a Rubik’s cube, these systems often require over 100 million interactions with an environment to train — equivalent of more than 100 years of human experience — to reach human-level performance. In contrast, a human can acquire new skills in relatively short amounts of time by observing an expert. How can we enable our artificial agents to similarly acquire such fast learning ability?</p>
+
+<p>Another challenge with current AI systems is that they require explicit programming or hand-designing of reward functions in-order to make correct decisions. These methodologies are frequently brittle, or otherwise imperfect, and can lead to these systems struggling to work well in complex situations — with <a href="https://techcrunch.com/2022/06/30/cruise-robotaxis-blocked-traffic-for-hours-on-this-san-francisco-street/?guccounter=1&amp;guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&amp;guce_referrer_sig=AQAAAAsuU8PnZh63bGcerbvgcuKtKvyiz6tm83WIxaC3Uib02ocOKM8_7gu8J0JSa4ECM2kH4r8HiYIz0fcmJGytZJ7dDep2NlNIOduC0IsPh8E6NPhDahX9tVIbomXY8OqsTU66W3cEgRSc3bjqA_SjGHwcIf8ypxdiGE0tlJOo5-ie">self-driving cars blockading roads</a>, or <a href="https://www.theverge.com/2022/7/25/23276982/chess-robot-breaks-childs-finger-russia-tournament">robots failing to coordinate with humans</a>. Developing new methods that can instead interactively learn from human or expert data can be a key stepping stone towards sample-efficient agents and learning human-like behavior.</p>
+
+<p>In this post, I’ll discuss several techniques being developed in a field called “Imitation Learning” (IL) to solve these sorts of problems and present a recent method from our lab, called <a href="#inverse-q-learning-iq-learn"><strong>Inverse Q-Learning</strong></a> — <strong>which was used to create the best AI agent for playing Minecraft using few expert demos</strong><sup id="fnref:minecraft" role="doc-noteref"><a href="#fn:minecraft" class="footnote">1</a></sup>. You can check out the <a href="https://div99.github.io/IQ-Learn/">project page here</a>, and the code for the <a href="https://github.com/Div99/IQ-Learn">underlying method here</a>.</p>
+
+<h2 id="so-what-is-imitation-learning-and-what-has-it-been-used-for">So, what is imitation learning, and what has it been used for?</h2>
+
+<p>In imitation learning (IL), an agent is given access to samples of expert behavior (e.g. videos of humans playing online games or cars driving on the road) and it tries to learn a policy that mimics this behavior. This objective is in contrast to reinforcement learning (RL), where the goal is to learn a policy that maximizes a specified reward function. A major advantage of imitation learning is that it does not require careful hand-design of a reward function because it relies solely on expert behavior data, making it easier to scale to real-world tasks where one is able to gather expert behavior (like video games or driving). This approach of enabling the development of AI systems by data-driven learning, rather than specification through code or heuristic rewards, is consistent with the key principles behind <a href="https://karpathy.medium.com/software-2-0-a64152b37c35">Software 2.0</a>.</p>
+
+<p>Imitation learning has been a key component in developing AI methods for decades, with early approaches dating back to the 1990s and early 2000s, including work by <a href="https://ai.stanford.edu/~ang/papers/icml00-irl.pdf">work by Andrew Ng</a> and <a href="https://people.eecs.berkeley.edu/~russell/papers/colt98-uncertainty.pdf">Stuart Russel</a>, and the creation of the <a href="https://proceedings.neurips.cc/paper/1988/file/812b4ba287f5ee0bc9d43bbf5bbe87fb-Paper.pdf">first self-driving car systems</a>. Recently, imitation learning has become an important topic with increasing real-world utility, with papers using the technique for <a href="http://roboticsproceedings.org/rss15/p31.pdf">driving autonomous cars</a>, enabling <a href="https://arxiv.org/pdf/2004.00784.pdf">robotic locomotion</a>, <a href="https://arxiv.org/pdf/2206.11795.pdf">playing video games</a>, <a href="https://arxiv.org/pdf/1710.04615.pdf">manipulating objects</a>, and even <a href="https://arxiv.org/pdf/2006.00545.pdf">robotic surgery</a>.</p>
+
+<h3 id="imitation-learning-as-supervision">Imitation Learning as Supervision</h3>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image4.png" /></p>
+</div></figure>
+
+<p>Early approaches to imitation learning seek to learn a policy as a machine learning model that maps environment observations to (optimal) actions taken by the expert using supervised learning. The method is called Behavioral Cloning (BC), but it has a drawback: BC has loose, or no, guarantees that the model will generalize to unseen environmental observations.  A key issue is that when the agent ends up in an situation that is unlike any of the expert trajectories, BC is prone to failures. For example, in the figure above, the car agent doesn’t know what to do if it goes away from the expert trajectory and it crashes. To avoid making a mistake, BC requires expert data on all possible trajectories in the environment, making it a heavily data-inefficient approach.</p>
+
+<p>A simple fix, Dataset Aggregation (DAGGER), was proposed to interactively collect more expert data to recover from mistakes and was used to create the <a href="https://arxiv.org/abs/1211.1690">first autonomous drone that could navigate forests</a>. Nevertheless, this requires a human in the loop and such interactive access to an expert is usually infeasible. Instead, we want to emulate the trial-and-error process that humans use to fix mistakes. For the above example, if the car agent can interact with the environment to learn “if I do this then I crash,” then it could correct itself to avoid that behavior.</p>
+
+<p>This insight led to the formulation of imitation learning as a problem to learn a reward function from the expert data, such that a policy that optimizes the reward through environment interaction matches the expert, thus inverting the reinforcement learning problem; this approach is termed Inverse Reinforcement Learning (IRL).</p>
+
+<h3 id="how-do-recent-imitation-approaches-using-irl-work">How do recent Imitation Approaches using IRL work?</h3>
+
+<p>In 2016, <a href="https://arxiv.org/abs/1606.03476">Ho and Ermon</a> posed Inverse Reinforcement Learning  as a <a href="https://brilliant.org/wiki/minimax/#:~:text=In%20game%20theory%2C%20minimax%20is,payoff%20as%20large%20as%20possible.">minimax game</a> between two AI models with simple parallels to <a href="https://arxiv.org/pdf/1406.2661.pdf">GANs</a> — a class of generative models. In this formulation, the agent policy model (the “generator”) produces actions interacting with an environment to attain the highest rewards from a reward model using RL, while the reward model (the “discriminator”) attempts to distinguish the agent policy behavior from expert behavior. Similar to GANs, the discriminator acts as a reward model that indicates how expert-like an action is.</p>
+
+<p>Thus, if the policy does something that is not expert-like, it gets a low reward from the discriminator and learns to correct this behavior. This minimax game has a unique equilibrium solution called the <em>saddle point solution</em> (due to the geometrical saddle shape of the optimization). At the equilibrium, the discriminator learns a reward such that the policy behavior based on it is indistinguishable from the expert. With this adversarial learning of a policy and a discriminator, it is possible to reach expert performance using few demonstrations. Techniques inspired by such are referred to as <em>Adversarial Imitation</em>. (see the figure below for an illustration of the method)</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image1.png" /></p>
+<figcaption>
+    Set-up of Adversarial Imitation Learning with an agent and a discriminator playing a minimax game. <i>The discriminator learns to distinguish the policy and expert behavior, giving a reward on how expert-like an action is, whereas the agent learns a policy using the discriminator rewards to produce more expert-like behavior.</i>
+  </figcaption>
+</div></figure>
+
+<p>Unfortunately, as adversarial imitation is based on GANs, it suffers from the same limitations, such as <a href="https://arxiv.org/abs/1705.07215">mode collapse</a> and training instability, and so training requires careful hyperparameter tuning and tricks like <a href="https://arxiv.org/pdf/1704.00028.pdf">gradient penalization</a>. Furthermore, the process of reinforcement learning complicates training because it is not possible to train the generator here through simple gradient descent. This amalgamation of GANs and RL makes for a very brittle combination, which does not work well in complex image-based environments like Atari. Because of these challenges, Behavioral Cloning remains the most prevalent method of imitation.</p>
+
+<h3 id="learning-q-functions-for-imitation">Learning Q-functions for Imitation</h3>
+
+<p>These issues, recently, have led to a new non-adversarial approach for imitation:  learning <strong>Q-functions</strong> to recover expert behavior.</p>
+
+<p>In RL, <em>Q-functions</em> measure the expected sum of future rewards an agent can obtain starting from the current state and choosing a particular action. By <a href="https://arxiv.org/abs/1312.5602">learning Q-functions using a neural network</a> that takes in the current state and a potential action of the agent as input, one can predict the overall expected future reward obtained by the agent. Because the prediction is of the overall reward, as opposed to only the reward for taking that one step, determining the optimal policy is as simple as  sequentially taking actions with the highest predicted Q-function values in the current state. This optimal policy can be represented as the argmax over all possible actions for a Q-function in a given state. Thus, the Q-function is a very useful quantity, providing a connection between the reward function and the optimal behavior policy in an environment.</p>
+
+<p>In IL, a simple, stable, and data-efficient approach has always been out of reach because of the above-mentioned issues with previous approaches. Additionally, the instability of adversarial methods makes the Inverse RL formulation hard to solve. A non-adversarial approach to IL could likely resolve many of the challenges the field faces. Is there something to learn for IL from the remarkable success of Q-functions in RL to determine the optimal behavior policy from a reward function?</p>
+
+<h2 id="inverse-q-learning-iq-learn">Inverse Q-Learning (IQ-Learn)</h2>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image22.png" /></p>
+</div></figure>
+
+<p>To determine reward functions, what if we directly learn a Q-function from expert behavior data? This is exactly the idea behind our recently proposed algorithm, <em>Inverse Q-Learning (IQ-Learn)</em>. Our key insight is that not only can the Q-function represent the optimal behavior policy but it can also represent the reward function, as the mapping from single-step rewards to Q-functions is bijective for a given policy<sup id="fnref:q_function" role="doc-noteref"><a href="#fn:q_function" class="footnote">2</a></sup>. This can be used to avoid the difficult minimax game over the policy and reward functions seen in the Adversarial Imitation formulation, by expressing both using a single variable: <strong>the Q-function</strong>. Plugging this change of variables into the original Inverse RL objective leads to a much simpler minimization problem over just the single Q-function; which we refer to as the <em>Inverse Q-learning</em> problem. Our Inverse Q-learning problem shares a one-to-one correspondence with the minimax game of adversarial IL in that each potential Q-function can be mapped to a pair of discriminator and generator networks. This means that we maintain the generality and unique equilibrium properties of IRL while resulting in a <strong><em>simple non-adversarial algorithm</em></strong> that may be used for imitation.</p>
+
+<p>Below is a visualization to intuitively understand our approach – existing IRL methods solve an involved minimax game over policy (\(\pi\)) and rewards (\(r\)), finding a policy that matches expert behavior at the unique saddle point solution (\(\pi^*\), \(r^*\)) by utilizing RL (shown in left). IQ-Learn proposes a simple transformation from rewards to Q-functions to instead solve this problem over the policy (\(\pi\))  and the Q-function (\(Q\)) to find the corresponding solution (\(\pi^*\), \(Q^*\)) (shown in right). Now crucially, <strong>if we know the Q-function then we explicitly know the optimal policy for it</strong>: this optimal policy is to simply choose the (softmax) action that maximizes the Q-function in the given state <sup id="fnref:softmax" role="doc-noteref"><a href="#fn:softmax" class="footnote">3</a></sup>. Thus, IQ-Learn removes the need for RL to find the policy!</p>
+
+<p>Now, instead of optimizing over the space of all possible rewards and policies, we only need to optimize along a manifold in this space corresponding to the choice of a Q-function and the optimal policy for it (<span style="color:red">the red line</span>). The new objective along the manifold \(\mathcal{J}^*\) is concave and dependent only on the Q-function variable, allowing the use of simple gradient descent methods to find the unique optima.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image24.png" /></p>
+<figcaption>
+    Diagram of the IQ-Learn approach. We show the IRL problem (on left) and the IQ-Learn problem (on right). The <span style="color:red"> red line</span> denotes the optimal policy manifold given as the softmax action of Q.
+  </figcaption>
+</div></figure>
+
+<p>During the course of learning, for discrete action spaces, IQ-Learn optimizes the objective \(\mathcal{J}^*\), taking gradient steps on the manifold with respect to the Q-function (<span style="color:green">the green lines</span>) converging to the globally optimal saddle point. For continuous action spaces calculating the exact gradients is often intractable and IQ-Learn additionally learns a policy network. It updates the Q-function (<span style="color:green">the green lines</span>) and the policy (<span style="color:blue">the blue lines</span>) separately to remain close to the manifold. You can read the technical proofs and implementation details in <a href="https://arxiv.org/abs/2106.12142">our paper</a>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image19.png" /></p>
+<figcaption>
+    IQ-Learn methodology for discrete (on left) and continuous (on right) action spaces.
+  </figcaption>
+</div></figure>
+
+<p>This approach is quite simple and  needs only a modified update rule to train a Q-network using expert demonstrations and, optionally, environment interactions. The IQ-Learn update is a form of contrastive learning, where expert behavior is assigned a large reward, and the policy behavior a low reward; with rewards parametrized using Q-functions. It can be easily implemented in <strong>less than 15 lines</strong> on top of existing Q-learning algorithms in discrete action spaces, and soft actor-critic (SAC) methods for continuous action spaces.</p>
+
+<hr />
+
+<p>IQ-Learn has a number of advantages:</p>
+<ul>
+  <li>It optimizes a single training objective using gradient descent and learns a single model for the Q-function.</li>
+  <li>It is performant with very sparse data — even single expert demonstrations.</li>
+  <li>It is simple to implement and can work in both settings: with access to an environment (online IL) or without (offline IL).</li>
+  <li>It scales to complex image-based environments and has proven theoretical convergence to a unique global optimum.</li>
+  <li>Lastly, it can be used to recover rewards and add interpretability to the policy’s behavior.</li>
+</ul>
+
+<p>Despite the simplicity of the approach, we were surprised to find that it substantially outperformed a number of existing approaches on popular imitation learning benchmarks such as OpenAI Gym, MujoCo, and Atari, including approaches that were much more complex or domain-specific. In all these benchmarks, IQ-Learn was the only method to successfully reach expert performance by relying on a few expert demonstrations (less than 10). IQ-Learn with a simple LSTM policy also works surprisingly well in the complex open-world setting of Minecraft and is able to learn from videos of human players to solve various tasks like building a house, creating a waterfall, caging animals, and finding caves<sup id="fnref:lstm" role="doc-noteref"><a href="#fn:lstm" class="footnote">4</a></sup>.</p>
+
+<p>Beyond simple imitation, we also tried to imitate experts where only partial expert data is available or the expert has changes in its environment or goals compared to the agent — more akin to the real world. We were able to show that IQ-Learn can be used for imitation without expert actions, and relying solely on expert observations, enabling learning from videos.  Moreover, IQ-Learn was surprisingly robust to distribution shifts in the expert behavior and goals in an environment, showing great generalization to new unseen settings and an ability to act as a <strong><em>meta-learner</em></strong>.</p>
+
+<p><br /></p>
+
+<h3 id="see-videos-of-iq-learn-below-trained-with-image-observations">See videos of IQ-Learn below (trained with Image observations):</h3>
+
+<p><br /></p>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image2.gif" /></p>
+<figcaption>
+<b>IQ-Learn on Atari.</b> Our trained agent reaches human performance in all games (using 20 expert demos).
+  </figcaption>
+</div></figure>
+
+<p><br /></p>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image11.gif" /></p>
+<figcaption>
+<b>IQ-Learn on Minecraft</b> solving the Create Waterfall task (using 20 expert demos).
+  </figcaption>
+</div></figure>
+
+<p><br /></p>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image10.gif" /></p>
+<figcaption>
+<b>IQ-Learn on Robomimic-Can task</b> with a 6 DOF arm learning to pick and place cans in the correct bin (using 30 expert demos).
+  </figcaption>
+</div></figure>
+
+<p><br /></p>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image7.gif" /></p>
+<figcaption>
+<b>IQ-Learn on CarRacing Gym environment.</b> Reaching expert driving on different race tracks (using 20 expert demos).
+  </figcaption>
+</div></figure>
+
+<h3 id="performance-comparisions-from-the-paper">Performance Comparisions (<a href="https://arxiv.org/abs/2106.12142">from the paper</a>):</h3>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image20.png" /></p>
+</div></figure>
+
+<!-- <br><br> -->
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2022-11-01-learning-to-imitate/image21.png" />
+<em>The performance is measured as the environment reward attained by the agent trained using different methods.</em></p>
+</div></figure>
+
+<p>The generality of our method — it can be combined with any existing Q-learning or actor-critic implementations — makes IQ-Learn applicable to a wide range of domains and learning objectives in imitation and reinforcement learning beyond those explored in the paper.</p>
+
+<p>We hope that IQ-Learn’s simple approach to learning policies via imitation of a few experts will bring us one step closer to developing sample-efficient general AI agents that can learn a variety of behavior from humans in real-world settings.</p>
+
+<hr />
+<p><em>I would like to thank Stefano Ermon, Mo Tiwari and Kuno Kim for valuable suggestions and proofreading. Also thanks to Jacob Schreiber, Megha Srivastava and 
+Sidd Karamcheti for their helpful and extensive comments. Finally, acknowledging Skanda Vaidyanath, Susan R. Qi and Brad Porter for their feedback</em></p>
+
+<p><strong>This last part of this post was based on the following research paper:</strong></p>
+<ul>
+  <li><strong><a href="https://arxiv.org/abs/2106.12142">IQ-Learn: Inverse soft-Q Learning for Imitation.</a></strong> D. Garg, S. Chakraborty, C. Cundy, J. Song, S. Ermon. In NeurIPS, 2021 (<em>Spotlight</em>). (<a href="https://arxiv.org/pdf/2106.12142.pdf">pdf</a>, <a href="https://github.com/Div99/IQ-Learn">code</a>)</li>
+</ul>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:minecraft" role="doc-endnote">
+      <p>IQ-Learn won the #1 place in NeurIPS ‘21 MineRL challenge to create an AI to play Minecraft trained using imitation on only 20-40 expert demos (&lt; 5 hrs demo data). Recently, OpenAI released <a href="https://arxiv.org/pdf/2206.11795.pdf">VPT</a> which is the current best in playing Minecraft but in comparison utilizes 70,000 hours of demo data. <a href="#fnref:minecraft" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:q_function" role="doc-endnote">
+      <p>As the Q-function estimates the cumulative reward attained by an agent, the idea is to subtract the next-step Q-function from the current state Q-function to get the single-step reward. This relationship is captured by the <a href="https://en.wikipedia.org/wiki/Bellman_equation#Example">Bellman equation</a>. <a href="#fnref:q_function" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:softmax" role="doc-endnote">
+      <p>We prefer choosing the softmax action over the argmax action as it introduces stochasticity, leading to improved exploration and better generalization, a technique often referred to as <a href="https://arxiv.org/abs/1702.08165">soft Q-learning</a>. <a href="#fnref:softmax" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lstm" role="doc-endnote">
+      <p>Our trained AI agent is adept at finding caves and creating waterfalls. It is also good at building pens but often misses fully enclosing animals. It also can build messy incomplete house structures, although, often abandoning current builds and starting new ones. (it uses a small LSTM to encode history, and better mechanisms like <a href="https://arxiv.org/pdf/2106.01345.pdf">self-attention</a> can help improve the memory) <a href="#fnref:lstm" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/learning-to-imitate/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/learning-to-imitate/&text=Learning+to+Imitate%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/learning-to-imitate/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/learning-to-imitate/&title=Learning+to+Imitate%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/learning-to-imitate/&title=Learning+to+Imitate%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Learning+to+Imitate%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/learning-to-imitate/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ai">
+      <p><i class="fa fa-tag fa-fw"></i> ai</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#deep+learning">
+      <p><i class="fa fa-tag fa-fw"></i> deep learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#imitation+learning">
+      <p><i class="fa fa-tag fa-fw"></i> imitation learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#inverse+reinforcement-learning">
+      <p><i class="fa fa-tag fa-fw"></i> inverse reinforcement-learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#iq-learn">
+      <p><i class="fa fa-tag fa-fw"></i> iq-learn</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#q-learning">
+      <p><i class="fa fa-tag fa-fw"></i> q-learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#reinforcement+learning">
+      <p><i class="fa fa-tag fa-fw"></i> reinforcement learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#theory">
+      <p><i class="fa fa-tag fa-fw"></i> theory</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/causal-abstraction/">
+      <p>Previous post</p>
+        Faithful, Interpretable Model Explanations via Causal Abstraction
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/neurips-2022/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at NeurIPS 2022
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

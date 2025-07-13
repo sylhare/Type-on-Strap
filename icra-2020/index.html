@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/icra-2020/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>SAIL and Stanford Robotics at ICRA 2020 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="SAIL and Stanford Robotics at ICRA 2020" />
+<meta name="author" content="Compiled by <a href='https://twitter.com/andrey_kurenkov'>Andrey Kurenkov</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/icra-2020/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/icra-2020/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-30T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SAIL and Stanford Robotics at ICRA 2020" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"SAIL and Stanford Robotics at ICRA 2020","dateModified":"2020-05-30T00:00:00-07:00","datePublished":"2020-05-30T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/icra-2020/"},"url":"http://ai.stanford.edu/blog/icra-2020/","author":{"@type":"Person","name":"Compiled by <a href='https://twitter.com/andrey_kurenkov'>Andrey Kurenkov</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>SAIL and Stanford Robotics at ICRA 2020 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at ICRA 2020, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="SAIL and Stanford Robotics at ICRA 2020">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at ICRA 2020, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-05-30-icra-2020/logo.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-05-30-icra-2020/logo.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">SAIL and Stanford Robotics at ICRA 2020</h1>
+    <p class="meta">
+    Compiled by <a href='https://twitter.com/andrey_kurenkov'>Andrey Kurenkov</a>
+    <div class="post-date">May 30, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img src="/blog/assets/img/posts/2020-05-30-icra-2020/logo_large.png" /></p>
+
+<p>The <a href="https://iclr.cc">International Conference on Robotics and Automation</a> (ICRA) 2020 is being hosted virtually from May 31 – Jun 4. 
+We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="design-of-a-roller-based-dexterous-hand-for-object-grasping-and-within-hand-manipulation"><a href="https://yuanshenli.com/roller_grasper.html">Design of a Roller-Based Dexterous Hand for Object Grasping and Within-Hand Manipulation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-30-icra-2020/roller-based-hand.png" />
+<strong>Authors</strong>: Shenli Yuan, Austin D. Epps, Jerome B. Nowak, J. Kenneth Salisbury
+<br /><strong>Contact</strong>: shenliy@stanford.edu
+<br /><strong>Award nominations:</strong> Best Paper, Best Student Paper, Best Paper Award in Robot Manipulation, Best Paper in Mechanisms and Design
+<br /><strong>Links:</strong> <a href="https://yuanshenli.com/roller_grasper.html">Paper</a> | <a href="https://youtu.be/JkQZGDzykyU">Video</a>
+<br /><strong>Keywords</strong>: dexterous manipulation, grasping, grippers and other end-effectors</p>
+<hr />
+
+<h4 id="distributed-multi-target-tracking-for-autonomous-vehicle-fleets"><a href="https://drive.google.com/open?id=1LthztyS4Nb4pxHzEdyUeR3xE3SG-csji">Distributed Multi-Target Tracking for Autonomous Vehicle Fleets</a></h4>
+<p><img class="postimage_50" src="/blog/assets/img/posts/2020-05-30-icra-2020/multi-target-tracking.png" />
+<strong>Authors</strong>: Ola Shorinwa, Javier Yu, Trevor Halsted, Alex Koufos, and Mac Schwager
+<br /><strong>Contact</strong>: shorinwa@stanford.edu
+<br /><strong>Award nominations:</strong>  Best Paper 
+<br /><strong>Links:</strong> <a href="https://drive.google.com/open?id=1LthztyS4Nb4pxHzEdyUeR3xE3SG-csji">Paper</a> | <a href="https://youtu.be/Yhn4HWrtgn4">Video</a>
+<br /><strong>Keywords</strong>: mulit-target tracking, distributed estimation, multi-robot systems</p>
+<hr />
+
+<h4 id="efficient-large-scale-multi-drone-delivery-using-transit-networks"><a href="https://arxiv.org/abs/1909.11840">Efficient Large-Scale Multi-Drone Delivery Using Transit Networks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-30-icra-2020/large-scale-multi-drone.png" />
+<strong>Authors</strong>: Shushman Choudhury, Kiril Solovey, Mykel J. Kochenderfer, Marco Pavone
+<br /><strong>Contact</strong>: shushman@stanford.edu
+<br /><strong>Award nominations:</strong> Best Multi-Robot Systems Paper
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.11840">Paper</a> | <a href="https://youtu.be/2U8jI-n9Ulk">Video</a>
+<br /><strong>Keywords</strong>: multi-robot, optimization, task allocation, route planning</p>
+<hr />
+
+<h4 id="form2fit-learning-shape-priors-for-generalizable-assembly-from-disassembly"><a href="https://form2fit.github.io/">Form2Fit: Learning Shape Priors for Generalizable Assembly from Disassembly</a></h4>
+<p><img class="postimage" src="/blog/assets/img/posts/2020-05-30-icra-2020/shape-priors.png" />
+<strong>Authors</strong>: Kevin Zakka, Andy Zeng, Johnny Lee, Shuran Song
+<br /><strong>Contact</strong>: zakka@cs.stanford.edu
+<br /><strong>Award nominations:</strong> Best Automation Paper 
+<br /><strong>Links:</strong> <a href="https://form2fit.github.io/">Paper</a> | <a href="https://ai.googleblog.com/2019/10/learning-to-assemble-and-to-generalize.html">Blog Post</a> | <a href="https://youtu.be/X_sbcNTN-fg">Video</a>
+<br /><strong>Keywords</strong>: perception for grasping, assembly, robotics</p>
+<hr />
+
+<h4 id="human-interface-for-teleoperated-object-manipulation-with-a-soft-growing-robot"><a href="https://arxiv.org/abs/1910.12998">Human Interface for Teleoperated Object Manipulation with a Soft Growing Robot</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-30-icra-2020/hri-soft.png" />
+<strong>Authors</strong>: Fabio Stroppa, Ming Luo, Kyle Yoshida, Margaret M. Coad, Laura H. Blumenschein, and Allison M. Okamura
+<br /><strong>Contact</strong>: fstroppa@stanford.edu
+<br /><strong>Award nominations:</strong> Best  Human-Robot Interaction Paper
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.12998">Paper</a> | <a href="https://youtu.be/JK6LzPjhZyg">Video</a>
+<br /><strong>Keywords</strong>: soft robot, growing robot, manipulation, interface, teleoperation</p>
+<hr />
+
+<h4 id="6-pack-category-level-6d-pose-tracker-with-anchor-based-keypoints"><a href="https://arxiv.org/abs/1910.10750">6-PACK: Category-level 6D Pose Tracker with Anchor-Based Keypoints</a></h4>
+<p><strong>Authors</strong>: Chen Wang, Roberto Martín-Martín, Danfei Xu, Jun Lv, Cewu Lu, Li Fei-Fei, Silvio Savarese, Yuke Zhu
+<br /><strong>Contact</strong>: chenwj@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.10750">Paper</a> | <a href="https://sites.google.com/view/6packtracking">Blog Post</a> | <a href="https://www.youtube.com/watch?v=o6dyy5oeoaw">Video</a>
+<br /><strong>Keywords</strong>: category-level 6d object pose tracking, unsupervised 3d keypoints</p>
+<hr />
+
+<h4 id="a-stretchable-capacitive-sensory-skin-for-exploring-cluttered-environments"><a href="https://ieeexplore-ieee-org.stanford.idm.oclc.org/document/8972571">A Stretchable Capacitive Sensory Skin for Exploring Cluttered Environments</a></h4>
+<p><strong>Authors</strong>: Alexander Gruebele, Jean-Philippe Roberge, Andrew Zerbe, Wilson Ruotolo, Tae Myung Huh, Mark R. Cutkosky
+<br /><strong>Contact</strong>: agruebe2@stanford.edu
+<br /><strong>Links:</strong> <a href="https://ieeexplore-ieee-org.stanford.idm.oclc.org/document/8972571">Paper</a>
+<br /><strong>Keywords</strong>: robot sensing systems , skin , wires , capacitance , grasping</p>
+<hr />
+
+<h4 id="accurate-vision-based-manipulation-through-contact-reasoning"><a href="https://arxiv.org/abs/1911.03112">Accurate Vision-based Manipulation through Contact Reasoning</a></h4>
+<p><strong>Authors</strong>: Alina Kloss, Maria Bauza, Jiajun Wu, Joshua B. Tenenbaum, Alberto Rodriguez, Jeannette Bohg
+<br /><strong>Contact</strong>: alina.kloss@tue.mpg.de
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1911.03112">Paper</a> | <a href="https://youtu.be/YLnXLHWTA60">Video</a>
+<br /><strong>Keywords</strong>: manipulation planning, contact modeling, perception for grasping and manipulation</p>
+<hr />
+
+<h4 id="assistive-gym-a-physics-simulation-framework-for-assistive-robotics"><a href="https://arxiv.org/pdf/1910.04700.pdf">Assistive Gym: A Physics Simulation Framework for Assistive Robotics</a></h4>
+<p><strong>Authors</strong>: Zackory Erickson, Vamsee Gangaram, Ariel Kapusta, C. Karen Liu, and Charles C. Kemp
+<br /><strong>Contact</strong>: karenliu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/1910.04700.pdf">Paper</a>
+<br /><strong>Keywords</strong>: assistive robotics; physics simulation; reinforcement learning; physical human robot interaction</p>
+<hr />
+
+<h4 id="controlling-assistive-robots-with-learned-latent-actions"><a href="https://arxiv.org/abs/1909.09674">Controlling Assistive Robots with Learned Latent Actions</a></h4>
+<p><strong>Authors</strong>: Dylan P. Losey, Krishnan Srinivasan, Ajay Mandlekar, Animesh Garg, Dorsa Sadigh
+<br /><strong>Contact</strong>: dlosey@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.09674">Paper</a> | <a href="http://ai.stanford.edu/blog/assistive-latent-spaces/">Blog Post</a> | <a href="https://youtu.be/wjnhrzugBj4">Video</a>
+<br /><strong>Keywords</strong>: human-robot interaction, assistive control</p>
+<hr />
+
+<h4 id="distal-hyperextension-is-handy-high-range-of-motion-in-cluttered-environments"><a href="https://ieeexplore.ieee.org/abstract/document/8957302">Distal Hyperextension is Handy: High Range of Motion in Cluttered Environments</a></h4>
+<p><strong>Authors</strong>: Wilson Ruotolo, Rachel Thomasson, Joel Herrera, Alex Gruebele, Mark R. Cutkosky
+<br /><strong>Contact</strong>: wruotolo@stanford.edu
+<br /><strong>Links:</strong> <a href="https://ieeexplore.ieee.org/abstract/document/8957302">Paper</a> | <a href="https://ieeexplore.ieee.org/abstract/document/8957302/media#media">Video</a>
+<br /><strong>Keywords</strong>: dexterous manipulation,  grippers and other end-effectors,   multifingered hands</p>
+<hr />
+
+<h4 id="dynamically-reconfigurable-discrete-distributed-stiffness-for-inflated-beam-robots"><a href="https://arxiv.org/abs/2002.04728">Dynamically Reconfigurable Discrete Distributed Stiffness for Inflated Beam Robots</a></h4>
+<p><strong>Authors</strong>: Brian H. Do, Valory Banashek, Allison M. Okamura
+<br /><strong>Contact</strong>: brianhdo@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.04728">Paper</a> | <a href="https://www.youtube.com/watch?v=Cpp1DQYl3JQ">Video</a>
+<br /><strong>Keywords</strong>: soft robot materials and design; mechanism design; compliant joint/mechanism</p>
+<hr />
+
+<h4 id="dynamically-reconfigurable-tactile-sensor-for-robotic-manipulation"><a href="https://ieeexplore-ieee-org.stanford.idm.oclc.org/document/8990001">Dynamically Reconfigurable Tactile Sensor for Robotic Manipulation</a></h4>
+<p><strong>Authors</strong>: Tae Myung Huh, Hojung Choi, Simone Willcox, Stephanie Moon, Mark R. Cutkosky 
+<br /><strong>Contact</strong>: taemyung@stanford.edu
+<br /><strong>Links:</strong> <a href="https://ieeexplore-ieee-org.stanford.idm.oclc.org/document/8990001">Paper</a> | <a href="https://ieeexplore-ieee-org.stanford.idm.oclc.org/document/8990001/media#media">Video</a>
+<br /><strong>Keywords</strong>: robot sensing systems , electrodes , force , force measurement , capacitance</p>
+<hr />
+
+<h4 id="enhancing-game-theoretic-autonomous-car-racing-using-control-barrier-functions"><a href="https://msl.stanford.edu/enhancing-game-theoretic-autonomous-car-racing-using-control-barrier-functions">Enhancing Game-Theoretic Autonomous Car Racing Using Control Barrier Functions</a></h4>
+<p><strong>Authors</strong>: Gennaro Notomista, Mingyu Wang, Mac Schwager, Magnus Egerstedt
+<br /><strong>Contact</strong>: mingyuw@stanford.edu
+<br /><strong>Links:</strong> <a href="https://msl.stanford.edu/enhancing-game-theoretic-autonomous-car-racing-using-control-barrier-functions">Paper</a>
+<br /><strong>Keywords</strong>: autonomous driving</p>
+<hr />
+
+<h4 id="evaluation-of-non-collocated-force-feedback-driven-by-signal-independent-noise"><a href="https://arxiv.org/abs/2005.11445">Evaluation of Non-Collocated Force Feedback Driven by Signal-Independent Noise</a></h4>
+<p><strong>Authors</strong>: Zonghe Chua, Allison Okamura, Darrel Deo
+<br /><strong>Contact</strong>: chuazh@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2005.11445">Paper</a> | <a href="https://youtu.be/eNcn_lmvpzk">Video</a>
+<br /><strong>Keywords</strong>: haptics and haptic interfaces; prosthetics and exoskeletons; brain-machine interface</p>
+<hr />
+
+<h4 id="from-planes-to-corners-multi-purpose-primitive-detection-in-unorganized-3d-point-clouds"><a href="https://arxiv.org/abs/2001.07360">From Planes to Corners: Multi-Purpose Primitive Detection in Unorganized 3D Point Clouds</a></h4>
+<p><strong>Authors</strong>: Christiane Sommer, Yumin Sun, Leonidas Guibas, Daniel Cremers, Tolga Birdal
+<br /><strong>Contact</strong>: tbirdal@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2001.07360">Paper</a> | <a href="https://github.com/c-sommer/orthogonal-planes">Code</a> | <a href="https://youtu.be/hcdCKUh1d8U">Video</a>
+<br /><strong>Keywords</strong>: plane detection, corner detection, orthogonal, 3d geometry, computer vision, point pair, slam</p>
+<hr />
+
+<h4 id="guided-uncertainty-aware-policy-optimization-combining-learning-and-model-based-strategies-for-sample-efficient-policy-learning"><a href="https://arxiv.org/abs/2005.10872">Guided Uncertainty-Aware Policy Optimization: Combining Learning and Model-Based Strategies for Sample-Efficient Policy Learning</a></h4>
+<p><strong>Authors</strong>: Michelle A. Lee, Carlos Florensa, Jonathan Tremblay, Nathan Ratliff, Animesh Garg, Fabio Ramos, Dieter Fox
+<br /><strong>Contact</strong>: mishlee@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2005.10872">Paper</a> | <a href="https://www.youtube.com/watch?v=_RGBMdiSMgw">Video</a>
+<br /><strong>Keywords</strong>: deep learning in robotics and automation, perception for grasping and manipulation, learning and adaptive systems</p>
+<hr />
+
+<h4 id="iris-implicit-reinforcement-without-interaction-at-scale-for-learning-control-from-offline-robot-manipulation-data"><a href="https://arxiv.org/abs/1911.05321">IRIS: Implicit Reinforcement without Interaction at Scale for Learning Control from Offline Robot Manipulation Data</a></h4>
+<p><strong>Authors</strong>: Ajay Mandlekar, Fabio Ramos, Byron Boots, Silvio Savarese, Li Fei-Fei, Animesh Garg, Dieter Fox
+<br /><strong>Contact</strong>: amandlek@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1911.05321">Paper</a> | <a href="https://www.youtube.com/watch?v=_7P41XHVHtM&amp;feature=emb_title">Video</a>
+<br /><strong>Keywords</strong>: imitation learning, reinforcement learning, robotics</p>
+<hr />
+
+<h4 id="interactive-gibson-benchmark-a-benchmark-for-interactive-navigation-in-cluttered-environments"><a href="https://arxiv.org/abs/1910.14442">Interactive Gibson Benchmark: A Benchmark for Interactive Navigation in Cluttered Environments</a></h4>
+<p><strong>Authors</strong>: Fei Xia, William B. Shen, Chengshu Li, Priya Kasimbeg, Micael Tchapmi, Alexander Toshev, Roberto Martín-Martín, Silvio Savarese
+<br /><strong>Contact</strong>: feixia@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.14442">Paper</a> | <a href="https://youtu.be/dPACOVX5L9A">Video</a>
+<br /><strong>Keywords</strong>: visual navigation, deep learning in robotics, mobile manipulation</p>
+<hr />
+
+<h4 id="keto-learning-keypoint-representations-for-tool-manipulation"><a href="https://arxiv.org/abs/1910.11977">KETO: Learning Keypoint Representations for Tool Manipulation</a></h4>
+<p><strong>Authors</strong>: Zengyi Qin, Kuan Fang, Yuke Zhu, Li Fei-Fei, Silvio Savarese
+<br /><strong>Contact</strong>: qinzy@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.11977">Paper</a> | <a href="https://sites.google.com/view/ke-to">Blog Post</a> | <a href="https://www.youtube.com/watch?v=hP2h53BHxE8">Video</a>
+<br /><strong>Keywords</strong>: manipulation, representation, keypoint, interaction, self-supervised learning</p>
+<hr />
+
+<h4 id="learning-hierarchical-control-for-robust-in-hand-manipulation"><a href="https://arxiv.org/abs/1910.10985">Learning Hierarchical Control for Robust In-Hand Manipulation</a></h4>
+<p><strong>Authors</strong>: Tingguang Li, Krishnan Srinivasan, Max Qing-Hu Meng, Wenzhen Yuan, Jeannette Bohg
+<br /><strong>Contact</strong>: tgli@link.cuhk.edu.hk
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.10985">Paper</a> | <a href="https://sites.google.com/view/learninghierarchicalcontrol/home">Blog Post</a> | <a href="https://www.youtube.com/watch?v=s8j2b79ByuQ">Video</a>
+<br /><strong>Keywords</strong>: in-hand manipulation, robotics, reinforcement learning, hierarchical</p>
+<hr />
+
+<h4 id="learning-task-oriented-grasping-from-human-activity-datasets"><a href="https://arxiv.org/pdf/1910.11669.pdf">Learning Task-Oriented Grasping from Human Activity Datasets</a></h4>
+<p><strong>Authors</strong>: Mia Kokic, Danica Kragic, Jeannette Bohg
+<br /><strong>Contact</strong>: mkokic@kth.se
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/1910.11669.pdf">Paper</a>
+<br /><strong>Keywords</strong>: perception, grasping</p>
+<hr />
+
+<h4 id="learning-a-control-policy-for-fall-prevention-on-an-assistive-walking-device"><a href="https://arxiv.org/pdf/1909.10488.pdf">Learning a Control Policy for Fall Prevention on an Assistive Walking Device</a></h4>
+<p><strong>Authors</strong>: Visak CV Kumar, Sehoon Ha, Gregory Sawicki, C. Karen Liu
+<br /><strong>Contact</strong>: karenliu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/1909.10488.pdf">Paper</a>
+<br /><strong>Keywords</strong>: assistive robotics; human motion modeling; physical human robot interaction; reinforcement learning</p>
+<hr />
+
+<h4 id="learning-an-action-conditional-model-for-haptic-texture-generation"><a href="https://arxiv.org/abs/1909.13025">Learning an Action-Conditional Model for Haptic Texture Generation</a></h4>
+<p><strong>Authors</strong>: Negin Heravi, Wenzhen Yuan, Allison M. Okamura, Jeannette Bohg 
+<br /><strong>Contact</strong>: nheravi@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.13025">Paper</a> | <a href="https://sites.google.com/stanford.edu/haptic-texture-generation/home">Blog Post</a> | <a href="https://www.youtube.com/watch?v=DTqvHDlmDw8">Video</a>
+<br /><strong>Keywords</strong>: haptics and haptic interfaces</p>
+<hr />
+
+<h4 id="learning-to-collaborate-from-simulation-for-robot-assisted-dressing"><a href="https://arxiv.org/abs/1909.06682">Learning to Collaborate from Simulation for Robot-Assisted Dressing</a></h4>
+<p><strong>Authors</strong>:  Alexander Clegg, Zackory Erickson, Patrick Grady, Greg Turk, Charles C. Kemp, C. Karen Liu
+<br /><strong>Contact</strong>: karenliu@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.06682">Paper</a>
+<br /><strong>Keywords</strong>: assistive robotics; physical human robot interaction; reinforcement learning; physics simulation; cloth manipulation</p>
+<hr />
+
+<h4 id="learning-to-scaffold-the-development-of-robotic-manipulation-skills"><a href="https://arxiv.org/pdf/1911.00969.pdf">Learning to Scaffold the Development of Robotic Manipulation Skills</a></h4>
+<p><strong>Authors</strong>: Lin Shao, Toki Migimatsu, Jeannette Bohg
+<br /><strong>Contact</strong>: lins2@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/1911.00969.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=od3jBAJES4w&amp;t=2s">Video</a>
+<br /><strong>Keywords</strong>: learning and adaptive systems, deep learning in robotics and automation, intelligent and flexible manufacturing</p>
+<hr />
+
+<h4 id="map-predictive-motion-planning-in-unknown-environments"><a href="https://arxiv.org/abs/1910.08184">Map-Predictive Motion Planning in Unknown Environments</a></h4>
+<p><strong>Authors</strong>: Amine Elhafsi, Boris Ivanovic, Lucas Janson, Marco Pavone
+<br /><strong>Contact</strong>: amine@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1910.08184">Paper</a>
+<br /><strong>Keywords</strong>: motion planning deep learning robotics</p>
+<hr />
+
+<h4 id="motion-reasoning-for-goal-based-imitation-learning"><a href="https://arxiv.org/pdf/1911.05864.pdf">Motion Reasoning for Goal-Based Imitation Learning</a></h4>
+<p><strong>Authors</strong>: De-An Huang, Yu-Wei Chao<em>, Chris Paxton</em>, Xinke Deng, Li Fei-Fei, Juan Carlos Niebles, Animesh Garg, Dieter Fox
+<br /><strong>Contact</strong>: dahuang@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/1911.05864.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=OdqJuvAHvGE">Video</a>
+<br /><strong>Keywords</strong>: imitation learning, goal inference</p>
+<hr />
+
+<h4 id="object-centric-task-and-motion-planning-in-dynamic-environments"><a href="https://arxiv.org/abs/1911.04679">Object-Centric Task and Motion Planning in Dynamic Environments</a></h4>
+<p><strong>Authors</strong>: Toki Migimatsu, Jeannette Bohg
+<br /><strong>Contact</strong>: takatoki@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1911.04679">Paper</a> | <a href="https://sites.google.com/stanford.edu/objectcentrictamp/home">Blog Post</a> | <a href="https://youtu.be/d9lNJLEvRmM">Video</a>
+<br /><strong>Keywords</strong>: control of systems integrating logic, dynamics, and constraints</p>
+<hr />
+
+<h4 id="optimal-sequential-task-assignment-and-path-finding-for-multi-agent-robotic-assembly-planning"><a href="kylejbrown17.github.io/assets/icra2020.pdf">Optimal Sequential Task Assignment and Path Finding for Multi-Agent Robotic Assembly Planning</a></h4>
+<p><strong>Authors</strong>: Kyle Brown, Oriana Peltzer, Martin Sehr, Mac Schwager, Mykel Kochenderfer
+<br /><strong>Contact</strong>: kjbrown7@stanford.edu
+<br /><strong>Links:</strong> <a href="kylejbrown17.github.io/assets/icra2020.pdf">Paper</a> | <a href="https://youtu.be/RqqHTERHOeA">Video</a>
+<br /><strong>Keywords</strong>: multi robot systems, multi agent path finding, mixed integer programming, automated manufacturing, sequential task assignment</p>
+<hr />
+
+<h4 id="refined-analysis-of-asymptotically-optimal-kinodynamic-planning-in-the-state-cost-space"><a href="https://arxiv.org/abs/1909.05569">Refined Analysis of Asymptotically-Optimal Kinodynamic Planning in the State-Cost Space</a></h4>
+<p><strong>Authors</strong>: Michal Kleinbort, Edgar Granados, Kiril Solovey, Riccardo Bonalli, Kostas E. Bekris, Dan Halperin
+<br /><strong>Contact</strong>: kirilsol@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.05569">Paper</a>
+<br /><strong>Keywords</strong>: motion planning, sampling-based planning, rrt, optimality</p>
+<hr />
+
+<h4 id="retraction-of-soft-growing-robots-without-buckling"><a href="http://doi.org/10.1109/LRA.2020.2970629  http://arxiv.org/abs/1910.11863">Retraction of Soft Growing Robots without Buckling</a></h4>
+<p><strong>Authors</strong>: Margaret M. Coad, Rachel P. Thomasson, Laura H. Blumenschein, Nathan S. Usevitch, Elliot W. Hawkes, and Allison M. Okamura
+<br /><strong>Contact</strong>: mmcoad@stanford.edu
+<br /><strong>Links:</strong> <a href="http://arxiv.org/abs/1910.11863">Paper</a> | <a href="https://youtu.be/YgIby1HGtts">Video</a>
+<br /><strong>Keywords</strong>: soft robot materials and design; modeling, control, and learning for soft robots</p>
+<hr />
+
+<h4 id="revisiting-the-asymptotic-optimality-of-rrt"><a href="https://arxiv.org/abs/1909.09688">Revisiting the Asymptotic Optimality of RRT*</a></h4>
+<p><strong>Authors</strong>: Kiril Solovey, Lucas Janson, Edward Schmerling, Emilio Frazzoli, and Marco Pavone
+<br /><strong>Contact</strong>: kirilsol@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.09688">Paper</a> | <a href="https://youtu.be/SG9irSYCr7E">Video</a>
+<br /><strong>Keywords</strong>: motion planning, rapidly-exploring random trees, rrt*, sampling-based planning</p>
+<hr />
+
+<h4 id="sample-complexity-of-probabilistic-roadmaps-via-epsilon-nets"><a href="https://arxiv.org/abs/1909.06363">Sample Complexity of Probabilistic Roadmaps via Epsilon Nets</a></h4>
+<p><strong>Authors</strong>: Matthew Tsao, Kiril Solovey, Marco Pavone
+<br /><strong>Contact</strong>: mwtsao@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1909.06363">Paper</a> | <a href="https://youtu.be/dk3zduYNMYk">Video</a>
+<br /><strong>Keywords</strong>: motion planning, sampling-based planning, probabilistic roadmaps, epsilon nets</p>
+<hr />
+
+<h4 id="self-supervised-learning-of-state-estimation-for-manipulating-deformable-linear-objects"><a href="https://arxiv.org/abs/1911.06283">Self-Supervised Learning of State Estimation for Manipulating Deformable Linear Objects</a></h4>
+<p><strong>Authors</strong>: Mengyuan Yan, Yilin Zhu, Ning Jin, Jeannette Bohg
+<br /><strong>Contact</strong>: myyan92@gmail.com, bohg@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1911.06283">Paper</a> | <a href="https://youtu.be/aZP2NDX9npw">Video</a>
+<br /><strong>Keywords</strong>: self-supervision, deformable objects</p>
+<hr />
+
+<h4 id="spatial-scheduling-of-informative-meetings-for-multi-agent-persistent-coverage"><a href="https://msl.stanford.edu/sites/g/files/sbiybj8446/f/ral2020meetings.pdf">Spatial Scheduling of Informative Meetings for Multi-Agent Persistent Coverage</a></h4>
+<p><strong>Authors</strong>: Ravi Haksar, Sebastian Trimpe, Mac Schwager
+<br /><strong>Contact</strong>: rhaksar@stanford.edu
+<br /><strong>Links:</strong> <a href="https://msl.stanford.edu/sites/g/files/sbiybj8446/f/ral2020meetings.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=M5Fp8WsmLno&amp;feature=youtu.be">Video</a>
+<br /><strong>Keywords</strong>: distributed systems, multi-robot systems, multi-robot path planning</p>
+<hr />
+
+<h4 id="spatiotemporal-relationship-reasoning-for-pedestrian-intent-prediction"><a href="https://arxiv.org/abs/2002.08945">Spatiotemporal Relationship Reasoning for Pedestrian Intent Prediction</a></h4>
+<p><strong>Authors</strong>: Bingbin Liu, Ehsan Adeli, Zhangjie Cao, Kuan-Hui Lee, Abhijeet Shenoi, Adrien Gaidon, Juan Carlos Niebles
+<br /><strong>Contact</strong>: eadeli@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2002.08945">Paper</a> | <a href="https://youtu.be/GnRzgQxKqSA">Video</a>
+<br /><strong>Keywords</strong>: spatiotemporal graphs, forecasting, graph neural networks, autonomous-driving.</p>
+<hr />
+
+<h4 id="trass-time-reversal-as-self-supervision"><a href="https://arxiv.org/abs/1810.01128">TRASS: Time Reversal as Self-Supervision</a></h4>
+<p><strong>Authors</strong>: Suraj Nair, Mohammad Babaeizadeh, Chelsea Finn, Sergey Levine, Vikash Kumar
+<br /><strong>Contact</strong>: surajn@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/1810.01128">Paper</a> | <a href="https://sites.google.com/view/time-reversal">Blog Post</a> | <a href="https://www.youtube.com/watch?v=-5pby29MfF0">Video</a>
+<br /><strong>Keywords</strong>: visual planning; reinforcement learning; self-supervision</p>
+<hr />
+
+<h4 id="unigrasp-learning-a-unified-model-to-grasp-with-multifingered-robotic-hands"><a href="https://ieeexplore.ieee.org/document/8972562">UniGrasp: Learning a Unified Model to Grasp with Multifingered Robotic Hands</a></h4>
+<p><strong>Authors</strong>: Lin Shao, Fabio Ferreira, Mikael Jorda, Varun Nambiar, Jianlan Luo, Eugen Solowjow, Juan Aparicio Ojea, Oussama Khatib, Jeannette Bohg
+<br /><strong>Contact</strong>: lins2@stanford.edu
+<br /><strong>Links:</strong> <a href="https://ieeexplore.ieee.org/document/8972562">Paper</a> | <a href="https://www.youtube.com/watch?v=UqVXL9QDnPU&amp;t=65s">Video</a>
+<br /><strong>Keywords</strong>: deep learning in robotics and automation; grasping; multifingered hands</p>
+<hr />
+
+<h4 id="vine-robots-design-teleoperation-and-deployment-for-navigation-and-exploration"><a href="http://doi.org/10.1109/MRA.2019.2947538  http://arxiv.org/abs/1903.00069">Vine Robots: Design, Teleoperation, and Deployment for Navigation and Exploration</a></h4>
+<p><strong>Authors</strong>:  Margaret M. Coad, Laura H. Blumenschein, Sadie Cutler, Javier A. Reyna Zepeda, Nicholas D. Naclerio, Haitham El-Hussieny, Usman Mehmood, Jee-Hwan Ryu, Elliot W. Hawkes, and Allison M. Okamura
+<br /><strong>Contact</strong>: mmcoad@stanford.edu
+<br /><strong>Links:</strong> <a href="http://arxiv.org/abs/1903.00069">Paper</a> | <a href="https://youtu.be/DAj2Ar5f5pA">Video</a>
+<br /><strong>Keywords</strong>: soft robot applications; field robots</p>
+
+<hr />
+
+<p>We look forward to seeing you at ICRA!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/icra-2020/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/icra-2020/&text=SAIL+and+Stanford+Robotics+at+ICRA+2020%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/icra-2020/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/icra-2020/&title=SAIL+and+Stanford+Robotics+at+ICRA+2020%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/icra-2020/&title=SAIL+and+Stanford+Robotics+at+ICRA+2020%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=SAIL+and+Stanford+Robotics+at+ICRA+2020%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/icra-2020/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ICLR">
+      <p><i class="fa fa-tag fa-fw"></i> ICLR</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/finding-crosslingual-syntax/">
+      <p>Previous post</p>
+        Finding Cross-Lingual Syntax in Multilingual BERT
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/cvpr-2020/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at CVPR 2020
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

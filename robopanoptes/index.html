@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/robopanoptes/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How Machine Learning Brings Unconventional Robots to Life | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="How Machine Learning Brings Unconventional Robots to Life" />
+<meta name="author" content="<a href='https://xxm19.github.io'>Xiaomeng Xu</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Most robotic manipulation systems use the same design: a classic 6-DOF industrial arm with one or two wrist or environment-mounted cameras. This has been the standard playbook for decades–but what if we threw that playbook out the window?" />
+<meta property="og:description" content="Most robotic manipulation systems use the same design: a classic 6-DOF industrial arm with one or two wrist or environment-mounted cameras. This has been the standard playbook for decades–but what if we threw that playbook out the window?" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/robopanoptes/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/robopanoptes/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-30T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How Machine Learning Brings Unconventional Robots to Life" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"How Machine Learning Brings Unconventional Robots to Life","dateModified":"2025-06-30T00:00:00-07:00","datePublished":"2025-06-30T00:00:00-07:00","description":"Most robotic manipulation systems use the same design: a classic 6-DOF industrial arm with one or two wrist or environment-mounted cameras. This has been the standard playbook for decades–but what if we threw that playbook out the window?","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/robopanoptes/"},"url":"http://ai.stanford.edu/blog/robopanoptes/","author":{"@type":"Person","name":"<a href='https://xxm19.github.io'>Xiaomeng Xu</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>How Machine Learning Brings <br> Unconventional Robots to Life | The Stanford AI Lab Blog</title>
+    <meta name="description" content="The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="How Machine Learning Brings <br> Unconventional Robots to Life">
+    
+    <meta name="twitter:description" content="The Stanford AI Lab (SAIL) Blog is a place for SAIL students, faculty, and researchers to share our work with the general public.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-06-30-robopanoptes/twitter_feature.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-06-30-robopanoptes/twitter_feature.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">How Machine Learning Brings <br> Unconventional Robots to Life</h1>
+    <p class="meta">
+    <a href='https://xxm19.github.io'>Xiaomeng Xu</a>
+    <div class="post-date">June 30, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Most robotic manipulation systems use the same design: a classic 6-DOF industrial arm with one or two wrist or environment-mounted cameras. This has been the standard playbook for decades–but what if we threw that playbook out the window?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image13.png" /></p>
+</div></figure>
+
+<p>What if we built robots that look nothing like before—and discover they can do things traditional robots never could? Our recent works explore this by asking: what happens when we give robots way more eyes, way more joints, or completely reimagine their shape from scratch?</p>
+
+<h2 id="robopanoptes-the-all-seeing-snake-like-robot">RoboPanoptes: The All-Seeing, Snake-Like Robot <sup id="fnref:robopanoptes" role="doc-noteref"><a href="#fn:robopanoptes" class="footnote">1</a></sup></h2>
+
+<p>Meet RoboPanoptes—a robot that has eyes everywhere and the flexibility to use its entire body as a tool.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image14.gif" /></p>
+</div></figure>
+
+<p>The design philosophy is simple: more cameras provide more information, and more joints enable more flexibility. So why not maximize both?</p>
+
+<p>We start with a modular building block, with one servo motor (with one rotational degree of freedom) and two tiny USB cameras. Chain many of these modules together, add a hook-shaped head module at the end, and you get RoboPanoptes.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image15.gif" /></p>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image16.png" /></p>
+</div></figure>
+
+<p>It has <strong>9 degrees of freedom</strong> for snake-like flexibility, and <strong>21 cameras</strong> sprinkled head-to-tail.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image6.gif" /></p>
+</div></figure>
+
+<h3 id="whole-body-dexterity">Whole-body Dexterity</h3>
+
+<p>With all that flexibility, RoboPanoptes becomes a natural sweeper. Watch it clear 10 cubes simultaneously with a single body wave—something no traditional 6-DOF arm could not achieve. We call this <strong>whole-body dexterity</strong>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image7.gif" /></p>
+</div></figure>
+
+<p>However, hardware potential is limited without proper control. Using a standard space mouse to teleoperate this robot would reduce it to poking cubes one by one.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image17.gif" /></p>
+</div></figure>
+
+<p>Instead, we built a <strong>leader-follower teleoperation system</strong>. The operator uses both hands to control the leader robot, whose joint angles are sent to the follower robot in real-time as position targets.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image9.gif" /></p>
+</div></figure>
+
+<p>This means we can sweep cubes much faster (9.3s/block -&gt; 2s/block).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image4.gif" /></p>
+</div></figure>
+
+<h3 id="whole-body-vision">Whole-body Vision</h3>
+
+<p>RoboPanoptes' 21 cameras enable <strong>whole-body vision</strong>. Consider this unboxing task. The goal here is to enter a box through a small hole on its side, then poke the lid open.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image3.gif" /></p>
+</div></figure>
+
+<p>A top-down camera captures the workspace but misses the hole's location. A head-mounted camera sees inside the box but loses track of the box's position. With cameras distributed along its entire body, RoboPanoptes doesn't have to choose where to look. The robot can see its surroundings, even peek inside a box to find the opening edge.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image2.gif" /></p>
+</div></figure>
+
+<h3 id="whole-body-visuomotor-policy">Whole-body Visuomotor Policy</h3>
+
+<p>To automatically infer whole-body actions from whole-body vision, we can train a visuomotor policy using demonstrations collected with the teleoperation setup. The pretrained image features and proprioception are passed to a diffusion transformer policy to predict robot actions. We call this the [vanilla policy] architecture.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image19.gif" /></p>
+</div></figure>
+
+<h4 id="3d-spatial-awareness-through-camera-pose-encoding">3D Spatial Awareness Through Camera Pose Encoding</h4>
+
+<p>When we first tested RoboPanoptes on a stowing task—where it needed to open a drawer, reach inside, organize shoes, and close the drawer—the [vanilla policy] moved in the right direction but frequently missed by centimeters, achieving only 28% success.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image5.gif" /></p>
+</div></figure>
+
+<p>The problem? Lack of 3D spatial awareness.</p>
+
+<p>The solution was simple: concatenate each camera's 6D pose (position and orientation) as additional positional encoding to the image features. These poses are easily computed through forward kinematics.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image10.gif" /></p>
+</div></figure>
+
+<p>With this addition, success rates jumped to 83%.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image12.gif" /></p>
+</div></figure>
+
+<h4 id="robust-perception-through-blink-training">Robust Perception Through "Blink Training"</h4>
+
+<p>One final challenge remains: reliability. One inevitable problem with having so many USB cameras is that some of them may drop frames and have delays often. On average, the dropout rate (i.e., camera discount) observed for the used cameras is 4.4% and latency ranges from 15 ms to 100 ms. This makes testing performance suffer significantly.</p>
+
+<p>To build robustness, we introduced "blink training"—during training, we simulate the random frame dropping by masking out whole camera inputs, so the robot learns to continue functioning even when some eyes are temporarily "closed." This technique boosted success rates on the unboxing task from 56% to 94%.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image18.gif" /></p>
+</div></figure>
+
+<h2 id="dgdm-designing-robots-that-dont-need-sensors-">DGDM: Designing Robots That Don't Need Sensors <sup id="fnref:dgdm" role="doc-noteref"><a href="#fn:dgdm" class="footnote">2</a></sup></h2>
+
+<p>While RoboPanoptes maximizes sensing, our Dynamics-Guided Diffusion Model (DGDM) takes the opposite direction: what if we designed robots that work perfectly without any sensors.</p>
+
+<p>Imagine an assembly line where objects arrive in random orientations, but specialized gripper fingers automatically align them perfectly just by closing—no sensors, no feedback, no complex control systems required. It's mechanical intelligence baked directly into the robot's shape.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image11.gif" /></p>
+</div></figure>
+
+<h3 id="designing-task-specific-manipulators">Designing Task-Specific Manipulators</h3>
+
+<p>Instead of building a robot and then figuring out how to control it, DGDM starts with the task and automatically generates the perfect robot shape to accomplish it. Need to rotate objects counterclockwise? DGDM designs finger shapes that naturally impart that rotation when closed. Want to align randomly oriented parts? It creates manipulators that funnel objects into the same final pose every time.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_85" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image1.gif" /></p>
+</div></figure>
+
+<h3 id="generating-task-specific-designs-without-task-specific-training">Generating Task-Specific Designs without Task-Specific Training</h3>
+
+<p>Our approach works by:</p>
+
+<ol>
+  <li>
+    <p>Representing tasks as interaction profiles that describe desired object motions.</p>
+  </li>
+  <li>
+    <p>Using geometric diffusion models to represent the design space.</p>
+  </li>
+  <li>
+    <p>Efficiently searching this space using gradients from a dynamics network trained on general interaction physics (no task-specific training needed).</p>
+  </li>
+</ol>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-06-30-robopanoptes/image8.png" /></p>
+</div></figure>
+
+<p>In other words, we learn the physics of how objects move when grippers close, then use that knowledge to sculpt robot shapes that create exactly the right motions. Both the geometric diffusion model and dynamics model are trained on randomly sampled manipulator designs and objects interacting in simulation, requiring no task-specific information.</p>
+
+<p>Removing the dynamics guidance yields the [Unguided] baseline, which generates task-agnostic manipulators using our geometric diffusion model. Removing our diffusion model yields the [GD] baseline, which optimizes the manipulator control points using gradients of the design objective via gradient descent optimization. Our generated designs outperform [GD] and [Unguided] baselines by 31.5% and 45.3% respectively on average success rate. With the ability to generate a new design within 0.8s, DGDM facilitates rapid design iteration.</p>
+
+<h2 id="two-paths-one-revolution">Two Paths, One Revolution</h2>
+
+<p>At first glance, RoboPanoptes and DGDM seem to be pulling in opposite directions. One maximizes sensing with 21 cameras; the other eliminates sensors entirely. One embraces complexity with 9 degrees of freedom; the other achieves goals through pure manipulator shape design.</p>
+
+<p>But they're part of the same revolution: <strong>using machine learning to break free from conventional robot design assumptions</strong>. We've been constraining ourselves by following patterns that made sense for robots controlled with model-based methods, but don't necessarily apply in the robot learning era.</p>
+
+<p>When you can learn from demonstrations instead of hand-coding behaviors, and use blink training to enhance perception robustness, suddenly it becomes feasible to build robots with many joints and many cameras. When you can use diffusion models to generate designs, you can explore robot morphologies inherently suited to their tasks within seconds, which might take human engineers days to figure out.</p>
+
+<p>They're glimpses of a future where robots come in wildly different shapes and sizes. The age of unconventional robots is just beginning.</p>
+
+<hr />
+
+<p>This blog post is based on the RSS 2025 paper <a href="https://arxiv.org/abs/2501.05420"><em>RoboPanoptes: The All-Seeing Robot with Whole-body Dexterity</em></a> by <a href="https://xxm19.github.io/">Xiaomeng Xu</a>, <a href="https://dornik.github.io/">Dominik Bauer</a>, and <a href="https://shurans.github.io/">Shuran Song</a>, and the CoRL 2024 paper <a href="https://arxiv.org/abs/2402.15038"><em>Dynamics-Guided Diffusion Model for Sensor-less Robot Manipulator Design</em></a> by <a href="https://xxm19.github.io/">Xiaomeng Xu</a>, <a href="https://huy-ha.github.io/">Huy Ha</a>, <a href="https://shurans.github.io/">Shuran Song</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:robopanoptes" role="doc-endnote">
+      <p>Xu, X., Bauer, D., &amp; Song, S. RoboPanoptes: The All-seeing Robot with Whole-body Dexterity. arXiv preprint arXiv:2501.05420. <a href="#fnref:robopanoptes" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dgdm" role="doc-endnote">
+      <p>Xu, X., Ha, H., &amp; Song, S. Dynamics-Guided Diffusion Model for Sensor-less Robot Manipulator Design. In 8th Annual Conference on Robot Learning. <a href="#fnref:dgdm" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/robopanoptes/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/robopanoptes/&text=How+Machine+Learning+Brings+%3Cbr%3E+Unconventional+Robots+to+Life%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/robopanoptes/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/robopanoptes/&title=How+Machine+Learning+Brings+%3Cbr%3E+Unconventional+Robots+to+Life%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/robopanoptes/&title=How+Machine+Learning+Brings+%3Cbr%3E+Unconventional+Robots+to+Life%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=How+Machine+Learning+Brings+%3Cbr%3E+Unconventional+Robots+to+Life%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/robopanoptes/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#CV">
+      <p><i class="fa fa-tag fa-fw"></i> CV</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ML">
+      <p><i class="fa fa-tag fa-fw"></i> ML</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#Robotics">
+      <p><i class="fa fa-tag fa-fw"></i> Robotics</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#cv">
+      <p><i class="fa fa-tag fa-fw"></i> cv</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/rss-2025/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at RSS
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/icml-2025/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at ICML 2025
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

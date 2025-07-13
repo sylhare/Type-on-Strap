@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/contextual/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>BERT, ELMo, &amp; GPT-2: How Contextual are Contextualized Word Representations? | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="BERT, ELMo, &amp; GPT-2: How Contextual are Contextualized Word Representations?" />
+<meta name="author" content="<a href='https://kawine.github.io/'>Kawin Ethayarajh</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Incorporating context into word embeddings - as exemplified by BERT, ELMo, and GPT-2 - has proven to be a watershed idea in NLP. Replacing static vectors (e.g., word2vec) with contextualized word representations has led to significant improvements on virtually every NLP task." />
+<meta property="og:description" content="Incorporating context into word embeddings - as exemplified by BERT, ELMo, and GPT-2 - has proven to be a watershed idea in NLP. Replacing static vectors (e.g., word2vec) with contextualized word representations has led to significant improvements on virtually every NLP task." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/contextual/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/contextual/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-24T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="BERT, ELMo, &amp; GPT-2: How Contextual are Contextualized Word Representations?" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"BERT, ELMo, &amp; GPT-2: How Contextual are Contextualized Word Representations?","dateModified":"2020-03-24T00:00:00-07:00","datePublished":"2020-03-24T00:00:00-07:00","description":"Incorporating context into word embeddings - as exemplified by BERT, ELMo, and GPT-2 - has proven to be a watershed idea in NLP. Replacing static vectors (e.g., word2vec) with contextualized word representations has led to significant improvements on virtually every NLP task.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/contextual/"},"url":"http://ai.stanford.edu/blog/contextual/","author":{"@type":"Person","name":"<a href='https://kawine.github.io/'>Kawin Ethayarajh</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>BERT, ELMo, & GPT-2: How Contextual are Contextualized Word Representations? | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Geometric properties of contextualized word representations and what that says about how contextualized they are.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="BERT, ELMo, & GPT-2: How Contextual are Contextualized Word Representations?">
+    
+    <meta name="twitter:description" content="Geometric properties of contextualized word representations and what that says about how contextualized they are.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-03-24-contextual/teaser.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-03-24-contextual/teaser.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">BERT, ELMo, & GPT-2: How Contextual are Contextualized Word Representations?</h1>
+    <p class="meta">
+    <a href='https://kawine.github.io/'>Kawin Ethayarajh</a>
+    <div class="post-date">March 24, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Incorporating context into word embeddings - as exemplified by <a href="https://arxiv.org/abs/1810.04805">BERT</a>, <a href="https://arxiv.org/abs/1802.05365">ELMo</a>, and <a href="https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">GPT-2</a> - has proven to be a watershed idea in NLP. Replacing <em>static vectors</em> (e.g., word2vec) with <strong>contextualized word representations</strong> has led to <a href="https://gluebenchmark.com/leaderboard">significant improvements</a> on virtually every NLP task.</p>
+
+<p>But just <em>how contextual</em> are these contextualized representations?</p>
+
+<p>Consider the word ‘mouse’. It has multiple word senses, one referring to a rodent and another to a device. Does BERT effectively create one representation of ‘mouse’ per word sense (left) ? Or does BERT create infinitely many representations of ‘mouse’, each highly specific to its context (right)?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2020-03-24-contextual/contextual_mouse_transparent_1.png" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2020-03-24-contextual/contextual_mouse_transparent_2.png" /></p>
+</div></figure>
+
+<p>In our EMNLP 2019 paper, <a href="https://www.aclweb.org/anthology/D19-1006.pdf">“How Contextual are Contextualized Word Representations?”</a>, we tackle these questions and arrive at some surprising conclusions:</p>
+
+<ol>
+  <li>
+    <p>In all layers of BERT, ELMo, and GPT-2, the representations of <em>all words</em> are anisotropic: they occupy a narrow cone in the embedding space instead of being distributed throughout.</p>
+  </li>
+  <li>
+    <p>In all three models, upper layers produce more context-specific representations than lower layers; however, the models contextualize words very differently from one another.</p>
+  </li>
+  <li>
+    <p>If a word’s contextualized representations were not at all contextual, we’d expect 100% of their variance to be explained by a static embedding. Instead, we find that - on average - less than 5% of the variance can be explained by a static embedding.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
+  </li>
+  <li>
+    <p>We can create a new type of static embedding for each word by taking the first principal component of its contextualized representations in a lower layer of BERT. Static embeddings created this way outperform GloVe and FastText on benchmarks like solving word analogies!<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup></p>
+  </li>
+</ol>
+
+<p>Going back to our example, this means that BERT creates highly context-specific representations of the word ‘mouse’ instead of creating one per word sense. Any static embedding of ‘mouse’ would account for very little of the variance in its contextualized representations. However, if we picked the vector that <em>did</em> maximize the variance explained, we would get a static embedding that is much better than the one provided by GloVe or FastText!<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">3</a></sup></p>
+
+<h3 id="measures-of-contextuality">Measures of Contextuality</h3>
+
+<p>What does contextuality look like? Consider these two sentences:</p>
+
+<blockquote>
+  <p><span style="font-style: normal; letter-spacing: 0px; color: black"> A panda <span style="font-style: normal; letter-spacing: 0px; color: red">dog</span> runs.</span></p>
+</blockquote>
+
+<blockquote>
+  <p><span style="font-style: normal; letter-spacing: 0px; color: black">A <span style="font-style: normal; letter-spacing: 0px; color: green">dog</span> is trying to get bacon off its back.</span></p>
+</blockquote>
+
+<p><span style="font-style: normal; letter-spacing: 0px; color: red">\(\vec{dog}\)</span> == <span style="font-style: normal; letter-spacing: 0px; color: green">\(\vec{dog}\)</span> implies that there is no contextualization (i.e., what we’d get with word2vec). 
+<span style="font-style: normal; letter-spacing: 0px; color: red">\(\vec{dog}\)</span> != <span style="font-style: normal; letter-spacing: 0px; color: green">\(\vec{dog}\)</span> implies that there is <em>some</em> contextualization. The difficulty lies in quantifying the extent to which this occurs. Since there is no definitive measure of contextuality, we propose three new ones:</p>
+
+<ol>
+  <li>
+    <p><strong>Self-Similarity (SelfSim)</strong>: The average cosine similarity of a word with itself across all the contexts in which it appears, where representations of the word are drawn from the same layer of a given model. For example, we would take the mean of cos(<span style="font-style: normal; letter-spacing: 0px; color: red">\(\vec{dog}\)</span>, <span style="font-style: normal; letter-spacing: 0px; color: green">\(\vec{dog}\)</span>) over all unique pairs to calculate \(\textit{SelfSim}\)(‘dog’). <br /></p>
+  </li>
+  <li>
+    <p><strong>Intra-Sentence Similarity (IntraSim)</strong>: The average cosine similarity between a word and its context. For the first sentence, where context vector \(\vec{s} = \frac{1}{4}(\vec{A} + \vec{panda} + \vec{dog} + \vec{runs})\): <br /></p>
+
+\[IntraSim(s) = \frac{1}{4} \sum_{w \in \{A,\ panda,\ dog,\ runs\}} \cos(\vec{w}, \vec{s})\]
+
+    <p>\(IntraSim\) helps us discern whether the contextualization is naive - simply making each word more similar to its neighbors - or whether it is more nuanced, recognizing that words occurring in the same context can affect each other while still having distinct semantics. <br /></p>
+  </li>
+  <li>
+    <p><strong>Maximum Explainable Variance (MEV)</strong>: The proportion of variance in a word’s representations that can be explained by their first principal component. For example, \(\textit{MEV}\)(‘dog’) would be the proportion of variance explained by the first principal component of <span style="font-style: normal; letter-spacing: 0px; color: red">\(\vec{dog}\)</span>, <span style="font-style: normal; letter-spacing: 0px; color: green">\(\vec{dog}\)</span>, and every other instance of ‘dog’ in the data. \(\textit{MEV}\)(‘dog’) = 1 would imply that there was no contextualization: a static embedding could replace all the contextualized representations. Conversely, if \(\textit{MEV}\)(‘dog’) were close to 0, then a static embedding could explain almost none of the variance.</p>
+  </li>
+</ol>
+
+<p>Note that each of these measures is calculated for <em>a given layer of a given model</em>, since each layer has its own representation space. For example, the word ‘dog’ has different self-similarity values in Layer 1 of BERT and Layer 2 of BERT.</p>
+
+<h3 id="adjusting-for-anisotropy">Adjusting for Anisotropy</h3>
+
+<p>When discussing contextuality, it is important to consider the isotropy of embeddings (i.e., whether they’re uniformly distributed in all directions).</p>
+
+<p>In both figures below, \(\textit{SelfSim}\)(‘dog’) = 0.95. The image on the left suggests that ‘dog’ is poorly contextualized. Not only are its representations nearly identical across all the contexts in which it appears, but the high isotropy of the representation space suggests that a self-similarity of 0.95 is exceptionally high. The image on the right suggests the opposite: because <em>any two words</em> have a cosine similarity over 0.95, ‘dog’ having a self-similarity of 0.95 is no longer impressive. <em>Relative to other words</em>, ‘dog’ would be considered highly contextualized!</p>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagethird" src="/blog/assets/img/posts/2020-03-24-contextual/sphere_1.png" />   vs.  
+<img class="postimagethird" src="/blog/assets/img/posts/2020-03-24-contextual/sphere_2.png" /></p>
+</div></figure>
+<p>To adjust for anisotropy, we calculate <em>anisotropic baselines</em> for each of our measures and subtract each baseline from the respective raw measure.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">4</a></sup></p>
+
+<p>But is it even necessary to adjust for anisotropy? Yes! As seen below, upper layers of BERT and GPT-2 are extremely anisotropic, suggesting that high anisotropy is inherent to – or at least a consequence of – the process of contextualization:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-03-24-contextual/mean_cosine_similarity_across_words.png" /></p>
+</div></figure>
+
+<h3 id="context-specificity">Context-Specificity</h3>
+
+<p><strong>On average, contextualized representations are more context-specific in higher layers.</strong> As seen below, the decrease in self-similarity is almost monotonic. This is analogous to how upper layers of LSTMs trained on NLP tasks learn more task-specific representations (<a href="https://arxiv.org/abs/1903.08855">Liu et al., 2019</a>). GPT-2 is the most context-specific; representations in its last layer are almost maximally context-specific.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-03-24-contextual/self_similarity_above_expected.png" /></p>
+</div></figure>
+
+<p><strong>Stopwords such as ‘the’ have among the lowest self-similarity (i.e., the most context-specific representations).</strong> The variety of contexts a word appears in, rather than its inherent polysemy, is what drives variation in its contextualized representations.  This suggests that ELMo, BERT, and GPT-2 are not simply assigning one representation per word sense; otherwise, there would not be so much variation in the representations of words with so few word senses.</p>
+
+<p><strong>Context-specificity manifests very differently in ELMo, BERT, and GPT-2.</strong> As seen below, in ELMo, words in the same sentence are more similar to one  another in upper layers. In BERT, words in the same sentence are more dissimilar to one another in upper layers but are on average more similar to each other than two random words. In contrast, for GPT-2, word representations  in the same sentence are no more similar to each other than randomly sampled words. This suggests that BERT and GPT-2’s contextualization are more nuanced than ELMo’s, as they seem to recognize that words appearing in the same context do not necessarily have a similar meaning.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-03-24-contextual/mean_cosine_similarity_between_sentence_and_words.png" /></p>
+</div></figure>
+
+<h3 id="static-vs-contextualized">Static vs. Contextualized</h3>
+
+<p><strong>On average, less than 5% of the variance in a word’s contextualized representations can be explained by a static embedding.</strong> If a word’s contextualized representations were not at all contextual, we would expect their first principal component to explain 100% of the variance. Instead, less than 5% of the variance can be explained on average. This 5% threshold represents the best-case scenario, where the static embedding is the first principal component. There is no theoretical guarantee that a GloVe vector, for example, is similar to the static embedding that maximizes the variance explained. This suggests that BERT, ELMo, and GPT-2 are not simply assigning one embedding per word sense: otherwise, the proportion of variance explained would be much higher.</p>
+
+<p><strong>Principal components of contextualized representations in lower layers of BERT outperform GloVe and FastText on many static embedding benchmarks.</strong> This method takes the previous finding to its logical conclusion: what if we created a new type of static embedding for each word by simply taking the first principal component of its contextualized representations? It turns out that this works surprisingly well. If we use representations from lower layers of BERT, these <em>principal component embeddings</em> outperform GloVe and FastText on benchmark tasks covering semantic similarity, analogy solving, and concept categorization (see table below).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-03-24-contextual/pc_static_embeddings.png" /></p>
+</div></figure>
+
+<p>For all three models, principal component embeddings created from lower layers are more effective than those created from upper layers. Those created using GPT-2 perform markedly worse than those from ELMo and BERT. Given that upper layers are much more context-specific than lower layers, and given that GPT-2’s representations are more context-specific, this suggests that principal components of less context-specific representations are more effective on these tasks.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In ELMo, BERT, and GPT-2, upper layers produce more context-specific representations than lower layers. However, these models contextualize words very differently from one another: after adjusting for anisotropy, the similarity between words in the same sentence is highest in ELMo but almost non-existent in GPT-2.</p>
+
+<p>On average, less than 5% of the variance in a word’s contextualized representations can be explained by a static embedding. Even in the best-case scenario, static word embeddings would thus be a poor replacement for contextualized ones. Still, contextualized representations can be used to create a more powerful type of static embedding: principal components of contextualized representations in lower layers of BERT are much better than GloVe and FastText! If you’re interested in reading more along these lines, check out:</p>
+<ul>
+  <li><a href="https://text-machine-lab.github.io/blog/2020/bert-secrets/">The Dark Secrets of BERT (Rogers et al., 2019)</a></li>
+  <li><a href="https://lena-voita.github.io/posts/emnlp19_evolution.html">Evolution of Representations in the Transformer (Voita et al., 2019)</a></li>
+  <li><a href="http://people.csail.mit.edu/tals/publication/crosslingual_elmo/">Cross-Lingual Alignment of Contextual Word Embeddings (Schuster et al., 2019)</a></li>
+  <li><a href="https://jalammar.github.io/illustrated-bert/">The Illustrated BERT, ELMo, and co. (Alammar, 2019)</a></li>
+</ul>
+
+<h5 id="acknowledgements">Acknowledgements</h5>
+
+<p class="small-text"> 
+Many thanks to Anna Rogers for live-tweeting this paper during EMNLP 2019. Special thanks to John Hewitt, Nelson Liu, and Krishnapriya Vishnubhotla for their comments on this blog post.
+</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>This was calculated after adjusting for the effect of anisotropy. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>The fact that arithmetic operators can be applied to embedding spaces is a hallmark of word vectors. Still, the ability to solve word analogies should not be treated as a perfect proxy for embedding quality (see <a href="https://www.aclweb.org/anthology/N18-2039">Schluter, 2018</a>; <a href="https://www.aclweb.org/anthology/S17-1017">Rogers et al., 2017</a>). To understand the theory behind when word analogies hold, see <a href="https://www.aclweb.org/anthology/P19-1315.pdf">Ethayarajh et al., 2019</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Provided we use the contextualized representations from lower layers of BERT (see the section titled ‘Static vs. Contextualized’). <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>For self-similarity and intra-sentence similarity, the baseline is the average cosine similarity between randomly sampled word representations (of different words) from a given layer’s representation space. For \(\textit{MEV}\), the baseline is the variance explained by the first principal component of uniformly randomly sampled representations. See the paper for details. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/contextual/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/contextual/&text=BERT%2C+ELMo%2C+%26+GPT-2%3A+How+Contextual+are+Contextualized+Word+Representations%3F%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/contextual/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/contextual/&title=BERT%2C+ELMo%2C+%26+GPT-2%3A+How+Contextual+are+Contextualized+Word+Representations%3F%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/contextual/&title=BERT%2C+ELMo%2C+%26+GPT-2%3A+How+Contextual+are+Contextualized+Word+Representations%3F%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=BERT%2C+ELMo%2C+%26+GPT-2%3A+How+Contextual+are+Contextualized+Word+Representations%3F%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/contextual/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#bert">
+      <p><i class="fa fa-tag fa-fw"></i> bert</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#elmo">
+      <p><i class="fa fa-tag fa-fw"></i> elmo</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#gpt-2">
+      <p><i class="fa fa-tag fa-fw"></i> gpt-2</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#gpt2">
+      <p><i class="fa fa-tag fa-fw"></i> gpt2</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/modeling-risky-humans/">
+      <p>Previous post</p>
+        When Humans Aren’t Optimal: Robots that Collaborate with Risk-Aware Humans
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/cavin/">
+      <p>Next post</p>
+        Sequential Problem Solving by Hierarchical Planning in Latent Spaces
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

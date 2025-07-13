@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/responsive.css"> 
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/viewmaker/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Broadening the Reach of Contrastive Learning with Viewmaker Networks | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Broadening the Reach of Contrastive Learning with Viewmaker Networks" />
+<meta name="author" content="<a href="https://alextamkin.com">Alex Tamkin</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Benefits and Bounds of Self-Supervised Pretraining" />
+<meta property="og:description" content="The Benefits and Bounds of Self-Supervised Pretraining" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/viewmaker/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/viewmaker/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Broadening the Reach of Contrastive Learning with Viewmaker Networks" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Broadening the Reach of Contrastive Learning with Viewmaker Networks","dateModified":"2021-04-20T00:00:00-07:00","datePublished":"2021-04-20T00:00:00-07:00","description":"The Benefits and Bounds of Self-Supervised Pretraining","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/viewmaker/"},"url":"http://ai.stanford.edu/blog/viewmaker/","author":{"@type":"Person","name":"<a href=\"https://alextamkin.com\">Alex Tamkin</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Broadening the Reach of Contrastive Learning with Viewmaker Networks | The Stanford AI Lab Blog</title>
+    <meta name="description" content="A single self-supervised algorithm for pretraining on many different modalities">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Broadening the Reach of Contrastive Learning with Viewmaker Networks">
+    
+    <meta name="twitter:description" content="A single self-supervised algorithm for pretraining on many different modalities">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-04-20-viewmaker/animation.gif">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-04-20-viewmaker/animation.gif">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Broadening the Reach of Contrastive Learning with Viewmaker Networks</h1>
+    <p class="meta">
+    <a href="https://alextamkin.com">Alex Tamkin</a>
+    <div class="post-date">April 20, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h2 id="the-benefits-and-bounds-of-self-supervised-pretraining">The Benefits and Bounds of Self-Supervised Pretraining</h2>
+
+<p>Deep learning is data hungry. Neural networks sometimes require millions of human-labeled data points to perform well, making it hard for the average person or company to train these models. This constraint keeps many important applications out of reach, including for rare diseases, low-resource languages, or even developers who want to train models on their own custom datasets.</p>
+
+<p>Fortunately, self-supervised pretraining has recently come to the rescue. These algorithms teach models to learn from large amounts of raw data without requiring humans to label each data point. The resulting models need drastically fewer labeled examples to achieve the same performance on a particular task.</p>
+
+<p>But currently, the pretraining methods used for different kinds of data are all distinct. Since new domains require new algorithms, pretraining is still underexplored in many high-impact domains, including healthcare, astronomy, and remote sensing, as well as multimodal settings that involve learning the relationships between different modalities, like language and vision.</p>
+
+<h2 id="learning-views-for-contrastive-learning">Learning Views for Contrastive Learning</h2>
+
+<p>In our <a href="https://arxiv.org/abs/2010.07432">ICLR 2021 paper</a>, we make progress on this problem by developing viewmaker networks, a single algorithm which enables competitive or superior pretraining performance on three diverse modalities: natural images, speech recordings, and wearable sensor data.</p>
+
+<p>At its core, our method extends a number of view-based pretraining methods in computer vision. In this family of methods, depicted below, the network’s goal is to tell whether two distorted examples—known as <strong>views</strong>—were produced from the same original data point. These methods include contrastive learning methods such as <a href="https://arxiv.org/abs/2002.05709">SimCLR</a>, <a href="https://arxiv.org/abs/1911.05722">MoCo</a>, and <a href="https://arxiv.org/abs/1805.01978">InstDisc</a>, along with non-contrastive algorithms like <a href="https://arxiv.org/abs/2006.07733">BYOL</a> and <a href="https://arxiv.org/abs/2006.09882">SwAV</a>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_90" src="/blog/assets/img/posts/2021-04-20-viewmaker/image7.png" /></p>
+</div></figure>
+
+<p>A key challenge for these methods is determining <strong>what kinds of views</strong> to produce from an input—since this determines how hard the task will be for the network, along with what capabilities the network will need to learn as it solves it. In computer vision, for example, the views are carefully-chosen combinations of image-specific data augmentation functions—such as cropping, blurring, and changes in hue, saturation, brightness, and contrast. Selecting views is currently more an art than a science, and requires both domain expertise and trial and error.</p>
+
+<p>In our work, we train a new generative model—called a viewmaker network—to learn good views, without extensive hand tuning or domain knowledge. Viewmaker networks enable pretraining on a wide range of different modalities, including ones where what makes a good view is still unknown. Remarkably, even without the benefits of domain knowledge or carefully-curated transformation functions, our method produces models with comparable or superior transfer learning accuracy to handcrafted views on the three diverse domains we consider! This suggests that viewmaker networks may be an important step towards general pretraining methods that work across modalities.</p>
+
+<h2 id="a-stochastic-bounded-adversary">A Stochastic Bounded Adversary</h2>
+
+<p>At its core, a viewmaker network is a stochastic bounded adversary. Let’s break these terms down, one at a time:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_90" src="/blog/assets/img/posts/2021-04-20-viewmaker/image4.png" /></p>
+</div></figure>
+
+<p><strong>Stochastic</strong>: Viewmaker networks accept a training example and a random noise vector, and output a perturbed input. Stochasticity enables the network to learn an infinite number of different views to apply to the input during pretraining.</p>
+
+<p><strong>Bounded</strong>: The perturbations applied to an input shouldn’t be too large in magnitude—otherwise the pretraining task would be impossible. Because of this, the viewmaker network perturbations are bounded in strength.</p>
+
+<p>But how can we control the strength of a perturbation in a domain-agnostic way? We use a simple L1-norm bound on the input—this gives the viewmaker the flexibility to make either strong changes to a small part of an input, or weaker transformations to a larger part. In practice, we train the viewmaker to directly output a delta—the difference to the eventual perturbation—which is added to the input after being scaled to an L1 radius.</p>
+
+<p>This radius, or “distortion budget,” is tuned as a hyperparameter, but we found a single setting to work well across the three different modalities we considered.</p>
+
+<p><strong>Adversary</strong>: What objective function should the viewmaker have? We train it adversarially—in other words, the viewmaker tries to increase the contrastive loss of the encoder network (e.g. SimCLR or InstDisc) as much as possible given the bounded constraint. Unlike GANs, which are known to suffer from training instability, we find viewmakers to be easier to train—perhaps because perturbing the data is a less challenging task than generating it.</p>
+
+<h2 id="visualizing-the-learned-views">Visualizing the Learned Views</h2>
+
+<p>Here are example perturbations for two of the different modalities we consider: natural images (left) and speech recordings (right). The center square shows a training example, while the outer images show the scaled perturbation generated by the viewmaker. The images show the diversity of views learned for a single input, as well as how the viewmaker network tailors the perturbations to the input image.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog//assets/img/posts/2021-04-20-viewmaker/image5.png" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2021-04-20-viewmaker/image3.png" /></p>
+</div></figure>
+
+<h2 id="performance-on-transfer-tasks">Performance on Transfer Tasks</h2>
+
+<p>Remarkably, despite not requiring domain-specific assumptions, viewmaker networks match the performance of expert-tuned views used for images, as measured by performance on a range of transfer tasks. Furthermore, they outperform common views used for spectrograms (e.g. SpecAugment) when pretraining on speech and sensor data—improving transfer accuracy by +9% and +17% points, resp. on average. This suggests viewmakers may be an important ingredient for developing pretraining methods that work across modalities. The tables below show linear evaluation accuracies on image, audio, and wearable sensor datasets (in that order). See <a href="https://www.google.com/url?q=https://arxiv.org/abs/2010.07432&amp;sa=D&amp;source=editors&amp;ust=1617490953716000&amp;usg=AOvVaw2lmd_8dcmUPilJ1DAIO29X">the paper</a> for more details.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagethird" src="/blog//assets/img/posts/2021-04-20-viewmaker/image6.png" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2021-04-20-viewmaker/image1.png" />
+<img class="postimage_90" src="/blog/assets/img/posts/2021-04-20-viewmaker/image2.png" /></p>
+</div></figure>
+
+<h2 id="conclusion--future-work">Conclusion &amp; Future Work</h2>
+
+<p>Viewmaker networks untether contrastive learning from a particular set of domain-specific augmentations, resulting in a more general pretraining method. Our results show that viewmakers enable strong pretraining performance on three diverse modalities, without requiring handcrafted expertise or domain knowledge for each domain.</p>
+
+<p>In terms of future work, we’re excited to see viewmakers applied to other domains, either by themselves or as a way to supplement existing handcrafted views. We’re also excited by potential applications of viewmakers to supervised learning and robustness research. Please check out our <a href="http://github.com/alextamkin/viewmaker">repo for code</a> and <a href="https://www.google.com/url?q=https://arxiv.org/abs/2010.07432&amp;sa=D&amp;source=editors&amp;ust=1617490953717000&amp;usg=AOvVaw0s8VKjGIewi6He45DNxrCQ">the paper</a> for more details!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/viewmaker/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/viewmaker/&text=Broadening+the+Reach+of+Contrastive+Learning+with+Viewmaker+Networks%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/viewmaker/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/viewmaker/&title=Broadening+the+Reach+of+Contrastive+Learning+with+Viewmaker+Networks%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/viewmaker/&title=Broadening+the+Reach+of+Contrastive+Learning+with+Viewmaker+Networks%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Broadening+the+Reach+of+Contrastive+Learning+with+Viewmaker+Networks%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/viewmaker/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#computer+vision">
+      <p><i class="fa fa-tag fa-fw"></i> computer vision</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#contrastive+learning">
+      <p><i class="fa fa-tag fa-fw"></i> contrastive learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#domain-agnostic">
+      <p><i class="fa fa-tag fa-fw"></i> domain-agnostic</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#pretraining">
+      <p><i class="fa fa-tag fa-fw"></i> pretraining</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#self-supervised">
+      <p><i class="fa fa-tag fa-fw"></i> self-supervised</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#sensors">
+      <p><i class="fa fa-tag fa-fw"></i> sensors</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#speech">
+      <p><i class="fa fa-tag fa-fw"></i> speech</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/aistats-2021/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at AISTATS 2021
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/conventions/">
+      <p>Next post</p>
+        Conventions in Multi-Agent Collaboration
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

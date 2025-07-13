@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/gti/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations" />
+<meta name="author" content="<a href="http://web.stanford.edu/~amandlek/">Ajay Mandlekar</a>, <a href="https://cs.stanford.edu/~danfei/">Danfei Xu</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="It takes a lot of data for robots to autonomously learn to perform simple manipulation tasks as as grasping and pushing. For example, prior work12 has leveraged Deep Reinforcement Learning to train robots to grasp and stack various objects. These tasks are usually short and relatively simple - for example, picking up a plastic bottle in a tray. However, because reinforcement learning relies on gaining experiences through trial-and-error, hundreds of robot hours were required for the robot to learn to picking up objects reliably. Quillen, D., Jang, E., Nachum, O., Finn, C., Ibarz, J., &amp; Levine, S. (2018, May). Deep reinforcement learning for vision-based robotic grasping: A simulated comparative evaluation of off-policy methods. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 6284-6291). IEEE. &#8617; Cabi, S., Colmenarejo, S. G., Novikov, A., Konyushkova, K., Reed, S., Jeong, R., … &amp; Sushkov, O. (2019). A Framework for Data-Driven Robotics. arXiv preprint arXiv:1909.12200. &#8617;" />
+<meta property="og:description" content="It takes a lot of data for robots to autonomously learn to perform simple manipulation tasks as as grasping and pushing. For example, prior work12 has leveraged Deep Reinforcement Learning to train robots to grasp and stack various objects. These tasks are usually short and relatively simple - for example, picking up a plastic bottle in a tray. However, because reinforcement learning relies on gaining experiences through trial-and-error, hundreds of robot hours were required for the robot to learn to picking up objects reliably. Quillen, D., Jang, E., Nachum, O., Finn, C., Ibarz, J., &amp; Levine, S. (2018, May). Deep reinforcement learning for vision-based robotic grasping: A simulated comparative evaluation of off-policy methods. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 6284-6291). IEEE. &#8617; Cabi, S., Colmenarejo, S. G., Novikov, A., Konyushkova, K., Reed, S., Jeong, R., … &amp; Sushkov, O. (2019). A Framework for Data-Driven Robotics. arXiv preprint arXiv:1909.12200. &#8617;" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/gti/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/gti/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-07T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations","dateModified":"2020-10-07T00:00:00-07:00","datePublished":"2020-10-07T00:00:00-07:00","description":"It takes a lot of data for robots to autonomously learn to perform simple manipulation tasks as as grasping and pushing. For example, prior work12 has leveraged Deep Reinforcement Learning to train robots to grasp and stack various objects. These tasks are usually short and relatively simple - for example, picking up a plastic bottle in a tray. However, because reinforcement learning relies on gaining experiences through trial-and-error, hundreds of robot hours were required for the robot to learn to picking up objects reliably. Quillen, D., Jang, E., Nachum, O., Finn, C., Ibarz, J., &amp; Levine, S. (2018, May). Deep reinforcement learning for vision-based robotic grasping: A simulated comparative evaluation of off-policy methods. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 6284-6291). IEEE. &#8617; Cabi, S., Colmenarejo, S. G., Novikov, A., Konyushkova, K., Reed, S., Jeong, R., … &amp; Sushkov, O. (2019). A Framework for Data-Driven Robotics. arXiv preprint arXiv:1909.12200. &#8617;","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/gti/"},"url":"http://ai.stanford.edu/blog/gti/","author":{"@type":"Person","name":"<a href=\"http://web.stanford.edu/~amandlek/\">Ajay Mandlekar</a>, <a href=\"https://cs.stanford.edu/~danfei/\">Danfei Xu</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We developed Generalization Through Imitation (GTI) - an algorithm for learning visuomotor control from human demonstrations and generalizing to new long-hor...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations">
+    
+    <meta name="twitter:description" content="We developed Generalization Through Imitation (GTI) - an algorithm for learning visuomotor control from human demonstrations and generalizing to new long-horizon tasks by leveraging latent compositional structures.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-10-07-gti/thumbnail.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-10-07-gti/thumbnail.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">GTI: Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations</h1>
+    <p class="meta">
+    <a href="http://web.stanford.edu/~amandlek/">Ajay Mandlekar</a>, <a href="https://cs.stanford.edu/~danfei/">Danfei Xu</a>
+    <div class="post-date">October 7, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>It takes a lot of data for robots to autonomously learn to perform simple manipulation tasks as as grasping and pushing. For example, prior work<sup id="fnref:qtopt" role="doc-noteref"><a href="#fn:qtopt" class="footnote">1</a></sup><sup id="fnref:dm_reward_sketch" role="doc-noteref"><a href="#fn:dm_reward_sketch" class="footnote">2</a></sup> has leveraged Deep Reinforcement Learning to train robots to grasp and stack various objects. These tasks are usually short and relatively simple - for example, picking up a plastic bottle in a tray. However, because reinforcement learning relies on gaining experiences through trial-and-error, hundreds of robot hours were required for the robot to learn to picking up objects reliably.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/qt_opt.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/dm_reward_sketch.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+It takes 100s of hours for robots to autonomously learn to perform manipulation tasks- even for grasping, or stacking, which are short-horizon tasks.
+</figcaption>
+</div></figure>
+
+<p>On the other hand, imitation learning can learn robot control policies directly from expert demonstrations without trial-and-error and thus require far less data than reinforcement learning. In prior work, a handful of human demonstrations have been used to train a robot to perform different skills such as pushing an object to a target location from only image input <sup id="fnref:deep_imitation" role="doc-noteref"><a href="#fn:deep_imitation" class="footnote">3</a></sup>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/deep_imitation_1.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2020-10-07-gti/deep_imitation_2.png" class="postimagehalf" /></p>
+<figcaption>
+Imitation Learning has been used to directly learn short-horizon skills from 100-300 demonstrations.
+</figcaption>
+</div></figure>
+
+<p>However, because the control policies are only trained with a fixed set of task demonstrations, it is difficult for the policies to generalize outside of the training data. In this work, we present a method for learning to solve new tasks by piecing together parts of training tasks that the robot has already seen in the demonstration data.</p>
+
+<h2 id="a-motivating-example">A Motivating Example</h2>
+
+<p>Consider the setup shown below. In the first task, the bread starts in the container, and the robot needs to remove the purple lid, retrieve the bread, put it into this green bowl, and then serve it on a plate.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/setup_a_start.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2020-10-07-gti/setup_a_goal.png" class="postimagehalf" /></p>
+<figcaption>
+In the first task, the robot needs to retrieve the bread from the covered container and serve it on a plate.
+</figcaption>
+</div></figure>
+
+<p>In the second task, the bread starts on the table, and it needs to be placed in the green bowl and then put into the oven for baking.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/setup_b_start.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2020-10-07-gti/setup_b_goal.png" class="postimagehalf" /></p>
+<figcaption>
+In the second task, the robot needs to pick the bread off the table and place it into the oven for baking.
+</figcaption>
+</div></figure>
+
+<p>We provide the robot with demonstrations of both tasks. Note that both tasks require the robot to place the bread into this green bowl! In other words, these task trajectories intersect in the state space! The robot should be able to generalize to new start and goal pairs by choosing different paths at the intersection, as shown in the picture. For example, the robot could retrieve the bread from the container and place the bread into the oven, instead of placing it on the plate.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/cross.png" class="postimagehalf" /></p>
+<figcaption>
+The task demonstrations for both tasks will intersect in the state space since both tasks require the robot to place the bread into the green bowl. By leveraging this task intersection and composing pieces of different demonstrations together, the robot will be able to generalize to new start and goal pairs.
+</figcaption>
+</div></figure>
+
+<p><br />
+In summary, our <strong>key insights</strong> are:</p>
+
+<ul>
+  <li>Multi-task domains often contain task intersections.
+<br /><br /></li>
+  <li>It should be possible for a policy to generate new task trajectories by composing training tasks via the intersections.
+<br /><br /></li>
+</ul>
+
+<h2 id="generalization-through-imitation">Generalization Through Imitation</h2>
+
+<p>In this work, we introduce <strong>Generalization Through Imitation (GTI)</strong>, a two-stage algorithm for enabling robots to generalize to new start and goal pairs through compositional imitation.</p>
+
+<ul>
+  <li><strong>Stage 1:</strong> Train policies to generate diverse (potentially new) rollouts from human demonstrations. 
+<br /><br /></li>
+  <li><strong>Stage 2:</strong> Use these rollouts to train goal-directed policies to achieve targeted new behaviors by self-imitation.
+<br /><br /></li>
+</ul>
+
+<h3 id="generating-diverse-rollouts-from-human-demonstrations">Generating Diverse Rollouts from Human Demonstrations</h3>
+
+<p>In Stage 1, we would like to train policies that are able to both reproduce the task trajectories in the data and also generate new task trajectories consisting of unseen start and goal pairs. This can be challenging - we need to encourage our trained policy to understand how to stop following one trajectory from the dataset and start following a different one in order to end up in a different goal state.</p>
+
+<p>Here, we list two core technical challenges.</p>
+
+<ul>
+  <li><strong>Mode Collapse.</strong> If we naively train imitation learning policies on the demonstration data of the two tasks,  the policy tends to only go to a particular goal regardless of the initial states, as indicated by the red arrows in the picture below.
+<br /><br /></li>
+  <li><strong>Spatio-temporal Variation</strong> There is a large amount of spatio-temporal variation from human demonstrations on a real robot that must be modeled and accounted for.
+<br /><br /></li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/diverse_rollouts_1.png" class="postimagehalf" />
+<img src="/blog/assets/img/posts/2020-10-07-gti/diverse_rollouts_2.png" class="postimagehalf" /></p>
+<figcaption>
+  Generating diverse rollouts from a fixed set of human demonstrations is difficult due to the potential for mode collapse (left) and because the policy must also model spatio-temporal variations in the data (right).
+</figcaption>
+</div></figure>
+
+<p>In order to get a better idea of how to encourage a policy to generate diverse rollouts, let’s take a closer look at the task space. The left image in the figure below shows the set of demonstrations. Consider a state near the beginning of a demonstration, as shown in the middle image. If we start in this state, and try to set a goal for our policy to achieve, according to the demonstration data, the goals can be modeled by a gaussian distribution. However, if we start at the intersection, the goal could spread across two tasks. It would be better for us to model the goal distributions with a multi-modal gaussian.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/diverse_rollouts_3.png" class="postimagethird" />
+<img src="/blog/assets/img/posts/2020-10-07-gti/diverse_rollouts_4.png" class="postimagethird" />
+<img src="/blog/assets/img/posts/2020-10-07-gti/diverse_rollouts_5.png" class="postimagethird" /></p>
+<figcaption>
+  Task intersections are better modeled with mixtures of gaussians in order to capture the different possible future states.
+</figcaption>
+</div></figure>
+
+<p>Based on this observation, we design a hierarchical policy learning algorithm, where the high-level policy captures distribution of future observations in a multimodal latent space. The low-level policy conditions on the latent goal to fully explore the space of demonstrations.</p>
+
+<h3 id="gti-algorithm-details">GTI Algorithm Details</h3>
+
+<p>Let’s take a closer look at the learning architecture for our Stage 1 policy, shown below. The high-level planner is a conditional variational autoencoder<sup id="fnref:VAE" role="doc-noteref"><a href="#fn:VAE" class="footnote">4</a></sup>, that attempts to learn the distribution of future image observations conditioned on current image observations. The encoder encodes both a current and future observation into a latent space. The decoder attempts to reconstruct the future observation from the latent. The latent space is regularized with a learned Gaussian mixture model prior. This prior encourages the model to a latent multimodal distribution of future observations. We can think of this latent space as modeling short-horizon subgoals. We train our low-level controller to imitate actions in the dataset that lead to particular subgoals.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/stage1_1.png" class="postimagesmaller" /></p>
+<figcaption>
+  The diagram above depicts the Stage 1 training architecture.
+</figcaption>
+</div></figure>
+
+<p>Next, we use the Stage 1 policy to collect a handful of self-generated diverse rollouts, shown below. Every 10 timesteps, we sample a new latent subgoal from the GMM prior, and use it to condition the low-level policy. The diversity captured in the GMM prior ensures that the Stage 1 policy will exhibit different behaviors at trajectory intersections, resulting in novel trajectories with unseen start and goal pairs.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/stage1_2.png" class="postimagesmaller" /></p>
+<figcaption>
+  The Stage 1 trained policy is used to generate a self-supervised dataset that covers the space of start and goal states by composing seen behaviors together.
+</figcaption>
+</div></figure>
+
+<p>Finally, the self-generated dataset is used to train a new, goal-directed policy that can perform intentional behaviors from these undirected rollouts.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/stage2.png" class="postimagesmaller" /></p>
+<figcaption>
+  Stage 2 policy learning is just goal-conditioned behavioral cloning from the Stage 1 dataset, where the goals are final image observations from the trajectories collected in Stage 1.
+</figcaption>
+</div></figure>
+
+<h2 id="real-robot-experiments">Real Robot Experiments</h2>
+
+<h3 id="data-collection">Data Collection</h3>
+
+<p>This is our hardware setup. We used a Franka robotic arm and two cameras for data collection - a front view camera and a wrist-mounted camera.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2020-10-07-gti/hardware_setup.png" class="postimagehalf" /></p>
+<figcaption>
+  Hardware setup used in our work.
+</figcaption>
+</div></figure>
+
+<p>We used the RoboTurk phone teleoperation interface<sup id="fnref:RoboTurk_v1" role="doc-noteref"><a href="#fn:RoboTurk_v1" class="footnote">5</a></sup><sup id="fnref:RoboTurk_v2" role="doc-noteref"><a href="#fn:RoboTurk_v2" class="footnote">6</a></sup> to collect human demonstrations. We collect only 50 demonstrations for each of the two tasks. The data collection took less than an hour.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagesmaller">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/demo_video.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+  We collected demonstrations using the RoboTurk phone teleoperation interface.
+</figcaption>
+</div></figure>
+
+<h3 id="results">Results</h3>
+
+<p>Below, we show the final trained Stage 2 model. We ask the robot to start from the initial state of one task, bread-in-container, and reach the goal of the other task, which is to put the bread in the oven. The goal is specified by providing an image observation that shows the bread in the oven. We emphasize that the policy is performing closed-loop visuomotor control at 20hz purely from image observations. Note that this task requires accurate contact-rich manipulations, and is long-horizon. With only visual information, our method can perform intricate tasks such as grasping, pushing the oven tray into the oven, or manipulating a constrained mechanism like closing door of the oven.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagesmaller">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/final_result_video.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+  GTI is able to produce a goal-conditioned policy that solves both tasks seen in the demonstrations and tasks that were not seen.
+</figcaption>
+</div></figure>
+
+<p>Our Stage 1 policy can recover all start and goal combinations, including both behavior seen in training and new unseen behaviors.</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/seen_container_plate.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/seen_table_oven.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+  The GTI Stage 1 policy can imitate the demonstrations to solve the tasks seen in the demonstrations.
+</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/unseen_table_plate.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/unseen_container_oven.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+  The GTI Stage 1 policy can compose different parts of the demonstrations together to produce novel behavior and solve unseen tasks as well.
+</figcaption>
+</div></figure>
+
+<p>Finally, we show that our method is robust towards unexpected situations. In the case below (left), the policy is stuck because of conflicting supervisions. Sampling latent goals allows the policy to get unstuck and complete the task successfully. Our policy is also very reactive and can quickly recover from errors. In the case below (right), the policy failed to grasp the bread twice, and finally succeeded the third time. It also made two attempts to get a good grasp of the bowl, and complete the task successfully</p>
+
+<figure class="figure"><div class="figure__main">
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/unstuck.mp4" type="video/mp4" />
+</video>
+<video autoplay="" loop="" muted="" playsinline="" class="postimagehalf">
+  <source src="/blog/assets/img/posts/2020-10-07-gti/reactive.mp4" type="video/mp4" />
+</video>
+
+<figcaption>
+  Robustness results. The policy is able to deal with conflicting supervision and get unstuck by sampling latent goals (left). The policy is reactive and can quickly recover from errors (right).
+</figcaption>
+</div></figure>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li>Imitation learning is an effective and safe technique to train robot policies in the real world because it does not depend on an expensive random exploration process. However, due to the lack of exploration, learning policies that generalize beyond the demonstrated behaviors is still an open challenge.
+<br /><br /></li>
+  <li>Our key insight is that multi-task domains often present a latent structure, where demonstrated trajectories for different tasks intersect at common regions of the state space.
+<br /><br /></li>
+  <li>We present Generalization Through Imitation (GTI), a two-stage offline imitation learning algorithm that exploits this intersecting structure to train goal-directed policies that generalize to unseen start and goal state combinations.</li>
+  <li>We validate GTI on a real robot kitchen domain and showcase the capacity of trained policies to solve both seen and unseen task configurations.</li>
+</ul>
+
+<hr />
+
+<p>This blog post is based on the following paper:</p>
+
+<ul>
+  <li><a href="https://arxiv.org/abs/2003.06085">“Learning to Generalize Across Long-Horizon Tasks from Human Demonstrations”</a> by Ajay Mandlekar*, Danfei Xu*, Roberto Martin-Martin, Silvio Savarese, and Li Fei-Fei.</li>
+</ul>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:qtopt" role="doc-endnote">
+      <p>Quillen, D., Jang, E., Nachum, O., Finn, C., Ibarz, J., &amp; Levine, S. (2018, May). Deep reinforcement learning for vision-based robotic grasping: A simulated comparative evaluation of off-policy methods. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 6284-6291). IEEE. <a href="#fnref:qtopt" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dm_reward_sketch" role="doc-endnote">
+      <p>Cabi, S., Colmenarejo, S. G., Novikov, A., Konyushkova, K., Reed, S., Jeong, R., … &amp; Sushkov, O. (2019). A Framework for Data-Driven Robotics. arXiv preprint arXiv:1909.12200. <a href="#fnref:dm_reward_sketch" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:deep_imitation" role="doc-endnote">
+      <p>Zhang, T., McCarthy, Z., Jow, O., Lee, D., Chen, X., Goldberg, K., &amp; Abbeel, P. (2018, May). Deep imitation learning for complex manipulation tasks from virtual reality teleoperation. In 2018 IEEE International Conference on Robotics and Automation (ICRA) (pp. 1-8). IEEE. <a href="#fnref:deep_imitation" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:VAE" role="doc-endnote">
+      <p>Kingma, D. P., &amp; Welling, M. (2013). Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114. <a href="#fnref:VAE" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:RoboTurk_v1" role="doc-endnote">
+      <p>Mandlekar, A., Zhu, Y., Garg, A., Booher, J., Spero, M., Tung, A., … &amp; Savarese, S. (2018). Roboturk: A crowdsourcing platform for robotic skill learning through imitation. arXiv preprint arXiv:1811.02790. <a href="#fnref:RoboTurk_v1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:RoboTurk_v2" role="doc-endnote">
+      <p>Mandlekar, A., Booher, J., Spero, M., Tung, A., Gupta, A., Zhu, Y., … &amp; Fei-Fei, L. (2019). Scaling Robot Supervision to Hundreds of Hours with RoboTurk: Robotic Manipulation Dataset through Human Reasoning and Dexterity. arXiv preprint arXiv:1911.04052. <a href="#fnref:RoboTurk_v2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/gti/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/gti/&text=GTI%3A+Learning+to+Generalize+Across+Long-Horizon+Tasks+from+Human+Demonstrations%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/gti/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/gti/&title=GTI%3A+Learning+to+Generalize+Across+Long-Horizon+Tasks+from+Human+Demonstrations%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/gti/&title=GTI%3A+Learning+to+Generalize+Across+Long-Horizon+Tasks+from+Human+Demonstrations%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=GTI%3A+Learning+to+Generalize+Across+Long-Horizon+Tasks+from+Human+Demonstrations%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/gti/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#imitation+learning">
+      <p><i class="fa fa-tag fa-fw"></i> imitation learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#reinforcement+learning">
+      <p><i class="fa fa-tag fa-fw"></i> reinforcement learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#rl">
+      <p><i class="fa fa-tag fa-fw"></i> rl</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/infilling-by-language-modeling/">
+      <p>Previous post</p>
+        How to Fill in the Blanks with Language Models
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/mlsys/">
+      <p>Next post</p>
+        The Coming Wave of ML Systems
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

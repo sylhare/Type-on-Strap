@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/responsive.css"> 
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/bifi/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors" />
+<meta name="author" content="<a href="https://michiyasunaga.github.io">Michihiro Yasunaga</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Machine Learning for Code Repair Across the board, programming has increased in popularity, ranging from developing with general-purpose programming languages like Python, C, Java to using simpler languages like HTML, SQL, LaTeX, and Excel formulas. When writing code we often make syntax errors such as typos, unbalanced parentheses, invalid indentations, etc., and need to fix them. In fact, several studies 1 show that both beginner and professional programmers spend 50% of time fixing code errors during programming. Automating code repair can dramatically enhance the programming productivity 2. Reversible Debugging Software. Tom Britton, Lisa Jeng, Graham Carver, Paul Cheak, Tomer Katzenellenbogen. 2013. Programmers’ Build Errors: A Case Study (at Google). Hyunmin Seo, Caitlin Sadowski, Sebastian Elbaum, Edward Aftandilian, Robert Bowdidge. 2014. &#8617; Improving programming productivity with machine learning is an extremely active area of research. A prominent example is the Copilot / Codex service recently released by OpenAI and GitHub, which translates natural language (e.g. English) descriptions into code. Automated code repair is another complementary technology to improve programming productivity. &#8617;" />
+<meta property="og:description" content="Machine Learning for Code Repair Across the board, programming has increased in popularity, ranging from developing with general-purpose programming languages like Python, C, Java to using simpler languages like HTML, SQL, LaTeX, and Excel formulas. When writing code we often make syntax errors such as typos, unbalanced parentheses, invalid indentations, etc., and need to fix them. In fact, several studies 1 show that both beginner and professional programmers spend 50% of time fixing code errors during programming. Automating code repair can dramatically enhance the programming productivity 2. Reversible Debugging Software. Tom Britton, Lisa Jeng, Graham Carver, Paul Cheak, Tomer Katzenellenbogen. 2013. Programmers’ Build Errors: A Case Study (at Google). Hyunmin Seo, Caitlin Sadowski, Sebastian Elbaum, Edward Aftandilian, Robert Bowdidge. 2014. &#8617; Improving programming productivity with machine learning is an extremely active area of research. A prominent example is the Copilot / Codex service recently released by OpenAI and GitHub, which translates natural language (e.g. English) descriptions into code. Automated code repair is another complementary technology to improve programming productivity. &#8617;" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/bifi/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/bifi/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-21T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors","dateModified":"2021-09-21T00:00:00-07:00","datePublished":"2021-09-21T00:00:00-07:00","description":"Machine Learning for Code Repair Across the board, programming has increased in popularity, ranging from developing with general-purpose programming languages like Python, C, Java to using simpler languages like HTML, SQL, LaTeX, and Excel formulas. When writing code we often make syntax errors such as typos, unbalanced parentheses, invalid indentations, etc., and need to fix them. In fact, several studies 1 show that both beginner and professional programmers spend 50% of time fixing code errors during programming. Automating code repair can dramatically enhance the programming productivity 2. Reversible Debugging Software. Tom Britton, Lisa Jeng, Graham Carver, Paul Cheak, Tomer Katzenellenbogen. 2013. Programmers’ Build Errors: A Case Study (at Google). Hyunmin Seo, Caitlin Sadowski, Sebastian Elbaum, Edward Aftandilian, Robert Bowdidge. 2014. &#8617; Improving programming productivity with machine learning is an extremely active area of research. A prominent example is the Copilot / Codex service recently released by OpenAI and GitHub, which translates natural language (e.g. English) descriptions into code. Automated code repair is another complementary technology to improve programming productivity. &#8617;","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/bifi/"},"url":"http://ai.stanford.edu/blog/bifi/","author":{"@type":"Person","name":"<a href=\"https://michiyasunaga.github.io\">Michihiro Yasunaga</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors">
+    
+    <meta name="twitter:description" content="Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-09-21-bifi/feature.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2021-09-21-bifi/feature.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors</h1>
+    <p class="meta">
+    <a href="https://michiyasunaga.github.io">Michihiro Yasunaga</a>
+    <div class="post-date">September 21, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h3 id="machine-learning-for-code-repair"><strong>Machine Learning for Code Repair</strong></h3>
+<p>Across the board, programming has increased in popularity, ranging from developing with general-purpose programming languages like Python, C, Java to using simpler languages like HTML, SQL, LaTeX, and Excel formulas. When writing code we often make syntax errors such as typos, unbalanced parentheses, invalid indentations, etc., and need to fix them. In fact, several studies <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> show that both beginner and professional programmers spend 50% of time fixing code errors during programming. Automating code repair can dramatically enhance the programming productivity <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/examples.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/examples.png" /></a></p>
+</div></figure>
+
+<p>Recent works <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> use machine learning models to fix code errors by training the models on human-labeled (broken code, fixed code) pairs. However, collecting this data for even a single programming language is costly, much less the dozens of languages commonly used in practice.</p>
+
+<p>On the other hand, <strong><em>unlabeled (unaligned) data</em></strong>—not aligned as (broken, fixed) pairs—is readily available: for example, raw code snippets on the web like GitHub. An unsupervised approach for training code repair models would make them much more scalable and widely deployable. In <a href="https://arxiv.org/abs/2106.06600">our recent work</a> <sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup> published at ICML 2021, we study how to leverage unlabeled data to learn code fixers effectively.</p>
+
+<h3 id="problem-setup"><strong>Problem Setup</strong></h3>
+<p>In code repair, we are given a <strong><em>critic</em></strong> that assesses the quality of an input: for instance, a compiler or code analyzer that tells us if input code has any syntax errors. The code is <strong><em>bad</em></strong> if there is at least one error and it is <strong><em>good</em></strong> if there are no errors. What we want is a <strong><em>fixer</em></strong> that repairs bad code into good code that satisfies the critic, e.g. repairing missing parenthesis as in the figure below. Our goal is to use <strong>unlabeled data</strong> and <strong>critic</strong> to learn a <strong>fixer</strong>.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/task.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/task.png" /></a></p>
+</div></figure>
+
+<p><strong>Challenges</strong><br />
+While unlabeled data can be split into a set of good code and a set of bad code using the critic, they are unaligned; in other words, they do not form (broken, fixed) pairs ready to be used for training a fixer.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/split.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/split.png" /></a></p>
+</div></figure>
+
+<p>A straightforward technique <sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">5</a></sup> is to apply random or heuristic perturbations to good code, such as dropping tokens, and prepare synthetic paired data (perturbed code, good code) to train a fixer. However, such synthetically-generated bad code does not match the distribution of real bad code written by humans. For instance, as the figure below shows, synthetic perturbations (purple box) may drop parentheses arbitrarily from code, generating errors that are rare in real code. In contrast, human-written code (red box) rarely misses parentheses when only a single pair appears, but misses parentheses often in a nested context (e.g., 10x more than non-nested in our Python code dataset collected from GitHub). This distributional mismatch between synthetic data and real data can result in low code repair performance when used in practice. To tackle this challenge, we introduce a new training approach, <strong><em>Break-It-Fix-It (BIFI)</em></strong>, that adapts the fixer towards real distributions of bad code.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/prior-work-challenge.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/prior-work-challenge.png" /></a></p>
+</div></figure>
+
+<h3 id="approach-break-it-fix-it"><strong>Approach: Break-It-Fix-It</strong></h3>
+<p>The basic idea of BIFI is to introduce a machine learning-based breaker that learns to corrupt good code into realistic bad code, and iteratively train both the fixer and the breaker while using them in conjunction to generate more realistic paired data. Concretely, BIFI takes as inputs:</p>
+<ul>
+  <li>Critic</li>
+  <li>Unaligned set of good and bad code</li>
+  <li>Initial fixer, which potentially is trained on synthetic data</li>
+</ul>
+
+<p>BIFI then improves the fixer by performing the following cycle of data generation and training procedure:</p>
+<ol>
+  <li>Apply the fixer to the set of bad code, which consists of real code errors made by humans, and use the critic to assess if the fixer’s output is good. If good, keep the pair</li>
+  <li>Train the breaker on the resulting paired data from Step 1. Consequently, the breaker can generate more realistic errors than the initial synthetic data</li>
+  <li>Apply the breaker to the set of good code, and keep outputs that the critic judges as bad</li>
+  <li>Train the fixer on the newly-generated paired data in Step 1 and Step 3</li>
+</ol>
+
+<p>These steps are also illustrated in the left panel of the figure below. We iterate over this cycle to improve the fixer and the breaker simultaneously until they have both converged. The intuition is that a better fixer and breaker will be able to generate more realistic paired data, which in turn helps to train a better fixer and breaker.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/BIFI-vs-BT.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/BIFI-vs-BT.png" /></a></p>
+</div></figure>
+
+<p>BIFI is related to the backtranslation (cycle-consistency) method in unsupervised translation <sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">6</a></sup>. If we apply backtranslation directly to the code repair task, we would do the following:</p>
+
+<ol>
+  <li>Apply the fixer to the set of bad code and generate (noisy) good code</li>
+  <li>Train the breaker to reconstruct the bad code</li>
+  <li>Apply the breaker to the set of good code and generate (noisy) bad code</li>
+  <li>Train the fixer to reconstruct the good code</li>
+</ol>
+
+<p>as illustrated in the right panel of the figure. BIFI improves on backtranslation in two aspects. First, while backtranslation may include non-fixed code as good or non-broken code as bad in Step 1 or 3, BIFI uses the critic to verify if the generated code is actually fixed or broken in Step 1 and 3, as highlighted with pink in the left panel of the figure. This ensures the correctness of training data generated by the breaker and fixer. Second, while backtranslation only uses paired data generated in Step 3 to train the fixer in Step 4, BIFI uses paired data generated in both Step 3 and Step 1, as paired data from Step 1 contains real code errors made by humans. This improves the distributional match of generated training data.</p>
+
+<h3 id="lets-use-our-code-repair-model"><strong>Let’s use our code repair model!</strong></h3>
+<p>We apply and evaluate our method, BIFI, on two code repair benchmarks:</p>
+<ul>
+  <li>GitHub-Python <sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote">7</a></sup>: Fix syntax errors in Python code. Critic is Python AST parser.</li>
+  <li>DeepFix <sup id="fnref:8" role="doc-noteref"><a href="#fn:8" class="footnote">8</a></sup>: Fix compiler errors in C code. Critic is C compiler.</li>
+</ul>
+
+<p><strong>BIFI improves on existing unsupervised methods for code repair</strong><br />
+Using the GitHub-Python dataset, we first compare BIFI with existing unsupervised methods for code repair: a <strong>synthetic baseline</strong> that uses synthetic paired data generated by randomly dropping, inserting or replacing tokens from good code, and a <strong>backtranslation baseline</strong> that directly applies backtracklation to code repair. The synthetic baseline serves as the initial fixer for our BIFI algorithm. We find that BIFI improves the repair accuracy by 28% (62%→90%) over the synthetic baseline and by 10% (80%→90%) over the backtranslation baseline, as shown in the left panel of the figure. This result suggests that while we started from a simple initial fixer trained with random perturbations, BIFI can automatically turn it into a usable fixer with high repair accuracy.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/result.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/result.png" /></a></p>
+</div></figure>
+
+<p>For the other dataset, DeepFix, there are several prior works that use heuristic ways to generate synthetic paired data for the task: Gupta+17 <sup id="fnref:9" role="doc-noteref"><a href="#fn:9" class="footnote">9</a></sup>, Hajipour+19 <sup id="fnref:10" role="doc-noteref"><a href="#fn:10" class="footnote">10</a></sup>, DrRepair <sup id="fnref:11" role="doc-noteref"><a href="#fn:11" class="footnote">11</a></sup>. We take the existing best model, DrRepair, as our initial fixer and apply BIFI. We find that it improves the repair accuracy by 5% (66%→71%), as shown in the right panel of the figure. This result suggests that while the initial fixer DrRepair was already trained with manually designed heuristics, there is still room for improving the adaptation to a more realistic distribution of code errors. BIFI helps to achieve this without additional manual effort.</p>
+
+<p><strong>Examples of breaker outputs</strong><br />
+Let’s look at several examples of code generated by the trained breaker. Given the good Python code shown on the left below, we show on the right outputs that the breaker places high probability on. In output 1, the breaker converts <code class="language-plaintext highlighter-rouge">raise ValueError(...)</code> into <code class="language-plaintext highlighter-rouge">raise ValueError, ...</code>, which is an obsolete usage of <code class="language-plaintext highlighter-rouge">raise</code> in Python. In output 2, the breaker drops a closing parenthesis in a nested context. These are both errors commonly seen in human written bad code.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/breaker.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/breaker.png" /></a></p>
+</div></figure>
+
+<p><strong>Examples of fixer outputs</strong><br />
+Let’s look at how our fixer performs through examples too. The left side of the figure shows human-written Python code with an indentation error—one needs to add indent to the <code class="language-plaintext highlighter-rouge">err = 0</code> line and remove indent in the next line. The initial fixer, shown in the center, only inserts one indent token and fails to fix the error. This is most likely due to the mismatch between real errors and synthetic errors used in training: synthetic errors generated by random perturbations do not frequently contain this kind of indentation error where multiple tokens need to be inserted/removed accordingly. The fixer trained by BIFI, shown on the right, fixes the indentation error by inserting and removing the correct pair of indent tokens. We find that this is one of the representative examples of when BIFI successfully fixes code errors but the initial fixer fails.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a href="/blog/assets/img/posts/2021-09-21-bifi/fixer.png"><img class="postimage" src="/blog/assets/img/posts/2021-09-21-bifi/fixer.png" /></a></p>
+</div></figure>
+
+<p>Finally, one limitation of this work is that we focus on fixing syntactic errors (we use critics such as AST parser and compiler), and we are not evaluating the semantic correctness of our outputs. Extending BIFI to fixing semantic errors is an exciting future research avenue.</p>
+
+<h3 id="conclusion"><strong>Conclusion</strong></h3>
+<p>Machine learning of source code repair is an important direction to enhance programming productivity, but collecting human-labeled data is costly. In this work, we studied how to learn source code repair in an unsupervised way, and developed a new training method, BIFI. The key innovation of BIFI is that it creates realistic paired data for training fixers from a critic (e.g. compiler) and unlabeled data (e.g. code snippets on the web) only, which are cheaply available.</p>
+
+<p>More broadly, the idea of learning fixers from critics + unlabeled data is applicable to various repair tasks beyond code repair, such as grammatical error correction <sup id="fnref:12" role="doc-noteref"><a href="#fn:12" class="footnote">12</a></sup> and molecule design, using domain-specific critics. Additionally, the idea of using a critic to improve the quality of paired data is applicable to various translation tasks by introducing a learned critic. We hope that BIFI can be an effective solution to unsupervised repair tasks and translation tasks.</p>
+
+<p>You can check out our full paper <a href="https://arxiv.org/abs/2106.06600">here</a> and our source code/data on <a href="https://github.com/michiyasunaga/BIFI">GitHub</a>.</p>
+
+<h3 id="acknowledgments"><strong>Acknowledgments</strong></h3>
+<p>This blog post is based on the paper:</p>
+<ul>
+  <li><a href="https://arxiv.org/abs/2106.06600">Break-It-Fix-It: Unsupervised Learning for Program Repair</a>. <a href="https://michiyasunaga.github.io/">Michihiro Yasunaga</a> and <a href="https://cs.stanford.edu/people/pliang/">Percy Liang</a>. ICML 2021.</li>
+</ul>
+
+<p>Many thanks to Percy Liang, as well as members of the Stanford P-Lambda group, SNAP group and NLP group for their valuable feedback. Many thanks to Jacob Schreiber and Sidd Karamcheti for edits on this blog post.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.370.9611">Reversible Debugging Software</a>. Tom Britton, Lisa Jeng, Graham Carver, Paul Cheak, Tomer Katzenellenbogen. 2013.   <a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/42184.pdf">Programmers’ Build Errors: A Case Study (at Google)</a>. Hyunmin Seo, Caitlin Sadowski, Sebastian Elbaum, Edward Aftandilian, Robert Bowdidge. 2014. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Improving programming productivity with machine learning is an extremely active area of research. A prominent example is the <a href="https://copilot.github.com/">Copilot</a> / <a href="https://openai.com/blog/openai-codex/">Codex</a> service recently released by OpenAI and GitHub, which translates natural language (e.g. English) descriptions into code. Automated code repair is another complementary technology to improve programming productivity. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://arxiv.org/abs/1901.01808">SEQUENCER: Sequence-to-Sequence Learning for End-to-End Program Repair</a>. Zimin Chen, Steve Kommrusch, Michele Tufano, Louis-Noël Pouchet, Denys Poshyvanyk, Martin Monperrus. 2019. <a href="https://dl.acm.org/doi/10.1145/3338906.3340455">DeepDelta: Learning to Repair Compilation Errors</a>. Ali Mesbah Andrew Rice Emily Johnston Nick Glorioso Eddie Aftandilian. 2019. <a href="https://arxiv.org/abs/2008.10707">Patching as Translation: the Data and the Metaphor</a>. Yangruibo Ding, Baishakhi Ray, Premkumar Devanbu, Vincent J. Hellendoorn. 2020 <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p><a href="https://arxiv.org/abs/2106.06600">Break-It-Fix-It: Unsupervised Learning for Program Repair</a>. Michihiro Yasunaga, Percy Liang. 2021. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p><a href="https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14603">DeepFix: Fixing common C language errors by deep learning</a>. Rahul Gupta, Soham Pal, Aditya Kanade, Shirish Shevade. 2017. <a href="https://arxiv.org/abs/1805.11683">DeepBugs: A Learning Approach to Name-based Bug Detection</a>. Michael Pradel, Koushik Sen. 2018. <a href="https://arxiv.org/abs/1904.01720">Neural program repair by jointly learning to localize and repair</a>. Marko Vasic, Aditya Kanade, Petros Maniatis, David Bieber, Rishabh Singh. 2019. <a href="https://openreview.net/pdf?id=B1lnbRNtwr">Global relational models of source code</a>. Vincent J. Hellendoorn, Charles Sutton, Rishabh Singh, Petros Maniatis, David Bieber. 2020. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:6" role="doc-endnote">
+      <p><a href="https://arxiv.org/abs/1511.06709">Improving Neural Machine Translation Models with Monolingual Data</a>. Rico Sennrich, Barry Haddow, Alexandra Birch. 2016. <a href="https://arxiv.org/abs/1804.07755">Phrase-Based &amp; Neural Unsupervised Machine Translation</a>. Guillaume Lample, Myle Ott, Alexis Conneau, Ludovic Denoyer, Marc’Aurelio Ranzato. 2018. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:7" role="doc-endnote">
+      <p><a href="https://github.com/michiyasunaga/BIFI">https://github.com/michiyasunaga/BIFI</a> <a href="#fnref:7" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:8" role="doc-endnote">
+      <p><a href="https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14603">DeepFix: Fixing common C language errors by deep learning</a>. Rahul Gupta, Soham Pal, Aditya Kanade, Shirish Shevade. 2017. <a href="#fnref:8" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:9" role="doc-endnote">
+      <p><a href="https://aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14603">DeepFix: Fixing common C language errors by deep learning</a>. Rahul Gupta, Soham Pal, Aditya Kanade, Shirish Shevade. 2017. <a href="#fnref:9" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:10" role="doc-endnote">
+      <p><a href="https://arxiv.org/abs/1906.10502">SampleFix: Learning to Correct Programs by Sampling Diverse Fixes</a>. Hossein Hajipour, Apratim Bhattacharya, Mario Fritz. 2019. <a href="#fnref:10" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:11" role="doc-endnote">
+      <p><a href="https://arxiv.org/abs/2005.10636">Graph-based, Self-Supervised Program Repair from Diagnostic Feedback</a>. Michihiro Yasunaga, Percy Liang. 2020. <a href="#fnref:11" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:12" role="doc-endnote">
+      <p><a href="https://arxiv.org/abs/2109.06822">LM-Critic: Language Models for Unsupervised Grammatical Error Correction</a>. Michihiro Yasunaga, Jure Leskovec, Percy Liang. 2021. <a href="#fnref:12" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/bifi/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/bifi/&text=Break-It-Fix-It%3A+Unsupervised+Learning+for+Fixing+Source+Code+Errors%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/bifi/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/bifi/&title=Break-It-Fix-It%3A+Unsupervised+Learning+for+Fixing+Source+Code+Errors%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/bifi/&title=Break-It-Fix-It%3A+Unsupervised+Learning+for+Fixing+Source+Code+Errors%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Break-It-Fix-It%3A+Unsupervised+Learning+for+Fixing+Source+Code+Errors%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/bifi/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#program+repair">
+      <p><i class="fa fa-tag fa-fw"></i> program repair</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#program+synthesis">
+      <p><i class="fa fa-tag fa-fw"></i> program synthesis</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#unsupervised+learning">
+      <p><i class="fa fa-tag fa-fw"></i> unsupervised learning</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/data-centric-ai-retrospective/">
+      <p>Previous post</p>
+        Our Journey towards Data-Centric AI: A Retrospective
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/retrieval-based-NLP/">
+      <p>Next post</p>
+        Building Scalable, Explainable, and Adaptive NLP Models with Retrieval
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

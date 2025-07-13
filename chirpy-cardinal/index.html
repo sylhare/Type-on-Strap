@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/responsive.css"> 
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/chirpy-cardinal/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Inside Chirpy Cardinal: Stanford’s Open-Source Social Chatbot that Won 2nd place in the Alexa Prize | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Inside Chirpy Cardinal: Stanford’s Open-Source Social Chatbot that Won 2nd place in the Alexa Prize" />
+<meta name="author" content="<a href="https://www.stanford.edu/~ashwinpp/">Ashwin Paranjape</a> and <a href="https://www.linkedin.com/in/ameliahardy/">Amelia Hardy</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Last year, Stanford won 2nd place in the Alexa Prize Socialbot Grand Challenge 3 for social chatbots. In this post, we look into building a chatbot that combines the flexibility and naturalness of neural dialog generation with the reliability and practicality of scripted dialogue. We also announce an open-source version of our socialbot with the goal of enabling future research." />
+<meta property="og:description" content="Last year, Stanford won 2nd place in the Alexa Prize Socialbot Grand Challenge 3 for social chatbots. In this post, we look into building a chatbot that combines the flexibility and naturalness of neural dialog generation with the reliability and practicality of scripted dialogue. We also announce an open-source version of our socialbot with the goal of enabling future research." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/chirpy-cardinal/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/chirpy-cardinal/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-09T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Inside Chirpy Cardinal: Stanford’s Open-Source Social Chatbot that Won 2nd place in the Alexa Prize" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Inside Chirpy Cardinal: Stanford’s Open-Source Social Chatbot that Won 2nd place in the Alexa Prize","dateModified":"2021-04-09T00:00:00-07:00","datePublished":"2021-04-09T00:00:00-07:00","description":"Last year, Stanford won 2nd place in the Alexa Prize Socialbot Grand Challenge 3 for social chatbots. In this post, we look into building a chatbot that combines the flexibility and naturalness of neural dialog generation with the reliability and practicality of scripted dialogue. We also announce an open-source version of our socialbot with the goal of enabling future research.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/chirpy-cardinal/"},"url":"http://ai.stanford.edu/blog/chirpy-cardinal/","author":{"@type":"Person","name":"<a href=\"https://www.stanford.edu/~ashwinpp/\">Ashwin Paranjape</a> and <a href=\"https://www.linkedin.com/in/ameliahardy/\">Amelia Hardy</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Inside Chirpy Cardinal: Stanford's Open-Source Social Chatbot that Won 2nd place in the Alexa Prize | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Last year, Stanford won 2nd place in the Alexa Prize Socialbot Grand Challenge for social chatbots. In this post, we look into building a chatbot that combin...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Inside Chirpy Cardinal: Stanford's Open-Source Social Chatbot that Won 2nd place in the Alexa Prize">
+    
+    <meta name="twitter:description" content="Last year, Stanford won 2nd place in the Alexa Prize Socialbot Grand Challenge for social chatbots. In this post, we look into building a chatbot that combines the flexibility and naturalness of neural dialog generation with the reliability and practicality of scripted dialogue.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-04-09-chirpy-cardinal/chirpy_animation_2.gif">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-04-09-chirpy-cardinal/chirpy_animation_2.gif">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Inside Chirpy Cardinal: Stanford's Open-Source Social Chatbot that Won 2nd place in the Alexa Prize</h1>
+    <p class="meta">
+    <a href="https://www.stanford.edu/~ashwinpp/">Ashwin Paranjape</a> and <a href="https://www.linkedin.com/in/ameliahardy/">Amelia Hardy</a>
+    <div class="post-date">April 9, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p style="font-size:1.3rem;">Last year, Stanford won 2nd place in the <a href="https://developer.amazon.com/alexaprize/challenges/past-challenges/challenge3">Alexa Prize Socialbot Grand Challenge 3</a> for social chatbots. In this post, we look into building a chatbot that combines the flexibility and naturalness of neural dialog generation with the reliability and practicality of scripted dialogue. We also announce an open-source version of our socialbot with the goal of enabling future research.</p>
+
+<p style="font-size:1.3rem;">Our bot, Chirpy, is a modern social chatbot, tested and validated by real users, capable of discussing a broad range of topics. We can’t wait to introduce it to you!</p>
+
+<h2 style="margin-top: 2rem" id="what-makes-chirpy-special">What makes Chirpy special?</h2>
+<p>Social conversations – such as one you would have with a friend – challenge chatbots to demonstrate human traits: emotional intelligence and empathy, world knowledge, and conversational awareness. They also challenge us – researchers and programmers – to imagine novel solutions and build fast and scalable systems. As an <a href="https://developer.amazon.com/alexaprize/challenges/past-challenges/challenge3">Alexa Prize team</a>, we created Chirpy, a social chatbot that interacted with hundreds of thousands of people who rated the conversations and validated our approaches. We were able to successfully incorporate neural generation into Chirpy and here we explain what went into making that happen.</p>
+
+<p><em>Recently, there has been enormous progress in building large neural net models that can produce fluent, coherent text by training them on a very large amount of text <sup id="fnref:BART" role="doc-noteref"><a href="#fn:BART" class="footnote">1</a></sup><sup id="fnref:GPT-3" role="doc-noteref"><a href="#fn:GPT-3" class="footnote">2</a></sup>. One might wonder, “Why not just extend these models and fine-tune them (or train them) on large dialogue corpora?”</em> In fact Meena<sup id="fnref:Meena" role="doc-noteref"><a href="#fn:Meena" class="footnote">3</a></sup>, BlenderBot<sup id="fnref:BlenderBot" role="doc-noteref"><a href="#fn:BlenderBot" class="footnote">4</a></sup>, and DialoGPT<sup id="fnref:DialoGPT" role="doc-noteref"><a href="#fn:DialoGPT" class="footnote">5</a></sup> attempt to do exactly this, yet they are not being used to chat with people in the real world – why? First, they lack controllability and can respond unpredictably to new, or out-of-domain inputs. For example they can generate toxic language and cause safety issues. Furthermore, they lack consistency over long conversations – forgetting, repeating, and contradicting themselves. Although neurally-generated dialog is more flexible and natural than scripted dialog, as the number of neural turns increases, their errors compound and so does the likelihood of producing inconsistent or illogical responses.</p>
+
+<p><em>Since neural generation is unreliable, practical conversational agents are dominated by hand-written rules:</em>  dialogue trees, templated responses, topic ontologies, and so on. Figure 1 shows an example of this type of conversation. The bot gives a series of scripted responses, choosing responses based on fixed criteria –  for example, whether or not a song name is detected. This design has benefits: developers writing these rules can interpret the system’s choices, control the direction of the conversation, and ensure consistency. But these rules are brittle! An unanticipated user utterance that gets misclassified into a wrong branch can lead to absurd responses and lead down a path that is hard to recover from. Additionally, depending on a predetermined set of templated responses limits the range of possibilities and can make the bot sound unnatural.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" style="float:right; display:inline;" src="/blog/assets/img/posts/2021-04-09-chirpy-cardinal/figure1_600p.png" /></p>
+<figcaption>
+<strong>Figure 1</strong>: Example of a hand-written dialogue tree. Unanticipated or misclassified user responses can lead to absurd responses and paths that are hard to recover from.
+</figcaption>
+</div></figure>
+
+<p>Both neural and scripted dialog have clear benefits and drawbacks. We designed Chirpy to take advantage of both, choosing a modular architecture that lets us fluidly combine elements of neural and scripted conversations. We refer to our bot’s modules as response generators, or RGs. Each response generator is designed for a specific type of conversation such as talking about music, exchanging opinions, or sharing factual information. Based on their roles, some response generators are scripted, some are entirely neural, and others use a combination of neural and scripted dialog. We track entities, topics, emotions, and opinions using rules that maintain consistency across response generators, without sacrificing the flexibility of our neural components. This modular design allows users to add new response generators without needing to alter large parts of the codebase every time they want to extend Chirpy’s coverage. In the following sections, we highlight a few response generators and how they fit into our broader system.</p>
+
+<h2 id="response-generators">Response Generators</h2>
+
+<p style="font-size:1.25rem;">Our response generators range from fully rule-based to fully neural. First, we’ll highlight three to demonstrate this range: the music response generator, which is entirely rule-based, the personal chat response generator, which relies entirely on a neural generative model, and the wikipedia response generator, which combines both rule-based and neurally-generated content. In the next section, we’ll discuss how Chirpy decides which RG to use, so that it can leverage their different strengths.</p>
+
+<h4 id="music-response-generator">Music Response Generator</h4>
+<p>Chirpy’s music response generator uses rule-based, scripted dialog trees, like the example shown in Figure 1. It asks the user a series of questions about their musical preferences and, depending on their answers, selects a response. All possible responses are hand-written in advance, so this RG is highly effective at handling cases where the user responds as expected, but has more difficulty when they say something it doesn’t have a rule for.</p>
+
+<h4 id="personal-chat-response-generator">Personal Chat Response Generator</h4>
+<p>We wanted Chirpy to have the ability to discuss users’ personal experiences and emotions. Since these are highly varied, we used neural generation because of its flexibility when handling previously unseen utterances. As shown in Figure 2, neural generation models input a context and then generate the response word-by-word. We fine-tuned a GPT2-medium model <sup id="fnref:transfer-transfo" role="doc-noteref"><a href="#fn:transfer-transfo" class="footnote">6</a></sup> on the EmpatheticDialogues dataset <sup id="fnref:empathetic-dialogues" role="doc-noteref"><a href="#fn:empathetic-dialogues" class="footnote">7</a></sup>, which consists of conversations between a speaker describing an emotional personal experience and a listener who responds to the speaker. Since the conversations it contains are relatively brief, grounded in specific emotional situations, and focused on empathy, this dataset is well suited to the personal chat RG.</p>
+
+<p>To keep neural conversations focused and effective, we begin each personal chat discussion by asking the user a scripted starter question, e.g., What do you like to do to relax? On each subsequent turn, we pass the conversation history as context to the GPT-2 model, and then sample 20 diverse responses. When selecting the final response, we prioritize generations that contain questions. However, if fewer than one third of the responses contain questions, we assume that the model no longer has a clear path forward, select a response without a question, and hand over to another response generator. Not continuing neurally generated conversation segments for too long is a simple but effective strategy for preventing the overall conversation quality from degrading.</p>
+
+<h4 id="wiki-response-generator">Wiki Response Generator</h4>
+<p>We wanted Chirpy to be able to discuss a broad range of topics in depth. One source of information for a broad range of topics is Wikipedia, which provides in-depth content for millions of entities. Chirpy tracks the entity under discussion and if it is able to find a corresponding Wikipedia article, the Wiki RG searches for relevant sentences using TF-IDF, a standard technique used by search engines to find relevant documents based on text overlap with an underlying query. To encourage such overlap, we have our bot ask a handwritten open-ended question that is designed to evoke a meaningful response, eg in Figure 2 “I’m thinking about visiting the Trevi fountain. Do you have any thoughts about what I should do?”</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" style="float:right; display:inline;" src="/blog/assets/img/posts/2021-04-09-chirpy-cardinal/figure2_600p.png" /></p>
+<figcaption>
+<strong>Figure 2</strong>: In the first utterance, we have our bot ask a handwritten question. The user in response provides a meaningful answer which we can use to find related content from the Wikipedia page on the Trevi Fountain. The neural rephrasing model takes the two prior turns and the snippet as input to produce a response that weaves factual sentences into the conversational narrative. 
+</figcaption>
+</div></figure>
+
+<p>However, quoting sentences from Wikipedia is insufficient, due to its encyclopedic, stiff writing style. When people share information they connect it to the conversation thus far and style it conversationally. Thus, we use a neural rephrasing model that takes the conversational history and the retrieved wikipedia sentence as input and generates a conversationally phrased reply. This model is trained on a modified version of the Topical Chat Dataset <sup id="fnref:topical-chat" role="doc-noteref"><a href="#fn:topical-chat" class="footnote">8</a></sup> which contains conversations paired with factual sentences. Unfortunately, the model isn’t perfect and makes mistakes from time to time. We handle user’s confusion with a few handwritten rules.</p>
+
+<h2 id="how-do-the-response-generators-fit-together">How do the response generators fit together?</h2>
+
+<p>There are clear benefits to all three types of dialog – entirely scripted, partially scripted, and entirely neural. So on a given turn, how do we decide which kind of response to give?</p>
+
+<p>Many other chatbots use a dialog management strategy where on a given turn, the bot gets a user utterance, decides which module can handle it best, and then returns the next response from this module. Our bot delays that decision until after generation, so that it can make a more informed choice. On each turn, every module within the bot generates a response and a self-assessed priority using module specific context. Once every response generator has produced some output, the bot will then use these priorities to select the highest priority response.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" style="float:right; display:inline;" src="/blog/assets/img/posts/2021-04-09-chirpy-cardinal/figure3_600p.png" /></p>
+<figcaption>
+<strong>Figure 3</strong>: Example conversation with our bot. In the second utterance, our bot uses a response from Launch RG appended with a prompt from Personal Chat RG. When the topic of conversation shifts to music, Music RG takes over. In the last turn, a lack of interest, the Music RG produces a response to acknowledge and hands over to Categories RG which provides a prompt.  
+</figcaption>
+</div></figure>
+
+<p>Since a module may decide it has finished discussing a topic, we allow another module to append a prompt and take over on the same turn. The first module’s response acknowledges the users’ previous utterance, and the second module’s prompt gives the user direction for the next turn. For example, the user might receive a response “I also like avocados” from the opinions response generator, which is used for casual exchange of personal opinions, and then a prompt “Would you like to know more about the history of avocados?” from the Wikipedia response generator, which is used for sharing factual information. Figure 3 shows an example of the type of conversation our bot has, with different RGs handling their own specialized types of dialog.</p>
+
+<p>The animations below show how the response and prompt selection works. The opinion, wikipedia, and personal chat modules use the state and annotations to generate responses, the bot selects the best response and prompt, and then the bot updates its state based on this choice.</p>
+
+<figure class="figure"><div class="figure__main">
+<video muted="" controls="" playsinline="" class="postimage">
+  <source src="/blog/assets/img/posts/2021-04-09-chirpy-cardinal/chirpy_animation_1.mp4" type="video/mp4" />
+</video>
+<figcaption style="text-align:center;">
+<strong>Step 1</strong>: Annotators run on new user message and their annotations are stored in Chirpy's state.
+</figcaption>
+</div></figure>
+<figure class="figure"><div class="figure__main">
+<video muted="" controls="" playsinline="" class="postimage">
+  <source src="/blog/assets/img/posts/2021-04-09-chirpy-cardinal/chirpy_animation_2_no_border.mp4" type="video/mp4" />
+</video>
+<figcaption style="text-align:center;">
+<strong>Step 2</strong>: Response generators use annotations to produce responses and the response with the highest priority is selected.
+</figcaption>
+</div></figure>
+<figure class="figure"><div class="figure__main">
+<video muted="" controls="" playsinline="" class="postimage">
+  <source src="/blog/assets/img/posts/2021-04-09-chirpy-cardinal/chirpy_animation_3_no_border.mp4" type="video/mp4" />
+</video>
+<figcaption style="text-align:center;">
+<strong>Step 3</strong>: Since the highest priority response did not include a prompt, response generators are also asked to produce prompts. The highest-priority prompt is chosen and combined with the previously selected response. This message is returned to the user.
+</figcaption>
+</div></figure>
+
+<h2 id="how-can-i-use-chirpy">How can I use Chirpy?</h2>
+
+<p>We’re open-sourcing Chirpy Cardinal, so that others can expand on the existing socialbot, create their own, or simply have a social conversation. This release is unique for several reasons.</p>
+
+<dl>
+  <dt>User-tested design</dt>
+  <dd>Our bot has already been tested over hundreds of thousands of conversations during the Alexa Prize Competition. Its strategies are verified and can appeal to a broad range of users with diverse interests.</dd>
+  <dt>Essential building blocks</dt>
+  <dd>We’ve implemented time-consuming but essential basics, such as entity-linking and dialog management, so that you won’t have to. This allows new developers to move chatbot design forward faster, focusing on higher-level research and design.</dd>
+  <dt>Customizable architecture</dt>
+  <dd>Our bot’s flexible architecture allows easier customization for your own unique use cases. You can introduce new areas of content by creating specialized response generators, and you can choose what your bot prioritizes by adjusting the settings of the dialog manager.</dd>
+  <dt>Experiment framework</dt>
+  <dd>Finally, our bot was designed to enable dialog research. Users can create their own experiments, which are stored as parameters of the state, determine how often these experiments should be triggered, and then use the collected data to compare different strategies or models.</dd>
+</dl>
+
+<p>To get started, you can try the <a href="https://stanfordnlp.github.io/chirpycardinal/live_demo/">live demo</a> of chirpy yourself before diving into the code in our <a href="https://github.com/stanfordnlp/chirpycardinal">github repo</a>.</p>
+
+<p>You can find more details about our system in a 30 minute <a href="https://www.youtube.com/watch?v=2pmAvOJOmGg">overview presentation</a> or our <a href="https://arxiv.org/abs/2008.12348">technical paper</a>.</p>
+
+<p>Our team continues to work on improving open-domain dialogue. You can find more about our current Alexa Prize team, publications and other updates at <a href="https://stanfordnlp.github.io/chirpycardinal/">https://stanfordnlp.github.io/chirpycardinal/</a></p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>We thank our colleages at <a href="https://stanfordnlp.github.io/chirpycardinal/people/">Stanford’s Alexa Prize Team</a>: Abigail See (co-lead), Kathleen Kenealy, Haojun Li, Peng Qi, Kaushik Ram Sadagopan, Nguyet Minh Phu, Dilara Soylu, Christopher D. Manning (faculty advisor).</p>
+
+<p>We also thank Haojun Li and Dilara Soylu for helping us with open sourcing of the codebase.</p>
+
+<p>Thanks to Siddharth Karamcheti, Megha Srivastava and rest of the SAIL Blog Team for reviewing and publishing our blog post.</p>
+
+<p>This research was supported in part by <a href="https://oval.cs.stanford.edu">Stanford Open Virtual Assistant Lab (OVAL)</a> (for Amelia Hardy) and Alexa Prize Stipend Award (for Haojun Li, Kaushik Ram Sadagopan, Nguyet Minh Phu, Dilara Soylu).</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:BART" role="doc-endnote">
+      <p>Mike Lewis, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Veselin Stoyanov, and Luke Zettlemoyer. (2019). Bart: Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension. CoRR, abs/1910.13461. <a href="#fnref:BART" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:GPT-3" role="doc-endnote">
+      <p>Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, … and Dario Amodei. (2020). Language Models are Few-Shot Learners. arXiv:2005.14165 <a href="#fnref:GPT-3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:Meena" role="doc-endnote">
+      <p>Daniel Adiwardana, Minh-Thang Luong, David R. So, Jamie Hall, Noah Fiedel, Romal Thoppilan, … Quoc V. Le. (2020). Towards a human-like open-domain chatbot. arXiv preprint arXiv:2001.09977. <a href="#fnref:Meena" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:BlenderBot" role="doc-endnote">
+      <p>Stephen Roller, Emily Dinan, Naman Goyal, Da Ju, Mary Williamson, Yinhan Liu, …  Jason Weston. (2020). Recipes for building an open-domain chatbot. arXiv preprint arXiv:2004.13637. <a href="#fnref:BlenderBot" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:DialoGPT" role="doc-endnote">
+      <p>Yizhe Zhang, Siqi Sun, Michel Galley, Yen-Chun Chen, Chris Brockett, Xiang Gao, Jianfeng Gao, Jingjing Liu, &amp; Bill Dolan. (2020). DialoGPT: Large-Scale Generative Pre-training for Conversational Response Generation. arXiv preprint arXiv:1911.00536. <a href="#fnref:DialoGPT" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:transfer-transfo" role="doc-endnote">
+      <p>Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. (2019). Language Models are Unsupervised Multitask Learners. <a href="#fnref:transfer-transfo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:empathetic-dialogues" role="doc-endnote">
+      <p>Hannah Rashkin, Eric Michael Smith, Margaret Li and Y-Lan Boureau. (2019). Towards Empathetic Open-domain Conversation Models: a New Benchmark and Dataset. arXiv preprint arXiv:1811.00207. <a href="#fnref:empathetic-dialogues" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:topical-chat" role="doc-endnote">
+      <p>Karthik Gopalakrishnan, Behnam Hedayatnia, Qinlang Chen, Anna Gottardi, Sanjeev Kwatra, Anu Venkatesh, Raefer Gabriel, &amp; Dilek Hakkani-Tür (2019). Topical-Chat: Towards Knowledge-Grounded Open-Domain Conversations. In Proc. Interspeech 2019 (pp. 1891–1895). <a href="#fnref:topical-chat" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/chirpy-cardinal/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/chirpy-cardinal/&text=Inside+Chirpy+Cardinal%3A+Stanford%27s+Open-Source+Social+Chatbot+that+Won+2nd+place+in+the+Alexa+Prize%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/chirpy-cardinal/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/chirpy-cardinal/&title=Inside+Chirpy+Cardinal%3A+Stanford%27s+Open-Source+Social+Chatbot+that+Won+2nd+place+in+the+Alexa+Prize%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/chirpy-cardinal/&title=Inside+Chirpy+Cardinal%3A+Stanford%27s+Open-Source+Social+Chatbot+that+Won+2nd+place+in+the+Alexa+Prize%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Inside+Chirpy+Cardinal%3A+Stanford%27s+Open-Source+Social+Chatbot+that+Won+2nd+place+in+the+Alexa+Prize%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/chirpy-cardinal/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#alexa+prize">
+      <p><i class="fa fa-tag fa-fw"></i> alexa prize</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#chatbots">
+      <p><i class="fa fa-tag fa-fw"></i> chatbots</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#neural+generation">
+      <p><i class="fa fa-tag fa-fw"></i> neural generation</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#open+source">
+      <p><i class="fa fa-tag fa-fw"></i> open source</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#socialbot">
+      <p><i class="fa fa-tag fa-fw"></i> socialbot</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/neural-mechanics/">
+      <p>Previous post</p>
+        Neural Mechanics: Symmetry and Broken Conservation Laws In Deep Learning Dynamics
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/aistats-2021/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at AISTATS 2021
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

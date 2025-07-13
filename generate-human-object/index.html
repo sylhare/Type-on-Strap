@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/generate-human-object/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Learning to Generate Human–Object Interactions | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Learning to Generate Human–Object Interactions" />
+<meta name="author" content="<a href='https://twitter.com/drsrinathsridha'>Srinath Sridhar</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sources: Oculus First Contact, Boston Dynamics." />
+<meta property="og:description" content="Sources: Oculus First Contact, Boston Dynamics." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/generate-human-object/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/generate-human-object/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-07T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Learning to Generate Human–Object Interactions" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Learning to Generate Human–Object Interactions","dateModified":"2019-05-07T00:00:00-07:00","datePublished":"2019-05-07T00:00:00-07:00","description":"Sources: Oculus First Contact, Boston Dynamics.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/generate-human-object/"},"url":"http://ai.stanford.edu/blog/generate-human-object/","author":{"@type":"Person","name":"<a href='https://twitter.com/drsrinathsridha'>Srinath Sridhar</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Learning to Generate Human–Object Interactions | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Human–object interactions are multi-stepped and governed by physics as well human goals, customs, and biomechanics -- how can we teach machines to capture, u...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Learning to Generate Human–Object Interactions">
+    
+    <meta name="twitter:description" content="Human–object interactions are multi-stepped and governed by physics as well human goals, customs, and biomechanics -- how can we teach machines to capture, understand, and replicate these interactions?">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-05-07-generate-human-object/thumb.gif">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-05-07-generate-human-object/thumb.gif">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Learning to Generate Human–Object Interactions</h1>
+    <p class="meta">
+    <a href='https://twitter.com/drsrinathsridha'>Srinath Sridhar</a>
+    <div class="post-date">May 7, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <figure class="figure"><div class="figure__main">
+<figure>
+    <img class="postimagehalf" src="/blog/assets/img/posts/2019-05-07-generate-human-object/robotvr.gif" /> 
+    <img class="postimagehalf" src="/blog/assets/img/posts/2019-05-07-generate-human-object/robotsnow.gif" /> 
+</figure>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Sources: Oculus First Contact, Boston Dynamics.</p>
+</figcaption></figure>
+
+<p>Tremendous progress has been made in the last few years in developing
+advanced virtual reality (VR) and robotics platforms. As the examples
+above show, these platforms now allow us to experience more immersive
+virtual worlds, or allow robots to perform challenging locomotion tasks
+like walking in snow. So, can we soon expect to have robots that can set
+the dinner table or do our dishes?</p>
+
+<p>Unfortunately, we are not yet there.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/examples.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Examples of human–object interactions in everyday life. Sources: Visit
+Jordan, EPIC Kitchens.</p>
+</figcaption></figure>
+
+<p>To understand why, consider the diversity of interactions in daily human
+life. We spend almost all of our waking hours performing
+activities—simple actions like picking up a fruit or more complex ones
+like cooking a meal. These physical interactions, called <strong>human–object interactions</strong>, are multi-stepped and governed by physics as well as human goals, customs, and biomechanics. In order to develop more dynamic virtual
+worlds, and smarter robots, we need to <em>teach machines to capture, understand, and replicate</em> these interactions. The information we need
+to learn these interactions is already widely available in the form of
+large video collections (e.g., YouTube, Netflix, Facebook).</p>
+
+<p>In this post, I will describe some first steps we have taken towards
+learning multi-step human–object interactions from videos. I will
+discuss two applications of our method: (1) generating plausible and
+novel human-object interaction animations suitable for VR/AR, (2)
+enabling robots to react smartly to user behavior and interactions.</p>
+
+<h2 id="problem-and-challenges">Problem and Challenges</h2>
+
+<p>We focus our investigation on a subset of the diverse interactions that
+humans experience — common tabletop home or office interactions where
+the hand manipulates objects on a desk or table. Tabletop interactions
+such as the ones shown below constitute a large proportion of our daily
+actions and yet are hard to capture because of the large space of
+hand-object configurations.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/example_data.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Some example tabletop interactions from our video collection. We
+gathered 75 videos (20 validation) similar to the ones shown above.</p>
+</figcaption></figure>
+
+<p>Our goal is to <strong>recognize, represent and generate</strong> these physical
+interactions by learning from large video collections. Any such approach
+must solve challenging vision-based recognition tasks and generate
+multi-step interactions that are consistent, temporally and spatially,
+with present and past states of the environment. It should also obey
+basic physical laws (e.g., objects cannot interpenetrate), human customs
+(e.g., hold a coffee mug with its handle), and limitations of human
+biomechanics (e.g., not reach too far).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/tableobjects.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>We focus on human–object interactions in typical tabletop settings. We
+can capture interactions from video collections (top inset) and
+synthesize animations of these interactions.</p>
+</figcaption></figure>
+
+<p><strong>1. Represent as Action Plots</strong></p>
+
+<p>Human activity spaces and the interactions that they can support span a
+large space of possibilities. Interacting with objects results in
+continuous spatio-temporal transformations, making them difficult to
+formalize. However, these complex interactions can be modeled
+sequentially, i.e., through transition probabilities from a given state
+to subsequent states.</p>
+
+<p>To parametrize interactions in this sequential model, we introduce a
+representation called <strong>action plot</strong>. An action plot is a sequence of
+actions performed by a hand causing a state change in the scene. Each
+action defines a unique phase in the interaction and is represented as
+an <strong>action tuple</strong> consisting of an action label, duration, and
+participating objects with their end states and positions. This
+discretization allows us to focus on the combinatorial nature of
+interactions, while abstracting away the complexity of spatio-temporal
+transformations.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/cuppouring.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>For instance, a simple interaction such as pouring water into a cup, can
+be described by an action plot containing the following atomic actions:
+(1) move hand (to grasp cup), (2) move cup, (3) move hand (to grasp
+bottle) (4) move bottle, (5) pour water from bottle to cup, (6) move
+bottle.</p>
+</figcaption></figure>
+
+<p>Formally, an action tuple is defined for a single time step as
+\(T = (a, d, o, s, p)\), where \(a\) is the action label, \(d\) is the action duration,
+\(o\) is the set of active objects participating, \(s\) is the end state of
+\(o\), \(p\) is the end position of \(o\). The duration and end positions are continuous variables in time units
+and 2D coordinates, respectively. The action labels, participating
+objects, and object end states are one-hot vectors denoting discrete
+variables. We decouple the time-varying and the time-invariant
+parameters in the action, which allows us to use appropriate statistical
+models for each.</p>
+
+<p><strong>2. Recognize from Video Collections</strong></p>
+
+<p>Our goal then is to learn to generate action plots containing plausible
+multi-step interactions that capture the physical constraints and causal
+dependencies in the real world. We aim to automatically learn this from
+video collections of humans interacting in a scene, since this is a
+quick, inexpensive and versatile setup. To fully characterize action
+plots, we need: (1) involved object instances, categories and positions,
+(2) hand positions, (3) action detection and segmentation, all of which
+are highly challenging to extract from video. Our automatic pipeline
+builds upon the most recent advances in computer vision and achieves
+state-of-the-art accuracy on tasks such as action segmentation. To learn
+interactions, we acquired a large video collection of 75 interaction
+videos at different locations and users. The videos show hand–object and
+object–object interactions with complex interactions on up to 10
+objects.</p>
+
+<p><strong>Object and Instance Tracking:</strong> An important component of action plots
+are object categories, instances, locations, and states. We use
+state-of-the-art object detectors based on the Faster R-CNN architecture
+to find candidate bounding boxes and labels and object positions (2D and
+approximate 3D) in each frame, and subsequent temporal filtering to
+reduce detection jitter. To infer the object state, we train a
+classifier on the content of each bounding box.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/results.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Results from our method for object instance detection and tracking, and
+hand detection. We build upon the state-of-the-art computer vision
+methods.</p>
+</figcaption></figure>
+
+<p><strong>Hand Detection:</strong> Since most interactions involve the hand, we aim to
+infer which objects are manipulated by the hand as well as the object
+position when it is occluded by the hand. We use a fully convolutional
+neural network (FCN) architecture to detect hands. This network is
+trained using data from the hand masks in the <a href="http://www.cbi.gatech.edu/fpv/"><em>GTEA dataset</em></a> and fine-tuned on a subset of
+our video collection. Hand detection and object motions allow us to
+infer hand state (empty, occupied), which is an important piece of
+information.</p>
+
+<p><strong>Action Segmentation:</strong> To generate action labels for each video frame,
+we need to identify the involved actions as well as their start and end
+times (i.e., action segmentation). We adopt a two phased approach: (1)
+extract meaningful image features for each frame, (2) use the extracted
+features to classify action labels for each frame and segment the
+actions. For added robustness to over-segmentation resulting from
+frame-based action classification, we use a Long Short-Term Memory
+(LSTM) network to aggregate information temporally. Please see <a href="http://www.pirk.info/projects/learning_interactions/index.html"><em>our paper</em></a>
+for more details.</p>
+
+<p><strong>3. Generate using Recurrent Neural Nets</strong></p>
+
+<p>The action plot representation described in part 1 allows us to
+compactly encode complex spatio-temporal interactions, and the
+recognition system in part 2 allows us to create action plots from
+videos. The goal now is to use extracted action plots from video
+collections to learn to generate novel interactions. To make the problem
+tractable, we decouple the time-varying and the time-invariant
+parameters in the action tuple \(T=L \bigcup p\) where \(L=(a,d,o,s)\).
+More specifically, we use a many-to-many RNN to model
+\(L\) and a time-independent Gaussian mixture model for \(p\).</p>
+
+<p><strong>Time-Dependent Action Plot RNN:</strong> Taking inspiration from similar
+sequential problems in natural language processing, we use a
+state-preserving recurrent neural network (RNN) to model the
+time-dependent parameters of interaction. At each timestep, the network
+takes the time-dependent variables \(L_t\)
+as input and predicts \(L_{t+1}\) for next timestep. Specifically, we use a Gated Recurrent Unit (GRU)
+which has a latent state that captures the information about the history
+of past interactions. We train the RNN using action plots extracted from
+a video collection with a combination of the cross entropy and \(L^2\)
+losses.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/diagram.png" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>The Action Plot RNN learns to predict the next state consisting of
+action labels, active objects, object state, and duration. The inputs at
+each timestep are first embedded into vectors with the sizes specified.
+FC indicates fully connected networks (FC) networks composed of three
+consecutive FC, ReLU, FC layers.</p>
+</figcaption></figure>
+
+<p><strong>Time-Independent Object Position Model:</strong> Many interactions involve
+object motions that need to be modeled to generate new plausible
+motions. There are strong physical and co-occurrence priors in object
+distribution. It is common to find open bottles around cups, but
+uncommon around laptops. Since these are not strongly time-dependent, we
+model them with a Gaussian mixture model (GMM) learned from video
+collections.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/gmm.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Time-independent object position model allows us capture physical and
+co-occurrence priors. The above animation shows a heat map of possible
+object locations learned from video collections in a time-independent
+manner.</p>
+</figcaption></figure>
+
+<h2 id="results--applications">Results &amp; Applications</h2>
+
+<p><strong>Animation Synthesis:</strong> Because our approach learns the causal
+dependencies of individual actions, it can be used to generate novel
+plausible action plots that were never observed during training. These
+action plots can then be rendered into realistic animations as shown
+below. This can enable novel applications in virtual/augmented reality
+settings, for instance, to teach new skills to people (e.g., make
+coffee).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/animation.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>Our approach allows animation synthesis. We can generate new
+interactions unseen in training data (bottom left). Please view a longer
+example on YouTube (<a href="https://youtu.be/KJt2UlT4nMA"><em>link</em></a>).</p>
+</figcaption></figure>
+
+<p><strong>Simulation and Motion Planning for Robots:</strong> We can also enable
+applications in smart and reactive environments to improve the lives of
+the elderly and people with disabilities. We developed a robotic cup
+with a differential drive. The actions of the cup are driven by a
+real-time version of our recognition, representation, and generation
+pipeline. Interactions are captured in real-time and encoded to action
+plots which are then used to predict plausible future states. These
+predictions are used by the robot to react appropriately.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/summoncup.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>“Summon Cup” is an example where our method predicts a possible grasp of
+the cup by the hand. The smart cup moves in the direction of the hand to
+prevent users from needing to overreach. However, if our method detects
+that the hand is previously holding a book, the smart cup does not move
+since the physical constraint of holding only one object at a time is
+implicitly learned by our method.</p>
+</figcaption></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2019-05-07-generate-human-object/summonpourcup.gif" /></p>
+</div><figcaption class="figure__caption" style="padding-top:0;"><p>“Summon Cup to Pour” shows examples where the hand, smart cup, and a
+bottle interact in more complex ways. When a filled bottle is moved, the
+smart cup automatically positions itself for easier pouring. However,
+when we detect that the bottle is empty, the smart cup does not react.
+This level of semantic planning is only possible with an understanding
+of complex human–object interactions.</p>
+</figcaption></figure>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>This work is a first step towards recognizing, representing, and
+generating plausible dynamic multi-step human–object interactions. We
+presented a method to automatically learn interactions from video
+collections by recognizing interactions from videos, representing them
+compactly using action plots, and generating novel and plausible
+interactions. While we take a first step forward, there are important
+limitations that need to be overcome, particularly with long time
+horizon activities which our Action Plot RNN cannot yet capture. We are
+also currently limited to tabletop interaction tasks. In the future, we
+plan to consider longer-term interactions and improving the physical
+plausibility of the interactions we generate.</p>
+
+<p>We believe that methods that take a sequential view of interactions
+provide a strong foundation for learning to generate human–object
+interactions. Our method provides one possible solution, but extensive
+research is needed before we can create more immersive and dynamic virtual
+realities, or build robots that can make dinner and wash dishes.</p>
+
+<hr />
+
+<p>This blog post is based on the following paper that will appear at
+<a href="https://www.eurographics2019.it/"><em>Eurographics 2019</em></a>. For more
+details on this work, datasets, and code, please visit the <a href="http://www.pirk.info/projects/learning_interactions/index.html"><em>project webpage</em></a>.</p>
+
+<p><strong>Learning a Generative Model for Multi-Step Human-Object Interactions
+from Videos.</strong> He Wang*, Soeren Pirk*, Ersin Yumer, Vladimir Kim, Ozan
+Sener, Srinath Sridhar, Leonidas J. Guibas. Eurographics 2019 [<strong>Honorable Mention</strong>].
+<a href="http://www.pirk.info/projects/learning_interactions/index.html"><em>Project Webpage</em></a>, <a href="http://www.pirk.info/papers/Wang.etal-2019-LearningInteractions.pdf"><em>PDF</em></a></p>
+
+<p>* joint first authors</p>
+
+<p>Thanks to Michelle Lee, Andrey Kurenkov, Davis Rempe, Supriya Krishnan,
+and Vladimir Kim for feedback on this post. This research was supported
+by a grant from Toyota-Stanford Center for AI Research, NSF grant
+CCF-1514305, a Vannevar Bush Faculty Fellowship, and a Google Focused
+Research Award.</p>
+
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/generate-human-object/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/generate-human-object/&text=Learning+to+Generate+Human%E2%80%93Object+Interactions%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/generate-human-object/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/generate-human-object/&title=Learning+to+Generate+Human%E2%80%93Object+Interactions%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/generate-human-object/&title=Learning+to+Generate+Human%E2%80%93Object+Interactions%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Learning+to+Generate+Human%E2%80%93Object+Interactions%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/generate-human-object/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#hci">
+      <p><i class="fa fa-tag fa-fw"></i> hci</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#learning">
+      <p><i class="fa fa-tag fa-fw"></i> learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#vision">
+      <p><i class="fa fa-tag fa-fw"></i> vision</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/reliable-ai/">
+      <p>Previous post</p>
+        Progress Toward Safe and Reliable AI
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/controllable-fairness/">
+      <p>Next post</p>
+        Controllable Fairness in Machine&nbsp;Learning
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

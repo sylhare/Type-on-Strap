@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/sc-magnifies-disparities/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Selective Classification Can Magnify Disparities Across Groups | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Selective Classification Can Magnify Disparities Across Groups" />
+<meta name="author" content="<a href="http://people.eecs.berkeley.edu/~erjones">Erik Jones</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Selective classification, where models are allowed to “abstain” when they are uncertain about a prediction, is a useful approach for deploying models in settings where errors are costly. For example, in medicine, model errors can have life-or-death ramifications, but abstentions can be easily handled by backing off to a doctor, who then makes a diagnosis. Across a range of applications from vision 123 and NLP 45, even simple selective classifiers, relying only on model logits, routinely and often dramatically improve accuracy by abstaining. This makes selective classification a compelling tool for ML practitioners 67. Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of the IEEE International Conference on Computer Vision, pp. 3730–3738, 2015. &#8617; Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, and Percy Liang. Distributionally robust neural networks for group shifts: On the importance of regularization for worst-case generalization. In International Conference on Learning Representations (ICLR), 2020. &#8617; Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Chris Chute, Henrik Marklund, Behzad Haghgoo, Robyn Ball, Katie Shpanskaya, et al. Chexpert: A large chest radiograph dataset with uncertainty labels and expert comparison. In Association for the Advancement of Artificial Intelligence (AAAI), volume 33, pp. 590–597, 2019. &#8617; Daniel Borkan, Lucas Dixon, Jeffrey Sorensen, Nithum Thain, and Lucy Vasserman. Nuanced metrics for measuring unintended bias with real data for text classification. In World Wide Web (WWW), pp. 491–500, 2019. &#8617; Adina Williams, Nikita Nangia, and Samuel Bowman. A broad-coverage challenge corpus for sentence understanding through inference. In Association for Computational Linguistics (ACL), pp. 1112–1122, 2018. &#8617; Yonatan Giefman and Ran El-Yaniv. SelectiveNet: A deep neural network with an integrated reject option. In International Conference on Machine Learning (ICML), 2019. &#8617; Hussein Mozannar and David Sontag. Consistent estimators for learning to defer to an expert. In International Conference on Machine Learning (ICML), 2020. &#8617;" />
+<meta property="og:description" content="Selective classification, where models are allowed to “abstain” when they are uncertain about a prediction, is a useful approach for deploying models in settings where errors are costly. For example, in medicine, model errors can have life-or-death ramifications, but abstentions can be easily handled by backing off to a doctor, who then makes a diagnosis. Across a range of applications from vision 123 and NLP 45, even simple selective classifiers, relying only on model logits, routinely and often dramatically improve accuracy by abstaining. This makes selective classification a compelling tool for ML practitioners 67. Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of the IEEE International Conference on Computer Vision, pp. 3730–3738, 2015. &#8617; Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, and Percy Liang. Distributionally robust neural networks for group shifts: On the importance of regularization for worst-case generalization. In International Conference on Learning Representations (ICLR), 2020. &#8617; Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Chris Chute, Henrik Marklund, Behzad Haghgoo, Robyn Ball, Katie Shpanskaya, et al. Chexpert: A large chest radiograph dataset with uncertainty labels and expert comparison. In Association for the Advancement of Artificial Intelligence (AAAI), volume 33, pp. 590–597, 2019. &#8617; Daniel Borkan, Lucas Dixon, Jeffrey Sorensen, Nithum Thain, and Lucy Vasserman. Nuanced metrics for measuring unintended bias with real data for text classification. In World Wide Web (WWW), pp. 491–500, 2019. &#8617; Adina Williams, Nikita Nangia, and Samuel Bowman. A broad-coverage challenge corpus for sentence understanding through inference. In Association for Computational Linguistics (ACL), pp. 1112–1122, 2018. &#8617; Yonatan Giefman and Ran El-Yaniv. SelectiveNet: A deep neural network with an integrated reject option. In International Conference on Machine Learning (ICML), 2019. &#8617; Hussein Mozannar and David Sontag. Consistent estimators for learning to defer to an expert. In International Conference on Machine Learning (ICML), 2020. &#8617;" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/sc-magnifies-disparities/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/sc-magnifies-disparities/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-13T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Selective Classification Can Magnify Disparities Across Groups" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Selective Classification Can Magnify Disparities Across Groups","dateModified":"2021-10-13T00:00:00-07:00","datePublished":"2021-10-13T00:00:00-07:00","description":"Selective classification, where models are allowed to “abstain” when they are uncertain about a prediction, is a useful approach for deploying models in settings where errors are costly. For example, in medicine, model errors can have life-or-death ramifications, but abstentions can be easily handled by backing off to a doctor, who then makes a diagnosis. Across a range of applications from vision 123 and NLP 45, even simple selective classifiers, relying only on model logits, routinely and often dramatically improve accuracy by abstaining. This makes selective classification a compelling tool for ML practitioners 67. Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of the IEEE International Conference on Computer Vision, pp. 3730–3738, 2015. &#8617; Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, and Percy Liang. Distributionally robust neural networks for group shifts: On the importance of regularization for worst-case generalization. In International Conference on Learning Representations (ICLR), 2020. &#8617; Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Chris Chute, Henrik Marklund, Behzad Haghgoo, Robyn Ball, Katie Shpanskaya, et al. Chexpert: A large chest radiograph dataset with uncertainty labels and expert comparison. In Association for the Advancement of Artificial Intelligence (AAAI), volume 33, pp. 590–597, 2019. &#8617; Daniel Borkan, Lucas Dixon, Jeffrey Sorensen, Nithum Thain, and Lucy Vasserman. Nuanced metrics for measuring unintended bias with real data for text classification. In World Wide Web (WWW), pp. 491–500, 2019. &#8617; Adina Williams, Nikita Nangia, and Samuel Bowman. A broad-coverage challenge corpus for sentence understanding through inference. In Association for Computational Linguistics (ACL), pp. 1112–1122, 2018. &#8617; Yonatan Giefman and Ran El-Yaniv. SelectiveNet: A deep neural network with an integrated reject option. In International Conference on Machine Learning (ICML), 2019. &#8617; Hussein Mozannar and David Sontag. Consistent estimators for learning to defer to an expert. In International Conference on Machine Learning (ICML), 2020. &#8617;","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/sc-magnifies-disparities/"},"url":"http://ai.stanford.edu/blog/sc-magnifies-disparities/","author":{"@type":"Person","name":"<a href=\"http://people.eecs.berkeley.edu/~erjones\">Erik Jones</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Selective Classification Can Magnify Disparities Across Groups | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We show that selective classification, where models are allowed to abstain when they are uncertain, can fail to improve and even hurt accuracy over certain s...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Selective Classification Can Magnify Disparities Across Groups">
+    
+    <meta name="twitter:description" content="We show that selective classification, where models are allowed to abstain when they are uncertain, can fail to improve and even hurt accuracy over certain subpopulations of the data.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-10-13-sc-magnifies-disparities/sc_feature.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-10-13-sc-magnifies-disparities/sc_feature.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Selective Classification Can Magnify Disparities Across Groups</h1>
+    <p class="meta">
+    <a href="http://people.eecs.berkeley.edu/~erjones">Erik Jones</a>
+    <div class="post-date">October 13, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Selective classification, where models are allowed to “abstain” when they are uncertain about a prediction, is a useful approach for deploying models in settings where errors are costly. For example, in medicine, model errors can have life-or-death ramifications, but abstentions can be easily handled by backing off to a doctor, who then makes a diagnosis. Across a range of applications from vision <sup id="fnref:liu2015" role="doc-noteref"><a href="#fn:liu2015" class="footnote">1</a></sup><sup id="fnref:sagawagroupdro" role="doc-noteref"><a href="#fn:sagawagroupdro" class="footnote">2</a></sup><sup id="fnref:irvinchexpert" role="doc-noteref"><a href="#fn:irvinchexpert" class="footnote">3</a></sup> and NLP <sup id="fnref:borkan2019" role="doc-noteref"><a href="#fn:borkan2019" class="footnote">4</a></sup><sup id="fnref:williams2018" role="doc-noteref"><a href="#fn:williams2018" class="footnote">5</a></sup>, even simple selective classifiers, relying only on model logits, routinely and often dramatically improve accuracy by abstaining. This makes selective classification a compelling tool for ML practitioners <sup id="fnref:selectivenet" role="doc-noteref"><a href="#fn:selectivenet" class="footnote">6</a></sup><sup id="fnref:mozannar2020" role="doc-noteref"><a href="#fn:mozannar2020" class="footnote">7</a></sup>.</p>
+
+<p>However, in our recent ICLR paper, we find that despite reliably improving average accuracy, <strong>selective classification can fail to improve and even hurt the accuracy over certain subpopulations of the data</strong>. As a motivating example, consider the task of diagnosing pleural effusion, or fluid in the lungs, from chest X-rays. Pleural effusion is often treated with a chest drain, so many pleural effusion cases also have chest drains, while most cases without pleural effusion do not have chest drains <sup id="fnref:oakdenrayner2020" role="doc-noteref"><a href="#fn:oakdenrayner2020" class="footnote">8</a></sup>. While selective classification improves average accuracy for this task, we find that it does not appreciably improve accuracy on the most clinically relevant subgroup, or subpopulation, of the data: those that have pleural effusion but don’t yet have a chest drain, i.e. those that have pleural effusion but have not yet been treated for it. Practitioners, thus, should be wary of these potential failure modes of using selective classification in the wild.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_95" src="/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image2.png" /></p>
+<figcaption>
+Example of the spurious correlation setup. This patient has a pleural effusion (excess fluid in the lung), but does not yet have a chest drain. The model, relying on the presence of a chest drain to make a prediction, incorrectly predicts negative.
+</figcaption>
+</div></figure>
+
+<p>To further outline this critical failure mode of selective classification, we’ll first provide an overview of selective classification. We then demonstrate empirically that selective classification can hurt or fail to significantly improve accuracy on certain subgroups of the data. We next outline our theoretical results, which suggest that selective classification is rarely a good tool to resolve differences in accuracy between subgroups. And finally, suggest methods for building more equitable selective classifiers.</p>
+
+<h3 id="selective-classification-basics">Selective classification basics</h3>
+
+<p>Imagine you are trying to build a model that classifies X-rays as either pleural effusion positive or negative. With standard classification, the model is required to either output positive or negative on each input. In contrast, a selective classifier can additionally abstain from making a prediction when it is not sufficiently confident in any class <sup id="fnref:chow1957" role="doc-noteref"><a href="#fn:chow1957" class="footnote">9</a></sup><sup id="fnref:gal2016" role="doc-noteref"><a href="#fn:gal2016" class="footnote">10</a></sup><sup id="fnref:geifman2017" role="doc-noteref"><a href="#fn:geifman2017" class="footnote">11</a></sup>. By abstaining, selective classifiers aim to avoid making predictions on examples they are likely to classify incorrectly, say a corrupted or difficult-to-classify X-ray, which increases their average accuracy.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_95" src="/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image5.png" /></p>
+<figcaption>
+Selective classification pipeline. The model makes the incorrect prediction of negative. However, the outputted confidence of 0.7 is less than the confidence threshold of 0.8, so the selective classifier abstains. Selective classifiers increase accuracy by abstaining on examples they would get wrong.
+</figcaption>
+</div></figure>
+
+<p>One key question in selective classification is how to choose which examples to abstain on. Selective classifiers can be viewed as two models: one that outputs a prediction (say, negative), and another that outputs a <em>confidence</em> in that prediction (say, 0.7 out of 1.) Whenever the confidence is above a certain (confidence) threshold, the selective classifier outputs the original prediction; for example, if the threshold were 0.6, the selective classifier would predict negative. Otherwise, the selective classifier abstains. In our work, we primarily use <em>softmax response</em> <sup id="fnref:geifman2017:1" role="doc-noteref"><a href="#fn:geifman2017" class="footnote">11</a></sup> to extract confidences: the confidence in a prediction is simply the maximum softmax probability over the possible classes.</p>
+
+<p>Selective classifiers are typically measured in terms of the <em>accuracy</em> (also called <em>selective accuracy</em>) on predicted examples, and the <em>coverage</em>, or fraction of examples the selective classifier makes predictions on <sup id="fnref:elyaniv2010" role="doc-noteref"><a href="#fn:elyaniv2010" class="footnote">12</a></sup>. We can tweak both coverage and accuracy by adjusting the <em>confidence threshold</em>: a lower threshold for making predictions increases the coverage, since the model’s confidence for more examples is sufficiently high. However, this tends to lower average accuracy, as the model is less confident on average in its predictions. In contrast, higher thresholds increase confidence required to make a prediction, reducing the coverage but generally increasing average accuracy.</p>
+
+<p>Typically, researchers measure the performance of selective classifiers by plotting accuracy as a function of coverage. In particular, for each possible coverage (ranging from 0: abstain on everything to 1: predict on everything) they compute the maximum threshold that achieves that coverage, and then plot the accuracy at that threshold. One particularly useful reference point is the <em>full-coverage accuracy</em>: the accuracy of the selective classifier at coverage 1, which is the accuracy of the regular classifier.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_95" src="/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image3.png" /></p>
+<figcaption>
+For five datasets, we plot the average accuracy as a function of the coverage. Reading from high coverages to low coverages (right to left), as the confidence threshold increases, accuracy reliably increases. This is expected, since the model is more confident on average in its predictions at lower coverage, so more of them tend to be correct.
+</figcaption>
+</div></figure>
+
+<h3 id="selective-classification-can-magnify-accuracy-disparities-between-subgroups">Selective classification can magnify accuracy disparities between subgroups</h3>
+
+<p>While prior work mostly focuses on average accuracy for selective classifiers, we instead focus on the accuracy of different <em>subgroups</em> of the data. In particular, we focus on datasets where models often latch onto <em>spurious correlations</em>. For example, in the above pleural effusion task, the model might learn to predict whether or not there is a chest drain, instead of directly diagnosing pleural effusion, because chest drains are highly correlated with pleural effusion; this correlation is spurious because not all pleural effusions have a chest drain. We consider subgroups that highlight this spurious correlation: two groups for when the spurious correlation gives the correct result (positive pleural effusion with chest drain, negative pleural effusion without a chest drain), and two groups when it does not (positive pleural effusion with no chest drain, negative pleural effusion with a chest drain). As a result, a model that learns this spurious correlation obtains high accuracy for the first two subgroups, but low accuracy for the latter two.</p>
+
+<p>In principle, selective classification seems like a reasonable approach towards resolving these accuracy discrepancies between different subgroups of the data. Since we empirically see that selective classification reliably improves average accuracy, it must be more likely to cause a model to abstain when an example would be classified incorrectly. Incorrect examples disproportionately come from the lowest-accuracy subgroups of the data, suggesting that without bias in the confidence function, worst-group accuracy should increase faster than average accuracy.</p>
+
+<p>To test this, we plot the accuracy-coverage curves over a range of tasks, including hair color classification (CelebA), bird type classification (Waterbirds), pleural effusion classification (CheXpert-device), toxicity classification (CivilComments) and natural language inference (MultiNLI). CelebA, Waterbirds, and MultiNLI use the same spurious correlation setup presented in <sup id="fnref:sagawagroupdro:1" role="doc-noteref"><a href="#fn:sagawagroupdro" class="footnote">2</a></sup>. CivilComments exhibits the same spurious correlations as described in the WILDS benchmark <sup id="fnref:kohwilds" role="doc-noteref"><a href="#fn:kohwilds" class="footnote">13</a></sup>. Finally, we created the CheXpert-device dataset by subsampling the original CheXpert dataset <sup id="fnref:irvinchexpert:1" role="doc-noteref"><a href="#fn:irvinchexpert" class="footnote">3</a></sup> such that the presence of a chest drain even more strongly correlates with pleural effusion.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_95" src="/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image4.png" /></p>
+</div></figure>
+
+<p>Reading from right to left, while we see that as the coverage decreases the average accuracy reliably increases, <strong>the worst-group accuracies do not always increase, and exhibit a range of undesirable behaviors</strong>. On CelebA, worst-group accuracy actually decreases: this means the more confident predictions are more likely to be incorrect. For Waterbirds, CheXpert-device, and CivilComments, worst-group accuracy sometimes increases, but never by more than 10 points until the noisy low-coverage regime, and sometimes decreases. For MultiNLI, worst-group accuracy does slowly improve, but can’t even reach 80% until very low coverages.</p>
+
+<p>These results highlight that practitioners should be wary: even if selective classification reliably increases average accuracy, it will not necessarily improve the accuracy of different subgroups.</p>
+
+<h3 id="selective-classification-rarely-overcomes-accuracy-disparities">Selective classification rarely overcomes accuracy disparities</h3>
+
+<p>To better understand why selective classification can sometimes hurt worst-group accuracy and does not reduce full-coverage accuracy disparities, we theoretically characterize for a broad class of distributions: (1) when does selective classification improve accuracy as the confidence threshold decreases and (2) when does selective classification disproportionately help the worst group.</p>
+
+<p>At a high level, our analysis focuses on the <em>margin</em>, or the model’s confidence for a given prediction multiplied by -1 if that prediction was incorrect. Intuitively, the more negative the margin, the “worse” the prediction. Using only the margin distribution, we can recreate the accuracy-coverage curve by abstaining on density between the negative and positive threshold, and computing the fraction of remaining density that is correct.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_90" src="/blog/assets/img/posts/2021-10-13-sc-magnifies-disparities/image1.png" /></p>
+</div></figure>
+
+<p>The key result of our theoretical analysis is that <strong>the <em>full-coverage accuracy</em> of a subgroup dramatically impacts how well selective classification performs</strong> on that subgroup, which amplifies disparities. For a wide range of margin distributions, full-coverage accuracy and a property of the margin distribution we call <em>left-log-concavity</em> completely determine whether or not the accuracy of a selective classifier monotonically increases or decreases. When a margin distribution is left-log-concave, which many standard distributions (e.g. gaussians) are, accuracy monotonically increases when full-coverage accuracy is at least 50% and decreases otherwise.</p>
+
+<h3 id="next-steps">Next steps</h3>
+
+<p>So far, we have painted a fairly bleak picture of selective classification: even though it reliably improves average accuracy, it can, both theoretically and empirically, exacerbate accuracy disparities between subgroups. There are still, however, mechanisms to improve selective classification, which we outline below.</p>
+
+<p>One natural step towards improving selective classification is to develop confidence functions that allow selective classifiers to overcome accuracy disparities between groups. In our paper, we test the two most widely used methods: softmax response and Monte Carlo dropout <sup id="fnref:gal2016:1" role="doc-noteref"><a href="#fn:gal2016" class="footnote">10</a></sup>. We consistently find that both are disproportionately overconfident on incorrect examples from the worst-groups. However, new confidence functions that are better calibrated across groups would likely resolve disparities <sup id="fnref:wald2021" role="doc-noteref"><a href="#fn:wald2021" class="footnote">14</a></sup>, and is an important direction for future work.</p>
+
+<p>In the short term, however, we find that the most promising method to improve worst-group accuracy with selective classification is to <strong>build selective classifiers on top of already-equitable models</strong>, or models that achieve similar full-coverage accuracies across the relevant subgroups. One method to train such models is group DRO, which minimizes the maximum loss over subgroups <sup id="fnref:sagawagroupdro:2" role="doc-noteref"><a href="#fn:sagawagroupdro" class="footnote">2</a></sup>. We find empirically that selective classifiers trained with group DRO improve the accuracy of subgroups at roughly the same rate when they have the same accuracy at full coverage. However, group DRO is far from a perfect fix – it requires a priori knowledge of the relevant subgroups, and subgroup labels for each training example which may be costly to obtain. Nevertheless, it is a promising start, and developing more broadly applicable methods for training already-equitable models is a critical area for future work.</p>
+
+<p>To conclude, despite the intuition that selective classification should improve worst-group accuracy, and selective classification’s ability to consistently improve average accuracy, common selective classifiers can severely exacerbate accuracy discrepancies between subgroups. We hope our work encourages practitioners to apply selective classification with caution, and in general focus on how different methods affect different subgroups of the data.</p>
+
+<h3 id="acknowledgements">Acknowledgements</h3>
+
+<p>Thanks to the SAIL blog editors, Pang Wei Koh, and Shiori Sagawa for their helpful feedback on this blog post. This post is based off our <a href="https://arxiv.org/abs/2010.14134">ICLR 2021 paper</a>:</p>
+<blockquote>
+  <p>Selective Classification Can Magnify Disparities Across Groups. Erik Jones*, Shiori Sagawa* Pang Wei Koh*, Ananya Kumar, and Percy Liang. ICLR 2021.</p>
+</blockquote>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:liu2015" role="doc-endnote">
+      <p>Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of the IEEE International Conference on Computer Vision, pp. 3730–3738, 2015. <a href="#fnref:liu2015" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:sagawagroupdro" role="doc-endnote">
+      <p>Shiori Sagawa, Pang Wei Koh, Tatsunori B. Hashimoto, and Percy Liang. Distributionally robust neural networks for group shifts: On the importance of regularization for worst-case generalization. In International Conference on Learning Representations (ICLR), 2020. <a href="#fnref:sagawagroupdro" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:sagawagroupdro:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a> <a href="#fnref:sagawagroupdro:2" class="reversefootnote" role="doc-backlink">&#8617;<sup>3</sup></a></p>
+    </li>
+    <li id="fn:irvinchexpert" role="doc-endnote">
+      <p>Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Chris Chute, Henrik Marklund, Behzad Haghgoo, Robyn Ball, Katie Shpanskaya, et al. Chexpert: A large chest radiograph dataset with uncertainty labels and expert comparison. In Association for the Advancement of Artificial Intelligence (AAAI), volume 33, pp. 590–597, 2019. <a href="#fnref:irvinchexpert" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:irvinchexpert:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:borkan2019" role="doc-endnote">
+      <p>Daniel Borkan, Lucas Dixon, Jeffrey Sorensen, Nithum Thain, and Lucy Vasserman. Nuanced metrics for measuring unintended bias with real data for text classification. In World Wide Web (WWW), pp. 491–500, 2019. <a href="#fnref:borkan2019" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:williams2018" role="doc-endnote">
+      <p>Adina Williams, Nikita Nangia, and Samuel Bowman. A broad-coverage challenge corpus for sentence understanding through inference. In Association for Computational Linguistics (ACL), pp. 1112–1122, 2018. <a href="#fnref:williams2018" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:selectivenet" role="doc-endnote">
+      <p>Yonatan Giefman and Ran El-Yaniv. SelectiveNet: A deep neural network with an integrated reject option. In International Conference on Machine Learning (ICML), 2019. <a href="#fnref:selectivenet" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:mozannar2020" role="doc-endnote">
+      <p>Hussein Mozannar and David Sontag. Consistent estimators for learning to defer to an expert. In International Conference on Machine Learning (ICML), 2020. <a href="#fnref:mozannar2020" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:oakdenrayner2020" role="doc-endnote">
+      <p>Luke Oakden-Rayner, Jared Dunnmon, Gustavo Carneiro, and Christopher Ré. Hidden stratification causes clinically meaningful failures in machine learning for medical imaging. In Proceedings of the ACM Conference on Health, Inference, and Learning, pp. 151–159, 2020. <a href="#fnref:oakdenrayner2020" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:chow1957" role="doc-endnote">
+      <p>C. K. Chow. An optimum character recognition system using decision functions. In IRE Transactions on Electronic Computers, 1957. <a href="#fnref:chow1957" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:gal2016" role="doc-endnote">
+      <p>Yarin Gal and Zoubin Ghahramani. Dropout as a Bayesian approximation: Representing model uncertainty in deep learning. In International Conference on Machine Learning (ICML), 2016. <a href="#fnref:gal2016" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:gal2016:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:geifman2017" role="doc-endnote">
+      <p>Yonatan Geifman and Ran El-Yaniv. Selective classification for deep neural networks. In Advances in Neural Information Processing Systems (NeurIPS), 2017. <a href="#fnref:geifman2017" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:geifman2017:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:elyaniv2010" role="doc-endnote">
+      <p>Ran El-Yaniv and Yair Wiener. On the foundations of noise-free selective classification. Journal of Machine Learning Research (JMLR), 11, 2010. <a href="#fnref:elyaniv2010" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:kohwilds" role="doc-endnote">
+      <p>Pang Wei Koh, Shiori Sagawa, Henrik Marklund, Sang Michael Xie, Marvin Zhang, Akshay Balsubramani, Weihua Hu, Michihiro Yasunaga, Richard Lanas Phillips, Irena Gao, Tony Lee, Etienne David, Ian Stavness, Wei Guo, Berton A. Earnshaw, Imran S. Haque, Sara Beery, Jure Leskovec, Anshul Kundaje, Emma Pierson, Sergey Levine, Chelsea Finn, and Percy Liang. WILDS: A benchmark of in-the-wild distribution shifts. arXiv, 2020. <a href="#fnref:kohwilds" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:wald2021" role="doc-endnote">
+      <p>Yoav Wald, Amir Feder, Daniel Greenfeld, and Uri Shalit. On Calibration and Out-of-domain Generalization. arXiv preprint arXiv:2102.10395, 2021. <a href="#fnref:wald2021" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/sc-magnifies-disparities/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/sc-magnifies-disparities/&text=Selective+Classification+Can+Magnify+Disparities+Across+Groups%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/sc-magnifies-disparities/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/sc-magnifies-disparities/&title=Selective+Classification+Can+Magnify+Disparities+Across+Groups%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/sc-magnifies-disparities/&title=Selective+Classification+Can+Magnify+Disparities+Across+Groups%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Selective+Classification+Can+Magnify+Disparities+Across+Groups%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/sc-magnifies-disparities/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#computer+vision">
+      <p><i class="fa fa-tag fa-fw"></i> computer vision</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#distribution+shift">
+      <p><i class="fa fa-tag fa-fw"></i> distribution shift</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#fairness">
+      <p><i class="fa fa-tag fa-fw"></i> fairness</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robustness">
+      <p><i class="fa fa-tag fa-fw"></i> robustness</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#selective+classification">
+      <p><i class="fa fa-tag fa-fw"></i> selective classification</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/iccv-2021/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers at ICCV 2021
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/corl-2021/">
+      <p>Next post</p>
+        Stanford AI Lab Papers at CoRL 2021
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

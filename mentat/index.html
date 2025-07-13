@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/mentat/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making" />
+<meta name="author" content="<a href='https://www.maxlamparth.com'>Max Lamparth</a> and <a href='https://med.stanford.edu/profiles/declan-grabb'>Declan Grabb</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/mentat/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/mentat/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-01T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making","dateModified":"2025-04-01T00:00:00-07:00","datePublished":"2025-04-01T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/mentat/"},"url":"http://ai.stanford.edu/blog/mentat/","author":{"@type":"Person","name":"<a href='https://www.maxlamparth.com'>Max Lamparth</a> and <a href='https://med.stanford.edu/profiles/declan-grabb'>Declan Grabb</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We developed a new expert design and annotated clinical decision-making dataset that also allows for nuanced accuracy and fairness evaluations with expert pr...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making">
+    
+    <meta name="twitter:description" content="We developed a new expert design and annotated clinical decision-making dataset that also allows for nuanced accuracy and fairness evaluations with expert preferences, uncertainty, and soft labels.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-04-01-mentat/image5.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-04-01-mentat/image5.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making</h1>
+    <p class="meta">
+    <a href='https://www.maxlamparth.com'>Max Lamparth</a> and <a href='https://med.stanford.edu/profiles/declan-grabb'>Declan Grabb</a>
+    <div class="post-date">April 1, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <link rel="stylesheet" href="path_to_bigfoot/bigfoot-default.css" />
+
+<script src="path_to_bigfoot/bigfoot.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    bigfoot({
+      duplicateFootnoteStrategy: "combine", // Keeps repeated citations as popovers
+    });
+  });
+</script>
+
+<!-- # MENTAT: A Clinician-Annotated Benchmark for Complex Psychiatric Decision-Making -->
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-01-mentat/image4.png" style="width: 65%;" /></div>
+<!-- <figcaption>
+  <b>Figure 1: </b> <b>Inference-time privacy risks</b> emerge as an agent may access private data through prompt inputs and potentially leak it while executing personal tasks on the user's behalf.
+</figcaption> -->
+</div></figure>
+
+<p>There is an increasing interest in using language models (LMs) to help with the growing number of patients seeking mental healthcare. However, medical AI benchmarks often oversimplify real-world clinical practice by primarily relying on standardized medical exam-style questions. While such benchmarks might be convenient for evaluation purposes, they predominantly test factual recall rather than genuine clinical reasoning. This approach can inadvertently overlook the complexity, subjectivity, and ambiguity inherent in real-world decision-making, particularly in fields like mental healthcare. Recent discussions in the AI and medical communities highlight the necessity of moving beyond simplistic exam-style benchmarks toward richer evaluation frameworks (see also <sup id="fnref:MedQA" role="doc-noteref"><a href="#fn:MedQA" class="footnote">1</a></sup> or SAIL’s ongoing <a href="https://medarena.ai/login">“MedArena”</a>).</p>
+
+<h2 id="introducing-mentat-real-world-psychiatric-decision-making">Introducing MENTAT: Real-World Psychiatric Decision-Making</h2>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-01-mentat/image1.png" style="width: 75%;" /></div>
+<!-- <figcaption>
+  <b>Figure 1: </b> <b>Inference-time privacy risks</b> emerge as an agent may access private data through prompt inputs and potentially leak it while executing personal tasks on the user's behalf.
+</figcaption> -->
+</div></figure>
+
+<p>In our recent paper, we introduced <strong>MENTAT (MENtal health Tasks AssessmenT)</strong>, a clinician-annotated dataset specifically designed to represent authentic psychiatric decision-making scenarios. Critically, MENTAT was developed entirely by mental health professionals without involving language models in the annotation process. This approach ensures real-world authenticity and clinical relevance while avoiding contamination of the evaluation dataset.</p>
+
+<p>MENTAT addresses clinical tasks across five essential categories: <strong>Diagnosis</strong>, <strong>Treatment</strong>, <strong>Monitoring</strong>, <strong>Triage</strong>, and <strong>Documentation</strong>. Diagnosis questions often include details about a patient’s past behavior or observations from therapy sessions, along with background information such as age, gender, and ethnicity, before asking for a diagnosis. Treatment questions typically summarize how a diagnosis was reached and what medication was prescribed—covering type, dosage, and duration—and then ask how the treatment should be adjusted based on additional background or current symptoms. Monitoring questions focus on identifying the appropriate metrics to track after initiating treatment, particularly when starting a patient with a specific history on a new medication. Triage questions can explore how to manage escalating situations, such as violent behavior, and when to escalate care. Documentation questions, while occasionally also asking for billing codes, usually present initial assessment results and request a concise, accurate summary of relevant clinical information.</p>
+
+<h2 id="beyond-simple-recall-capturing-ambiguity-and-demographic-impacts">Beyond Simple Recall: Capturing Ambiguity and Demographic Impacts</h2>
+
+<p>Each question in MENTAT offers five detailed answer options and intentionally excludes patient demographic information that is not decision-relevant. By doing this, we facilitate nuanced analyses about how patient demographics—such as age, gender, ethnicity, and nationality—impact AI performance across different clinical scenarios.</p>
+
+<p>Notably, the <strong>triage</strong> and <strong>documentation</strong> tasks are deliberately designed to be ambiguous, reflecting genuine challenges clinicians regularly encounter. To capture the nuances of clinician reasoning, we collected annotations in a preference dataset, allowing more granular and realistic evaluation through soft labels, instead of enforcing “black-and-white” labels in applications with inherent ambiguity.</p>
+
+<h2 id="evaluating-language-models-results-and-insights">Evaluating Language Models: Results and Insights</h2>
+
+<p>We evaluated 15 large language models (LMs) using MENTAT, and the results revealed striking patterns:</p>
+
+<ul>
+  <li><strong>Diagnosis and treatment:</strong> Language models showed strong performance, as these tasks are closer in nature to exam-style questions.</li>
+  <li><strong>Monitoring:</strong> Besides the strongest performing models, most models do not perform as well as on the previous categories.</li>
+  <li><strong>Triage and documentation:</strong> Performance sharply declined due to these tasks’ inherent complexity and ambiguity, highlighting current AI limitations.</li>
+  <li>Interestingly, models fine-tuned specifically on mental health questions (achieving higher MedQA scores) did not consistently outperform their general-purpose parent models.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-01-mentat/image3.png" style="width: 75%;" /></div>
+<!-- <figcaption>
+  <b>Figure 1: </b> <b>Inference-time privacy risks</b> emerge as an agent may access private data through prompt inputs and potentially leak it while executing personal tasks on the user's behalf.
+</figcaption> -->
+</div></figure>
+
+<h3 id="impact-of-demographic-information-on-decision-making-bias-alert">Impact of Demographic Information on Decision-Making (Bias Alert)</h3>
+
+<p>Critically, our analysis also uncovered clear biases. All models performed differently based on patient demographic variables—such as age, gender coding, and ethnicity—underscoring a substantial fairness challenge.</p>
+
+<p>In the table below, we show the average accuracy across tasks. We list the results for all fourteen models combined and separately show the results for the eight most capable tested models (which, in our case, were the models from OpenAI and Anthropic). The uncertainties are estimated with bootstrap resampling at a 95% confidence level. To evaluate the impact of different demographic information dimensions (e.g., varying gender), we created three datasets (e.g, D_G for gender) that introduce variance for the demographic information dimension of interest while fixing the other variables.</p>
+
+<figure class="figure"><div class="figure__main">
+<div><img class="postimage" src="/blog/assets/img/posts/2025-04-01-mentat/image2.png" style="width: 65%;" /></div>
+<!-- <figcaption>
+  <b>Figure 1: </b> <b>Inference-time privacy risks</b> emerge as an agent may access private data through prompt inputs and potentially leak it while executing personal tasks on the user's behalf.
+</figcaption> -->
+</div></figure>
+
+<p>With statistical significance, we see that when we look at all models together or when only considering the tested closed-source models, that the accuracy is higher for non-binary-
+coded patients compared to female-coded patients; the accuracy is lower for patients with an “Asian” or ”African American” background compared to other backgrounds, and the accuracy is higher for patients states in the age group 18 to 33 years compared to all other age groups.</p>
+
+<p>These results highlight the need for further methods to mitigate the propagation and perpetuation of harmful biases before deploying models in mental healthcare settings. Determining the exact cause of these results is complex, given the significant impact differences in pre- and post-training data have on models, as seen in other works studying decision-making tendencies and biases (e.g., <sup id="fnref:HvM" role="doc-noteref"><a href="#fn:HvM" class="footnote">2</a></sup> or <sup id="fnref:Jared" role="doc-noteref"><a href="#fn:Jared" class="footnote">3</a></sup>).</p>
+
+<p>We also demonstrate how MENTAT can be used to track how much LM free-form responses deviate from expert-annotated preferences (using the methods from <sup id="fnref:INCONS" role="doc-noteref"><a href="#fn:INCONS" class="footnote">4</a></sup>).</p>
+
+<h2 id="key-takeaways-and-related-work">Key Takeaways and Related Work</h2>
+
+<p>Our research demonstrates an essential point: achieving high accuracy on standardized multiple-choice tests does not necessarily translate into accurate clinical decision-making, and current models show strong biases in their decision-making.</p>
+
+<p>Additionally, our work complements recent research highlighting significant ethical risks and structural challenges associated with the clinical deployment of language models, particularly in sensitive areas like mental healthcare. Blind spots in model safety training remain critical challenges toward safer real-world use <sup id="fnref:TAIMH" role="doc-noteref"><a href="#fn:TAIMH" class="footnote">5</a></sup>.</p>
+
+<h2 id="open-access-and-opportunities-for-future-research">Open Access and Opportunities for Future Research</h2>
+
+<p>We believe that advancing the field requires openly accessible, carefully constructed datasets reflecting real-world complexities. Therefore, we have made MENTAT publicly available along with the associated codebase for benchmarking, changing the processing pipeline, and experimentation.</p>
+
+<p>You can access the dataset and all resources at our <a href="https://github.com/maxlampe/mentat">GitHub repository</a> and the paper <a href="https://arxiv.org/abs/2502.16051">as pre-print here</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:MedQA" role="doc-endnote">
+      <p>Raji, I. , Daneshjou, R. &amp; Alsentzer, E. (2025). <a href="https://ai.nejm.org/doi/full/10.1056/AIe2401235">It’s Time to Bench the Medical Exam Benchmark</a>. NEJM AI <a href="#fnref:MedQA" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:HvM" role="doc-endnote">
+      <p>Lamparth, M., Corso, A., Ganz, J., Mastro, O. S., Schneider, J., &amp; Trinkunas, H. (2024). <a href="https://doi.org/10.1609/aies.v7i1.31681">Human vs. Machine: Behavioral Differences between Expert Humans and Language Models in Wargame Simulations</a>. Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society <a href="#fnref:HvM" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:Jared" role="doc-endnote">
+      <p>Moore, J., Deshpande, T. &amp; Yang, D. (2024). <a href="https://doi.org/10.18653/v1/2024.findings-emnlp.891">Are Large Language Models Consistent over Value-laden Questions?</a>.  In Findings of the Association for Computational Linguistics: EMNLP 2024 <a href="#fnref:Jared" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:INCONS" role="doc-endnote">
+      <p>Shrivastava, A., Hullman, J. &amp; Lamparth, M. (2024). <a href="https://openreview.net/forum?id=qZ2CeIaYSu">Measuring Free-Form Decision-Making Inconsistency of Language Models in Military Crisis Simulations</a>. NeurIPS Workshop on Socially Responsible Language Modelling Research <a href="#fnref:INCONS" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:TAIMH" role="doc-endnote">
+      <p>Grabb, D., Lamparth, M. &amp; Vasan, N. (2024). <a href="https://openreview.net/forum?id=1pgfvZj0Rx#discussion">Risks from Language Models for Automated Mental Healthcare: Ethics and Structure for Implementation</a>.  Proceedings of the First Conference on Language Modeling <a href="#fnref:TAIMH" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/mentat/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/mentat/&text=MENTAT%3A+A+Clinician-Annotated+Benchmark+for+Complex+Psychiatric+Decision-Making%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/mentat/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/mentat/&title=MENTAT%3A+A+Clinician-Annotated+Benchmark+for+Complex+Psychiatric+Decision-Making%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/mentat/&title=MENTAT%3A+A+Clinician-Annotated+Benchmark+for+Complex+Psychiatric+Decision-Making%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=MENTAT%3A+A+Clinician-Annotated+Benchmark+for+Complex+Psychiatric+Decision-Making%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/mentat/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#AI">
+      <p><i class="fa fa-tag fa-fw"></i> AI</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#AI+for+healthcare">
+      <p><i class="fa fa-tag fa-fw"></i> AI for healthcare</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#NLP">
+      <p><i class="fa fa-tag fa-fw"></i> NLP</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#bias">
+      <p><i class="fa fa-tag fa-fw"></i> bias</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#decision-making">
+      <p><i class="fa fa-tag fa-fw"></i> decision-making</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#fairness">
+      <p><i class="fa fa-tag fa-fw"></i> fairness</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#mental+health">
+      <p><i class="fa fa-tag fa-fw"></i> mental health</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/sail-graduates/">
+      <p>Previous post</p>
+        Stanford AI Lab Graduates 2025
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/iclr-2025/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at ICLR 2025
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

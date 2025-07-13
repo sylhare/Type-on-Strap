@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/domino/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Discovering the systematic errors made by machine learning models | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Discovering the systematic errors made by machine learning models" />
+<meta name="author" content="<a href='http://www.sabrieyuboglu.com/'>Sabri Eyuboglu</a>, <a href='https://maya-varma.com/'>Maya Varma</a>, <a href='https://web.stanford.edu/~ksaab/'>Khaled Saab</a>,  <a href='https://jdunnmon.github.io/'>Jared Dunnmon</a>, <a href='https://www.james-zou.com/'>James Zou</a> and <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Discovering systematic errors with cross-modal embeddings" />
+<meta property="og:description" content="Discovering systematic errors with cross-modal embeddings" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/domino/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/domino/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-04-07T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Discovering the systematic errors made by machine learning models" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Discovering the systematic errors made by machine learning models","dateModified":"2022-04-07T00:00:00-07:00","datePublished":"2022-04-07T00:00:00-07:00","description":"Discovering systematic errors with cross-modal embeddings","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/domino/"},"url":"http://ai.stanford.edu/blog/domino/","author":{"@type":"Person","name":"<a href='http://www.sabrieyuboglu.com/'>Sabri Eyuboglu</a>, <a href='https://maya-varma.com/'>Maya Varma</a>, <a href='https://web.stanford.edu/~ksaab/'>Khaled Saab</a>,  <a href='https://jdunnmon.github.io/'>Jared Dunnmon</a>, <a href='https://www.james-zou.com/'>James Zou</a> and <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Discovering the systematic errors made by machine learning models | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Machine learning models that achieve high overall accuracy often make systematic errors on coherent slices of validation data. Can we develop methods to auto...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Discovering the systematic errors made by machine learning models">
+    
+    <meta name="twitter:description" content="Machine learning models that achieve high overall accuracy often make systematic errors on coherent slices of validation data. Can we develop methods to automatically identify these systematic errors?">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-04-07-domino/image3.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-04-07-domino/image3.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Discovering the systematic errors made by machine learning models</h1>
+    <p class="meta">
+    <a href='http://www.sabrieyuboglu.com/'>Sabri Eyuboglu</a>, <a href='https://maya-varma.com/'>Maya Varma</a>, <a href='https://web.stanford.edu/~ksaab/'>Khaled Saab</a>,  <a href='https://jdunnmon.github.io/'>Jared Dunnmon</a>, <a href='https://www.james-zou.com/'>James Zou</a> and <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>
+    <div class="post-date">April 7, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h1 id="discovering-systematic-errors-with-cross-modal-embeddings">Discovering systematic errors with cross-modal embeddings</h1>
+
+<blockquote>
+  <p>In this blog post, we introduce Domino, a new approach for discovering systematic errors made by machine learning models. We also discuss a framework for quantitatively evaluating methods like Domino.</p>
+
+  <p>Links: 
+📄 <a href="https://arxiv.org/abs/2203.14960">Paper (ICLR 2022)</a>
+🌍 <a href="https://hazyresearch.stanford.edu/blog/2022-04-02-domino">Longer Walkthrough</a>
+💻 <a href="https://github.com/HazyResearch/domino">GitHub</a>
+📘 <a href="https://domino-slice.readthedocs.io/en/latest/">Docs</a>
+📒 <a href="https://colab.research.google.com/github/HazyResearch/domino/blob/main/examples/01_intro.ipynb">Google Colab</a></p>
+</blockquote>
+
+<p>Machine learning models that achieve high overall accuracy often make systematic errors on coherent slices of validation data.</p>
+
+<p>What is a slice? A slice is a set of data samples that share a common characteristic. As an example, in large image datasets, photos of vintage cars comprise a slice (i.e. all images in the slice share a common subject). The term slice has a number of synonyms  that you might be more familiar with (e.g. subgroup, subpopulation, stratum). These terms are largely interchangeable, but we’ll stick with “slice” throughout this post. We say that a model underperforms on a slice if performance on the data samples in the slice is significantly worse than its overall performance.</p>
+
+<p>The search for underperforming slices is a critical, but often overlooked, part of model evaluation. When practitioners are aware of the slices on which their models underperform, they can make more informed decisions around model deployment. This is particularly important in safety-critical settings like medicine: a diagnostic model that underperforms on younger patients should likely not be deployed at a pediatric hospital. Slice awareness can also help practitioners debug and improve models: after an underperforming slice is identified, we can improve model robustness by either updating the training dataset or using robust optimization techniques (<em>e.g.</em><a href="https://arxiv.org/pdf/2011.12945.pdf"> Sohoni et al., 2020</a>;<a href="https://arxiv.org/pdf/1911.08731.pdf"> Sagawa et al., 2020</a>).</p>
+
+<p>Deploying models that underperform on critical data slices may have significant safety or fairness consequences. For example, models trained to detect collapsed lungs in chest X-rays have been shown to make predictions based on the presence of chest drains, a device typically used during treatment <em>(</em><a href="https://arxiv.org/pdf/1909.12475.pdf">Oakden-Rayner, 2019</a><em>)</em>. As a result, these models often fail to detect collapsed lung in images without chest drains, a critical data slice where false negative predictions could be life-threatening.</p>
+
+<p>However, in practice, some underperforming slices are hard to find. The examples in these “hidden” data slices are tied together by a concept not annotated in metadata or easily extracted from unstructured inputs (e.g. images, video, time-series data). Returning to our example from earlier, many chest X-ray datasets do not provide metadata indicating which patients’ images show chest tubes, making it difficult to evaluate performance on the slice. This raises the following question: <em>How can we automatically identify data slices on which our model underperforms?</em></p>
+
+<p>In this blog post, we discuss our recent exploration of this question. We introduce Domino, a novel method for identifying and describing underperforming slices. We also discuss an evaluation framework for rigorously evaluating our method across diverse slice types, tasks, and datasets.</p>
+
+<h2 id="what-is-slice-discovery">What is slice discovery?</h2>
+<p><strong>Slice discovery</strong> is the task of mining unstructured input data (<em>e.g.</em> images, videos, audio) for semantically meaningful subgroups on which a model performs poorly. We refer to automated techniques that mine input data for semantically meaningful slices as <strong>slice discovery methods (SDM).</strong> Given a labeled validation dataset and a trained classifier, an SDM computes a set of slicing functions that partition the dataset into slices. This process is illustrated below.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2022-04-07-domino/image1.png" /></p>
+</div></figure>
+
+<p>In order to be broadly useful across diverse settings, an ideal SDM should satisfy the following desiderata:</p>
+
+<ol>
+  <li>Identified slices should contain examples on which the model <strong>underperforms</strong>, or has a high error rate.</li>
+  <li>Identified slices should contain examples that are <strong>coherent</strong>, or align closely with a human-understandable concept.</li>
+</ol>
+
+<p>This second desideratum is particularly hard to achieve: existing evaluations have shown that discovered slices often do not align with concepts understandable to a domain expert. Further, even if slices do align well with concepts, it may be difficult for humans to identify the commonality.</p>
+
+<h2 id="domino-slice-discovery-with-cross-modal-embeddings">Domino: Slice discovery with cross-modal embeddings</h2>
+
+<p>In our work, we introduce Domino, a slice discovery method designed to identify coherent, underperforming data slices (<em>i.e.</em> groups of similar validation data points on which the model makes errors). It leverages a powerful class of recently-developed cross-modal representation learning approaches, which yield semantically-meaningful representations by embedding images and text in the same latent space. We demonstrate that using cross-modal representations both improves slice coherence and enables Domino to generate natural language descriptions for identified slices!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2022-04-07-domino/image3.png" /></p>
+</div></figure>
+
+<p>Domino follows a three-step procedure illustrated in the figure above:</p>
+
+<ol>
+  <li><strong>Embed:</strong> Domino encodes the validation images alongside text in a shared embedding space using a cross-modal encoder. In many domains, such encoders are publicly available (<em>e.g</em>.<a href="https://openai.com/blog/clip/"> CLIP</a> for natural images, <a href="https://github.com/pytorch/fairseq/tree/main/examples/MMPT">VideoCLIP</a> for natural videos, <a href="https://github.com/edreisMD/ConVIRT-pytorch">ConVIRT</a> for medical images, and <a href="https://github.com/MicPie/clasp">CLASP</a> for amino acid sequences).</li>
+  <li><strong>Slice:</strong> Using an error-aware mixture model, Domino identifies regions in the embedding space with a high concentration of errors.</li>
+  <li><strong>Describe:</strong> Finally, to help practitioners understand the commonalities among the examples in each slice, Domino generates natural language descriptions of the slices. To do so, it leverages the cross-modal embeddings computed in Step 1, surfacing the text nearest to the slice in embedding space.</li>
+</ol>
+
+<p>We now use Domino to audit a popular off-the-shelf classifier: a<a href="https://pytorch.org/vision/stable/models.html"> ResNet18 pretrained on ImageNet</a>. Specifically, we interrogate the model’s ability to detect cars, exploring whether there are any interesting slices on which the model underperforms. In the figure below we show a couple of the slices that Domino discovered. The gray boxes show the natural language descriptions of the two slices produced by Domino, the $X$ row shows the top six images predicted by domino to be in the slice, the $Y$ row shows the ground truth label assigned to the image, and the $\hat{Y}$ row shows the ResNet18’s predicted probability for the “car” class. Note that although we only include six images here, the complete slice includes dozens of images.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2022-04-07-domino/image2.png" /></p>
+</div></figure>
+
+<p>From these slices, we might hypothesize that the model struggles to recognize photos of cars <em>taken from the inside</em> and photos of <em>racecars.</em> Both of these slices describe rare subclasses of the target class. Depending on the intended use case for the model, we may want to add more training examples to boost performance in these slices. For example, Waymo (an autonomous vehicle company) may not care much whether the model misses photos of car interiors, but ESPN (a broadcaster with the television rights for Formula 1) would care a lot if the model couldn’t recognize race cars! Clearly, it’s important to practitioners that discovered slices map onto coherent concepts.</p>
+
+<h2 id="evaluating-slice-discovery-methods">Evaluating slice discovery methods</h2>
+
+<p>In designing Domino, we were inspired by a number of really exciting slice discovery methods that were recently proposed. These include <em>The Spotlight</em> (<a href="https://arxiv.org/pdf/2107.00758.pdf">D’Eon et al. 2022</a>), <em>GEORGE</em> (<a href="https://proceedings.neurips.cc/paper/2020/hash/e0688d13958a19e087e123148555e4b4-Abstract.html">Sohoni et al. 2020</a>), and <em>MultiAccuracy Boost</em> (<a href="https://dl.acm.org/doi/10.1145/3306618.3314287">Kim et al. 2018</a>). These methods all have (1) an <strong>embed</strong> step and (2) a <strong>slice</strong> step, like Domino, but use different embeddings and slicing algorithms. In our experiments, we evaluate SDMs along these two axes, ablating both the choice of embedding and the slicing algorithm. Notably, these methods do not include a (3) <strong>describe</strong> step, and generally require users to manually inspect examples and identify common attributes.</p>
+
+<p>SDMs like Domino have traditionally been evaluated qualitatively, due to a lack of a simple quantitative approach. Typically, in these evaluations, the SDM is applied to a few different models and identified slices are visualized. Practitioners can then inspect the slices and judge whether the slices “make sense.” However, these qualitative evaluations are subjective and do not scale beyond more than a few settings. Moreover, they cannot tell us if the SDM has missed an important, coherent slice.</p>
+
+<p>Ideally, we’d like to estimate the failure rate of an SDM: how often it fails to identify a coherent slice on which the model underperforms. Estimating this failure rate is very challenging because we don’t typically know the full set of slices on which a model underperforms. How could we possibly know if the SDM is missing any?</p>
+
+<p>To solve this problem, we trained 1,235 deep classifiers that were specifically constrained to underperform on pre-defined slices. We did this across three domains: natural images, medical images and medical time-series. Our approach involved (1) obtaining a dataset with some annotated slices (<em>e.g.</em> a dataset with interesting annotated attributes, like <a href="https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html">CelebA</a> or <a href="https://physionet.org/content/mimic-cxr/2.0.0/">MIMIC-CXR</a>), and (2) manipulating the dataset such that, with high probability, a model trained on it would exhibit poor performance on one or more of the annotated slices (<em>e.g.</em> by subsampling the dataset to induce a spurious correlation between the label and a metadata field).</p>
+
+<p>Using this evaluation framework, we were able to evaluate Domino quantitatively. We find that Domino accurately identifies 36% of the 1,235 slices in our framework. Further, the natural language description of the generated slice exactly matches the name of the slice in 35% of settings.</p>
+
+<p>We were also able to compare SDMs and run ablation studies evaluating specific SDM design choices. Two key findings emerged from these experiments:</p>
+
+<ol>
+  <li><strong>Cross-modal embeddings improve SDM performance.</strong> We found that the choice of representation matters – a lot! Slice discovery methods based on cross-modal embeddings outperform those based on a single modality by at least 9 percentage-points in precision-at-10. When compared with using the activations of the trained model, the gap grows to 15 percentage points. This finding is of particular interest given that classifier activations are a popular embedding choice in existing SDMs.</li>
+  <li><strong>Modeling both the prediction and class label enables accurate slice discovery.</strong> Good embeddings alone do not suffice – the choice of algorithm for actually extracting the underperforming slices from the embedding space, is significant as well. We find that a simple mixture model that jointly models the embeddings, labels and predictions enables a 105% improvement over the next best slicing algorithm. We hypothesize that this is because this algorithm is unique in modeling the class labels and the model’s predictions as separate variables, which leads to slices which are “pure” in their error type (false positive vs. false negative).</li>
+</ol>
+
+<p>However, there’s still a long way to go: slice discovery is a challenging task, and <em>Domino,</em> the best performing method in our experiments, still fails to recover over 60% of coherent slices. We see a number of exciting avenues for future work that could begin to close this gap.</p>
+
+<ul>
+  <li>
+    <p>We suspect that improvements in the embeddings that power slice discovery will be driven by large <strong>cross modal datasets</strong>, so work in dataset curation and management could help push the needle.</p>
+  </li>
+  <li>
+    <p>In this blog post, we described slice discovery as a fully automated process, while, in the future, we expect that effective slice discovery systems will be <strong>highly interactive</strong>: practitioners will be able to quickly explore slices and provide feedback.<a href="https://www.youtube.com/watch?v=qFzIgc5tc9s"> Forager</a>, a system for rapid data exploration, is an exciting step in this direction.</p>
+  </li>
+</ul>
+
+<p>We are really excited to continue working on this important problem and to collaborate with others as we seek to develop more reliable slice discovery methods. To facilitate this process, we are releasing 984 models and their associated slices as part of <a href="https://github.com/data-centric-ai/dcbench">dcbench</a>, a suite of data centric benchmarks. This will allow others to reproduce our results and also develop new slice discovery methods. Additionally, we are also releasing <a href="https://github.com/HazyResearch/domino">domino</a>, a Python package containing implementations of popular slice discovery methods. If you’ve developed a new slice discovery method and would like us to add it to the library please reach out!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/domino/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/domino/&text=Discovering+the+systematic+errors+made+by+machine+learning+models%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/domino/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/domino/&title=Discovering+the+systematic+errors+made+by+machine+learning+models%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/domino/&title=Discovering+the+systematic+errors+made+by+machine+learning+models%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Discovering+the+systematic+errors+made+by+machine+learning+models%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/domino/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/play-to-grade/">
+      <p>Previous post</p>
+        Grading Complex Interactive Coding Programs with Reinforcement Learning
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/understanding-contrastive-learning/">
+      <p>Next post</p>
+        Understanding Deep Learning Algorithms that Leverage Unlabeled Data, Part 2: Contrastive Learning
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

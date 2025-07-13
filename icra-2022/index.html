@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/icra-2022/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Robotics Papers (ICRA and RSS 2022) | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Robotics Papers (ICRA and RSS 2022)" />
+<meta name="author" content="Compiled by <a href='https://cs.stanford.edu/~dorarad'>Drew A. Hudson</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/icra-2022/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/icra-2022/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-06-20T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Robotics Papers (ICRA and RSS 2022)" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Robotics Papers (ICRA and RSS 2022)","dateModified":"2022-06-20T00:00:00-07:00","datePublished":"2022-06-20T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/icra-2022/"},"url":"http://ai.stanford.edu/blog/icra-2022/","author":{"@type":"Person","name":"Compiled by <a href='https://cs.stanford.edu/~dorarad'>Drew A. Hudson</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Robotics Papers (ICRA and RSS 2022) | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at ICRA and RSS 2022, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Robotics Papers (ICRA and RSS 2022)">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at ICRA and RSS 2022, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-06-20-icra-2022/logo_small.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2022-06-20-icra-2022/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Robotics Papers (ICRA and RSS 2022)</h1>
+    <p class="meta">
+    Compiled by <a href='https://cs.stanford.edu/~dorarad'>Drew A. Hudson</a>
+    <div class="post-date">June 20, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/logo.png" /></p>
+
+<p>The <a href="https://roboticsconference.org/">Robotics: Science and Systems</a> conference (RSS 2022) is taking place June 27th - July 1st, and the <a href="https://www.icra2022.org/">International Conference on Robotics and Automation</a> (ICRA 2022) also took place just recently. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers-icra">List of Accepted Papers (ICRA)</h2>
+<h4 id="reachbot-a-small-robot-with-exceptional-reach-for-rough-terrain">ReachBot: A Small Robot with Exceptional Reach for Rough Terrain</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img6" />
+<strong>Authors</strong>: Tony G. Chen, Becky Miller, Crystal Winston, Stephanie Newdick, Andrew Bylard, Marco Pavone, Mark R. Cutkosky
+<br /><strong>Contact</strong>: snewdick@stanford.edu
+<br /><strong>Keywords</strong>: mobile manipulation, space robotics and automation, climbing robots, grippers and other end-effectors, mechanism design</p>
+<hr />
+
+<h4 id="balancing-efficiency-and-comfort-in-robot-assisted-bite-transfer"><a href="https://arxiv.org/abs/2111.11401">Balancing Efficiency and Comfort in Robot-Assisted Bite Transfer</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img1" />
+<strong>Authors</strong>: Suneel Belkhale, Ethan K. Gordon, Yuxiao Chen, Siddhartha Srinivasa, Tapomayukh Bhattacharjee, Dorsa Sadigh
+<br /><strong>Contact</strong>: belkhale@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2111.11401">Paper</a> | <a href="https://sites.google.com/view/comfortbitetransfer-icra22/home">Website</a>
+<br /><strong>Keywords</strong>: motion planning, human robot interaction, assistive feeding</p>
+<hr />
+
+<h4 id="grounding-predicates-through-actions"><a href="https://arxiv.org/abs/2109.14718">Grounding Predicates through Actions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img7" />
+<strong>Authors</strong>: Toki Migimatsu, Jeannette Bohg
+<br /><strong>Contact</strong>: takatoki@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2109.14718">Paper</a> | <a href="https://sites.google.com/stanford.edu/groundingpredicates">Website</a>
+<br /><strong>Keywords</strong>: perception for manipulation, visual relationship detection, task planning</p>
+<hr />
+
+<h4 id="grouptron-dynamic-multi-scale-graph-convolutional-networks-for-group-aware-dense-crowd-trajectory-forecasting"><a href="https://arxiv.org/abs/2109.14128">Grouptron: Dynamic Multi-Scale Graph Convolutional Networks for Group-Aware Dense Crowd Trajectory Forecasting</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img2" />
+<strong>Authors</strong>: Rui Zhou, Hongyu Zhou, Huidong Gao, Masayoshi Tomizuka, Jiachen Li, Zhuo Xu
+<br /><strong>Contact</strong>: jiachen_li@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2109.14128">Paper</a>
+<br /><strong>Keywords</strong>: trajectory prediction, graph neural network, interaction modeling, human behaviors</p>
+<hr />
+
+<h4 id="important-object-identification-with-semi-supervised-learning-for-autonomous-driving"><a href="https://arxiv.org/abs/2203.02634">Important Object Identification with Semi-Supervised Learning for Autonomous Driving</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img3" />
+<strong>Authors</strong>: Jiachen Li, Haiming Gang, Hengbo Ma, Masayoshi Tomizuka, Chiho Choi
+<br /><strong>Contact</strong>: jiachen_li@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2203.02634">Paper</a>
+<br /><strong>Keywords</strong>: autonomous driving, scene understanding, relational reasoning, graph neural network</p>
+<hr />
+
+<h4 id="learning-periodic-tasks-from-human-demonstrations"><a href="https://arxiv.org/abs/2109.14078">Learning Periodic Tasks from Human Demonstrations</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img10" />
+<strong>Authors</strong>: Jingyun Yang, Junwu Zhang, Connor Settle, Akshara Rai, Rika Antonova, Jeannette Bohg
+<br /><strong>Contact</strong>: jingyuny@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2109.14078">Paper</a> | <a href="https://bit.ly/viptl_icra22">Website</a>
+<br /><strong>Keywords</strong>: visual learning, learning from demonstration, perception for grasping and manipulation</p>
+<hr />
+
+<h4 id="learning-from-imperfect-demonstrations-via-adversarial-confidence-transfer"><a href="https://iliad.stanford.edu/pdfs/publications/cao2022learning.pdf">Learning from Imperfect Demonstrations via Adversarial Confidence Transfer</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img4" />
+<strong>Authors</strong>: Zhangjie Cao*, Zihan Wang*, Dorsa Sadigh
+<br /><strong>Contact</strong>: caozj@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://iliad.stanford.edu/pdfs/publications/cao2022learning.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=NbC4mF5g53A">Video</a> | <a href="https://sites.google.com/view/adversarialconfidencetransfer">Website</a>
+<br /><strong>Keywords</strong>: robotics, machine learning</p>
+<hr />
+
+<h4 id="propagating-state-uncertainty-through-trajectory-forecasting"><a href="https://arxiv.org/abs/2110.03267">Propagating State Uncertainty Through Trajectory Forecasting</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img0" />
+<strong>Authors</strong>: Boris Ivanovic, Yifeng (Richard) Lin, Shubham Shrivastava, Punarjay Chakravarty, Marco Pavone
+<br /><strong>Contact</strong>: borisi@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2110.03267">Paper</a>
+<br /><strong>Keywords</strong>: uncertainty propagation, trajectory forecasting, autonomous vehicle perception</p>
+<hr />
+
+<h4 id="symbolic-state-estimation-with-predicates-for-contact-rich-manipulation-tasks"><a href="https://arxiv.org/abs/2203.02468">Symbolic State Estimation with Predicates for Contact-Rich Manipulation Tasks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img8" />
+<strong>Authors</strong>: Toki Migimatsu, Wenzhao Lian, Jeannette Bohg, Stefan Schaal
+<br /><strong>Contact</strong>: takatoki@cs.stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2203.02468">Paper</a> | <a href="https://sites.google.com/stanford.edu/symbolicstateestimation/home?authuser=1">Website</a>
+<br /><strong>Keywords</strong>: perception for manipulation, symbolic state estimation</p>
+<hr />
+
+<h4 id="vision-only-robot-navigation-in-a-neural-radiance-world"><a href="https://mikh3x4.github.io/nerf-navigation/assets/NeRF_Navigation.pdf">Vision-Only Robot Navigation in a Neural Radiance World</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img9" />
+<strong>Authors</strong>: Michal Adamkiewicz, Timothy Chen, Adam Caccavale, Rachel Gardner,  Preston Culbertson,  Jeannette Bohg, Mac Schwager
+<br /><strong>Contact</strong>: chengine@stanford.edu
+<br /><strong>Links:</strong> <a href="https://mikh3x4.github.io/nerf-navigation/assets/NeRF_Navigation.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=5JjWpv9BaaE">Video</a> | <a href="https://mikh3x4.github.io/nerf-navigation/">Website</a>
+<br /><strong>Keywords</strong>: neural radiance fields, nerfs, vision-only navigation</p>
+<hr />
+
+<h4 id="weakly-supervised-correspondence-learning"><a href="https://iliad.stanford.edu/pdfs/publications/wang2022weakly.pdf">Weakly Supervised Correspondence Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/img5" />
+<strong>Authors</strong>: Zihan Wang*, Zhangjie Cao*, Yilun Hao, Dorsa Sadigh
+<br /><strong>Contact</strong>: wangzih@stanford.edu
+<br /><strong>Links:</strong> <a href="https://iliad.stanford.edu/pdfs/publications/wang2022weakly.pdf">Paper</a> | <a href="https://www.youtube.com/watch?v=F5rTzT2YU7E&amp;t=138s">Video</a> | <a href="https://sites.google.com/stanford.edu/weakly-supervised-correspond">Website</a>
+<br /><strong>Keywords</strong>: robotics, machine learning</p>
+
+<hr />
+
+<h2 id="list-of-accepted-papers-rss">List of Accepted Papers (RSS)</h2>
+<h4 id="acid-action-conditional-implicit-visual-dynamics-for-deformable-object-manipulation"><a href="https://arxiv.org/abs/2203.06856">ACID: Action-Conditional Implicit Visual Dynamics for Deformable Object Manipulation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/rss0" />
+<strong>Authors</strong>: Bokui Shen, Zhenyu Jiang, Christopher Choy, Leonidas J. Guibas, Silvio Savarese, Anima Anandkumar, Yuke Zhu
+<br /><strong>Contact</strong>: willshen@stanford.edu
+<br /><strong>Award nominations:</strong> Best Student Paper Nomination
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2203.06856">Paper</a> | <a href="https://b0ku1.github.io/acid/assets/videos/acid_vid.mp4">Video</a> | <a href="https://b0ku1.github.io/acid/">Website</a>
+<br /><strong>Keywords</strong>: deformable manipulation, implicit representations, simulation</p>
+<hr />
+
+<h4 id="play-it-by-ear-learning-skills-amidst-occlusion-through-audio-visual-imitation-learning"><a href="https://arxiv.org/abs/2205.14850">Play it by Ear: Learning Skills amidst Occlusion through Audio-Visual Imitation Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-06-20-icra-2022/rss1" />
+<strong>Authors</strong>: Maximilian Du*, Olivia Y. Lee*, Suraj Nair, Chelsea Finn
+<br /><strong>Contact</strong>: surajn@stanford.edu
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2205.14850">Paper</a> | <a href="https://drive.google.com/file/d/16grT06YqC0XGSoSbwGx5k03aof73G6C3/view?usp=sharing">Video</a> | <a href="https://sites.google.com/view/playitbyear/">Website</a>
+<br /><strong>Keywords</strong>: multi-modal learning, robotic manipulation</p>
+
+<hr />
+
+<p>We look forward to seeing you at the robotics conferences!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/icra-2022/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/icra-2022/&text=Stanford+AI+Lab+Robotics+Papers+%28ICRA+and+RSS+2022%29%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/icra-2022/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/icra-2022/&title=Stanford+AI+Lab+Robotics+Papers+%28ICRA+and+RSS+2022%29%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/icra-2022/&title=Stanford+AI+Lab+Robotics+Papers+%28ICRA+and+RSS+2022%29%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Robotics+Papers+%28ICRA+and+RSS+2022%29%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/icra-2022/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ICRA">
+      <p><i class="fa fa-tag fa-fw"></i> ICRA</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#RSS">
+      <p><i class="fa fa-tag fa-fw"></i> RSS</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/longer-sequences-next-leap-ai/">
+      <p>Previous post</p>
+        Can Longer Sequences Help Take the Next Leap in AI?
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/cvpr-2022/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at CVPR 2022
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

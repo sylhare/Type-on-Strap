@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/acteach/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers" />
+<meta name="author" content="<a href='https://www.andreykurenkov.com/'>Andrey Kurenkov</a> and <a href="http://web.stanford.edu/~amandlek/">Ajay Mandlekar</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Reinforcement Learning (RL) algorithms have recently demonstrated impressive results in challenging problem domains such as robotic manipulation, Go, and Atari games. But, RL algorithms typically require a large number of interactions with the environment to train policies that solve new tasks, since they begin with no knowledge whatsoever about the task and rely on random exploration of their possible actions in order to learn. This is particularly problematic for physical domains such as robotics, where gathering experience from interactions is slow and expensive. At the same time, people often have some intution about the right kinds of things to do during RL tasks, such as approaching an object when attempting to grasp it – might it be possible for us to somehow communicate these intuitions to the RL agent to speed up its training?" />
+<meta property="og:description" content="Reinforcement Learning (RL) algorithms have recently demonstrated impressive results in challenging problem domains such as robotic manipulation, Go, and Atari games. But, RL algorithms typically require a large number of interactions with the environment to train policies that solve new tasks, since they begin with no knowledge whatsoever about the task and rely on random exploration of their possible actions in order to learn. This is particularly problematic for physical domains such as robotics, where gathering experience from interactions is slow and expensive. At the same time, people often have some intution about the right kinds of things to do during RL tasks, such as approaching an object when attempting to grasp it – might it be possible for us to somehow communicate these intuitions to the RL agent to speed up its training?" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/acteach/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/acteach/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-11T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers","dateModified":"2019-09-11T00:00:00-07:00","datePublished":"2019-09-11T00:00:00-07:00","description":"Reinforcement Learning (RL) algorithms have recently demonstrated impressive results in challenging problem domains such as robotic manipulation, Go, and Atari games. But, RL algorithms typically require a large number of interactions with the environment to train policies that solve new tasks, since they begin with no knowledge whatsoever about the task and rely on random exploration of their possible actions in order to learn. This is particularly problematic for physical domains such as robotics, where gathering experience from interactions is slow and expensive. At the same time, people often have some intution about the right kinds of things to do during RL tasks, such as approaching an object when attempting to grasp it – might it be possible for us to somehow communicate these intuitions to the RL agent to speed up its training?","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/acteach/"},"url":"http://ai.stanford.edu/blog/acteach/","author":{"@type":"Person","name":"<a href='https://www.andreykurenkov.com/'>Andrey Kurenkov</a> and <a href=\"http://web.stanford.edu/~amandlek/\">Ajay Mandlekar</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Presenting AC-Teach, a unifying approach to leverage advice from an ensemble of sub-optimal teachers in order to accelerate the learning process of actor-cri...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers">
+    
+    <meta name="twitter:description" content="Presenting AC-Teach, a unifying approach to leverage advice from an ensemble of sub-optimal teachers in order to accelerate the learning process of actor-critic reinforcement learning agents.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-09-05-acteach/alg-mini.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2019-09-05-acteach/alg-mini.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers</h1>
+    <p class="meta">
+    <a href='https://www.andreykurenkov.com/'>Andrey Kurenkov</a> and <a href="http://web.stanford.edu/~amandlek/">Ajay Mandlekar</a>
+    <div class="post-date">September 11, 2019</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Reinforcement Learning (RL) algorithms have recently demonstrated impressive results in challenging problem domains such as robotic manipulation, Go, and Atari games. But, RL algorithms typically require a large number of interactions with the environment to train policies that solve new tasks, since they begin with no knowledge whatsoever about the task and rely on random exploration of their possible actions in order to learn. This is particularly problematic for physical domains such as robotics, where gathering experience from interactions is slow and expensive. At the same time, people often have some intution about the right kinds of things to do during RL tasks, such as approaching an object when attempting to grasp it – might it be possible for us to somehow communicate these intuitions to the RL agent to speed up its training?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/learn_slow.png" /></p>
+<figcaption>
+Plots from Figure 6 of <a href="https://arxiv.org/pdf/1809.07731.pdf">Benchmarking Reinforcement Learning Algorithms on Real-World Robots</a> by Mahmood et al., showing that even after hours of training for the simple tasks of reaching a point in free space the RL agent is not able to perform as well as one scripted by the authors.
+</figcaption>
+</div></figure>
+
+<p>Well, if we have some intuition about some of the things the agent ought to do, why not just hand-code or otherwise implement policies that do those things and throw them into the mix during training to help the agent explore well? Though we can’t just have the agent imitate these policies, since they may be suboptimal and only useful at certain (and not all) portions of the task, we can perhaps still use them to help the agent learn from them where it can and ultimately surpass them.</p>
+
+<p>In other words, we argue that in domains like robotics one powerful way to speed up learning is to encode knowledge into an <strong>ensemble of heuristic solutions</strong> (controllers, planners, previously trained policies, etc.) that address parts of the task. Leveraged properly, these heuristics act as <strong>teachers</strong> guiding agent exploration, leading to faster convergence during training and better asymptotic performance.  Given a state, each teacher would simply provide the action it would take in that state, and the RL agent can consider these action proposals in addition to what its own still-training policy suggests it should do.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/high-level-fig.png" /></p>
+<figcaption>
+The high level idea forming the basis of our work: implementing several 'teachers' that address parts of a task, which aid an agent in learning the whole task.
+</figcaption>
+</div></figure>
+
+<p>For example, if the task is to search for items in a messy heap, we may be able to provide policies for grasping, placing, and pushing objects based on prior work. Since these are in themselves not solved problems these policies may not accomplish these tasks in the optimal way, but would still do them far better than an agent starting to learn from scratch, which probably would do nothing useful.  We could then supply these teachers to the agent and have it benefit from them while learning:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/example.png" /></p>
+<figcaption>
+The search for items in a messy heap task, showing how the provided teachers can aid in exporation. 
+</figcaption>
+</div></figure>
+
+<p>But, learning with teachers also presents additional challenges – the agent now needs to learn which teachers (if any) to follow in any given state, and to avoid alternating between teachers that are offering contradictory advice.</p>
+
+<p>To address these challenges we developed <a href="https://arxiv.org/abs/1909.04121"><strong>Actor-Critic with Teacher Ensembles (AC-Teach)</strong></a>, a policy learning framework to leverage advice from multiple teachers where individual teachers might only offer useful advice in certain states, or offer advice that contradicts other teacher suggestions, and where the agent might need to learn behaviors from scratch in states where no teacher offers useful advice. In this post we shall explain how AC-Teach works, and demonstrate that it is able to leverage varying teacher ensembles to solve multi-step tasks while significantly improving sample complexity over baselines. Lastly, we will show that AC-Teach is not only able to generate policies using low-quality teacher sets but also surpasses baselines when using higher quality teachers, hence providing a unified algorithmic solution to a broad range of teacher attributes.</p>
+
+<h2 id="why-might-leveraging-teacher-ensembles-be-tricky">Why might leveraging teacher ensembles be tricky?</h2>
+
+<p>An intuitive first idea for leveraging teachers may be to execute actions from them some random proportion of the time, a technique known as Probabilistic Policy Reuse<sup id="fnref:ppr" role="doc-noteref"><a href="#fn:ppr" class="footnote">1</a></sup>. Before jumping to explaining AC-Teach, let’s establish why such an approach may not work well in our setting with two example robotics tasks – pick and place, and sweeping of a cube towards a goal location using a hook.</p>
+
+<p><strong>Behavioral policies can be sensitive to contradictory teachers</strong></p>
+
+<p>When an agent has no notion of <em>commitment</em>, the experience it collects withe the aid of teachers can be low quality due to teachers that offer contradictory advice:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/pick_contradictory.gif" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/sweep_contradictory.gif" /></p>
+<figcaption>
+Left, the agent picks between a Pick-cube teacher, a Place-cube teacher, and itself uniformly at random, leading to indecisiveness between picking the cube and moving to the goal. Right, the agent similarly chooses randomly between several teachers and therefore makes not progress.
+</figcaption>
+</div></figure>
+
+<p><strong>Behavioral policies can be sensitive to partial teachers</strong></p>
+
+<p>When an agent <em>overcommits</em> to its choice of policy, the experience it collects can be low quality due to teachers that only address parts of the task:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/pick_partial.gif" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/sweep_partial.gif" /></p>
+<figcaption>
+In the example above, the agent selects a policy and naively executes it for several timesteps. Left, for the pick and place task, although the Pick teacher allows the behavioral policy to grasp the cube, little else happens during the episode, since the behavioral policy does not realize that the Pick teacher is not useful when the cube is grasped. Similarly, the Place teacher is executed at the wrong time, when the cube has not been grasped yet. Right, for the hook sweep task, although the Hook-Grasp teacher allows the behavioral policy to grasp the hook, little else happens during the episode, since the behavioral policy does not realize that the Hook-Grasp teacher is not useful when the hook is grasped. Similarly, the Hook-Sweep teacher is executed at the wrong time, when the hook has neither been grasped nor positioned.
+</figcaption>
+</div></figure>
+
+<p><strong>AC-Teach manages a good balance of exploration and commitment</strong></p>
+
+<p>Qualitatively, we can now look at what AC-Teach does during training to get a sense for why it may work better than the above approaches:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/pick_insensitive.gif" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/sweep_insensitive.gif" /></p>
+<figcaption>
+The AC-Teach agent is able to commit to policy selections for appropriate time scales, allowing for improved exploration guided by the teachers. Left, the agent is able to switch its policy choice when the Pick teacher has helped it grasp the cube, allowing for improved exploration, and resulting in a successful episode of interaction. Right, the agent is able to switch its policy choice when the Hook-Grasp teacher has helped it grasp the hook, allowing for improved exploration, and resulting in a successful episode of interaction. This provides useful experience for training the agent.
+</figcaption>
+</div></figure>
+
+<h2 id="problem-formulation">Problem Formulation</h2>
+
+<p>So, we can see above that several properties of teachers make them more tricky to utilize. Specifically, we make minimal assumptions on the quality of such teacher sets and assume that the sets can have the following attributes:</p>
+<ul>
+  <li><em>partial</em>: Individual teachers might only offer useful advice in certain states</li>
+  <li><em>contradictory</em>: Teachers might offer advice that contradicts other teacher suggestions</li>
+  <li><em>insufficient</em>: There might be states where no teacher offers useful advice, and the agent needs to learn optimal behavior from scratch</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/teacher_props.png" /></p>
+<figcaption>
+Visual representation of teacher ensemble attributes, with arrows
+representing actions and line color representing different teacher
+policies. In this figure each example trajectory has the attributes of
+all the boxes it is contained within. Italicized terms apply to single
+policies, and non-italicized terms refer to sets of policies.
+</figcaption>
+</div></figure>
+
+<p>While prior work has addressed the problem of policy learning with teachers, we are the first to enumerate the above teacher attributes and propose a unifying algorithmic framework that efficiently exploits the set of teachers during the agent’s training regardless of the teachers’ attributes.</p>
+
+<p>More concretely, we consider the policy advice setting in which the behavioral policy \(\pi_b\) (that is, the policy with which we collect experience during trainig, which is distinct from the agent policy \(\pi_\theta\)) can receive action suggestions from a set of teacher policies \(\Pi = \{\pi_1, \pi_2, \ldots, \pi_N\}\) that are available during training but not at test time. The problem is then to specify a behavioral policy \(\pi_b\) that efficiently leverages the advice of a set \(\Pi\) of teacher policies to generate experience to train an agent policy \(\pi_\theta\) with the goal of achieving good test-time performance in minimal train-time environment interactions.</p>
+
+<h2 id="background-review">Background Review</h2>
+
+<p>There are multiple methods to maximize the RL objective based on the policy gradient theorem, and one family of solutions is <strong>actor-critic</strong> methods. These methods train two networks – (1) the critic, which takes in an action and state and is optimized to output the expected return from taking that action and then acting via the optimal policy, and (2) the actor, which which takes in a state and is optimized to output the best action according to the critic.</p>
+
+<p>Although AC-Teach is compatible with any actor-critic algorithm, in this work we focus on an instance of it implemented with Bayesian
+DDPG<sup id="fnref:lillicrap2015continuous" role="doc-noteref"><a href="#fn:lillicrap2015continuous" class="footnote">2</a></sup><sup id="fnref:henderson2017bayesian" role="doc-noteref"><a href="#fn:henderson2017bayesian" class="footnote">3</a></sup>, a popular actor-critic algorithm for continuous action spaces. The agent policy
+\(\pi_{\theta}\) in AC-Teach is the actor in the DDPG architecture.
+DDPG maintains a critic network \(Q_{\phi}(s, a)\) and a deterministic
+actor network \(\pi_{\theta}(s)\) (the agent policy), parametrized by
+\(\phi\) and \(\theta\) respectively. A behavioral policy \(\pi_b\)
+(usually the same as the agent policy, \(\pi_{\theta}\), with an
+additional exploration noise) is used to select actions that are
+executed in the environment, and state transitions are stored in a
+replay buffer \(\mathcal{B}\). DDPG alternates between collecting
+experience and sampling the buffer to train the policy
+\(\pi_{\theta}\) and the critic \(Q_{\phi}\).</p>
+
+<p>The critic is trained via the Bellman residual loss and the actor is trained
+with a deterministic policy gradient update to choose actions that
+maximize the critic with a target critic and actor networks.
+The stability and performance of DDPG varies strongly between tasks.  To alleviate these problems, Henderson et al. introduced Bayesian DDPG, a Bayesian Policy Gradient method that extends DDPG by estimating a posterior value function for the critic. The posterior is obtained based on Bayesian dropout<sup id="fnref:gal2016dropout" role="doc-noteref"><a href="#fn:gal2016dropout" class="footnote">4</a></sup> with an \(\alpha\)-divergence loss. AC-Teach trains a Bayesian critic and actor in a similar fashion.</p>
+
+<h2 id="ac-teach">AC-Teach</h2>
+
+<p>In this section we explain the details of how AC-Teach works. AC-Teach is shaped by four key challenges
+with regards to how to implement an efficient behavioral policy:</p>
+
+<ul>
+  <li>
+    <p>How to <strong>evaluate the quality of the advice</strong> from any given teacher
+in each state for a continuous state and action space? AC-Teach is
+based on a novel <em>critic-guided behavioral policy</em> that
+evaluates both the advice from the teachers as well as the actions
+of the learner.</p>
+  </li>
+  <li>
+    <p>How to <strong>balance exploitation and exploration</strong> in the behavioral
+policy? AC-Teach uses <em>Thompson sampling</em> on the posterior
+over expected action returns provided by a Bayesian critic to help
+the behavioral policy to select which advice to follow.</p>
+  </li>
+  <li>
+    <p>How to deal with <strong>contradictory teachers</strong>? AC-Teach implements a
+temporal <em>commitment</em> method based on the posterior from
+the Bayesian critic that executes actions from the same policy
+until the confidence in return improvement from switching to
+another policy is significant.</p>
+  </li>
+  <li>
+    <p>How to <strong>alleviate extrapolation errors in the agent</strong> arising from
+large differences between the behavioral and the agent policy, the
+‘‘large off-policy-ness’’ problem? AC-Teach introduces a
+<em>behavioral target</em> into DDPG’s policy gradient update, such
+that the critic is optimized with the target Q-value of the
+behavioral policy rather than the agent policy.</p>
+  </li>
+</ul>
+
+<h4 id="critic-guided-behavioral-policy">Critic-Guided Behavioral Policy</h4>
+
+<p>In off-policy Deep RL, the behavioral policy \(\pi_{b}\) collects experience in the environment during training and
+is typically the output of the actor network \(\pi_{\theta}\) with added noise. However, when teachers are available, the behavioral policy
+should take their advice into consideration. To leverage teacher advice for exploration, we propose to use the critic to implement \(\pi_b\) in AC-Teach as follows:</p>
+<ol>
+  <li>Given a state <em>S</em>, the agent policy \(\pi_{\theta}\) and each teacher policy \(\pi_i \in \Pi\)
+generate a set of action proposals \({\pi_{\theta}(s),\pi_1(s),\ldots,\pi_N(s)}\).</li>
+  <li>The critic \(Q_{\phi}\) evaluates the set of action proposals and
+selects the most promising one to execute in the environment.</li>
+</ol>
+
+<p>This is equivalent to selecting between the teachers and the agent, but notice
+that this selection mechanism is agnostic to the source of the actions,
+enabling AC-Teach to scale to large teacher sets.</p>
+
+<h4 id="thompson-sampling-over-a-bayesian-critic-for-behavioral-policy">Thompson Sampling over a Bayesian Critic for Behavioral Policy</h4>
+
+<p>The behavioral policy needs to balance between exploration of teachers, whose utility in different states is not known at the start of training, and the agent policy, whose utility is non-stationary during learning versus exploitation of teachers that
+provided highly rewarded advice in the past. Inspired by the similarity between policy selection and the multi-arm bandits problem, we use
+<strong>Thompson sampling</strong>, a well-known approach for efficiently balancing exploration and exploitation in the bandit setting. Thompson sampling is a Bayesian approach for decision making where the uncertainty of each decision is modeled by a posterior reward distribution for each arm. In our multi-step setting, we model the posterior distribution over action-values using a Bayesian dropout critic network similar to
+Henderson et al.</p>
+
+<p>Concretely, instead of maintaining a point estimate of \(\phi\) and
+\(Q_{\phi}\), we maintain a <strong>distribution over weights</strong>, and consequently over values by using Bayesian dropout. To evaluate an action for a given state-action pair, a new dropout mask is sampled at each layer of \(Q_{\phi}\), resulting in a set of weights \(\hat{\phi}\), and then
+a forward pass through the network results in a sample \(Q_{\hat{\phi}}(s, a)\). We then use critic \(Q_{\hat{\phi}}\) to
+evaluate the set of action proposals \({a_0,a_1,\ldots,a_N}\) and selects \(a_i = \arg\max_{a_0, a_1, ..., a_N} Q_{\hat{\phi}}(s, a)\) as the action to consider executing. The choice whether to execute this action depends on our commitment mechanism, explained next.</p>
+
+<h4 id="confidence-based-commitment">Confidence Based Commitment</h4>
+
+<p>In our problem setup, we consider the possibility of contradictory
+advice from different teachers that hinders task progress.
+Therefore, it is crucial to avoid switching excessively between teachers
+and <em>commit</em> to the advice from the same teacher for longer time
+periods. This is particularly important at the beginning of the training process
+when the critic has not yet learned to provide correct evaluations.</p>
+
+<p>To achieve a longer time commitment, we compare the policy selected at
+this timestep \(\pi_i\) via the Thompson Sampling process to the
+policy selected at the previous timestep, \(\pi_j\). We use the
+posterior critic to estimate the probability for the value of \(a_i\)
+to be larger than the value of \(a_j\). If the probability of value
+improvement is larger than a threshold \(\beta\psi\^{t_c}\), the
+behavioral policy acts using the new policy, otherwise it acts with the
+previous policy. The threshold \(\beta\) controls the behavioral
+policy’s aversion to switch, and \(\psi\) controls the degree of
+multiplicative decay, to prevent over-commitment and make it easier to
+switch the policy choice when a policy is selected for several
+consecutive time steps.</p>
+
+<p>To summarize, the following figure provides an overview of how the AC-Teach behavioral policy works:</p>
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/algo_fig.png" /></p>
+</div></figure>
+
+<p>Or, expressed more formally:</p>
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/alg-block.png" /></p>
+</div></figure>
+
+<h4 id="addressing-extrapolation-error-in-the-critic">Addressing Extrapolation Error in the Critic</h4>
+
+<p>Off-policy learning can be unstable for deep reinforcement learning
+approaches. We follow Henderson et al.<sup id="fnref:henderson2017bayesian:1" role="doc-noteref"><a href="#fn:henderson2017bayesian" class="footnote">3</a></sup> for training
+the learner policy \(\pi_{\theta}\) and the Bayesian critic
+\(Q_{\phi}\) on samples from the experience replay \(\mathcal{B}\).
+However, we further improved the stability of training by modifying the
+critic target values used for the \(\alpha\)-divergence Bayesian critic
+loss. Instead of using \(r + \gamma Q_{\phi'}(s',
+\pi_{\theta'}(s'))\) as the target value for the critic, we opt to
+use \(r + \gamma Q_{\phi'}(s', \pi_{b}(s'))\).</p>
+
+<p>In other words, the behavioral policy is used to select target values
+for the critic. We observed that using this modified target value in
+conjunction with basing the behavioral policy on the critic greatly
+improved off-policy learning.</p>
+
+<h2 id="experiments">Experiments</h2>
+
+<p>We designed AC-Teach to be able to leverage experience from challenging
+sets of teachers that do not always provide good advice (see Table 1).
+In our experiments, we compare AC-Teach to other learning algorithms
+that use experience from teachers with the aforementioned attributes
+(see Sec. 3) for the following three control tasks (see Appendix D.1 for
+more task details). We outline the tasks and teacher sets below. For
+each task, we design a sufficient teacher that can complete each task
+that chooses the appropriate partial teacher to query per state, and
+unless differently specified, we add a Gaussian action perturbation to
+every teacher’s actions during learning so that their behavior is more
+suboptimal.</p>
+
+<h4 id="path-following">Path Following</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/task-path.gif" /></p>
+</div></figure>
+
+<p>Objective: a point agent starts each episode at the origin of a 2D plane and needs
+to visit the four corners of a square centered at the origin. These
+corners must be visited in a specific order that is randomly sampled at each episode. The agent applies delta
+position actions to move.</p>
+
+<p>Teacher Set: we designed one teacher per corner that, when queried,
+moves the agent a step of maximum length closer to that corner. Each of
+these teachers ispartialsince it can only solve part of the task
+(converging to the specific corner). The four teachers are needed for
+the teacher set to be sufficient.</p>
+
+<h4 id="pick-and-place">Pick and Place</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/task-path-place.gif" /></p>
+</div></figure>
+
+<p>Objective: pick up a cube and place it at a target location on the table surface. The initial
+position of the object and the robot end effector are randomized at each
+episode start, but the goal is constant. The agent applies delta
+position commands to the end effector and can actuate the gripper.</p>
+
+<p>Teacher Set: we designed two partial teachers for this task,
+pickandplace. The pick teacher moves directly toward the object and
+grasps it when close enough. The place agent is implemented to move the
+grasped cube in a parabolic motion towards the goal location and
+dropping it on the target location once it is overhead.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/teacher-grasp.gif" />
+<img class="postimagehalf" src="/blog/assets/img/posts/2019-09-05-acteach/teacher-place.gif" /></p>
+</div></figure>
+
+<h4 id="hook-sweep">Hook Sweep</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/task-sweep.gif" /></p>
+</div></figure>
+
+<p>Objective: actuate a robot arm to move a cube to a particular goal location. The cube is
+initialized out of reach of the robot arm, and so the robot must use a
+hook to sweep the cube to the goal. The goal location and initial cube
+location are randomized such that in some episodes the robot arm must
+use the hook tosweep the cube closer to its base and in other episodes
+the robot arm must use the hook to push the cube away from its base to a
+location far from the robot.</p>
+
+<p>Teacher Set: We designed four partial teachers for this
+task, hook-pick, hook-position, sweep-in, and sweep-out. The hook-pick teacher guides the end-effector to the base of
+the hook and grasps the hook. The hook-position teacher assumes that the
+hook has been grasped at the handle and attempts to move the end
+effector into a position where the hook would be in a good location to
+sweep the cube to the goal. Note that this teacher is agnostic to
+whether the hook has actually been grasped and tries to position the arm
+regardless. The sweep-in and sweep-out teachers move the end effector toward
+or away from the robot base respectively such that the hook would sweep
+the cube into the goal, if the robot were holding the hook and the hook
+had been positioned correctly, relative to the cube.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagethird" src="/blog/assets/img/posts/2019-09-05-acteach/teacher-grasp-hook.gif" />
+<img class="postimagethird" src="/blog/assets/img/posts/2019-09-05-acteach/teacher-position-hook.gif" />
+<img class="postimagethird" src="/blog/assets/img/posts/2019-09-05-acteach/teacher-move-hook.gif" /></p>
+</div></figure>
+
+<h4 id="baselines">Baselines</h4>
+
+<p>We compare AC-Teach against the following set of baselines:</p>
+
+<ol>
+  <li>BDDPG: Vanilla DDPG without teachers, using a Bayesian critic as in
+Henderson et al.</li>
+  <li>DDPG + Teachers (Critic): Train a point estimate of the critic
+parameters instead of using Bayesian dropout. The behavioral policy still uses the critic to choose
+a policy to run.</li>
+  <li>BDDPG + Teachers (Random): BDDPG with a behavioral policy that picks an
+agent to run uniformly at random.</li>
+  <li>BDDPG + Teachers (DQN): BDDPG with a behavioral policy that is a Deep Q
+Network (DQN), trained alongside the agent to select the source policy as in Xie et al.</li>
+</ol>
+
+<h2 id="results">Results</h2>
+
+<p>We will highlight experiments that answer the following questions:</p>
+
+<ol>
+  <li>
+    <p>To what extent does AC-Teach improve the number of interactions
+needed by the agent to learn to solve the task by leveraging a set
+of teachers that are partial?</p>
+  </li>
+  <li>
+    <p>Can AC-Teach still improve sample efficiency when the set of
+teachers is insufficient and parts of the task must be learned
+from scratch?</p>
+  </li>
+  <li>
+    <p>Do all the components of AC-Teach help in it performing well?</p>
+  </li>
+</ol>
+
+<h4 id="partial-sufficient-teacher-results">Partial Sufficient Teacher Results</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/results_sufficient.png" /></p>
+</div></figure>
+
+<p>Above we present the test time performance of an agent trained with AC-Teach and baselines with the help of the sufficient partial teacher sets. For all the tasks, our method significantly outperforms all others in both convergence speed and asymptotic performance. On the pick-and-place task, the AC-Teach agent even outperforms our hand-coded teacher without noise, despite it being very close to optimal.</p>
+
+<h4 id="partial-insufficient-teacher-results">Partial Insufficient Teacher Results</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/results_insufficient.png" /></p>
+</div></figure>
+
+<p>Above, we present the test time performance of agents trained with insufficient teacher sets, meaning we exclude one of the teachers from the ensemble for each task (for the pick-and-place task it is the place teacher, and otherwise we remove one teacher at random). AC-Teach can learn to accomplish the task even with <strong>insufficient teacher ensembles</strong>.</p>
+
+<h4 id="ablation-results">Ablation Results</h4>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/results_ablation.png" /></p>
+</div></figure>
+
+<p>Above, we present the test time performance of agents trained with several modified versions of AC-Teach to evaluate the effect of each of its components, in particular different variants of time commitment and behavioral target. Interestingly, time commitment does not grant any benefit in the Path Following task despite being useful in the Pick and Place and Hook Sweep tasks. On the contrary, the behavioral target is not relevant for the performance of AC-Teach in the Pick and Place and Hook Sweep tasks despite being important in the Path Following.</p>
+
+<p>We hypothesize that the tasks present different characteristics that benefit (or not) from the features of AC-Teach. In the case of Path Following, it includes little stochasticity and so the potential extrapolation error that is countered with the behavioral target is larger. For the Pick and Place task, both the end-effector and cube locations are randomized so the collected experience is varied enough, making extrapolation error less problematic. However, the shorter time horizon to complete the Pick and Place task and the possibility of pushing the cube away make commitment beneficial.</p>
+
+<h4 id="learned-qualitative-agent-behaviors">Learned Qualitative Agent Behaviors</h4>
+
+<p><strong>Path Following</strong>: The agent mostly learns to follow optimal straight line paths to the
+waypoints, despite the teachers having noisy actions and exhibiting
+imperfect behavior at train time.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/path_qual.gif" /></p>
+</div></figure>
+
+<p><strong>Pick and Place</strong>: Notice how the agent learned to grasp the cube and then slide it to the
+goal, even though the place teacher actually lifts the cube up and tries
+to execute a parabolic arc to the goal (see Place teacher above). The
+agent can learn to exhibit behavior that is different than that of the
+teachers in order to maximize task performance.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/pick_qual.gif" /></p>
+</div></figure>
+
+<p><strong>Hook Sweep</strong>: This agent learned to recognize situations where it needs to use the
+hook to sweep the cube forward to the goal, and where it needs to use
+the hook to pull the cube back to the goal.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img src="/blog/assets/img/posts/2019-09-05-acteach/sweep_qual.gif" /></p>
+</div></figure>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We presented AC-Teach, a unifying approach to leverage advice from an
+ensemble of sub-optimal teachers in order to accelerate the learning
+process of an actor-critic agent. AC-Teach incorporates teachers’ advice
+into the behavioral policy based on a Thomson sampling mechanism on the
+probabilistic evaluations of a Bayesian critic. Our experiments and
+comparison to baselines showed that AC-Teach can extract useful
+exploratory experiences when the set of teachers is noisy, partial,
+incomplete, or even contradictory. In the future, we plan to apply
+AC-Teach to real robot policy learning to demonstrate its applicability
+to solving challenging long-horizon manipulation in the real world.</p>
+
+<hr />
+
+<p>This blog post is based on the CoRL 2019 paper AC-Teach: A Bayesian Actor-Critic Method for Policy Learning with an Ensemble of Suboptimal Teachers by Andrey Kurenkov, Ajay Mandlekar, Roberto Martin-Martin, Silvio Savarese, Animesh Garg</p>
+
+<p>For further details on this work, check out the <a href="https://arxiv.org/abs/1909.04121">paper on Arxiv</a>.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ppr" role="doc-endnote">
+      <p>Fernández, Fernando, and Manuela Veloso. “Probabilistic policy reuse in a reinforcement learning agent.” Proceedings of the fifth international joint conference on Autonomous agents and multiagent systems. ACM, 2006. <a href="#fnref:ppr" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lillicrap2015continuous" role="doc-endnote">
+      <p>Lillicrap, Timothy P., et al. “Continuous control with deep reinforcement learning.” arXiv preprint arXiv:1509.02971 (2015). <a href="#fnref:lillicrap2015continuous" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:henderson2017bayesian" role="doc-endnote">
+      <p>Henderson, Peter, et al. “Bayesian policy gradients via alpha divergence dropout inference.” arXiv preprint arXiv:1712.02037 (2017). <a href="#fnref:henderson2017bayesian" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:henderson2017bayesian:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:gal2016dropout" role="doc-endnote">
+      <p>Gal, Yarin, and Zoubin Ghahramani. “Dropout as a bayesian approximation: Representing model uncertainty in deep learning.” international :conference on machine learning. 2016. <a href="#fnref:gal2016dropout" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/acteach/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/acteach/&text=AC-Teach%3A+A+Bayesian+Actor-Critic+Method+for+Policy+Learning+with+an+Ensemble+of+Suboptimal+Teachers%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/acteach/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/acteach/&title=AC-Teach%3A+A+Bayesian+Actor-Critic+Method+for+Policy+Learning+with+an+Ensemble+of+Suboptimal+Teachers%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/acteach/&title=AC-Teach%3A+A+Bayesian+Actor-Critic+Method+for+Policy+Learning+with+an+Ensemble+of+Suboptimal+Teachers%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=AC-Teach%3A+A+Bayesian+Actor-Critic+Method+for+Policy+Learning+with+an+Ensemble+of+Suboptimal+Teachers%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/acteach/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#rl">
+      <p><i class="fa fa-tag fa-fw"></i> rl</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#robotics">
+      <p><i class="fa fa-tag fa-fw"></i> robotics</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/minimax-optimal-pac/">
+      <p>Previous post</p>
+        Policy Certificates and Minimax-Optimal PAC Bounds for Episodic Reinforcement Learning
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/answering-complex-questions/">
+      <p>Next post</p>
+        Answering Complex Open-domain Questions at Scale
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

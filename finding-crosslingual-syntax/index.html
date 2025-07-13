@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/finding-crosslingual-syntax/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Finding Cross-Lingual Syntax in Multilingual BERT | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Finding Cross-Lingual Syntax in Multilingual BERT" />
+<meta name="author" content="<a href="http://ethanachi.com">Ethan A. Chi</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="We projected head-dependent pairs from both English (light colors) and French (dark colors) into a syntactic space trained on solely English mBERT representations. Both English and French head-dependent vectors cluster; dependencies of the same label in both English and French share the same cluster. Although our method has no access to dependency labels, the dependencies exhibit cross-lingual clustering that largely agree with linguists’ categorizations." />
+<meta property="og:description" content="We projected head-dependent pairs from both English (light colors) and French (dark colors) into a syntactic space trained on solely English mBERT representations. Both English and French head-dependent vectors cluster; dependencies of the same label in both English and French share the same cluster. Although our method has no access to dependency labels, the dependencies exhibit cross-lingual clustering that largely agree with linguists’ categorizations." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/finding-crosslingual-syntax/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/finding-crosslingual-syntax/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-26T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Finding Cross-Lingual Syntax in Multilingual BERT" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Finding Cross-Lingual Syntax in Multilingual BERT","dateModified":"2020-05-26T00:00:00-07:00","datePublished":"2020-05-26T00:00:00-07:00","description":"We projected head-dependent pairs from both English (light colors) and French (dark colors) into a syntactic space trained on solely English mBERT representations. Both English and French head-dependent vectors cluster; dependencies of the same label in both English and French share the same cluster. Although our method has no access to dependency labels, the dependencies exhibit cross-lingual clustering that largely agree with linguists’ categorizations.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/finding-crosslingual-syntax/"},"url":"http://ai.stanford.edu/blog/finding-crosslingual-syntax/","author":{"@type":"Person","name":"<a href=\"http://ethanachi.com\">Ethan A. Chi</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Finding Cross-Lingual Syntax in Multilingual BERT | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Large neural language models such as BERT have seen surprising success with multilingual pre-training on a large number of languages. We demonstrate that Mul...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Finding Cross-Lingual Syntax in Multilingual BERT">
+    
+    <meta name="twitter:description" content="Large neural language models such as BERT have seen surprising success with multilingual pre-training on a large number of languages. We demonstrate that Multilingual BERT learns cross-lingual syntax, visualizing its inherent structure.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/thumbnail.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/thumbnail.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Finding Cross-Lingual Syntax in Multilingual BERT</h1>
+    <p class="meta">
+    <a href="http://ethanachi.com">Ethan A. Chi</a>
+    <div class="post-date">May 26, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_0.png" /></p>
+<figcaption>We projected head-dependent pairs from both English (light colors) and French (dark colors) into a syntactic space trained on solely English mBERT representations.  Both English and French head-dependent vectors cluster; dependencies of the same label in both English and French share the same cluster.   Although our method has no access to dependency labels, the dependencies exhibit cross-lingual clustering that largely agree with linguists’ categorizations.</figcaption>
+</div></figure>
+
+<h4 style="text-align: center;"> If you ask a deep neural network to read a large number of languages, does it share what it’s learned about sentence structure between different languages? </h4>
+
+<p>Deep neural language models like BERT have recently demonstrated a fascinating level of understanding of human language.  Multilingual versions of these models, like Multilingual BERT (mBERT), are able to understand a large number of languages simultaneously.  To what extent do these models share what they’ve learned between languages?</p>
+
+<p>Focusing on the syntax, or grammatical structure, of these languages, we show that Multilingual BERT is able to learn a general syntactic structure applicable to a variety of natural languages. Additionally, we find evidence that mBERT learns cross-lingual syntactic categories like “subject” and “adverb”—categories that largely agree with traditional linguistic concepts of syntax!  Our results imply that simply by reading a large amount of text, mBERT is able to represent syntax—something fundamental to understanding language—in a way that seems to apply across many of the languages it comprehends.</p>
+
+<p>More specifically, we present the following:</p>
+
+<ul>
+  <li>
+    <p>We apply the structural probe method of <a href="https://nlp.stanford.edu/pubs/hewitt2019structural.pdf">Hewitt and Manning (2019)</a> to 10 languages, finding syntactic subspaces in a multilingual setting.</p>
+  </li>
+  <li>
+    <p>Through zero-shot transfer experiments, we demonstrate that mBERT represents some syntactic features in syntactic subspaces that overlap between languages.</p>
+  </li>
+  <li>
+    <p>Through an unsupervised method, we find that mBERT natively represents dependency clusters that largely overlap with the UD standard.</p>
+  </li>
+</ul>
+
+<p>Our results are presented in the forthcoming ACL 2020 paper, <a href="https://arxiv.org/pdf/2005.04511.pdf">Finding Universal Grammatical Relations in Multilingual BERT</a>.  This post draws from the paper, which is joint work with John Hewitt and Chris Manning.  You can also find the code <a href="https://github.com/ethanachi/multilingual-probing-visualization">here</a>.</p>
+
+<p>If you’d like to skip the background and jump to the discussion of our methods, click <a href="#finding-universal-grammatical-relations-in-mbert">here</a>.  Otherwise, read on!</p>
+
+<h2 id="learning-languages">Learning Languages</h2>
+
+<p>Past childhood, humans usually learn a language by <em>comparison</em> to one we already speak.<sup id="fnref:multicompetence" role="doc-noteref"><a href="#fn:multicompetence" class="footnote">1</a></sup> We naturally draw parallels between sentences with similar meanings—for example, after learning some French, one can work out that <em>Je vis le chat mignon</em> is essentially a word-for-word translation of <em>I see the cute cat</em>.  Importantly, humans draw parallels in <em>syntax</em>, or the way words are organized to form meaning; most bilinguals know that <em>mignon</em> is an adjective which describes the noun <em>chat</em>, just as <em>cute</em> describes the noun <em>cat</em>—even though the words are in the opposite order between languages.</p>
+
+<p>How do we train a neural network to understand multiple languages at the same time?  One intuitive approach might be to equip the neural network with a multilingual dictionary and a list of rules to transfer between one language to another.  (For example, adjectives come before the noun in English but after the noun in Khmer.)  However, mirroring recent developments in monolingual neural networks, one more recent method is to give our neural network enormous amounts of data in multiple languages.  In this approach, we never provide even a single translation pair, much less a dictionary or grammar rules.</p>
+
+<p>Surprisingly, this trial by fire works!  A network trained this way, like Google’s Multilingual BERT, is able to understand a vast number of languages beyond what any human can handle, even a typologically divergent set ranging from English to Hindi to Indonesian.</p>
+
+<p>This raises an interesting question: how do these networks understand multiple languages at the same time? Do they learn each language separately, or do they draw parallels between the way syntax works in different languages?</p>
+
+<h2 id="knowing-what-it-means-to-know">Knowing What it Means to “Know”</h2>
+
+<p>First, let’s ask: what does it even mean for a neural network to “understand” a linguistic property?</p>
+
+<p>One way to evaluate this is through the network’s performance on a <em>downstream task</em>, such as a standard leaderboard like the <a href="https://gluebenchmark.com/">GLUE (General Language Understanding Evaluation) benchmark</a>.  By this metric, large models like BERT do pretty well!  However, although high performance numbers suggest in some sense that the model understands some aspects of language <em>generally speaking</em>, they conflate the evaluation of many different aspects of language, and it’s difficult to test specific hypotheses about the individual properties of our model.</p>
+
+<p>Instead, we use a method known as <em>probing</em>.  The central idea is as follows: we feed linguistic data for which we know the property we’re interested in exploring (e.g. part-of-speech) through the network we want to probe.  Instead of looking at the predictions of the model themselves, for each sentence we feed through, we save the <em>hidden representations</em>, which one can think of as the model’s internal data structures.  We then train a <em>probe</em>—a secondary model—to recover the target property from these representations, akin to how a neuroscientist might read out emotions from a MRI scan of your brain.</p>
+
+<p>Probes are usually designed to be simple, to test what the neural network makes easily accessible. intuitively, the harder we try to tease a linguistic property out of the representations, the less the representations themselves matter to your final results.  As an example, we might be able to build an extremely complex model to predict whether someone is seeing a cat, based on the raw data coming from the retina; however, this doesn’t mean that the retina itself intrinsically “understands” what a cat is.<sup id="fnref:probing" role="doc-noteref"><a href="#fn:probing" class="footnote">2</a></sup></p>
+
+<h2 id="a-tale-of-syntax-and-subspaces">A Tale of Syntax and Subspaces</h2>
+
+<p>So what form, exactly, do these hidden representations take?  The innards of a neural network like BERT represent each sentence as a series of real-valued vectors (in real life, these are 768-dimensional, but we’ve represented them as three-dimensional here):</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_1.png" /></p>
+<figcaption>From <a href="https://nlp.stanford.edu/pubs/hewitt2019structural.pdf">Hewitt and Manning (2019)</a>.</figcaption>
+</div></figure>
+
+<p>A probe, then, is a model that maps from a word vector to some linguistic property of interest. For something like part of speech, this might take the form of a 1-layer neural classifier which predicts a category (like noun or verb).</p>
+
+<p>But how do we evaluate whether a neural network knows something as nebulous as syntax, the way words and phrases are arranged to create meaning?  Linguists believe sentences are implicitly organized into <em>syntax trees</em>, which we generate mentally in order to produce a sentence.  Here’s an example of what that looks like:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimagesmall" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_2.png" /></p>
+<figcaption>Syntax tree for French <b><i>Jean qui avait faim joue bien dans le jardin</i></b> (Jean, who was hungry, plays in the garden).</figcaption>
+</div></figure>
+
+<p>To probe whether BERT encodes a syntax tree internally, we apply the <em>structural probe</em> method [Hewitt and Manning, 2019].  This finds a linear transformation<sup id="fnref:linear" role="doc-noteref"><a href="#fn:linear" class="footnote">3</a></sup> such that the tree constructed by connecting each word to the word closest to it approximates a linguist’s idea of what the parse tree should look like.  This ends up looking like this:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_50" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_3.png" /></p>
+</div></figure>
+
+<p>Intuitively, we can think of BERT vectors as lying in a 768-dimensional space; the structural probe tries to find a linear subspace of the BERT space which best recovers syntax trees.</p>
+
+<p>Does this work, you might ask?  Well, this certainly seems to be the case:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_4.png" /></p>
+<figcaption>A gold parse tree annotated by a linguist, and a parse tree generated from Monolingual BERT embeddings. From <a href="https://arxiv.org/abs/1906.02715">Coenen et al. (2019)</a>.</figcaption>
+</div></figure>
+
+<p>Hewitt and Manning apply this method only to monolingual English BERT; we apply their method to 10 other languages, finding that mBERT encodes syntax to various degrees in all of them.  Here’s a table of performance (measured in UUAS, or unlabeled undirected accuracy score) as graphed against the rank of the probe’s linear transformation:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_50" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_5.png" /></p>
+</div></figure>
+
+<h2 id="probing-for-cross-lingual-syntax">Probing for Cross-Lingual Syntax</h2>
+
+<p>With this in mind, we can turn to the question with which we started this blog post:</p>
+
+<p><strong><em>Does Multilingual BERT represent syntax similarly cross-lingually?</em></strong></p>
+
+<p>To answer this, we train a structural probe to predict syntax from representations in one language—say, English—and evaluate it on another, like French.  If a probe trained on mBERT’s English representations performs well when evaluated on French data, this intuitively suggests that the way mBERT encodes English syntax is similar to the way it encodes French syntax.</p>
+
+<p>Does this work? In a word, basically:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_unpadded" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_6.png" /></p>
+<figcaption>Syntactic trees for a single English sentence generated by structural probes trained on English, French, and Indonesian data.
+      Black represents the reference syntactic tree as defined by a linguist.
+      The English structural probe is almost entirely able to replicate the syntactic tree, with one error;
+      the French probe finds most of the syntactic tree, while the Indonesian probe is able to recover the high-level structure but misses low-level details.</figcaption>
+</div></figure>
+
+<p>Out of the 11 languages that we evaluate on, we find that probes trained on representations from one language are able to successfully recover syntax trees—to varying degrees—in data from another language.  Evaluated on two numerical metrics of parse tree accuracy, applying probes cross-lingually performs surprisingly well!  This performance suggests that <strong>syntax is encoded similarly in mBERT representations across many different languages</strong>.</p>
+
+<figure class="figure"><div class="figure__main">
+<table>
+  <tr>
+    <td></td>
+    <td>UUAS</td>
+    <td>DSpr.</td>
+  </tr>
+  <tr>
+    <td>Best baseline</td>
+    <td>0%</td>
+    <td>0%</td>
+  </tr>
+  <tr>
+    <td>Transfer from best source language</td>
+    <td>62.3%</td>
+    <td>73.1%</td>
+  </tr>
+  <tr>
+    <td>Transfer from holdout subspace (trained on all languages other than eval)</td>
+    <td>70.5%</td>
+    <td>79%</td>
+  </tr>
+  <tr>
+    <td>Transfer from subspace trained on all languages (including eval)</td>
+    <td>88.0%</td>
+    <td>89.0%</td>
+  </tr>
+  <tr>
+    <td>Training on evaluation language directly</td>
+    <td>100%</td>
+    <td>100%</td>
+  </tr>
+</table>
+
+<figcaption>Table: Improvement for various transfer methods over best baseline, evaluated on two metrics: UUAS (unlabeled undirected accuracy score) and DSpr. (Spearman correlation of tree distances). Percent improvement is calculated with respect to the total possible improvement in recovering syntactic trees over baseline (as represented by in-language supervision.)</figcaption>
+
+</div></figure>
+
+<h2 id="finding-universal-grammatical-relations-in-mbert">Finding Universal Grammatical Relations in mBERT</h2>
+
+<p>We’ve shown that cross-lingual syntax exists—can we visualize it?</p>
+
+<p>Recall that the structural probe works by finding a linear subspace optimized to encode syntax trees.  Intuitively, this <em>syntactic subspace</em> might focus on syntactic aspects of mBERT’s representations.  Can we visualize words in this subspace and get a first-hand view of how mBERT represents syntax?</p>
+
+<p>One idea is to focus on the edges of our syntactic tree, or <em>head-dependent pairs</em>. For example, below, <em>was</em> is the head of the dependent <em>chef</em>:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_7.png" /></p>
+</div></figure>
+
+<p>Let’s try to visualize these vectors in the syntactic subspace and see what happens!  Define the <em>head-dependent</em> vector as the vector between the head and the dependent in the syntactic subspace:</p>
+
+\[v_{\text{diff}} = B(\mathbf{h}_\text{head} - \mathbf{h}_\text{dep})\]
+
+<p>We do this for every head-dependent pair in every sentence in our corpus, then visualize the resulting 32-dimensional vectors in two dimensions using t-SNE, a dimensionality reduction algorithm.  The results are striking: the dependencies naturally separate into clusters, whose identities largely overlap with the categories that linguists believe are fundamental to language!  In the image below, we’ve highlighted the clusters with dependency labels from Universal Dependencies, like <code class="language-plaintext highlighter-rouge">amod</code> (adjective modifying a noun) and <code class="language-plaintext highlighter-rouge">conj</code> (two clauses joined by a coordinating conjunction like <em>and</em>, <em>or</em>):</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_8.png" /></p>
+</div></figure>
+
+<p>Importantly, these categories are <strong>multilingual</strong>. In the above diagram, we’ve projected head-dependent pairs from both English (light colors) and French (dark colors) into a syntactic space trained on solely English mBERT representations.  We see that French head-dependent vectors cluster as well, and that dependencies with the same label in both English and French share the same cluster.</p>
+
+<h2 id="freedom-from-human-chosen-labels">Freedom from Human-Chosen Labels</h2>
+
+<p>The fact that BERT “knows” dependency labels is nothing new; previous studies have shown high accuracy in recovering dependency labels from BERT embeddings.  So what’s special about our method?</p>
+
+<p>Training a probe successfully demonstrates that we can map from mBERT’s representations to a standard set of dependency category labels.  But because our probe needs supervision on a labeled dataset, we’re limited to demonstrating the existence of a mapping to human-generated labels. In other words, probes make it difficult to gain insight into the categories drawn by mBERT itself.</p>
+
+<p>By contrast, the structural probe never receives information about what humans think dependency label categories should look like. Because we only ever pass in head-dependent pairs, rather than the category labels associated with these pairs, our method is free from human category labels. Instead, the clusters that emerge from the data are a view into <strong>mBERT’s innate dependency label representations</strong>.<sup id="fnref:ud" role="doc-noteref"><a href="#fn:ud" class="footnote">4</a></sup></p>
+
+<p>For more work on the <em>latent</em> linguistic ontology of BERT, see: <a href="https://arxiv.org/abs/2004.14513">Michael et al. (2020)</a> and <a href="https://arxiv.org/pdf/2004.14620.pdf">Limisiewicz et al. (2020)</a>.</p>
+
+<h2 id="analyzing-mberts-internal-representations">Analyzing mBERT’s Internal Representations</h2>
+
+<p>Taking a closer look, what can we discover about how mBERT categorizes head-dependency relations, as compared to human labels? Our results show that mBERT draws slightly different distinctions from Universal Dependencies.  Some are linguistically valid distinctions not distinguished by the UD standards, while others are more influenced by word order, separating relations that most linguists would group together.  Here’s a brief overview:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2020-05-26-finding-crosslingual-syntax/image_9.png" /></p>
+<figcaption>t-SNE visualization of 100,000 syntactic difference vectors projected into the cross-lingual syntactic subspace of Multilingual BERT. We exclude `punct` and visualize the top 11 dependencies remaining, which are collectively responsible for 79.36% of the dependencies in our dataset. Clusters of interest highlighted in yellow; linguistically interesting clusters labeled.</figcaption>
+</div></figure>
+
+<ul>
+  <li>
+    <p><strong>Adjectives:</strong> We find that mBERT breaks adjectives into two categories: prenominal adjectives in cluster (b) (e.g., Chinese <strong>獨特</strong>的地理) and postnominal adjectives in cluster (u) (e.g., French <em>applications</em> <strong><em>domestiques</em></strong>).</p>
+  </li>
+  <li>
+    <p><strong>Nominal arguments:</strong> mBERT maintains the UD distinction between subject and object.  However, indirect objects cluster with direct objects; other adjuncts cluster with subjects if near the beginning of a sentence and <code class="language-plaintext highlighter-rouge">obj</code> otherwise.  This suggests that mBERT categorizes nominal arguments into pre-verbal and post-verbal categories.</p>
+  </li>
+  <li>
+    <p><strong>Relative clauses</strong> In the languages in our dataset, there are two major ways of forming relative clauses. Relative pronouns (e.g., English <em>the man</em> <strong><em>who</em></strong> <em>is hungry</em> are classed by Universal Dependencies as being an <code class="language-plaintext highlighter-rouge">nsubj</code> dependent, while subordinating markers (e.g., English <em>I know</em> <strong><em>that</em></strong> <em>she saw me</em>) are classed as the dependent of a mark relation. However, mBERT groups both of these relations together, clustering them distinctly from most <code class="language-plaintext highlighter-rouge">nsubj</code> and <code class="language-plaintext highlighter-rouge">mark</code> relations.</p>
+  </li>
+  <li>
+    <p><strong>Determiners</strong> The linguistic category of determiners (det) is split into definite articles (i), indefinite articles (e), possessives (f), and demonstratives (g). Sentence-initial definite articles (k) cluster separately from other definite articles (j).</p>
+  </li>
+  <li>
+    <p><strong>Expletive subjects</strong> Just as in UD, expletive subjects, or third person pronouns with no syntactic meaning (e.g. English <strong><em>It</em></strong> <em>is cold</em>, French <strong><em>Il</em></strong> <em>faudrait</em>, Indonesian <strong><em>Yang</em></strong> <em>menjadi masalah kemudian</em>), cluster separately (k) from other <code class="language-plaintext highlighter-rouge">nsubj</code> relations (small cluster in the bottom left).</p>
+  </li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this work, we’ve found that BERT shares some of the ways it represents syntax between its internal representations of different languages.  We’ve provided evidence that mBERT learns natural syntactic categories that overlap cross-lingually.  Interestingly, we also find evidence that these categories largely agree with traditional linguistic concepts of syntax.</p>
+
+<p>Excitingly, our methods allow us to examine fine-grained syntactic categories native to mBERT.  By removing assumptions on what the ontology of syntactic relations should look like, we discover that mBERT’s internal representations innately share significant overlap with linguists’ idea of what syntax looks like.  However, there are also some interesting differences between the two, the nature of which is definitely worth further investigation!</p>
+
+<p>If you’d like to run some tests or generate some visualizations of your own, please head on over to the <a href="https://github.com/ethanachi/multilingual-probing-visualization">multilingual-probing-visualization</a> codebase!</p>
+
+<p>Finally, I’m deeply grateful to John Hewitt and Chris Manning, as well as members of the Stanford NLP group for their advice, including but not limited to: Erik Jones, Sebastian Schuster, and Chris Donahue.  Many thanks also to John Hewitt and Dylan Losey for reading over the draft of this blog post, and to Mohammad Rasooli for advice on Farsi labels in the original paper.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:multicompetence" role="doc-endnote">
+      <p>For a linguistic perspective (specifically, in the field of second-language acquisition), see <a href="https://www.tandfonline.com/doi/abs/10.1080/07908319509525193">Cook (1995)</a>. <a href="#fnref:multicompetence" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:probing" role="doc-endnote">
+      <p>This definition is a general overview and leaves some important questions. How exactly, for instance, do we evaluate the complexity of our probe? Relatedly, how much of the performance improvement is due to the model, and how much is due to the probe itself? For more work on this, see <a href="https://arxiv.org/abs/1909.03368">Hewitt and Liang (2019)</a> and <a href="https://arxiv.org/abs/2004.03061">Pimentel et al. (2020)</a>. <a href="#fnref:probing" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:linear" role="doc-endnote">
+      <p>A linear transformation on a vector is simply multiplication by a matrix: \(h' = Ah\) <a href="#fnref:linear" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:ud" role="doc-endnote">
+      <p>Technically speaking, this is constrained to the assumption that BERT would choose the same head-dependent pairs as UD does. <a href="#fnref:ud" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/finding-crosslingual-syntax/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/finding-crosslingual-syntax/&text=Finding+Cross-Lingual+Syntax+in+Multilingual+BERT%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/finding-crosslingual-syntax/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/finding-crosslingual-syntax/&title=Finding+Cross-Lingual+Syntax+in+Multilingual+BERT%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/finding-crosslingual-syntax/&title=Finding+Cross-Lingual+Syntax+in+Multilingual+BERT%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Finding+Cross-Lingual+Syntax+in+Multilingual+BERT%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/finding-crosslingual-syntax/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tag</div>
+    
+
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/selfsupervised-multimodal/">
+      <p>Previous post</p>
+        Making Sense of Vision and Touch: Multimodal Representations for Contact-Rich Tasks 
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/icra-2020/">
+      <p>Next post</p>
+        SAIL and Stanford Robotics at ICRA 2020
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

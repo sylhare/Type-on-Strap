@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    <link rel="stylesheet" href="/blog/assets/css/responsive.css"> 
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/retrieval-based-NLP/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Building Scalable, Explainable, and Adaptive NLP Models with Retrieval | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Building Scalable, Explainable, and Adaptive NLP Models with Retrieval" />
+<meta name="author" content="<a href="https://omarkhattab.com/">Omar Khattab</a>, <a href="http://web.stanford.edu/~cgpotts/">Christopher Potts</a>, and <a href="https://cs.stanford.edu/~matei/">Matei Zaharia</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Natural language processing (NLP) has witnessed impressive developments in answering questions, summarizing or translating reports, and analyzing sentiment or offensiveness. Much of this progress is owed to training ever-larger language models, such as T5 or GPT-3, that use deep monolithic architectures to internalize how language is used within text from massive Web crawls. During training, these models distill the facts they read into implicit knowledge, storing in their parameters not only the capacity to “understand” language tasks, but also highly abstract knowledge representations of entities, events, and facts the model needs for solving tasks." />
+<meta property="og:description" content="Natural language processing (NLP) has witnessed impressive developments in answering questions, summarizing or translating reports, and analyzing sentiment or offensiveness. Much of this progress is owed to training ever-larger language models, such as T5 or GPT-3, that use deep monolithic architectures to internalize how language is used within text from massive Web crawls. During training, these models distill the facts they read into implicit knowledge, storing in their parameters not only the capacity to “understand” language tasks, but also highly abstract knowledge representations of entities, events, and facts the model needs for solving tasks." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/retrieval-based-NLP/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/retrieval-based-NLP/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-05T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Building Scalable, Explainable, and Adaptive NLP Models with Retrieval" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Building Scalable, Explainable, and Adaptive NLP Models with Retrieval","dateModified":"2021-10-05T00:00:00-07:00","datePublished":"2021-10-05T00:00:00-07:00","description":"Natural language processing (NLP) has witnessed impressive developments in answering questions, summarizing or translating reports, and analyzing sentiment or offensiveness. Much of this progress is owed to training ever-larger language models, such as T5 or GPT-3, that use deep monolithic architectures to internalize how language is used within text from massive Web crawls. During training, these models distill the facts they read into implicit knowledge, storing in their parameters not only the capacity to “understand” language tasks, but also highly abstract knowledge representations of entities, events, and facts the model needs for solving tasks.","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/retrieval-based-NLP/"},"url":"http://ai.stanford.edu/blog/retrieval-based-NLP/","author":{"@type":"Person","name":"<a href=\"https://omarkhattab.com/\">Omar Khattab</a>, <a href=\"http://web.stanford.edu/~cgpotts/\">Christopher Potts</a>, and <a href=\"https://cs.stanford.edu/~matei/\">Matei Zaharia</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Building Scalable, Explainable, and Adaptive NLP Models with Retrieval | The Stanford AI Lab Blog</title>
+    <meta name="description" content="By tapping into knowledge stored explicitly in text corpora, retrieval helps tackle the inefficiency, opaqueness, and static nature of large language models.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Building Scalable, Explainable, and Adaptive NLP Models with Retrieval">
+    
+    <meta name="twitter:description" content="By tapping into knowledge stored explicitly in text corpora, retrieval helps tackle the inefficiency, opaqueness, and static nature of large language models.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-10-05-retrieval-based-NLP/image1.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2021-10-05-retrieval-based-NLP/image1.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Building Scalable, Explainable, and Adaptive NLP Models with Retrieval</h1>
+    <p class="meta">
+    <a href="https://omarkhattab.com/">Omar Khattab</a>, <a href="http://web.stanford.edu/~cgpotts/">Christopher Potts</a>, and <a href="https://cs.stanford.edu/~matei/">Matei Zaharia</a>
+    <div class="post-date">October 5, 2021</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>Natural language processing (NLP) has witnessed impressive developments
+in answering questions, summarizing or translating reports, and
+analyzing sentiment or offensiveness. Much of this progress is owed to
+training ever-larger language models, such
+as <strong><a href="https://arxiv.org/abs/1910.10683">T5</a></strong> or <strong><a href="https://arxiv.org/abs/2005.14165">GPT-3</a></strong>,
+that use deep monolithic architectures to internalize how language is
+used within text from massive Web crawls. During training, these models
+distill the facts they read into <em>implicit knowledge</em>, storing in their
+parameters not only the capacity to “understand” language tasks, but
+also highly abstract <em>knowledge representations</em> of entities, events, and
+facts the model needs for solving tasks.</p>
+
+<p>Despite the well-publicized success of large language models, their
+black-box nature hinders key goals of NLP. In particular, existing large
+language models are generally:</p>
+
+<ul>
+  <li>
+    <p><strong>Inefficient.</strong> Researchers continue to enlarge these models, leading
+to striking inefficiencies as the field already pushes past 1
+trillion parameters. This imposes a considerable <a href="https://arxiv.org/abs/1906.02243">environmental impact</a>
+and its costs exclude all but a few large organizations from the
+ability to train—or in many cases even deploy—such models.</p>
+  </li>
+  <li>
+    <p><strong>Opaque.</strong> They encode “knowledge” into model weights, synthesizing
+what they manage to memorize from training examples. This makes it
+difficult to discern what sources—if any—the model uses to make a
+prediction, a concerning problem in practice as these models
+frequently generate fluent yet untrue <a href="https://twitter.com/yoavgo/status/1284192413477670912">statements</a>.</p>
+  </li>
+  <li>
+    <p><strong>Static.</strong> They are expensive to update. We cannot efficiently adapt a
+GPT model trained on, say, Wikipedia text from 2019 so it reflects
+the knowledge encoded in the 2021 Wikipedia—or the latest snapshot
+of the medical preprint server medRXiv. In practice, adaptation often
+necessitates expensive retraining or <a href="https://arxiv.org/abs/2106.15110">fine-tuning</a> on the new corpus.</p>
+  </li>
+</ul>
+
+<p>This post explores an emerging alternative, <strong>Retrieval-based NLP</strong>, in
+which models directly “search” for information in a text corpus to
+exhibit knowledge, leveraging the representational strengths of language models
+while addressing the challenges above. Such
+models—including <strong><a href="https://arxiv.org/abs/2002.08909">REALM</a></strong>, <strong><a href="https://arxiv.org/abs/2005.11401">RAG</a></strong>, <strong><a href="https://arxiv.org/abs/2007.00814">ColBERT-QA</a></strong>,
+and <strong><a href="https://arxiv.org/abs/2101.00436">Baleen</a></strong>—are
+already advancing the state of the art for tasks like answering
+open-domain questions and verifying complex claims, all with
+architectures that back their predictions with checkable sources while
+being 100–1000× smaller, and thus far cheaper to execute, than GPT-3. At
+Stanford, we have shown that improving the expressivity and
+supervision of scalable neural retrievers can lead to much stronger NLP
+systems: for instance, <strong>ColBERT-QA</strong> improves answer correctness on open-QA
+benchmarks by up to <strong>16</strong> EM points and <strong>Baleen</strong> improves the ability to
+check complex claims on
+<strong><a href="https://hover-nlp.github.io/">HoVer</a></strong>,
+correctly and with provenance, by up to <strong>42</strong> percentage points against existing work.</p>
+
+<h3 id="retrieval-based-nlp">Retrieval-based NLP</h3>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2021-10-05-retrieval-based-NLP/image1.png" /></p>
+<figcaption>
+Figure 1: An illustration comparing (a) black-box language models and (b) retrieval-oriented NLP models, the paradigm this post advocates for.
+</figcaption>
+</div></figure>
+
+<p>As <strong>Figure 1</strong> illustrates, retrieval-based NLP methods view tasks as
+“<a href="https://arxiv.org/abs/1809.02789">open-book</a>”
+exams: knowledge is encoded <em>explicitly</em> in the form of a text corpus like
+Wikipedia, the medical literature, or a software’s API documentation. When
+solving a language task, the model <strong>learns to search</strong> for pertinent passages
+and to then <strong>use the retrieved information</strong> for crafting knowledgeable responses.
+In doing so, retrieval helps decouple the capacity that language models have for
+<em>understanding text</em> from how they <em>store knowledge</em>, leading to three key advantages.</p>
+
+<!-- ### Benefits of retrieval-based NLP models -->
+
+<p><strong>Tackling Inefficiency.</strong> Retrieval-based models can be <strong>much smaller and
+faster</strong>, and thus more environmentally friendly. Unlike black-box language models,
+the parameters no longer need to store an ever-growing list of facts, as
+such facts can be retrieved. Instead, we can dedicate those parameters
+for processing language and solving tasks, leaving us with smaller
+models that are highly effective. For instance, ColBERT-QA achieves
+<strong>47.8%</strong> EM on the open-domain Natural Questions task, whereas a fine-tuned
+T5-11B model (with <strong>24x</strong> more parameters) and a few-shot GPT-3 model (with
+<strong>400x</strong> more parameters) achieve only <strong>34.8%</strong> and <strong>29.9%</strong>, respectively.</p>
+
+<p><strong>Tackling Opaqueness.</strong> Retrieval-based NLP offers a <strong>transparent</strong> contract
+with users: when the model produces an answer, we can read the sources
+it retrieved and judge their relevance and credibility for ourselves.
+This is essential whether the model is factually correct or not: by
+inspecting the sources surfaced by a system like Baleen, we can trust
+its outputs only if we find that reliable sources do support them.</p>
+
+<p><strong>Tackling Static Knowledge.</strong> Retrieval-based models emphasize learning
+general techniques for finding and connecting information from the
+available resources. With facts stored as text, the retrieval knowledge
+store can be <strong>efficiently updated or expanded</strong> by modifying the text
+corpus, all while the model’s capacity for finding and using information
+remains constant. Besides computational cost reductions, this expedites generality:
+developers, even in niche domains, can “plug in” a domain-specific text
+collection and rely on retrieval to facilitate domain-aware responses.</p>
+
+<h3 id="colbert-scalable-yet-expressive-neural-retrieval">ColBERT: Scalable yet expressive neural retrieval</h3>
+
+<p>As the name suggests, retrieval-based NLP relies on semantically rich <strong>search</strong> to extract
+information. For search be practical and effective, it must scale to massive text corpora.
+To draw on the open-book exam analogy, it’s hopeless to linearly look
+through the pages of a hefty textbook during the exam—we need scalable
+strategies for organizing the content in advance, and efficient
+techniques for locating relevant information at inference time.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2021-10-05-retrieval-based-NLP/image2.png" /></p>
+<figcaption>
+Figure 2: Schematic diagrams comparing two popular paradigms in neural IR in sub-figures (a) and (b) against the late interaction paradigm of ColBERT in sub-figure (c).
+</figcaption>
+</div></figure>
+
+<p>Traditionally in IR, search tasks were conducted using bag-of-words
+models like BM25, which seek documents that contain the same tokens as
+the query. In
+2019, <a href="https://arxiv.org/abs/1901.04085">search</a> <a href="https://arxiv.org/abs/1910.10687">was</a> <a href="https://arxiv.org/abs/1904.07094">revolutionized</a> with <strong><a href="https://arxiv.org/abs/1810.04805">BERT</a></strong> for
+ranking and its deployment
+in <a href="https://blog.google/products/search/search-language-understanding-bert/">Google</a> and <a href="https://azure.microsoft.com/en-us/blog/bing-delivers-its-largest-improvementin-search-experience-using-azure-gpus/">Bing</a> for
+Web search. The standard approach is illustrated in <strong>Figure 2(a)</strong>. Each
+document is concatenated with the query, and both are fed jointly into a BERT
+model, fine-tuned to estimate relevance. BERT <em>doubled</em> the MRR@10 quality
+metric over BM25 on the popular MS MARCO Passage Ranking leaderboard,
+but it simultaneously posed a fundamental limitation: scoring
+<em>each</em> query–document pair requires <em>billions</em> of computational operations
+(FLOPs). As a result, BERT can only be used to <em>re-rank</em> the top-k (e.g.,
+top-1000) documents already extracted by simpler methods like BM25,
+having no capacity to recover useful documents that bag-of-word search
+misses.</p>
+
+<p>The key limitation of this approach is that it encodes queries and
+documents <em>jointly</em>. Many <strong>representation-similarity</strong> systems have been
+proposed to tackle this, some of which re-purpose BERT within the
+paradigm depicted in <strong>Figure 2(b)</strong>. In these systems
+(like <strong><a href="https://arxiv.org/abs/1908.10084">SBERT</a></strong> and <strong><a href="https://arxiv.org/abs/1906.00300">ORQA</a></strong>,
+and more
+recently <strong><a href="https://arxiv.org/abs/2004.04906">DPR</a></strong> and <strong><a href="https://arxiv.org/abs/2007.00808">ANCE</a></strong>,
+every document in the corpus is fed into a BERT encoder that produces a
+dense vector meant to capture the semantics of the document. At search
+time, the query is encoded, separately, through another BERT encoder, and the
+top-k related documents are found using a dot product between the query
+and document vectors. By removing the expensive interactions between the
+query and the document, these models are able to scale far more
+efficiently than the approach in <strong>Figure 2(a)</strong>.</p>
+
+<p>Nonetheless, representation-similarity models suffer from an
+architectural bottleneck: they encode the query and document into
+coarse-grained representations and model relevance as a single dot
+product. This greatly diminishes quality compared with expensive
+re-rankers that model token-level interactions between the contents of
+queries and documents. Can we efficiently scale fine-grained, contextual
+interactions to a massive corpus, without compromising speed or quality?
+It turns out that the answer is “yes”, using a paradigm called late
+interaction, first devised in
+our <strong><a href="https://arxiv.org/abs/2004.12832">ColBERT</a></strong><sup id="fnref:colbert" role="doc-noteref"><a href="#fn:colbert" class="footnote">1</a></sup> [<a href="https://github.com/stanford-futuredata/ColBERT">code</a>]
+model, which appeared at SIGIR 2020.</p>
+
+<p>As depicted in <strong>Figure 2(c)</strong>, <strong>ColBERT</strong> independently encodes queries and
+documents into fine-grained <strong>multi-vector representations</strong>. It then
+attempts to softly and contextually locate each query token inside the
+document: for each query embedding, it finds the most similar embedding
+in the document with a “MaxSim” operator and then sums up all of the
+MaxSims to score the document. “MaxSim” is a careful choice that allows
+us to index the document embeddings for <a href="https://arxiv.org/abs/1702.08734">Approximate Nearest Neighbor</a>
+(ANN) search, enabling us to scale this rich interaction to millions of passages with latency
+on the order of tens of milliseconds. For instance, ColBERT can search over all
+passages in English Wikipedia in approximately <strong>70 milliseconds</strong> per query.
+On MS MARCO Passage Ranking, ColBERT preserved the MRR@10 quality of BERT re-rankers while boosting recall@1k to nearly <strong>97%</strong>
+against the official BM25 ranking’s recall@1k of just <strong>81%</strong>.</p>
+
+<p>Making neural retrievers more lightweight remains an active area of
+development, with models like <strong><a href="https://arxiv.org/abs/2104.12016">DeepImpact</a></strong>
+that trade away some quality for extreme forms of efficiency and
+developments like <strong><a href="https://arxiv.org/abs/2106.00882">BPR</a></strong>
+and <strong><a href="https://github.com/stanford-futuredata/ColBERT/tree/binarization">quantized ColBERT</a></strong>
+that reduce the storage footprint by an order of magnitude while
+preserving the quality of DPR and ColBERT, respectively.</p>
+
+<h3 id="colbert-qa-and-baleen-specializing-neural-retrieval-to-complex-tasks-with-tracked-provenance">ColBERT-QA and Baleen: Specializing neural retrieval to complex tasks, with tracked provenance</h3>
+
+<p>While scaling expressive search mechanisms is critical, NLP models need
+more than just finding the right documents. In particular, we want NLP models
+to use retrieval to answer questions, fact-check claims, respond
+informatively in a conversation, or identify the sentiment of a piece of
+text. Many tasks of this kind—dubbed <em>knowledge-intensive</em> language
+tasks—are collected in
+the <strong><a href="https://ai.facebook.com/tools/kilt/">KILT</a></strong> benchmark.
+The most popular task is open-domain question answering (or Open-QA).
+Systems are given a question from any domain and must produce an answer,
+often by reference to the passages in a large corpus, as depicted in
+<strong>Figure 1(b)</strong>.</p>
+
+<figure class="figure"><div class="figure__main">
+<table style="border-collapse:collapse;border-color:#ccc;border-spacing:0;" class="tg"><colgroup><col style="" /><col style="" /><col style="" /><col style="" /><col style="" /></colgroup><thead><tr><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal">Benchmark</th><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal">System</th><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Metric</th><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:top;word-break:normal">Gains</th><th style="background-color:#f0f0f0;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal">Baselines</th></tr></thead><tbody><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal" colspan="5">Open-Domain Question Answering</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">Open-NaturalQuestions</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="3">ColBERT-QA</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="3">Answer Match</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+3</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="3">RAG, DPR, REALM, BM25+BERT</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">Open-TriviaQA</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+12</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">Open-SQuAD</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+17</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal" colspan="5">Multi-Hop Reasoning</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="2">HotPotQA</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="4">Baleen</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Retrieval Success@20</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+10 / NA</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="2">MDR / IRRR</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Passage-Pair Match</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+5 / +3</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal" rowspan="2">HoVer</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Retrieval Success@100</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+48 / +17</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">TF-IDF / ColBERT-Hop</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">“HoVer Score” for<br />Claim Verification<br />with Provenance</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+42</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">Official “TF-IDF + BERT” Baseline</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal" colspan="5" rowspan="2">Cross-Lingual Open-Domain Question Answering    </td></tr><tr></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">XOR TyDi</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">GAAMA with ColBERT<br />from IBM Research</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Recall@5000-tokens</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">+10</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">Official “DPR + Vanilla Transformer” Baseline</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:center;vertical-align:middle;word-break:normal" colspan="5">Zero-Shot Information Retrieval</td></tr><tr><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;font-weight:bold;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">BEIR</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">ColBERT</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Recall@100</td><td style="background-color:#f9f9f9;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:top;word-break:normal">Outperforms other off-the-shelf<br />dense retrievers on 13/17 tasks</td><td style="background-color:#fff;border-color:inherit;border-style:solid;border-width:1px;color:#333;font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;text-align:left;vertical-align:middle;word-break:normal">DPR, ANCE, SBERT, USE-QA</td></tr></tbody></table>
+
+<figcaption>
+Table 1: Results of models using ColBERT, ColBERT-QA, and Baleen across a wide range of language tasks.
+</figcaption>
+
+</div></figure>
+
+<p>Two popular models in this space are <strong>REALM</strong> and <strong>RAG</strong>, which rely on the
+ORQA and DPR retrievers discussed earlier. REALM and RAG jointly tune a
+retriever as well as a reader, a modeling component that consumes the
+retrieved documents and produces answers or responses. Take RAG as an
+example: its reader is a generative BART model, which attends to the
+passages while generating the target outputs. While they constitute
+important steps toward retrieval-based NLP, REALM and RAG suffer from
+two major limitations. First, they use the restrictive paradigm of
+<strong>Figure 2(b)</strong> for retrieval, thereby sacrificing recall: they are often
+unable to find relevant passages for conducting their tasks. Second,
+when training the retriever, REALM and RAG collect documents by
+searching for them inside the training loop and, to make this practical, they
+freeze the document encoder when fine-tuning, restricting the model’s adaptation to the task.</p>
+
+<p><strong><a href="https://arxiv.org/abs/2007.00814">ColBERT-QA</a></strong><sup id="fnref:colbert-qa" role="doc-noteref"><a href="#fn:colbert-qa" class="footnote">2</a></sup> is an Open-QA system (published at TACL’21) that we built on
+top of ColBERT to tackle both problems. By adapting ColBERT’s expressive search to the task,
+ColBERT-QA finds useful passages for a larger fraction of the questions and thus
+enables the reader component to answer more questions correctly and with provenance.
+In addition, ColBERT-QA introduces <strong>relevance-guided supervision</strong> (RGS),
+a training strategy whose goal is to adapt a
+retriever like ColBERT to the specifics of an NLP task like Open-QA. RGS
+proceeds in discrete rounds, using the retriever trained in the previous
+round to collect “positive” passages that are likely useful for the
+reader—specifically, passages ranked highly by the latest version of the
+retriever and that also overlap with the gold answer of the question—and
+challenging “negative” passages. By converging to a high coverage of
+positive passages and by effectively sampling hard negatives, ColBERT-QA
+improves retrieval Success@20 by more than <strong>5</strong>-, <strong>5</strong>-, and <strong>12</strong>-point gains on
+the open-domain QA settings of NaturalQuestions, TriviaQA, and SQuAD, and thus greatly
+improves downstream answer match.</p>
+
+<p>A more sophisticated version of the Open-QA task is <strong>multi-hop reasoning</strong>,
+where systems must answer questions or verify claims by gathering
+information from multiple sources. Systems in this space,
+like <strong><a href="https://arxiv.org/abs/1910.07000">GoldEn</a></strong>, <strong><a href="https://arxiv.org/abs/2009.12756">MDR</a></strong>,
+and <strong><a href="https://arxiv.org/abs/2010.12527">IRRR</a></strong>,
+find relevant documents and “hop” between them—often by running
+additional searches—to find all pertinent sources. While these models
+have demonstrated strong performance for two-hop tasks, scaling robustly
+to more hops is challenging as the search space grows exponentially.</p>
+
+<p>To tackle this, our <strong><a href="https://arxiv.org/abs/2101.00436">Baleen</a></strong><sup id="fnref:baleen" role="doc-noteref"><a href="#fn:baleen" class="footnote">3</a></sup> system
+(accepted as a Spotlight paper at NeurIPS’21) introduces a richer pipeline for
+multi-hop retrieval: after each retrieval “hop”, Baleen summarizes the
+pertinent information from the passages into a short context that is used
+to inform future hops. In doing so, Baleen controls the search space
+architecturally—obviating the need to explore each potential passage
+at every hop—without sacrificing recall. Baleen also extends ColBERT’s
+late interaction: it allows the representations of different documents
+to “focus” on distinct parts of the same query, as each of those documents
+in the corpus might satisfy a distinct aspect of the same complex query.
+As a result of its more deliberate architecture and its stronger
+retrieval modeling, Baleen saturates retrieval on the popular two-hop
+HotPotQA benchmark (raising answer-recall@20 from <strong>89%</strong> by MDR to <strong>96%</strong>) and
+dramatically improves performance on the harder four-hop claim
+verification
+benchmark <a href="https://hover-nlp.github.io/">HoVer</a>,
+finding all required passages in <strong>92%</strong> of the examples—up from just <strong>45%</strong>
+for the official baseline and <strong>75%</strong> for a many-hop flavor of ColBERT.</p>
+
+<p>In these tasks, when our retrieval-based models make predictions, we can
+inspect their underlying sources and decide whether we can trust the
+answer. And when model errors stem from specific sources, those can be
+removed or edited, and making sure models are faithful to such edits
+is an <a href="https://arxiv.org/abs/2109.05052">active area</a> of work.</p>
+
+<h3 id="generalizing-models-to-new-domains-with-robust-neural-retrieval">Generalizing models to new domains with robust neural retrieval</h3>
+
+<p>In addition to helping with efficiency and transparency, retrieval
+approaches promise to make domain generalization and knowledge updates
+much easier in NLP. Exhibiting up-to-date, domain-specific knowledge is
+essential for many applications: you might want to answer questions over
+recent publications on COVID-19 or to develop a chatbot that guides
+customers to suitable products among those currently available in a
+fast-evolving inventory. For such applications, NLP models should be
+able to leverage any corpus provided to them, without having to train a
+new version of the model for each emerging scenario or domain.</p>
+
+<p>While large language models are trained using plenty of data from the
+Web, this snapshot is:</p>
+
+<ul>
+  <li>
+    <p><strong>Static.</strong> The Web evolves as the world does: Wikipedia articles
+reflect new elected officials, news articles describe current events, and
+scientific papers communicate new research. Despite this, a language
+model trained in 2020 has no way to learn about 2021 events, short
+of training and releasing a new version of the model.</p>
+  </li>
+  <li>
+    <p><strong>Incomplete.</strong> Many topics are under-represented in Web crawls like C4
+and The Pile. Suppose we seek to answer questions over the ACL
+papers published 2010–2021; there is no guarantee that The Pile
+contains all papers from the ACL Anthology a priori and there is no
+way to plug that in ad-hoc without additional training. Even when
+some ACL papers are present (e.g., through arXiv, which is included
+in The Pile), they form only a tiny sliver of the data, and it is
+difficult to reliably restrict the model to specifically those
+papers for answering NLP questions.</p>
+  </li>
+  <li>
+    <p><strong>Public-only.</strong> Many applications hinge on private text, like internal
+company policies, in-house software documentation, copyrighted
+textbooks and novels, or personal email. Because models like GPT-3
+never see such data in their training, they are fundamentally
+incapable of exhibiting knowledge pertaining to those topics without
+special re-training or fine-tuning.</p>
+  </li>
+</ul>
+
+<p>With retrieval-based NLP, models learn effective ways to encode and
+extract information, allowing them to generalize to updated text,
+specialized domains, or private data without resorting to additional
+training. This suggests a vision where developers “plug in” their text
+corpus, like in-house software documentation, which is indexed by a
+powerful retrieval-based NLP model that can then answer questions, solve
+classification tasks, or generate summaries using the knowledge from the
+corpus, while always supporting its predictions with provenance from the
+corpus.</p>
+
+<p>An exciting benchmark connected to this space
+is <strong><a href="https://arxiv.org/abs/2104.08663">BEIR</a></strong>,
+which evaluates retrievers on their capacity for search “out-of-the-box”
+on unseen IR tasks, like <em>Argument Retrieval</em>, and in new domains, like
+the <em>COVID-19 research literature</em>. While retrieval offers a concrete
+mechanism for generalizing NLP models to new domains, not every IR model
+generalizes equally: the BEIR evaluations highlight the impact of
+modeling and supervision choices on generalization. For instance, due to
+its late interaction modeling, a vanilla off-the-shelf ColBERT retriever
+achieved the strongest recall of all competing IR models in the initial
+BEIR evaluations, outperforming the other off-the-shelf dense
+retrievers—namely, DPR, ANCE, SBERT, and USE-QA—on 13 out of 17
+datasets. The BEIR benchmark continues to develop quickly, a recent
+addition being the
+<strong><a href="https://arxiv.org/abs/2104.06967">TAS-B</a></strong> model,
+which advances a sophisticated supervision approach to distill ColBERT
+and BERT models into single-vector representations, inheriting much of
+their robustness in doing so. While retrieval allows rapid deployment in new
+domains, explicitly adapting retrieval to new scenarios is also
+possible. This is an active area of research, with work
+like <strong><a href="https://arxiv.org/abs/2004.14503">QGen</a></strong> and <strong><a href="https://arxiv.org/abs/2104.07800">AugDPR</a></strong> that
+generate synthetic questions and use those to explicitly fine-tune
+retrievers for targeting a new corpus.</p>
+
+<h3 id="summary-is-retrieval-all-you-need">Summary: Is retrieval “all you need”?</h3>
+
+<p>The black-box nature of large language models like T5 and GPT-3 makes
+them <strong>inefficient</strong> to train and deploy, <strong>opaque</strong> in their knowledge representations and in backing
+their claims with provenance, and <strong>static</strong> in facing a constantly evolving world and diverse downstream contexts.
+This post explores <strong>retrieval-based NLP</strong>, where models retrieve information
+pertinent to solving their tasks from a plugged-in text corpus. This
+paradigm allows NLP models to leverage the representational strengths
+of language models, while needing <strong>much smaller architectures</strong>, offering
+<strong>transparent provenance</strong> for claims, and enabling <strong>efficient updates and adaptation</strong>.</p>
+
+<p>We surveyed much of the existing and emerging work in this space and
+highlighted some of our work at Stanford, including
+<strong><a href="https://arxiv.org/abs/2004.12832">ColBERT</a></strong>
+for scaling up expressive retrieval to massive corpora via late
+interaction,
+<strong><a href="https://arxiv.org/abs/2007.00814">ColBERT-QA</a></strong> for
+accurately answering open-domain questions by adapting high-recall
+retrieval to the task, and
+<strong><a href="https://arxiv.org/abs/2101.00436">Baleen</a></strong> for
+solving tasks that demand information from several independent sources
+using a condensed retrieval architecture.
+We continue to actively maintain
+<strong><a href="https://github.com/stanford-futuredata/ColBERT">our code</a></strong> as open source.</p>
+
+<p><strong>Acknowledgments.</strong> We would like to thank Megha Srivastava and Drew A. Hudson for helpful comments and feedback on this blog post. We also thank Ashwin Paranjape, Xiang Lisa Li, and Sidd Karamcheti for valuable and insightful discussions.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:colbert" role="doc-endnote">
+      <p>Omar Khattab and Matei Zaharia. “ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT.” Proceedings of the 43rd International ACM SIGIR conference on research and development in Information Retrieval. 2020. <a href="#fnref:colbert" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:colbert-qa" role="doc-endnote">
+      <p>Omar Khattab, Christopher Potts, Matei Zaharia; “Relevance-guided Supervision for OpenQA with ColBERT.” Transactions of the Association for Computational Linguistics 2021; 9 929–944. doi: https://doi.org/10.1162/tacl_a_00405 <a href="#fnref:colbert-qa" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:baleen" role="doc-endnote">
+      <p>Omar Khattab, Christopher Potts, and Matei Zaharia. “Baleen: Robust Multi-Hop Reasoning at Scale via Condensed Retrieval.” (To appear at NeurIPS 2021.) arXiv preprint arXiv:2101.00436 (2021). <a href="#fnref:baleen" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/retrieval-based-NLP/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/retrieval-based-NLP/&text=Building+Scalable%2C+Explainable%2C+and+Adaptive+NLP+Models+with+Retrieval%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/retrieval-based-NLP/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/retrieval-based-NLP/&title=Building+Scalable%2C+Explainable%2C+and+Adaptive+NLP+Models+with+Retrieval%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/retrieval-based-NLP/&title=Building+Scalable%2C+Explainable%2C+and+Adaptive+NLP+Models+with+Retrieval%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Building+Scalable%2C+Explainable%2C+and+Adaptive+NLP+Models+with+Retrieval%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/retrieval-based-NLP/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#baleen">
+      <p><i class="fa fa-tag fa-fw"></i> baleen</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#colbert">
+      <p><i class="fa fa-tag fa-fw"></i> colbert</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#colbert-qa">
+      <p><i class="fa fa-tag fa-fw"></i> colbert-qa</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#information+retrieval">
+      <p><i class="fa fa-tag fa-fw"></i> information retrieval</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ir">
+      <p><i class="fa fa-tag fa-fw"></i> ir</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#multi-hop+reasoning">
+      <p><i class="fa fa-tag fa-fw"></i> multi-hop reasoning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#natural+language+processing">
+      <p><i class="fa fa-tag fa-fw"></i> natural language processing</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#open-domain+question+answering">
+      <p><i class="fa fa-tag fa-fw"></i> open-domain question answering</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/bifi/">
+      <p>Previous post</p>
+        Break-It-Fix-It: Unsupervised Learning for Fixing Source Code Errors
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/iccv-2021/">
+      <p>Next post</p>
+        Stanford AI Lab Papers at ICCV 2021
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

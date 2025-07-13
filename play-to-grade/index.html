@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/play-to-grade/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Grading Complex Interactive Coding Programs with Reinforcement Learning | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Grading Complex Interactive Coding Programs with Reinforcement Learning" />
+<meta name="author" content="<a href="https://anie.me">Allen Nie</a>, <a href="https://cs.stanford.edu/people/ebrun/">Emma Brunskill</a>, and <a href="https://stanford.edu/~cpiech/bio/index.html">Chris Piech</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/play-to-grade/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/play-to-grade/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-03-28T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Grading Complex Interactive Coding Programs with Reinforcement Learning" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Grading Complex Interactive Coding Programs with Reinforcement Learning","dateModified":"2022-03-28T00:00:00-07:00","datePublished":"2022-03-28T00:00:00-07:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/play-to-grade/"},"url":"http://ai.stanford.edu/blog/play-to-grade/","author":{"@type":"Person","name":"<a href=\"https://anie.me\">Allen Nie</a>, <a href=\"https://cs.stanford.edu/people/ebrun/\">Emma Brunskill</a>, and <a href=\"https://stanford.edu/~cpiech/bio/index.html\">Chris Piech</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Grading Complex Interactive Coding Programs with Reinforcement Learning | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Using reinforcement learning agent to simultaneously learn to play and grade student's homework.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Grading Complex Interactive Coding Programs with Reinforcement Learning">
+    
+    <meta name="twitter:description" content="Using reinforcement learning agent to simultaneously learn to play and grade student's homework.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-03-28-play-to-grade/snapshot.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2022-03-28-play-to-grade/snapshot.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Grading Complex Interactive Coding Programs with Reinforcement Learning</h1>
+    <p class="meta">
+    <a href="https://anie.me">Allen Nie</a>, <a href="https://cs.stanford.edu/people/ebrun/">Emma Brunskill</a>, and <a href="https://stanford.edu/~cpiech/bio/index.html">Chris Piech</a>
+    <div class="post-date">March 28, 2022</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+
+<p><strong>[Summary] tl;dr:</strong>
+A tremendous amount of effort has been poured into training AI algorithms to competitively play games that computers have traditionally had trouble with, such as the retro games published by Atari, Go, DotA, and StarCraft II. The practical machine learning knowledge accumulated in developing these algorithms  has paved the way for people to now routinely train game-playing AI agents for many games. Following this line of work, we focus on a specific category of games – those developed by students as part of a programming assignment.  Can the same algorithms that master Atari games help us grade these game assignments? In our recent NeurIPS 2021 <a href="https://arxiv.org/abs/2110.14615">paper</a>, we illustrate the challenges in treating interactive coding assignment grading as game playing and introduce the Play to Grade Challenge.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Massive Online Coding Education has reached striking success over the past decade. Fast internet speed, improved UI design, code editors that are embedded in a browser window allow educational platforms such as <a href="https://code.org">Code.org</a> to build a diverse set of courses tailored towards students of different coding experiences and interest levels (for example, Code.org offers “Star War-themed coding challenge,” and “Elsa/Frozen themed for-loop writing”). As a non-profit organization, Code.org claims to have reached over 60 million learners across the world <sup id="fnref:codeorgstats" role="doc-noteref"><a href="#fn:codeorgstats" class="footnote">1</a></sup>. Such organizations typically provide a variety of carefully constructed teaching materials such as videos and programming challenges.</p>
+
+<p>A challenge faced by these platforms is that of grading assignments. It is well known that grading is critical to student learning <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>, in part because it motivates students to complete their assignments. Sometimes manual grading can be feasible in small settings, or automated grading used in simple settings such as when assignments are multiple choice or adopt a fill-in-the-blink modular coding structure. Unfortunately, many of the most exciting assignments, such as developing games or interactive apps, are also much more difficult to automatically evaluate. For such assignments, human teachers are currently needed to provide feedback and grading. This requirement, and the corresponding difficulty with scaling up manual grading, is one of the biggest obstacles of online coding education. Without automated grading systems,  students who lack additional teacher resources cannot get useful  feedback to help them learn and advance through the materials provided.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_50" src="https://media.giphy.com/media/LhC4oRHFahkxvryfQA/giphy.gif" style="width:40%" /></p>
+<figcaption>
+<b>Figure 1</b>: This is a popular coding game offered by Code.org. A student would write a program to create this game.
+</figcaption>
+</div></figure>
+
+<p>Programming a game that is playable is exciting for students who are learning to code. <a href="https://code.org">Code.org</a> provides many game development assignments in their curriculum. In these assignments, students write JavaScript programs in a code editor embedded in the web browser. Game assignments are great for teachers to examine student’s progress as well: students not only need to grasp basic concepts like if-conditionals and for-loops but use these concepts to write the physical rules of the game world — calculate the trajectories of objects, resolve inelastic collision of two objects, and keep track of game states. To deal with all of these complexities, students need to use abstraction (functions/class) to encapsulate each functionality in order to manage this complex set of logic.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure2.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 2</b>: In Code.org, students program in an interactive code interface, where they can write the program in the coding area, hit run and play their game.
+</figcaption>
+</div></figure>
+
+<p>Automated grading on the code text alone can be an incredibly hard challenge, even for introductory level computer science assignments. As examples, two solutions which are only slightly different in text can have very different behaviors, and two solutions that are written in very different ways can have the same behaviors. As such, some models that people develop for grading code can be as complex as those used to understand paragraphs of natural language. But, sometimes, grading code can be even more difficult than grading an essay because coding submissions can be in different programming languages. In this situation, one must not only develop a program that can understand many programming languages, but guard against the potential that the grader is more accurate for some languages than others. A Finally, these programs must be able to generalize to new assignments because correct grading is just as necessary for the first student working on an assignment as the millionth – the collect-data, train, deploy cycle is not quite suitable in this context. We don’t have the luxury of collecting a massive amount of labeled dataset to train a fully supervised learning algorithm for each and every assignment.</p>
+
+<p>In a <a href="https://arxiv.org/abs/2110.14615">recent paper</a>, we circumvent these challenges by developing a method that grades assignments by playing them, without needing to look at the source code at all. Despite this different approach, our method still manages to provide scalable feedback that potentially can be deployed in a massively-online setting.</p>
+
+<h2 id="the-play-to-grade-challenge">The Play to Grade Challenge</h2>
+
+<p>Our solution to these problems is to ignore the code text entirely and to grade an assignment by having a grading algorithm play it. We represent the underlying game of each program submission as a Markov Decision Process (MDP), which defines a state space, action space, reward function, and transition dynamics. By running each student’s program, we can build the MDP directly without needing to read or understand the underlying code. You can read more about the MDP framework here: <sup id="fnref:lilianweng" role="doc-noteref"><a href="#fn:lilianweng" class="footnote">3</a></sup>.</p>
+
+<p>Since all student programs are written for the same assignment, these programs should generate MDP with a lot of commonalities, such as shared state and action space. After playing the game and fully constructing the MDP for an assignment, all we need is to compare the MDP specified by the student’s program (student MDP) to the teacher’s solution (reference MDP) and determine <strong>if these two MDPs are the same</strong>. What sets this challenge apart from any other reinforcement learning problems is the fact that a <strong>classification</strong> needs to be made at the end of this agent’s interaction with this MDP — the decision of whether the MDP is the same as the reference MDP or not.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postfigurethird" src="/blog/assets/img/posts/2022-03-28-play-to-grade/distance.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 3</b>: We need to build an approximate distance function D that determines the distance between the student program's underlying MDP (black dot) and correct MDPs (blue dots) and incorrect MDPs (red dots). Read more about how we build this distance function in our <a href="https://arxiv.org/abs/2110.14615">paper</a>.
+</figcaption>
+</div></figure>
+
+<p>In order to solve this challenge, we present an algorithm with two components: an agent that plays the game and can reliably reach bug states, and a classifier that can recognize bug states (i.e., provide the probability of the observed state being a bug). Both components are necessary for accurate grading: an agent that reaches all states but cannot determine if any represents bugs is just as bad as a perfect classifier paired with an agent that is bad at taking actions which might cause bugs. Imagine a non-optimal agent that never catches the ball (in the example above) – this agent will never be able to test if the wall, or paddle, or goal does not behave correctly.</p>
+
+<p>An ideal agent needs to produce <strong>differential trajectories</strong>, i.e., sequences of actions that can be used to differentiate two MDPs, and must contain at least one bug-triggering state if the trajectory is produced from the incorrect MDP. Therefore, we need both a correct MDP and a few incorrect MDPs to teach the agent and the classifier. These incorrect MDPs are incorrect solutions that can either be provided by the teacher, or come from manually grading a few student programs to find common issues. Although having to manually label incorrect MDPs is an annoyance, we show that the total amount of effort is generally significantly lower than grading each assignment: in fact, we show that for the task we solve in the paper, you only need 5 incorrect MDPs to reach a decent performance (see the appendix section of our paper).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure3_new.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 4</b>: We build an MDP wrapper around the student program that allows the agent to interact with the program (while the original program might only allow human control, i.e., we override mouse / keyboard events.
+</figcaption>
+</div></figure>
+
+<h2 id="recognizing-bugs-from-scratch">Recognizing Bugs from Scratch</h2>
+
+<p>Here are three incorrect programs and what they look like when played. Each incorrect program behaves differently from the correct program:</p>
+<ul>
+  <li>One program’s wall does not allow the ball to bounce on it.</li>
+  <li>Another program’s goal post does not let the ball go through.</li>
+  <li>The last program spawns 2 new balls whenever the ball bounces on the wall.</li>
+</ul>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postfigurethird" src="https://media.giphy.com/media/i8ITbB6QtNS67t9dk6/giphy.gif" />
+<img class="postfigurethird" src="https://media.giphy.com/media/JuQn32VatSaW1vFCgi/giphy.gif" />
+<img class="postfigurethird" src="https://media.giphy.com/media/gQKLJuq49sjjkEube9/giphy.gif" /></p>
+<figcaption>
+<b>Figure 5</b>: Different types of incorrect student programs.
+</figcaption>
+</div></figure>
+
+<p>A challenge with building differential trajectories is that one must know which state is a bug triggering state. Previous works <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">4</a></sup><sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">5</a></sup><sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">6</a></sup> have made the strong assumption that one would automatically know when they encountered a bug, potentially because they expect the game program to crash after encountering a bug. Because of this assumption, they focus their efforts on building pure-exploration agents that try to visit as many states as possible. However, in reality, bugs can be difficult to identify and do not all cause the game to crash. For example, a ball that is supposed to bounce off of a wall is now piercing through it and flying off into oblivion. These types of behavioral anomalies motivate the use of a predictive model that can take in the current game state and determine whether it is anomalous or not.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure4.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 6</b>: The chicken-and-egg cold-start problem. The agent doesn't know how to reach bug state, and the classifier does not know what is a bug.
+</figcaption>
+</div></figure>
+
+<p>Unfortunately, training a model to predict if a state is a bug state is non-trivial. This is because, although we have labels for some MDPs, these labels are not on the state-level (i.e., not all states in an incorrect MDP are bug states). Put another way, our labels can tell us when a bug has been encountered but cannot tell us what specific action caused the bug. The determination of whether bugs exist in a program can be framed as a chicken-and-egg problem where, if bug states could be unambiguously determined one would only need to explore the state space, and if the exploration was optimal one would only need to figure out how to determine if the current state exhibited a bug.</p>
+
+<h2 id="collaborative-reinforcement-learning">Collaborative Reinforcement Learning</h2>
+
+<p>Fortunately, these types of problems can generally be solved through the expectation-maximization framework, which involves an intimate collaboration between the neural network classifier and the reinforcement learning agent. We propose <strong>collaborative reinforcement learning</strong>, an expectation-maximization approach, where we use a random agent to produce a dataset of trajectories from the correct and incorrect MDP to teach the classifier. Then the classifier would assign a score to each state indicating how much the classifier believes the state is a bug-triggering state. We use this score as reward and train the agent to reach these states as often as possible for a new dataset of trajectories to train the classifier.</p>
+
+<p>After using the RL agent to interact with the MDP to produce trajectories, we can try out  different ways to learn a classifier that can classify a state as a bug or not (a binary label). Choosing the right label  is important because this label will become the reward function for the agent, so it can learn to reach bug states more efficiently. However, we only know if the MDP (the submitted code) is correct or broken, but we don’t have labels for the underlying states. Learning state-level labels becomes a challenge!</p>
+
+<p>We tested out several types of classifiers: (1) a noisy classifier that classifies all states in a broken MDP as broken, (2) a Gaussian Mixture Model that treats all states independently, (3) a Variational Autoencoder that also treats all states independently but directly models non-linear interactions among the features, or (4) an LSTM that jointly models the teacher program as an MDP (HoareLSTM) and an LSTM that models the student program as an MDP (Contrastive HoareLSTM) – with a distance function that compares the two MDPs, borrowing distance notions from literature in MDP homomorphism<sup id="fnref:homomorph" role="doc-noteref"><a href="#fn:homomorph" class="footnote">7</a></sup><sup id="fnref:lihong" role="doc-noteref"><a href="#fn:lihong" class="footnote">8</a></sup><sup id="fnref:kipf" role="doc-noteref"><a href="#fn:kipf" class="footnote">9</a></sup><sup id="fnref:givan" role="doc-noteref"><a href="#fn:givan" class="footnote">10</a></sup>.</p>
+
+<p>In this toy environment, the agent drives a car on a 2D plane. Whenever the agent drives the car into the outer rim of this area (space between the boundary and red dotted line), a bug will cause the car to get stuck (Leftmost panel in <a href="#figure5">Figure 5</a>). Being stuck means the car’s physical movement is altered, resulting in back-and-forth movement around the same location. The bug classifier needs to recognize the resulting states (position and velocity) of the car being “stuck”, by correctly outputting a binary label (bug) for these states.</p>
+
+<p>In this setting, there is only one type of bug. Most classifiers do well when the agent only drives a straight line (single-direction agent). However, when the agent randomly samples actions at each state, simpler classifiers can no longer differentiate between bug and non-bug states with high accuracy.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a id="figure5"></a>
+<img class="postfigurethird" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure5_env.png" style="padding:0; width:25%" />
+<img class="postfigurethird" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure5_single_direction_agent.png" style="padding:0; width:35%" />
+<img class="postfigurethird" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure5_random_agent.png" style="padding:0;width:35%" /></p>
+<figcaption>
+<b>Figure 7</b>: Performance of different bug classification models with different RL agents.
+</figcaption>
+</div></figure>
+
+<p>We can increase the difficulty of this setting to see if collaborative training can make the agent operate in the environment with an intention to trigger bugs. In this toy environment, now the bugs will only be triggered in red boxes (Leftmost panel in <a href="#figure6">Figure 6</a> below). We can see that with only one round of collaborative training (“CT Round 1”), the performances of ALL classifiers are improved, including weaker classifiers. This is understandable, as the agent learns to gradually collect better datasets to train classifiers – and higher quality datasets lead to stronger classifiers. For example, variational auto-encoder started only with 32% precision, but it increased to 74.8% precision after 2 rounds of collaborative training.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a id="figure6"></a>
+<img class="postfigurethird" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure6_env.png" style="padding:0; width:25%" />
+<img class="postfigurethird" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure6_training_improvement_with_CI.png" style="padding:0; width:70%" /></p>
+<figcaption>
+<b>Figure 8</b>: Collaborative training improves bug classifier performance across different models. This shows how important it is for the RL agent to produce <b>differential trajectories</b>, which will allow classifiers to obtain higher performance.
+</figcaption>
+</div></figure>
+
+<p>We can also visualize how the collaborative training quickly allows the agent to learn to explore states that most-likely contain bugs by visualizing the trajectories (see figure below). Initially the agent just explores the space uniformly (blue curves), but after one round of collaborative training (CT), it learns to focus on visiting the potential bug areas (regions marked by red boxes) (red curves).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a id="figure7"></a>
+<img class="postimage_75" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure7.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 9</b>: Visualization of the paths taken by the RL agent (each line represents one trajectory). After collaborative training (CT), the agent quickly focuses only on visiting potentially bug states (relying on the signal provided by the bug classifiers).
+</figcaption>
+</div></figure>
+
+<h2 id="grading-bounce">Grading Bounce</h2>
+
+<p>Next, we returned to the motivating example for this type of approach: grading real student submissions. With help from <a href="https://code.org">Code.org</a>, we are able to verify the algorithm’s performance on a massive amount of unlabeled, ungraded student submissions. The game <a href="https://studio.code.org/s/course3/lessons/15/levels/10">Bounce</a>, from Code.org’s <a href="https://studio.code.org/s/course3/">Course3</a> for students in 4th and 5th grade, provides a real-life dataset of what variations of different bugs and behaviors in student programs should look like. The dataset is compiled of 453,211 students who made an attempt on this assignment. In total, this dataset consists of 711,274 programs.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a id="figure8"></a>
+<img class="postimage_50" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure8_table.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 10</b>: Each program has a binary label (correct or broken) associated with it. We only have 11 programs as our training data.
+</figcaption>
+</div></figure>
+
+<p>We train our agent and classifier on 10 broken programs that we wrote without looking at any of the student’s submissions. The 10 programs contain bugs that we “guess” to be most likely to occur, and we use them to train 10 agents that learn to reach bug states in these 10 programs. This means that in our training dataset, we have 1 correct program and 10 broken programs. Even with only 11 labeled programs, our agent and classifier can get <strong>99.5%</strong> precision at identifying a bug program and <strong>93.4-94%</strong> accuracy overall – the agent is able to trigger most of the bugs and the classifier recognizes the bug states using only 10 broken programs. Though for other games, especially more complicated games, the number of training programs will vary. We strongly believe the number is still in magnitude smaller than training supervised code-as-text algorithms. This demonstration shows the promise of reformulating code assignment grading as the Play to Grade.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a id="figure9"></a>
+<img class="postimage_50" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure9_table.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 11</b>: We show superior performance compared to training a simple code-as-text classifier. <b>For complex, interactive programs, Play to Grade is the most data efficient solution.</b>
+</figcaption>
+</div></figure>
+
+<h2 id="what-is-next">What is Next?</h2>
+
+<p>We started this project by making the argument that sometimes it is far easier to grade a complex coding assignment not by looking at the code text but by playing it. Using Bounce, we demonstrated that in the simple task of identifying if a program has a bug or not (a binary task, nonetheless), we are able to achieve striking accuracy with only 11 labeled programs. We provide a simulator and all of the student’s programs on this <a href="https://github.com/windweller/play-to-grade/">Github repo</a>.</p>
+
+<h3 id="multi-label-bounce">Multi-label Bounce</h3>
+
+<p>One promising direction for future work is to expand beyond pass/fail binary feedback, and actually identify which bug is in the student’s program and provide that information. Our Bounce dataset enables this by providing multi-error labels, as shown in the table below. The multi-error label setting was not solved by our current algorithm and remains an open challenge!</p>
+
+<figure class="figure"><div class="figure__main">
+<p><a id="figure10"></a>
+<img class="postimage_50" src="/blog/assets/img/posts/2022-03-28-play-to-grade/figure10_multi.png" style="padding:0;" /></p>
+<figcaption>
+<b>Figure 12</b>: Each program has a binary label (correct or broken) associated with it. We only have 11 programs as our training data.
+</figcaption>
+</div></figure>
+
+<h3 id="more-than-one-correct-solution">More than One Correct Solution</h3>
+
+<p>Oftentimes, students create solutions that are creative. Creative solutions are different, but not wrong. For example, students can change the texture pattern of the ball or paddle; or they can make the paddle move much faster. How to set the boundary between “being creative” and “being wrong”? This is not a discussion that happens often in AI, but is of huge importance in education. Though we didn’t use the Bounce dataset to focus on the problem of understanding creativity, our work can still use distance measures to set a “tolerance threshold” to account for creativity.</p>
+
+<h3 id="for-educators">For Educators</h3>
+
+<p>We are interested in collecting a suite of interactive coding assignments and creating a dataset for future researchers to work on this problem. Feel free to reach out to us and let us know what you would consider as important in grading and giving students feedback on their coding assignments!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Providing automated feedback for coding is an important area of research in computational education, and an important area for building fully autonomous coding education pipeline (that can generate coding assignment, grade assignment, and teach interactively). Providing a generalizable algorithm that can play interactive student programs in order to give feedback is an important problem for education and an exciting intellectual challenge for the reinforcement learning community. In this work, we introduce the challenge and a dataset, set up the MDP distance framework that is highly data efficient, algorithms that achieve high accuracy, and demonstrate this is a promising direction of applying machine learning to assist education.</p>
+
+<p>This blog post is based on the following paper:</p>
+
+<ul>
+  <li>“Play to Grade: Testing Coding Games as Classifying Markov Decision Process.” Allen Nie, Emma Brunskill, and Chris Piech. Advances in Neural Information Processing Systems 34 (2021). <a href="https://arxiv.org/abs/2110.14615">Link</a></li>
+</ul>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>Many thanks to Emma Brunskill, Chris Piech for their guidance on the project. Many thanks to Mike Wu, Ali Malik, Yunsung Kim, Lisa Yan, Tong Mu, and Henry Zhu for their discussion and feedback. Special thanks to <a href="https://www.code.org">code.org</a>, and Baker Franke, for many years of collaboration and generously providing the research community with data. Thanks to Stanford Hoffman-Yee Human Centered AI grant for supporting AI in education. Thanks for the numerous rounds of edits from Megha Srivastava and Jacob Schreiber.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:codeorgstats" role="doc-endnote">
+      <p>Code.org displays this statistics on their landing webpage. <a href="#fnref:codeorgstats" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>William G Bowen. The ‘cost disease’ in higher education: is technology the answer? The Tanner Lectures Stanford University, 2012. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lilianweng" role="doc-endnote">
+      <p><a href="https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html">https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html</a> <a href="#fnref:lilianweng" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Gordillo, Camilo, Joakim Bergdahl, Konrad Tollmar, and Linus Gisslén. “Improving Playtesting Coverage via Curiosity Driven Reinforcement Learning Agents.” arXiv preprint arXiv:2103.13798 (2021). <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Zhan, Zeping, Batu Aytemiz, and Adam M. Smith. “Taking the scenic route: Automatic exploration for videogames.” arXiv preprint arXiv:1812.03125 (2018). <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Zheng, Yan, Xiaofei Xie, Ting Su, Lei Ma, Jianye Hao, Zhaopeng Meng, Yang Liu, Ruimin Shen, Yingfeng Chen, and Changjie Fan. “Wuji: Automatic online combat game testing using evolutionary deep reinforcement learning.” In 2019 34th IEEE/ACM International Conference on Automated Software Engineering (ASE), pp. 772-784. IEEE, 2019. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:homomorph" role="doc-endnote">
+      <p>Pablo Samuel Castro, Prakash Panangaden, and Doina Precup. Equivalence relations in fully and partially observable markov decision processes. In Twenty-First International Joint Conference on Artificial Intelligence, 2009. <a href="#fnref:homomorph" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:lihong" role="doc-endnote">
+      <p>Lihong Li, Thomas J Walsh, and Michael L Littman. Towards a unified theory of state abstraction for mdps. ISAIM, 4:5, 2006. <a href="#fnref:lihong" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:kipf" role="doc-endnote">
+      <p>Elise van der Pol, Thomas Kipf, Frans A Oliehoek, and Max Welling. Plannable approximations to mdp homomorphisms: Equivariance under actions. arXiv preprint arXiv:2002.11963, 2020. <a href="#fnref:kipf" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:givan" role="doc-endnote">
+      <p>Robert Givan, Thomas Dean, and Matthew Greig. Equivalence notions and model minimization in markov decision processes. Artificial Intelligence, 147(1-2):163–223, 2003. <a href="#fnref:givan" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/play-to-grade/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/play-to-grade/&text=Grading+Complex+Interactive+Coding+Programs+with+Reinforcement+Learning%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/play-to-grade/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/play-to-grade/&title=Grading+Complex+Interactive+Coding+Programs+with+Reinforcement+Learning%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/play-to-grade/&title=Grading+Complex+Interactive+Coding+Programs+with+Reinforcement+Learning%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Grading+Complex+Interactive+Coding+Programs+with+Reinforcement+Learning%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/play-to-grade/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#MDP">
+      <p><i class="fa fa-tag fa-fw"></i> MDP</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#automatic+feedback">
+      <p><i class="fa fa-tag fa-fw"></i> automatic feedback</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#code+education">
+      <p><i class="fa fa-tag fa-fw"></i> code education</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#few-shot+learning">
+      <p><i class="fa fa-tag fa-fw"></i> few-shot learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#reinforcement+learning">
+      <p><i class="fa fa-tag fa-fw"></i> reinforcement learning</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/understanding-self-training/">
+      <p>Previous post</p>
+        Understanding Deep Learning Algorithms that Leverage Unlabeled Data, Part 1: Self-training
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/domino/">
+      <p>Next post</p>
+        Discovering the systematic errors made by machine learning models
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

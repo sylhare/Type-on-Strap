@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/bootleg/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation" />
+<meta name="author" content="<a href='https://cs.stanford.edu/people/lorr1/'>Laurel Orr</a>, <a href='http://www.mleszczy.com/'>Megan Leszczynski</a>, <a href='https://arorasimran.com/'>Simran Arora</a>, <a href='http://www.neelguha.com/'>Neel Guha</a>, Xiao Ling, <a href='https://stanford.edu/~senwu/'>Sen Wu</a>, and <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/bootleg/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/bootleg/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-12T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation","dateModified":"2020-11-12T00:00:00-08:00","datePublished":"2020-11-12T00:00:00-08:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/bootleg/"},"url":"http://ai.stanford.edu/blog/bootleg/","author":{"@type":"Person","name":"<a href='https://cs.stanford.edu/people/lorr1/'>Laurel Orr</a>, <a href='http://www.mleszczy.com/'>Megan Leszczynski</a>, <a href='https://arorasimran.com/'>Simran Arora</a>, <a href='http://www.neelguha.com/'>Neel Guha</a>, Xiao Ling, <a href='https://stanford.edu/~senwu/'>Sen Wu</a>, and <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation | The Stanford AI Lab Blog</title>
+    <meta name="description" content="The challenge of identifying rare people, places, and things in text and how our self-supervised system Bootleg addresses this challenge.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation">
+    
+    <meta name="twitter:description" content="The challenge of identifying rare people, places, and things in text and how our self-supervised system Bootleg addresses this challenge.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2020-11-12-bootleg/logo.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2020-11-12-bootleg/logo.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Bootleg: Chasing the Tail with Self-Supervised Named Entity Disambiguation</h1>
+    <p class="meta">
+    <a href='https://cs.stanford.edu/people/lorr1/'>Laurel Orr</a>, <a href='http://www.mleszczy.com/'>Megan Leszczynski</a>, <a href='https://arorasimran.com/'>Simran Arora</a>, <a href='http://www.neelguha.com/'>Neel Guha</a>, Xiao Ling, <a href='https://stanford.edu/~senwu/'>Sen Wu</a>, and <a href='https://cs.stanford.edu/people/chrismre/'>Chris Ré</a>
+    <div class="post-date">November 12, 2020</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <figure style="text-align: center">
+    <img style="width: 20%;" src="/blog/assets/img/posts/2020-11-12-bootleg/logo.png" />
+</figure>
+
+<p>Named entity disambiguation (NED) is the process of mapping “strings” to “things” in a knowledge base. You have likely already used a system that requires NED multiple times today. Every time you ask a question to your personal assistant or issue a search query on your favorite browser, these systems use NED to understand what people, places, and things (entities) are being talked about.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2020-11-12-bootleg/ned_example_1.svg" /></p>
+<figcaption style="text-align: left;">Named entity disambiguation example. The ambiguous “Lincoln” refers to the car, not the person or location.</figcaption>
+</div></figure>
+
+<p>Take the example shown above. You ask your personal assistant “What is the average gas mileage of a Lincoln?”. The assistant would need NED to know that “Lincoln” refers to Lincoln Motors (the car company)—not the former president or city in Nebraska. The ambiguity of mentions in text is what makes NED so challenging as it requires the use of subtle cues.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_90" src="/blog/assets/img/posts/2020-11-12-bootleg/ned_distribution_2.svg" /></p>
+<figcaption style="text-align: left;">The spectrum of entities. Popular (head) entities occur frequently in data while rare (tail) entities are infrequent.</figcaption>
+</div></figure>
+
+<p>NED gets more interesting when we examine the full spectrum of entities shown above, specifically the more rare <em>tail</em> and <em>unseen</em> entities. These are entities that occur infrequently or not at all in data. <strong>Performance over the tail is critical because the majority of entities are rare.</strong> In <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>, only 13% of entities even have Wikipedia pages as a source of textual information.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_60" src="/blog/assets/img/posts/2020-11-12-bootleg/frequency_plot_3.svg" /></p>
+<figcaption style="text-align: left;">Bootleg compared to a BERT-based baseline model <a href="https://arxiv.org/pdf/2005.14253.pdf">Févry et el. 2020</a> showing average F1 versus number of times an entity occurred in the training data. As there are 15x the number of entities in Wikidata than in Wikipedia (most of them are rare) and the baseline model needs to see an entity on average 100x for it to achieve 60 F1, it follows that the baseline model would need to train on data 1,500x the size of Wikipedia to achieve 60 F1 over all entities.</figcaption>
+</div></figure>
+
+<p>Prior approaches to NED use BERT-based systems to memorize textual patterns associated with an entity (e.g., Abraham Lincoln is associated with “president”). As shown above, the SotA BERT-based <strong>baseline</strong> from <a href="https://arxiv.org/pdf/2005.14253.pdf">Févry</a> does a great job at memorizing patterns over popular entities (it achieves 86 F1 points over all entities). For the rare entities, it does much worse (58 F1 points lower on the tail). One possible solution to better tail performance is to simply train over more data, but this would likely require training over data 1,500x the size of Wikipedia for the model to achieve 60 F1 points over all entities!</p>
+
+<p>In this blog post, we present <strong>Bootleg</strong>, a self-supervised approach to NED that is better able to handle rare entities.</p>
+
+<h1 id="tail-disambiguation-through-ned-reasoning-patterns">Tail Disambiguation through NED Reasoning Patterns</h1>
+
+<p>The question we are left with is how to disambiguate these rare entities? <strong>Our insight is that humans disambiguate entities, including rare entities, by using signals from text as well as from entity relations and types.</strong> For example, the sentence “What is the gas mileage of a Lincoln?” requires reasoning that cars have a gas mileage, not people or locations. This can be used to reason that the mention of “Bluebird” in “What is the average gas mileage of a Bluebird?” refers to the car, a Nissan Bluebird, not the animal. Our goal in Bootleg is to train a model to reason over entity types and relations and better identify these tail entities.</p>
+
+<p>Through empirical analysis, we found four reasoning patterns for NED, shown and defined in the figure below.</p>
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_90" src="/blog/assets/img/posts/2020-11-12-bootleg/reasoning_patterns_4.svg" /></p>
+<figcaption style="text-align: left;">Four reasoning patterns of NED. Each pattern uses some combination of entity, type, and relation information.</figcaption>
+</div></figure>
+
+<p>These patterns rely on signals from entities, types, and relations. Luckily, <strong>tail entities do not have equally rare types and relations</strong>. This means we should be able to learn type and relation patterns from our data that can apply to tail entities.</p>
+
+<h1 id="bootleg-a-model-for-tail-ned">Bootleg: A Model for Tail NED</h1>
+<p>Bootleg takes as input a sentence, determines the possible entity candidates that could be mentioned in the sentence, and outputs the most likely candidates. The core insight that enables Bootleg to better identify rare entities is in how it internally represents entities.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_60" src="/blog/assets/img/posts/2020-11-12-bootleg/candidate_embedding_5.svg" /></p>
+<figcaption style="text-align: left;">The creation of an entity candidate representation. Each candidate is a combination of an entity, type, and relation learned embedding.</figcaption>
+</div></figure>
+
+<p>Similar to how words are often represented by continuous word embeddings (e.g., <a href="https://arxiv.org/pdf/1810.04805.pdf">BERT</a> or <a href="https://arxiv.org/pdf/1802.05365.pdf">ELMo</a>), Bootleg represents entity candidates as a combination of a unique entity embedding, a type embedding, and a relation embedding, as shown above. For example, each car entity will get the <em>same</em> car type embedding (likewise for relations) which will encode patterns learned over all cars in the training data. A rare car can then use this global “car type” knowledge for disambiguation, as it will have the car embedding as part of its representation.</p>
+
+<p>To output the correct entities, Bootleg uses these representations in a stacked <a href="https://arxiv.org/pdf/1706.03762.pdf">Transformer</a> module to allow the model to naturally learn the useful patterns for disambiguation without hard-coded rules. Bootleg then scores the output candidate representations and returns the most likely candidates.</p>
+
+<p>There are other exciting techniques we present in our <a href="https://arxiv.org/pdf/2010.10363.pdf">paper</a> regarding regularization and weak labeling to improve tail performance.</p>
+
+<h1 id="bootleg-improves-tail-performance-and-allows-for-knowledge-transfer">Bootleg Improves Tail Performance and Allows for Knowledge Transfer</h1>
+
+<p>Our simple insight of training a model to reason over types and relations <strong>provides state-of-the-art performance on three standard NED benchmarks</strong> – matching or exceeding SotA by up to 5.6 F1 points – and <strong>outperforms a BERT-based NED baseline by 5.4 F1 points over all entities and 40 F1 points over tail entities</strong> (see F1 versus entity occurrence plot above).</p>
+
+<p>
+  <figure class="figure"><div class="figure__main">
+<table>
+    <thead>
+        <tr>
+          <th>Benchmark</th>
+          <th>System</th>
+            <th>Precision</th>
+            <th>Recall</th>
+            <th>F1</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><a href="https://www.hoffart.ai/wp-content/papercite-data/pdf/hoffart-2012vx.pdf">KORE50</a></td>
+        <td><a href="https://www.mdpi.com/2073-8994/11/4/453">Hu et al., 2019</a></td>
+          <td>80.0</td>
+          <td>79.8</td>
+          <td>79.9</td>
+      </tr>
+    <td>Bootleg</td>
+        <td><b>86.0</b></td>
+        <td><b>85.4</b></td>
+        <td><b>85.7</b></td>
+      <tr>
+        <td rowspan="2"><a href="https://link.springer.com/chapter/10.1007/978-3-642-41335-3_9">RSS500</a></td>
+          <td><a href="https://arxiv.org/pdf/1802.01074.pdf">Phan et al., 2019</a></td>
+          <td>82.3 </td>
+          <td>82.3</td>
+          <td>82.3</td>
+      </tr>
+      <td>Bootleg</td>
+      <td><b>82.5</b> </td> 
+      <td><b>82.5</b></td>
+      <td><b>82.5</b></td>
+      <tr>
+        <td rowspan="2"><a href="https://www.aclweb.org/anthology/D11-1072.pdf">AIDA CoNLL YAGO</a></td>
+          <td><a href="https://arxiv.org/pdf/2005.14253.pdf">Févry et al., 2020</a></td>
+          <td>-</td>
+          <td><b>96.7</b></td>
+          <td>-</td>
+      </tr>
+    <td>Bootleg</td>
+    <td>96.9</td>
+    <td><b>96.7</b></td>
+    <td>96.8</td>
+    </tbody>
+</table>
+</div></figure>
+</p>
+
+<p>We’ll now show how the entity knowledge encoded in Bootleg’s entity representations can transfer to non-NED tasks. We extract our entity representations and use them in both a production task at a major technology company and relation extraction task. We find that the use of Bootleg embeddings in the production task provides a 8% lift in performance and even improves quality over Spanish, French, and German languages. We repeat this experiment by adding Bootleg representations to a SotA model for the <a href="https://arxiv.org/pdf/2004.14855.pdf">TACRED</a> relation extraction task (see <a href="https://github.com/HazyResearch/bootleg/tree/master/tutorials/downstream_tutorial">tutorial</a>). We find this Bootleg-enhanced model sets a new SotA by 1 F1 point.</p>
+
+<p>
+  <figure class="figure"><div class="figure__main">
+<table>
+    <thead>
+        <tr>
+          <th>Model</th>
+          <th>TACRED F1</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bootleg-Enhanced</td>
+        <td><b>80.3</b></td>
+      </tr>
+      <tr>
+        <td><a href="https://arxiv.org/pdf/1909.04164.pdf">KnowBERT</a></td>
+        <td>79.3</td>
+      </tr>
+      <tr>
+        <td><a href="https://arxiv.org/pdf/1907.10529.pdf">SpanBERT</a></td>
+        <td>78.0</td>
+      </tr>
+    </tbody>
+</table>
+</div></figure>
+</p>
+
+<p>These results suggest that Bootleg entity representations can transfer entity knowledge to other language tasks!</p>
+
+<h1 id="recap">Recap</h1>
+<p>To recap, we described the problem of the tail of NED and showed that existing NED systems fall short at disambiguating these rare, yet important entities. We then introduced four reasoning patterns for NED and described how we trained Bootleg to learn these patterns through the use of embeddings and Transformer modules. We finally showed that Bootleg is a SotA NED system that better disambiguates rare entities than prior methods. Further, Bootleg learns representations that can transfer entity knowledge to non-NED tasks.</p>
+
+<p>We are actively developing Bootleg and would love to hear your thoughts. See our <a href="http://hazyresearch.stanford.edu/bootleg/">website</a>, <a href="https://github.com/HazyResearch/bootleg">source code</a>, and <a href="https://arxiv.org/pdf/2010.10363.pdf">paper</a>.</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/bootleg/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/bootleg/&text=Bootleg%3A+Chasing+the+Tail+with+Self-Supervised+Named+Entity+Disambiguation%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/bootleg/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/bootleg/&title=Bootleg%3A+Chasing+the+Tail+with+Self-Supervised+Named+Entity+Disambiguation%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/bootleg/&title=Bootleg%3A+Chasing+the+Tail+with+Self-Supervised+Named+Entity+Disambiguation%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Bootleg%3A+Chasing+the+Tail+with+Self-Supervised+Named+Entity+Disambiguation%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/bootleg/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#NED">
+      <p><i class="fa fa-tag fa-fw"></i> NED</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#entity+linking">
+      <p><i class="fa fa-tag fa-fw"></i> entity linking</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#generalization">
+      <p><i class="fa fa-tag fa-fw"></i> generalization</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#named+entity+disambiguation">
+      <p><i class="fa fa-tag fa-fw"></i> named entity disambiguation</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/bias-nlp/">
+      <p>Previous post</p>
+        Measuring Bias in NLP (with Confidence!)
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/lili/">
+      <p>Next post</p>
+        Learning to Influence Multi-Agent Interaction
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
