@@ -114,7 +114,12 @@ position: 6
         <br><p style="text-align: center;">Dr. Lucia Moran</p>
       </a>
     </td>
-    <td></td>
+    <td>
+      <a href="https://scholar.google.com/citations?user=zsWx9ycAAAAJ&hl=es">
+        <img src="../assets/img/people/garcia.png" width="200">
+        <br><p style="text-align: center;">Dr. Susana Garcia</p>
+      </a>
+    </td>
   </tr>
 </table>
 
