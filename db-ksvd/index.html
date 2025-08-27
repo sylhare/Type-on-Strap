@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/db-ksvd/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings" />
+<meta name="author" content="<a href="https://github.com/romeov">Romeo Valentin</a>, <a href="https://sydneymkatz.com/"> Sydney M. Katz</a>, and <a href="https://mykel.kochenderfer.com">Mykel J. Kochenderfer</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/db-ksvd/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/db-ksvd/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-12T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings" />
+<script type="application/ld+json">
+{"datePublished":"2025-08-12T00:00:00-07:00","author":{"@type":"Person","name":"<a href=\"https://github.com/romeov\">Romeo Valentin</a>, <a href=\"https://sydneymkatz.com/\"> Sydney M. Katz</a>, and <a href=\"https://mykel.kochenderfer.com\">Mykel J. Kochenderfer</a>"},"url":"http://ai.stanford.edu/blog/db-ksvd/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/db-ksvd/"},"description":"The official Stanford AI Lab blog","@type":"BlogPosting","headline":"How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings","dateModified":"2025-08-12T00:00:00-07:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We introduce key optimizations to the 20 year old K-SVD algorithm, show that it can match sparse autoencoder performance for interpreting LLM embeddings, and...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings">
+    
+    <meta name="twitter:description" content="We introduce key optimizations to the 20 year old K-SVD algorithm, show that it can match sparse autoencoder performance for interpreting LLM embeddings, and provide theoretical insights into the feasability of the dictionary learning formulation.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2025-08-12-db-ksvd/ksvd-sketch.svg">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2025-08-12-db-ksvd/ksvd-sketch.svg">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings</h1>
+    <p class="meta">
+    <a href="https://github.com/romeov">Romeo Valentin</a>, <a href="https://sydneymkatz.com/"> Sydney M. Katz</a>, and <a href="https://mykel.kochenderfer.com">Mykel J. Kochenderfer</a>
+    <div class="post-date">August 12, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <!-- # How a 20-Year-Old Algorithm Can Help Us Understand Transformer Embeddings -->
+
+<p>Suppose we ask an LLM: “Can you tell me about Java?” What “Java” is the model thinking about? The programming language or the Indonesian island? To answer this question, we can try to understand what is going on inside the model. Specifically, we want to <strong>represent the model’s internal states in a human-interpretable way</strong> by finding the concepts that the model is thinking about.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-08-12-db-ksvd/ksvd-sketch.svg" /></p>
+</div></figure>
+
+<p>One approach to this problem is to phrase it as a dictionary learning problem, in which we try to decompose complex embeddings into a sum of simple and interpretable concept vectors. These vectors are selected from a learned dictionary. It is not obvious that we can break down embeddings as a linear sum of interpretable elements. However, in 2022, Elhage et. al introduced supporting evidence for the “superposition hypothesis,” which suggests that this superposition of monosemantic concept vectors is a good model for the complex embeddings.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> Finding these concept vectors remains an ongoing challenge. When dictionary learning was first proposed for this problem by Bricken et al. in 2023, they used a single-layer neural network called a sparse autoencoder (SAE) to learn the dictionary, which has since become widely popular.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup> The problem of dictionary learning actually goes way back (pre-2000s!), but Bricken et al. opted to forego established algorithms in favor of SAEs for two main reasons:</p>
+
+<p><em>“First, a sparse autoencoder can readily scale to very large datasets, which we believe is necessary to characterize the features present in a model trained on a large and diverse corpus. […] Secondly, we have a concern that iterative dictionary learning methods might be “too strong”, in the sense of being able to recover features from the activations which the model itself cannot access. Exact compressed sensing is NP-hard, which the neural network certainly isn’t doing.”</em></p>
+
+<p>In our <a href="https://arxiv.org/abs/2505.18441">recent paper</a>, we show that with minor modifications, <strong>traditional methods can be scaled to sufficiently large datasets with millions of samples and thousands of dimensions</strong> and that their performance matches that of SAEs on a variety of benchmarks. We can also use established theory to gain insights on the applicability of SAEs to different problem sizes, e.g., when less data is available.</p>
+
+<h2 id="from-30-days-to-8-minutes-reviving-ksvd">From 30 days to 8 minutes: Reviving KSVD</h2>
+
+<p>Instead of using gradient descent to optimize the dictionary elements as done by SAEs, we consider the previously reigning champion of dictionary learning: the 20-year-old KSVD algorithm.<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> KSVD solves the dictionary learning problem through alternating optimization of two subproblems in a loop: (i) updating the concept vector assignments for each sample and (ii) updating the concept vectors themselves given the assignments. Intuitively, KSVD is a generalization of k-means clustering, which uses a similar alternating optimization, but with the key difference that KSVD assigns samples to multiple clusters (concept vectors) at once.</p>
+
+<p>In the naive implementation of KSVD, dictionary elements are updated sequentially and each update requires computing an expensive singular value decomposition of the assigned samples at each step. Based on extrapolated timing results, a naïve implementation of KSVD would take over 30 days to produce a dictionary sufficient to interpret LLM embeddings. In our paper, we introduce algorithmic modifications and a highly efficient implementation, which we call double-batch KSVD (DB-KSVD). DB-KSVD provides a 10,000 times speed up over a naïve KSVD implementation and allows us to find interpretable features for LLM embeddings in just 8 minutes.</p>
+
+<p>We provide an implementation of DB-KSVD in our open source Julia package called <a href="https://github.com/romeov/KSVD.jl">KSVD.jl</a>.</p>
+
+<p>KSVD.jl can easily be called from Python:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span><span class="p">,</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="nn">juliacall</span><span class="p">;</span> <span class="n">jl</span> <span class="o">=</span> <span class="n">juliacall</span><span class="p">.</span><span class="n">Main</span>
+<span class="n">jl</span><span class="p">.</span><span class="n">seval</span><span class="p">(</span><span class="s">"using KSVD"</span><span class="p">)</span>
+
+<span class="c1"># placeholder embeddings
+</span><span class="n">Y</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">5_000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float32</span><span class="p">)</span> 
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">jl</span><span class="p">.</span><span class="n">ksvd</span><span class="p">(</span><span class="n">Y</span><span class="p">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># choose dictionary size and sparsity
+</span><span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">D</span><span class="p">,</span> <span class="n">res</span><span class="p">.</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># returns dictionary vectors and sparse codes
+</span></code></pre></div></div>
+
+<h2 id="db-ksvd-is-competitive-on-saebench">DB-KSVD is competitive on SAEBench</h2>
+
+<p>To compare DB-KSVD to existing SAE-based approaches, we evaluated it on the SAEBench benchmark<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup> and found competitive performance on all six metrics both for DB-KSVD and an extension called MatryoshkaDB-KSVD.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-08-12-db-ksvd/performance_figure.png" /></p>
+</div></figure>
+
+<p>The SAEBench benchmark comprises a number of metrics related to embedding reconstruction, feature disentanglement, concept detection, and interpretability. For instance, the sparse probing metric measures how well the learned concept vectors predict a set of predefined interpretable concepts. Absorption measures how well the learned dictionary separates concepts that are highly correlated (in the input data) but distinct. Autointerpretability measures whether a concept vector can be well represented by a summarizing phrase. These phrases are constructed by summarizing input text fragments for which a concept vector activates.</p>
+
+<p>By finding competitive results on all six metrics, we argue that classical approaches to the dictionary learning problem can be competitive even for large problem sizes. Further, the fact that two completely different optimization approaches (DB-KSVD and SAEs) achieve similar performance results may indicate that we are close to the theoretical limits given the problem setup.</p>
+
+<h2 id="on-the-feasibility-of-dictionary-learning">On the feasibility of dictionary learning</h2>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-08-12-db-ksvd/drawing.svg" /></p>
+</div></figure>
+
+<p>At the time of writing, most of the ongoing research in dictionary learning focuses on language models. However, we believe dictionary learning will have many more applications in the near future, for instance, in robotics, vision, or planning tasks. Fundamentally, all that is required is an embedding model which maps a modality to an informative feature representation. If we want to apply dictionary learning to these embeddings, we must decide on two main parameters:</p>
+
+<ol>
+  <li>How many concept vectors should we search for?</li>
+  <li>How many active concepts, approximately, does each sample have?</li>
+</ol>
+
+<p>How we select these parameters is driven by two factors. The first factor is the nature of the problem itself. For instance, a dataset of only Stack Overflow questions will likely have a smaller number of inherent concepts than a dataset of all Arxiv papers.<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">5</a></sup> Similarly, any particular Stack Overflow question usually relates only a small number of active concepts compared to a typical Arxiv paper, which often relates a significant number of concepts. The second factor is the feasibility of the dictionary learning problem. It turns out that even if the data (and embeddings) contain a large number of concepts, recovering the individual concept vectors from their superimposed representations can be impossible for any algorithm.</p>
+
+<p>To study these algorithmic limits, in <a href="https://ar5iv.labs.arxiv.org/html/2505.18441#S3">our paper</a>, we consider established theory from the dictionary learning literature to understand how the feasibility is impacted by various aspects of the problem. In particular, we find that the theory tells us that:</p>
+
+<ol>
+  <li>The number of recoverable concept vectors is proportional to the square of the number of available samples.</li>
+  <li>The number of recoverable concepts per sample is proportional to the square of the embedding dimension.</li>
+  <li>The quality of the solution is related to the <a href="https://en.wikipedia.org/wiki/Mutual_coherence_\(linear_algebra\)">incoherence</a> of the dictionary.</li>
+</ol>
+
+<p>In practical terms, the applicability of dictionary learning to new domains is therefore dependent on having sufficiently large datasets and high-dimensional embeddings. Fortunately, such models have already been developed for a variety of domains. We are therefore looking forward to further adoption of dictionary learning in new domains as well as new methods for using the conceptual representations to understand today’s models and their internal reasoning.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Elhage, et al., “Toy Models of Superposition”, Transformer Circuits Thread, 2022. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Bricken, et al., “Towards Monosemanticity: Decomposing Language Models With Dictionary Learning”, Transformer Circuits Thread, 2023. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Aharon, et al., “K-SVD: An algorithm for designing overcomplete dictionaries for sparse representation”, <em>IEEE Transactions on signal processing</em> 54.11, 2006. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Karvonen, et al., “SAEBench: A Comprehensive Benchmark for Sparse Autoencoders in Language Model Interpretability”, <em>International Conference on Machine Learning (ICML)</em>, 2025. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>One interesting way to quantify a prior for the number of concepts in natural language is to look at the size of the vocabulary, or dictionary! Although the Oxford English Dictionary lists approximately 273 thousand “headwords”, the Esperanto language dictionary, which has been designed as a “universal second language,” only uses about 16,000 words to form its sentences. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/db-ksvd/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/db-ksvd/&text=How+a+20-Year-Old+Algorithm+Can+Help+Us+Understand+Transformer+Embeddings%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/db-ksvd/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/db-ksvd/&title=How+a+20-Year-Old+Algorithm+Can+Help+Us+Understand+Transformer+Embeddings%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/db-ksvd/&title=How+a+20-Year-Old+Algorithm+Can+Help+Us+Understand+Transformer+Embeddings%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=How+a+20-Year-Old+Algorithm+Can+Help+Us+Understand+Transformer+Embeddings%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/db-ksvd/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#dictionary+learning">
+      <p><i class="fa fa-tag fa-fw"></i> dictionary learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ksvd">
+      <p><i class="fa fa-tag fa-fw"></i> ksvd</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#machine+learning">
+      <p><i class="fa fa-tag fa-fw"></i> machine learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#mechanistic+interpretability">
+      <p><i class="fa fa-tag fa-fw"></i> mechanistic interpretability</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#sae">
+      <p><i class="fa fa-tag fa-fw"></i> sae</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#sparse+coding">
+      <p><i class="fa fa-tag fa-fw"></i> sparse coding</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/icml-2025/">
+      <p>Previous post</p>
+        Stanford AI Lab Papers and Talks at ICML 2025
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
