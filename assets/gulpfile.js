@@ -40,7 +40,7 @@ gulp.task('js', function minijs() {
 });
 
 gulp.task("img", async function imging() {
-  const imagemin = await import('gulp-imagemin');
+  const { default: imagemin } = await import('gulp-imagemin');
 
   return gulp.src('img/**/*.{png,svg,jpg,webp,jpeg,gif}')
     .pipe(imagemin.default())
@@ -52,7 +52,7 @@ gulp.task("img", async function imging() {
 
 // Alternative using "sharp" in case "imagemin" does not work, supported formats: heic, heif, jpeg, jpg, png, raw, tiff, webp
 gulp.task('sharp_img', async function () {
-  const responsive = await import('gulp-responsive');
+  const { default: responsive } = await import('gulp-responsive');
   let settings = {
     quality: 85,
     progressive: true,
@@ -68,7 +68,7 @@ gulp.task('sharp_img', async function () {
 });
 
 gulp.task('thumbnails', async function () {
-  const responsive = await import('gulp-responsive');
+  const { default: responsive } = await import('gulp-responsive');
   let settings = {
     width: '50%',
     //format: 'jpeg', // convert to jpeg format
@@ -84,7 +84,7 @@ gulp.task('thumbnails', async function () {
 
 
 gulp.task('thumbnails-all', async function () {
-  const responsive = await import('gulp-responsive');
+  const { default: responsive } = await import('gulp-responsive');
   let settings = {
     width: '50%',
     //format: 'jpeg', // convert to jpeg format
