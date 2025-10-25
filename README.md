@@ -1,6 +1,7 @@
 # Type on Strap 🎨
 
 [![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/docker-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/docker-build.yml)
+[![Vendor Testing](https://github.com/sylhare/Type-on-Strap/actions/workflows/vendor-testing.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/vendor-testing.yml)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
 
@@ -78,7 +79,7 @@ Here are the main files of the template
 	
 ## Configure Type on Strap 🛠
 
-Open `_config.yml` in a text editor to change most of the blog's settings.
+Open [`_config.yml`](_config.yml) in a text editor to change most of the blog's settings.
 
 If a variable in this document is marked as "optional", disable the feature by removing all text from the variable. 
 
@@ -86,7 +87,7 @@ If a variable in this document is marked as "optional", disable the feature by r
 
 #### Base url
 
-Configure Jekyll as your own blog or with a "baseurl" in `_config.yml`:
+Configure Jekyll as your own blog or with a "baseurl" in [`_config.yml`](_config.yml):
 
 Jekyll website *without* a "baseurl" (such as a **GitHub Pages website** with your username as the repository name):
 
@@ -104,7 +105,7 @@ url: "https://username.github.io"
 
 #### Jekyll blog configuration 
 
-And here is the basic information you will need in your `_config.yml` for it to work properly:
+And here is the basic information you will need in your [`_config.yml`](_config.yml) for it to work properly:
 
 ```yaml
 # BLOG CONFIGURATION
@@ -121,7 +122,7 @@ To configure the blog part and default plugins. Those plugins are validated by G
 _Meta variables_ hold basic information about your Jekyll site, which will be used throughout the site 
 and as _meta properties_ that are used for search engines, browsers, and the site's RSS feed.
 
-Change these variables in `_config.yml`:
+Change these variables in [`_config.yml`](_config.yml):
 
 ```yml
 title: My Jekyll Blog                 # Name of website
@@ -132,14 +133,14 @@ color_theme: auto                     # color theme auto, dark or light
 ```
 
 You can also customize the seo tags default option following the jekyll-seo-tag plugin [documentation](http://jekyll.github.io/jekyll-seo-tag/advanced-usage/).
-The color theme can be set to dark or light (customize it in _variables.scss_). 
+The color theme can be set to dark or light (customize it in [`_variables.scss`](_sass/base/_variables.scss)). 
 Using _auto_ you'll have a tiny icon in the navbar allowing the use to manually switch from dark to light theme.
 
 ### Theme customization 🎨
 
 #### Footer and Header text
 
-Customize your site header/footer with these variables in `_config.yml`:
+Customize your site header/footer with these variables in [`_config.yml`](_config.yml):
 
 ```yml
 header_text: Welcome to my Jekyll blog
@@ -164,7 +165,7 @@ with suffix `-small` (620x320) and `-medium` (1240x640) to display on smaller sc
 #### Localisation string
 
 Localization string is a way to quickly change the template language for text like *Next Post* or *Follow on*, ...
-You can find all the properties in `_data/language.yml`.
+You can find all the properties in [`_data/language.yml`](_data/language.yml).
 
 By default, it is in English, but you can add your own language.
 
@@ -174,7 +175,7 @@ Here you also can set the date format, e.g., set `str_date_format: '%B %-d, %Y'`
 ### Google Analytics
 
 To enable Google Analytics (GA4), add your [Measurement ID](https://support.google.com/analytics/answer/12270356?hl=en&sjid=1593376271608310401-NA) 
-to `_config.yml` like so:
+to [`_config.yml`](_config.yml) like so:
 
 ```yml
 google_analytics: G-XXXXXXXXXX
@@ -185,14 +186,14 @@ It will use the [Google Tag Manager](https://support.google.com/analytics/answer
 ### Comments 💬
 
 Type-on-Strap supports multiple comment systems. 
-Use `_data/comments.yml` for all comment configurations
+Use [`_data/comments.yml`](_data/comments.yml) for all comment configurations
 
 #### Disqus
 
 If you have a [Disqus](https://disqus.com/) account, you can show a comments section below each post.
 
 To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) 
-to your project's `_data/comments.yml.yml` file:
+to your project's [`_data/comments.yml`](_data/comments.yml) file:
 
 ```yml
 comments:
@@ -204,7 +205,7 @@ comments:
 [Cusdis](https://cusdis.com/) is an open-source alternative to Disqus.
 You can read more about it in the [documentation](https://cusdis.com/doc#/)
 
-To enable it, set your Cusdis name in `_data/comments.yml.yml`:
+To enable it, set your Cusdis name in [`_data/comments.yml`](_data/comments.yml):
 
 ```yaml
 comments:
@@ -217,7 +218,7 @@ comments:
 It stores the comments as GitHub issues on a repository for each page.
 
 Install the utterance [app](https://github.com/apps/utterances) to your repo.
-After installing, add your info in the `_data/comments.yml.yml`:
+After installing, add your info in the [`_data/comments.yml`](_data/comments.yml):
 
 ```yaml
 comments:
@@ -234,7 +235,7 @@ comments:
 It stores the comments as GitHub discussions on a repository for each page.
 
 Install the giscus [app](https://github.com/apps/giscus) to your repo.
-After installing, add your info in the `_data/comments.yml.yml`:
+After installing, add your info in the [`_data/comments.yml`](_data/comments.yml):
 
 ```yaml
 comments:
@@ -255,14 +256,14 @@ comments:
 
 ### Math typesetting with KateX
 
-When KateX is set in `_config.yml`:
+When KateX is set in [`_config.yml`](_config.yml):
 
 ```yml
 katex: true # to enable it
 ```
 
 You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable 
-in `_config.yml` to `true` for math typesetting.
+in [`_config.yml`](_config.yml) to `true` for math typesetting.
 
 For inline math typesetting, type your math expression on the *same line* as your content. For example:
 
@@ -282,7 +283,7 @@ You can find a cheat sheet of the compatible LaTex symbols [online](https://arto
 
 ### Diagrams with Mermaid
 
-Enable the [mermaid-js](https://github.com/mermaid-js/mermaid) diagram rendering by setting mermaid to true in the `_config.yml`.
+Enable the [mermaid-js](https://github.com/mermaid-js/mermaid) diagram rendering by setting mermaid to true in the [`_config.yml`](_config.yml).
 This will load and init the [mermaid.min.js](https://mermaid-js.github.io/mermaid/getting-started/n00b-gettingStarted.html#4-calling-mermaid-from-a-relative-link).
 
 ```yml
@@ -301,11 +302,11 @@ sequenceDiagram
 
 ### Social icons
 
-In `_data/social.yml` you can customize the social icons that will be displayed in the post to share your post.
+In [`_data/social.yml`](_data/social.yml) you can customize the social icons that will be displayed in the post to share your post.
 You can also enable RSS.
 The site icons come from [Font Awesome](https://fontawesome.com/).
 
-In `_data/icons.yml` you can set the footer icon that will appear at the bottom of the page.
+In [`_data/icons.yml`](_data/icons.yml) you can set the footer icon that will appear at the bottom of the page.
 They will redirect the user on your profile on to other platforms like Twitter, GitHub and so many more!
 
 ### Cookie consent
@@ -322,11 +323,11 @@ They will on click redirect you to the logo's platform to share the article.
 #### Footer
 
 Display icons in the footer. 
-All icon variables should be your username enclosed in quotes (e.g. "username") in `_data/icons.yml`.
+All icon variables should be your username enclosed in quotes (e.g. "username") in [`_data/icons.yml`](_data/icons.yml).
 
 You can update the RSS settings in `_data/social` to change the default feed path (generated by [jekyll-feel](https://github.com/jekyll/jekyll-feed)).
 To enable the share icons at the bottom of each article,
-set to true the one you'd like under `share` in the `_data/social.yml` file.
+set to true the one you'd like under `share` in the [`_data/social.yml`](_data/social.yml) file.
 
 ### Personalize your Blog Posts 📝
 
@@ -358,7 +359,7 @@ tags: [sample, markdown, html]                    # [Opt] Add tags to the page
 With `thumbnail`, you can add a smaller image than the `feature-img`. 
 If you don't have a thumbnail, you can still use the same image as the feature one. Or use the gulp task to create it.
 
-If you don't use a feature image, but `color`, the transparent background is set comes from `lineart.png`. 
+If you don't use a feature image, but `color`, the transparent background is set comes from [`lineart.png`](assets/img/lineart.png). 
 You can edit it in the config file (`_config.yml > color_image`). If you want another one, put it in `/assets/img` as well. 
 
 For position, if not set on all pages, it will be by alphabetical order without `position` then by `position` order.
@@ -428,7 +429,7 @@ of your favourite highlight color scheme on this format.
 All feature pages besides the "home" one are stored in the `page` folder, 
 they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
 
-Here are the documentation for the other feature pages that can be added through `_config.yml`. 
+Here are the documentation for the other feature pages that can be added through [`_config.yml`](_config.yml). 
 
 Non-standard features are documented below.
 
@@ -439,13 +440,13 @@ Unless you are making a custom layout you won't need it.
 
 ### Layout: Home 🏡
 
-This page is used as the home page of the template (in the `index.html`). It displays the list of articles in `_posts`.
+This page is used as the home page of the template (in the [`index.html`](index.html)). It displays the list of articles in `_posts`.
 You can use this layout in another page (adding a title to it will make it appear in the navigation bar).
 
 The recommended width and height for the home picture is width:`2484px;` and height:`1280px` 
 which are the dimensions of the actual picture for it to be rolling down as you scroll the page.
 
-If your posts are not displaying ensure that you have added the line `paginate: 5` to `_config.yml`.
+If your posts are not displaying ensure that you have added the line `paginate: 5` to [`_config.yml`](_config.yml).
 
 ### Layout: Page 📄
 
@@ -471,7 +472,7 @@ The hide only hides your page from the navigation bar, it is, however, still gen
 
 Portfolio is a feature page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
 
-To use the portfolio, simply create a `portfolio.md` with this information inside:
+To use the portfolio, simply create a [`portfolio.md`](pages/portfolio.md) with this information inside:
 
 ```yml
 
@@ -504,7 +505,7 @@ date: 2019-07-25		 	       # Not mandatory, however needs to be in date format t
 
 #### Portfolio in gem
 
-Make sure your `_config.yml` contains the following if you are using the theme as a gem:
+Make sure your [`_config.yml`](_config.yml) contains the following if you are using the theme as a gem:
 
 ```yml
 # PORTFOLIO
@@ -537,7 +538,7 @@ gallery: "assets/img/pexels"
 ### Feature: Search 🔍
 
 The search feature is based on [Simple-Jekyll-search](https://github.com/sylhare/Simple-Jekyll-Search) 
-there is a `search.liquid` file that will create a list of all the site posts, pages and portfolios. 
+there is a [`search.liquid`](_layouts/search.liquid) file that will create a list of all the site posts, pages and portfolios. 
 Then there's a script displaying the formatted results in the _search page_.
 
 To exclude contents from the search add the `exclude: true` option in the markdown header. 
@@ -645,7 +646,7 @@ Add this line to your Jekyll site's Gemfile (or create one):
 gem "type-on-strap"
 ```
 
-Add this line to your Jekyll site's `_config.yml` file:
+Add this line to your Jekyll site's [`_config.yml`](_config.yml) file:
 
 ```yml
 theme: type-on-strap
@@ -658,14 +659,14 @@ bundle install
 ```
 
 Then you can start adding content like:
-  - Add a `index.html` file
+  - Add a [`index.html`](index.html) file
   - Add the feature page you want. (ex: as it is already in `pages`)
   - Add posts in `_posts` and `_portfolio` to be displayed
 
 ### Remote Theme
 
 Now you can use any theme gem with GitHub pages with [29/11/2017 GitHub Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
-For that remove all `theme:` attributes from `_config.yml` and add instead:
+For that remove all `theme:` attributes from [`_config.yml`](_config.yml) and add instead:
 
 ```yml
 remote_theme: sylhare/Type-on-Strap 
