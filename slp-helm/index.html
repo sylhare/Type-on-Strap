@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/slp-helm/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders" />
+<meta name="author" content="<a href="https://www.linkedin.com/in/fagunpatel98/">Fagun Patel</a>, <a href="https://www.comp.nus.edu.sg/~nqduc/">Duc Q. Nguyen</a>, <a href="https://ai.stanford.edu/~sttruong/">Sang T. Truong</a>, <a href="https://www.linkedin.com/in/jodynorwood/">Jody Vaynshtok</a>, <a href="https://cs.stanford.edu/~sanmi/">Sanmi Koyejo</a>, <a href="https://ed.stanford.edu/faculty/nhaber">Nick Haber</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Need for a Benchmark" />
+<meta property="og:description" content="The Need for a Benchmark" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/slp-helm/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/slp-helm/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-23T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders" />
+<script type="application/ld+json">
+{"url":"http://ai.stanford.edu/blog/slp-helm/","dateModified":"2025-10-23T00:00:00-05:00","datePublished":"2025-10-23T00:00:00-05:00","@type":"BlogPosting","description":"The Need for a Benchmark","author":{"@type":"Person","name":"<a href=\"https://www.linkedin.com/in/fagunpatel98/\">Fagun Patel</a>, <a href=\"https://www.comp.nus.edu.sg/~nqduc/\">Duc Q. Nguyen</a>, <a href=\"https://ai.stanford.edu/~sttruong/\">Sang T. Truong</a>, <a href=\"https://www.linkedin.com/in/jodynorwood/\">Jody Vaynshtok</a>, <a href=\"https://cs.stanford.edu/~sanmi/\">Sanmi Koyejo</a>, <a href=\"https://ed.stanford.edu/faculty/nhaber\">Nick Haber</a>"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/slp-helm/"},"headline":"Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We introduce SLPHelm, the first-ever benchmark for AI in speech-language pathology. Testing 15 models on 5 diagnostic tasks revealed that today's AI isn't re...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders">
+    
+    <meta name="twitter:description" content="We introduce SLPHelm, the first-ever benchmark for AI in speech-language pathology. Testing 15 models on 5 diagnostic tasks revealed that today's AI isn't ready for clinical use—but targeted fine-tuning shows promising improvements. Our findings highlight critical biases and unexpected failures that must be addressed before AI can safely assist speech therapists.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-10-23-slp-helm/image2.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2025-10-23-slp-helm/image2.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders</h1>
+    <p class="meta">
+    <a href="https://www.linkedin.com/in/fagunpatel98/">Fagun Patel</a>, <a href="https://www.comp.nus.edu.sg/~nqduc/">Duc Q. Nguyen</a>, <a href="https://ai.stanford.edu/~sttruong/">Sang T. Truong</a>, <a href="https://www.linkedin.com/in/jodynorwood/">Jody Vaynshtok</a>, <a href="https://cs.stanford.edu/~sanmi/">Sanmi Koyejo</a>, <a href="https://ed.stanford.edu/faculty/nhaber">Nick Haber</a>
+    <div class="post-date">October 23, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h2 id="the-need-for-a-benchmark">The Need for a Benchmark</h2>
+
+<p>For a child, learning to communicate is one of life’s biggest adventures. But for millions of kids, this journey has extra hurdles. In the United States alone, over 3.4 million children have <a href="https://www.nidcd.nih.gov/health/statistics/quick-statistics-voice-speech-language">speech disorders</a> that need professional help. The problem? There just aren’t enough experts to go around. For every 20 children who need help, there’s only one speech-language pathologist (SLP). This staggering gap means many children wait too long for a diagnosis and miss out on crucial early intervention.</p>
+
+<p>Could multi-modal LLMs like GPT-4 and Gemini help close this gap? Imagine an AI tool that could help an SLP figure out if a child has an <strong>articulation disorder</strong> (a physical struggle to make a sound, like a lisp) or a <strong>phonological disorder</strong> (a pattern of errors, like always dropping the last sound of a word, saying “ca” instead of “cat”). The potential is huge, but so are the risks. Using these models without understanding their capabilities and limits could lead to wrong diagnoses and real harm.</p>
+
+<p>The two biggest roadblocks have been a lack of good, clean datasets of children’s speech and no standard way to “grade” these AI models on tasks that actually matter to clinicians.</p>
+
+<p>That’s where our work comes in. We set out to build the first-ever comprehensive “driver’s test” for AI in speech-language pathology. We teamed up with clinical experts to design five key diagnostic tasks, created new datasets to test them, and put 15 of today’s top AI models through their paces. We also tinkered with the models to see if we could make them smarter for this specific job. Our evaluation revealed that there’s no silver bullet; no single model consistently outperformed the others nor did they meet clinical standards. We also uncovered systematic disparities; with models performing better on male children, and found that popular prompting techniques like asking the model to “think step-by-step” can actually hurt performance on nuanced diagnostic tasks. But there’s good news: by fine-tuning the models on domain-specific data, we achieved improvements of over 10%. <strong>We’re making all of our datasets, models, and our testing framework public to help everyone build safer and more helpful AI for SLPs and the kids they support</strong></p>
+
+<h3 id="slphelm-an-slp-drivers-test">SLPHelm: An SLP ‘Drivers Test’</h3>
+
+<p><em>Note: This section contains details on our evaluation framework; you can skip it if you want to focus on the evaluation results.</em></p>
+
+<p>To build an AI tool that an SLP would actually find useful, you have to test it on real-world problems. We quickly realized that existing research datasets were a major bottleneck. Most of them could only do one thing: label a speech sample as either “disordered” or “typical”. That’s like a doctor only being able to tell you if you’re “sick” or “healthy”—it’s not nearly specific enough to be helpful. “Disordered” could mean anything from a lisp to a pattern of omitting sounds, like saying ‘ca’ for ‘cat’.</p>
+
+<p>To fix this, we worked side-by-side with a certified SLP to create a much more detailed system for labeling speech. Our new taxonomy (Figure 1) organizes diagnosis into three levels:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-10-23-slp-helm/image6.png" /></p>
+<figcaption>Figure 1: SLPHelm Classification Taxonomy</figcaption>
+</div></figure>
+
+<ul>
+  <li>At the highest level, it makes the primary distinction between speech that is <strong>Typically Developing</strong> and speech that exhibits a <strong>Speech Disorder</strong>. A pediatric speech disorder is a clinical deviation from expected speech development patterns that requires intervention. This initial classification is the most critical early triage step for prioritizing clinical resources.</li>
+  <li>
+    <p>For speech identified as disordered, the taxonomy allows for two different, more granular levels of classification:</p>
+
+    <ul>
+      <li><strong>By Disorder Type</strong>: This level distinguishes between an <strong>Articulation Disorder</strong>, which involves motor-based difficulty in physically producing specific sounds (like a lisp), and a <strong>Phonological Disorder</strong>, which involves pattern-based errors in understanding and using the sound system of a language (e.g., consistently saying “ca” for “cat”).</li>
+      <li><strong>By Disorder Symptom</strong>: This level pinpoints the specific clinical symptoms present. These include <strong>Substitution</strong> (replacing one sound with another), <strong>Omission</strong> (dropping a sound), <strong>Addition</strong> (inserting an extra sound), and <strong>Stuttering</strong> (disruptions in speech fluency).</li>
+    </ul>
+  </li>
+</ul>
+
+<p>With this detailed map in place, we created our evaluation framework, <strong>SLPHelm</strong>. We challenged the AI models with five key tasks:</p>
+
+<ol>
+  <li><strong>Disorder Diagnosis</strong>: The foundational task of distinguishing between typical and disordered speech is a critical first step in clinical triage.</li>
+  <li><strong>Transcription-Based Diagnosis</strong>: A baseline task that checks for mismatches between a model’s transcription and the expected text, providing a simple, interpretation-free diagnostic heuristic.</li>
+  <li><strong>Transcription</strong>: A measure of automatic speech recognition (ASR) accuracy on disordered child speech, which is essential for many downstream tasks.</li>
+  <li><strong>Disorder Type Classification</strong>: A more advanced task where models must differentiate between articulation disorders (motor-based errors) and phonological disorders (pattern-based errors).</li>
+  <li><strong>Symptom Classification</strong>: The most granular task, requiring models to identify specific error types like <strong>substitutions</strong> (e.g., “gape” for “gate”), <strong>omissions</strong> (“gore” for “gorge”), <strong>additions</strong>, or <strong>stuttering</strong>.</li>
+</ol>
+
+<p>We evaluated 15 closed and open-source models, including families like GPT-4, Gemini, Qwen, and IBM Granite. Additionally, we investigated whether domain-specific fine-tuning could improve performance on SLP scenarios. We explored two primary strategies:</p>
+
+<ol>
+  <li><strong>Standard ASR Fine-tuning</strong>: Training a model on a speech recognition task using both typical and disordered speech samples with their correct transcriptions.</li>
+  <li><strong>Marked ASR Fine-tuning</strong>: To help the model better distinguish between typical and disordered speech, we used a simple but effective trick: we appended an asterisk (*) to each word in the transcription of a disordered speech sample. This gives the model an explicit signal to learn disorder-specific patterns without changing the core task.</li>
+</ol>
+
+<h2 id="the-results-biases-blind-spots-and-bright-spots">The Results: Biases, Blind Spots, and Bright Spots</h2>
+
+<p>Our comprehensive evaluation reveals that no single model excels across all tasks, and most current models fall short of the reliability needed for clinical use. Existing FDA-approved AI diagnostic systems typically achieve F1 scores between 0.80 and 0.85; none of our evaluated models reached this standard for classification tasks.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-10-23-slp-helm/image2.png" /></p>
+<figcaption>Figure 2: Overall results across all five scenarios. The figure shows: 1. Model performance varies greatly over the 5 scenarios and there is no model that consistently outperforms the others 2. As the complexity of the classification tasks increase, F1 scores degrade relatively 3. Transcription accuracy is not a great marker for classification accuracy</figcaption>
+</div></figure>
+
+<p>Here are the most interesting takeaways:</p>
+
+<ol>
+  <li>
+    <p><strong>Today’s AI Isn’t Ready for the Clinic.</strong> In the most fundamental task—simply telling disordered from typical speech—the best model (Qwen 2.5-Omni-3B) has an F1 score of 0.56, which is below the bar for being clinically useful. This is a significant warning sign that simply deploying a powerful AI off the shelf to tackle a clinical problem is a risky idea.</p>
+  </li>
+  <li>
+    <p><strong>ASR Fine-tuning Can Be Effective</strong>: Fine-tuning large models can boost their performance on specific downstream tasks. We observed consistent gains in ASR-based tasks (Scenarios 2 and 3) when fine-tuning solely on ASR data, regardless of whether disordered speech was explicitly marked. However, improvements beyond these scenarios were not uniform across models; Qwen2.5-Omni-7b showed gains in Scenarios 4 and 5, whereas others did not. While the performance advantage from finetuning did not extend to all scenarios across all models, it highlights a promising direction for building more specialized models for SLP.</p>
+  </li>
+</ol>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-10-23-slp-helm/image5.png" /></p>
+<figcaption>Figure 3: Finetuning Results. Shows the improvement domain-specific finetuning can make on model performance. Finetuning with markers for disordered speech comprehensively proves to be the better strategy amongst the two tested.</figcaption>
+</div></figure>
+
+<ol>
+  <li><strong>A Systematic Bias Towards Male Speakers</strong>: Our analysis revealed a consistent and concerning performance gap, where nearly every model performed better on speech from male children compared to female children. This disparity appeared in both audio-native and transcription-based models. A potential cause is an imbalance in training data, as persistent speech disorders are more commonly documented in boys. This finding highlights a critical need for gender-balanced auditing and fine-tuning to ensure equitable care.</li>
+</ol>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-10-23-slp-helm/image4.png" /></p>
+<figcaption>Figure 4: Robustness analysis across genders, languages, and perturbations. Shows: 1. A consistent gender bias in performance is seen in favor of boys. 2. Transcription accuracy degrades for non-English languages while classification performance stays relatively consistent. 3. Noise perturbations make a small but consistent impact on model performance</figcaption>
+</div></figure>
+
+<ol>
+  <li>
+    <p><strong>Transcription ≠ Diagnosis</strong>: We found that high-quality transcription is neither necessary nor sufficient for accurate diagnosis. Some models with mediocre transcription accuracy were still strong classifiers, likely because they leverage higher-level acoustic cues (like prosody and articulation) that are lost in a pure text transcript. This suggests that end-to-end, audio-native models may hold an advantage for complex diagnostic reasoning.</p>
+  </li>
+  <li>
+    <p><strong>Models Fail on Tonal Languages</strong>: In a preliminary analysis, we found that current models completely fail to generalize to tonal languages like Taiwanese and Cantonese. The models systematically misclassified typical speech as disordered, suggesting they confuse the natural tonal variations in these languages with pathological speech patterns. This is a critical limitation for global applications.</p>
+  </li>
+</ol>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-10-23-slp-helm/image1.png" /></p>
+<figcaption>Figure 5: Classification performance on Tonal languages. Shows the order of magnitude degradation in classification performance</figcaption>
+</div></figure>
+
+<h2 id="chain-of-thought-can-backfire-when-thinking-hurts-performance">Chain-of-Thought Can Backfire: When ‘Thinking’ Hurts Performance</h2>
+
+<p>Contrary to the common wisdom that Chain-of-Thought (CoT) prompting improves reasoning, we found it systematically <strong>degraded</strong> performance on some of our complex classification tasks. This aligns with recent evidence suggesting CoT can hamper tasks where the decision boundary is narrow or the answer format is strict, as the additional reasoning tokens can introduce “distraction” or bleed into the final predicted <a href="https://arxiv.org/abs/2410.21333">label</a>. However, the explicit step-by-step rationale gives crucial insight into <strong>why</strong> a model failed. To gain a deeper understanding, <strong>we analyzed 200 reasoning traces</strong> from four different models, focusing on the following behaviours:</p>
+
+<ul>
+  <li><strong>Error Detection</strong>: Recognizing individual, raw errors in speech. This is an observation step. For instance, identifying that a child said “tai” for “kai” and “dow” for “cow” involves detecting two specific sound substitutions.</li>
+  <li><strong>Rule Following</strong>: Applying a broader clinical or taxonomical rule to the detected errors to reach a conclusion. This is an inference step. Using the same example, the model would apply the rule that a <strong>consistent pattern</strong> of substituting back-of-the-mouth sounds (/k/) for front-of-the-mouth sounds (/t/, /d/) indicates a phonological disorder.</li>
+  <li><strong>Subgoal Setting</strong>: breaking down a complex problem into manageable steps (e.g., ``To solve this, we first need to…’’).</li>
+</ul>
+
+<p>Our analysis revealed key differences in how effectively the models reasoned. For example, GPT-4o frequently attempted to follow rules and detect errors, but its application of these strategies was often flawed, leading to an incorrect final answer in the majority of cases. This “high rate of flawed application” likely explains its drop in performance with CoT. Conversely, Gemini 2.0 Flash’s performance improved, correlating with more reliable reasoning; its application of “Rule Following” was correct in 50% of instances, compared to just 39.5% for GPT-4o. This suggests that for these specialized SLP tasks, CoT only helps when the model can reliably apply reasoning strategies within a well-defined problem space.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-10-23-slp-helm/image3.png" /></p>
+<figcaption>Figure 6: Model performance with CoT reasoning</figcaption>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-10-23-slp-helm/image7.png" /></p>
+<figcaption>Figure 7: Breakdown of behaviors showcased by the model. The bar for each model indicates the number of times the given behavior is observed. Each bar is broken down by the times the given behavior resulted in a correct/incorrect answer.</figcaption>
+</div></figure>
+
+<h2 id="conclusion-where-do-we-go-from-here">Conclusion: Where Do We Go From Here?</h2>
+
+<p>Our work is the first major benchmark for AI in pediatric speech pathology, and our findings are a mix of good news and bad news.</p>
+
+<p>The bad news is that today’s off-the-shelf AI models are not ready or reliable enough to be used in a clinic. We also found that popular AI tricks don’t always work in this specialized medical field, and we uncovered serious biases related to gender and language that must be fixed. But the good news is that we have a path forward. We showed that smart, targeted finetuning—like our marked ASR method—can dramatically improve performance.</p>
+
+<p>This research is a crucial first step. The goal is not to replace clinicians but to develop ethical, reliable, and clinically valuable tools that can augment their capabilities. Future research should prioritize the expansion of this framework to include more low-resource and tonal languages, the development of privacy-preserving fine-tuning methods suitable for sensitive pediatric data, and the creation of AI-generated explanations that are clinically faithful and genuinely useful to SLPs. By pursuing this trajectory, we can work toward bridging the significant gap in care and providing timely support to the millions of children who require it.</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/slp-helm/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/slp-helm/&text=Teaching+AI+to+Listen%3A+Building+the+First+Benchmark+for+Pediatric+Speech+Disorders%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/slp-helm/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/slp-helm/&title=Teaching+AI+to+Listen%3A+Building+the+First+Benchmark+for+Pediatric+Speech+Disorders%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/slp-helm/&title=Teaching+AI+to+Listen%3A+Building+the+First+Benchmark+for+Pediatric+Speech+Disorders%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Teaching+AI+to+Listen%3A+Building+the+First+Benchmark+for+Pediatric+Speech+Disorders%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/slp-helm/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/tstar/">
+      <p>Previous post</p>
+        T*: Rethinking Temporal Search for Long-Form Video Understanding
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
