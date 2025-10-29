@@ -1,0 +1,83 @@
+name: Vendor Dependency Testing
+
+on:
+  push:
+    paths:
+      - 'assets/js/vendor/**'
+      - 'assets/fonts/katex/**'
+      - '_sass/external/katex/**'
+      - '_includes/default/head.liquid'
+      - '.github/scripts/**'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  test-vendor-dependencies:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.4'
+        bundler-cache: true
+        
+    - name: Install Jekyll dependencies
+      run: |
+        bundle install
+        
+    - name: Make scripts executable
+      run: |
+        chmod +x .github/scripts/*.sh
+        
+    - name: Run vendor validation
+      # Use 'bash {0}' to disable GitHub Actions' default 'set -e'
+      # The script handles its own error control with set -e
+      shell: bash {0}
+      run: |
+        .github/scripts/validate-vendor.sh
+        
+    - name: Run automated testing
+      shell: bash {0}
+      run: |
+        .github/scripts/test-vendor-updates.sh
+        
+    - name: Test Jekyll build
+      run: |
+        bundle exec jekyll build --verbose
+        
+    - name: Check for build warnings
+      run: |
+        if bundle exec jekyll build 2>&1 | grep -i "warning\|error"; then
+          echo "⚠️ Build warnings/errors detected"
+          echo "This may indicate issues with vendor updates"
+        else
+          echo "✅ No build warnings/errors"
+        fi
+        
+    - name: Verify asset generation
+      run: |
+        echo "Checking generated assets..."
+        ls -la _site/assets/js/vendor/
+        ls -la _site/assets/fonts/katex/ | head -10
+        
+        # Check file sizes are reasonable
+        echo "File sizes:"
+        ls -lh _site/assets/js/vendor/*.js
+        
+    - name: Test production build
+      run: |
+        JEKYLL_ENV=production bundle exec jekyll build
+        echo "✅ Production build successful"
+        
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: vendor-test-results
+        path: |
+          _site/
+          .github/scripts/
+        retention-days: 7
