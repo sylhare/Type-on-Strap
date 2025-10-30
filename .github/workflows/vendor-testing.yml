@@ -1,13 +1,20 @@
 name: Vendor Dependency Testing
 
 on:
-  push:
-    paths:
-      - 'assets/js/vendor/**'
-      - 'assets/fonts/katex/**'
-      - '_sass/external/katex/**'
-      - '_includes/default/head.liquid'
-      - '.github/scripts/**'
+  # push:
+  #   paths:
+  #     - 'assets/js/vendor/**'
+  #     - 'assets/fonts/katex/**'
+  #     - '_sass/external/katex/**'
+  #     - '_includes/default/head.liquid'
+  #     - '.github/scripts/**'
+  # pull_request:
+  #   paths:
+  #     - 'assets/js/vendor/**'
+  #     - 'assets/fonts/katex/**'
+  #     - '_sass/external/katex/**'
+  #     - '_includes/default/head.liquid'
+  #     - '.github/scripts/**'
   workflow_dispatch: # Allow manual triggering
 
 jobs:

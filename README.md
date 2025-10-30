@@ -1,7 +1,6 @@
 # Type on Strap 🎨
 
 [![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/docker-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/docker-build.yml)
-[![Vendor Testing](https://github.com/sylhare/Type-on-Strap/actions/workflows/vendor-testing.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/vendor-testing.yml)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
 
