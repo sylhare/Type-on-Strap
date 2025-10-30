@@ -29,6 +29,15 @@ jekyll-theme-type-on-strap.gemspec
 **/node_modules/*
 **/package-lock.json
 
+# Testing
+.github/tests/node_modules/
+.github/tests/playwright-report/
+.github/tests/test-results/
+.github/tests/_site/
+.github/tests/.jekyll-cache/
+.github/tests/playwright/.cache/
+.github/tests/coverage/
+
 # Misc
 *-test.md
 *copy.md
