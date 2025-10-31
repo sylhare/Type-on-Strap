@@ -38,18 +38,26 @@ jobs:
     - name: Make scripts executable
       run: |
         chmod +x .github/scripts/*.sh
-        
-    - name: Run vendor validation
-      # Use 'bash {0}' to disable GitHub Actions' default 'set -e'
-      # The script handles its own error control with set -e
-      shell: bash {0}
+    
+    - name: Validate KaTeX
       run: |
-        .github/scripts/validate-vendor.sh
+        .github/scripts/validate-katex.sh
         
-    - name: Run automated testing
-      shell: bash {0}
+    - name: Validate Mermaid
       run: |
-        .github/scripts/test-vendor-updates.sh
+        .github/scripts/validate-mermaid.sh
+        
+    - name: Validate Masonry
+      run: |
+        .github/scripts/validate-masonry.sh
+        
+    - name: Validate imagesLoaded
+      run: |
+        .github/scripts/validate-imagesloaded.sh
+        
+    - name: Validate Simple-Jekyll-Search
+      run: |
+        .github/scripts/validate-jekyll-search.sh
         
     - name: Test Jekyll build
       run: |
