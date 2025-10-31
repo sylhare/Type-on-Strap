@@ -1,5 +1,15 @@
-name-template: 'v$NEXT_PATCH_VERSION'
-tag-template: 'v$NEXT_PATCH_VERSION'
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+version-resolver:
+  major:
+    labels:
+      - 'breaking'
+      - 'major'
+  minor:
+    labels:
+      - 'feature'
+      - 'enhancement'
+  default: patch
 categories:
   - title: '🚀 Features'
     labels:
@@ -15,6 +25,6 @@ categories:
       - 'custom'
       - 'dependencies'
 template: |
-  ## What’s new:
+  ## What's new:
 
   $CHANGES
