@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/blog/feedback-descent/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://localhost:4000/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Following the Text Gradient at Scale | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Following the Text Gradient at Scale" />
+<meta name="author" content="<a href="https://yoonholee.com/">Yoonho Lee</a> and <a href="https://ai.stanford.edu/~cbfinn/">Chelsea Finn</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="RL Throws Away Almost Everything Evaluators Have to Say" />
+<meta property="og:description" content="RL Throws Away Almost Everything Evaluators Have to Say" />
+<link rel="canonical" href="http://localhost:4000/blog/feedback-descent/" />
+<meta property="og:url" content="http://localhost:4000/blog/feedback-descent/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-01T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Following the Text Gradient at Scale" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Following the Text Gradient at Scale","dateModified":"2025-12-01T00:00:00-08:00","datePublished":"2025-12-01T00:00:00-08:00","description":"RL Throws Away Almost Everything Evaluators Have to Say","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/feedback-descent/"},"url":"http://localhost:4000/blog/feedback-descent/","author":{"@type":"Person","name":"<a href=\"https://yoonholee.com/\">Yoonho Lee</a> and <a href=\"https://ai.stanford.edu/~cbfinn/\">Chelsea Finn</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Following the Text Gradient at Scale | The Stanford AI Lab Blog</title>
+    <meta name="description" content="Feedback Descent is a simple, domain-agnostic optimization method that uses rich textual feedback instead of scalar rewards, matching or exceeding specialize...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Following the Text Gradient at Scale">
+    
+    <meta name="twitter:description" content="Feedback Descent is a simple, domain-agnostic optimization method that uses rich textual feedback instead of scalar rewards, matching or exceeding specialized RL methods across molecular design, prompt optimization, and visual editing.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/blog//assets/img/posts/2025-12-01-feedback-descent/thumbnail.png">
+    <meta name="og:image" content="http://localhost:4000/blog//assets/img/posts/2025-12-01-feedback-descent/thumbnail.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Following the Text Gradient at Scale</h1>
+    <p class="meta">
+    <a href="https://yoonholee.com/">Yoonho Lee</a> and <a href="https://ai.stanford.edu/~cbfinn/">Chelsea Finn</a>
+    <div class="post-date">December 1, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h2 id="rl-throws-away-almost-everything-evaluators-have-to-say">RL Throws Away Almost Everything Evaluators Have to Say</h2>
+
+<p>When you get feedback on your work, it usually tells you <em>what</em> went wrong and <em>how</em> to fix it. But existing reinforcement learning (RL) algorithms throw most of that information away; it compresses potentially rich feedback into a single number, a reward<sup id="fnref:dense" role="doc-noteref"><a href="#fn:dense" class="footnote">1</a></sup>, then tries to learn by correlating rewards with actions across hundreds or thousands of attempts. We do this because our algorithms were designed for scalar supervision, not because of a fundamental constraint in learning from experience<sup id="fnref:rl-gap" role="doc-noteref"><a href="#fn:rl-gap" class="footnote">2</a></sup>.</p>
+
+<p>To illustrate this, let’s consider a simple example. Suppose you’re judging cakes. You take a bite, you like the shavings on top, the ganache is perfectly tempered, but you want way more cherries throughout. Yet you only record: “4/5.” The baker learns nothing about the cherry distribution or what else worked well, only that this cake scored higher than a 3. If this is the only information you provide, the baker will likely have to do <strong>a lot</strong> more baking to figure out what you actually want. <sup id="fnref:cake-reference" role="doc-noteref"><a href="#fn:cake-reference" class="footnote">3</a></sup></p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-12-01-feedback-descent/cake.png" /></p>
+</div></figure>
+
+<p>More generally, an expert given a candidate solution can articulate specific failure modes, causal mechanisms, and concrete fixes. Full verbal feedback for the cake above would contain far more actionable information than the numerical score “4/5”. The baker can confidently keep the parts of the cake that worked well, rather than blindly exploring recipe variations. This is the core insight: rich feedback enables targeted improvements rather than random exploration, resulting in fewer trials to achieve a better outcome.</p>
+
+<p>This striking mismatch between the information available and the information used by RL has been aptly described as <a href="https://youtu.be/lXUZvyajciY?si=fez_SbjEhp2y3FZF&amp;t=2597">sucking supervision through a straw</a>: you run minutes of rollout and compress it all into a final reward signal broadcast across the entire trajectory. This scalar bottleneck is becoming increasingly costly in the tasks we’re deploying LLMs on: for example, <a href="https://blog.google/products/search/deep-search-business-calling-google-search/">research</a> <a href="https://openai.com/index/introducing-deep-research/">agents</a> run 5-30 minutes per task. Each run produces rich diagnostic logs—tool calls, intermediate reasoning, error traces—all of which are collapsed into a single scalar that discards the causal signal of where and why things failed. While rich feedback requires a bit more work from the evaluator, they’ve already done the reasoning; we’re just asking them to write it down. When rollouts themselves are expensive, the marginal annotation cost is small relative to the sample-efficiency gains we can achieve with richer feedback.</p>
+
+<p>In this post, we survey an emerging learning paradigm that fully embraces all the feedback an environment has to offer—avoiding the scalar bottleneck of RL—and discuss our recent work called <strong>Feedback Descent</strong> (check out the paper <a href="https://arxiv.org/abs/2511.07919">here</a>), which outperforms specialized RL methods in challenging optimization domains such as molecular design and prompt optimization.</p>
+
+<h2 id="from-scalar-rewards-to-text-based-optimization">From Scalar Rewards to Text-Based Optimization</h2>
+
+<p>A growing body of work hints at an alternative to reward-based learning: directly using rich feedback to guide model improvement. Given a textual artifact (e.g., a prompt, source code, molecule specs), we can often provide natural-language explanations of how to improve it. That explanation is already a form of supervision. Rather than compressing it into a single number, we can feed it back into the system during the update.</p>
+
+<p>In recent work, two broad patterns have emerged around this principle:</p>
+
+<ul>
+  <li><strong>Critique-based or “text gradient” methods.</strong> The model proposes an artifact and receives a natural-language critique of its errors or omissions. The critique explicitly suggests a direction of improvement: adjust the retrieval query, remove this redundancy, change the control flow, etc. A revised artifact is then produced by editing the original in line with the critique. This pattern appears in systems such as <a href="https://arxiv.org/abs/2303.17651">Self-Refine</a>, <a href="https://arxiv.org/abs/2305.03495">APO</a>, <a href="https://arxiv.org/abs/2406.16218">Trace</a>, and <a href="https://arxiv.org/abs/2406.07496">TextGrad</a>.</li>
+  <li><strong>Evolutionary methods.</strong> Instead of iteratively editing a single artifact, these methods maintain a population of artifacts. Language models generate mutations and recombinations conditioned on the current population, and evaluators select the better ones. Iterating this variation-selection loop gradually shifts the population toward higher-performing algorithms or designs, as in <a href="https://arxiv.org/abs/2309.08532">EvoPrompt</a>, <a href="https://arxiv.org/abs/2507.19457">GEPA</a>, and <a href="https://arxiv.org/abs/2506.13131">AlphaEvolve</a>/<a href="https://github.com/algorithmicsuperintelligence/openevolve">OpenEvolve</a>, and has driven novel <a href="https://www.nature.com/articles/s41586-023-06924-6">mathematical discoveries</a>.</li>
+</ul>
+
+<p>Both lines demonstrate the same underlying principle: textual feedback can serve as structured supervision, often far more informative than scalar rewards. In the remainder of this post, we build a single, domain-agnostic loop around the two primitives these approaches rely on: an evaluator that produces structured feedback, and an editor that turns <em>accumulated</em> feedback on the current best candidates into concrete revisions. We will demonstrate how this loop can sustain meaningful improvement for up to 1000 iterations, far beyond the stability range of standard self-refinement methods.</p>
+
+<h2 id="example-domain-drug-discovery">Example Domain: Drug Discovery</h2>
+
+<p>Let’s make this concrete with a problem where the stakes are high and real-world evaluation is expensive: computational drug discovery. The goal is to find small molecules that bind strongly to a target protein, a critical first step in developing new therapeutics. We can navigate the (huge) space of possible molecules using a standard text representation called SMILES: for example, <code class="language-plaintext highlighter-rouge">COCCc1ccc(OCC(O)CNC(C)C)cc1</code> is metoprolol, one of the most prescribed blockers of ADRB1 (one of our target proteins). Given a target protein, docking simulators can give us a proxy score for binding affinity; if we treat this as a standard RL-style optimization problem, the environment returns only a single scalar reward for each SMILES:</p>
+
+<ul>
+  <li>Molecule 1 (<code class="language-plaintext highlighter-rouge">O=C(O)C1=CC=CC=C2C=CCCCCCN1C(=O)c1cccc(c1)C2</code>): Reward = 5.037</li>
+  <li>Molecule 2 (<code class="language-plaintext highlighter-rouge">COCCc1ccc(OCC(O)CNC(C)C)cc1</code>): Reward = 4.236</li>
+</ul>
+
+<p>A scalar reward like this hides almost everything about <em>why</em> one molecule is better than the other. But nothing stops us from designing evaluators that expose a much richer structure. For each candidate, the evaluator can report a detailed breakdown of its molecular properties. Below is a small subset of <a href="https://www.rdkit.org/docs/Cookbook.html">RDKit</a>-computed features for these two molecules<sup id="fnref:molecule-metadata" role="doc-noteref"><a href="#fn:molecule-metadata" class="footnote">4</a></sup>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Molecule 1</th>
+      <th>Molecule 2</th>
+      <th>Implication</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Core scaffold</td>
+      <td>macrocycle</td>
+      <td>benzene</td>
+      <td>Rigid fused system vs. flexible benzene</td>
+    </tr>
+    <tr>
+      <td>Docking score</td>
+      <td>−6.8</td>
+      <td>−7.1</td>
+      <td>Molecule 1 binds <em>weaker</em></td>
+    </tr>
+    <tr>
+      <td>Drug-likeness (QED)</td>
+      <td>0.824</td>
+      <td>0.714</td>
+      <td>Molecule 1 is more drug-like</td>
+    </tr>
+    <tr>
+      <td>Basic amines</td>
+      <td>0</td>
+      <td>1</td>
+      <td>No salt bridge with Asp138—explains weak binding</td>
+    </tr>
+    <tr>
+      <td>Rotatable bonds</td>
+      <td>1</td>
+      <td>9</td>
+      <td>Rigidity boosts QED but pre-organizes wrong pose</td>
+    </tr>
+    <tr>
+      <td>LogP</td>
+      <td>4.3</td>
+      <td>1.6</td>
+      <td>Too lipophilic, solubility risk</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A medicinal chemist would be able to look through this table and reason almost immediately:</p>
+
+<ul>
+  <li>Molecule 1 has a better overall drug-likeness, but a worse docking score.</li>
+  <li>Molecule 1’s lack of basic amines explains the weak docking score. Molecule 2 binds better because it forms a salt bridge.</li>
+  <li>A promising candidate would merge the strengths of both: keep the favorable macrocycle scaffold of Molecule 1, but introduce a basic amine.</li>
+</ul>
+
+<p>The scalar reward reveals none of this structure, but the rich feedback exposes a clear path forward. This is precisely the kind of targeted, interpretable guidance that feedback-driven optimization can exploit (and what traditional scalar-based RL discards).</p>
+
+<h2 id="the-feedback-descent-algorithm">The Feedback Descent Algorithm</h2>
+
+<p>Having seen how rich feedback can reveal an actionable structure beyond what a scalar reward can, we now describe the general framework that turns this idea into a scalable optimization procedure.</p>
+
+<p>Feedback Descent is a domain-agnostic loop built from two components:</p>
+
+<ol>
+  <li><strong>Evaluators: rich feedback instead of scalars</strong>. An evaluator (an LLM judge, a programmatic tool, or even a human) provides natural-language feedback describing what worked and what didn’t. For different domains, the feedback may include chemical properties and nearest neighbors in a database (molecules), missing structure or aesthetic flaws (SVG images), or reasoning errors and unmet conditions (prompts). The evaluator exposes <em>why</em> an artifact performs the way it does, rather than just whether it did well or poorly.</li>
+  <li><strong>Editors: revisions guided by accumulated feedback</strong>. The editor is an LLM that takes the top candidates and the evaluator’s accumulated feedback and outputs a revised version. This is the descent step: the LLM implicitly incorporates the strongest signals from prior feedback into its following proposal.</li>
+</ol>
+
+<p>Feedback Descent alternates these two steps while maintaining a small <em>frontier</em> of top-performing candidates. For each newly proposed candidate, the evaluator provides feedback. We aggregate all prior feedback and pass it to the editor, and the editor proposes a new candidate:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-12-01-feedback-descent/system.png" /></p>
+</div></figure>
+
+<p>Over many iterations, the candidate population continually improves as useful feedback accumulates and unproductive directions are discarded. Since both evaluation and editing occur entirely through text, the same loop transfers cleanly across domains, with the only domain-specific component being the evaluator that supplies feedback.</p>
+
+<h2 id="does-feedback-descent-work">Does Feedback Descent Work?</h2>
+
+<p>We applied the same Feedback Descent framework to three fundamentally different domains: molecular design, SVG image optimization, and prompt optimization.</p>
+
+<p><strong>Molecular Design.</strong> We compared Feedback Descent with specialized graph-based molecular optimizers that explicitly encode chemical structures, as well as REINVENT, a reinforcement learning method specifically designed for molecular optimization. Feedback Descent, operating purely on text representations (SMILES strings), matched or exceeded these specialized methods. On multiple targets, our text-based approach identified molecules surpassing the 99.9th percentile of DOCKSTRING’s 260,000-compound database. In several cases, we matched or exceeded the best molecule in the entire database. In this domain, Feedback Descent achieved an average 3.8x reduction in docking calls relative to reinforcement learning (REINVENT).</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-feedback-descent/molecule.png" /></p>
+</div></figure>
+
+<video autoplay="" loop="" muted="" playsinline="" style="width: 100%;">
+  <source src="/blog/assets/img/posts/2025-12-01-feedback-descent/PPARA-compressed.mp4" type="video/mp4" />
+</video>
+
+<p><strong>SVG Optimization.</strong> Starting from basic SVG drawings, Feedback Descent consistently improved designs through iterative visual critique. After just five iterations, designs reliably outperformed a baseline that conditioned on the judge prompt verbatim, demonstrating a generator-verifier gap where iterative feedback elicits better outputs from the same model.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2025-12-01-feedback-descent/svg_progression.png" /></p>
+</div></figure>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-feedback-descent/svg_grid.png" /></p>
+</div></figure>
+
+<p><strong>Prompt Optimization.</strong> On four diverse tasks (multi-hop reasoning, instruction following, privacy-aware delegation, and retrieval verification), Feedback Descent achieved competitive performance with GEPA, the state-of-the-art prompt optimization method, while outperforming GRPO, a reinforcement learning baseline.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-feedback-descent/prompt_optimization.png" /></p>
+</div></figure>
+
+<p>Together, these results demonstrate that the same evaluator-editor loop can drive continual improvement in domains that differ in representation, evaluation, and failure modes. The only requirement is that we can obtain and express informative feedback in text; no task-specific optimizers, mutation rules, or architectural changes are needed. The informative signal is carried by the textual feedback itself, and the editor LLM uses this feedback to guide its next revisions through in-context learning.</p>
+
+<h2 id="is-text-a-viable-medium-for-learning">Is Text a Viable Medium for Learning?</h2>
+
+<p>In conventional gradient-based learning, progress accumulates in the model’s weights. These parameters absorb broad statistical structures and give models the general competence we rely on. But weight updates are not the only place where learning can happen.</p>
+
+<p>Text-based optimization suggests a complementary substrate: <strong>semantic space</strong>.</p>
+
+<p>This is especially promising for <strong>continual learning</strong>, where parameter updates often struggle because the knowledge stored inside the weights is highly entangled, new updates risk catastrophic forgetting and require careful regularization or access to past data. In contrast, textual artifacts <em>persist</em>. They accumulate naturally as the system operates, and grow in a form that LLMs can readily condition on. New feedback can be integrated immediately without retraining the underlying model.</p>
+
+<p>This is early territory. We don’t yet know the full limits of what can be stored or refined in semantic space. But the evidence so far suggests that text-level artifacts can absorb detailed feedback from the environment and unlock forms of improvement that are difficult or inefficient to achieve through weight updates alone. Understanding how to organize and scale this semantic layer, and how to integrate it cleanly with parameter learning, is an exciting direction for future work.</p>
+
+<hr />
+
+<p>This post is based on our recent work “<a href="https://arxiv.org/abs/2511.07919">Feedback Descent: Open-Ended Text Optimization via Pairwise Comparison</a>.”</p>
+
+<p>We thank Anikait Singh, Henrik Marklund, Mert Yuksekgonul, Jubayer Ibn Hamid, Allen Nie, Omar Khattab, Sergey Levine, SAIL blog editors (James Burgess, Megha Srivastava), and anonymous ICLR reviewers for their helpful feedback on earlier drafts.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:dense" role="doc-endnote">
+      <p>Dense rewards can help with temporal credit assignment, but don’t address the information bottleneck; a scalar at every step still doesn’t tell you what went wrong or how to fix it. Even when dense rewards are available, they’re notoriously hard to design well and prone to reward hacking. In practice, rewards for LLM post-training are usually sparse (outcome-based verification, human preferences), making this limitation especially acute. <a href="#fnref:dense" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:rl-gap" role="doc-endnote">
+      <p>Here, we’re primarily talking about policy gradients since that is the dominant paradigm for LLM post-training. Value-based methods are more sample-efficient because they propagate credit across time. However, this addresses temporal credit assignment while leaving the information bottleneck intact. This gap is exponential: <a href="https://arxiv.org/abs/1910.03016">Du et al.</a> show that even in settings where value functions are perfectly representable, RL requires exponentially more samples than richer supervision (i.e., imitation learning). <a href="#fnref:rl-gap" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:cake-reference" role="doc-endnote">
+      <p>This is, of course, a reference to <a href="https://youtu.be/Ount2Y4qxQo?si=oIrt0oFrwmGVWMM1&amp;t=1276">Yann LeCun’s cake analogy</a>. One “cherry on top” is too little for some appetites 🙁 <a href="#fnref:cake-reference" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:molecule-metadata" role="doc-endnote">
+      <p>For clarity, we only show condensed feedback from two molecules in this table. In practice, the Feedback Descent system is shown full feedback on all top-k molecules proposed so far. <a href="#fnref:molecule-metadata" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://localhost:4000/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/feedback-descent/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://localhost:4000/blog/feedback-descent/&text=Following+the+Text+Gradient+at+Scale%20%7C%20SAIL+Blog:%20http://localhost:4000/blog/feedback-descent/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://localhost:4000/blog/feedback-descent/&title=Following+the+Text+Gradient+at+Scale%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://localhost:4000/blog/feedback-descent/&title=Following+the+Text+Gradient+at+Scale%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Following+the+Text+Gradient+at+Scale%20%7C%20SAIL+Blog&body=:%20http://localhost:4000/blog/feedback-descent/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list"></div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/slp-helm/">
+      <p>Previous post</p>
+        Teaching AI to Listen: Building the First Benchmark for Pediatric Speech Disorders
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <a href="/blog/neurips-2025/">
+      <p>Next post</p>
+        Stanford AI Lab Papers and Talks at NeurIPS 2025
+      </a>
+  </div>
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://localhost:4000/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>

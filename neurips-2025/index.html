@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/blog/neurips-2025/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://localhost:4000/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stanford AI Lab Papers and Talks at NeurIPS 2025 | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2025" />
+<meta name="author" content="Compiled by <a href='https://jmhb0.github.io/'>James Burgess</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The official Stanford AI Lab blog" />
+<meta property="og:description" content="The official Stanford AI Lab blog" />
+<link rel="canonical" href="http://localhost:4000/blog/neurips-2025/" />
+<meta property="og:url" content="http://localhost:4000/blog/neurips-2025/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-12-01T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2025" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Stanford AI Lab Papers and Talks at NeurIPS 2025","dateModified":"2025-12-01T00:00:00-08:00","datePublished":"2025-12-01T00:00:00-08:00","description":"The official Stanford AI Lab blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/neurips-2025/"},"url":"http://localhost:4000/blog/neurips-2025/","author":{"@type":"Person","name":"Compiled by <a href='https://jmhb0.github.io/'>James Burgess</a>"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Stanford AI Lab Papers and Talks at NeurIPS 2025 | The Stanford AI Lab Blog</title>
+    <meta name="description" content="All the great work from the Stanford AI Lab accepted at NeurIPS 2025, all in one place.">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Stanford AI Lab Papers and Talks at NeurIPS 2025">
+    
+    <meta name="twitter:description" content="All the great work from the Stanford AI Lab accepted at NeurIPS 2025, all in one place.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://localhost:4000/blog/assets/img/posts/2025-12-01-neurips-2025/logo_small.png">
+    <meta name="og:image" content="http://localhost:4000/blog/assets/img/posts/2025-12-01-neurips-2025/logo_small.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Stanford AI Lab Papers and Talks at NeurIPS 2025</h1>
+    <p class="meta">
+    Compiled by <a href='https://jmhb0.github.io/'>James Burgess</a>
+    <div class="post-date">December 1, 2025</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/logo.png" /></p>
+
+<p>The <a href="https://neurips.cc/">Neural Information Processing Systems conference</a> (NeurIPS) 2025 is being hosted in San Diego from December 2nd to 7th. We’re excited to share all the work from SAIL that’s being presented, and you’ll find links to papers, videos and blogs below. Feel free to reach out to the contact authors directly to learn more about the work that’s happening at Stanford!</p>
+
+<h2 id="list-of-accepted-papers">List of Accepted Papers</h2>
+<h4 id="mcp-explorer-interactive-learning-experience">MCP Explorer: Interactive Learning Experience</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img19" />
+<strong>Authors</strong>: Jiayu He, Sherry Ruan, James Landay
+<br /><strong>Contact</strong>: sruan@cs.stanford.edu
+<br /><strong>Workshop</strong>: NeurIPS Educational Content for the AI Education Resource Showcase (Oral Presentation)
+<br /><strong>Keywords</strong>: model context protocol (mcp), ai assistants, interactive learning, responsible ai, tool use</p>
+<hr />
+
+<h4 id="preference-learning-with-response-time">Preference Learning with Response Time</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img4" />
+<strong>Authors</strong>: Ayush Sawarni, Sahasrajit Sarmasarkar, Vasilis Syrgkanis
+<br /><strong>Contact</strong>: ayushsaw@stanfored.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> | <a href="https://www.youtube.com/watch?v=wiPLQZZORlk">Video</a>
+<br /><strong>Keywords</strong>: rlhf, preference learning, orthogonal statistics,</p>
+<hr />
+
+<h4 id="procurement-auctions-with-predictions-improved-frugality-for-facility-location">Procurement Auctions with Predictions: Improved Frugality for Facility Location</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img14" />
+<strong>Authors</strong>: Eric Balkanski ~Eric_Balkanski2 , Nicholas DeFilippis, Vasilis Gkatzelis, Xizhi Tan
+<br /><strong>Contact</strong>: xizhi@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Keywords</strong>: frugality, mechanism design, procurement auction</p>
+<hr />
+
+<h4 id="retrospective-in-context-learning-for-temporal-credit-assignment-with-large-language-models">Retrospective In-Context Learning for Temporal Credit Assignment with Large Language Models</h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img11" />
+<strong>Authors</strong>: Wentse Chen, Jiayu Chen, Fahim Tajwar, Hao Zhu, Xintong Duan, Ruslan Salakhutdinov, Jeff Schneider
+<br /><strong>Contact</strong>: zhuhao@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Keywords</strong>: reinforcement learning, large language models, self-evolving agents</p>
+<hr />
+
+<h4 id="a-practical-guide-for-incorporating-symmetry-in-diffusion-policy"><a href="https://arxiv.org/pdf/2505.13431">A Practical Guide for Incorporating Symmetry in Diffusion Policy</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img16" />
+<strong>Authors</strong>: Dian Wang, Boce Hu, Shuran Song, Robin Walters, Robert Platt
+<br /><strong>Contact</strong>: dianwang@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2505.13431">Paper</a> | <a href="https://sym-in-dp.github.io">Website</a>
+<br /><strong>Keywords</strong>: robotic manipulation, equivariance, diffusion model</p>
+<hr />
+
+<h4 id="agentic-bridge-framework-closing-the-gap-between-agentic-capability-and-performance-benchmarks"><a href="https://openreview.net/pdf?id=Rv664iOMNv">Agentic Bridge Framework: Closing the Gap Between Agentic Capability and Performance Benchmarks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img8" />
+<strong>Authors</strong>: Yun Du, Rubens Lacouture, Qizheng Zhang, Genghan Zhang, Tian Zhao, Kunle Olukotun
+<br /><strong>Contact</strong>: yundu27@stanford.edu
+<br /><strong>Workshop</strong>: Workshop
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=Rv664iOMNv">Paper</a> | <a href="https://github.com/stanford-ppl/Agentic_Benchmarking_For_GAIA">Website</a>
+<br /><strong>Keywords</strong>: agents, llms, benchmarking, gaia benchmark, ml systems, multi-agent systems, system optimizations, agentic workflows, agentic ai, trace-level telemetry</p>
+<hr />
+
+<h4 id="agentic-plan-caching-test-time-memory-for-fast-and-cost-efficient-llm-agents"><a href="https://openreview.net/pdf?id=n4V3MSqK77">Agentic Plan Caching: Test-Time Memory for Fast and Cost-Efficient LLM Agents</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img23" />
+<strong>Authors</strong>: Qizheng Zhang, Michael Wornow, Kunle Olukotun
+<br /><strong>Contact</strong>: qizhengz@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=n4V3MSqK77">Paper</a> | <a href="youtube.com/watch?v=njw0mLSEejA&amp;vl=en-US">Video</a>
+<br /><strong>Keywords</strong>: caching, memory, serving, llm agents</p>
+<hr />
+
+<h4 id="codearc-benchmarking-reasoning-capabilities-of-llm-agents-for-inductive-program-synthesis"><a href="https://arxiv.org/abs/2503.23145">CodeARC: Benchmarking Reasoning Capabilities of LLM Agents for Inductive Program Synthesis</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img13" />
+<strong>Authors</strong>: Anjiang Wei, Tarun Suresh, Jiannan Cao, Naveen Kannan, Yuheng Wu, Kai Yan, Thiago S. F. X. Teixeira, Ke Wang, Alex Aiken
+<br /><strong>Contact</strong>: anjiang@cs.stanford.edu
+<br /><strong>Workshop</strong>: Workshop
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2503.23145">Paper</a> | <a href="https://anjiang-wei.github.io/CodeARC-Website/">Website</a>
+<br /><strong>Keywords</strong>: agent, large language model, reasoning, code, program synthesis</p>
+<hr />
+
+<h4 id="discovering-latent-graphs-with-gflownets-for-diverse-conditional-image-generation"><a href="https://openreview.net/pdf?id=PhHrlDKcx1">Discovering Latent Graphs with GFlowNets for Diverse Conditional Image Generation</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img1" />
+<strong>Authors</strong>: Bailey Trang, Parham Saremi, Alan Wang, Fangrui Huang, Zahra TehraniNasab, Amar Kumar, Tal Arbel, Fei-Fei Li, Ehsan Adeli
+<br /><strong>Contact</strong>: eadeli@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=PhHrlDKcx1">Paper</a>
+<br /><strong>Keywords</strong>: generative models, diffusion model, diversity, gflownet</p>
+<hr />
+
+<h4 id="dynaguide-steering-diffusion-polices-with-active-dynamic-guidance"><a href="https://arxiv.org/pdf/2506.13922">DynaGuide: Steering Diffusion Polices with Active Dynamic Guidance</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img5" />
+<strong>Authors</strong>: Maximilian Du, Shuran Song
+<br /><strong>Contact</strong>: maxjdu@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2506.13922">Paper</a> | <a href="https://www.youtube.com/watch?v=9aQKert2wyM">Video</a> | <a href="https://dynaguide.github.io/">Website</a>
+<br /><strong>Keywords</strong>: robots, steering behaviors, imitation learning</p>
+<hr />
+
+<h4 id="exploring-diffusion-transformer-designs-via-grafting"><a href="https://arxiv.org/abs/2506.05340">Exploring Diffusion Transformer Designs via Grafting</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img15" />
+<strong>Authors</strong>: Keshigeyan Chandrasegaran, Michael Poli, Daniel Y. Fu, Dongjun Kim, Lea M. Hadzic, Manling Li, Agrim Gupta, Stefano Massaroli, Azalia Mirhoseini, Juan Carlos Niebles, Stefano Ermon, Li Fei-Fei
+<br /><strong>Contact</strong>: keshik@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Award nominations:</strong> Oral
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2506.05340">Paper</a> | <a href="https://www.liquid.ai/research/exploring-diffusion-transformer-designs-via-grafting">Blog Post</a> | <a href="https://grafting.stanford.edu">Website</a>
+<br /><strong>Keywords</strong>: diffusion transformers, model grafting, architectural editing, hybrid model architectures</p>
+<hr />
+
+<h4 id="fantastic-bugs-and-where-to-find-them-in-ai-benchmarks"><a href="https://arxiv.org/abs/2511.16842">Fantastic Bugs and Where to Find Them in AI Benchmarks</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img7" />
+<strong>Authors</strong>: Sang Truong, Yuheng Tu, Michael Hardy, Anka Reuel, Zeyu Tang, Jirayu Burapacheep, Jonathan Perera, Chibuike Uwakwe, Ben Domingue, Nick Haber, Sanmi Koyejo
+<br /><strong>Contact</strong>: sttruong@cs.stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2511.16842">Paper</a>
+<br /><strong>Keywords</strong>: benchmark, evaluation, measurement theory</p>
+<hr />
+
+<h4 id="from-programs-to-poses-factored-real-world-scene-generation-via-learned-program-libraries"><a href="https://arxiv.org/abs/2510.10292">From Programs to Poses: Factored Real-World Scene Generation via Learned Program Libraries</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img3" />
+<strong>Authors</strong>: Joy Hsu, Emily Jin, Jiajun Wu, and Niloy J. Mitra
+<br /><strong>Contact</strong>: joycj@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2510.10292">Paper</a> | <a href="https://stanford.edu/~joycj/projects/factoredscenes_neurips_2025.html">Website</a>
+<br /><strong>Keywords</strong>: factorization, library learning, real-world scene generation</p>
+<hr />
+
+<h4 id="houselayout3d-benchmark-and-training-free-baseline-for-3d-layout-estimation-in-the-wild"><a href="https://houselayout3d.github.io/assets/houselayout3d_paper.pdf">HouseLayout3D Benchmark and Training-Free Baseline for 3D Layout Estimation in the Wild</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img17" />
+<strong>Authors</strong>: Valentin Bieri, Marie-Julie Rakotosaona, Keisuke Tateno, Francis Engelmann, Leonidas Guibas
+<br /><strong>Contact</strong>: engelmann@cs.stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://houselayout3d.github.io/assets/houselayout3d_paper.pdf">Paper</a> | <a href="https://houselayout3d.github.io/assets/houselayout3d_video.mp4">Video</a> | <a href="https://houselayout3d.github.io/">Website</a>
+<br /><strong>Keywords</strong>: 3d scene understanding, 3d scene generation, cadification</p>
+<hr />
+
+<h4 id="in-context-learning-strategies-emerge-rationally"><a href="https://arxiv.org/abs/2506.17859">In-Context Learning Strategies Emerge Rationally</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img20" />
+<strong>Authors</strong>: Daniel Wurgaft, Ekdeep Singh Lubana, Core Francisco Park, Hidenori Tanaka, Gautam Reddy, Noah D. Goodman
+<br /><strong>Contact</strong>: wurgaft@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2506.17859">Paper</a>
+<br /><strong>Keywords</strong>: in-context learning, loss-complexity tradeoff, bayesian modeling, algorithmic complexity</p>
+<hr />
+
+<h4 id="joint-design-of-protein-surface-and-structure-using-a-diffusion-bridge-model"><a href="https://arxiv.org/pdf/2511.16675">Joint Design of Protein Surface and Structure Using a Diffusion Bridge Model</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img9" />
+<strong>Authors</strong>: Guanlue Li, Xufeng Zhao, Fang Wu, Sören Laue
+<br /><strong>Contact</strong>: fangwu97@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2511.16675">Paper</a> | <a href="https://github.com/guanlueli/Pepbridge">Website</a>
+<br /><strong>Keywords</strong>: protein design, diffusion model</p>
+<hr />
+
+<h4 id="llm-guided-autoscheduling-for-large-scale-sparse-machine-learning"><a href="https://openreview.net/pdf?id=7H9qWe8lLO">LLM-Guided Autoscheduling for Large-Scale Sparse Machine Learning</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img21" />
+<strong>Authors</strong>: Rubens Lacouture, Genghan Zhang, Konstantin Hossfeld, Tian Zhao, Kunle Olukotun
+<br /><strong>Contact</strong>: rubensl@stanford.edu
+<br /><strong>Workshop</strong>: Workshop
+<br /><strong>Links:</strong> <a href="https://openreview.net/pdf?id=7H9qWe8lLO">Paper</a>
+<br /><strong>Keywords</strong>: sparse machine learning, compiler optimization, autoscheduling</p>
+<hr />
+
+<h4 id="latent-policy-barrier-learning-robust-visuomotor-policies-by-staying-in-distribution"><a href="https://arxiv.org/abs/2508.05941">Latent Policy Barrier: Learning Robust Visuomotor Policies by Staying In-Distribution</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img22" />
+<strong>Authors</strong>: Zhanyi Sun, Shuran Song
+<br /><strong>Contact</strong>: zhanyis@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2508.05941">Paper</a> | <a href="https://project-latentpolicybarrier.github.io/">Website</a>
+<br /><strong>Keywords</strong>: out-of-distribution generalization, imitation learning, robotic manipulation</p>
+<hr />
+
+<h4 id="on-the-entropy-calibration-of-language-models"><a href="https://www.arxiv.org/abs/2511.11966">On the Entropy Calibration of Language Models</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img6" />
+<strong>Authors</strong>: Steven Cao, Gregory Valiant, Percy Liang
+<br /><strong>Contact</strong>: shcao@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://www.arxiv.org/abs/2511.11966">Paper</a> | <a href="https://neurips.cc/virtual/2025/loc/san-diego/poster/119303">Video</a>
+<br /><strong>Keywords</strong>: language models, language generation, calibration, entropy, error accumulation, scaling laws, language model theory, rl theory</p>
+<hr />
+
+<h4 id="satbench-benchmarking-llms-logical-reasoning-via-automated-puzzle-generation-from-sat-formulas"><a href="https://aclanthology.org/2025.emnlp-main.1716/">SATBench: Benchmarking LLMs’ Logical Reasoning via Automated Puzzle Generation from SAT Formulas</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img12" />
+<strong>Authors</strong>: Anjiang Wei, Yuheng Wu, Yingjia Wan, Tarun Suresh, Huanmi Tan, Zhanke Zhou, Sanmi Koyejo, Ke Wang, Alex Aiken
+<br /><strong>Contact</strong>: anjiang@cs.stanford.edu
+<br /><strong>Workshop</strong>: Workshop
+<br /><strong>Links:</strong> <a href="https://aclanthology.org/2025.emnlp-main.1716/">Paper</a> | <a href="https://anjiang-wei.github.io/SATBench-Web/">Website</a>
+<br /><strong>Keywords</strong>: reasoning, sat solving, benchmark</p>
+<hr />
+
+<h4 id="swe-smith-scaling-data-for-software-engineering-agents"><a href="https://arxiv.org/abs/2504.21798">SWE-smith: Scaling Data for Software Engineering Agents</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img2" />
+<strong>Authors</strong>: John Yang, Kilian Lieret, Carlos E. Jimenez, Alexander Wettig, Kabir Khandpur, Yanzhe Zhang, Binyuan Hui, Ofir Press, Ludwig Schmidt, Diyi Yang
+<br /><strong>Contact</strong>: johnby@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Award nominations:</strong> Spotlight
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2504.21798">Paper</a> | <a href="http://swesmith.com/blog.html">Blog Post</a> | <a href="https://www.youtube.com/watch?v=Wdkm_mJdFWU">Video</a> | <a href="http://swesmith.com/">Website</a>
+<br /><strong>Keywords</strong>: software engineering, language models, swe-bench, swe-agent</p>
+<hr />
+
+<h4 id="somi-tom-evaluating-multi-perspective-theory-of-mind-in-embodied-social-interactions"><a href="https://arxiv.org/abs/2506.23046">SoMi-ToM: Evaluating Multi-Perspective Theory of Mind in Embodied Social Interactions</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img10" />
+<strong>Authors</strong>: Xianzhe Fan, Xuhui Zhou, Chuanyang Jin, Kolby Nottingham, Hao Zhu, Maarten Sap
+<br /><strong>Contact</strong>: zhuhao@stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/abs/2506.23046">Paper</a>
+<br /><strong>Keywords</strong>: theory of mind, embodied ai, vision-language models</p>
+<hr />
+
+<h4 id="vipscene-video-perception-models-for-3d-scene-synthesis"><a href="https://arxiv.org/pdf/2506.20601">VIPScene: Video Perception Models for 3D Scene Synthesis</a></h4>
+<p><img class="postimage_75" src="/blog/assets/img/posts/2025-12-01-neurips-2025/img18" />
+<strong>Authors</strong>: Rui Huang, Guangyao Zhai, Zuria Bauer, Marc Pollefeys, Federico Tombari, Leonidas Guibas, Gao Huang, Francis Engelmann
+<br /><strong>Contact</strong>: engelmann@cs.stanford.edu
+<br /><strong>Workshop</strong>: Main Conference
+<br /><strong>Links:</strong> <a href="https://arxiv.org/pdf/2506.20601">Paper</a> | <a href="https://www.youtube.com/watch?v=hU3bIUpbMX4">Video</a> | <a href="https://vipscene.github.io/">Website</a>
+<br /><strong>Keywords</strong>: 3d scene generation, video models</p>
+<hr />
+
+<p>We look forward to seeing you at NeurIPS 2025!</p>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://localhost:4000/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/neurips-2025/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://localhost:4000/blog/neurips-2025/&text=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2025%20%7C%20SAIL+Blog:%20http://localhost:4000/blog/neurips-2025/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://localhost:4000/blog/neurips-2025/&title=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2025%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://localhost:4000/blog/neurips-2025/&title=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2025%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Stanford+AI+Lab+Papers+and+Talks+at+NeurIPS+2025%20%7C%20SAIL+Blog&body=:%20http://localhost:4000/blog/neurips-2025/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#ICLR">
+      <p><i class="fa fa-tag fa-fw"></i> ICLR</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#conference">
+      <p><i class="fa fa-tag fa-fw"></i> conference</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#publication">
+      <p><i class="fa fa-tag fa-fw"></i> publication</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#video">
+      <p><i class="fa fa-tag fa-fw"></i> video</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/feedback-descent/">
+      <p>Previous post</p>
+        Following the Text Gradient at Scale
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://localhost:4000/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
