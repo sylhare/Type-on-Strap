@@ -1,19 +1,20 @@
 # SITE CONFIGURATION
-baseurl: "/Type-on-Strap"
-url: "https://sylhare.github.io"
+baseurl: ""
+url: "https://blog-wkaisan.netlify.app"
+lang: en
 
 # THEME-SPECIFIC CONFIGURATION
-title: Type on Strap                                    # site's title
-description: "A website with blog posts and pages"      # used by search engines
-avatar: assets/img/triangle.png                         # Empty for no avatar in navbar
+title: Waiz Kuruni Ahmed Zisan                          # site's title
+description: "Engineering Carrier Journey | Personal Blog by Zisan"  # used by search engines
+avatar: assets/img/zisan.jpg                            # Empty for no avatar in navbar
 favicon: assets/favicon.ico                             # Icon displayed in the tab
 
 # Header and footer text
-header_text: Change <code>header_text</code> in <code>_config.yml</code>  # Change Blog header text
+header_text: "Engineering Carrier Journey"              # Change Blog header text
 header_feature_image: assets/img/header/triangular.jpeg
 header_feature_image_responsive: true
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+  Made by <a href="https://blog-wkaisan.netlify.app">Zisan</a>
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
@@ -21,13 +22,24 @@ post_navigation: true
 color_image: /assets/img/lineart.png                    # A bit transparent for color posts.
 
 # Features
-# More in the _data folder for comments, share buttons, author and language
-# For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
 katex: true                                             # Enable if using math markup
 mermaid: default                                        # Enable mermaid-js for diagrams, use theme: base, forest, dark, default, neutral
-google_analytics:                                       # Measurement ID, e.g. "G-00000"
+google_analytics:                                       # Measurement ID, e.g. "G-00000" — পরে বসাবে
 cookie_consent: false                                   # To respect the usage of cookies
 color_theme: auto                                       # auto, dark or light
+
+# SEO
+twitter:
+  username: wkazisan
+  card: summary_large_image
+
+social:
+  name: Waiz Kuruni Ahmed Zisan
+  links:
+    - https://github.com/wkazisan
+    - https://linkedin.com/in/wkazisan
+    - https://facebook.com/feo.y.hermoso
+    - https://wkazisan.netlify.app
 
 # PAGINATION
 paginate: 5
@@ -43,7 +55,7 @@ collections:
 sass:
   style: compressed
   quiet_deps: true
-plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed]
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-sitemap]
 exclude: [".jekyll-cache", ".jekyll-metadata", ".idea", "vendor/*", "assets/node_modules/*", ".github/*"]
 
 # theme: type-on-strap                                  # if using the theme as a jekyll theme gem
