@@ -11,6 +11,18 @@
 </li>
 {% endif %}
 
+<li>
+    <a href="https://github.com/wkazisan"
+       title="Follow on GitHub"
+       target="_blank"
+       rel="noopener">
+        <span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+
 {% for footer in site.data.icons %}
     {% unless footer[1] == nil %}
         {% assign brand = footer[0] %}
