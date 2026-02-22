@@ -1,9 +1,8 @@
 ---
 layout: post
 title: My Portfolio
-# feature-img: "assets/img/triangle.svg"
 img: "assets/img/triangle.svg"
-date: 2026
+date: 2026-02-22
 tags: [Portfolio, Electrical, Engineering]
 ---
 
