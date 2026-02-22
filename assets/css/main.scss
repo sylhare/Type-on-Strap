@@ -2,15 +2,15 @@
 ---
 
 @font-face {
-  font-family: 'LiShobuj';
-  src: url('/assets/fonts/custom/LiShobujNolua.ttf') format('truetype');
+  font-family: "LiShobuj";
+  src: url("/assets/fonts/custom/LiShobujNolua.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Nunito';
-  src: url('/assets/fonts/custom/Nunito-Black.ttf') format('truetype');
+  font-family: "Nunito";
+  src: url("/assets/fonts/custom/Nunito-Black.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -18,13 +18,46 @@
 @import "type-on-strap";
 
 body {
-  font-family: 'LiShobuj', 'Nunito', sans-serif;
+  font-family: "LiShobuj", "Nunito", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Nunito', 'LiShobuj', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nunito", "LiShobuj", sans-serif;
 }
 
-p, li, td, blockquote {
-  font-family: 'LiShobuj', 'Nunito', sans-serif;
+p,
+li,
+td,
+blockquote {
+  font-family: "LiShobuj", "Nunito", sans-serif;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.3em;
+}
+h4 {
+  font-size: 1.1em;
+}
+
+p,
+li,
+td {
+  font-size: 1em;
+  line-height: 1.7;
+}
+
+.post-header h1 {
+  font-size: 1.8em;
+  line-height: 1.3;
 }
