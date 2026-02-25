@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/tos_stanford_blog/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration? | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?" />
+<meta name="author" content="Pingyue Zhang*, Zihan Huang*, Yue Wang*, Jieyu Zhang*, Letian Xue, Zihan Wang, Qineng Wang, Keshigeyan Chandrasegaran, Ruohan Zhang, Yejin Choi, Ranjay Krishna, Jiajun Wu, Li Fei-Fei, Manling Li" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="We introduce a new benchmark to test whether AI agents can actively explore physical spaces and build mental maps, just like humans do." />
+<meta property="og:description" content="We introduce a new benchmark to test whether AI agents can actively explore physical spaces and build mental maps, just like humans do." />
+<link rel="canonical" href="http://ai.stanford.edu/blog/tos_stanford_blog/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/tos_stanford_blog/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-24T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?" />
+<script type="application/ld+json">
+{"url":"http://ai.stanford.edu/blog/tos_stanford_blog/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/tos_stanford_blog/"},"author":{"@type":"Person","name":"Pingyue Zhang*, Zihan Huang*, Yue Wang*, Jieyu Zhang*, Letian Xue, Zihan Wang, Qineng Wang, Keshigeyan Chandrasegaran, Ruohan Zhang, Yejin Choi, Ranjay Krishna, Jiajun Wu, Li Fei-Fei, Manling Li"},"description":"We introduce a new benchmark to test whether AI agents can actively explore physical spaces and build mental maps, just like humans do.","headline":"Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?","dateModified":"2026-02-24T00:00:00-08:00","datePublished":"2026-02-24T00:00:00-08:00","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration? | The Stanford AI Lab Blog</title>
+    <meta name="description" content="We introduce Theory of Space, a benchmark testing whether foundation models can construct, revise, and exploit spatial beliefs through active exploration. Ac...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?">
+    
+    <meta name="twitter:description" content="We introduce Theory of Space, a benchmark testing whether foundation models can construct, revise, and exploit spatial beliefs through active exploration. Across six state-of-the-art models, we reveal a critical exploration bottleneck, a persistent text-vision modality gap, and severe belief inertia in vision settings.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog/assets/img/posts/2026-02-24-tos_stanford_blog/feature_image.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog/assets/img/posts/2026-02-24-tos_stanford_blog/feature_image.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?</h1>
+    <p class="meta">
+    Pingyue Zhang*, Zihan Huang*, Yue Wang*, Jieyu Zhang*, Letian Xue, Zihan Wang, Qineng Wang, Keshigeyan Chandrasegaran, Ruohan Zhang, Yejin Choi, Ranjay Krishna, Jiajun Wu, Li Fei-Fei, Manling Li
+    <div class="post-date">February 24, 2026</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <p>We introduce a new benchmark to test whether AI agents can actively explore physical spaces and build mental maps, just like humans do.</p>
+
+<hr />
+
+<p>What happens when an AI needs to navigate a new building? Unlike humans who intuitively explore and build mental maps, most foundation models struggle when they must actively acquire spatial information rather than passively receive it. In the passive setting, a model simply analyzes a fixed log of pre-collected observations. Active acquisition is fundamentally harder: the AI must autonomously decide where to move, which direction to look, and when it has gathered enough information.</p>
+
+<p>Current benchmarks fall short: passive benchmarks simply ask models to reason over observations handed to them, while task-driven benchmarks test goal completion without probing whether models truly internalize spatial structure. We propose Theory of Space as an explicit test of whether models can construct, revise, and exploit an internal spatial belief through active exploration.</p>
+
+<hr />
+
+<h2 id="introducing-theory-of-space-a-spatial-counterpart-to-theory-of-mind">Introducing Theory of Space: A Spatial Counterpart to Theory of Mind</h2>
+
+<figure class="figure"><div class="figure__main">
+<figure class="postfigurehalf">
+  <img src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image1.png" class="postimage_unpadded" />
+  <figcaption>
+  (a) Theory of Space: Modeling hidden space as Theory of Mind models hidden mental states.
+  </figcaption>
+</figure>
+<figure class="postfigurehalf">
+  <img src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image4.png" class="postimage_unpadded" />
+  <figcaption>
+  (b) Theory of Space: the ability to construct spatial beliefs through exploration, exploit for tasks, revise as environments change.
+  </figcaption>
+</figure>
+</div></figure>
+
+<p>Theory of Mind is a well established concept from cognitive science that refers to the capacity to attribute beliefs, intentions, and knowledge to other agents, essentially reasoning about what someone else thinks or knows even when it differs from reality<sup id="fnref:premack" role="doc-noteref"><a href="#fn:premack" class="footnote">1</a></sup>. We draw an analogy to this familiar idea to define Theory of Space: just as Theory of Mind measures how agents model the hidden mental states of others, Theory of Space assesses an agent’s ability to model the hidden physical structure of the world. Specifically, we define it as the ability to construct spatial beliefs through exploration, exploit them for downstream spatial tasks, and revise them as environments change.</p>
+
+<p>At its heart, Theory of Space tests three coupled capabilities:</p>
+
+<p>1) Construct: Can the agent actively explore to build a globally consistent spatial belief from partial observations?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image6.gif" /></p>
+</div></figure>
+
+<p>2) Revise: When the environment changes, can the agent update its mental map, overwriting obsolete information with new evidence?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image9.gif" /></p>
+</div></figure>
+
+<p>3) Exploit: Can the agent use its spatial belief to answer spatial reasoning questions about directions, locations, and perspectives?</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image8.png" /></p>
+</div></figure>
+
+<p>To operationalize this framework, we developed a benchmark with procedurally generated multi-room layouts. The agent starts in an unknown environment and must decide what to observe next, rotate, move between rooms, and build understanding one partial view at a time. We offer both text-based environments (symbolic observations like “chair is front-left and near”) and vision-based environments (egocentric RGB images rendered with ThreeDWorld<sup id="fnref:threedworld" role="doc-noteref"><a href="#fn:threedworld" class="footnote">2</a></sup>), enabling us to pinpoint whether failures stem from spatial reasoning deficits or visual perception errors.</p>
+
+<hr />
+
+<h2 id="probing-the-black-box-cognitive-map-externalization">Probing the Black Box: Cognitive Map Externalization</h2>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image5.gif" /></p>
+</div></figure>
+
+<p>Most evaluations treat AI as a black box. We only see final answers, not internal representations. Theory of Space externalizes agents’ spatial beliefs as structured cognitive maps at each exploration step. Agents output a JSON-formatted map of observed object poses and select unobserved candidate points from a top-down map. This transforms evaluation from “did you get the right answer?” to “do you actually understand the space?”</p>
+
+<p>We evaluate six state-of-the-art foundation models:</p>
+
+<ul>
+  <li>Closed-source: GPT-5.2 (multimodal vision + tool use; 400K context); Gemini 3 Pro (native text/image/video/audio/PDF; 1M input tokens); Claude Sonnet 4.5 (multimodal + “computer use”; strong coding/agents).</li>
+  <li>Open-source: GLM-4.6V (106B, 128K; native multimodal function/tool calling); Qwen3-VL-235B-A22B Thinking (open-weight MoE VLM; 256K context; strong visual/spatial/video understanding); InternVL 3.5-241B-A28B (open-source multimodal; Cascade RL + dynamic visual token routing)</li>
+</ul>
+
+<p><strong>Modality Gap</strong>: Text significantly outperforms vision across all metrics. A clear modality gap persists in both spatial belief construction and exploitation.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image2.gif" /></p>
+</div></figure>
+
+<hr />
+
+<h2 id="active-exploration-bottleneck">Active Exploration Bottleneck</h2>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image3.gif" /></p>
+</div></figure>
+
+<p>Our experiments with state-of-the-art models (GPT-5.2, Gemini-3 Pro, Claude-4.5 Sonnet) reveal the striking finding:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage_100" src="/blog/assets/img/posts/2026-02-24-tos_stanford_blog/image7.png" /></p>
+</div></figure>
+
+<p>The chart shows evaluation accuracy (how well models exploit their beliefs to answer downstream spatial tasks like pairwise directions, perspective taking, and localization) versus exploration cost, where the exploration cost is evaluated as the number of exploration steps.</p>
+
+<p>Faded icons mark passive settings; solid icons show active exploration.</p>
+
+<p><strong>Active Exploration is the Bottleneck</strong>:</p>
+
+<ul>
+  <li>
+    <p><strong>Performance drops</strong> dramatically when agents must actively explore rather than passively receive observations. In the vision-based world, GPT-5.2 drops from 57.1% to 46.0%, and Gemini-3 Pro from 60.5% to 57.3%. This gap widens with environment complexity.</p>
+  </li>
+  <li>
+    <p><strong>Exploration Inefficiency</strong>: Our scripted proxy agents reach target coverage in approximately 9 steps. Foundation models take 14+ steps and still produce less accurate beliefs, often chasing every new door immediately and leaving rooms partially explored.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="spatial-belief-probing-results">Spatial Belief Probing Results</h2>
+
+<p>We evaluate the probed cognitive maps along four dimensions:</p>
+
+<ul>
+  <li>
+    <p>Correctness: Does the map match ground truth for object positions, directions, and orientations?</p>
+  </li>
+  <li>
+    <p>Perception: Are newly observed objects encoded accurately?</p>
+  </li>
+  <li>
+    <p>Stability: Do beliefs about previously seen objects degrade over time?</p>
+  </li>
+  <li>
+    <p>Self-tracking: Does the agent know where it is?</p>
+  </li>
+</ul>
+
+<p>Cognitive Map Failures: Vision perception is a bottleneck, especially for object orientation. In vision settings, orientation correctness drops to 20-32% compared to 91-92% in text. Stability scores reveal that beliefs about previously observed objects degrade over time (56-62% in vision), and new updates corrupt earlier correct perceptions.</p>
+
+<hr />
+
+<h2 id="belief-revision-failures">Belief Revision Failures</h2>
+
+<p>Using a false belief paradigm, we secretly relocate objects after initial exploration. The agent must re-explore and update its mental map. Two critical failures emerge:</p>
+
+<p><strong>Vision-based Revision Failures:</strong> Vision agents suffer from excessive exploration redundancy (6.2 redundant steps for GPT-5.2) and poor accuracy in identifying object shifts.</p>
+
+<ul>
+  <li>
+    <p>GPT-5.2 orientation identification: 97.9% (text) vs 14.3% (vision)</p>
+  </li>
+  <li>
+    <p>Gemini-3 Pro orientation identification: 98.7% (text) vs 23.9% (vision)</p>
+  </li>
+</ul>
+
+<p><strong>Belief Inertia:</strong> Agents persist in obsolete spatial coordinates despite new observations. In vision settings, orientation inertia reaches 68.9% for GPT-5.2, meaning agents frequently fail to overwrite their initial spatial memory despite directly observing objects in new locations.</p>
+
+<hr />
+
+<h2 id="looking-ahead">Looking Ahead</h2>
+
+<p>Theory of Space reframes spatial evaluation from “can the model answer?” to “can the model build and maintain a coherent, revisable spatial world model through efficient information gathering?”</p>
+
+<p>We hope this benchmark provides a foundation for developing AI systems with uncertainty-aware exploration policies, robust belief maintenance over long horizons, and reliable mechanisms for revising beliefs when environments change.</p>
+
+<hr />
+
+<p>Our paper, code, and benchmark are available at: https://theory-of-space.github.io/</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:premack" role="doc-endnote">
+      <p>Premack, David, and Guy Woodruff. “Does the chimpanzee have a theory of mind?.” Behavioral and brain sciences 1.4 (1978): 515-526. <a href="#fnref:premack" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:threedworld" role="doc-endnote">
+      <p>Gan, C., Schwartz, J., Alter, S., Mrowca, D., Schrimpf, M., Traer, J., … Yamins, D. L. K. (2020). <em>ThreeDWorld: A Platform for Interactive Multi-Modal Physical Simulation</em>. arXiv:2007.04954. https://arxiv.org/abs/2007.04954 <a href="#fnref:threedworld" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/tos_stanford_blog/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/tos_stanford_blog/&text=Theory+of+Space%3A+Can+Foundation+Models+Construct+Spatial+Beliefs+through+Active+Exploration%3F%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/tos_stanford_blog/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/tos_stanford_blog/&title=Theory+of+Space%3A+Can+Foundation+Models+Construct+Spatial+Beliefs+through+Active+Exploration%3F%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/tos_stanford_blog/&title=Theory+of+Space%3A+Can+Foundation+Models+Construct+Spatial+Beliefs+through+Active+Exploration%3F%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=Theory+of+Space%3A+Can+Foundation+Models+Construct+Spatial+Beliefs+through+Active+Exploration%3F%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/tos_stanford_blog/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#active+exploration">
+      <p><i class="fa fa-tag fa-fw"></i> active exploration</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#foundation+models">
+      <p><i class="fa fa-tag fa-fw"></i> foundation models</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#nlp">
+      <p><i class="fa fa-tag fa-fw"></i> nlp</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#spatial+understanding">
+      <p><i class="fa fa-tag fa-fw"></i> spatial understanding</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/fantastic-bugs/">
+      <p>Previous post</p>
+        Fantastic Bugs and Where to Find Them in AI Benchmarks
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
