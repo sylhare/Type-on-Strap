@@ -17,10 +17,6 @@ html {
   background: var(--selection);
 }
 
-::-moz-selection {
-  background: var(--selection);
-}
-
 body {
   color: var(--text);
   font-family: $font-family-main;

@@ -79,17 +79,10 @@
     }
 
     .post-img img {
-      -moz-transition-timing-function: ease-out;
-      -webkit-transition-timing-function: ease-out;
       transition-timing-function: ease-out;
-
-      -moz-transition: all 2s;
-      -webkit-transition: all 2s;
       transition: all 2s;
 
       &:hover {
-        -moz-transform: scale(1.1);
-        -webkit-transform: scale(1.1);
         transform: scale(1.1);
       }
     }
