@@ -8,7 +8,7 @@
                     <i class="fas fa-search-plus fa-3x"></i>
                 </div>
             </div>
-            <img alt="" class="" data-testid="portfolio-item-image" src="{{ item.img | relative_url }}">
+            <img alt="{{ item.title }}" class="" data-testid="portfolio-item-image" loading="lazy" src="{{ item.img | relative_url }}">
         </a>
     </div>
     {% endfor %}
