@@ -17,10 +17,6 @@ html {
   background: var(--selection);
 }
 
-::-moz-selection {
-  background: var(--selection);
-}
-
 body {
   color: var(--text);
   font-family: $font-family-main;
@@ -141,7 +137,7 @@ summary {
 }
 
 blockquote {
-  border-left: 2px solid #9fd2e3;
+  border-left: 2px solid var(--blockquote-border);
   margin: 1em 1em;
   padding: 0.75em 1em;
   background-color: var(--blockquote);
@@ -215,7 +211,7 @@ ul {
 hr {
   border: 0;
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--background);
   margin: 1em 0;
 }
 
@@ -225,11 +221,11 @@ a {
 }
 
 kbd {
-  background-color: #eee;
+  background-color: var(--kbd-background);
   border-radius: 3px;
-  border: 1px solid #b4b4b4;
+  border: 1px solid var(--kbd-border);
   box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
-  color: #333;
+  color: var(--kbd-color);
   display: inline-block;
   font-size: .85em;
   font-weight: 700;

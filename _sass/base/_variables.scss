@@ -48,6 +48,10 @@ html, html[data-theme="light"] {
   --h5: #262626;
   --h6: #262626;
   --border: rgba(0, 0, 0, 0.2);
+  --blockquote-border: #9fd2e3;
+  --kbd-background:    #eee;
+  --kbd-border:        #b4b4b4;
+  --kbd-color:         #333;
 }
 
 html[data-theme="dark"] {
@@ -70,6 +74,10 @@ html[data-theme="dark"] {
   --h5: #6bac00;
   --h6: #ff5c00;
   --border: rgba(255, 255, 255, 0.5); // border
+  --blockquote-border: #546e7a;
+  --kbd-background:    #3a3f4b;
+  --kbd-border:        #5a6070;
+  --kbd-color:         #cdd9e5;
   --cusdis--color-text-default: var(--text);
   --cusdis--color-comment-username-text: var(--link);
 }

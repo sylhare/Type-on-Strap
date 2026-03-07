@@ -1,3 +1,13 @@
+// NOTE: This file intentionally uses Sass @import (not @use/@forward).
+// Migration is blocked until ALL of the following are resolved:
+//   1. GitHub Pages / jekyll-sass-converter 1.5.2 uses Ruby Sass 3.7.4
+//      which has no @use/@forward support.
+//   2. External deps (Font Awesome, KaTeX) ship @use-compatible partials.
+//   3. Cross-module @extend (utility ↔ footer/posts/blog/post_nav) is
+//      converted to @mixin before modules can be isolated.
+// quiet_deps: true in _config.yml silences Font Awesome's own @import
+// deprecation warnings under Dart Sass.
+
 /* TYPE_ON_STRAP Main style sheet */
 
 /* Variables */

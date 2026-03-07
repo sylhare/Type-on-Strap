@@ -46,7 +46,7 @@ footer {
 }
 
 header {
-  h1 {
+  h1, h2 {
     margin: 0;
   }
 }
@@ -154,15 +154,12 @@ header {
 
 /*-- feature-image Responsive scrolling --*/
 .feature-image header {
-  @media screen and (max-width: $break) {
-    padding: $padding-large*1.5 $padding-small;
-  }
-
   @media screen and (min-width: $break) {
     background-size: 120% auto;
   }
 
   @media screen and (max-width: $break) {
+    padding: $padding-large*1.5 $padding-small;
     background-size: 200% auto;
   }
 
