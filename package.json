@@ -1,0 +1,40 @@
+{
+  "name": "type-on-strap-helper",
+  "version": "2.5.0",
+  "description": "CLI utilities for the Type on Strap jekyll theme",
+  "scripts": {
+    "post":           "node .github/scripts/post.js",
+    "compress":       "node .github/scripts/images.js compress",
+    "thumbnails":     "node .github/scripts/images.js thumbnails",
+    "thumbnails-all": "node .github/scripts/images.js thumbnails-all",
+    "webp":           "node .github/scripts/images.js webp",
+    "build:js":       "node .github/scripts/build.js js",
+    "build:css":      "node .github/scripts/build.js css",
+    "build":          "node .github/scripts/build.js",
+    "test":           "cd .github/tests && npm run test:unit",
+    "test:integration": "cd .github/tests && npm run test:integration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylhare/Type-on-Strap.git"
+  },
+  "keywords": [
+    "jekyll"
+  ],
+  "author": "sylhare",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sylhare/Type-on-Strap/issues"
+  },
+  "homepage": "https://github.com/sylhare/Type-on-Strap#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.0",
+    "esbuild":   "^0.24.0",
+    "glob":      "^11.0.0",
+    "less":      "^4.2.0",
+    "sharp":     "^0.33.0"
+  }
+}
