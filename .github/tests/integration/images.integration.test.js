@@ -8,6 +8,7 @@
 const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
+const { randomBytes } = require('crypto');
 const sharp = require('sharp');
 
 const { compressImage, createThumbnail, convertToWebp } = require('../../scripts/images');
@@ -17,22 +18,31 @@ const SOURCE_PNG = path.join(TMP, 'source.png');
 const SOURCE_WIDTH  = 400;
 const SOURCE_HEIGHT = 200;
 
+let sourceSize;
+
 beforeAll(async () => {
-  // Create a real 400x200 PNG as the test source image
-  await sharp({
-    create: {
-      width:      SOURCE_WIDTH,
-      height:     SOURCE_HEIGHT,
-      channels:   3,
-      background: { r: 200, g: 100, b: 50 },
-    },
-  })
-    .png()
+  const pixels = randomBytes(SOURCE_WIDTH * SOURCE_HEIGHT * 3);
+  await sharp(Buffer.from(pixels), { raw: { width: SOURCE_WIDTH, height: SOURCE_HEIGHT, channels: 3 } })
+    .png({ compressionLevel: 0 })
     .toFile(SOURCE_PNG);
+  sourceSize = fs.statSync(SOURCE_PNG).size;
 });
 
 afterAll(() => {
   fs.rmSync(TMP, { recursive: true, force: true });
+});
+
+describe('source image', () => {
+  test('is a valid PNG', async () => {
+    const meta = await sharp(SOURCE_PNG).metadata();
+    expect(meta.format).toBe('png');
+  });
+
+  test('has correct dimensions', async () => {
+    const meta = await sharp(SOURCE_PNG).metadata();
+    expect(meta.width).toBe(SOURCE_WIDTH);
+    expect(meta.height).toBe(SOURCE_HEIGHT);
+  });
 });
 
 describe('createThumbnail() integration', () => {
@@ -83,6 +93,10 @@ describe('compressImage() integration', () => {
     const meta = await sharp(compressedOut).metadata();
     expect(meta.format).toBe('png');
   });
+
+  test('output is smaller than the source', () => {
+    expect(fs.statSync(compressedOut).size).toBeLessThan(sourceSize);
+  });
 });
 
 describe('convertToWebp() integration', () => {
@@ -105,5 +119,9 @@ describe('convertToWebp() integration', () => {
     const meta = await sharp(webpOut).metadata();
     expect(meta.width).toBe(SOURCE_WIDTH);
     expect(meta.height).toBe(SOURCE_HEIGHT);
+  });
+
+  test('output is smaller than the source', () => {
+    expect(fs.statSync(webpOut).size).toBeLessThan(sourceSize);
   });
 });
