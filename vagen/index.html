@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Main JS (navbar.js, katex_init.js and masonry_init.js)-->
+    <script defer=true src="/blog/assets/js/main.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/blog/assets/css/main.css">
+    
+
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/blog/assets/img/favicon-16x16.png" sizes="16x16" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://ai.stanford.edu/blog/vagen/">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="The Stanford AI Lab Blog" href="http://ai.stanford.edu/blog/feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/font-awesome.min.css">
+
+    <!-- Bootstrap-3.3.7 isolation CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <!-- JQuery 2.2.4 -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/bigfoot-number.css">
+    <script type="text/javascript" src="/blog/assets/js/vendor/bigfoot.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $.bigfoot();
+
+    window.onload = function() {
+
+        var videos = document.getElementsByTagName("video"),
+            fraction = 0.8;
+
+        function checkScroll() {
+
+            for (var i = 0; i < videos.length; i++) {
+
+                var video = videos[i];
+
+                var x = video.offsetLeft,
+                    y = video.offsetTop,
+                    w = video.offsetWidth,
+                    h = video.offsetHeight,
+                    r = x + w, //right
+                    b = y + h, //bottom
+                    visibleX, visibleY, visible;
+
+                visibleX = Math.max(0, Math.min(w, window.pageXOffset + window.innerWidth - x, r - window.pageXOffset));
+                visibleY = Math.max(0, Math.min(h, window.pageYOffset + window.innerHeight - y, b - window.pageYOffset));
+
+                visible = visibleX * visibleY / (w * h);
+
+                if (visible > fraction) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+
+            }
+
+        }
+
+        window.addEventListener('scroll', checkScroll, false);
+        window.addEventListener('resize', checkScroll, false);
+    }
+    });
+    </script>
+
+
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <link rel="stylesheet" type="text/css" href="/blog/assets/css/vendor/katex.min.css">
+    <script src="/blog/assets/js/vendor/katex.min.js">
+    </script>
+
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-129018108-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning | SAIL Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning" />
+<meta name="author" content="<a href="https://kangruiwang.github.io/">Kangrui Wang</a>, <a href="https://pingyue-zhang.github.io/">Pingyue Zhang</a>, <a href="https://zihanwang314.github.io/">Zihan Wang</a>, <a href="https://scholar.google.com/citations?user=yaning_gao">Yaning Gao</a>, <a href="https://scholar.google.com/citations?user=linjie_li">Linjie Li</a>, <a href="https://scholar.google.com/citations?user=qineng_wang">Qineng Wang</a>, <a href="https://scholar.google.com/citations?user=hanyang_chen">Hanyang Chen</a>, <a href="https://scholar.google.com/citations?user=chi_wan">Chi Wan</a>, <a href="https://scholar.google.com/citations?user=yiping_lu">Yiping Lu</a>, <a href="https://zyang-ur.github.io/">Zhengyuan Yang</a>, <a href="https://scholar.google.com/citations?user=lijuan_wang">Lijuan Wang</a>, <a href="https://ranjaykrishna.com/">Ranjay Krishna</a>, <a href="https://jiajunwu.com/">Jiajun Wu</a>, <a href="https://profiles.stanford.edu/fei-fei-li">Li Fei-Fei</a>, <a href="https://homes.cs.washington.edu/~yejin/">Yejin Choi</a>, <a href="https://manling.li/">Manling Li</a>" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="http://ai.stanford.edu/blog/vagen/" />
+<meta property="og:url" content="http://ai.stanford.edu/blog/vagen/" />
+<meta property="og:site_name" content="SAIL Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-03-09T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning" />
+<script type="application/ld+json">
+{"datePublished":"2026-03-09T00:00:00-07:00","author":{"@type":"Person","name":"<a href=\"https://kangruiwang.github.io/\">Kangrui Wang</a>, <a href=\"https://pingyue-zhang.github.io/\">Pingyue Zhang</a>, <a href=\"https://zihanwang314.github.io/\">Zihan Wang</a>, <a href=\"https://scholar.google.com/citations?user=yaning_gao\">Yaning Gao</a>, <a href=\"https://scholar.google.com/citations?user=linjie_li\">Linjie Li</a>, <a href=\"https://scholar.google.com/citations?user=qineng_wang\">Qineng Wang</a>, <a href=\"https://scholar.google.com/citations?user=hanyang_chen\">Hanyang Chen</a>, <a href=\"https://scholar.google.com/citations?user=chi_wan\">Chi Wan</a>, <a href=\"https://scholar.google.com/citations?user=yiping_lu\">Yiping Lu</a>, <a href=\"https://zyang-ur.github.io/\">Zhengyuan Yang</a>, <a href=\"https://scholar.google.com/citations?user=lijuan_wang\">Lijuan Wang</a>, <a href=\"https://ranjaykrishna.com/\">Ranjay Krishna</a>, <a href=\"https://jiajunwu.com/\">Jiajun Wu</a>, <a href=\"https://profiles.stanford.edu/fei-fei-li\">Li Fei-Fei</a>, <a href=\"https://homes.cs.washington.edu/~yejin/\">Yejin Choi</a>, <a href=\"https://manling.li/\">Manling Li</a>"},"url":"http://ai.stanford.edu/blog/vagen/","mainEntityOfPage":{"@type":"WebPage","@id":"http://ai.stanford.edu/blog/vagen/"},"description":"TL;DR","@type":"BlogPosting","headline":"VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning","dateModified":"2026-03-09T00:00:00-07:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Manual seo tags -->
+    <title>VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning | The Stanford AI Lab Blog</title>
+    <meta name="description" content="A reinforcement learning framework that trains VLM agents to build internal world models through explicit visual state reasoning, achieving state-of-the-art ...">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:title" content="VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning">
+    
+    <meta name="twitter:description" content="A reinforcement learning framework that trains VLM agents to build internal world models through explicit visual state reasoning, achieving state-of-the-art results with only 3B parameters.">
+    
+    <meta name="twitter:creator" content="@StanfordAILab">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="http://ai.stanford.edu/blog//assets/img/posts/2026-03-09-vagen/vagen-training-framework.png">
+    <meta name="og:image" content="http://ai.stanford.edu/blog//assets/img/posts/2026-03-09-vagen/vagen-training-framework.png">
+    
+</head>
+
+  <body class="post-body">
+      <!-- Toggle menu -->
+<header class="site-header">
+
+<nav class="clear navbar navbar-expand-lg navbar-light bg-white flex-column flex-md-row bd-navbar fixed-top" id="main_nav">
+  
+  <div class="container">
+
+    <a class="navbar-brand mr-0 mr-md-2 text-black d-flex align-items-center" href="/blog/" aria-label="Bootstrap">
+    
+	  <div class="branding">
+	    <a href="http://ai.stanford.edu/">
+	      <img class="avatar" src="/blog/assets/img/sail-logo.png" alt=""/>
+		  </a>
+
+      <a href="/blog/">
+	      <h1 class="site-title">
+			    The Stanford AI Lab Blog
+		    </h1> 
+		  </a>
+	  </div>
+    
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <ul class="navbar-nav ml-auto">
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/about">About</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="/blog/">All</a>
+        <a class="dropdown-item" href="/blog/conferences">Conferences</a>
+        <a class="dropdown-item" href="/blog/vision">Computer Vision</a>
+        <a class="dropdown-item" href="/blog/robotics">Robotics</a>
+        <a class="dropdown-item" href="/blog/nlp">NLP</a>
+        <a class="dropdown-item" href="/blog/ml">Machine Learning</a>
+        <a class="dropdown-item" href="/blog/rl">Reinforcement Learning</a>
+
+        </div>
+      </li>
+        
+      
+      <li class="nav-item">
+      <a class="nav-link" href="/blog/subscribe">Subscribe</a>
+      </li>
+      
+      
+      <li class="nav-item">
+      <a class="nav-link" href="http://ai.stanford.edu/">SAIL</a>
+      </li>
+      
+      </ul> 
+
+    </div>
+
+  </div>
+</nav>
+
+</header>
+
+  
+    <div class="content">
+      
+
+<article>
+
+  <header id="main">
+    
+    <h1 id="post_title">VAGEN: Teaching Vision-Language Models to Build World Models Through Reinforcement Learning</h1>
+    <p class="meta">
+    <a href="https://kangruiwang.github.io/">Kangrui Wang</a>, <a href="https://pingyue-zhang.github.io/">Pingyue Zhang</a>, <a href="https://zihanwang314.github.io/">Zihan Wang</a>, <a href="https://scholar.google.com/citations?user=yaning_gao">Yaning Gao</a>, <a href="https://scholar.google.com/citations?user=linjie_li">Linjie Li</a>, <a href="https://scholar.google.com/citations?user=qineng_wang">Qineng Wang</a>, <a href="https://scholar.google.com/citations?user=hanyang_chen">Hanyang Chen</a>, <a href="https://scholar.google.com/citations?user=chi_wan">Chi Wan</a>, <a href="https://scholar.google.com/citations?user=yiping_lu">Yiping Lu</a>, <a href="https://zyang-ur.github.io/">Zhengyuan Yang</a>, <a href="https://scholar.google.com/citations?user=lijuan_wang">Lijuan Wang</a>, <a href="https://ranjaykrishna.com/">Ranjay Krishna</a>, <a href="https://jiajunwu.com/">Jiajun Wu</a>, <a href="https://profiles.stanford.edu/fei-fei-li">Li Fei-Fei</a>, <a href="https://homes.cs.washington.edu/~yejin/">Yejin Choi</a>, <a href="https://manling.li/">Manling Li</a>
+    <div class="post-date">March 9, 2026</div>
+    </p>
+  <hr>
+  </header>
+
+
+  <section class="post-content">
+  
+    <h2 id="tldr">TL;DR</h2>
+
+<p>We introduce <a href="https://arxiv.org/abs/2510.16907"><strong>VAGEN</strong></a>, a reinforcement learning framework that trains vision-language model (VLM) agents to build internal world models through explicit visual state reasoning. By encouraging agents to actively estimate the current state and predict future transitions, our 3B parameter model achieves state-of-the-art results across diverse visual tasks.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Vision-Language Models (VLMs) have shown remarkable capabilities in understanding images and following instructions. Increasingly, these models are being deployed as <strong>visual agents</strong> — systems that interact with environments over multiple steps by perceiving visual observations, reasoning about state, and taking actions. Examples include web-browsing assistants that navigate interfaces, household robots that manipulate objects, and game agents that explore virtual worlds.</p>
+
+<p>Visual agents are important because many real-world tasks are inherently <strong>interactive and sequential</strong>. Solving them requires not just understanding a single image, but maintaining context, planning ahead, and adapting as new observations arrive.</p>
+
+<p>However, when VLMs are used as multi-turn agents, their performance often degrades significantly. Why?</p>
+
+<p>A key reason is partial and noisy visual observations. At each turn, the agent only sees a screenshot or camera view which is a limited snapshot of the environment. The true state requires integrating information across multiple interactions. This is fundamentally different from single-turn visual QA, where all necessary information is present in one image, and from text-based agents, where the environment state is comprehensive and clean in text.</p>
+
+<p>In this blog post, we introduce <strong>VAGEN</strong> (VLM Agent Training with World Model Reasoning), a framework that explicitly teaches VLM agents to build and maintain internal world models through reinforcement learning.</p>
+
+<h2 id="the-problem-vlm-agents-and-partial-observability">The Problem: VLM Agents and Partial Observability</h2>
+
+<h3 id="framing-as-a-pomdp">Framing as a POMDP</h3>
+
+<p>We formulate multi-turn VLM agent tasks as a <strong>Partially Observable Markov Decision Process (POMDP)</strong>, illustrated in the image below.</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2026-03-09-vagen/vagen-pomdp-formulation.png" /></p>
+<figcaption>
+POMDP formulation for multi-turn VLM agent tasks.
+</figcaption>
+</div></figure>
+
+<p>In a POMDP:</p>
+
+<ul>
+  <li>The agent receives <strong>observations</strong> (images + text prompts) rather than the full environment state</li>
+  <li>The true <strong>state</strong> contains information the agent cannot directly see</li>
+  <li>The agent must <strong>infer</strong> the underlying state from its observation history</li>
+</ul>
+
+<h2 id="our-approach-world-modeling-with-structured-reasoning">Our Approach: World Modeling with Structured Reasoning</h2>
+
+<p>We propose training VLM agents to perform explicit <strong>world modeling</strong> through two complementary reasoning processes:</p>
+
+<h3 id="1-state-estimation-grounding">1. State Estimation (Grounding)</h3>
+
+<blockquote>
+  <p>“What is the current state?”</p>
+</blockquote>
+
+<p>The agent learns to ground its visual observation into a structured state representation. For example:</p>
+<ul>
+  <li>In a grid world: “The player is at position (2,3), there’s a wall to the north”</li>
+  <li>In navigation: “I’m in a bedroom, facing the door, the target is a couch”</li>
+  <li>In robot manipulation: “The gripper is above the red cube, which is on the table”</li>
+</ul>
+
+<h3 id="2-transition-modeling-prediction">2. Transition Modeling (Prediction)</h3>
+
+<blockquote>
+  <p>“What will happen next?”</p>
+</blockquote>
+
+<p>The agent learns to predict how its actions will change the environment state:</p>
+<ul>
+  <li>“If I move right, I’ll be at position (3,3)”</li>
+  <li>“If I go through the door, I’ll enter the living room”</li>
+  <li>“If I close the gripper, I’ll be holding the red cube”</li>
+</ul>
+
+<h3 id="the-combined-world-modeling-strategy">The Combined World Modeling Strategy</h3>
+
+<p>We structure the agent’s output as:</p>
+
+<pre style="background-color: #f5f5f5; color: #333; padding: 16px; border-radius: 6px; font-size: 14px; line-height: 1.6; overflow-x: auto;">
+&lt;think&gt;
+  &lt;observation&gt;
+    [State estimation: what is the current state?]
+  &lt;/observation&gt;
+  [General reasoning...]
+  &lt;prediction&gt;
+    [Transition modeling: what will happen after my action?]
+  &lt;/prediction&gt;
+&lt;/think&gt;
+&lt;answer&gt;[executable action]&lt;/answer&gt;
+</pre>
+
+<p>This structured format serves two purposes:</p>
+<ol>
+  <li><strong>During training</strong>: We can extract and evaluate the reasoning to provide targeted rewards</li>
+  <li><strong>During execution</strong>: The explicit reasoning improves action quality by forcing the model to think systematically</li>
+</ol>
+
+<h2 id="five-reasoning-strategies">Five Reasoning Strategies</h2>
+
+<p>We compare five strategies for incorporating reasoning into VLM agents:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Description</th>
+      <th>Output Format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>NoThink</strong></td>
+      <td>Direct action output, no reasoning</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;answer&gt;action&lt;/answer&gt;</code></td>
+    </tr>
+    <tr>
+      <td><strong>FreeThink</strong></td>
+      <td>Unconstrained chain-of-thought</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;think&gt;...&lt;/think&gt;&lt;answer&gt;action&lt;/answer&gt;</code></td>
+    </tr>
+    <tr>
+      <td><strong>StateEstimation</strong></td>
+      <td>Only estimate current state</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;think&gt;&lt;observation&gt;...&lt;/observation&gt;&lt;/think&gt;&lt;answer&gt;action&lt;/answer&gt;</code></td>
+    </tr>
+    <tr>
+      <td><strong>TransitionModeling</strong></td>
+      <td>Only predict transitions</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;think&gt;&lt;prediction&gt;...&lt;/prediction&gt;&lt;/think&gt;&lt;answer&gt;action&lt;/answer&gt;</code></td>
+    </tr>
+    <tr>
+      <td><strong>WorldModeling</strong></td>
+      <td>Both estimation + prediction</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;think&gt;&lt;observation&gt;...&lt;/observation&gt;...&lt;prediction&gt;...&lt;/prediction&gt;&lt;/think&gt;&lt;answer&gt;action&lt;/answer&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="training-algorithm-worldmodeling-rl">Training Algorithm: WorldModeling RL</h2>
+
+<h3 id="on-policy-agentic-training">On-Policy Agentic Training</h3>
+
+<p>Following the common agentic RL training paradigm, VAGEN employs an <strong>iterative on-policy training</strong> loop that alternates between rollout and policy update:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2026-03-09-vagen/vagen-training-framework.png" /></p>
+<figcaption>
+Overview of the VAGEN framework: an iterative on-policy training loop with rollout and policy update phases.
+</figcaption>
+</div></figure>
+
+<p><strong>Rollout Phase</strong>: The VLM agent interacts with diverse visual environments through multi-turn episodes. At each turn, the agent receives a visual observation, generates structured reasoning and actions, and receives environment feedback. Complete trajectories are collected in a trajectory buffer.</p>
+
+<p><strong>Training Phase</strong>: The policy is updated using RL algorithms (PPO, GRPO, etc.) with collected trajectories.</p>
+
+<p>What distinguishes VAGEN are two key components designed for visual agentic tasks:</p>
+
+<h3 id="component-1-worldmodeling-reward-llm-as-judge">Component 1: WorldModeling Reward (LLM-as-Judge)</h3>
+
+<p>A key innovation is our <strong>WorldModeling Reward</strong>. Instead of only rewarding task success (which is sparse and delayed), we also reward accurate world modeling at each turn:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2026-03-09-vagen/vagen-worldmodeling-reward.png" /></p>
+<figcaption>
+WorldModeling Reward via LLM-as-Judge: the agent's state estimation and transition predictions are extracted and scored against ground truth.
+</figcaption>
+</div></figure>
+
+<ol>
+  <li><strong>Extract</strong> the agent’s state estimation and transition predictions from its output</li>
+  <li><strong>Compare</strong> against ground truth states from the simulator</li>
+  <li><strong>Score</strong> using an LLM judge that determines if the prediction matches ground truth</li>
+</ol>
+
+<p>This provides dense, intermediate rewards that guide the agent to develop accurate internal representations, even when task rewards are sparse.</p>
+
+<h3 id="component-2-bi-level-gae-for-credit-assignment">Component 2: Bi-Level GAE for Credit Assignment</h3>
+
+<p>Multi-turn agentic tasks introduce a credit assignment challenge: which parts of an interaction actually drove success or failure?</p>
+
+<p>A common solution in policy gradient methods for RL is <a href="https://arxiv.org/abs/1506.02438"><strong>Generalized Advantage Estimation (GAE)</strong></a>, which estimates how much each action improves outcomes relative to a baseline while balancing bias and variance. GAE is widely used in PPO to produce stable training signals.</p>
+
+<p>In single-turn RL for VLMs, GAE is typically applied at the token-level, distributing trajectory-level rewards across generated tokens so the model can learn which parts of its reasoning or actions were helpful.</p>
+
+<p>However, multi-turn agents operate across longer horizons and multiple temporal scales. This creates a mismatch, where we need to distinguish between:</p>
+
+<ul>
+  <li><strong>Turn-level credit</strong>: Which turns were pivotal for task success?</li>
+  <li><strong>Token-level credit</strong>: Within each turn, which tokens (reasoning vs. action) mattered most?</li>
+</ul>
+
+<p><strong>Bi-Level GAE</strong> addresses this by:</p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2026-03-09-vagen/vagen-bilevel-gae.png" /></p>
+<figcaption>
+Bi-Level GAE: hierarchical credit assignment at both the turn level and token level.
+</figcaption>
+</div></figure>
+
+<ol>
+  <li>First computing turn-level advantages using rewards at turn boundaries</li>
+  <li>Then computing token-level advantages within each turn and using separate discount factors for each level</li>
+</ol>
+
+<p>This hierarchical structure provides more precise learning signals for multi-turn reasoning tasks.</p>
+
+<h2 id="evaluation-five-diverse-visual-tasks">Evaluation: Five Diverse Visual Tasks</h2>
+
+<p>We evaluate VAGEN across five tasks that require different types of visual reasoning:</p>
+
+<h3 id="task-overview">Task Overview</h3>
+
+<figure class="figure"><div class="figure__main">
+<div style="text-align:center;">
+<img src="/blog/assets/img/posts/2026-03-09-vagen/frozenlake_case1.gif" style="width:18%;height:auto;padding:0.5%;" />
+<img src="/blog/assets/img/posts/2026-03-09-vagen/sokoban_case1.gif" style="width:18%;height:auto;padding:0.5%;" />
+<img src="/blog/assets/img/posts/2026-03-09-vagen/navigation_case1.gif" style="width:18%;height:auto;padding:0.5%;" />
+<img src="/blog/assets/img/posts/2026-03-09-vagen/maniskill_case1.gif" style="width:18%;height:auto;padding:0.5%;" />
+<img src="/blog/assets/img/posts/2026-03-09-vagen/SVG_generate.gif" style="width:18%;height:auto;padding:0.5%;" />
+</div>
+<figcaption>
+Left to right: FrozenLake, Sokoban, Visual Navigation, ManiSkill, and SVG Construction tasks.
+</figcaption>
+</div></figure>
+
+<h3 id="task-details">Task Details</h3>
+
+<ol>
+  <li>
+    <p><strong>FrozenLake</strong>: Navigate a 4x4 frozen lake grid. The agent must reach the goal while avoiding holes. Requires understanding position and planning safe paths.</p>
+  </li>
+  <li>
+    <p><strong>Sokoban</strong>: Classic box-pushing puzzle. The agent must push all boxes onto target locations. Requires spatial reasoning and planning multiple moves ahead.</p>
+  </li>
+  <li>
+    <p><strong>Visual Navigation</strong>: Navigate through realistic 3D indoor environments (AI2-THOR) to find target objects. Requires visual understanding and exploration strategy.</p>
+  </li>
+  <li>
+    <p><strong>ManiSkill (Robot Manipulation)</strong>: Control a robot arm to pick and place objects. Requires understanding 3D spatial relationships and precise action sequences.</p>
+  </li>
+  <li>
+    <p><strong>SVG Construction</strong>: Generate SVG code that reconstructs a target image. A unique visual-to-code task requiring iterative refinement across multiple turns.</p>
+  </li>
+</ol>
+
+<h2 id="results">Results</h2>
+
+<p>The main results comparing VAGEN with proprietary VLMs across all five tasks (average scores) are given below:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Sokoban</th>
+      <th>FrozenLake</th>
+      <th>Navigation</th>
+      <th>PrimitiveSkill</th>
+      <th>SVG</th>
+      <th><strong>Overall</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><em>Open-Source Models</em></strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Qwen2.5-VL-72B</td>
+      <td>0.18</td>
+      <td>0.44</td>
+      <td>0.73</td>
+      <td>0.44</td>
+      <td>0.76</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <td>Qwen2.5-VL-7B</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.34</td>
+      <td>0.19</td>
+      <td>0.55</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <td>Qwen2.5-VL-3B</td>
+      <td>0.14</td>
+      <td>0.14</td>
+      <td>0.24</td>
+      <td>0.00</td>
+      <td>0.54</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <td>VLM-R1-3B</td>
+      <td>0.13</td>
+      <td>0.13</td>
+      <td>0.33</td>
+      <td>0.00</td>
+      <td>0.55</td>
+      <td>0.23</td>
+    </tr>
+    <tr>
+      <td><strong><em>VAGEN (Ours, Backbone: Qwen2.5-VL-3B)</em></strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>FreeThink</td>
+      <td>0.57</td>
+      <td>0.68</td>
+      <td>0.67</td>
+      <td>0.66</td>
+      <td>0.78</td>
+      <td>0.67</td>
+    </tr>
+    <tr>
+      <td>NoThink</td>
+      <td>0.57</td>
+      <td>0.09</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.76</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <td>StateEstimation</td>
+      <td>0.56</td>
+      <td>0.68</td>
+      <td>0.74</td>
+      <td>0.00</td>
+      <td>0.78</td>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <td>TransitionModeling</td>
+      <td>0.41</td>
+      <td>0.76</td>
+      <td>0.62</td>
+      <td>0.82</td>
+      <td>0.77</td>
+      <td>0.68</td>
+    </tr>
+    <tr>
+      <td>WorldModeling (VAGEN-Base)</td>
+      <td>0.61</td>
+      <td>0.71</td>
+      <td>0.79</td>
+      <td>0.91</td>
+      <td>0.78</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>VAGEN-Full</td>
+      <td><strong>0.79</strong></td>
+      <td>0.74</td>
+      <td>0.81</td>
+      <td><strong>0.97</strong></td>
+      <td>0.79</td>
+      <td><strong>0.82</strong></td>
+    </tr>
+    <tr>
+      <td><strong><em>RL Baselines</em></strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Vanilla-PPO</td>
+      <td>0.18</td>
+      <td>0.21</td>
+      <td>0.29</td>
+      <td>0.00</td>
+      <td>0.64</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>GRPO w/ Mask</td>
+      <td>0.20</td>
+      <td>0.57</td>
+      <td><strong>0.85</strong></td>
+      <td>0.25</td>
+      <td>0.79</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <td>Turn-PPO w/ Mask</td>
+      <td>0.38</td>
+      <td>0.70</td>
+      <td>0.81</td>
+      <td>0.25</td>
+      <td>0.77</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <td><strong><em>Proprietary Models</em></strong></td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>GPT-5</td>
+      <td>0.70</td>
+      <td>0.77</td>
+      <td>0.78</td>
+      <td>0.66</td>
+      <td>0.85</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <td>o3</td>
+      <td>0.60</td>
+      <td>0.78</td>
+      <td>0.78</td>
+      <td>0.66</td>
+      <td>0.82</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <td>o4-mini</td>
+      <td>0.44</td>
+      <td><strong>0.82</strong></td>
+      <td>0.75</td>
+      <td>0.56</td>
+      <td>0.78</td>
+      <td>0.67</td>
+    </tr>
+    <tr>
+      <td>GPT-4o</td>
+      <td>0.43</td>
+      <td>0.54</td>
+      <td>0.72</td>
+      <td>0.50</td>
+      <td>0.80</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <td>Gemini 2.5 Pro</td>
+      <td>0.58</td>
+      <td>0.78</td>
+      <td>0.63</td>
+      <td>0.50</td>
+      <td>0.86</td>
+      <td>0.67</td>
+    </tr>
+    <tr>
+      <td>Gemini 2.0</td>
+      <td>0.28</td>
+      <td>0.61</td>
+      <td>0.56</td>
+      <td>0.28</td>
+      <td>0.84</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <td>Claude 4.5 Sonnet</td>
+      <td>0.31</td>
+      <td>0.80</td>
+      <td>0.67</td>
+      <td>0.53</td>
+      <td><strong>0.88</strong></td>
+      <td>0.64</td>
+    </tr>
+    <tr>
+      <td>Claude 3.7 Sonnet</td>
+      <td>0.25</td>
+      <td>0.69</td>
+      <td>0.47</td>
+      <td>0.44</td>
+      <td>0.85</td>
+      <td>0.54</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="key-findings">Key Findings</h3>
+
+<p><strong>1. VAGEN significantly outperforms proprietary models</strong></p>
+
+<p>Our 3B parameter model trained with VAGEN achieves 0.82 overall score, compared to:</p>
+<ul>
+  <li>GPT-5: 0.75</li>
+  <li>Gemini 2.5 Pro: 0.67</li>
+  <li>Claude 4.5: 0.62</li>
+</ul>
+
+<p>This demonstrates that explicit world modeling training is more effective than simply scaling model size.</p>
+
+<p><strong>2. WorldModeling strategy is consistently best</strong></p>
+
+<p>Across all tasks, the full WorldModeling strategy (combining state estimation and transition modeling) outperforms other reasoning approaches:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Strategy</th>
+      <th>Overall Performance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NoThink</td>
+      <td>Baseline</td>
+    </tr>
+    <tr>
+      <td>FreeThink</td>
+      <td>+12%</td>
+    </tr>
+    <tr>
+      <td>StateEstimation</td>
+      <td>+18%</td>
+    </tr>
+    <tr>
+      <td>TransitionModeling</td>
+      <td>+20%</td>
+    </tr>
+    <tr>
+      <td><strong>WorldModeling</strong></td>
+      <td><strong>+25%</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>3. Both components of WorldModeling RL help</strong></p>
+
+<figure class="figure"><div class="figure__main">
+<p><img class="postimage" src="/blog/assets/img/posts/2026-03-09-vagen/vagen-ablation-study.png" /></p>
+<figcaption>
+Ablation study showing the contribution of each VAGEN component.
+</figcaption>
+</div></figure>
+
+<p>We did ablation study to show the contribution of each component.</p>
+<ul>
+  <li><strong>WorldModeling Reward alone</strong>: Consistently improves performance by providing visual learning signals, but limited by coarse credit assignment</li>
+  <li><strong>Bi-Level GAE alone</strong>: Notable but unstable improvements, sensitive to reward sparsity</li>
+  <li><strong>VAGEN-Full (both)</strong>: Most robust, achieving strong and stable results across all tasks</li>
+</ul>
+
+<h2 id="conclusion-and-limitations">Conclusion and Limitations</h2>
+
+<p>We introduce a multi-turn reinforcement learning framework that rewards the reasoning process to build an internal world model through explicit visual state reasoning over <strong>StateEstimation</strong> (grounding) and <strong>TransitionModeling</strong> (prediction). In this way, the VLM agent learns to explore the environment to understand its causal/transition dynamics, and update internal beliefs as multi-turn interactions unfold.</p>
+
+<p>To optimize an agent’s world model reasoning, we propose <strong>WorldModeling Reward</strong> for dense turn-level feedback that evaluates the accuracy of the agent’s internal state simulation against ground-truth. To solve the critical challenge of long-horizon credit assignment, we propose <strong>Bi-Level GAE</strong> that first computes the value of an entire turn’s reasoning before propagating that credit precisely to individual tokens.</p>
+
+<p>Our VAGEN framework significantly enhances task performance and visual reasoning quality for VLMs in agentic tasks. Limitations include restricted model architecture and evaluation environments. Future work will explore additional VLM families and unified multi-modal models for image-based world modeling.</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><strong>Paper</strong>: <a href="https://arxiv.org/abs/2510.16907">arXiv</a></li>
+  <li><strong>Code</strong>: <a href="https://github.com/RAGEN-AI/VAGEN">GitHub</a></li>
+  <li><strong>Project Page</strong>: <a href="https://vagen-ai.github.io/">https://vagen-ai.github.io/</a></li>
+</ul>
+
+  
+  </section>
+  <hr>
+  Keep on top of the latest SAIL Blog posts via <a class="social-icon" href="http://ai.stanford.edu/blog/feed.xml">RSS <i class="fa fa-rss-square fa fa" title="Twitter"></i></a>, <a class="social-icon" href="https://twitter.com/StanfordAILab">Twitter <i class="fa fa-twitter-square fa fa" title="Twitter"></i></a>, or email:
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://stanford.us19.list-manage.com/subscribe/post?u=3a6484754abf2fc18724ec835&amp;id=028823e92b" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3a6484754abf2fc18724ec835_028823e92b" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+
+
+  <!-- Social media shares -->
+  <div class="share-buttons">
+    <ul class="share-buttons">
+        <div class="meta">Share</div>
+        
+        <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://ai.stanford.edu/blog/vagen/" target="_blank" title="Share on Facebook">
+			<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Facebook</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="https://twitter.com/intent/tweet?source=http://ai.stanford.edu/blog/vagen/&text=VAGEN%3A+Teaching+Vision-Language+Models+to+Build+World+Models+Through+Reinforcement+Learning%20%7C%20SAIL+Blog:%20http://ai.stanford.edu/blog/vagen/" target="_blank" title="Tweet">
+			<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Tweet</span>
+		</a>
+        </li>
+            
+        <li>
+            <a href="https://getpocket.com/save?url=http://ai.stanford.edu/blog/vagen/&title=VAGEN%3A+Teaching+Vision-Language+Models+to+Build+World+Models+Through+Reinforcement+Learning%20%7C%20SAIL+Blog" target="_blank" title="Add to Pocket">
+			<i class="fa fa fa-get-pocket fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Add to Pocket</span>
+		</a>
+        </li>
+         
+        <li>
+            <a href="http://www.reddit.com/submit?url=http://ai.stanford.edu/blog/vagen/&title=VAGEN%3A+Teaching+Vision-Language+Models+to+Build+World+Models+Through+Reinforcement+Learning%20%7C%20SAIL+Blog" target="_blank" title="Share on Reddit">
+			<i class="fa fa-reddit-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Share on Reddit</span>
+		</a>
+        </li>
+           
+        <li>
+            <a href="mailto:?subject=VAGEN%3A+Teaching+Vision-Language+Models+to+Build+World+Models+Through+Reinforcement+Learning%20%7C%20SAIL+Blog&body=:%20http://ai.stanford.edu/blog/vagen/" target="_blank" title="Email">
+			<i class="fa fa-envelope-square fa-2x" aria-hidden="true"></i>
+			<span class="sr-only">Email</span>
+		</a>
+        </li>
+        
+    </ul>
+</div>
+
+  <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/blog/tags#agents">
+      <p><i class="fa fa-tag fa-fw"></i> agents</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#ml">
+      <p><i class="fa fa-tag fa-fw"></i> ml</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#reinforcement+learning">
+      <p><i class="fa fa-tag fa-fw"></i> reinforcement learning</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#vision-language+models">
+      <p><i class="fa fa-tag fa-fw"></i> vision-language models</p>
+    </a>
+    
+    <a class="button" href="/blog/tags#world+models">
+      <p><i class="fa fa-tag fa-fw"></i> world models</p>
+    </a>
+    
+  </div>
+</footer>
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <a href="/blog/tos_stanford_blog/">
+      <p>Previous post</p>
+        Theory of Space: Can Foundation Models Construct Spatial Beliefs through Active Exploration?
+      </a>
+  </div>
+  
+  
+</div>
+
+
+
+    </div>
+    <hr>
+<footer class="site-footer">
+    
+   <div class="footer-icons">
+        <ul>
+        <!-- Social icons from Font Awesome, if enabled -->
+        
+<li>
+	<a href="http://ai.stanford.edu/blog/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/StanfordAILab" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+        </ul>
+    </div>
+    <p class="text">&copy; 2021 Stanford AI Lab
+</p>
+ 
+</footer>
+
+
+
+  </body>
+</html>
