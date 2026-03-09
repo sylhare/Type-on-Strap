@@ -23,15 +23,13 @@ async function buildJs(partialFiles, outFile) {
 async function compileLess(inputPath, outputPath) {
   const input = fs.readFileSync(inputPath, 'utf8');
   const result = await less.render(input, { filename: inputPath, strictMath: true });
-  let css = result.css;
-  css = css.replace(/\.bootstrap-iso html/g, '');
-  css = css.replace(/\.bootstrap-iso body/g, '');
+  let css = result.css.replace(/\.bootstrap-iso (?:html|body)/g, '');
   fs.writeFileSync(outputPath, css);
+  return css;
 }
 
-function minifyCSS(inputPath, outputPath) {
-  const input = fs.readFileSync(inputPath, 'utf8');
-  const result = new CleanCSS().minify(input);
+function minifyCSS(css, outputPath) {
+  const result = new CleanCSS().minify(css);
   fs.writeFileSync(outputPath, result.styles);
 }
 
@@ -44,32 +42,32 @@ if (require.main === module) {
   async function runJs() {
     const partialsDir = path.join(cwd, 'assets/js/partials');
     const partials = getJsPartials(partialsDir);
-    await buildJs(partials, path.join(cwd, 'assets/js/main.min.js'));
-    console.log('Built assets/js/main.min.js');
-
     const commentsFile = path.join(cwd, 'assets/js/comments-lazy-load.js');
-    await buildJs([commentsFile], path.join(cwd, 'assets/js/comments-lazy-load.min.js'));
-    console.log('Built assets/js/comments-lazy-load.min.js');
+    await Promise.all([
+      buildJs(partials, path.join(cwd, 'assets/js/main.min.js'))
+        .then(() => console.log('Built assets/js/main.min.js')),
+      buildJs([commentsFile], path.join(cwd, 'assets/js/comments-lazy-load.min.js'))
+        .then(() => console.log('Built assets/js/comments-lazy-load.min.js')),
+    ]);
   }
 
   async function runCss() {
     const lessIn = path.join(cwd, 'assets/css/bootstrap-iso.less');
     const cssOut = path.join(cwd, 'assets/css/vendor/bootstrap-iso.css');
-    await compileLess(lessIn, cssOut);
+    const css = await compileLess(lessIn, cssOut);
     console.log('Compiled assets/css/vendor/bootstrap-iso.css');
 
-    minifyCSS(cssOut, path.join(cwd, 'assets/css/vendor/bootstrap-iso.min.css'));
+    minifyCSS(css, path.join(cwd, 'assets/css/vendor/bootstrap-iso.min.css'));
     console.log('Built assets/css/vendor/bootstrap-iso.min.css');
   }
 
   (async () => {
-    if (arg === 'js') {
-      await runJs();
-    } else if (arg === 'css') {
-      await runCss();
-    } else {
-      await runJs();
-      await runCss();
+    switch (arg) {
+      case 'js':  await runJs();  break;
+      case 'css': await runCss(); break;
+      default:
+        await runJs();
+        await runCss();
     }
   })().catch(err => {
     console.error(err);

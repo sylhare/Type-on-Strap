@@ -10,7 +10,7 @@ function getOutputPath(inputPath, inputBase, outputBase) {
 }
 
 function getCompressionSettings(ext, opts = {}) {
-  const lext = ext.toLowerCase().replace('.', '');
+  const lext = ext.slice(1).toLowerCase();
   if (lext === 'png') {
     return {
       compressionLevel: opts.compressionLevel ?? 6,
@@ -43,9 +43,10 @@ async function compressImage(inputPath, outputPath, opts = {}) {
 }
 
 async function createThumbnail(inputPath, outputPath, opts = {}) {
-  const meta = await sharp(inputPath).metadata();
+  const instance = sharp(inputPath);
+  const meta = await instance.metadata();
   const { width } = getThumbnailSettings(meta.width, opts);
-  await sharp(inputPath).resize({ width }).toFile(outputPath);
+  await instance.resize({ width }).toFile(outputPath);
 }
 
 async function convertToWebp(inputPath, outputPath, opts = {}) {
@@ -65,54 +66,59 @@ if (require.main === module) {
   const cwd = process.cwd();
   const command = process.argv[2];
 
+  async function runThumbnails(files, imgBase, outputBase) {
+    for (const file of files) {
+      const full = path.join(cwd, file);
+      const out = getOutputPath(full, imgBase, outputBase);
+      fs.mkdirSync(path.dirname(out), { recursive: true });
+      await createThumbnail(full, out);
+      console.log('Thumbnail:', file, '->', path.relative(cwd, out));
+    }
+  }
+
   async function run() {
-    if (command === 'compress') {
-      const files = globSync('assets/img/**/*.{png,jpg,jpeg,webp}', { cwd });
-      for (const file of files) {
-        const full = path.join(cwd, file);
-        const tmp = full + '.tmp';
-        await compressImage(full, tmp);
-        fs.renameSync(tmp, full);
-        console.log('Compressed:', file);
+    switch (command) {
+      case 'compress': {
+        const files = globSync('assets/img/**/*.{png,jpg,jpeg,webp}', { cwd });
+        for (const file of files) {
+          const full = path.join(cwd, file);
+          const tmp = full + '.tmp';
+          await compressImage(full, tmp);
+          fs.renameSync(tmp, full);
+          console.log('Compressed:', file);
+        }
+        break;
       }
-
-    } else if (command === 'thumbnails') {
-      const inputBase = path.join(cwd, 'assets/img/feature-img');
-      const outputBase = path.join(cwd, 'assets/img/thumbnails/feature-img');
-      const files = globSync('assets/img/feature-img/*', { cwd });
-      for (const file of files) {
-        const full = path.join(cwd, file);
-        const out = getOutputPath(full, inputBase, outputBase);
-        fs.mkdirSync(path.dirname(out), { recursive: true });
-        await createThumbnail(full, out);
-        console.log('Thumbnail:', file, '->', path.relative(cwd, out));
+      case 'thumbnails': {
+        const imgBase = path.join(cwd, 'assets/img/feature-img');
+        const outputBase = path.join(cwd, 'assets/img/thumbnails/feature-img');
+        const files = globSync('assets/img/feature-img/*', { cwd });
+        await runThumbnails(files, imgBase, outputBase);
+        break;
       }
-
-    } else if (command === 'thumbnails-all') {
-      const outputBase = path.join(cwd, 'assets/img/thumbnails');
-      const imgBase = path.join(cwd, 'assets/img');
-      const rootFiles = globSync('assets/img/*.{png,jpg,jpeg,webp}', { cwd });
-      const subFiles = globSync('assets/img/!(thumbnails)/**/*.{png,jpg,jpeg,webp}', { cwd });
-      for (const file of [...rootFiles, ...subFiles]) {
-        const full = path.join(cwd, file);
-        const out = getOutputPath(full, imgBase, outputBase);
-        fs.mkdirSync(path.dirname(out), { recursive: true });
-        await createThumbnail(full, out);
-        console.log('Thumbnail:', file, '->', path.relative(cwd, out));
+      case 'thumbnails-all': {
+        const imgBase = path.join(cwd, 'assets/img');
+        const outputBase = path.join(cwd, 'assets/img/thumbnails');
+        const files = [
+          ...globSync('assets/img/*.{png,jpg,jpeg,webp}', { cwd }),
+          ...globSync('assets/img/!(thumbnails)/**/*.{png,jpg,jpeg,webp}', { cwd }),
+        ];
+        await runThumbnails(files, imgBase, outputBase);
+        break;
       }
-
-    } else if (command === 'webp') {
-      const files = globSync('assets/img/**/*.{png,jpg,jpeg,gif,svg}', { cwd });
-      for (const file of files) {
-        const full = path.join(cwd, file);
-        const out = full.replace(/\.[^.]+$/, '.webp');
-        await convertToWebp(full, out);
-        console.log('WebP:', file, '->', path.relative(cwd, out));
+      case 'webp': {
+        const files = globSync('assets/img/**/*.{png,jpg,jpeg,gif,svg}', { cwd });
+        for (const file of files) {
+          const full = path.join(cwd, file);
+          const out = full.replace(/\.[^.]+$/, '.webp');
+          await convertToWebp(full, out);
+          console.log('WebP:', file, '->', path.relative(cwd, out));
+        }
+        break;
       }
-
-    } else {
-      console.error('Usage: node images.js <compress|thumbnails|thumbnails-all|webp>');
-      process.exit(1);
+      default:
+        console.error('Usage: node images.js <compress|thumbnails|thumbnails-all|webp>');
+        process.exit(1);
     }
   }
 
