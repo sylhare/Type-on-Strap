@@ -354,7 +354,7 @@ tags: [sample, markdown, html]                    # [Opt] Add tags to the page
 ```
 
 With `thumbnail`, you can add a smaller image than the `feature-img`. 
-If you don't have a thumbnail, you can still use the same image as the feature one. Or use the gulp task to create it.
+If you don't have a thumbnail, you can still use the same image as the feature one. Or use the npm script to create it.
 
 If you don't use a feature image, but `color`, the transparent background is set comes from [`lineart.png`](assets/img/lineart.png). 
 You can edit it in the config file (`_config.yml > color_image`). If you want another one, put it in `/assets/img` as well. 
@@ -371,7 +371,7 @@ It will respect the page and theme layout, mind the padding on the sides.
 The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) is the head of the article rendered in the blog page. 
 The length of the excerpt has a default of around `250` characters or can be manually set in the post using:
 
-in `conflig.yml`:
+in `_config.yml`:
 
 ```yml
 excerpt: true
@@ -586,39 +586,44 @@ Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually repre
 These are useful to render your jekyll files. 
 You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
-### Gulp toolbox
+### npm scripts toolbox
 
 #### Requirements
 
-Before you need to have *node* and `npm` installed:
+Before you need to have *node* (>=18) and `npm` installed:
 
 - Windows: https://nodejs.org/
 - Ubuntu/Debian: `apt-get install nodejs npm libgl1 libxi6`
 - Fedora (dnf) / RHEL/CentOS (yum): `dnf install node npm libglvnd-glx libXi`
 
-Then you need to install [`gulp-cli`](https://gulpjs.com/) and its dependencies:
+Then install the dependencies from the project root:
 
 ```bash
-cd assets/
-sudo npm install gulp-cli -g
 npm install
 ```
 
 #### Minimizing and optimizing: css, js and images
 
-You can run the default task that will compress the js, css and images and create the thumbnails for the supported image
-formats:
+Build (minify JS and compile + minify CSS):
 
 ```bash
-cd assets/
-gulp default
-gulp thumbnails-all # to create all of the images thumbnails
-gulp thumbnails     # to create thumbnails for the feature-img/ only
+npm run build       # js + css
+npm run build:js    # js only
+npm run build:css   # css only
+```
+
+Compress and create thumbnails for images:
+
+```bash
+npm run compress        # compress images in place
+npm run thumbnails-all  # create thumbnails for all images
+npm run thumbnails      # create thumbnails for feature-img/ only
+npm run webp            # convert images to WebP
 # tip: run a git status to see the changes
 git status
 ```
 
-You can find more about the gulp tasks in the [gulpfile.js](assets/gulpfile.js).
+You can find the scripts in [.github/scripts/](.github/scripts/).
 
 #### Create a post
 
@@ -626,7 +631,7 @@ To create a `.md` file in the *_posts/* section with the jekyll format of today'
 Use this command with the title you'd like to create the very basic post.
 
 ```bash
-gulp post -n 'title of the post'
+npm run post 'title of the post'
 ```
 
 A file will be created following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.

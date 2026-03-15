@@ -6,7 +6,7 @@ You can delete this folder or add your own workflows in it.
 
 ## Structure
 
-- [hooks](./hooks): custom git hooks for gulp task
+- [hooks](./hooks): custom git hooks for asset build checks
 - [workflows](./workflows): Workflows of this repository for the GitHub actions  
 - [config.yml](./config.yml): Config file for "request-info" bot
 - [release-drafter.yml](./release-drafter.yml): Config file for "release-drafter" bot

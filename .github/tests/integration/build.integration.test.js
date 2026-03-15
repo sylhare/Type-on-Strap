@@ -1,0 +1,85 @@
+/**
+ * @fileoverview Integration tests for build.js — run against real source files,
+ * no mocks, output written to a temp directory so nothing in the repo is modified.
+ * @jest-environment node
+ */
+
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+
+const ROOT = path.resolve(__dirname, '../../../');
+const { buildJs, compileLess, minifyCSS, getJsPartials } = require('../../scripts/build');
+
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-build-'));
+
+afterAll(() => {
+  fs.rmSync(TMP, { recursive: true, force: true });
+});
+
+describe('build:js integration', () => {
+  const outFile = path.join(TMP, 'main.min.js');
+
+  beforeAll(async () => {
+    const partials = getJsPartials(path.join(ROOT, 'assets/js/partials'));
+    await buildJs(partials, outFile);
+  });
+
+  test('creates output file', () => {
+    expect(fs.existsSync(outFile)).toBe(true);
+  });
+
+  test('output is non-empty', () => {
+    expect(fs.statSync(outFile).size).toBeGreaterThan(0);
+  });
+
+  test('output is minified (single line)', () => {
+    const content = fs.readFileSync(outFile, 'utf8').trim();
+    expect(content.split('\n').length).toBe(1);
+  });
+
+  test('output is smaller than concatenated source', () => {
+    const partials = getJsPartials(path.join(ROOT, 'assets/js/partials'));
+    const srcSize = partials.reduce((sum, f) => sum + fs.statSync(f).size, 0);
+    expect(fs.statSync(outFile).size).toBeLessThan(srcSize);
+  });
+});
+
+describe('build:css integration', () => {
+  const lessIn  = path.join(ROOT, 'assets/css/bootstrap-iso.less');
+  const cssOut  = path.join(TMP, 'bootstrap-iso.css');
+  const minOut  = path.join(TMP, 'bootstrap-iso.min.css');
+
+  beforeAll(async () => {
+    await compileLess(lessIn, cssOut);
+    minifyCSS(cssOut, minOut);
+  });
+
+  test('compileLess creates the CSS output file', () => {
+    expect(fs.existsSync(cssOut)).toBe(true);
+  });
+
+  test('compiled CSS does not contain .bootstrap-iso html', () => {
+    const css = fs.readFileSync(cssOut, 'utf8');
+    expect(css).not.toContain('.bootstrap-iso html');
+  });
+
+  test('compiled CSS does not contain .bootstrap-iso body', () => {
+    const css = fs.readFileSync(cssOut, 'utf8');
+    expect(css).not.toContain('.bootstrap-iso body');
+  });
+
+  test('compiled CSS still scopes rules under .bootstrap-iso', () => {
+    const css = fs.readFileSync(cssOut, 'utf8');
+    expect(css).toContain('.bootstrap-iso');
+  });
+
+  test('minified CSS file is created', () => {
+    expect(fs.existsSync(minOut)).toBe(true);
+  });
+
+  test('minified CSS is smaller than compiled CSS', () => {
+    expect(fs.statSync(minOut).size).toBeLessThan(fs.statSync(cssOut).size);
+  });
+});
