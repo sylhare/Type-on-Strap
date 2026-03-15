@@ -5,14 +5,20 @@ on:
     paths:
       - 'assets/js/vendor/**'
       - 'assets/fonts/katex/**'
+      - 'assets/fonts/font-awesome/**'
       - '_sass/external/katex/**'
+      - '_sass/external/font-awesome/**'
+      - '_sass/external/_font-awesome.scss'
       - '_includes/default/head.liquid'
       - '.github/scripts/**'
   pull_request:
     paths:
       - 'assets/js/vendor/**'
       - 'assets/fonts/katex/**'
+      - 'assets/fonts/font-awesome/**'
       - '_sass/external/katex/**'
+      - '_sass/external/font-awesome/**'
+      - '_sass/external/_font-awesome.scss'
       - '_includes/default/head.liquid'
       - '.github/scripts/**'
   workflow_dispatch: # Allow manual triggering
@@ -39,6 +45,10 @@ jobs:
       run: |
         chmod +x .github/scripts/*.sh
     
+    - name: Validate Font Awesome
+      run: |
+        .github/scripts/validate-font-awesome.sh
+
     - name: Validate KaTeX
       run: |
         .github/scripts/validate-katex.sh
@@ -77,6 +87,7 @@ jobs:
         echo "Checking generated assets..."
         ls -la _site/assets/js/vendor/
         ls -la _site/assets/fonts/katex/ | head -10
+        ls -la _site/assets/fonts/font-awesome/
         
         # Check file sizes are reasonable
         echo "File sizes:"

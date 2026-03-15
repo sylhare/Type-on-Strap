@@ -42,6 +42,7 @@ run_validation() {
     echo ""
 }
 
+run_validation ".github/scripts/validate-font-awesome.sh" "Font Awesome"
 run_validation ".github/scripts/validate-katex.sh" "KaTeX"
 run_validation ".github/scripts/validate-mermaid.sh" "Mermaid"
 run_validation ".github/scripts/validate-masonry.sh" "Masonry"
