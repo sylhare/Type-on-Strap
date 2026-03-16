@@ -12,7 +12,8 @@
     "build:css":      "node .github/scripts/build.js css",
     "build":          "node .github/scripts/build.js",
     "test":           "cd .github/tests && npm run test:unit",
-    "test:integration": "cd .github/tests && npm run test:integration"
+    "test:integration": "cd .github/tests && npm run test:integration",
+    "update:mermaid":   "node .github/scripts/update-mermaid.js"
   },
   "repository": {
     "type": "git",
