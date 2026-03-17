@@ -57,7 +57,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'cd ../.. && bundle exec jekyll build --baseurl "" --quiet && cd .github/cli && npm run server',
+    command: 'bundle exec jekyll build --baseurl "" --quiet && npm run server',
     url: 'http://localhost:4000',
     reuseExistingServer: !process.env['CI'],
     timeout: 120 * 1000,

@@ -1,0 +1,17 @@
+{
+  "katex": {
+    "version": "0.16.38"
+  },
+  "mermaid": {
+    "version": "11.13.0"
+  },
+  "fontAwesome": {
+    "version": "6.7.2"
+  },
+  "masonry": {
+    "version": "4.2.2"
+  },
+  "imagesLoaded": {
+    "version": "5.0.0"
+  }
+}
