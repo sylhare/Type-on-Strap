@@ -1,28 +1,27 @@
-const { test } = require('@playwright/test');
+import { test } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 /**
  * Helper to open mobile menu - forces menu visibility for mobile tests
  */
-async function openMobileMenu(page) {
+export async function openMobileMenu(page: Page): Promise<void> {
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(300);
-  
+
   const menu = page.locator('nav ul');
   await menu.evaluate(el => {
     el.classList.remove('hide');
-    el.style.opacity = '1';
-    el.style.fontSize = '';
+    (el as HTMLElement).style.opacity = '1';
+    (el as HTMLElement).style.fontSize = '';
   });
-  
+
   await page.waitForTimeout(200);
 }
 
 /**
  * Helper function to check if theme toggle is available on the page.
- * @param {import('@playwright/test').Page} page - Playwright page object
- * @returns {Promise<boolean>} True if theme toggle exists
  */
-async function hasThemeToggle(page) {
+export async function hasThemeToggle(page: Page): Promise<boolean> {
   const themeToggle = page.locator('#theme-toggle');
   return await themeToggle.count() > 0;
 }
@@ -30,7 +29,7 @@ async function hasThemeToggle(page) {
 /**
  * Helper function to check if gallery has images and skip test if not
  */
-async function checkGalleryHasImages(page) {
+export async function checkGalleryHasImages(page: Page) {
   const images = page.locator('.gallery img, .gallery-item img, img[class*="gallery"]');
   const count = await images.count();
   if (count === 0) {
@@ -38,10 +37,3 @@ async function checkGalleryHasImages(page) {
   }
   return { images, count };
 }
-
-module.exports = {
-  openMobileMenu,
-  hasThemeToggle,
-  checkGalleryHasImages,
-};
-

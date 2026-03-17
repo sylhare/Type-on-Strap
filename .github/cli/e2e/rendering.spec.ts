@@ -1,10 +1,10 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('KaTeX Math Rendering @desktop', () => {
   const katexPostUrl = '/syntax/2014/11/28/markdown-and-html';
 
   test('should load KaTeX post without console errors', async ({ page }) => {
-    const errors = [];
+    const errors: string[] = [];
     page.on('console', msg => {
       if (msg.type() === 'error') {
         errors.push(msg.text());
@@ -14,7 +14,7 @@ test.describe('KaTeX Math Rendering @desktop', () => {
     await page.goto(katexPostUrl);
     await expect(page.locator('article')).toBeVisible();
 
-    const criticalErrors = errors.filter(e => 
+    const criticalErrors = errors.filter(e =>
       e.includes('katex') || e.includes('KaTeX') || e.includes('math')
     );
     expect(criticalErrors).toHaveLength(0);
@@ -50,7 +50,7 @@ test.describe('KaTeX Math Rendering @desktop', () => {
     await expect(page.locator('.katex').first()).toBeVisible({ timeout: 10000 });
 
     const katexElement = page.locator('.katex').first();
-    const fontFamily = await katexElement.evaluate(el => 
+    const fontFamily = await katexElement.evaluate(el =>
       window.getComputedStyle(el).fontFamily
     );
     expect(fontFamily.toLowerCase()).toContain('katex');
@@ -61,7 +61,7 @@ test.describe('Mermaid Diagram Rendering @desktop', () => {
   const mermaidPostUrl = '/2016/12/03/Mermaid';
 
   test('should load Mermaid post without console errors', async ({ page }) => {
-    const errors = [];
+    const errors: string[] = [];
     page.on('console', msg => {
       if (msg.type() === 'error') {
         errors.push(msg.text());
@@ -71,7 +71,7 @@ test.describe('Mermaid Diagram Rendering @desktop', () => {
     await page.goto(mermaidPostUrl);
     await expect(page.locator('article')).toBeVisible();
 
-    const criticalErrors = errors.filter(e => 
+    const criticalErrors = errors.filter(e =>
       e.includes('mermaid') || e.includes('Mermaid') || e.includes('diagram')
     );
     expect(criticalErrors).toHaveLength(0);

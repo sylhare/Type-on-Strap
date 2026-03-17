@@ -1,10 +1,10 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('Portfolio Functionality @desktop', () => {
   test('should display portfolio page', async ({ page }) => {
     await page.goto('/portfolio');
     await expect(page.locator('body')).toBeVisible();
-    
+
     const pageHeading = page.locator('h1').first();
     await expect(pageHeading).toBeVisible();
   });
@@ -36,7 +36,7 @@ test.describe('Portfolio Functionality @desktop', () => {
     const count = await images.count();
 
     expect(count).toBeGreaterThan(0);
-    
+
     const firstImage = images.first();
 
     const src = await firstImage.getAttribute('src');
@@ -44,9 +44,9 @@ test.describe('Portfolio Functionality @desktop', () => {
     expect(src).toMatch(/\.(jpg|jpeg|png|gif|webp|svg)/i);
 
     await firstImage.evaluate((img) => {
-      return img.complete || new Promise((resolve) => {
-        img.onload = resolve;
-        img.onerror = resolve;
+      return (img as HTMLImageElement).complete || new Promise((resolve) => {
+        (img as HTMLImageElement).onload = resolve as () => void;
+        (img as HTMLImageElement).onerror = resolve as () => void;
       });
     });
   });
@@ -59,11 +59,11 @@ test.describe('Portfolio Functionality @desktop', () => {
 
     const firstItem = items.first();
     await expect(firstItem).toBeVisible();
-    
+
     const caption = firstItem.locator('[data-testid="portfolio-item-caption"]');
     const titleAttr = await caption.getAttribute('title');
     expect(titleAttr).toBeTruthy();
-    expect(titleAttr.length).toBeGreaterThan(0);
+    expect(titleAttr!.length).toBeGreaterThan(0);
   });
 
   test('should have portfolio item content', async ({ page }) => {
@@ -73,7 +73,7 @@ test.describe('Portfolio Functionality @desktop', () => {
     const firstItem = items.first();
 
     await expect(firstItem).toBeVisible();
-    
+
     await expect(firstItem.locator('[data-testid="portfolio-item-link"]')).toBeVisible();
     await expect(firstItem.locator('[data-testid="portfolio-item-image"]')).toBeVisible();
     await expect(firstItem.locator('[data-testid="portfolio-item-caption"]')).toBeVisible();
@@ -83,7 +83,7 @@ test.describe('Portfolio Functionality @desktop', () => {
     expect(title).toBeTruthy();
   });
 
-  test('should have responsive portfolio grid', async ({ page, isMobile }) => {
+  test('should have responsive portfolio grid', async ({ page }) => {
     await page.goto('/portfolio');
 
     const items = page.locator('[data-testid="portfolio-item"]');
@@ -117,7 +117,7 @@ test.describe('Portfolio Functionality @desktop', () => {
     await firstItem.click();
 
     await expect(page.locator('body')).toBeVisible();
-    
+
     const content = page.locator('article, .post-content, main').first();
     await expect(content).toBeVisible();
   });

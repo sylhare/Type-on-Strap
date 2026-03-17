@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const { openMobileMenu, hasThemeToggle } = require('./helpers');
+import { test, expect } from '@playwright/test';
+import { openMobileMenu, hasThemeToggle } from './helpers';
 
 test.describe('Theme and Dark Mode @desktop', () => {
 
@@ -14,7 +14,7 @@ test.describe('Theme and Dark Mode @desktop', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
+
     const initialTheme = await page.getAttribute('html', 'data-theme');
 
     await themeToggle.click();
@@ -73,8 +73,8 @@ test.describe('Theme and Dark Mode @desktop', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
-    const themes = [];
+
+    const themes: (string | null)[] = [];
 
     for (let i = 0; i < 3; i++) {
       await themeToggle.click();
@@ -98,7 +98,7 @@ test.describe('Theme and Dark Mode @desktop', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
+
     const initialHtml = await themeToggle.innerHTML();
 
     await themeToggle.click();
@@ -134,10 +134,10 @@ test.describe('Dark Mode Initialization @desktop', () => {
     await page.waitForTimeout(500);
 
     const theme = await page.getAttribute('html', 'data-theme');
-    const localStorage = await page.evaluate(() => window.localStorage.getItem('theme'));
+    const storedTheme = await page.evaluate(() => window.localStorage.getItem('theme'));
 
     expect(theme).toBe('dark');
-    expect(localStorage).toBe('dark');
+    expect(storedTheme).toBe('dark');
 
     await context.close();
   });
@@ -234,7 +234,7 @@ test.describe('Dark Mode Initialization @desktop', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
+
     await page.evaluate(() => {
       document.documentElement.setAttribute('data-theme', 'light');
       localStorage.setItem('theme', 'light');
@@ -243,13 +243,13 @@ test.describe('Dark Mode Initialization @desktop', () => {
     await page.waitForTimeout(300);
 
     let buttonText = await themeToggle.textContent();
-    expect(buttonText.toLowerCase()).toContain('dark');
+    expect(buttonText!.toLowerCase()).toContain('dark');
 
     await themeToggle.click();
     await page.waitForTimeout(300);
 
     buttonText = await themeToggle.textContent();
-    expect(buttonText.toLowerCase()).toContain('light');
+    expect(buttonText!.toLowerCase()).toContain('light');
   });
 });
 
@@ -268,7 +268,7 @@ test.describe('Theme and Dark Mode @mobile', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
+
     const initialTheme = await page.getAttribute('html', 'data-theme');
 
     await themeToggle.click();
@@ -317,8 +317,8 @@ test.describe('Theme and Dark Mode @mobile', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
-    const themes = [];
+
+    const themes: (string | null)[] = [];
 
     for (let i = 0; i < 3; i++) {
       await themeToggle.click();
@@ -342,7 +342,7 @@ test.describe('Theme and Dark Mode @mobile', () => {
     }
 
     await expect(themeToggle).toBeVisible();
-    
+
     const initialHtml = await themeToggle.innerHTML();
 
     await themeToggle.click();

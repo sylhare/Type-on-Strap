@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const { openMobileMenu } = require('./helpers');
+import { test, expect } from '@playwright/test';
+import { openMobileMenu } from './helpers';
 
 test.describe('Navigation and Routing @desktop', () => {
   test('should load home page successfully', async ({ page }) => {
@@ -75,7 +75,6 @@ test.describe('Navigation and Routing @desktop', () => {
     const response = await page.goto('/nonexistent-page-12345');
     expect(response?.status()).toBe(404);
   });
-
 });
 
 // Mobile-specific navigation tests
@@ -119,7 +118,7 @@ test.describe('Navigation and Routing @mobile', () => {
   test('should have responsive navbar on mobile', async ({ page }) => {
     await page.goto('/');
     await openMobileMenu(page);
-    
+
     const menu = page.locator('nav ul, .navbar ul');
     await expect(menu).toBeVisible();
   });

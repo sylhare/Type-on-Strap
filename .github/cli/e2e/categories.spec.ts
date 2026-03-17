@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('Category Display Functionality @desktop', () => {
   test('should display categories on posts with category metadata', async ({ page }) => {
@@ -16,9 +16,7 @@ test.describe('Category Display Functionality @desktop', () => {
 
   test('should display empty category list on posts without categories', async ({ page }) => {
     await page.goto('/');
-    
-    const categoryListDivs = page.locator('[data-testid="category-list"]');
-    
+
     await expect(page.locator('body')).toBeVisible();
   });
 
@@ -27,7 +25,7 @@ test.describe('Category Display Functionality @desktop', () => {
 
     const categoryLink = page.locator('[data-testid="category-link"]').first();
     await expect(categoryLink).toBeVisible();
-    
+
     await categoryLink.click();
 
     await expect(page).toHaveURL(/\/categories(\/)?#/);
@@ -38,7 +36,7 @@ test.describe('Category Display Functionality @desktop', () => {
 
     const categoryLink = page.locator('[data-testid="category-link"]').first();
     await expect(categoryLink).toBeVisible();
-    
+
     const icon = categoryLink.locator('i.fa-folder');
     await expect(icon).toBeVisible();
   });
@@ -64,7 +62,7 @@ test.describe('Category Display Functionality @desktop', () => {
 
     const categoryList = page.locator('[data-testid="category-list"]');
     await expect(categoryList).toBeVisible();
-    
+
     const categoryMeta = categoryList.locator('li.meta');
     const metaText = await categoryMeta.textContent();
     expect(metaText).toContain('Category');
@@ -106,4 +104,3 @@ test.describe('Category Display Functionality @desktop', () => {
     expect(hasButtonClass).toBe(true);
   });
 });
-

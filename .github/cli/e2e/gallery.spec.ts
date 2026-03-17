@@ -1,11 +1,11 @@
-const { test, expect } = require('@playwright/test');
-const { checkGalleryHasImages } = require('./helpers');
+import { test, expect } from '@playwright/test';
+import { checkGalleryHasImages } from './helpers';
 
 test.describe('Gallery Functionality @desktop', () => {
   test('should display gallery page', async ({ page }) => {
     await page.goto('/gallery');
     await expect(page.locator('body')).toBeVisible();
-    
+
     const pageHeading = page.locator('h1').first();
     await expect(pageHeading).toBeVisible();
   });
@@ -48,7 +48,7 @@ test.describe('Gallery Functionality @desktop', () => {
     const { images, count } = await checkGalleryHasImages(page);
 
     expect(count).toBeGreaterThan(0);
-    
+
     for (let i = 0; i < Math.min(count, 3); i++) {
       await expect(images.nth(i)).toBeVisible();
     }
@@ -64,7 +64,7 @@ test.describe('Gallery Functionality @desktop', () => {
     await expect(firstImage).toBeVisible();
 
     const isLoaded = await firstImage.evaluate((img) => {
-      return img.complete && img.naturalWidth > 0;
+      return (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0;
     });
 
     expect(isLoaded).toBe(true);
@@ -75,7 +75,7 @@ test.describe('Gallery Functionality @desktop', () => {
 
     const gallery = page.locator('.gallery, [class*="gallery"]').first();
     const galleryCount = await gallery.count();
-    
+
     if (galleryCount === 0) {
       test.skip(true, 'Gallery container not found');
       return;
@@ -85,7 +85,7 @@ test.describe('Gallery Functionality @desktop', () => {
 
     const images = gallery.locator('img');
     const count = await images.count();
-    
+
     if (count === 0) {
       test.skip(true, 'Gallery has no images');
       return;

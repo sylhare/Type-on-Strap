@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('Blog Functionality @desktop', () => {
   test('should display blog posts', async ({ page }) => {
@@ -26,7 +26,7 @@ test.describe('Blog Functionality @desktop', () => {
 
     const article = page.locator('article');
     await expect(article).toBeVisible();
-    
+
     const articleText = await article.textContent();
     expect(articleText?.length).toBeGreaterThan(50);
   });
@@ -39,18 +39,16 @@ test.describe('Blog Functionality @desktop', () => {
 
     const article = page.locator('article');
     await expect(article).toBeVisible();
-    
-    const navLinks = page.locator('.post-nav, .pagination, nav a');
+
     await expect(page.locator('body')).toBeVisible();
   });
 
   test('should filter posts by tag', async ({ page }) => {
     await page.goto('/tags');
 
-    // Look for tag links with data-testid
     const tag = page.locator('[data-testid="tag-link"]').first();
     await expect(tag).toBeVisible();
-    
+
     await tag.click();
 
     await expect(page.locator('body')).toBeVisible();
@@ -60,15 +58,14 @@ test.describe('Blog Functionality @desktop', () => {
   test('should filter posts by category', async ({ page }) => {
     await page.goto('/categories');
 
-    // Look for category links in the content, not navbar
     const category = page.locator('main a[href*="categories"], .content a[href*="categories"], .category a').first();
     const count = await category.count();
-    
+
     if (count === 0) {
       test.skip(true, 'No categories configured');
       return;
     }
-    
+
     await expect(category).toBeVisible();
     await category.click();
 
@@ -80,11 +77,9 @@ test.describe('Blog Functionality @desktop', () => {
     await page.goto('/');
 
     await expect(page.locator('body')).toBeVisible();
-    
+
     const posts = page.locator('[data-testid="blog-post-teaser"]');
     expect(await posts.count()).toBeGreaterThan(0);
-    
-    const pagination = page.locator('[data-testid="blog-pagination"]');
   });
 
   test('should display post excerpts on blog page', async ({ page }) => {
@@ -94,7 +89,7 @@ test.describe('Blog Functionality @desktop', () => {
     const firstPost = posts.first();
 
     await expect(firstPost).toBeVisible();
-    
+
     const text = await firstPost.textContent();
     expect(text?.length).toBeGreaterThan(0);
   });
@@ -107,7 +102,7 @@ test.describe('Blog Functionality @desktop', () => {
 
     const codeBlocks = page.locator('pre code, .highlight');
     expect(await codeBlocks.count()).toBeGreaterThan(0);
-    
+
     const codeBlock = codeBlocks.first();
     const className = await codeBlock.getAttribute('class');
     expect(className).toBeTruthy();
@@ -121,7 +116,7 @@ test.describe('Blog Functionality @desktop', () => {
 
     const article = page.locator('article');
     await expect(article).toBeVisible();
-    
+
     const articleText = await article.textContent();
     expect(articleText?.length).toBeGreaterThan(50);
   });

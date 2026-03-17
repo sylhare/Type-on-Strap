@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const { openMobileMenu } = require('./helpers');
+import { test, expect } from '@playwright/test';
+import { openMobileMenu } from './helpers';
 
 test.describe('Accessibility @desktop', () => {
   test('should have proper heading hierarchy on home page', async ({ page }) => {
@@ -18,7 +18,7 @@ test.describe('Accessibility @desktop', () => {
     const count = await images.count();
 
     expect(count).toBeGreaterThan(0);
-    
+
     for (let i = 0; i < Math.min(count, 5); i++) {
       const img = images.nth(i);
       const alt = await img.getAttribute('alt');
@@ -38,7 +38,7 @@ test.describe('Accessibility @desktop', () => {
     const count = await visibleLinks.count();
 
     expect(count).toBeGreaterThan(0);
-    
+
     const firstLink = visibleLinks.first();
     await expect(firstLink).toBeVisible();
     await firstLink.focus();
@@ -51,7 +51,7 @@ test.describe('Accessibility @desktop', () => {
     const count = await links.count();
 
     expect(count).toBeGreaterThan(0);
-    
+
     for (let i = 0; i < Math.min(count, 10); i++) {
       const link = links.nth(i);
       const text = await link.textContent();
@@ -71,7 +71,7 @@ test.describe('Accessibility @desktop', () => {
     const count = await inputs.count();
 
     expect(count).toBeGreaterThan(0);
-    
+
     const input = inputs.first();
     const id = await input.getAttribute('id');
     const ariaLabel = await input.getAttribute('aria-label');
@@ -100,11 +100,11 @@ test.describe('Accessibility @desktop', () => {
 
     const main = page.locator('main, [role="main"]');
     const mainCount = await main.count();
-    
+
     const skipLink = page.locator('a[href="#main"], a[href="#content"], a:has-text("skip")');
     const hasSkipLink = await skipLink.count() > 0;
     const hasMainContent = mainCount > 0;
-    
+
     expect(hasSkipLink || hasMainContent).toBe(true);
   });
 
@@ -136,10 +136,10 @@ test.describe('Accessibility @desktop', () => {
     await page.goto('/');
 
     const buttons = page.locator('button:visible, a:visible').first();
-    
+
     await expect(buttons).toBeVisible();
     await buttons.focus();
-    
+
     const isFocused = await buttons.evaluate(el => el === document.activeElement);
     expect(isFocused).toBe(true);
   });
@@ -148,10 +148,7 @@ test.describe('Accessibility @desktop', () => {
     await page.goto('/');
 
     const nav = page.locator('nav, [role="navigation"]');
-    const main = page.locator('main, [role="main"]');
-
     const navCount = await nav.count();
-    const mainCount = await main.count();
 
     expect(navCount).toBeGreaterThan(0);
   });
@@ -168,7 +165,7 @@ test.describe('Accessibility @mobile', () => {
     const count = await visibleLinks.count();
 
     expect(count).toBeGreaterThan(0);
-    
+
     const firstLink = visibleLinks.first();
     await expect(firstLink).toBeVisible();
     await firstLink.focus();
