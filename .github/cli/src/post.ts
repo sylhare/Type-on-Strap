@@ -1,30 +1,27 @@
-'use strict';
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
-function formatDate(date) {
+export function formatDate(date: Date): string {
   return date.toLocaleDateString('en-CA');
 }
 
-function formatTime(date) {
+export function formatTime(date: Date): string {
   return date.toLocaleTimeString('en-CA', { hour12: false });
 }
 
-function createFilename(title, date) {
+export function createFilename(title: string, date: Date): string {
   return formatDate(date) + '-' + title.replace(/ /g, '-') + '.md';
 }
 
-function createContent(title) {
+export function createContent(title: string): string {
   return '---\n' +
     'layout: post\n' +
     'title: ' + title + '\n' +
-    //'feature-img: "assets/img/"\n' +
-    //'thumbnail: "assets/img/thumbnails/"\n' +
     'tags: []\n' +
     '---';
 }
 
-function createPost(title, postsDir, date = new Date()) {
+export function createPost(title: string, postsDir: string, date: Date = new Date()): { filename: string; filepath: string; content: string } {
   const filename = createFilename(title, date);
   const filepath = path.join(postsDir, filename);
   const content = createContent(title);
@@ -32,8 +29,6 @@ function createPost(title, postsDir, date = new Date()) {
   console.log('[' + formatTime(date) + '] File created: _posts/' + filename);
   return { filename, filepath, content };
 }
-
-module.exports = { formatDate, formatTime, createFilename, createContent, createPost };
 
 if (require.main === module) {
   const title = process.argv.slice(2).join(' ');

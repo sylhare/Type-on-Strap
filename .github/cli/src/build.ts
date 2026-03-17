@@ -1,45 +1,43 @@
-'use strict';
-const fs = require('fs');
-const path = require('path');
-const { globSync } = require('glob');
-const esbuild = require('esbuild');
-const less = require('less');
-const CleanCSS = require('clean-css');
+import fs from 'node:fs';
+import path from 'node:path';
+import { globSync } from 'glob';
+import * as esbuild from 'esbuild';
+import less from 'less';
+import CleanCSS from 'clean-css';
 
-function getJsPartials(dir) {
+export function getJsPartials(dir: string): string[] {
   return globSync(path.join(dir, '*.js')).sort();
 }
 
-function concatFiles(filePaths) {
+export function concatFiles(filePaths: string[]): string {
   return filePaths.map(f => fs.readFileSync(f, 'utf8')).join('\n');
 }
 
-async function buildJs(partialFiles, outFile) {
+export async function buildJs(partialFiles: string[], outFile: string): Promise<void> {
   const code = concatFiles(partialFiles);
   const result = await esbuild.transform(code, { minify: true });
   fs.writeFileSync(outFile, result.code);
 }
 
-async function compileLess(inputPath, outputPath) {
+export async function compileLess(inputPath: string, outputPath: string): Promise<string> {
   const input = fs.readFileSync(inputPath, 'utf8');
-  const result = await less.render(input, { filename: inputPath, strictMath: true });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = await (less.render as any)(input, { filename: inputPath, strictMath: true });
   let css = result.css.replace(/\.bootstrap-iso (?:html|body)/g, '');
   fs.writeFileSync(outputPath, css);
   return css;
 }
 
-function minifyCSS(css, outputPath) {
+export function minifyCSS(css: string, outputPath: string): void {
   const result = new CleanCSS().minify(css);
   fs.writeFileSync(outputPath, result.styles);
 }
-
-module.exports = { getJsPartials, concatFiles, buildJs, compileLess, minifyCSS };
 
 if (require.main === module) {
   const cwd = process.cwd();
   const arg = process.argv[2];
 
-  async function runJs() {
+  async function runJs(): Promise<void> {
     const partialsDir = path.join(cwd, 'assets/js/partials');
     const partials = getJsPartials(partialsDir);
     const commentsFile = path.join(cwd, 'assets/js/comments-lazy-load.js');
@@ -51,7 +49,7 @@ if (require.main === module) {
     ]);
   }
 
-  async function runCss() {
+  async function runCss(): Promise<void> {
     const lessIn = path.join(cwd, 'assets/css/bootstrap-iso.less');
     const cssOut = path.join(cwd, 'assets/css/vendor/bootstrap-iso.css');
     const css = await compileLess(lessIn, cssOut);

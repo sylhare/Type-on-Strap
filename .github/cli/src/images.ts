@@ -1,15 +1,14 @@
-'use strict';
-const fs = require('fs');
-const path = require('path');
-const { globSync } = require('glob');
-const sharp = require('sharp');
+import fs from 'node:fs';
+import path from 'node:path';
+import { globSync } from 'glob';
+import sharp from 'sharp';
 
-function getOutputPath(inputPath, inputBase, outputBase) {
+export function getOutputPath(inputPath: string, inputBase: string, outputBase: string): string {
   const relative = path.relative(inputBase, inputPath);
   return path.join(outputBase, relative);
 }
 
-function getCompressionSettings(ext, opts = {}) {
+export function getCompressionSettings(ext: string, opts: { compressionLevel?: number; quality?: number; progressive?: boolean } = {}): Record<string, unknown> {
   const lext = ext.slice(1).toLowerCase();
   if (lext === 'png') {
     return {
@@ -23,14 +22,14 @@ function getCompressionSettings(ext, opts = {}) {
   };
 }
 
-function getThumbnailSettings(imageWidth, opts = {}) {
+export function getThumbnailSettings(imageWidth: number, opts: { ratio?: number } = {}): { width: number } {
   const ratio = opts.ratio ?? 0.5;
   return { width: Math.round(imageWidth * ratio) };
 }
 
-async function compressImage(inputPath, outputPath, opts = {}) {
+export async function compressImage(inputPath: string, outputPath: string, opts: { compressionLevel?: number; quality?: number; progressive?: boolean } = {}): Promise<void> {
   const ext = path.extname(inputPath).toLowerCase();
-  const settings = getCompressionSettings(ext, opts);
+  const settings = getCompressionSettings(ext, opts) as { compressionLevel?: number; quality?: number; progressive?: boolean };
   let pipeline = sharp(inputPath);
   if (ext === '.png') {
     pipeline = pipeline.png({ compressionLevel: settings.compressionLevel, quality: settings.quality });
@@ -42,31 +41,22 @@ async function compressImage(inputPath, outputPath, opts = {}) {
   await pipeline.toFile(outputPath);
 }
 
-async function createThumbnail(inputPath, outputPath, opts = {}) {
+export async function createThumbnail(inputPath: string, outputPath: string, opts: { ratio?: number } = {}): Promise<void> {
   const instance = sharp(inputPath);
   const meta = await instance.metadata();
-  const { width } = getThumbnailSettings(meta.width, opts);
+  const { width } = getThumbnailSettings(meta.width ?? 0, opts);
   await instance.resize({ width }).toFile(outputPath);
 }
 
-async function convertToWebp(inputPath, outputPath, opts = {}) {
+export async function convertToWebp(inputPath: string, outputPath: string, opts: { quality?: number } = {}): Promise<void> {
   await sharp(inputPath).webp({ quality: opts.quality ?? 85 }).toFile(outputPath);
 }
-
-module.exports = {
-  getOutputPath,
-  getCompressionSettings,
-  getThumbnailSettings,
-  compressImage,
-  createThumbnail,
-  convertToWebp,
-};
 
 if (require.main === module) {
   const cwd = process.cwd();
   const command = process.argv[2];
 
-  async function runThumbnails(files, imgBase, outputBase) {
+  async function runThumbnails(files: string[], imgBase: string, outputBase: string): Promise<void> {
     for (const file of files) {
       const full = path.join(cwd, file);
       const out = getOutputPath(full, imgBase, outputBase);
@@ -76,16 +66,21 @@ if (require.main === module) {
     }
   }
 
-  async function run() {
+  async function run(): Promise<void> {
     switch (command) {
       case 'compress': {
         const files = globSync('assets/img/**/*.{png,jpg,jpeg,webp}', { cwd });
         for (const file of files) {
           const full = path.join(cwd, file);
           const tmp = full + '.tmp';
-          await compressImage(full, tmp);
-          fs.renameSync(tmp, full);
-          console.log('Compressed:', file);
+          try {
+            await compressImage(full, tmp);
+            fs.renameSync(tmp, full);
+            console.log('Compressed:', file);
+          } catch (err) {
+            if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
+            throw err;
+          }
         }
         break;
       }
@@ -117,7 +112,7 @@ if (require.main === module) {
         break;
       }
       default:
-        console.error('Usage: node images.js <compress|thumbnails|thumbnails-all|webp>');
+        console.error('Usage: npm run <compress|thumbnails|thumbnails-all|webp>');
         process.exit(1);
     }
   }
