@@ -1,43 +1,39 @@
-/**
- * @fileoverview Unit tests for build.js
- * @jest-environment node
- */
+import fs from 'node:fs';
+import path from 'node:path';
 
-'use strict';
-const fs = require('fs');
-const path = require('path');
+jest.mock('esbuild', () => ({ transform: jest.fn() }));
+jest.mock('less', () => ({ render: jest.fn() }));
+jest.mock('clean-css', () => jest.fn());
+jest.mock('glob', () => ({ globSync: jest.fn() }));
 
-jest.mock('esbuild', () => ({ transform: jest.fn() }), { virtual: true });
-jest.mock('less', () => ({ render: jest.fn() }), { virtual: true });
-jest.mock('clean-css', () => jest.fn(), { virtual: true });
-jest.mock('glob', () => ({ globSync: jest.fn() }), { virtual: true });
+import * as esbuild from 'esbuild';
+import less from 'less';
+import CleanCSS from 'clean-css';
+import { globSync } from 'glob';
+import { getJsPartials, concatFiles, buildJs, compileLess } from '../src/build';
 
-const esbuild = require('esbuild');
-const less = require('less');
-const CleanCSS = require('clean-css');
-const { globSync } = require('glob');
+const mockEsbuild = esbuild as jest.Mocked<typeof esbuild>;
+const mockLess = less as jest.Mocked<typeof less>;
+const mockGlobSync = globSync as jest.Mock;
 
-const { getJsPartials, concatFiles, buildJs, compileLess, minifyCSS } =
-  require('../../scripts/build');
-
-describe('build.js', () => {
+describe('build.ts', () => {
   describe('getJsPartials()', () => {
     test('returns a sorted file list from the partials directory', () => {
-      globSync.mockReturnValue(['/dir/c.js', '/dir/a.js', '/dir/b.js']);
+      mockGlobSync.mockReturnValue(['/dir/c.js', '/dir/a.js', '/dir/b.js']);
       const result = getJsPartials('/dir');
       expect(result).toEqual(['/dir/a.js', '/dir/b.js', '/dir/c.js']);
     });
 
     test('passes the correct glob pattern', () => {
-      globSync.mockReturnValue([]);
+      mockGlobSync.mockReturnValue([]);
       getJsPartials('/assets/js/partials');
-      expect(globSync).toHaveBeenCalledWith(
+      expect(mockGlobSync).toHaveBeenCalledWith(
         path.join('/assets/js/partials', '*.js')
       );
     });
 
     test('returns empty array when no files found', () => {
-      globSync.mockReturnValue([]);
+      mockGlobSync.mockReturnValue([]);
       expect(getJsPartials('/empty')).toEqual([]);
     });
   });
@@ -66,32 +62,29 @@ describe('build.js', () => {
     test('transforms concatenated source with minify enabled', async () => {
       jest.spyOn(fs, 'readFileSync').mockReturnValue('function foo() {}');
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      esbuild.transform.mockResolvedValue({ code: 'function foo(){}' });
+      mockEsbuild.transform.mockResolvedValue({ code: 'function foo(){}' } as any);
 
       await buildJs(['/partials/a.js'], '/out/main.min.js');
 
-      expect(esbuild.transform).toHaveBeenCalledWith(
+      expect(mockEsbuild.transform).toHaveBeenCalledWith(
         expect.any(String),
         { minify: true }
       );
     });
-
   });
 
   describe('compileLess()', () => {
     test('passes filename to less.render for import resolution', async () => {
       jest.spyOn(fs, 'readFileSync').mockReturnValue('');
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      less.render.mockResolvedValue({ css: '' });
+      mockLess.render.mockResolvedValue({ css: '' } as any);
 
       await compileLess('/path/to/input.less', '/output.css');
 
-      expect(less.render).toHaveBeenCalledWith(
+      expect(mockLess.render).toHaveBeenCalledWith(
         expect.any(String),
         expect.objectContaining({ filename: '/path/to/input.less' })
       );
     });
   });
-
 });
-

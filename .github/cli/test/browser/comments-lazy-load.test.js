@@ -38,7 +38,7 @@ describe('Comments Lazy Loading', () => {
     function loadCommentsScript() {
         const fs = require('fs');
         const path = require('path');
-        const scriptPath = path.join(__dirname, '../../../assets/js/comments-lazy-load.js');
+        const scriptPath = path.join(__dirname, '../../../../assets/js/comments-lazy-load.js');
         const scriptContent = fs.readFileSync(scriptPath, 'utf8');
         eval(scriptContent);
     }

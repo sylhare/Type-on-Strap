@@ -1,16 +1,8 @@
-/**
- * @fileoverview Unit tests for post.js
- * @jest-environment node
- */
+import fs from 'node:fs';
+import path from 'node:path';
+import { formatDate, formatTime, createFilename, createContent, createPost } from '../src/post';
 
-'use strict';
-const fs = require('fs');
-const path = require('path');
-
-const { formatDate, formatTime, createFilename, createContent, createPost } =
-  require('../../scripts/post');
-
-describe('post.js', () => {
+describe('post.ts', () => {
   const fixedDate = new Date('2024-01-15T10:30:00');
 
   describe('formatDate()', () => {

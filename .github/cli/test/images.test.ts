@@ -1,26 +1,29 @@
-/**
- * @fileoverview Unit tests for images.js
- * @jest-environment node
- */
+import path from 'node:path';
 
-'use strict';
-const path = require('path');
+jest.mock('sharp', () => jest.fn());
+jest.mock('glob', () => ({ globSync: jest.fn() }));
 
-jest.mock('sharp', () => jest.fn(), { virtual: true });
-jest.mock('glob', () => ({ globSync: jest.fn() }), { virtual: true });
-
-const sharp = require('sharp');
-const {
+import sharp from 'sharp';
+import {
   getOutputPath,
   getCompressionSettings,
   getThumbnailSettings,
   compressImage,
   createThumbnail,
   convertToWebp,
-} = require('../../scripts/images');
+} from '../src/images';
 
-describe('images.js', () => {
-  let mockPipeline;
+const mockSharp = sharp as jest.Mock;
+
+describe('images.ts', () => {
+  let mockPipeline: {
+    jpeg:     jest.Mock;
+    png:      jest.Mock;
+    webp:     jest.Mock;
+    resize:   jest.Mock;
+    metadata: jest.Mock;
+    toFile:   jest.Mock;
+  };
 
   beforeEach(() => {
     mockPipeline = {
@@ -31,7 +34,7 @@ describe('images.js', () => {
       metadata: jest.fn().mockResolvedValue({ width: 1000, height: 600 }),
       toFile:   jest.fn().mockResolvedValue({}),
     };
-    sharp.mockReturnValue(mockPipeline);
+    mockSharp.mockReturnValue(mockPipeline);
   });
 
   describe('getOutputPath()', () => {
@@ -59,13 +62,13 @@ describe('images.js', () => {
     test('returns compressionLevel for PNG', () => {
       const settings = getCompressionSettings('.png');
       expect(settings).toHaveProperty('compressionLevel');
-      expect(typeof settings.compressionLevel).toBe('number');
+      expect(typeof settings['compressionLevel']).toBe('number');
     });
 
     test('returns quality for JPEG', () => {
       const settings = getCompressionSettings('.jpg');
       expect(settings).toHaveProperty('quality');
-      expect(typeof settings.quality).toBe('number');
+      expect(typeof settings['quality']).toBe('number');
     });
 
     test('returns quality for WebP', () => {
@@ -75,12 +78,12 @@ describe('images.js', () => {
 
     test('accepts custom quality option', () => {
       const settings = getCompressionSettings('.jpg', { quality: 70 });
-      expect(settings.quality).toBe(70);
+      expect(settings['quality']).toBe(70);
     });
 
     test('accepts custom compressionLevel for PNG', () => {
       const settings = getCompressionSettings('.png', { compressionLevel: 9 });
-      expect(settings.compressionLevel).toBe(9);
+      expect(settings['compressionLevel']).toBe(9);
     });
   });
 
