@@ -9,7 +9,7 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 cd "$PROJECT_ROOT"
 
 # Version configuration
-KATEX_VERSION="0.16.28"
+KATEX_VERSION="0.16.38"
 
 # Colors for output
 GREEN='\033[0;32m'
