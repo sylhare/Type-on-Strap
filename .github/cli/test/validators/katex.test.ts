@@ -14,9 +14,7 @@ const mockFetchBuffer = fetchBuffer as jest.MockedFunction<typeof fetchBuffer>;
 
 const MOCK_CONFIG = JSON.stringify({ katex: { version: '0.16.38' } });
 const MOCK_HASH = 'a'.repeat(64);
-// SCSS with matching version
 const MOCK_SCSS = 'some content\ncontent: "0.16.38"\nmore content';
-// CDN CSS response with version
 const MOCK_CDN_CSS = Buffer.from('content: "0.16.38"');
 const realReadFileSync = (jest.requireActual('node:fs') as typeof import('node:fs')).readFileSync;
 
@@ -41,9 +39,9 @@ describe('validators/katex', () => {
 
   test('fails katex.min.js when hashes do not match', async () => {
     mockSha256Buffer
-      .mockReturnValueOnce('b'.repeat(64))  // katex.min.js fails
-      .mockReturnValueOnce(MOCK_HASH)        // auto-render passes
-      .mockReturnValue(MOCK_HASH);           // css check not reached via sha256Buffer
+      .mockReturnValueOnce('b'.repeat(64))
+      .mockReturnValueOnce(MOCK_HASH)
+      .mockReturnValue(MOCK_HASH);
 
     const result = await validate();
     expect(result.failures).toContain('katex.min.js');
@@ -52,7 +50,7 @@ describe('validators/katex', () => {
   test('fails scss version check when local version does not match', async () => {
     mockFs.readFileSync = jest.fn().mockImplementation((filePath: unknown, options?: any) => {
       if (String(filePath).endsWith('vendor.config.json')) return MOCK_CONFIG;
-      if (String(filePath).endsWith('.scss')) return 'content: "0.16.00"'; // wrong version
+      if (String(filePath).endsWith('.scss')) return 'content: "0.16.00"';
       return realReadFileSync(filePath as any, options);
     }) as jest.MockedFunction<typeof fs.readFileSync>;
 

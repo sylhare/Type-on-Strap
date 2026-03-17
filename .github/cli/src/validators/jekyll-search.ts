@@ -28,7 +28,6 @@ export async function validate(): Promise<ValidationResult> {
     return { passed: false, failures: ['simple-jekyll-search.min.js'] };
   }
 
-  // Extract local version from file header
   const localContent = fs.readFileSync(LOCAL_FILE, 'utf8');
   const localLines = localContent.split('\n').slice(0, 3).join('\n');
   const localVersionMatch = localLines.match(/v(\d+\.\d+\.\d+)/);
@@ -36,7 +35,6 @@ export async function validate(): Promise<ValidationResult> {
 
   logger.info(`Local version:  ${localVersion ?? 'Unable to detect'}`);
 
-  // Fetch latest release from GitHub API
   let latestVersion: string | null = null;
   let downloadUrl: string | null = null;
 
@@ -54,7 +52,6 @@ export async function validate(): Promise<ValidationResult> {
     return { passed: failures.length === 0, failures };
   }
 
-  // Compare versions
   if (localVersion === latestVersion) {
     logger.info('✓ Version matches');
   } else {
@@ -64,7 +61,6 @@ export async function validate(): Promise<ValidationResult> {
     failures.push('version mismatch');
   }
 
-  // Compare file content
   if (downloadUrl) {
     logger.info('\nContent check:');
     try {

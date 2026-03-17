@@ -53,7 +53,6 @@ describe('validators/jekyll-search', () => {
   test('passes gracefully when GitHub API is unreachable', async () => {
     mockFetchJson.mockRejectedValue(new Error('Network error'));
     const result = await validate();
-    // When API is unreachable, we cannot verify — treat as inconclusive (passed)
     expect(result.failures).toHaveLength(0);
   });
 

@@ -23,12 +23,14 @@ const config: Config = {
       testEnvironment: 'node',
       testMatch: ['<rootDir>/test/integration/**/*.test.js'],
       roots: ['<rootDir>/test/integration'],
+      transform: {
+        '^.+\\.tsx?$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json', diagnostics: false }],
+      },
     },
   ],
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  verbose: true,
 };
 
 export default config;

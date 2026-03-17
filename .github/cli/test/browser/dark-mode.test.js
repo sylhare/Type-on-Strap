@@ -1,8 +1,3 @@
-/**
- * @fileoverview Unit tests for dark-mode.js functionality
- * @module dark-mode.test
- */
-
 describe('Dark Mode', () => {
   let setMode, themeToggle, currentTheme, bootstrapTheme;
 
@@ -27,16 +22,8 @@ describe('Dark Mode', () => {
       'dark': `<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${global.lightBtn}</span>`,
     };
 
-    /**
-     * Gets the current theme from localStorage
-     * @returns {string|null} The current theme or null
-     */
     currentTheme = () => localStorage.getItem('theme');
 
-    /**
-     * Sets the theme mode and updates DOM
-     * @param {string} theme - The theme to set ('light' or 'dark')
-     */
     setMode = (theme) => {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
@@ -46,9 +33,6 @@ describe('Dark Mode', () => {
       }
     };
 
-    /**
-     * Toggles between light and dark themes
-     */
     themeToggle = () => {
       let sessionPrefers = currentTheme();
       if (sessionPrefers === 'light') {
@@ -58,9 +42,6 @@ describe('Dark Mode', () => {
       }
     };
 
-    /**
-     * Initializes theme based on browser preference and localStorage
-     */
     bootstrapTheme = () => {
       if (global.isAutoTheme) {
         if (!currentTheme()) {
@@ -137,11 +118,11 @@ describe('Dark Mode', () => {
 
     test('should toggle multiple times correctly', () => {
       setMode('light');
-      themeToggle(); // -> dark
+      themeToggle();
       expect(currentTheme()).toBe('dark');
-      themeToggle(); // -> light
+      themeToggle();
       expect(currentTheme()).toBe('light');
-      themeToggle(); // -> dark
+      themeToggle();
       expect(currentTheme()).toBe('dark');
     });
   });

@@ -1,8 +1,3 @@
-/**
- * @fileoverview Unit tests for comments-lazy-load.js functionality
- * @module comments-lazy-load.test
- */
-
 const {
     cusdisContainer,
     disqusContainer,

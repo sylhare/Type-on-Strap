@@ -33,7 +33,6 @@ describe('fs utils', () => {
       fs.writeFileSync(tmp, 'VERSION="1.0.0"');
       const spy = jest.spyOn(fs, 'writeFileSync');
       try {
-        // Pattern matches but replacement produces same content
         updateVersionInFile(tmp, /VERSION="1.0.0"/, 'VERSION="1.0.0"');
         expect(spy).not.toHaveBeenCalledWith(tmp, expect.anything());
       } finally {

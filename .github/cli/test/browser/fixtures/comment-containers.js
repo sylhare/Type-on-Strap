@@ -1,6 +1,3 @@
-/**
- * Helper to build HTML attributes from an object
- */
 function buildAttributes(attrs) {
     return Object.entries(attrs)
         .filter(([_, value]) => value !== undefined && value !== null)

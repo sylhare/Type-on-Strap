@@ -10,7 +10,7 @@ on:
       - '_sass/external/font-awesome/**'
       - '_sass/external/_font-awesome.scss'
       - '_includes/default/head.liquid'
-      - '.github/scripts/**'
+      - '.github/cli/src/validators/**'
   pull_request:
     paths:
       - 'assets/js/vendor/**'
@@ -20,59 +20,37 @@ on:
       - '_sass/external/font-awesome/**'
       - '_sass/external/_font-awesome.scss'
       - '_includes/default/head.liquid'
-      - '.github/scripts/**'
-  workflow_dispatch: # Allow manual triggering
+      - '.github/cli/src/validators/**'
+  workflow_dispatch:
 
 jobs:
   test-vendor-dependencies:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
-    - name: Set up Ruby
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/*'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Validate vendor dependencies
+      run: npm run validate
+
+    - name: Test Jekyll build
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.4'
         bundler-cache: true
-        
-    - name: Install Jekyll dependencies
-      run: |
-        bundle install
-        
-    - name: Make scripts executable
-      run: |
-        chmod +x .github/scripts/*.sh
-    
-    - name: Validate Font Awesome
-      run: |
-        .github/scripts/validate-font-awesome.sh
 
-    - name: Validate KaTeX
-      run: |
-        .github/scripts/validate-katex.sh
-        
-    - name: Validate Mermaid
-      run: |
-        .github/scripts/validate-mermaid.sh
-        
-    - name: Validate Masonry
-      run: |
-        .github/scripts/validate-masonry.sh
-        
-    - name: Validate imagesLoaded
-      run: |
-        .github/scripts/validate-imagesloaded.sh
-        
-    - name: Validate Simple-Jekyll-Search
-      run: |
-        .github/scripts/validate-jekyll-search.sh
-        
-    - name: Test Jekyll build
-      run: |
-        bundle exec jekyll build --verbose
-        
+    - name: Build site
+      run: bundle exec jekyll build --verbose
+
     - name: Check for build warnings
       run: |
         if bundle exec jekyll build 2>&1 | grep -i "warning\|error"; then
@@ -81,18 +59,16 @@ jobs:
         else
           echo "✅ No build warnings/errors"
         fi
-        
+
     - name: Verify asset generation
       run: |
         echo "Checking generated assets..."
         ls -la _site/assets/js/vendor/
         ls -la _site/assets/fonts/katex/ | head -10
         ls -la _site/assets/fonts/font-awesome/
-        
-        # Check file sizes are reasonable
         echo "File sizes:"
         ls -lh _site/assets/js/vendor/*.js
-        
+
     - name: Test production build
       run: |
         JEKYLL_ENV=production bundle exec jekyll build

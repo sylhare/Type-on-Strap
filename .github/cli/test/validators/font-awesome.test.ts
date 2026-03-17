@@ -32,7 +32,6 @@ describe('validators/font-awesome', () => {
     const result = await validate();
     expect(result.passed).toBe(true);
     expect(result.failures).toHaveLength(0);
-    // 6 font files + 19 SCSS files = 25 total
     expect(mockFetchBuffer).toHaveBeenCalledTimes(25);
   });
 

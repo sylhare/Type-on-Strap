@@ -1,16 +1,10 @@
-/**
- * @fileoverview Integration tests for build.js — run against real source files,
- * no mocks, output written to a temp directory so nothing in the repo is modified.
- * @jest-environment node
- */
-
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const ROOT = path.resolve(__dirname, '../../../');
-const { buildJs, compileLess, minifyCSS, getJsPartials } = require('../../scripts/build');
+const ROOT = path.resolve(__dirname, '../../../../');
+const { buildJs, compileLess, minifyCSS, getJsPartials } = require('../../src/build');
 
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-build-'));
 

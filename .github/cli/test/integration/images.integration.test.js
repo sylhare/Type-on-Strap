@@ -1,9 +1,3 @@
-/**
- * @fileoverview Integration tests for images.js — uses real sharp operations on
- * a synthetic PNG created in a temp directory. Nothing in assets/ is modified.
- * @jest-environment node
- */
-
 'use strict';
 const fs   = require('fs');
 const path = require('path');
@@ -11,7 +5,7 @@ const os   = require('os');
 const { randomBytes } = require('crypto');
 const sharp = require('sharp');
 
-const { compressImage, createThumbnail, convertToWebp } = require('../../scripts/images');
+const { compressImage, createThumbnail, convertToWebp } = require('../../src/images');
 
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-images-'));
 const SOURCE_PNG = path.join(TMP, 'source.png');
