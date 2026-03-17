@@ -13,6 +13,7 @@
     "build":          "node .github/scripts/build.js",
     "test":           "cd .github/tests && npm run test:unit",
     "test:integration": "cd .github/tests && npm run test:integration",
+    "update:katex":     "node .github/scripts/update-katex.js",
     "update:mermaid":   "node .github/scripts/update-mermaid.js"
   },
   "repository": {
