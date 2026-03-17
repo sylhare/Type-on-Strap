@@ -30,21 +30,21 @@ describe('validators/mermaid', () => {
 
   test('passes when local and remote hashes match', async () => {
     const result = await validate();
-    expect(result.passed).toBe(true);
+    expect(result.passed).toEqual(true);
     expect(result.failures).toHaveLength(0);
   });
 
   test('fails when hashes do not match', async () => {
     mockSha256Buffer.mockReturnValue('b'.repeat(64));
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
     expect(result.failures).toContain('mermaid.min.js');
   });
 
   test('fails when local file does not exist', async () => {
     mockFs.existsSync = jest.fn().mockReturnValue(false);
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
     expect(result.failures).toContain('mermaid.min.js');
   });
 

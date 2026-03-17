@@ -21,7 +21,7 @@ describe('build:js integration', () => {
   });
 
   test('creates output file', () => {
-    expect(fs.existsSync(outFile)).toBe(true);
+    expect(fs.existsSync(outFile)).toEqual(true);
   });
 
   test('output is non-empty', () => {
@@ -30,7 +30,7 @@ describe('build:js integration', () => {
 
   test('output is minified (single line)', () => {
     const content = fs.readFileSync(outFile, 'utf8').trim();
-    expect(content.split('\n').length).toBe(1);
+    expect(content.split('\n').length).toEqual(1);
   });
 
   test('output is smaller than concatenated source', () => {
@@ -51,7 +51,7 @@ describe('build:css integration', () => {
   });
 
   test('compileLess creates the CSS output file', () => {
-    expect(fs.existsSync(cssOut)).toBe(true);
+    expect(fs.existsSync(cssOut)).toEqual(true);
   });
 
   test('compiled CSS does not contain .bootstrap-iso html', () => {
@@ -70,7 +70,7 @@ describe('build:css integration', () => {
   });
 
   test('minified CSS file is created', () => {
-    expect(fs.existsSync(minOut)).toBe(true);
+    expect(fs.existsSync(minOut)).toEqual(true);
   });
 
   test('minified CSS is smaller than compiled CSS', () => {

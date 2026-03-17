@@ -44,17 +44,17 @@ describe('images.ts', () => {
         '/project/assets/img/feature-img',
         '/project/assets/img/thumbnails/feature-img'
       );
-      expect(result).toBe('/project/assets/img/thumbnails/feature-img/photo.jpg');
+      expect(result).toEqual('/project/assets/img/thumbnails/feature-img/photo.jpg');
     });
 
     test('preserves filename in output path', () => {
       const result = getOutputPath('/img/a/b.png', '/img/a', '/out');
-      expect(path.basename(result)).toBe('b.png');
+      expect(path.basename(result)).toEqual('b.png');
     });
 
     test('preserves subdirectory structure', () => {
       const result = getOutputPath('/img/sub/dir/file.jpg', '/img', '/out');
-      expect(result).toBe('/out/sub/dir/file.jpg');
+      expect(result).toEqual('/out/sub/dir/file.jpg');
     });
   });
 
@@ -62,13 +62,13 @@ describe('images.ts', () => {
     test('returns compressionLevel for PNG', () => {
       const settings = getCompressionSettings('.png');
       expect(settings).toHaveProperty('compressionLevel');
-      expect(typeof settings['compressionLevel']).toBe('number');
+      expect(typeof settings['compressionLevel']).toEqual('number');
     });
 
     test('returns quality for JPEG', () => {
       const settings = getCompressionSettings('.jpg');
       expect(settings).toHaveProperty('quality');
-      expect(typeof settings['quality']).toBe('number');
+      expect(typeof settings['quality']).toEqual('number');
     });
 
     test('returns quality for WebP', () => {
@@ -78,32 +78,32 @@ describe('images.ts', () => {
 
     test('accepts custom quality option', () => {
       const settings = getCompressionSettings('.jpg', { quality: 70 });
-      expect(settings['quality']).toBe(70);
+      expect(settings['quality']).toEqual(70);
     });
 
     test('accepts custom compressionLevel for PNG', () => {
       const settings = getCompressionSettings('.png', { compressionLevel: 9 });
-      expect(settings['compressionLevel']).toBe(9);
+      expect(settings['compressionLevel']).toEqual(9);
     });
   });
 
   describe('getThumbnailSettings()', () => {
     test('returns width as a number', () => {
       const result = getThumbnailSettings(1000);
-      expect(typeof result.width).toBe('number');
+      expect(typeof result.width).toEqual('number');
     });
 
     test('returns 50% of imageWidth by default', () => {
-      expect(getThumbnailSettings(1000).width).toBe(500);
+      expect(getThumbnailSettings(1000).width).toEqual(500);
     });
 
     test('rounds the width to an integer', () => {
       const result = getThumbnailSettings(101);
-      expect(Number.isInteger(result.width)).toBe(true);
+      expect(Number.isInteger(result.width)).toEqual(true);
     });
 
     test('respects custom ratio option', () => {
-      expect(getThumbnailSettings(1000, { ratio: 0.25 }).width).toBe(250);
+      expect(getThumbnailSettings(1000, { ratio: 0.25 }).width).toEqual(250);
     });
   });
 

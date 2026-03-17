@@ -29,7 +29,7 @@ describe('http utils', () => {
       });
 
       const buf = await fetchBuffer('https://example.com/file');
-      expect(buf.toString()).toBe('hello world');
+      expect(buf.toString()).toEqual('hello world');
     });
 
     test('rejects on non-200 status', async () => {
@@ -61,8 +61,8 @@ describe('http utils', () => {
       });
 
       const buf = await fetchBuffer('https://example.com/redirect');
-      expect(buf.toString()).toBe('redirected');
-      expect(callCount).toBe(2);
+      expect(buf.toString()).toEqual('redirected');
+      expect(callCount).toEqual(2);
     });
   });
 
@@ -77,7 +77,7 @@ describe('http utils', () => {
       });
 
       const data = await fetchJson<{ version: string }>('https://example.com/api');
-      expect(data.version).toBe('1.0.0');
+      expect(data.version).toEqual('1.0.0');
     });
   });
 

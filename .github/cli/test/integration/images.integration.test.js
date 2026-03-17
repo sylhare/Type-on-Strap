@@ -29,13 +29,13 @@ afterAll(() => {
 describe('source image', () => {
   test('is a valid PNG', async () => {
     const meta = await sharp(SOURCE_PNG).metadata();
-    expect(meta.format).toBe('png');
+    expect(meta.format).toEqual('png');
   });
 
   test('has correct dimensions', async () => {
     const meta = await sharp(SOURCE_PNG).metadata();
-    expect(meta.width).toBe(SOURCE_WIDTH);
-    expect(meta.height).toBe(SOURCE_HEIGHT);
+    expect(meta.width).toEqual(SOURCE_WIDTH);
+    expect(meta.height).toEqual(SOURCE_HEIGHT);
   });
 });
 
@@ -47,22 +47,22 @@ describe('createThumbnail() integration', () => {
   });
 
   test('creates the thumbnail file', () => {
-    expect(fs.existsSync(thumbOut)).toBe(true);
+    expect(fs.existsSync(thumbOut)).toEqual(true);
   });
 
   test('thumbnail width is exactly 50% of source', async () => {
     const meta = await sharp(thumbOut).metadata();
-    expect(meta.width).toBe(SOURCE_WIDTH / 2);
+    expect(meta.width).toEqual(SOURCE_WIDTH / 2);
   });
 
   test('thumbnail height scales proportionally', async () => {
     const meta = await sharp(thumbOut).metadata();
-    expect(meta.height).toBe(SOURCE_HEIGHT / 2);
+    expect(meta.height).toEqual(SOURCE_HEIGHT / 2);
   });
 
   test('thumbnail is a valid image', async () => {
     const meta = await sharp(thumbOut).metadata();
-    expect(meta.format).toBe('png');
+    expect(meta.format).toEqual('png');
   });
 });
 
@@ -74,18 +74,18 @@ describe('compressImage() integration', () => {
   });
 
   test('creates the compressed output file', () => {
-    expect(fs.existsSync(compressedOut)).toBe(true);
+    expect(fs.existsSync(compressedOut)).toEqual(true);
   });
 
   test('output has the same dimensions as the source', async () => {
     const meta = await sharp(compressedOut).metadata();
-    expect(meta.width).toBe(SOURCE_WIDTH);
-    expect(meta.height).toBe(SOURCE_HEIGHT);
+    expect(meta.width).toEqual(SOURCE_WIDTH);
+    expect(meta.height).toEqual(SOURCE_HEIGHT);
   });
 
   test('output is a valid PNG', async () => {
     const meta = await sharp(compressedOut).metadata();
-    expect(meta.format).toBe('png');
+    expect(meta.format).toEqual('png');
   });
 
   test('output is smaller than the source', () => {
@@ -101,18 +101,18 @@ describe('convertToWebp() integration', () => {
   });
 
   test('creates the WebP output file', () => {
-    expect(fs.existsSync(webpOut)).toBe(true);
+    expect(fs.existsSync(webpOut)).toEqual(true);
   });
 
   test('output format is webp', async () => {
     const meta = await sharp(webpOut).metadata();
-    expect(meta.format).toBe('webp');
+    expect(meta.format).toEqual('webp');
   });
 
   test('output has the same dimensions as the source', async () => {
     const meta = await sharp(webpOut).metadata();
-    expect(meta.width).toBe(SOURCE_WIDTH);
-    expect(meta.height).toBe(SOURCE_HEIGHT);
+    expect(meta.width).toEqual(SOURCE_WIDTH);
+    expect(meta.height).toEqual(SOURCE_HEIGHT);
   });
 
   test('output is smaller than the source', () => {

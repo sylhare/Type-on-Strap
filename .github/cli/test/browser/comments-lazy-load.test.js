@@ -102,9 +102,9 @@ describe('Comments Lazy Loading', () => {
 
             const scripts = Array.from(document.querySelectorAll('script'));
             if (shouldLoad) {
-                expect(scripts.some(s => s.src.includes(scriptMatch))).toBe(true);
+                expect(scripts.some(s => s.src.includes(scriptMatch))).toEqual(true);
             } else {
-                expect(scripts.length).toBe(0);
+                expect(scripts.length).toEqual(0);
             }
         });
 
@@ -129,7 +129,7 @@ describe('Comments Lazy Loading', () => {
 
             const scripts = Array.from(document.querySelectorAll('script'));
             const cusdisScripts = scripts.filter(s => s.src.includes('cusdis.es.js'));
-            expect(cusdisScripts.length).toBe(1);
+            expect(cusdisScripts.length).toEqual(1);
         });
     });
 
@@ -149,7 +149,7 @@ describe('Comments Lazy Loading', () => {
             loadCommentsScript();
 
             const scripts = Array.from(document.querySelectorAll('script'));
-            expect(scripts.some(s => s.src.includes('cusdis.es.js'))).toBe(true);
+            expect(scripts.some(s => s.src.includes('cusdis.es.js'))).toEqual(true);
         });
 
         test('should load on window load event if document not complete', () => {
@@ -163,12 +163,12 @@ describe('Comments Lazy Loading', () => {
             loadCommentsScript();
 
             let scripts = Array.from(document.querySelectorAll('script'));
-            expect(scripts.length).toBe(0);
+            expect(scripts.length).toEqual(0);
 
             window.dispatchEvent(new Event('load'));
 
             scripts = Array.from(document.querySelectorAll('script'));
-            expect(scripts.some(s => s.src.includes('cusdis.es.js'))).toBe(true);
+            expect(scripts.some(s => s.src.includes('cusdis.es.js'))).toEqual(true);
         });
     });
 
@@ -181,7 +181,7 @@ describe('Comments Lazy Loading', () => {
             const scripts = Array.from(document.querySelectorAll('script'));
             const mainScript = scripts.find(s => s.src === 'https://cusdis.com/js/cusdis.es.js');
             expect(mainScript).toBeTruthy();
-            expect(mainScript.async).toBe(true);
+            expect(mainScript.async).toEqual(true);
         });
 
         test.each([
@@ -196,10 +196,10 @@ describe('Comments Lazy Loading', () => {
             if (shouldLoad) {
                 const langScript = scripts.find(s => s.src === scriptMatch);
                 expect(langScript).toBeTruthy();
-                expect(langScript.async).toBe(true);
+                expect(langScript.async).toEqual(true);
             } else {
                 const langScripts = scripts.filter(s => s.src.includes(scriptMatch));
-                expect(langScripts.length).toBe(0);
+                expect(langScripts.length).toEqual(0);
             }
         });
     });
@@ -215,7 +215,7 @@ describe('Comments Lazy Loading', () => {
             );
             const disqusScript = scripts.find(s => s.src.includes('mysite.disqus.com/embed.js'));
             expect(disqusScript).toBeTruthy();
-            expect(disqusScript.async).toBe(true);
+            expect(disqusScript.async).toEqual(true);
         });
 
         test('should set window.disqus_shortname', () => {
@@ -223,7 +223,7 @@ describe('Comments Lazy Loading', () => {
             loadCommentsScript();
             observerCallback([{ isIntersecting: true }]);
 
-            expect(window.disqus_shortname).toBe('mysite');
+            expect(window.disqus_shortname).toEqual('mysite');
         });
 
         test('should log error when shortname is missing', () => {
@@ -250,12 +250,12 @@ describe('Comments Lazy Loading', () => {
 
             const giscusScript = document.querySelector('#giscus_thread script[src="https://giscus.app/client.js"]');
             expect(giscusScript).toBeTruthy();
-            expect(giscusScript.async).toBe(true);
-            expect(giscusScript.crossOrigin).toBe('anonymous');
-            expect(giscusScript.getAttribute('data-repo')).toBe('user/repo');
-            expect(giscusScript.getAttribute('data-repo-id')).toBe('123');
-            expect(giscusScript.getAttribute('data-category')).toBe('General');
-            expect(giscusScript.getAttribute('data-theme')).toBe('light');
+            expect(giscusScript.async).toEqual(true);
+            expect(giscusScript.crossOrigin).toEqual('anonymous');
+            expect(giscusScript.getAttribute('data-repo')).toEqual('user/repo');
+            expect(giscusScript.getAttribute('data-repo-id')).toEqual('123');
+            expect(giscusScript.getAttribute('data-category')).toEqual('General');
+            expect(giscusScript.getAttribute('data-theme')).toEqual('light');
         });
 
         test('should not transfer data-lazy-load attribute to script', () => {
@@ -281,12 +281,12 @@ describe('Comments Lazy Loading', () => {
 
             const utterancesScript = document.querySelector('#utterances_thread script[src="https://utteranc.es/client.js"]');
             expect(utterancesScript).toBeTruthy();
-            expect(utterancesScript.async).toBe(true);
-            expect(utterancesScript.crossOrigin).toBe('anonymous');
-            expect(utterancesScript.getAttribute('repo')).toBe('user/repo');
-            expect(utterancesScript.getAttribute('issue-term')).toBe('pathname');
-            expect(utterancesScript.getAttribute('theme')).toBe('github-light');
-            expect(utterancesScript.getAttribute('label')).toBe('comments');
+            expect(utterancesScript.async).toEqual(true);
+            expect(utterancesScript.crossOrigin).toEqual('anonymous');
+            expect(utterancesScript.getAttribute('repo')).toEqual('user/repo');
+            expect(utterancesScript.getAttribute('issue-term')).toEqual('pathname');
+            expect(utterancesScript.getAttribute('theme')).toEqual('github-light');
+            expect(utterancesScript.getAttribute('label')).toEqual('comments');
         });
 
         test('should handle optional label attribute', () => {
@@ -357,14 +357,14 @@ describe('Comments Lazy Loading', () => {
                 if (selector && scriptUrl) {
                     const systemScript = document.querySelector(selector);
                     expect(systemScript).toBeTruthy();
-                    expect(systemScript.src).toBe(scriptUrl);
+                    expect(systemScript.src).toEqual(scriptUrl);
                 }
 
                 const scripts = getAllScripts();
-                expect(scripts.some(s => s.src.includes(scriptMatch))).toBe(true);
+                expect(scripts.some(s => s.src.includes(scriptMatch))).toEqual(true);
 
                 otherSystems.forEach(otherSystem => {
-                    expect(scripts.some(s => s.src.includes(otherSystem))).toBe(false);
+                    expect(scripts.some(s => s.src.includes(otherSystem))).toEqual(false);
                 });
             }
         );

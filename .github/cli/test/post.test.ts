@@ -7,7 +7,7 @@ describe('post.ts', () => {
 
   describe('formatDate()', () => {
     test('returns YYYY-MM-DD format', () => {
-      expect(formatDate(fixedDate)).toBe('2024-01-15');
+      expect(formatDate(fixedDate)).toEqual('2024-01-15');
     });
 
     test('pads month and day with leading zeros', () => {
@@ -24,12 +24,12 @@ describe('post.ts', () => {
 
   describe('createFilename()', () => {
     test('slugifies title by replacing spaces with hyphens', () => {
-      expect(createFilename('Hello World', fixedDate)).toBe('2024-01-15-Hello-World.md');
+      expect(createFilename('Hello World', fixedDate)).toEqual('2024-01-15-Hello-World.md');
     });
 
     test('prepends date to title', () => {
       const filename = createFilename('My Post Title', fixedDate);
-      expect(filename).toBe('2024-01-15-My-Post-Title.md');
+      expect(filename).toEqual('2024-01-15-My-Post-Title.md');
     });
 
     test('has .md extension', () => {
@@ -52,8 +52,8 @@ describe('post.ts', () => {
 
     test('starts and ends with frontmatter delimiters', () => {
       const content = createContent('Test');
-      expect(content.startsWith('---')).toBe(true);
-      expect(content.endsWith('---')).toBe(true);
+      expect(content.startsWith('---')).toEqual(true);
+      expect(content.endsWith('---')).toEqual(true);
     });
   });
 
@@ -89,9 +89,9 @@ describe('post.ts', () => {
       const postsDir = '/tmp/posts';
       const result = createPost('Hello World', postsDir, fixedDate);
 
-      expect(result.filename).toBe('2024-01-15-Hello-World.md');
-      expect(result.filepath).toBe(path.join(postsDir, '2024-01-15-Hello-World.md'));
-      expect(typeof result.content).toBe('string');
+      expect(result.filename).toEqual('2024-01-15-Hello-World.md');
+      expect(result.filepath).toEqual(path.join(postsDir, '2024-01-15-Hello-World.md'));
+      expect(typeof result.content).toEqual('string');
     });
 
     test('logs the created file name', () => {

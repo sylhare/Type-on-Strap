@@ -61,19 +61,19 @@ describe('Dark Mode', () => {
 
     test('should return theme from localStorage', () => {
       localStorage.setItem('theme', 'dark');
-      expect(currentTheme()).toBe('dark');
+      expect(currentTheme()).toEqual('dark');
     });
   });
 
   describe('setMode()', () => {
     test('should set data-theme attribute on document', () => {
       setMode('dark');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('dark');
     });
 
     test('should save theme to localStorage', () => {
       setMode('dark');
-      expect(localStorage.getItem('theme')).toBe('dark');
+      expect(localStorage.getItem('theme')).toEqual('dark');
     });
 
     test('should update theme toggle button innerHTML', () => {
@@ -85,7 +85,7 @@ describe('Dark Mode', () => {
 
     test('should handle light mode correctly', () => {
       setMode('light');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('light');
       const toggle = document.getElementById('theme-toggle');
       expect(toggle.innerHTML).toContain('Dark');
     });
@@ -100,30 +100,30 @@ describe('Dark Mode', () => {
     test('should toggle from light to dark', () => {
       setMode('light');
       themeToggle();
-      expect(currentTheme()).toBe('dark');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+      expect(currentTheme()).toEqual('dark');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('dark');
     });
 
     test('should toggle from dark to light', () => {
       setMode('dark');
       themeToggle();
-      expect(currentTheme()).toBe('light');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+      expect(currentTheme()).toEqual('light');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('light');
     });
 
     test('should default to light when no theme is set', () => {
       themeToggle();
-      expect(currentTheme()).toBe('light');
+      expect(currentTheme()).toEqual('light');
     });
 
     test('should toggle multiple times correctly', () => {
       setMode('light');
       themeToggle();
-      expect(currentTheme()).toBe('dark');
+      expect(currentTheme()).toEqual('dark');
       themeToggle();
-      expect(currentTheme()).toBe('light');
+      expect(currentTheme()).toEqual('light');
       themeToggle();
-      expect(currentTheme()).toBe('dark');
+      expect(currentTheme()).toEqual('dark');
     });
   });
 
@@ -136,15 +136,15 @@ describe('Dark Mode', () => {
       });
 
       bootstrapTheme();
-      expect(currentTheme()).toBe('light');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+      expect(currentTheme()).toEqual('light');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('light');
     });
 
     test('should respect existing localStorage theme', () => {
       localStorage.setItem('theme', 'dark');
       bootstrapTheme();
-      expect(currentTheme()).toBe('dark');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+      expect(currentTheme()).toEqual('dark');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('dark');
     });
 
     test('should respect browser preference for dark mode', () => {
@@ -159,8 +159,8 @@ describe('Dark Mode', () => {
       bootstrapTheme();
 
       expect(window.matchMedia).toHaveBeenCalledWith('(prefers-color-scheme: dark)');
-      expect(currentTheme()).toBe('dark');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+      expect(currentTheme()).toEqual('dark');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('dark');
     });
 
     test('should default to light mode when browser prefers light', () => {
@@ -174,8 +174,8 @@ describe('Dark Mode', () => {
 
       bootstrapTheme();
 
-      expect(currentTheme()).toBe('light');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+      expect(currentTheme()).toEqual('light');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('light');
     });
 
     test('should not set theme when isAutoTheme is false', () => {
@@ -199,12 +199,12 @@ describe('Dark Mode', () => {
       });
 
       setMode('dark');
-      expect(localStorage.getItem('theme')).toBe('dark');
+      expect(localStorage.getItem('theme')).toEqual('dark');
 
       document.documentElement.removeAttribute('data-theme');
 
       bootstrapTheme();
-      expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('dark');
     });
 
     test('should maintain theme through multiple toggles', () => {
@@ -213,8 +213,8 @@ describe('Dark Mode', () => {
       themeToggle();
       themeToggle();
 
-      expect(localStorage.getItem('theme')).toBe('dark');
-      expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+      expect(localStorage.getItem('theme')).toEqual('dark');
+      expect(document.documentElement.getAttribute('data-theme')).toEqual('dark');
     });
   });
 });

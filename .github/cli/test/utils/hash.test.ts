@@ -12,17 +12,17 @@ describe('hash utils', () => {
 
     test('returns deterministic output for the same input', () => {
       const buf = Buffer.from('test data');
-      expect(sha256Buffer(buf)).toBe(sha256Buffer(buf));
+      expect(sha256Buffer(buf)).toEqual(sha256Buffer(buf));
     });
 
     test('returns different hashes for different inputs', () => {
-      expect(sha256Buffer(Buffer.from('a'))).not.toBe(sha256Buffer(Buffer.from('b')));
+      expect(sha256Buffer(Buffer.from('a'))).not.toEqual(sha256Buffer(Buffer.from('b')));
     });
 
     test('matches Node crypto SHA256 output', () => {
       const { createHash } = require('node:crypto');
       const expected = createHash('sha256').update(Buffer.from('abc')).digest('hex');
-      expect(sha256Buffer(Buffer.from('abc'))).toBe(expected);
+      expect(sha256Buffer(Buffer.from('abc'))).toEqual(expected);
     });
   });
 
@@ -34,7 +34,7 @@ describe('hash utils', () => {
       try {
         const fileHash = await sha256File(tmp);
         const bufHash = sha256Buffer(content);
-        expect(fileHash).toBe(bufHash);
+        expect(fileHash).toEqual(bufHash);
       } finally {
         fs.unlinkSync(tmp);
       }

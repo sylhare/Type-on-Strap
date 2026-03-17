@@ -33,7 +33,7 @@ describe('validators/katex', () => {
 
   test('passes when all checks succeed', async () => {
     const result = await validate();
-    expect(result.passed).toBe(true);
+    expect(result.passed).toEqual(true);
     expect(result.failures).toHaveLength(0);
   });
 
@@ -61,6 +61,6 @@ describe('validators/katex', () => {
   test('fails when local JS file does not exist', async () => {
     mockFs.existsSync = jest.fn().mockReturnValue(false);
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
   });
 });

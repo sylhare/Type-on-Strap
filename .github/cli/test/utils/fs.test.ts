@@ -48,7 +48,7 @@ describe('fs utils', () => {
       try {
         updateVendorConfig(tmp, 'mermaid', '11.13.0');
         const updated = JSON.parse(fs.readFileSync(tmp, 'utf8'));
-        expect(updated.mermaid.version).toBe('11.13.0');
+        expect(updated.mermaid.version).toEqual('11.13.0');
       } finally {
         fs.unlinkSync(tmp);
       }
@@ -60,8 +60,8 @@ describe('fs utils', () => {
       try {
         updateVendorConfig(tmp, 'mermaid', '11.13.0');
         const updated = JSON.parse(fs.readFileSync(tmp, 'utf8'));
-        expect(updated.katex.version).toBe('0.16.0');
-        expect(updated.mermaid.version).toBe('11.13.0');
+        expect(updated.katex.version).toEqual('0.16.0');
+        expect(updated.mermaid.version).toEqual('11.13.0');
       } finally {
         fs.unlinkSync(tmp);
       }

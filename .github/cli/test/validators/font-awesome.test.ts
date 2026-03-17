@@ -30,7 +30,7 @@ describe('validators/font-awesome', () => {
 
   test('passes when all 25 files match (6 fonts + 19 SCSS)', async () => {
     const result = await validate();
-    expect(result.passed).toBe(true);
+    expect(result.passed).toEqual(true);
     expect(result.failures).toHaveLength(0);
     expect(mockFetchBuffer).toHaveBeenCalledTimes(25);
   });
@@ -39,15 +39,15 @@ describe('validators/font-awesome', () => {
     // First call fails
     mockSha256Buffer.mockReturnValueOnce('b'.repeat(64));
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
     expect(result.failures.length).toBeGreaterThan(0);
   });
 
   test('fails when a local file does not exist', async () => {
     mockFs.existsSync = jest.fn().mockReturnValue(false);
     const result = await validate();
-    expect(result.passed).toBe(false);
-    expect(result.failures.length).toBe(25);
+    expect(result.passed).toEqual(false);
+    expect(result.failures.length).toEqual(25);
   });
 
   test('uses cdnjs for font files', async () => {

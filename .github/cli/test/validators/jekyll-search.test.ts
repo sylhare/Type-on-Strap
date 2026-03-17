@@ -32,21 +32,21 @@ describe('validators/jekyll-search', () => {
 
   test('passes when version and content match', async () => {
     const result = await validate();
-    expect(result.passed).toBe(true);
+    expect(result.passed).toEqual(true);
     expect(result.failures).toHaveLength(0);
   });
 
   test('fails when version does not match latest', async () => {
     mockFetchJson.mockResolvedValue({ tag_name: 'v1.11.0' });
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
     expect(result.failures).toContain('version mismatch');
   });
 
   test('fails when content hash does not match', async () => {
     mockSha256Buffer.mockReturnValue('b'.repeat(64));
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
     expect(result.failures).toContain('content mismatch');
   });
 
@@ -59,6 +59,6 @@ describe('validators/jekyll-search', () => {
   test('fails when local file does not exist', async () => {
     mockFs.existsSync = jest.fn().mockReturnValue(false);
     const result = await validate();
-    expect(result.passed).toBe(false);
+    expect(result.passed).toEqual(false);
   });
 });

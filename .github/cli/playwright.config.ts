@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'node:path';
 
 /**
  * Playwright configuration for Type-on-Strap theme e2e tests
@@ -58,6 +59,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'bundle exec jekyll build --baseurl "" --quiet && npm run server',
+    cwd: path.resolve(__dirname, '../..'),
     url: 'http://localhost:4000',
     reuseExistingServer: !process.env['CI'],
     timeout: 120 * 1000,

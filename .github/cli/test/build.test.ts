@@ -44,7 +44,7 @@ describe('build.ts', () => {
         .mockReturnValueOnce('content A')
         .mockReturnValueOnce('content B');
       const result = concatFiles(['/a.js', '/b.js']);
-      expect(result).toBe('content A\ncontent B');
+      expect(result).toEqual('content A\ncontent B');
     });
 
     test('reads each file as utf8', () => {
@@ -54,7 +54,7 @@ describe('build.ts', () => {
     });
 
     test('returns empty string for empty file list', () => {
-      expect(concatFiles([])).toBe('');
+      expect(concatFiles([])).toEqual('');
     });
   });
 

@@ -17,6 +17,7 @@ const config: Config = {
       testEnvironment: 'jsdom',
       testMatch: ['<rootDir>/test/browser/**/*.test.js'],
       roots: ['<rootDir>/test/browser'],
+      transform: {},
     },
     {
       displayName: 'integration',
