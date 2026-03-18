@@ -15,14 +15,16 @@ const config: Config = {
     {
       displayName: 'browser',
       testEnvironment: 'jsdom',
-      testMatch: ['<rootDir>/test/browser/**/*.test.js'],
+      testMatch: ['<rootDir>/test/browser/**/*.test.ts'],
       roots: ['<rootDir>/test/browser'],
-      transform: {},
+      transform: {
+        '^.+\\.tsx?$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json', diagnostics: false }],
+      },
     },
     {
       displayName: 'integration',
       testEnvironment: 'node',
-      testMatch: ['<rootDir>/test/integration/**/*.test.js'],
+      testMatch: ['<rootDir>/test/integration/**/*.test.ts'],
       roots: ['<rootDir>/test/integration'],
       transform: {
         '^.+\\.tsx?$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.json', diagnostics: false }],

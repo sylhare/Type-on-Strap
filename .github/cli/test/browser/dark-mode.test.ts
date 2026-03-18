@@ -1,5 +1,8 @@
 describe('Dark Mode', () => {
-  let setMode, themeToggle, currentTheme, bootstrapTheme;
+  let setMode: (theme: string) => void;
+  let themeToggle: () => void;
+  let currentTheme: () => string | null;
+  let bootstrapTheme: () => void;
 
   beforeEach(() => {
     localStorage.clear();
@@ -13,18 +16,18 @@ describe('Dark Mode', () => {
       </html>
     `;
 
-    global.darkBtn = 'Dark';
-    global.lightBtn = 'Light';
-    global.isAutoTheme = true;
+    (global as Record<string, unknown>).darkBtn = 'Dark';
+    (global as Record<string, unknown>).lightBtn = 'Light';
+    (global as Record<string, unknown>).isAutoTheme = true;
 
-    const themeButton = {
-      'light': `<i class="fas fa-adjust" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${global.darkBtn}</span>`,
-      'dark': `<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${global.lightBtn}</span>`,
+    const themeButton: Record<string, string> = {
+      'light': `<i class="fas fa-adjust" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${(global as Record<string, unknown>).darkBtn}</span>`,
+      'dark': `<i class="fas fa-adjust fa-rotate-180" aria-hidden="true"></i><span class="navbar-label-with-icon"> ${(global as Record<string, unknown>).lightBtn}</span>`,
     };
 
     currentTheme = () => localStorage.getItem('theme');
 
-    setMode = (theme) => {
+    setMode = (theme: string) => {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
       const toggle = document.getElementById('theme-toggle');
@@ -34,7 +37,7 @@ describe('Dark Mode', () => {
     };
 
     themeToggle = () => {
-      let sessionPrefers = currentTheme();
+      const sessionPrefers = currentTheme();
       if (sessionPrefers === 'light') {
         setMode('dark');
       } else {
@@ -43,12 +46,12 @@ describe('Dark Mode', () => {
     };
 
     bootstrapTheme = () => {
-      if (global.isAutoTheme) {
+      if ((global as Record<string, unknown>).isAutoTheme) {
         if (!currentTheme()) {
-          let browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+          const browserPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
           if (browserPrefersDark.matches) localStorage.setItem('theme', 'dark');
         }
-        let sessionPrefers = currentTheme();
+        const sessionPrefers = currentTheme();
         setMode(sessionPrefers ? sessionPrefers : 'light');
       }
     };
@@ -79,19 +82,19 @@ describe('Dark Mode', () => {
     test('should update theme toggle button innerHTML', () => {
       const toggle = document.getElementById('theme-toggle');
       setMode('dark');
-      expect(toggle.innerHTML).toContain('Light');
-      expect(toggle.innerHTML).toContain('fa-rotate-180');
+      expect(toggle!.innerHTML).toContain('Light');
+      expect(toggle!.innerHTML).toContain('fa-rotate-180');
     });
 
     test('should handle light mode correctly', () => {
       setMode('light');
       expect(document.documentElement.getAttribute('data-theme')).toEqual('light');
       const toggle = document.getElementById('theme-toggle');
-      expect(toggle.innerHTML).toContain('Dark');
+      expect(toggle!.innerHTML).toContain('Dark');
     });
 
     test('should not error if toggle button does not exist', () => {
-      document.getElementById('theme-toggle').remove();
+      document.getElementById('theme-toggle')!.remove();
       expect(() => setMode('dark')).not.toThrow();
     });
   });
@@ -129,7 +132,7 @@ describe('Dark Mode', () => {
 
   describe('bootstrapTheme()', () => {
     test('should set light mode by default when no preference', () => {
-      window.matchMedia = jest.fn().mockReturnValue({
+      (window as any).matchMedia = jest.fn().mockReturnValue({
         matches: false,
         media: '(prefers-color-scheme: none)',
         addEventListener: jest.fn(),
@@ -150,7 +153,7 @@ describe('Dark Mode', () => {
     test('should respect browser preference for dark mode', () => {
       localStorage.clear();
 
-      window.matchMedia = jest.fn().mockImplementation(query => ({
+      (window as any).matchMedia = jest.fn().mockImplementation((query: string) => ({
         matches: query === '(prefers-color-scheme: dark)',
         media: query,
         addEventListener: jest.fn(),
@@ -166,7 +169,7 @@ describe('Dark Mode', () => {
     test('should default to light mode when browser prefers light', () => {
       localStorage.clear();
 
-      window.matchMedia = jest.fn().mockReturnValue({
+      (window as any).matchMedia = jest.fn().mockReturnValue({
         matches: false,
         media: '(prefers-color-scheme: dark)',
         addEventListener: jest.fn(),
@@ -182,7 +185,7 @@ describe('Dark Mode', () => {
       localStorage.clear();
       document.documentElement.removeAttribute('data-theme');
 
-      global.isAutoTheme = false;
+      (global as Record<string, unknown>).isAutoTheme = false;
       bootstrapTheme();
 
       expect(localStorage.getItem('theme')).toBeNull();
@@ -192,7 +195,7 @@ describe('Dark Mode', () => {
 
   describe('Theme persistence', () => {
     test('should persist theme across page loads', () => {
-      window.matchMedia = jest.fn().mockReturnValue({
+      (window as any).matchMedia = jest.fn().mockReturnValue({
         matches: false,
         media: '(prefers-color-scheme: none)',
         addEventListener: jest.fn(),
@@ -218,4 +221,3 @@ describe('Dark Mode', () => {
     });
   });
 });
-

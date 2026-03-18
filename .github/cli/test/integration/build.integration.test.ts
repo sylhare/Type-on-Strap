@@ -1,11 +1,9 @@
-'use strict';
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+import { buildJs, compileLess, minifyCSS, getJsPartials } from '../../src/build';
 
 const ROOT = path.resolve(__dirname, '../../../../');
-const { buildJs, compileLess, minifyCSS, getJsPartials } = require('../../src/build');
-
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-build-'));
 
 afterAll(() => {
@@ -41,9 +39,9 @@ describe('build:js integration', () => {
 });
 
 describe('build:css integration', () => {
-  const lessIn  = path.join(ROOT, 'assets/css/bootstrap-iso.less');
-  const cssOut  = path.join(TMP, 'bootstrap-iso.css');
-  const minOut  = path.join(TMP, 'bootstrap-iso.min.css');
+  const lessIn = path.join(ROOT, 'assets/css/bootstrap-iso.less');
+  const cssOut = path.join(TMP, 'bootstrap-iso.css');
+  const minOut = path.join(TMP, 'bootstrap-iso.min.css');
 
   beforeAll(async () => {
     await compileLess(lessIn, cssOut);

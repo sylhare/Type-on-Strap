@@ -1,18 +1,16 @@
-'use strict';
-const fs   = require('fs');
-const path = require('path');
-const os   = require('os');
-const { randomBytes } = require('crypto');
-const sharp = require('sharp');
-
-const { compressImage, createThumbnail, convertToWebp } = require('../../src/images');
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+import { randomBytes } from 'node:crypto';
+import sharp from 'sharp';
+import { compressImage, createThumbnail, convertToWebp } from '../../src/images';
 
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-images-'));
 const SOURCE_PNG = path.join(TMP, 'source.png');
-const SOURCE_WIDTH  = 400;
+const SOURCE_WIDTH = 400;
 const SOURCE_HEIGHT = 200;
 
-let sourceSize;
+let sourceSize: number;
 
 beforeAll(async () => {
   const pixels = randomBytes(SOURCE_WIDTH * SOURCE_HEIGHT * 3);
