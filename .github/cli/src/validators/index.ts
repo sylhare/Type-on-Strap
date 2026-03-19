@@ -1,5 +1,5 @@
 import { logger } from '../utils/logger';
-import { ValidationResult } from './types';
+import { ValidationResult } from '../types';
 import { validate as validateKatex } from './katex';
 import { validate as validateMermaid } from './mermaid';
 import { validate as validateFontAwesome } from './font-awesome';

@@ -2,7 +2,7 @@ import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
 import { readVendorVersion } from '../utils/fs';
-import { ValidationResult } from './types';
+import { ValidationResult } from '../types';
 
 export async function validateFile(name: string, localPath: string, cdnUrl: string): Promise<boolean> {
   logger.info(`Validating ${name}...`);

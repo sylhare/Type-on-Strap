@@ -3,10 +3,9 @@ import path from 'node:path';
 import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer, fetchJson } from '../utils/http';
 import { logger } from '../utils/logger';
-import { ValidationResult } from './types';
+import { ValidationResult, PROJECT_ROOT } from '../types';
 import { runAsMain } from './common';
 
-const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const GITHUB_REPO = 'sylhare/Simple-Jekyll-Search';
 const LOCAL_FILE = path.join(PROJECT_ROOT, 'assets/js/vendor/simple-jekyll-search.min.js');
 

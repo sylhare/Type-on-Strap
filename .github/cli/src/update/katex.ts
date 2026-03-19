@@ -3,11 +3,10 @@ import path from 'node:path';
 import os from 'node:os';
 import { execSync } from 'child_process';
 import { globSync } from 'glob';
-import { updateVersionInFile, updateVendorConfig, readVendorVersion } from './utils/fs';
-import { logger } from './utils/logger';
+import { updateVersionInFile, updateVendorConfig, readVendorVersion } from '../utils/fs';
+import { logger } from '../utils/logger';
+import { PROJECT_ROOT, VENDOR_CONFIG, HEAD_LIQUID } from '../types';
 
-const PROJECT_ROOT = path.resolve(__dirname, '../../..');
-const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
 const FONTS_DIR = path.join(PROJECT_ROOT, 'assets/fonts/katex');
 const KATEX_SCSS = path.join(PROJECT_ROOT, '_sass/external/katex/katex.scss');
 const KATEX_ENTRY = path.join(PROJECT_ROOT, '_sass/external/_katex.scss');
@@ -100,7 +99,6 @@ export async function updateKatex(version: string): Promise<void> {
     );
     logger.info(`  _sass/external/_katex.scss → KaTeX v${version}`);
 
-    const HEAD_LIQUID = path.join(PROJECT_ROOT, '_includes/default/head.liquid');
     updateVersionInFile(
       HEAD_LIQUID,
       /<!-- KaTeX [\d.]+ -->/,

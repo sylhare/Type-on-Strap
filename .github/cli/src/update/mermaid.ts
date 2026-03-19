@@ -1,13 +1,10 @@
-import fs from 'node:fs';
 import path from 'node:path';
-import { downloadFile, fetchJson } from './utils/http';
-import { updateVersionInFile, updateVendorConfig } from './utils/fs';
-import { logger } from './utils/logger';
+import { downloadFile, fetchJson } from '../utils/http';
+import { updateVersionInFile, updateVendorConfig } from '../utils/fs';
+import { logger } from '../utils/logger';
+import { PROJECT_ROOT, VENDOR_CONFIG, HEAD_LIQUID } from '../types';
 
-const PROJECT_ROOT = path.resolve(__dirname, '../../..');
-const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
 const VENDOR_JS = path.join(PROJECT_ROOT, 'assets/js/vendor/mermaid.min.js');
-const HEAD_LIQUID = path.join(PROJECT_ROOT, '_includes/default/head.liquid');
 
 export async function fetchLatestVersion(): Promise<string> {
   logger.info('No version specified, querying npm registry for latest...');

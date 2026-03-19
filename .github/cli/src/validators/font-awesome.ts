@@ -1,11 +1,8 @@
 import path from 'node:path';
 import { logger } from '../utils/logger';
 import { readVendorVersion } from '../utils/fs';
-import { ValidationResult } from './types';
+import { ValidationResult, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
 import { validateFile, runAsMain } from './common';
-
-const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
-const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
 
 interface FileEntry {
   name: string;

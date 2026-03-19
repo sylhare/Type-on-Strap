@@ -12,9 +12,10 @@ afterAll(() => {
 
 describe('build:js integration', () => {
   const outFile = path.join(TMP, 'main.min.js');
+  let partials: string[];
 
   beforeAll(async () => {
-    const partials = getJsPartials(path.join(ROOT, 'assets/js/partials'));
+    partials = getJsPartials(path.join(ROOT, 'assets/js/partials'));
     await buildJs(partials, outFile);
   });
 
@@ -32,7 +33,6 @@ describe('build:js integration', () => {
   });
 
   test('output is smaller than concatenated source', () => {
-    const partials = getJsPartials(path.join(ROOT, 'assets/js/partials'));
     const srcSize = partials.reduce((sum, f) => sum + fs.statSync(f).size, 0);
     expect(fs.statSync(outFile).size).toBeLessThan(srcSize);
   });

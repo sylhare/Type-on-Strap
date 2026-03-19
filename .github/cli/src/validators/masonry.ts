@@ -1,9 +1,6 @@
 import path from 'node:path';
-import { ValidationResult } from './types';
+import { ValidationResult, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
 import { validateSingleVendorFile, runAsMain } from './common';
-
-const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
-const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
 
 export async function validate(): Promise<ValidationResult> {
   return validateSingleVendorFile(
