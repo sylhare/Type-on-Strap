@@ -1,6 +1,6 @@
 import { cusdisContainer, disqusContainer, giscusContainer, utterancesContainer } from './fixtures/comment-containers';
 import fs from 'node:fs';
-import path from 'node:path';
+import * as path from 'node:path';
 
 describe('Comments Lazy Loading', () => {
   let mockIntersectionObserver: jest.Mock;
@@ -278,7 +278,11 @@ describe('Comments Lazy Loading', () => {
     });
 
     test('should handle optional label attribute', () => {
-      document.body.innerHTML = utterancesContainer({ repo: 'user/repo', issueTerm: 'pathname', theme: 'github-light' });
+      document.body.innerHTML = utterancesContainer({
+        repo: 'user/repo',
+        issueTerm: 'pathname',
+        theme: 'github-light'
+      });
       loadCommentsScript();
       observerCallback!([{ isIntersecting: true }]);
 

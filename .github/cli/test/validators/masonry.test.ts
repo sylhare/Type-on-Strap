@@ -3,7 +3,7 @@ jest.mock('../../src/utils/http');
 jest.mock('fs');
 
 import { validate } from '../../src/validators/masonry';
-import { mockReadFileSync, mockSha256File, mockSha256Buffer, mockFetchBuffer, mockHashAndFetch } from '../helpers';
+import { mockFetchBuffer, mockHashAndFetch, mockReadFileSync, mockSha256Buffer, mockSha256File } from '../helpers';
 
 const MOCK_CONFIG = JSON.stringify({ masonry: { version: '4.2.2' } });
 

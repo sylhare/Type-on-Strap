@@ -2,7 +2,7 @@ jest.mock('../../src/utils/http');
 jest.mock('../../src/utils/fs');
 
 import { fetchLatestVersion, resolveVersion, updateMermaid } from '../../src/update/mermaid';
-import { fetchJson, downloadFile } from '../../src/utils/http';
+import { downloadFile, fetchJson } from '../../src/utils/http';
 import { updateVendorConfig, updateVersionInFile } from '../../src/utils/fs';
 
 const mockFetchJson = fetchJson as jest.MockedFunction<typeof fetchJson>;
@@ -13,8 +13,10 @@ const mockUpdateVersionInFile = updateVersionInFile as jest.MockedFunction<typeo
 describe('update/mermaid', () => {
   beforeEach(() => {
     mockDownloadFile.mockResolvedValue(undefined as unknown as void);
-    mockUpdateVendorConfig.mockImplementation(() => {});
-    mockUpdateVersionInFile.mockImplementation(() => {});
+    mockUpdateVendorConfig.mockImplementation(() => {
+    });
+    mockUpdateVersionInFile.mockImplementation(() => {
+    });
   });
 
   describe('fetchLatestVersion()', () => {

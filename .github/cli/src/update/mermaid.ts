@@ -1,8 +1,8 @@
-import path from 'node:path';
+import * as path from 'node:path';
 import { downloadFile, fetchJson } from '../utils/http';
-import { updateVersionInFile, updateVendorConfig } from '../utils/fs';
+import { updateVendorConfig, updateVersionInFile } from '../utils/fs';
 import { logger } from '../utils/logger';
-import { PROJECT_ROOT, VENDOR_CONFIG, HEAD_LIQUID } from '../types';
+import { HEAD_LIQUID, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
 
 const VENDOR_JS = path.join(PROJECT_ROOT, 'assets/js/vendor/mermaid.min.js');
 

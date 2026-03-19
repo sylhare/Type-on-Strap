@@ -1,11 +1,11 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import os from 'node:os';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import * as os from 'node:os';
 import { execSync } from 'child_process';
 import { globSync } from 'glob';
-import { updateVersionInFile, updateVendorConfig, readVendorVersion } from '../utils/fs';
+import { readVendorVersion, updateVendorConfig, updateVersionInFile } from '../utils/fs';
 import { logger } from '../utils/logger';
-import { PROJECT_ROOT, VENDOR_CONFIG, HEAD_LIQUID } from '../types';
+import { HEAD_LIQUID, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
 
 const FONTS_DIR = path.join(PROJECT_ROOT, 'assets/fonts/katex');
 const KATEX_SCSS = path.join(PROJECT_ROOT, '_sass/external/katex/katex.scss');

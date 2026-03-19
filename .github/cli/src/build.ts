@@ -1,8 +1,8 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { globSync } from 'glob';
 import * as esbuild from 'esbuild';
-import less from 'less';
+import * as less from 'less';
 import CleanCSS from 'clean-css';
 import { logger } from './utils/logger';
 
@@ -61,8 +61,12 @@ if (require.main === module) {
 
   (async () => {
     switch (arg) {
-      case 'js':  await runJs();  break;
-      case 'css': await runCss(); break;
+      case 'js':
+        await runJs();
+        break;
+      case 'css':
+        await runCss();
+        break;
       default:
         await Promise.all([runJs(), runCss()]);
     }

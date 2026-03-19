@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import * as fs from 'node:fs';
 
 export function updateVersionInFile(filePath: string, pattern: RegExp, replacement: string): void {
   const content = fs.readFileSync(filePath, 'utf8');

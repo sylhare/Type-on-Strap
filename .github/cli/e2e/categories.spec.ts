@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Category Display Functionality @desktop', () => {
   test('should display categories on posts with category metadata', async ({ page }) => {

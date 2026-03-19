@@ -1,5 +1,5 @@
-import { test } from '@playwright/test';
 import type { Page } from '@playwright/test';
+import { test } from '@playwright/test';
 
 /**
  * Helper to open mobile menu - forces menu visibility for mobile tests

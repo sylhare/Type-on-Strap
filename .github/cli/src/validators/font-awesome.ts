@@ -1,8 +1,8 @@
-import path from 'node:path';
+import * as path from 'node:path';
 import { logger } from '../utils/logger';
 import { readVendorVersion } from '../utils/fs';
-import { ValidationResult, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
-import { validateFile, runAsMain } from './common';
+import { PROJECT_ROOT, ValidationResult, VENDOR_CONFIG } from '../types';
+import { runAsMain, validateFile } from './common';
 
 interface FileEntry {
   name: string;

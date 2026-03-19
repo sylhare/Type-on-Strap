@@ -1,10 +1,10 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
 import { readVendorVersion } from '../utils/fs';
-import { ValidationResult, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
-import { validateFile, runAsMain } from './common';
+import { PROJECT_ROOT, ValidationResult, VENDOR_CONFIG } from '../types';
+import { runAsMain, validateFile } from './common';
 
 async function validateCssVersion(scssFile: string, expectedVersion: string): Promise<boolean> {
   logger.info('Validating KaTeX CSS/SCSS version...');

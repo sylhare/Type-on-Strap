@@ -1,9 +1,9 @@
 import fs from 'node:fs';
-import path from 'node:path';
-import os from 'node:os';
+import * as path from 'node:path';
+import * as os from 'node:os';
 import { randomBytes } from 'node:crypto';
 import sharp from 'sharp';
-import { compressImage, createThumbnail, convertToWebp } from '../../src/images';
+import { compressImage, convertToWebp, createThumbnail } from '../../src/images';
 
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-images-'));
 const SOURCE_PNG = path.join(TMP, 'source.png');

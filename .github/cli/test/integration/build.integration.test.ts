@@ -1,7 +1,7 @@
 import fs from 'node:fs';
-import path from 'node:path';
-import os from 'node:os';
-import { buildJs, compileLess, minifyCSS, getJsPartials } from '../../src/build';
+import * as path from 'node:path';
+import * as os from 'node:os';
+import { buildJs, compileLess, getJsPartials, minifyCSS } from '../../src/build';
 
 const ROOT = path.resolve(__dirname, '../../../../');
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'tos-build-'));

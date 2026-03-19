@@ -1,9 +1,9 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { sha256File, sha256Buffer } from '../utils/hash';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { sha256Buffer, sha256File } from '../utils/hash';
 import { fetchBuffer, fetchJson } from '../utils/http';
 import { logger } from '../utils/logger';
-import { ValidationResult, PROJECT_ROOT } from '../types';
+import { PROJECT_ROOT, ValidationResult } from '../types';
 import { runAsMain } from './common';
 
 const GITHUB_REPO = 'sylhare/Simple-Jekyll-Search';

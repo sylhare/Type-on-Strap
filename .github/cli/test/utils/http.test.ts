@@ -1,4 +1,4 @@
-import { fetchBuffer, fetchJson, downloadFile } from '../../src/utils/http';
+import { downloadFile, fetchBuffer, fetchJson } from '../../src/utils/http';
 import https from 'node:https';
 import fs from 'node:fs';
 import { EventEmitter } from 'node:events';

@@ -13,11 +13,11 @@ interface ValidatorEntry {
 }
 
 const VALIDATORS: ValidatorEntry[] = [
-  { name: 'Font Awesome',         fn: validateFontAwesome },
-  { name: 'KaTeX',                fn: validateKatex },
-  { name: 'Mermaid',              fn: validateMermaid },
-  { name: 'Masonry',              fn: validateMasonry },
-  { name: 'imagesLoaded',         fn: validateImagesLoaded },
+  { name: 'Font Awesome', fn: validateFontAwesome },
+  { name: 'KaTeX', fn: validateKatex },
+  { name: 'Mermaid', fn: validateMermaid },
+  { name: 'Masonry', fn: validateMasonry },
+  { name: 'imagesLoaded', fn: validateImagesLoaded },
   { name: 'Simple-Jekyll-Search', fn: validateJekyllSearch },
 ];
 

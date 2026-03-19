@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import path from 'node:path';
+import * as path from 'node:path';
 
 /**
  * Playwright configuration for Type-on-Strap theme e2e tests

@@ -1,14 +1,14 @@
 import fs from 'node:fs';
 import { logger } from '../src/utils/logger';
 import {
-  parseVersion,
   bumpVersion,
-  updateGemspec,
+  parseVersion,
+  release,
   updateDefaultHtml,
+  updateGemBuildWorkflow,
+  updateGemspec,
   updatePackageJson,
   updatePackageLockJson,
-  updateGemBuildWorkflow,
-  release,
 } from '../src/release';
 
 describe('release.ts', () => {
@@ -51,7 +51,8 @@ describe('release.ts', () => {
   describe('updateGemspec()', () => {
     test('replaces version in spec.version line', () => {
       jest.spyOn(fs, 'readFileSync').mockReturnValue('spec.version = "2.5.0"\n' as any);
-      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
 
       updateGemspec('/fake/type-on-strap.gemspec', '2.6.0');
 
@@ -63,7 +64,8 @@ describe('release.ts', () => {
     test('replaces version in theme comment', () => {
       const content = '    Type on Strap jekyll theme v2.5.0\n';
       jest.spyOn(fs, 'readFileSync').mockReturnValue(content as any);
-      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
 
       updateDefaultHtml('/fake/_layouts/default.html', '2.6.0');
 
@@ -78,7 +80,8 @@ describe('release.ts', () => {
     test('updates version field in package.json', () => {
       const pkg = JSON.stringify({ name: 'test', version: '2.5.0' }, null, 2);
       jest.spyOn(fs, 'readFileSync').mockReturnValue(pkg as any);
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
 
       updatePackageJson('/fake/package.json', '2.6.0');
 
@@ -93,7 +96,8 @@ describe('release.ts', () => {
     test('updates root version and packages[""] version', () => {
       const lock = JSON.stringify({ version: '2.5.0', packages: { '': { version: '2.5.0' } } }, null, 2);
       jest.spyOn(fs, 'readFileSync').mockReturnValue(lock as any);
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
 
       updatePackageLockJson('/fake/package-lock.json', '2.6.0');
 
@@ -109,7 +113,8 @@ describe('release.ts', () => {
     test('replaces version in gem install command', () => {
       const content = 'gem install type-on-strap --version "2.4.11" --source "https://rubygems.pkg.github.com/sylhare"\n';
       jest.spyOn(fs, 'readFileSync').mockReturnValue(content as any);
-      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
 
       updateGemBuildWorkflow('/fake/.github/workflows/gem-build.yml', '2.6.0');
 
@@ -130,7 +135,8 @@ describe('release.ts', () => {
         if (p.endsWith('gem-build.yml')) return `gem install type-on-strap --version "${current}"` as any;
         return `{"version":"${current}","packages":{"":{"version":"${current}"}}}` as any;
       });
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
       const log = jest.spyOn(logger, 'success');
 
       release('2.6.0', '/fake');

@@ -1,38 +1,36 @@
-import path from 'node:path';
+import * as path from 'node:path';
+import sharp from 'sharp';
+import {
+  compressImage,
+  convertToWebp,
+  getCompressionSettings,
+  getOutputPath,
+  getThumbnailSettings,
+} from '../src/images';
 
 jest.mock('sharp', () => jest.fn());
 jest.mock('glob', () => ({ globSync: jest.fn() }));
-
-import sharp from 'sharp';
-import {
-  getOutputPath,
-  getCompressionSettings,
-  getThumbnailSettings,
-  compressImage,
-  createThumbnail,
-  convertToWebp,
-} from '../src/images';
 
 const mockSharp = sharp as jest.Mock;
 
 describe('images.ts', () => {
   let mockPipeline: {
-    jpeg:     jest.Mock;
-    png:      jest.Mock;
-    webp:     jest.Mock;
-    resize:   jest.Mock;
+    jpeg: jest.Mock;
+    png: jest.Mock;
+    webp: jest.Mock;
+    resize: jest.Mock;
     metadata: jest.Mock;
-    toFile:   jest.Mock;
+    toFile: jest.Mock;
   };
 
   beforeEach(() => {
     mockPipeline = {
-      jpeg:     jest.fn().mockReturnThis(),
-      png:      jest.fn().mockReturnThis(),
-      webp:     jest.fn().mockReturnThis(),
-      resize:   jest.fn().mockReturnThis(),
+      jpeg: jest.fn().mockReturnThis(),
+      png: jest.fn().mockReturnThis(),
+      webp: jest.fn().mockReturnThis(),
+      resize: jest.fn().mockReturnThis(),
       metadata: jest.fn().mockResolvedValue({ width: 1000, height: 600 }),
-      toFile:   jest.fn().mockResolvedValue({}),
+      toFile: jest.fn().mockResolvedValue({}),
     };
     mockSharp.mockReturnValue(mockPipeline);
   });

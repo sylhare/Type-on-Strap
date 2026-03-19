@@ -1,6 +1,6 @@
-import path from 'node:path';
-import { ValidationResult, PROJECT_ROOT, VENDOR_CONFIG } from '../types';
-import { validateSingleVendorFile, runAsMain } from './common';
+import * as path from 'node:path';
+import { PROJECT_ROOT, ValidationResult, VENDOR_CONFIG } from '../types';
+import { runAsMain, validateSingleVendorFile } from './common';
 
 export async function validate(): Promise<ValidationResult> {
   return validateSingleVendorFile(

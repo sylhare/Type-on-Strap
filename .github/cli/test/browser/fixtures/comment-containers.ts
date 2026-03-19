@@ -38,7 +38,14 @@ interface GiscusOptions {
   theme?: string | null;
 }
 
-export function giscusContainer({ lazyLoad = 'true', repo, repoId, category, mapping, theme }: GiscusOptions = {}): string {
+export function giscusContainer({
+  lazyLoad = 'true',
+  repo,
+  repoId,
+  category,
+  mapping,
+  theme
+}: GiscusOptions = {}): string {
   const attrs = buildAttributes({
     id: 'giscus_thread',
     'data-lazy-load': lazyLoad,
@@ -59,7 +66,13 @@ interface UtterancesOptions {
   label?: string | null;
 }
 
-export function utterancesContainer({ lazyLoad = 'true', repo, issueTerm, theme, label }: UtterancesOptions = {}): string {
+export function utterancesContainer({
+  lazyLoad = 'true',
+  repo,
+  issueTerm,
+  theme,
+  label
+}: UtterancesOptions = {}): string {
   const attrs = buildAttributes({
     id: 'utterances_thread',
     'data-lazy-load': lazyLoad,

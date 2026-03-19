@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { sha256File, sha256Buffer } from '../src/utils/hash';
+import { sha256Buffer, sha256File } from '../src/utils/hash';
 import { fetchBuffer } from '../src/utils/http';
 
 export const realReadFileSync = (jest.requireActual('node:fs') as typeof import('node:fs')).readFileSync;

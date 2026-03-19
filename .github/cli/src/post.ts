@@ -1,5 +1,5 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { logger } from './utils/logger';
 
 export function formatDate(date: Date): string {
@@ -22,7 +22,11 @@ export function createContent(title: string): string {
     '---';
 }
 
-export function createPost(title: string, postsDir: string, date: Date = new Date()): { filename: string; filepath: string; content: string } {
+export function createPost(title: string, postsDir: string, date: Date = new Date()): {
+  filename: string;
+  filepath: string;
+  content: string
+} {
   const filename = createFilename(title, date);
   const filepath = path.join(postsDir, filename);
   const content = createContent(title);

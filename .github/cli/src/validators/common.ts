@@ -1,4 +1,4 @@
-import { sha256File, sha256Buffer } from '../utils/hash';
+import { sha256Buffer, sha256File } from '../utils/hash';
 import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
 import { readVendorVersion } from '../utils/fs';
@@ -40,7 +40,7 @@ export async function validateSingleVendorFile(
   return { passed: ok, failures: ok ? [] : [fileName] };
 }
 
-export function runAsMain(callerModule: NodeModule, name: string, validate: () => Promise<ValidationResult>): void {
+export function runAsMain(callerModule: NodeJS.Module, name: string, validate: () => Promise<ValidationResult>): void {
   if (require.main === callerModule) {
     validate().then(({ passed, failures }) => {
       if (passed) {

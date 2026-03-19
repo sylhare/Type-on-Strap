@@ -1,6 +1,6 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { updateVersionInFile, updateJsonFile } from './utils/fs';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { updateJsonFile, updateVersionInFile } from './utils/fs';
 import { logger } from './utils/logger';
 
 export type BumpType = 'major' | 'minor' | 'patch';
@@ -17,15 +17,18 @@ export function bumpVersion(current: string, bump: BumpType | string): string {
   if (SEMVER.test(bump)) return bump;
   const [major, minor, patch] = parseVersion(current);
   switch (bump) {
-    case 'major': return `${major + 1}.0.0`;
-    case 'minor': return `${major}.${minor + 1}.0`;
+    case 'major':
+      return `${major + 1}.0.0`;
+    case 'minor':
+      return `${major}.${minor + 1}.0`;
     case 'patch':
-    default:      return `${major}.${minor}.${patch + 1}`;
+    default:
+      return `${major}.${minor}.${patch + 1}`;
   }
 }
 
 export function updateGemspec(filePath: string, newVersion: string): void {
-  updateVersionInFile(filePath, /(spec\.version\s*=\s*")[^"]+(")/,  `$1${newVersion}$2`);
+  updateVersionInFile(filePath, /(spec\.version\s*=\s*")[^"]+(")/, `$1${newVersion}$2`);
 }
 
 export function updateDefaultHtml(filePath: string, newVersion: string): void {
@@ -33,7 +36,9 @@ export function updateDefaultHtml(filePath: string, newVersion: string): void {
 }
 
 export function updatePackageJson(filePath: string, newVersion: string): void {
-  updateJsonFile(filePath, (pkg: { version: string }) => { pkg.version = newVersion; });
+  updateJsonFile(filePath, (pkg: { version: string }) => {
+    pkg.version = newVersion;
+  });
 }
 
 export function updatePackageLockJson(filePath: string, newVersion: string): void {

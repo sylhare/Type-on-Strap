@@ -1,5 +1,9 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import * as path from 'node:path';
+import * as esbuild from 'esbuild';
+import * as less from 'less';
+import { globSync } from 'glob';
+import { buildJs, compileLess, concatFiles, getJsPartials, minifyCSS } from '../src/build';
 
 jest.mock('esbuild', () => ({ transform: jest.fn() }));
 jest.mock('less', () => ({ render: jest.fn() }));
@@ -7,12 +11,6 @@ jest.mock('clean-css', () =>
   jest.fn().mockImplementation(() => ({ minify: jest.fn().mockReturnValue({ styles: '.a{}' }) }))
 );
 jest.mock('glob', () => ({ globSync: jest.fn() }));
-
-import * as esbuild from 'esbuild';
-import less from 'less';
-import CleanCSS from 'clean-css';
-import { globSync } from 'glob';
-import { getJsPartials, concatFiles, buildJs, compileLess, minifyCSS } from '../src/build';
 
 const mockEsbuild = esbuild as jest.Mocked<typeof esbuild>;
 const mockLess = less as jest.Mocked<typeof less>;
@@ -64,7 +62,8 @@ describe('build.ts', () => {
   describe('buildJs()', () => {
     test('transforms concatenated source with minify enabled', async () => {
       jest.spyOn(fs, 'readFileSync').mockReturnValue('function foo() {}');
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
       mockEsbuild.transform.mockResolvedValue({ code: 'function foo(){}' } as any);
 
       await buildJs(['/partials/a.js'], '/out/main.min.js');
@@ -79,7 +78,8 @@ describe('build.ts', () => {
   describe('compileLess()', () => {
     test('passes filename to less.render for import resolution', async () => {
       jest.spyOn(fs, 'readFileSync').mockReturnValue('');
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
       mockLess.render.mockResolvedValue({ css: '' } as any);
 
       await compileLess('/path/to/input.less', '/output.css');
@@ -93,7 +93,8 @@ describe('build.ts', () => {
 
   describe('minifyCSS()', () => {
     test('writes minified output to the given path', () => {
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
 
       minifyCSS('.a { color: red; }', '/out/file.min.css');
 

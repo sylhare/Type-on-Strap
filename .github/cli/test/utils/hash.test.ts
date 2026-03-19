@@ -1,7 +1,7 @@
 import { sha256Buffer, sha256File } from '../../src/utils/hash';
 import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
+import * as os from 'node:os';
+import * as path from 'node:path';
 
 describe('hash utils', () => {
   describe('sha256Buffer()', () => {

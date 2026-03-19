@@ -1,7 +1,7 @@
-import { updateVersionInFile, updateVendorConfig } from '../../src/utils/fs';
+import { updateVendorConfig, updateVersionInFile } from '../../src/utils/fs';
 import fs from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
+import * as os from 'node:os';
+import * as path from 'node:path';
 
 describe('fs utils', () => {
   describe('updateVersionInFile()', () => {
@@ -56,7 +56,10 @@ describe('fs utils', () => {
 
     test('preserves other keys', () => {
       const tmp = path.join(os.tmpdir(), `vendor-test-${Date.now()}.json`);
-      fs.writeFileSync(tmp, JSON.stringify({ katex: { version: '0.16.0' }, mermaid: { version: '11.0.0' } }, null, 2) + '\n');
+      fs.writeFileSync(tmp, JSON.stringify({
+        katex: { version: '0.16.0' },
+        mermaid: { version: '11.0.0' }
+      }, null, 2) + '\n');
       try {
         updateVendorConfig(tmp, 'mermaid', '11.13.0');
         const updated = JSON.parse(fs.readFileSync(tmp, 'utf8'));

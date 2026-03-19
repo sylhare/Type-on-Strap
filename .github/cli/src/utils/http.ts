@@ -1,7 +1,7 @@
-import https from 'node:https';
-import http from 'node:http';
-import fs from 'node:fs';
+import * as https from 'node:https';
 import type { IncomingMessage } from 'node:http';
+import * as http from 'node:http';
+import * as fs from 'node:fs';
 
 function getProtocol(url: string) {
   return url.startsWith('https') ? https : http;

@@ -1,6 +1,6 @@
 jest.mock('../../src/utils/fs');
 
-import { resolveVersion, generateScss } from '../../src/update/katex';
+import { generateScss, resolveVersion } from '../../src/update/katex';
 import { readVendorVersion } from '../../src/utils/fs';
 
 const mockReadVendorVersion = readVendorVersion as jest.MockedFunction<typeof readVendorVersion>;

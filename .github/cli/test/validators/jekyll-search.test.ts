@@ -5,7 +5,7 @@ jest.mock('fs');
 import fs from 'node:fs';
 import { fetchJson } from '../../src/utils/http';
 import { validate } from '../../src/validators/jekyll-search';
-import { realReadFileSync, mockSha256File, mockSha256Buffer, mockFetchBuffer, mockHashAndFetch } from '../helpers';
+import { mockHashAndFetch, mockSha256Buffer, realReadFileSync } from '../helpers';
 
 const mockFs = fs as jest.Mocked<typeof fs>;
 const mockFetchJson = fetchJson as jest.MockedFunction<typeof fetchJson>;

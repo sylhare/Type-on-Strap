@@ -1,5 +1,5 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import { globSync } from 'glob';
 import sharp from 'sharp';
 import { logger } from './utils/logger';
@@ -9,7 +9,11 @@ export function getOutputPath(inputPath: string, inputBase: string, outputBase: 
   return path.join(outputBase, relative);
 }
 
-export function getCompressionSettings(ext: string, opts: { compressionLevel?: number; quality?: number; progressive?: boolean } = {}): Record<string, unknown> {
+export function getCompressionSettings(ext: string, opts: {
+  compressionLevel?: number;
+  quality?: number;
+  progressive?: boolean
+} = {}): Record<string, unknown> {
   const lext = ext.slice(1).toLowerCase();
   if (lext === 'png') {
     return {
@@ -28,9 +32,17 @@ export function getThumbnailSettings(imageWidth: number, opts: { ratio?: number 
   return { width: Math.round(imageWidth * ratio) };
 }
 
-export async function compressImage(inputPath: string, outputPath: string, opts: { compressionLevel?: number; quality?: number; progressive?: boolean } = {}): Promise<void> {
+export async function compressImage(inputPath: string, outputPath: string, opts: {
+  compressionLevel?: number;
+  quality?: number;
+  progressive?: boolean
+} = {}): Promise<void> {
   const ext = path.extname(inputPath).toLowerCase();
-  const settings = getCompressionSettings(ext, opts) as { compressionLevel?: number; quality?: number; progressive?: boolean };
+  const settings = getCompressionSettings(ext, opts) as {
+    compressionLevel?: number;
+    quality?: number;
+    progressive?: boolean
+  };
   let pipeline = sharp(inputPath);
   if (ext === '.png') {
     pipeline = pipeline.png({ compressionLevel: settings.compressionLevel, quality: settings.quality });
@@ -42,14 +54,18 @@ export async function compressImage(inputPath: string, outputPath: string, opts:
   await pipeline.toFile(outputPath);
 }
 
-export async function createThumbnail(inputPath: string, outputPath: string, opts: { ratio?: number } = {}): Promise<void> {
+export async function createThumbnail(inputPath: string, outputPath: string, opts: {
+  ratio?: number
+} = {}): Promise<void> {
   const instance = sharp(inputPath);
   const meta = await instance.metadata();
   const { width } = getThumbnailSettings(meta.width ?? 0, opts);
   await instance.resize({ width }).toFile(outputPath);
 }
 
-export async function convertToWebp(inputPath: string, outputPath: string, opts: { quality?: number } = {}): Promise<void> {
+export async function convertToWebp(inputPath: string, outputPath: string, opts: {
+  quality?: number
+} = {}): Promise<void> {
   await sharp(inputPath).webp({ quality: opts.quality ?? 85 }).toFile(outputPath);
 }
 

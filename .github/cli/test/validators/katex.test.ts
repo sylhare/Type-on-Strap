@@ -4,7 +4,7 @@ jest.mock('fs');
 
 import fs from 'node:fs';
 import { validate } from '../../src/validators/katex';
-import { mockReadFileSync, mockSha256File, mockSha256Buffer, mockFetchBuffer, MOCK_HASH } from '../helpers';
+import { MOCK_HASH, mockFetchBuffer, mockReadFileSync, mockSha256Buffer, mockSha256File } from '../helpers';
 
 const mockFs = fs as jest.Mocked<typeof fs>;
 

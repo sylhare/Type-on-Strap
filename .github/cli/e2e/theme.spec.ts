@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { openMobileMenu, hasThemeToggle } from './helpers';
+import { expect, test } from '@playwright/test';
+import { hasThemeToggle, openMobileMenu } from './helpers';
 
 test.describe('Theme and Dark Mode @desktop', () => {
 

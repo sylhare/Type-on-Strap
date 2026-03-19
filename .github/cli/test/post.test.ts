@@ -1,6 +1,6 @@
 import fs from 'node:fs';
-import path from 'node:path';
-import { formatDate, formatTime, createFilename, createContent, createPost } from '../src/post';
+import * as path from 'node:path';
+import { createContent, createFilename, createPost, formatDate, formatTime } from '../src/post';
 import { logger } from '../src/utils/logger';
 
 describe('post.ts', () => {
@@ -60,8 +60,10 @@ describe('post.ts', () => {
 
   describe('createPost()', () => {
     test('writes file with correct path', () => {
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      jest.spyOn(console, 'log').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
+      jest.spyOn(console, 'log').mockImplementation(() => {
+      });
 
       const postsDir = '/tmp/posts';
       createPost('Hello World', postsDir, fixedDate);
@@ -73,8 +75,10 @@ describe('post.ts', () => {
     });
 
     test('writes correct frontmatter content', () => {
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      jest.spyOn(console, 'log').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
+      jest.spyOn(console, 'log').mockImplementation(() => {
+      });
 
       const result = createPost('Hello World', '/tmp/posts', fixedDate);
 
@@ -84,8 +88,10 @@ describe('post.ts', () => {
     });
 
     test('returns filename, filepath, and content', () => {
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      jest.spyOn(console, 'log').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
+      jest.spyOn(console, 'log').mockImplementation(() => {
+      });
 
       const postsDir = '/tmp/posts';
       const result = createPost('Hello World', postsDir, fixedDate);
@@ -96,7 +102,8 @@ describe('post.ts', () => {
     });
 
     test('logs the created file name', () => {
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+      });
       const logSpy = jest.spyOn(logger, 'info');
 
       createPost('Hello World', '/tmp/posts', fixedDate);

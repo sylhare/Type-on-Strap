@@ -1,4 +1,4 @@
-import path from 'node:path';
+import * as path from 'node:path';
 
 export const PROJECT_ROOT = path.resolve(__dirname, '../../..');
 export const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');

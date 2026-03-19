@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('KaTeX Math Rendering @desktop', () => {
   const katexPostUrl = '/syntax/2014/11/28/markdown-and-html';
