@@ -1,6 +1,7 @@
 import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
+import { readVendorVersion } from '../utils/fs';
 import { ValidationResult } from './types';
 
 export async function validateFile(name: string, localPath: string, cdnUrl: string): Promise<boolean> {
@@ -23,6 +24,20 @@ export async function validateFile(name: string, localPath: string, cdnUrl: stri
     logger.error((err as Error).message);
     return false;
   }
+}
+
+export async function validateSingleVendorFile(
+  vendorConfigPath: string,
+  vendorKey: string,
+  displayName: string,
+  fileName: string,
+  localPath: string,
+  remoteUrl: (version: string) => string
+): Promise<ValidationResult> {
+  const version = readVendorVersion(vendorConfigPath, vendorKey);
+  logger.header(`${displayName} Validation (v${version})`);
+  const ok = await validateFile(fileName, localPath, remoteUrl(version));
+  return { passed: ok, failures: ok ? [] : [fileName] };
 }
 
 export function runAsMain(callerModule: NodeModule, name: string, validate: () => Promise<ValidationResult>): void {

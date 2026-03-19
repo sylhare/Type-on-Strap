@@ -42,8 +42,6 @@ export async function validate(): Promise<ValidationResult> {
     remoteUrl: `${GITHUB_SCSS_BASE}/${scss}`,
   }));
 
-  logger.info('-- Font files --\n');
-  logger.info('\n-- SCSS files --\n');
   const [fontResults, scssResults] = await Promise.all([
     Promise.allSettled(fontFiles.map(({ name, localPath, remoteUrl }) =>
       validateFile(name, localPath, remoteUrl).then(ok => ok ? null : name)

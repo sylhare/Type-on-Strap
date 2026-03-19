@@ -4,6 +4,7 @@ import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer, fetchJson } from '../utils/http';
 import { logger } from '../utils/logger';
 import { ValidationResult } from './types';
+import { runAsMain } from './common';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const GITHUB_REPO = 'sylhare/Simple-Jekyll-Search';
@@ -81,16 +82,4 @@ export async function validate(): Promise<ValidationResult> {
   return { passed: failures.length === 0, failures };
 }
 
-if (require.main === module) {
-  validate().then(({ passed }) => {
-    if (passed) {
-      logger.success('Simple-Jekyll-Search validation passed!');
-    } else {
-      logger.error('Validation failed');
-      process.exit(1);
-    }
-  }).catch(err => {
-    logger.error((err as Error).message);
-    process.exit(1);
-  });
-}
+runAsMain(module, 'Simple-Jekyll-Search', validate);

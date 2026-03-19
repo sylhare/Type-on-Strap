@@ -22,7 +22,7 @@ export async function buildJs(partialFiles: string[], outFile: string): Promise<
 
 export async function compileLess(inputPath: string, outputPath: string): Promise<string> {
   const input = fs.readFileSync(inputPath, 'utf8');
-  const result = await (less.render as any)(input, { filename: inputPath, strictMath: true });
+  const result = await less.render(input, { filename: inputPath, strictMath: true } as Less.Options);
   let css = result.css.replace(/\.bootstrap-iso (?:html|body)/g, '');
   fs.writeFileSync(outputPath, css);
   return css;

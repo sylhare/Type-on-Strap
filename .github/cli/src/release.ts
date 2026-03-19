@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { updateVersionInFile } from './utils/fs';
+import { updateVersionInFile, updateJsonFile } from './utils/fs';
 import { logger } from './utils/logger';
 
 export type BumpType = 'major' | 'minor' | 'patch';
@@ -31,16 +31,14 @@ export function updateDefaultHtml(filePath: string, newVersion: string): void {
 }
 
 export function updatePackageJson(filePath: string, newVersion: string): void {
-  const pkg = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  pkg.version = newVersion;
-  fs.writeFileSync(filePath, JSON.stringify(pkg, null, 2) + '\n');
+  updateJsonFile(filePath, (pkg: { version: string }) => { pkg.version = newVersion; });
 }
 
 export function updatePackageLockJson(filePath: string, newVersion: string): void {
-  const lock = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  lock.version = newVersion;
-  if (lock.packages?.['']) lock.packages[''].version = newVersion;
-  fs.writeFileSync(filePath, JSON.stringify(lock, null, 2) + '\n');
+  updateJsonFile(filePath, (lock: { version: string; packages?: Record<string, { version: string }> }) => {
+    lock.version = newVersion;
+    if (lock.packages?.['']) lock.packages[''].version = newVersion;
+  });
 }
 
 export function updateGemBuildWorkflow(filePath: string, newVersion: string): void {

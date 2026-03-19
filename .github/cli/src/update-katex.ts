@@ -3,7 +3,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { execSync } from 'child_process';
 import { globSync } from 'glob';
-import { updateVersionInFile, updateVendorConfig } from './utils/fs';
+import { updateVersionInFile, updateVendorConfig, readVendorVersion } from './utils/fs';
 import { logger } from './utils/logger';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
@@ -14,8 +14,7 @@ const KATEX_ENTRY = path.join(PROJECT_ROOT, '_sass/external/_katex.scss');
 
 export function resolveVersion(arg?: string): string {
   if (arg) return arg;
-  const config = JSON.parse(fs.readFileSync(VENDOR_CONFIG, 'utf8')) as { katex: { version: string } };
-  return config.katex.version;
+  return readVendorVersion(VENDOR_CONFIG, 'katex');
 }
 
 function copyFile(src: string, dest: string): void {
