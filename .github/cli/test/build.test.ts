@@ -17,7 +17,7 @@ import { getJsPartials, concatFiles, buildJs, compileLess, minifyCSS } from '../
 const mockEsbuild = esbuild as jest.Mocked<typeof esbuild>;
 const mockLess = less as jest.Mocked<typeof less>;
 const mockGlobSync = globSync as jest.Mock;
-const MockCleanCSS = CleanCSS as jest.Mock;
+
 
 describe('build.ts', () => {
   describe('getJsPartials()', () => {
@@ -94,7 +94,6 @@ describe('build.ts', () => {
   describe('minifyCSS()', () => {
     test('writes minified output to the given path', () => {
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      MockCleanCSS.mockImplementation(() => ({ minify: jest.fn().mockReturnValue({ styles: '.a{}' }) }));
 
       minifyCSS('.a { color: red; }', '/out/file.min.css');
 

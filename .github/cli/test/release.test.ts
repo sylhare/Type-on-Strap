@@ -121,7 +121,14 @@ describe('release.ts', () => {
 
   describe('release()', () => {
     test('calls all updaters and logs the new version', () => {
-      jest.spyOn(fs, 'readFileSync').mockReturnValue('{}' as any);
+      const current = '2.4.11';
+      jest.spyOn(fs, 'readFileSync').mockImplementation((filePath: unknown) => {
+        const p = filePath as string;
+        if (p.endsWith('.gemspec')) return `spec.version = "${current}"` as any;
+        if (p.endsWith('default.html')) return `Type on Strap jekyll theme v${current}` as any;
+        if (p.endsWith('gem-build.yml')) return `gem install type-on-strap --version "${current}"` as any;
+        return `{"version":"${current}","packages":{"":{"version":"${current}"}}}` as any;
+      });
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
       const log = jest.spyOn(console, 'log').mockImplementation(() => {});
 

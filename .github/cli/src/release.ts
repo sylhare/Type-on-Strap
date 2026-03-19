@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { updateVersionInFile } from './utils/fs';
 
 export type BumpType = 'major' | 'minor' | 'patch';
 
@@ -21,15 +22,11 @@ export function bumpVersion(current: string, bump: BumpType | string): string {
 }
 
 export function updateGemspec(filePath: string, newVersion: string): void {
-  let content = fs.readFileSync(filePath, 'utf8');
-  content = content.replace(/(spec\.version\s*=\s*")[^"]+(")/,  `$1${newVersion}$2`);
-  fs.writeFileSync(filePath, content);
+  updateVersionInFile(filePath, /(spec\.version\s*=\s*")[^"]+(")/,  `$1${newVersion}$2`);
 }
 
 export function updateDefaultHtml(filePath: string, newVersion: string): void {
-  let content = fs.readFileSync(filePath, 'utf8');
-  content = content.replace(/(Type on Strap jekyll theme v)\d+\.\d+\.\d+/, `$1${newVersion}`);
-  fs.writeFileSync(filePath, content);
+  updateVersionInFile(filePath, /(Type on Strap jekyll theme v)\d+\.\d+\.\d+/, `$1${newVersion}`);
 }
 
 export function updatePackageJson(filePath: string, newVersion: string): void {
@@ -46,12 +43,11 @@ export function updatePackageLockJson(filePath: string, newVersion: string): voi
 }
 
 export function updateGemBuildWorkflow(filePath: string, newVersion: string): void {
-  let content = fs.readFileSync(filePath, 'utf8');
-  content = content.replace(
+  updateVersionInFile(
+    filePath,
     /(gem install type-on-strap --version ")[^"]+(")/,
     `$1${newVersion}$2`
   );
-  fs.writeFileSync(filePath, content);
 }
 
 export function release(newVersion: string, root: string): void {
