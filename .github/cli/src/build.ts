@@ -63,8 +63,7 @@ if (require.main === module) {
       case 'js':  await runJs();  break;
       case 'css': await runCss(); break;
       default:
-        await runJs();
-        await runCss();
+        await Promise.all([runJs(), runCss()]);
     }
   })().catch(err => {
     console.error(err);

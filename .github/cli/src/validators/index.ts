@@ -22,9 +22,7 @@ const VALIDATORS: ValidatorEntry[] = [
 ];
 
 async function main(): Promise<void> {
-  console.log('\n==================================================');
-  console.log('Vendor Dependencies Validation');
-  console.log('==================================================\n');
+  logger.header('Vendor Dependencies Validation');
 
   let passed = 0;
   let failed = 0;
@@ -46,9 +44,7 @@ async function main(): Promise<void> {
     console.log('');
   }
 
-  console.log('==================================================');
-  console.log('Summary');
-  console.log('==================================================');
+  logger.header('Summary');
   console.log(`Passed: ${passed}`);
   console.log(`Failed: ${failed}`);
   console.log('');

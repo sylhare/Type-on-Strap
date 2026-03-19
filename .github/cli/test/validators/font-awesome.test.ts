@@ -18,7 +18,6 @@ const realReadFileSync = (jest.requireActual('node:fs') as typeof import('node:f
 
 describe('validators/font-awesome', () => {
   beforeEach(() => {
-    mockFs.existsSync = jest.fn().mockReturnValue(true);
     mockFs.readFileSync = jest.fn().mockImplementation((filePath: unknown, options?: any) => {
       if (String(filePath).endsWith('vendor.config.json')) return MOCK_CONFIG;
       return realReadFileSync(filePath as any, options);
@@ -44,7 +43,7 @@ describe('validators/font-awesome', () => {
   });
 
   test('fails when a local file does not exist', async () => {
-    mockFs.existsSync = jest.fn().mockReturnValue(false);
+    mockSha256File.mockRejectedValue(new Error("ENOENT: no such file or directory, open 'font-file'"));
     const result = await validate();
     expect(result.passed).toEqual(false);
     expect(result.failures.length).toEqual(25);

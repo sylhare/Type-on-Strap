@@ -12,3 +12,8 @@ export function updateVendorConfig(configPath: string, key: string, version: str
   config[key] = { ...config[key], version };
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
 }
+
+export function readVendorVersion(configPath: string, key: string): string {
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8')) as Record<string, { version: string }>;
+  return config[key].version;
+}

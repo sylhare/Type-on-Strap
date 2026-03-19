@@ -18,7 +18,6 @@ const realReadFileSync = (jest.requireActual('node:fs') as typeof import('node:f
 
 describe('validators/imagesloaded', () => {
   beforeEach(() => {
-    mockFs.existsSync = jest.fn().mockReturnValue(true);
     mockFs.readFileSync = jest.fn().mockImplementation((filePath: unknown, options?: any) => {
       if (String(filePath).endsWith('vendor.config.json')) return MOCK_CONFIG;
       return realReadFileSync(filePath as any, options);

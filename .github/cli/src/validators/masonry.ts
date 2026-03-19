@@ -1,61 +1,26 @@
-import fs from 'node:fs';
 import path from 'node:path';
-import { sha256File, sha256Buffer } from '../utils/hash';
-import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
+import { readVendorVersion } from '../utils/fs';
 import { ValidationResult } from './types';
+import { validateFile, runAsMain } from './common';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
 
-function getVersion(): string {
-  const config = JSON.parse(fs.readFileSync(VENDOR_CONFIG, 'utf8')) as { masonry: { version: string } };
-  return config.masonry.version;
-}
-
 export async function validate(): Promise<ValidationResult> {
-  const version = getVersion();
+  const version = readVendorVersion(VENDOR_CONFIG, 'masonry');
   const failures: string[] = [];
 
   logger.header(`Masonry Validation (v${version})`);
 
-  const localPath = path.join(PROJECT_ROOT, 'assets/js/vendor/masonry.pkgd.min.js');
-  const cdnUrl = `https://unpkg.com/masonry-layout@${version}/dist/masonry.pkgd.min.js`;
-
-  logger.info('Validating masonry.pkgd.min.js...');
-
-  if (!fs.existsSync(localPath)) {
-    logger.error(`Local file not found: ${localPath}`);
-    failures.push('masonry.pkgd.min.js');
-    return { passed: false, failures };
-  }
-
-  const localHash = await sha256File(localPath);
-  const remoteHash = sha256Buffer(await fetchBuffer(cdnUrl));
-
-  logger.info(`  Local SHA256:  ${localHash}`);
-  logger.info(`  Remote SHA256: ${remoteHash}`);
-
-  if (localHash === remoteHash) {
-    logger.success('Files match!');
-  } else {
-    logger.error('Files DO NOT match!');
-    failures.push('masonry.pkgd.min.js');
-  }
+  const ok = await validateFile(
+    'masonry.pkgd.min.js',
+    path.join(PROJECT_ROOT, 'assets/js/vendor/masonry.pkgd.min.js'),
+    `https://unpkg.com/masonry-layout@${version}/dist/masonry.pkgd.min.js`
+  );
+  if (!ok) failures.push('masonry.pkgd.min.js');
 
   return { passed: failures.length === 0, failures };
 }
 
-if (require.main === module) {
-  validate().then(({ passed, failures }) => {
-    if (passed) {
-      logger.success('Masonry validation passed!');
-    } else {
-      logger.error(`Masonry validation failed! (${failures.join(', ')})`);
-      process.exit(1);
-    }
-  }).catch(err => {
-    logger.error((err as Error).message);
-    process.exit(1);
-  });
-}
+runAsMain(module, 'Masonry', validate);

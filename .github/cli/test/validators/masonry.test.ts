@@ -18,7 +18,6 @@ const realReadFileSync = (jest.requireActual('node:fs') as typeof import('node:f
 
 describe('validators/masonry', () => {
   beforeEach(() => {
-    mockFs.existsSync = jest.fn().mockReturnValue(true);
     mockFs.readFileSync = jest.fn().mockImplementation((filePath: unknown, options?: any) => {
       if (String(filePath).endsWith('vendor.config.json')) return MOCK_CONFIG;
       return realReadFileSync(filePath as any, options);
@@ -42,7 +41,7 @@ describe('validators/masonry', () => {
   });
 
   test('fails when local file does not exist', async () => {
-    mockFs.existsSync = jest.fn().mockReturnValue(false);
+    mockSha256File.mockRejectedValueOnce(new Error("ENOENT: no such file or directory, open 'masonry.pkgd.min.js'"));
     const result = await validate();
     expect(result.passed).toEqual(false);
   });

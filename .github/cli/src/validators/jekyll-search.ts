@@ -60,9 +60,10 @@ export async function validate(): Promise<ValidationResult> {
   if (downloadUrl) {
     logger.info('\nContent check:');
     try {
-      const remoteBuf = await fetchBuffer(downloadUrl);
-      const localHash = await sha256File(LOCAL_FILE);
-      const remoteHash = sha256Buffer(remoteBuf);
+      const [localHash, remoteHash] = await Promise.all([
+        sha256File(LOCAL_FILE),
+        fetchBuffer(downloadUrl).then(sha256Buffer),
+      ]);
 
       if (localHash === remoteHash) {
         logger.info('✓ Content matches official release');

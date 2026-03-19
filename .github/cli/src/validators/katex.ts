@@ -1,36 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
+import { readVendorVersion } from '../utils/fs';
 import { ValidationResult } from './types';
+import { validateFile, runAsMain } from './common';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
-
-function getVersion(): string {
-  const config = JSON.parse(fs.readFileSync(VENDOR_CONFIG, 'utf8')) as { katex: { version: string } };
-  return config.katex.version;
-}
-
-async function validateFile(name: string, localPath: string, cdnUrl: string): Promise<boolean> {
-  logger.info(`Validating ${name}...`);
-  if (!fs.existsSync(localPath)) {
-    logger.error(`Local file not found: ${localPath}`);
-    return false;
-  }
-  const localHash = await sha256File(localPath);
-  const remoteHash = sha256Buffer(await fetchBuffer(cdnUrl));
-  logger.info(`  Local SHA256:  ${localHash}`);
-  logger.info(`  Remote SHA256: ${remoteHash}`);
-  if (localHash === remoteHash) {
-    logger.success('Files match!');
-    return true;
-  } else {
-    logger.error('Files DO NOT match!');
-    return false;
-  }
-}
 
 async function validateCssVersion(scssFile: string, expectedVersion: string): Promise<boolean> {
   logger.info('Validating KaTeX CSS/SCSS version...');
@@ -38,11 +15,14 @@ async function validateCssVersion(scssFile: string, expectedVersion: string): Pr
     logger.error(`SCSS file not found: ${scssFile}`);
     return false;
   }
-  const localContent = fs.readFileSync(scssFile, 'utf8');
+  const [localContent, cdnCssBuffer] = await Promise.all([
+    Promise.resolve(fs.readFileSync(scssFile, 'utf8')),
+    fetchBuffer(`https://cdn.jsdelivr.net/npm/katex@${expectedVersion}/dist/katex.css`),
+  ]);
+  const cdnCss = cdnCssBuffer.toString('utf8');
+
   const localMatch = localContent.match(/content: *"([0-9.]+)"/);
   const localVersion = localMatch?.[1];
-
-  const cdnCss = (await fetchBuffer(`https://cdn.jsdelivr.net/npm/katex@${expectedVersion}/dist/katex.css`)).toString('utf8');
   const cdnMatch = cdnCss.match(/content: *"([0-9.]+)"/);
   const cdnVersion = cdnMatch?.[1];
 
@@ -63,7 +43,7 @@ async function validateCssVersion(scssFile: string, expectedVersion: string): Pr
 }
 
 export async function validate(): Promise<ValidationResult> {
-  const version = getVersion();
+  const version = readVendorVersion(VENDOR_CONFIG, 'katex');
   const failures: string[] = [];
 
   logger.header(`KaTeX Validation (v${version})`);
@@ -91,16 +71,4 @@ export async function validate(): Promise<ValidationResult> {
   return { passed: failures.length === 0, failures };
 }
 
-if (require.main === module) {
-  validate().then(({ passed, failures }) => {
-    if (passed) {
-      logger.success('KaTeX validation passed!');
-    } else {
-      logger.error(`KaTeX validation failed! (${failures.join(', ')})`);
-      process.exit(1);
-    }
-  }).catch(err => {
-    logger.error((err as Error).message);
-    process.exit(1);
-  });
-}
+runAsMain(module, 'KaTeX', validate);

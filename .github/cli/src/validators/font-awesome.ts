@@ -1,17 +1,11 @@
-import fs from 'node:fs';
 import path from 'node:path';
-import { sha256File, sha256Buffer } from '../utils/hash';
-import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
+import { readVendorVersion } from '../utils/fs';
 import { ValidationResult } from './types';
+import { validateFile, runAsMain } from './common';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
-
-function getVersion(): string {
-  const config = JSON.parse(fs.readFileSync(VENDOR_CONFIG, 'utf8')) as { fontAwesome: { version: string } };
-  return config.fontAwesome.version;
-}
 
 interface FileEntry {
   name: string;
@@ -19,27 +13,8 @@ interface FileEntry {
   remoteUrl: string;
 }
 
-async function validateFile(entry: FileEntry): Promise<string | null> {
-  logger.info(`Validating ${entry.name}...`);
-  if (!fs.existsSync(entry.localPath)) {
-    logger.error(`Local file not found: ${entry.localPath}`);
-    return entry.name;
-  }
-  const localHash = await sha256File(entry.localPath);
-  const remoteHash = sha256Buffer(await fetchBuffer(entry.remoteUrl));
-  logger.info(`  Local SHA256:   ${localHash}`);
-  logger.info(`  Remote SHA256:  ${remoteHash}`);
-  if (localHash === remoteHash) {
-    logger.success('Files match!');
-    return null;
-  } else {
-    logger.error('Files DO NOT match!');
-    return entry.name;
-  }
-}
-
 export async function validate(): Promise<ValidationResult> {
-  const version = getVersion();
+  const version = readVendorVersion(VENDOR_CONFIG, 'fontAwesome');
   const CDN_BASE = `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/${version}/webfonts`;
   const GITHUB_SCSS_BASE = `https://raw.githubusercontent.com/FortAwesome/Font-Awesome/${version}/scss`;
 
@@ -68,10 +43,15 @@ export async function validate(): Promise<ValidationResult> {
   }));
 
   logger.info('-- Font files --\n');
-  const fontResults = await Promise.allSettled(fontFiles.map(validateFile));
-
   logger.info('\n-- SCSS files --\n');
-  const scssResults = await Promise.allSettled(scssFiles.map(validateFile));
+  const [fontResults, scssResults] = await Promise.all([
+    Promise.allSettled(fontFiles.map(({ name, localPath, remoteUrl }) =>
+      validateFile(name, localPath, remoteUrl).then(ok => ok ? null : name)
+    )),
+    Promise.allSettled(scssFiles.map(({ name, localPath, remoteUrl }) =>
+      validateFile(name, localPath, remoteUrl).then(ok => ok ? null : name)
+    )),
+  ]);
 
   const failures: string[] = [];
   for (const result of [...fontResults, ...scssResults]) {
@@ -85,16 +65,4 @@ export async function validate(): Promise<ValidationResult> {
   return { passed: failures.length === 0, failures };
 }
 
-if (require.main === module) {
-  validate().then(({ passed, failures }) => {
-    if (passed) {
-      logger.success('Font Awesome validation passed!');
-    } else {
-      logger.error(`Font Awesome validation failed! (${failures.length} check(s) failed)`);
-      process.exit(1);
-    }
-  }).catch(err => {
-    logger.error((err as Error).message);
-    process.exit(1);
-  });
-}
+runAsMain(module, 'Font Awesome', validate);
