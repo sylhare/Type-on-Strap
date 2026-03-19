@@ -3,6 +3,7 @@ import path from 'node:path';
 import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer } from '../utils/http';
 import { logger } from '../utils/logger';
+import { ValidationResult } from './types';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
@@ -10,11 +11,6 @@ const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
 function getVersion(): string {
   const config = JSON.parse(fs.readFileSync(VENDOR_CONFIG, 'utf8')) as { masonry: { version: string } };
   return config.masonry.version;
-}
-
-export interface ValidationResult {
-  passed: boolean;
-  failures: string[];
 }
 
 export async function validate(): Promise<ValidationResult> {

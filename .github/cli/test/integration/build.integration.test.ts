@@ -44,8 +44,8 @@ describe('build:css integration', () => {
   const minOut = path.join(TMP, 'bootstrap-iso.min.css');
 
   beforeAll(async () => {
-    await compileLess(lessIn, cssOut);
-    minifyCSS(cssOut, minOut);
+    const css = await compileLess(lessIn, cssOut);
+    minifyCSS(css, minOut);
   });
 
   test('compileLess creates the CSS output file', () => {

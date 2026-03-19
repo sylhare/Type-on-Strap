@@ -1,4 +1,5 @@
 import { logger } from '../utils/logger';
+import { ValidationResult } from './types';
 import { validate as validateKatex } from './katex';
 import { validate as validateMermaid } from './mermaid';
 import { validate as validateFontAwesome } from './font-awesome';
@@ -8,7 +9,7 @@ import { validate as validateJekyllSearch } from './jekyll-search';
 
 interface ValidatorEntry {
   name: string;
-  fn: () => Promise<{ passed: boolean; failures: string[] }>;
+  fn: () => Promise<ValidationResult>;
 }
 
 const VALIDATORS: ValidatorEntry[] = [

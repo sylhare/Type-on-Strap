@@ -3,6 +3,7 @@ import path from 'node:path';
 import { sha256File, sha256Buffer } from '../utils/hash';
 import { fetchBuffer, fetchJson } from '../utils/http';
 import { logger } from '../utils/logger';
+import { ValidationResult } from './types';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../..');
 const GITHUB_REPO = 'sylhare/Simple-Jekyll-Search';
@@ -10,11 +11,6 @@ const LOCAL_FILE = path.join(PROJECT_ROOT, 'assets/js/vendor/simple-jekyll-searc
 
 interface GithubRelease {
   tag_name: string;
-}
-
-export interface ValidationResult {
-  passed: boolean;
-  failures: string[];
 }
 
 export async function validate(): Promise<ValidationResult> {

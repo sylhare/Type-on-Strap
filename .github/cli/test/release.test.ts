@@ -49,14 +49,12 @@ describe('release.ts', () => {
 
   describe('updateGemspec()', () => {
     test('replaces version in spec.version line', () => {
-      const read = jest.spyOn(fs, 'readFileSync').mockReturnValue('spec.version = "2.5.0"\n' as any);
+      jest.spyOn(fs, 'readFileSync').mockReturnValue('spec.version = "2.5.0"\n' as any);
       const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
 
       updateGemspec('/fake/type-on-strap.gemspec', '2.6.0');
 
       expect(write).toHaveBeenCalledWith('/fake/type-on-strap.gemspec', 'spec.version = "2.6.0"\n');
-      read.mockRestore();
-      write.mockRestore();
     });
   });
 
