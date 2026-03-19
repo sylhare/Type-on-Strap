@@ -3,19 +3,14 @@ jest.mock('../../src/utils/http');
 jest.mock('fs');
 
 import fs from 'node:fs';
-import { sha256File, sha256Buffer } from '../../src/utils/hash';
-import { fetchBuffer, fetchJson } from '../../src/utils/http';
+import { fetchJson } from '../../src/utils/http';
 import { validate } from '../../src/validators/jekyll-search';
+import { realReadFileSync, mockSha256File, mockSha256Buffer, mockFetchBuffer, mockHashAndFetch } from '../helpers';
 
 const mockFs = fs as jest.Mocked<typeof fs>;
-const mockSha256File = sha256File as jest.MockedFunction<typeof sha256File>;
-const mockSha256Buffer = sha256Buffer as jest.MockedFunction<typeof sha256Buffer>;
-const mockFetchBuffer = fetchBuffer as jest.MockedFunction<typeof fetchBuffer>;
 const mockFetchJson = fetchJson as jest.MockedFunction<typeof fetchJson>;
 
 const LOCAL_CONTENT = '// Simple-Jekyll-Search v1.10.0\n(function(){var module={};})();\n';
-const MOCK_HASH = 'a'.repeat(64);
-const realReadFileSync = (jest.requireActual('node:fs') as typeof import('node:fs')).readFileSync;
 
 describe('validators/jekyll-search', () => {
   beforeEach(() => {
@@ -24,9 +19,7 @@ describe('validators/jekyll-search', () => {
       if (String(filePath).endsWith('.js')) return LOCAL_CONTENT;
       return realReadFileSync(filePath as any, options);
     }) as jest.MockedFunction<typeof fs.readFileSync>;
-    mockSha256File.mockResolvedValue(MOCK_HASH);
-    mockSha256Buffer.mockReturnValue(MOCK_HASH);
-    mockFetchBuffer.mockResolvedValue(Buffer.from('remote content'));
+    mockHashAndFetch();
     mockFetchJson.mockResolvedValue({ tag_name: 'v1.10.0' });
   });
 

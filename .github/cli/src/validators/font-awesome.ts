@@ -56,6 +56,7 @@ export async function validate(): Promise<ValidationResult> {
     if (result.status === 'fulfilled' && result.value !== null) {
       failures.push(result.value);
     } else if (result.status === 'rejected') {
+      logger.error((result.reason as Error).message);
       failures.push('unknown (error during validation)');
     }
   }

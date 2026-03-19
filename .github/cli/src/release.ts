@@ -5,14 +5,16 @@ import { logger } from './utils/logger';
 
 export type BumpType = 'major' | 'minor' | 'patch';
 
+const SEMVER = /^(\d+)\.(\d+)\.(\d+)$/;
+
 export function parseVersion(version: string): [number, number, number] {
-  const match = version.match(/^(\d+)\.(\d+)\.(\d+)$/);
+  const match = version.match(SEMVER);
   if (!match) throw new Error(`Invalid version format: ${version}`);
   return [parseInt(match[1]), parseInt(match[2]), parseInt(match[3])];
 }
 
 export function bumpVersion(current: string, bump: BumpType | string): string {
-  if (/^\d+\.\d+\.\d+$/.test(bump)) return bump;
+  if (SEMVER.test(bump)) return bump;
   const [major, minor, patch] = parseVersion(current);
   switch (bump) {
     case 'major': return `${major + 1}.0.0`;
