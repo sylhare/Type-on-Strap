@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { globSync } from 'glob';
 import sharp from 'sharp';
+import { logger } from './utils/logger';
 
 export function getOutputPath(inputPath: string, inputBase: string, outputBase: string): string {
   const relative = path.relative(inputBase, inputPath);
@@ -62,7 +63,7 @@ if (require.main === module) {
       const out = getOutputPath(full, imgBase, outputBase);
       fs.mkdirSync(path.dirname(out), { recursive: true });
       await createThumbnail(full, out);
-      console.log('Thumbnail:', file, '->', path.relative(cwd, out));
+      logger.info(`Thumbnail: ${file} -> ${path.relative(cwd, out)}`);
     }
   }
 
@@ -76,7 +77,7 @@ if (require.main === module) {
           try {
             await compressImage(full, tmp);
             fs.renameSync(tmp, full);
-            console.log('Compressed:', file);
+            logger.info(`Compressed: ${file}`);
           } catch (err) {
             if (fs.existsSync(tmp)) fs.unlinkSync(tmp);
             throw err;
@@ -107,18 +108,18 @@ if (require.main === module) {
           const full = path.join(cwd, file);
           const out = full.replace(/\.[^.]+$/, '.webp');
           await convertToWebp(full, out);
-          console.log('WebP:', file, '->', path.relative(cwd, out));
+          logger.info(`WebP: ${file} -> ${path.relative(cwd, out)}`);
         }
         break;
       }
       default:
-        console.error('Usage: npm run <compress|thumbnails|thumbnails-all|webp>');
+        logger.error('Usage: npm run <compress|thumbnails|thumbnails-all|webp>');
         process.exit(1);
     }
   }
 
   run().catch(err => {
-    console.error(err);
+    logger.error(String(err));
     process.exit(1);
   });
 }

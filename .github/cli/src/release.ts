@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { updateVersionInFile } from './utils/fs';
+import { logger } from './utils/logger';
 
 export type BumpType = 'major' | 'minor' | 'patch';
 
@@ -56,7 +57,7 @@ export function release(newVersion: string, root: string): void {
   updatePackageJson(path.join(root, 'package.json'), newVersion);
   updatePackageLockJson(path.join(root, 'package-lock.json'), newVersion);
   updateGemBuildWorkflow(path.join(root, '.github/workflows/gem-build.yml'), newVersion);
-  console.log(`Version bumped to ${newVersion}`);
+  logger.success(`Version bumped to ${newVersion}`);
 }
 
 if (require.main === module) {
@@ -64,7 +65,7 @@ if (require.main === module) {
   const gemspec = path.join(process.cwd(), 'type-on-strap.gemspec');
   const current = fs.readFileSync(gemspec, 'utf8').match(/spec\.version\s*=\s*"([^"]+)"/)?.[1];
   if (!current) {
-    console.error('Could not read current version from type-on-strap.gemspec');
+    logger.error('Could not read current version from type-on-strap.gemspec');
     process.exit(1);
   }
   const newVersion = bumpVersion(current, arg);

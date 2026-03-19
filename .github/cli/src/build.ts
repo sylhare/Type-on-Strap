@@ -4,6 +4,7 @@ import { globSync } from 'glob';
 import * as esbuild from 'esbuild';
 import less from 'less';
 import CleanCSS from 'clean-css';
+import { logger } from './utils/logger';
 
 export function getJsPartials(dir: string): string[] {
   return globSync(path.join(dir, '*.js')).sort();
@@ -42,9 +43,9 @@ if (require.main === module) {
     const commentsFile = path.join(cwd, 'assets/js/comments-lazy-load.js');
     await Promise.all([
       buildJs(partials, path.join(cwd, 'assets/js/main.min.js'))
-        .then(() => console.log('Built assets/js/main.min.js')),
+        .then(() => logger.info('Built assets/js/main.min.js')),
       buildJs([commentsFile], path.join(cwd, 'assets/js/comments-lazy-load.min.js'))
-        .then(() => console.log('Built assets/js/comments-lazy-load.min.js')),
+        .then(() => logger.info('Built assets/js/comments-lazy-load.min.js')),
     ]);
   }
 
@@ -52,10 +53,10 @@ if (require.main === module) {
     const lessIn = path.join(cwd, 'assets/css/bootstrap-iso.less');
     const cssOut = path.join(cwd, 'assets/css/vendor/bootstrap-iso.css');
     const css = await compileLess(lessIn, cssOut);
-    console.log('Compiled assets/css/vendor/bootstrap-iso.css');
+    logger.info('Compiled assets/css/vendor/bootstrap-iso.css');
 
     minifyCSS(css, path.join(cwd, 'assets/css/vendor/bootstrap-iso.min.css'));
-    console.log('Built assets/css/vendor/bootstrap-iso.min.css');
+    logger.info('Built assets/css/vendor/bootstrap-iso.min.css');
   }
 
   (async () => {
@@ -66,7 +67,7 @@ if (require.main === module) {
         await Promise.all([runJs(), runCss()]);
     }
   })().catch(err => {
-    console.error(err);
+    logger.error(String(err));
     process.exit(1);
   });
 }

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { formatDate, formatTime, createFilename, createContent, createPost } from '../src/post';
+import { logger } from '../src/utils/logger';
 
 describe('post.ts', () => {
   const fixedDate = new Date('2024-01-15T10:30:00');
@@ -96,7 +97,7 @@ describe('post.ts', () => {
 
     test('logs the created file name', () => {
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+      const logSpy = jest.spyOn(logger, 'info');
 
       createPost('Hello World', '/tmp/posts', fixedDate);
 

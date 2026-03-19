@@ -4,6 +4,7 @@ import os from 'node:os';
 import { execSync } from 'child_process';
 import { globSync } from 'glob';
 import { updateVersionInFile, updateVendorConfig } from './utils/fs';
+import { logger } from './utils/logger';
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
 const VENDOR_CONFIG = path.join(PROJECT_ROOT, 'vendor.config.json');
@@ -39,66 +40,66 @@ export function generateScss(distCss: string): string {
 }
 
 export async function updateKatex(version: string): Promise<void> {
-  console.log(`\nUpdating KaTeX to v${version}...\n`);
+  logger.info(`\nUpdating KaTeX to v${version}...\n`);
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'katex-'));
-  console.log(`Temp dir: ${tmp}`);
+  logger.info(`Temp dir: ${tmp}`);
 
   try {
-    console.log(`Cloning KaTeX v${version}...`);
+    logger.info(`Cloning KaTeX v${version}...`);
     execSync(`git clone --depth 1 --branch v${version} https://github.com/KaTeX/KaTeX.git ${tmp}`, { stdio: 'inherit' });
 
-    console.log('\nInstalling dependencies...');
+    logger.info('\nInstalling dependencies...');
     execSync('yarn install --frozen-lockfile', { cwd: tmp, stdio: 'inherit' });
 
-    console.log('\nBuilding KaTeX (USE_TTF=false)...');
+    logger.info('\nBuilding KaTeX (USE_TTF=false)...');
     execSync('yarn build', {
       cwd: tmp,
       stdio: 'inherit',
       env: { ...process.env, USE_TTF: 'false' },
     });
 
-    console.log('\nCopying JS files...');
+    logger.info('\nCopying JS files...');
     copyFile(
       path.join(tmp, 'dist/katex.min.js'),
       path.join(PROJECT_ROOT, 'assets/js/vendor/katex.min.js')
     );
-    console.log('  assets/js/vendor/katex.min.js');
+    logger.info('  assets/js/vendor/katex.min.js');
     copyFile(
       path.join(tmp, 'dist/contrib/auto-render.min.js'),
       path.join(PROJECT_ROOT, 'assets/js/vendor/katex.auto-render.min.js')
     );
-    console.log('  assets/js/vendor/katex.auto-render.min.js');
+    logger.info('  assets/js/vendor/katex.auto-render.min.js');
 
-    console.log('\nUpdating fonts...');
+    logger.info('\nUpdating fonts...');
     const ttfFiles = globSync(path.join(FONTS_DIR, '*.ttf'));
     for (const f of ttfFiles) {
       fs.unlinkSync(f);
-      console.log(`  Deleted ${path.basename(f)}`);
+      logger.info(`  Deleted ${path.basename(f)}`);
     }
     const newFonts = globSync(path.join(tmp, 'dist/fonts/*.{woff2,woff}'));
     for (const src of newFonts) {
       const dest = path.join(FONTS_DIR, path.basename(src));
       fs.copyFileSync(src, dest);
     }
-    console.log(`  Copied ${newFonts.length} font files (woff2 + woff)`);
+    logger.info(`  Copied ${newFonts.length} font files (woff2 + woff)`);
 
-    console.log('\nGenerating SCSS...');
+    logger.info('\nGenerating SCSS...');
     const distCss = fs.readFileSync(path.join(tmp, 'dist/katex.css'), 'utf8');
     const scss = generateScss(distCss);
     fs.writeFileSync(KATEX_SCSS, scss);
-    console.log('  _sass/external/katex/katex.scss');
+    logger.info('  _sass/external/katex/katex.scss');
 
-    console.log('\nUpdating version strings...');
+    logger.info('\nUpdating version strings...');
     updateVendorConfig(VENDOR_CONFIG, 'katex', version);
-    console.log(`  vendor.config.json → katex.version="${version}"`);
+    logger.info(`  vendor.config.json → katex.version="${version}"`);
 
     updateVersionInFile(
       KATEX_ENTRY,
       /KaTeX v[\d.]+/,
       `KaTeX v${version}`
     );
-    console.log(`  _sass/external/_katex.scss → KaTeX v${version}`);
+    logger.info(`  _sass/external/_katex.scss → KaTeX v${version}`);
 
     const HEAD_LIQUID = path.join(PROJECT_ROOT, '_includes/default/head.liquid');
     updateVersionInFile(
@@ -106,15 +107,15 @@ export async function updateKatex(version: string): Promise<void> {
       /<!-- KaTeX [\d.]+ -->/,
       `<!-- KaTeX ${version} -->`
     );
-    console.log(`  _includes/default/head.liquid → KaTeX ${version}`);
+    logger.info(`  _includes/default/head.liquid → KaTeX ${version}`);
 
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
-    console.log('\nTemp directory cleaned up.');
+    logger.info('\nTemp directory cleaned up.');
   }
 
-  console.log('\n✅ KaTeX update complete!');
-  console.log('   Run: npm run validate:katex');
+  logger.success('KaTeX update complete!');
+  logger.info('   Run: npm run validate:katex');
 }
 
 if (require.main === module) {
@@ -122,12 +123,12 @@ if (require.main === module) {
   try {
     version = resolveVersion(process.argv[2]);
   } catch (err) {
-    console.error((err as Error).message);
+    logger.error((err as Error).message);
     process.exit(1);
   }
 
   updateKatex(version).catch(err => {
-    console.error(err);
+    logger.error(String(err));
     process.exit(1);
   });
 }

@@ -41,13 +41,13 @@ async function main(): Promise<void> {
       failed++;
       logger.error(`${name} threw an error: ${(err as Error).message}`);
     }
-    console.log('');
+    logger.info('');
   }
 
   logger.header('Summary');
-  console.log(`Passed: ${passed}`);
-  console.log(`Failed: ${failed}`);
-  console.log('');
+  logger.info(`Passed: ${passed}`);
+  logger.info(`Failed: ${failed}`);
+  logger.info('');
 
   if (failed === 0) {
     logger.success('All vendor dependencies validated successfully!');

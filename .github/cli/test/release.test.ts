@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { logger } from '../src/utils/logger';
 import {
   parseVersion,
   bumpVersion,
@@ -130,7 +131,7 @@ describe('release.ts', () => {
         return `{"version":"${current}","packages":{"":{"version":"${current}"}}}` as any;
       });
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
-      const log = jest.spyOn(console, 'log').mockImplementation(() => {});
+      const log = jest.spyOn(logger, 'success');
 
       release('2.6.0', '/fake');
 
