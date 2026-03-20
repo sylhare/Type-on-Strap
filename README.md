@@ -588,54 +588,18 @@ You can learn more about them on [shopify's doc](https://help.shopify.com/themes
 
 ### npm scripts toolbox
 
-#### Requirements
+If you are not familiar with npm scripts, check the [CONTRIBUTING.md](.github/CONTRIBUTING.md) for setup instructions.
 
-Before you need to have *node* (>=18) and `npm` installed:
-
-- Windows: https://nodejs.org/
-- Ubuntu/Debian: `apt-get install nodejs npm libgl1 libxi6`
-- Fedora (dnf) / RHEL/CentOS (yum): `dnf install node npm libglvnd-glx libXi`
-
-Then install the dependencies from the project root:
-
-```bash
-npm install
-```
-
-#### Minimizing and optimizing: css, js and images
-
-Build (minify JS and compile + minify CSS):
-
-```bash
-npm run build       # js + css
-npm run build:js    # js only
-npm run build:css   # css only
-```
-
-Compress and create thumbnails for images:
-
-```bash
-npm run compress        # compress images in place
-npm run thumbnails-all  # create thumbnails for all images
-npm run thumbnails      # create thumbnails for feature-img/ only
-npm run webp            # convert images to WebP
-# tip: run a git status to see the changes
-git status
-```
-
-You can find the scripts in [.github/scripts/](.github/scripts/).
-
-#### Create a post
-
-To create a `.md` file in the *_posts/* section with the jekyll format of today's date.
-Use this command with the title you'd like to create the very basic post.
+To create a new post with today's date:
 
 ```bash
 npm run post 'title of the post'
 ```
 
-A file will be created following the format `yyyy-mm-dd-title-of-the-post.md` with default post attributes inside.
-Nothing will happen if the file exists already.
+A file `_posts/YYYY-MM-DD-title-of-the-post.md` will be created with default frontmatter.
+Nothing will happen if the file already exists.
+
+For build scripts, image optimization, and the full development setup, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ### Use as Ruby Gem 💎
 
