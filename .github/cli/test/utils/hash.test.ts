@@ -36,7 +36,7 @@ describe('hash utils', () => {
         const bufHash = sha256Buffer(content);
         expect(fileHash).toEqual(bufHash);
       } finally {
-        fs.unlinkSync(tmp);
+        fs.rmSync(tmp, { force: true });
       }
     });
 
