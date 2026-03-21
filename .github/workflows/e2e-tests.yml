@@ -12,7 +12,7 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    
+
     strategy:
       fail-fast: false
       matrix:
@@ -28,33 +28,20 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
-          
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-        
-      - name: Build Jekyll site
-        run: |
-          bundle exec jekyll build
-          ls -la _site/
-        env:
-          JEKYLL_ENV: production
-          
-      - name: Install test dependencies
-        run: |
-          cd .github/tests
-          npm i
-          
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Install Playwright browsers
-        run: |
-          cd .github/tests
-          npx playwright install --with-deps ${{ matrix.browser }}
-          
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
       - name: Run E2E tests
-        run: |
-          cd .github/tests
-          npx playwright test --project=${{ matrix.browser }}
+        run: npm run test:e2e -- --project=${{ matrix.browser }}
         env:
           CI: true
           BASE_URL: http://localhost:4000
@@ -63,24 +50,18 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-          
-      - name: Install test dependencies
-        run: |
-          cd .github/tests
-          npm i
-          
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Run unit tests
-        run: |
-          cd .github/tests
-          npm run test:unit
-
-
+        run: npm test

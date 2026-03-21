@@ -9,7 +9,7 @@
 *.spec
 
 # Jekyll dev or build
-_site/*
+**/_site/
 _development_tool/*
 .sass-cache/*
 *.css.map
@@ -30,17 +30,13 @@ jekyll-theme-type-on-strap.gemspec
 **/package-lock.json
 
 # Testing
-.github/tests/node_modules/
-.github/tests/playwright-report/
-.github/tests/test-results/
-.github/tests/_site/
-.github/tests/.jekyll-cache/
-.github/tests/playwright/.cache/
-.github/tests/coverage/
+.github/cli/playwright/.cache/
+.github/cli/coverage/
+**/playwright-report/
+**/test-results/
 
 # Misc
 *-test.md
 *copy.md
 test/*
 /type-on-strap*/*
-test-results/*
