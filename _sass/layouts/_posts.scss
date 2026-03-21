@@ -71,11 +71,17 @@ header {
   padding-right: 0.5em;
   display: inline-flex;
   flex-direction: column;
+  max-width: 100%;
+
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
 
   .post-meta {
     display: flex;
     align-items: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
     .meta:only-child {
       margin: 0 auto;
