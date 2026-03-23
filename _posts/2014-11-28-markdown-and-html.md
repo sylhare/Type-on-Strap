@@ -84,7 +84,6 @@ And in your markdown file:
 $$ f(x) = \int \frac{2x^2+4x+6}{x-2} $$
 ```
 
-
 ### Expandable content
 
 Click on the expandable content to display it:
