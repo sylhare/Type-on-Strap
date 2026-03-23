@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Font Awesome Icons
-tags: [Icons]
+tags: [Font Awesome, Icons]
 ---
 
 This post showcases [Font Awesome](https://fontawesome.com) icons available in Type-on-Strap.

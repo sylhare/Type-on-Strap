@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Markdown and HTML
-tags: [Katex, Markdown]
+tags: [Markdown]
 author: rohanchandra
-categories: Syntax
+categories: [Syntax]
 ---
 
 Jekyll supports the use of [Markdown](http://daringfireball.net/projects/markdown/syntax) with inline HTML tags which makes it easier to quickly write posts with Jekyll, without having to worry too much about text formatting. A sample of the formatting follows.

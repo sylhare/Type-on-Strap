@@ -5,7 +5,7 @@ hide_title: true
 feature-img: assets/img/feature-img/story.jpeg
 author: mhagnumdw
 tags: [Test, Image]
-categories: Demo
+categories: [Demo]
 ---
 
 This is an example of a post which includes a feature image that has a

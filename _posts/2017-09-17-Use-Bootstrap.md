@@ -2,8 +2,8 @@
 layout: post
 title: "Bootstrap"
 bootstrap: true
-tags: [Test]
-categories: Demo
+tags: [Bootstrap, Test]
+categories: [Demo]
 ---
 
 This theme is compatible with Bootstrap if you choose to use it in your pages or posts.

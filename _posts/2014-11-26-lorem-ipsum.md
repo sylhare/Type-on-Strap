@@ -4,7 +4,7 @@ title: The Real Lorem Ipsum
 tags: [Image, Color]
 color: turquoise
 excerpt_separator: <!--more-->
-categories: Demo
+categories: [Demo]
 ---
 
 ## Lorem Ipsum
