@@ -1,0 +1,50 @@
+name: Visual Tests
+
+on:
+  pull_request:
+    branches: [ master, main ]
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  visual-update: # Runs on main push or manually: regenerate baselines and upload as artifact
+    name: Update Visual Baselines
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Generate baselines (all visual projects)
+        run: npm run test:e2e -- --project=visual-chromium --project=visual-firefox --project=visual-webkit --project=visual-mobile-chrome --project=visual-mobile-safari --update-snapshots
+        env:
+          CI: true
+          BASE_URL: http://localhost:4000
+
+      - name: Upload snapshots artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-snapshots
+          path: .github/cli/e2e/screenshots.spec.ts-snapshots/
+          retention-days: 90
+
