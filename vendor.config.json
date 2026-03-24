@@ -13,5 +13,8 @@
   },
   "imagesLoaded": {
     "version": "5.0.0"
+  },
+  "simpleJekyllSearch": {
+    "version": "2.1.2"
   }
 }
