@@ -18,7 +18,7 @@
 .grid-sizer,
 .grid-item {
   /* state column width */
-  width: 32.6%;
+  width: $gallery-item-width;
 }
 
 .grid-item {
@@ -36,13 +36,13 @@
 /* --- Masonry gutter size --- */
 
 .gutter-sizer {
-  width: 1%;
+  width: $gallery-gutter;
 }
 
 .grid-item:first-of-type {
-  margin-bottom: 1%;
+  margin-bottom: $gallery-gutter;
 }
 
 .grid-item {
-  margin-bottom: 1%;
+  margin-bottom: $gallery-gutter;
 }

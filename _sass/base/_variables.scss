@@ -26,6 +26,26 @@ $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 320px;
 
+/* Z-INDEX */
+$z-index-cookie: 1000;
+
+/* COMPONENT SIZES */
+$post-img-height: 250px;
+$post-img-height-mobile: 150px;
+$portfolio-max-width: 400px;
+$gallery-item-width: 32.6%;
+$gallery-gutter: 1%;
+
+/* MIXINS */
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xl'    { @media screen and (max-width: $xl-break)   { @content; } }
+  @if $breakpoint == 'l'     { @media screen and (max-width: $l-break)    { @content; } }
+  @if $breakpoint == 'm'     { @media screen and (max-width: $m-break)    { @content; } }
+  @if $breakpoint == 'break' { @media screen and (max-width: $break)      { @content; } }
+  @if $breakpoint == 'sm'    { @media screen and (max-width: $sm-break)   { @content; } }
+  @if $breakpoint == 'x-sm'  { @media screen and (max-width: $x-sm-break) { @content; } }
+}
+
 
 /* THEME COLOR SCHEMES */
 html, html[data-theme="light"] {

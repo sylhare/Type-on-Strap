@@ -2,7 +2,7 @@
   display: block;
   position: relative;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: $portfolio-max-width;
 
   .caption {
     margin: 0;
@@ -11,8 +11,6 @@
     height: 100%;
     text-align: center;
     opacity: 0;
-    -webkit-transition: all ease .5s;
-    -moz-transition: all ease .5s;
     transition: all ease .5s;
 
     &::before {

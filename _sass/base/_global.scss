@@ -255,7 +255,7 @@ details {
   width: 100%;
   background: rgba(2, 2, 2, 0.85);
   color: lightgray;
-  z-index: 1000;
+  z-index: $z-index-cookie;
 
   & a {
     display: inline-block;
