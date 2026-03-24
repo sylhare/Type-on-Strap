@@ -107,9 +107,9 @@ jobs:
         run: |
           PROJECT="${{ matrix.project }}"
           case "$PROJECT" in
-            *chromium*) BROWSER="chromium" ;;
-            *firefox*)  BROWSER="firefox"  ;;
-            *webkit*)   BROWSER="webkit"   ;;
+            *chromium*|*chrome*) BROWSER="chromium" ;;
+            *firefox*)           BROWSER="firefox"  ;;
+            *webkit*|*safari*)   BROWSER="webkit"   ;;
           esac
           npx playwright install --with-deps "$BROWSER"
 
