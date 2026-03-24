@@ -48,3 +48,74 @@ jobs:
           path: .github/cli/e2e/screenshots.spec.ts-snapshots/
           retention-days: 90
 
+  visual-compare: # Runs on PRs: restore baselines from artifact and compare
+    name: Visual Compare (${{ matrix.project }})
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [visual-chromium, visual-firefox, visual-webkit, visual-mobile-chrome, visual-mobile-safari]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download snapshots from latest main run
+        id: snapshots
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RUN_ID=$(gh run list \
+            --repo ${{ github.repository }} \
+            --branch main \
+            --workflow e2e-visual.yml \
+            --status success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+
+          if [ -n "$RUN_ID" ] && [ "$RUN_ID" != "null" ]; then
+            gh run download "$RUN_ID" \
+              --repo ${{ github.repository }} \
+              --name visual-snapshots \
+              --dir .github/cli/e2e/screenshots.spec.ts-snapshots
+            echo "available=true" >> $GITHUB_OUTPUT
+          else
+            echo "No successful main run found — visual comparison will be skipped"
+            echo "available=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: |
+          PROJECT="${{ matrix.project }}"
+          case "$PROJECT" in
+            *chromium*) BROWSER="chromium" ;;
+            *firefox*)  BROWSER="firefox"  ;;
+            *webkit*)   BROWSER="webkit"   ;;
+          esac
+          npx playwright install --with-deps "$BROWSER"
+
+      - name: Run visual comparison
+        if: steps.snapshots.outputs.available == 'true'
+        run: npm run test:e2e -- --project=${{ matrix.project }}
+        env:
+          CI: true
+          BASE_URL: http://localhost:4000

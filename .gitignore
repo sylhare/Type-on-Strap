@@ -34,6 +34,7 @@ jekyll-theme-type-on-strap.gemspec
 .github/cli/coverage/
 **/playwright-report/
 **/test-results/
+**/*.spec.ts-snapshots/
 
 # Misc
 *-test.md
