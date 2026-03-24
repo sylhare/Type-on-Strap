@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { checkGalleryHasImages } from './helpers';
+import { checkGalleryHasImages } from './support/helpers';
 
 test.describe('Gallery Functionality @desktop', () => {
   test('should display gallery page', async ({ page }) => {
