@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openMobileMenu } from './helpers';
+import { openMobileMenu } from './support/helpers';
 
 test.describe('Accessibility @desktop', () => {
   test('should have proper heading hierarchy on home page', async ({ page }) => {

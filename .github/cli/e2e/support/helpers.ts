@@ -1,5 +1,4 @@
-import type { Page } from '@playwright/test';
-import { test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 /**
  * Helper to open mobile menu - forces menu visibility for mobile tests
@@ -24,6 +23,31 @@ export async function openMobileMenu(page: Page): Promise<void> {
 export async function hasThemeToggle(page: Page): Promise<boolean> {
   const themeToggle = page.locator('#theme-toggle');
   return await themeToggle.count() > 0;
+}
+
+/**
+ * Force a theme by writing to localStorage and setting the data-theme attribute directly.
+ */
+export async function setTheme(page: Page, theme: 'light' | 'dark'): Promise<void> {
+  await page.evaluate((t) => {
+    localStorage.setItem('theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+  }, theme);
+  await page.waitForTimeout(300);
+}
+
+/**
+ * Capture light-mode and dark-mode screenshots for the current page state.
+ * Screenshots are stored in a `screenshots.spec.ts-snapshots/` directory and
+ * compared on subsequent runs (visual regression). Run with `--update-snapshots`
+ * to create or refresh the baseline.
+ */
+export async function takeThemeScreenshots(page: Page, name: string): Promise<void> {
+  await setTheme(page, 'light');
+  await expect(page).toHaveScreenshot(`${name}-light.png`, { fullPage: true });
+
+  await setTheme(page, 'dark');
+  await expect(page).toHaveScreenshot(`${name}-dark.png`, { fullPage: true });
 }
 
 /**

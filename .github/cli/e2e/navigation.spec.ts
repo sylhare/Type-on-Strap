@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openMobileMenu } from './helpers';
+import { openMobileMenu } from './support/helpers';
 
 test.describe('Navigation and Routing @desktop', () => {
   test('should load home page successfully', async ({ page }) => {
