@@ -20,7 +20,7 @@ describe('http utils', () => {
   describe('fetchBuffer()', () => {
     test('resolves with concatenated chunks on 200', async () => {
       const { res, emit } = makeMockResponse(200, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('data', Buffer.from('hello'));
         emit('data', Buffer.from(' world'));
@@ -34,7 +34,7 @@ describe('http utils', () => {
 
     test('rejects on non-200 status', async () => {
       const { res, emit } = makeMockResponse(404, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('end');
         return { on: jest.fn() } as any;
@@ -48,7 +48,7 @@ describe('http utils', () => {
       const { res: final, emit: emitFinal } = makeMockResponse(200, '');
 
       let callCount = 0;
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         callCount++;
         if (callCount === 1) {
           cb(redirect);
@@ -69,7 +69,7 @@ describe('http utils', () => {
   describe('fetchJson()', () => {
     test('parses response as JSON', async () => {
       const { res, emit } = makeMockResponse(200, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('data', Buffer.from('{"version":"1.0.0"}'));
         emit('end');
@@ -84,7 +84,7 @@ describe('http utils', () => {
   describe('downloadFile()', () => {
     test('writes fetched buffer to destination', async () => {
       const { res, emit } = makeMockResponse(200, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('data', Buffer.from('file contents'));
         emit('end');

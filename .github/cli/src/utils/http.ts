@@ -7,9 +7,18 @@ function getProtocol(url: string) {
   return url.startsWith('https') ? https : http;
 }
 
+function buildRequestOptions(url: string): https.RequestOptions {
+  const headers: Record<string, string> = { 'User-Agent': 'type-on-strap-cli' };
+  const token = process.env['GITHUB_TOKEN'];
+  if (token && url.includes('api.github.com')) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return { headers };
+}
+
 export function fetchBuffer(url: string): Promise<Buffer> {
   return new Promise((resolve, reject) => {
-    getProtocol(url).get(url, (res: IncomingMessage) => {
+    getProtocol(url).get(url, buildRequestOptions(url), (res: IncomingMessage) => {
       if (res.statusCode === 301 || res.statusCode === 302) {
         const location = res.headers.location;
         if (!location) return reject(new Error(`Redirect with no location for ${url}`));
