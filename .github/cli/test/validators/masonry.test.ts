@@ -1,6 +1,5 @@
 jest.mock('../../src/utils/hash');
 jest.mock('../../src/utils/http');
-jest.mock('fs');
 
 import { validate } from '../../src/validators/masonry';
 import { mockFetchBuffer, mockHashAndFetch, mockReadFileSync, mockSha256Buffer, mockSha256File } from '../helpers';

@@ -4,10 +4,8 @@ import fs from 'node:fs';
 import { EventEmitter } from 'node:events';
 
 jest.mock('https');
-jest.mock('fs');
 
 const mockHttps = https as jest.Mocked<typeof https>;
-const mockFs = fs as jest.Mocked<typeof fs>;
 
 function makeMockResponse(statusCode: number, body: string, headers: Record<string, string> = {}) {
   const res = new EventEmitter() as any;
@@ -90,11 +88,11 @@ describe('http utils', () => {
         emit('end');
         return { on: jest.fn() } as any;
       });
-      mockFs.writeFileSync = jest.fn();
+      const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
 
       await downloadFile('https://example.com/file.js', '/dest/file.js');
 
-      expect(mockFs.writeFileSync).toHaveBeenCalledWith('/dest/file.js', expect.any(Buffer));
+      expect(writeFileSyncSpy).toHaveBeenCalledWith('/dest/file.js', expect.any(Buffer));
     });
   });
 });

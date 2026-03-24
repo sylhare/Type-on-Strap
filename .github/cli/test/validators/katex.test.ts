@@ -1,12 +1,9 @@
 jest.mock('../../src/utils/hash');
 jest.mock('../../src/utils/http');
-jest.mock('fs');
 
 import fs from 'node:fs';
 import { validate } from '../../src/validators/katex';
 import { MOCK_HASH, mockFetchBuffer, mockReadFileSync, mockSha256Buffer, mockSha256File } from '../helpers';
-
-const mockFs = fs as jest.Mocked<typeof fs>;
 
 const MOCK_CONFIG = JSON.stringify({ katex: { version: '0.16.38' } });
 const MOCK_SCSS = 'some content\ncontent: "0.16.38"\nmore content';
@@ -14,7 +11,7 @@ const MOCK_CDN_CSS = Buffer.from('content: "0.16.38"');
 
 describe('validators/katex', () => {
   beforeEach(() => {
-    mockFs.existsSync = jest.fn().mockReturnValue(true);
+    jest.spyOn(fs, 'existsSync').mockReturnValue(true);
     mockReadFileSync(MOCK_CONFIG, filePath => {
       if (filePath.endsWith('.scss')) return MOCK_SCSS;
     });
@@ -49,7 +46,7 @@ describe('validators/katex', () => {
   });
 
   test('fails when local JS file does not exist', async () => {
-    mockFs.existsSync = jest.fn().mockReturnValue(false);
+    jest.spyOn(fs, 'existsSync').mockReturnValue(false);
     const result = await validate();
     expect(result.passed).toEqual(false);
   });
