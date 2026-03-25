@@ -78,7 +78,7 @@ html, html[data-theme="light"] {
   --h4: #262626;
   --h5: #262626;
   --h6: #262626;
-  --border: rgba(0, 0, 0, 0.2);
+  --border: rgb(229, 229, 229);
   --blockquote-border: #9fd2e3;
   --kbd-background:    #eee;
   --kbd-border:        #b4b4b4;
@@ -105,7 +105,7 @@ html[data-theme="dark"] {
   --h4: #00af9e;
   --h5: #6bac00;
   --h6: #ff5c00;
-  --border: rgba(255, 255, 255, 0.5); // border
+  --border: rgba(255, 255, 255, 0.15);
   --blockquote-border: #546e7a;
   --kbd-background:    #3a3f4b;
   --kbd-border:        #5a6070;
