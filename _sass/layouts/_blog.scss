@@ -21,17 +21,9 @@
     background-size: 170% auto;
   }
 
-  @media screen and (max-width: 450px) {
-    background-size: 200% auto;
-  }
-
-  @media screen and (max-width: 400px) {
-    background-size: 250% auto;
-  }
-
-  @media screen and (max-width: 380px) {
-    background-size: 280% auto;
-  }
+  @include respond-to('xs-l') { background-size: 200% auto; }
+  @include respond-to('xs-m') { background-size: 250% auto; }
+  @include respond-to('xs-s') { background-size: 280% auto; }
 
   p:last-child {
     margin-bottom: 0;
@@ -50,7 +42,7 @@
     margin-bottom: 0;
     display: inline-block;
     background-size: cover;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border);
 
     p a {
       @extend .body-link;
@@ -62,12 +54,12 @@
       overflow: hidden;
 
       @media (min-width: $break) {
-        height: 250px;
+        height: $post-img-height;
       }
 
       //Smaller screen
       @media screen and (max-width: $break) {
-        height: 150px;
+        height: $post-img-height-mobile;
       }
 
       img {
@@ -79,8 +71,7 @@
     }
 
     .post-img img {
-      transition-timing-function: ease-out;
-      transition: all 2s;
+      transition: all 2s ease-out;
 
       &:hover {
         transform: scale(1.1);

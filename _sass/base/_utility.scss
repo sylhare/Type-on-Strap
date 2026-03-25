@@ -1,35 +1,14 @@
 // Mix-ins
-%padding-nav {
-  padding: $padding-small $padding-x-large;
-  @media (max-width: $xl-break) {
-    padding: $padding-small ($padding-large * 2);
-  }
-  @media (max-width: $l-break) {
-    padding: $padding-small $padding-large;
-  }
-  @media (max-width: $m-break) {
-    padding: $padding-small $padding-medium;
-  }
-  @media (max-width: $sm-break) {
-    padding: $padding-small $padding-x-small;
-  }
+@mixin responsive-padding($v, $sm-h) {
+  padding: $v $padding-x-large;
+  @media (max-width: $xl-break) { padding: $v ($padding-large * 2); }
+  @media (max-width: $l-break)  { padding: $v $padding-large; }
+  @media (max-width: $m-break)  { padding: $v $padding-medium; }
+  @media (max-width: $sm-break) { padding: $v $sm-h; }
 }
 
-%padding-post {
-  padding: $padding-x-small $padding-x-large;
-  @media (max-width: $xl-break) {
-    padding: $padding-x-small ($padding-large * 2);
-  }
-  @media (max-width: $l-break) {
-    padding: $padding-x-small $padding-large;
-  }
-  @media (max-width: $m-break) {
-    padding: $padding-x-small $padding-medium;
-  }
-  @media (max-width: $sm-break) {
-    padding: $padding-x-small $padding-small;
-  }
-}
+%padding-nav  { @include responsive-padding($padding-small, $padding-x-small); }
+%padding-post { @include responsive-padding($padding-x-small, $padding-small); }
 
 %padding-header {
   padding: $padding-medium $padding-large;

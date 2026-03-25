@@ -25,6 +25,37 @@ $m-break: 1000px;
 $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 320px;
+$xs-l-break: 450px;
+$xs-m-break: 400px;
+$xs-s-break: 380px;
+
+/* TRANSITIONS */
+$transition-fast: 0.15s;
+$transition-base: 0.2s;
+$transition-slow: 0.5s;
+
+/* Z-INDEX */
+$z-index-cookie: 1000;
+
+/* COMPONENT SIZES */
+$post-img-height: 250px;
+$post-img-height-mobile: 150px;
+$portfolio-max-width: 400px;
+$gallery-item-width: 32.6%;
+$gallery-gutter: 1%;
+
+/* MIXINS */
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xl'    { @media screen and (max-width: $xl-break)   { @content; } }
+  @if $breakpoint == 'l'     { @media screen and (max-width: $l-break)    { @content; } }
+  @if $breakpoint == 'm'     { @media screen and (max-width: $m-break)    { @content; } }
+  @if $breakpoint == 'break' { @media screen and (max-width: $break)      { @content; } }
+  @if $breakpoint == 'sm'    { @media screen and (max-width: $sm-break)   { @content; } }
+  @if $breakpoint == 'x-sm'  { @media screen and (max-width: $x-sm-break) { @content; } }
+  @if $breakpoint == 'xs-l'  { @media screen and (max-width: $xs-l-break) { @content; } }
+  @if $breakpoint == 'xs-m'  { @media screen and (max-width: $xs-m-break) { @content; } }
+  @if $breakpoint == 'xs-s'  { @media screen and (max-width: $xs-s-break) { @content; } }
+}
 
 
 /* THEME COLOR SCHEMES */
@@ -52,6 +83,7 @@ html, html[data-theme="light"] {
   --kbd-background:    #eee;
   --kbd-border:        #b4b4b4;
   --kbd-color:         #333;
+  --search-highlight:  rgba(255, 221, 76, 0.5);
 }
 
 html[data-theme="dark"] {
@@ -78,6 +110,7 @@ html[data-theme="dark"] {
   --kbd-background:    #3a3f4b;
   --kbd-border:        #5a6070;
   --kbd-color:         #cdd9e5;
+  --search-highlight:  rgba(167, 139, 250, 0.5);
   --cusdis--color-text-default: var(--text);
   --cusdis--color-comment-username-text: var(--link);
 }

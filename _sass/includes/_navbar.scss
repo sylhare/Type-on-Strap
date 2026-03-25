@@ -121,7 +121,7 @@ nav {
       overflow: hidden;
 
       /* fade out, then shrink */
-      transition: opacity .25s 0s, font-size .25s 0s;
+      transition: opacity $transition-base 0s, font-size $transition-base 0s;
       transition-delay: 0s;
 
       &.hide {
@@ -139,10 +139,6 @@ nav {
       margin: 0;
       background-color: var(--background);
       backdrop-filter: brightness(0.98);
-
-      &:nth-of-type(4n) {
-        background-color: var(--background);
-      }
 
       a {
         width: 100%;
