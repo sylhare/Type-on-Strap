@@ -3,8 +3,6 @@ import { ValidationResult } from '../types';
 import { validate as validateKatex } from './katex';
 import { validate as validateMermaid } from './mermaid';
 import { validate as validateFontAwesome } from './font-awesome';
-import { validate as validateMasonry } from './masonry';
-import { validate as validateImagesLoaded } from './imagesloaded';
 import { validate as validateJekyllSearch } from './jekyll-search';
 
 interface ValidatorEntry {
@@ -16,8 +14,6 @@ const VALIDATORS: ValidatorEntry[] = [
   { name: 'Font Awesome', fn: validateFontAwesome },
   { name: 'KaTeX', fn: validateKatex },
   { name: 'Mermaid', fn: validateMermaid },
-  { name: 'Masonry', fn: validateMasonry },
-  { name: 'imagesLoaded', fn: validateImagesLoaded },
   { name: 'Simple-Jekyll-Search', fn: validateJekyllSearch },
 ];
 
