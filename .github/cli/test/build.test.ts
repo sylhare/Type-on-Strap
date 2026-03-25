@@ -1,19 +1,13 @@
 import fs from 'node:fs';
 import * as path from 'node:path';
 import * as esbuild from 'esbuild';
-import * as less from 'less';
 import { globSync } from 'glob';
-import { buildJs, compileLess, concatFiles, getJsPartials, minifyCSS } from '../src/build';
+import { buildJs, concatFiles, getJsPartials } from '../src/build';
 
 jest.mock('esbuild', () => ({ transform: jest.fn() }));
-jest.mock('less', () => ({ render: jest.fn() }));
-jest.mock('clean-css', () =>
-  jest.fn().mockImplementation(() => ({ minify: jest.fn().mockReturnValue({ styles: '.a{}' }) }))
-);
 jest.mock('glob', () => ({ globSync: jest.fn() }));
 
 const mockEsbuild = esbuild as jest.Mocked<typeof esbuild>;
-const mockLess = less as jest.Mocked<typeof less>;
 const mockGlobSync = globSync as jest.Mock;
 
 
@@ -72,33 +66,6 @@ describe('build.ts', () => {
         expect.any(String),
         { minify: true }
       );
-    });
-  });
-
-  describe('compileLess()', () => {
-    test('passes filename to less.render for import resolution', async () => {
-      jest.spyOn(fs, 'readFileSync').mockReturnValue('');
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
-      });
-      mockLess.render.mockResolvedValue({ css: '' } as any);
-
-      await compileLess('/path/to/input.less', '/output.css');
-
-      expect(mockLess.render).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({ filename: '/path/to/input.less' })
-      );
-    });
-  });
-
-  describe('minifyCSS()', () => {
-    test('writes minified output to the given path', () => {
-      jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
-      });
-
-      minifyCSS('.a { color: red; }', '/out/file.min.css');
-
-      expect(fs.writeFileSync).toHaveBeenCalledWith('/out/file.min.css', '.a{}');
     });
   });
 });
