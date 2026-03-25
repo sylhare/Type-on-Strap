@@ -15,13 +15,7 @@ layout: default
         </div>
     </header>
     <section class="post-content">
-    {% if page.bootstrap %}
-        <div class="bootstrap-iso">
-            {% endif %}
-            {{ content }}
-            {% if page.bootstrap %}
-        </div>
-        {% endif %}
+        {{ content }}
     </section>
     <!-- Category and Tag list -->
     <div class="tag-category-container">
