@@ -25,6 +25,14 @@ $m-break: 1000px;
 $break: 768px;
 $sm-break: 576px;
 $x-sm-break: 320px;
+$xs-l-break: 450px;
+$xs-m-break: 400px;
+$xs-s-break: 380px;
+
+/* TRANSITIONS */
+$transition-fast: 0.15s;
+$transition-base: 0.2s;
+$transition-slow: 0.5s;
 
 /* Z-INDEX */
 $z-index-cookie: 1000;
@@ -72,6 +80,7 @@ html, html[data-theme="light"] {
   --kbd-background:    #eee;
   --kbd-border:        #b4b4b4;
   --kbd-color:         #333;
+  --search-highlight:  rgba(255, 221, 76, 0.5);
 }
 
 html[data-theme="dark"] {
@@ -98,6 +107,7 @@ html[data-theme="dark"] {
   --kbd-background:    #3a3f4b;
   --kbd-border:        #5a6070;
   --kbd-color:         #cdd9e5;
+  --search-highlight:  rgba(167, 139, 250, 0.5);
   --cusdis--color-text-default: var(--text);
   --cusdis--color-comment-username-text: var(--link);
 }

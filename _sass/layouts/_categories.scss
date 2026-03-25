@@ -14,7 +14,7 @@
     .category-link {
       color: var(--meta);
       text-decoration: underline;
-      transition: color 0.2s ease;
+      transition: color $transition-base ease;
 
       &:hover {
         color: var(--link);
@@ -89,7 +89,7 @@
           font-size: 0.75rem;
           font-weight: 500;
           white-space: nowrap;
-          transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+          transition: background-color $transition-base ease, color $transition-base ease, border $transition-base ease;
           cursor: pointer;
           border: 1px solid transparent;
         }

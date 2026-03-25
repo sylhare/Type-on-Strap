@@ -182,9 +182,7 @@ header {
   h5 { color: var(--h5); }
   h6 { color: var(--h6); }
 
-  a {
-    :visited {
-      filter: saturate(0.7);
-    }
+  a:visited {
+    filter: saturate(0.7);
   }
 }
