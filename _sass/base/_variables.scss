@@ -52,6 +52,9 @@ $gallery-gutter: 1%;
   @if $breakpoint == 'break' { @media screen and (max-width: $break)      { @content; } }
   @if $breakpoint == 'sm'    { @media screen and (max-width: $sm-break)   { @content; } }
   @if $breakpoint == 'x-sm'  { @media screen and (max-width: $x-sm-break) { @content; } }
+  @if $breakpoint == 'xs-l'  { @media screen and (max-width: $xs-l-break) { @content; } }
+  @if $breakpoint == 'xs-m'  { @media screen and (max-width: $xs-m-break) { @content; } }
+  @if $breakpoint == 'xs-s'  { @media screen and (max-width: $xs-s-break) { @content; } }
 }
 
 

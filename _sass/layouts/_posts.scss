@@ -1,6 +1,6 @@
 .comments {
   @extend %padding-post;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border);
   float: left;
   width: 100%;
 
@@ -139,7 +139,7 @@ header {
 
     .meta, .meta-separator, .last-modified {
       color: var(--header-text);
-      filter: opacity(0.7);
+      opacity: 0.7;
     }
   }
 
