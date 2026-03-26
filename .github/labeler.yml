@@ -1,8 +1,30 @@
-question:
-  - '(\?|How|What|Why|When|Where|Who)'
+dependencies:
+- changed-files:
+  - any-glob-to-any-file:
+    - Gemfile
+    - Gemfile.lock
+    - package.json
+    - package-lock.json
+    - yarn.lock
+    - pnpm-lock.yaml
 
-bug:
-  - '(bug|issue|problem|broken|error|fail|does not work|not working)'
+ruby:
+- changed-files:
+  - any-glob-to-any-file:
+    - Gemfile
+    - Gemfile.lock
+    - '**/*.gemspec'
+    - '**/*.rb'
 
-enhancement:
-  - '(enhancement|feature)'
+javascript:
+- changed-files:
+  - any-glob-to-any-file:
+    - package.json
+    - package-lock.json
+    - yarn.lock
+    - pnpm-lock.yaml
+    - '**/*.js'
+    - '**/*.mjs'
+    - '**/*.cjs'
+    - '**/*.ts'
+    - '**/*.tsx'

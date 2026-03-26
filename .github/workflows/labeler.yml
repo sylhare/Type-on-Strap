@@ -1,18 +1,25 @@
-name: "Issue Labeler"
+name: "Labeler"
 on:
   issues:
     types: [opened, edited]
-
-permissions:
-  issues: write
-  contents: read
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   triage:
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
     runs-on: ubuntu-latest
     steps:
     - uses: github/issue-labeler@v3.4
       with:
         repo-token: ${{ github.token }}
-        configuration-path: .github/labeler.yml
+        configuration-path: .github/issue-labeler.yml
         enable-versioned-regex: 0
+    - if: ${{ github.event_name == 'pull_request' }}
+      uses: actions/labeler@v6
+      with:
+        repo-token: ${{ github.token }}
+        configuration-path: .github/labeler.yml
