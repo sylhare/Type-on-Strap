@@ -18,13 +18,12 @@ export function mockReadFileSync(
   vendorConfig: string,
   extra?: (filePath: string, options?: unknown) => string | Buffer | undefined
 ): void {
-  const mockFs = fs as jest.Mocked<typeof fs>;
-  mockFs.readFileSync = jest.fn().mockImplementation((filePath: unknown, options?: unknown) => {
-    if (String(filePath).endsWith('vendor.config.json')) return vendorConfig;
+  jest.spyOn(fs, 'readFileSync').mockImplementation((filePath: unknown, options?: unknown) => {
+    if (String(filePath).endsWith('vendor.config.json')) return vendorConfig as any;
     const result = extra?.(String(filePath), options);
-    if (result !== undefined) return result;
+    if (result !== undefined) return result as any;
     return realReadFileSync(filePath as any, options as any);
-  }) as jest.MockedFunction<typeof fs.readFileSync>;
+  });
 }
 
 /**

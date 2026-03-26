@@ -14,6 +14,7 @@
     "release": "tsx .github/cli/src/release.ts",
     "update:katex": "tsx .github/cli/src/update/katex.ts",
     "update:mermaid": "tsx .github/cli/src/update/mermaid.ts",
+    "update:search": "tsx .github/cli/src/update/jekyll-search.ts",
     "validate": "tsx .github/cli/src/validators/index.ts",
     "validate:katex": "tsx .github/cli/src/validators/katex.ts",
     "validate:mermaid": "tsx .github/cli/src/validators/mermaid.ts",

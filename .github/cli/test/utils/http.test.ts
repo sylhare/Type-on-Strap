@@ -4,10 +4,8 @@ import fs from 'node:fs';
 import { EventEmitter } from 'node:events';
 
 jest.mock('https');
-jest.mock('fs');
 
 const mockHttps = https as jest.Mocked<typeof https>;
-const mockFs = fs as jest.Mocked<typeof fs>;
 
 function makeMockResponse(statusCode: number, body: string, headers: Record<string, string> = {}) {
   const res = new EventEmitter() as any;
@@ -20,7 +18,7 @@ describe('http utils', () => {
   describe('fetchBuffer()', () => {
     test('resolves with concatenated chunks on 200', async () => {
       const { res, emit } = makeMockResponse(200, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('data', Buffer.from('hello'));
         emit('data', Buffer.from(' world'));
@@ -34,7 +32,7 @@ describe('http utils', () => {
 
     test('rejects on non-200 status', async () => {
       const { res, emit } = makeMockResponse(404, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('end');
         return { on: jest.fn() } as any;
@@ -48,7 +46,7 @@ describe('http utils', () => {
       const { res: final, emit: emitFinal } = makeMockResponse(200, '');
 
       let callCount = 0;
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         callCount++;
         if (callCount === 1) {
           cb(redirect);
@@ -69,7 +67,7 @@ describe('http utils', () => {
   describe('fetchJson()', () => {
     test('parses response as JSON', async () => {
       const { res, emit } = makeMockResponse(200, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('data', Buffer.from('{"version":"1.0.0"}'));
         emit('end');
@@ -84,17 +82,17 @@ describe('http utils', () => {
   describe('downloadFile()', () => {
     test('writes fetched buffer to destination', async () => {
       const { res, emit } = makeMockResponse(200, '');
-      mockHttps.get = jest.fn((url: any, cb: any) => {
+      mockHttps.get = jest.fn((url: any, _options: any, cb: any) => {
         cb(res);
         emit('data', Buffer.from('file contents'));
         emit('end');
         return { on: jest.fn() } as any;
       });
-      mockFs.writeFileSync = jest.fn();
+      const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
 
       await downloadFile('https://example.com/file.js', '/dest/file.js');
 
-      expect(mockFs.writeFileSync).toHaveBeenCalledWith('/dest/file.js', expect.any(Buffer));
+      expect(writeFileSyncSpy).toHaveBeenCalledWith('/dest/file.js', expect.any(Buffer));
     });
   });
 });

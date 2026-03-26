@@ -1,57 +1,41 @@
 jest.mock('../../src/utils/hash');
 jest.mock('../../src/utils/http');
-jest.mock('fs');
 
-import fs from 'node:fs';
-import { fetchJson } from '../../src/utils/http';
 import { validate } from '../../src/validators/jekyll-search';
-import { mockHashAndFetch, mockSha256Buffer, realReadFileSync } from '../helpers';
+import { mockFetchBuffer, mockHashAndFetch, mockReadFileSync, mockSha256Buffer, mockSha256File } from '../helpers';
 
-const mockFs = fs as jest.Mocked<typeof fs>;
-const mockFetchJson = fetchJson as jest.MockedFunction<typeof fetchJson>;
-
-const LOCAL_CONTENT = '// Simple-Jekyll-Search v1.10.0\n(function(){var module={};})();\n';
+const MOCK_CONFIG = JSON.stringify({ simpleJekyllSearch: { version: '2.1.2' } });
 
 describe('validators/jekyll-search', () => {
   beforeEach(() => {
-    mockFs.existsSync = jest.fn().mockReturnValue(true);
-    mockFs.readFileSync = jest.fn().mockImplementation((filePath: unknown, options?: any) => {
-      if (String(filePath).endsWith('.js')) return LOCAL_CONTENT;
-      return realReadFileSync(filePath as any, options);
-    }) as jest.MockedFunction<typeof fs.readFileSync>;
+    mockReadFileSync(MOCK_CONFIG);
     mockHashAndFetch();
-    mockFetchJson.mockResolvedValue({ tag_name: 'v1.10.0' });
   });
 
-  test('passes when version and content match', async () => {
+  test('passes when local and remote hashes match', async () => {
     const result = await validate();
     expect(result.passed).toEqual(true);
     expect(result.failures).toHaveLength(0);
   });
 
-  test('fails when version does not match latest', async () => {
-    mockFetchJson.mockResolvedValue({ tag_name: 'v1.11.0' });
-    const result = await validate();
-    expect(result.passed).toEqual(false);
-    expect(result.failures).toContain('version mismatch');
-  });
-
-  test('fails when content hash does not match', async () => {
+  test('fails when hashes do not match', async () => {
     mockSha256Buffer.mockReturnValue('b'.repeat(64));
     const result = await validate();
     expect(result.passed).toEqual(false);
-    expect(result.failures).toContain('content mismatch');
-  });
-
-  test('passes gracefully when GitHub API is unreachable', async () => {
-    mockFetchJson.mockRejectedValue(new Error('Network error'));
-    const result = await validate();
-    expect(result.failures).toHaveLength(0);
+    expect(result.failures).toContain('simple-jekyll-search.min.js');
   });
 
   test('fails when local file does not exist', async () => {
-    mockFs.existsSync = jest.fn().mockReturnValue(false);
+    mockSha256File.mockRejectedValueOnce(new Error("ENOENT: no such file or directory, open 'simple-jekyll-search.min.js'"));
     const result = await validate();
     expect(result.passed).toEqual(false);
+    expect(result.failures).toContain('simple-jekyll-search.min.js');
+  });
+
+  test('requests correct GitHub raw URL', async () => {
+    await validate();
+    expect(mockFetchBuffer).toHaveBeenCalledWith(
+      expect.stringContaining('Simple-Jekyll-Search/v2.1.2/dest/simple-jekyll-search.min.js')
+    );
   });
 });

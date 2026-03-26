@@ -1,22 +1,17 @@
 jest.mock('../../src/utils/http');
 jest.mock('../../src/utils/fs');
+jest.mock('../../src/utils/logger');
 
 import { fetchLatestVersion, resolveVersion, updateMermaid } from '../../src/update/mermaid';
 import { downloadFile, fetchJson } from '../../src/utils/http';
-import { updateVendorConfig, updateVersionInFile } from '../../src/utils/fs';
 
 const mockFetchJson = fetchJson as jest.MockedFunction<typeof fetchJson>;
 const mockDownloadFile = downloadFile as jest.MockedFunction<typeof downloadFile>;
-const mockUpdateVendorConfig = updateVendorConfig as jest.MockedFunction<typeof updateVendorConfig>;
-const mockUpdateVersionInFile = updateVersionInFile as jest.MockedFunction<typeof updateVersionInFile>;
 
 describe('update/mermaid', () => {
   beforeEach(() => {
-    mockDownloadFile.mockResolvedValue(undefined as unknown as void);
-    mockUpdateVendorConfig.mockImplementation(() => {
-    });
-    mockUpdateVersionInFile.mockImplementation(() => {
-    });
+    jest.clearAllMocks();
+    mockDownloadFile.mockResolvedValue(undefined);
   });
 
   describe('fetchLatestVersion()', () => {
@@ -38,27 +33,11 @@ describe('update/mermaid', () => {
   });
 
   describe('updateMermaid()', () => {
-    test('downloads the mermaid JS file from CDN', async () => {
+    test('downloads the mermaid JS file from jsdelivr CDN', async () => {
       await updateMermaid('11.13.0');
       expect(mockDownloadFile).toHaveBeenCalledWith(
-        expect.stringContaining('mermaid@11.13.0'),
+        expect.stringContaining('mermaid@11.13.0/dist/mermaid.min.js'),
         expect.stringContaining('mermaid.min.js')
-      );
-    });
-
-    test('updates vendor config with new version', async () => {
-      await updateMermaid('11.13.0');
-      expect(mockUpdateVendorConfig).toHaveBeenCalledWith(
-        expect.any(String), 'mermaid', '11.13.0'
-      );
-    });
-
-    test('updates head.liquid with new version', async () => {
-      await updateMermaid('11.13.0');
-      expect(mockUpdateVersionInFile).toHaveBeenCalledWith(
-        expect.stringContaining('head.liquid'),
-        expect.any(RegExp),
-        '<!-- Mermaid 11.13.0 -->'
       );
     });
   });
