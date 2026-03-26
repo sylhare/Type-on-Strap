@@ -31,12 +31,11 @@ All scripts live in [`.github/cli/src/`](.github/cli/src/) and are run from the 
 
 ### Build
 
-Minify JS and compile + minify CSS:
+Minify JS:
 
 ```bash
-npm run build        # js + css
-npm run build:js     # js only
-npm run build:css    # css only
+npm run build        # minify JS
+npm run build:js     # minify JS
 ```
 
 ### Images
