@@ -1,3 +1,12 @@
+devops:
+- changed-files:
+  - any-glob-to-any-file:
+    - '.github/workflows/**'
+    - '.github/**/*.yml'
+    - '.github/**/*.yaml'
+    - '**/Dockerfile'
+    - '**/Dockerfile.*'
+
 dependencies:
 - changed-files:
   - any-glob-to-any-file:
