@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        ruby-version: ['3.4', '4.0']
 
     steps:
       - name: Checkout repository
@@ -26,7 +25,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby-version }}
+          ruby-version: '4.0'
           bundler-cache: true
 
       - name: Setup Node.js
