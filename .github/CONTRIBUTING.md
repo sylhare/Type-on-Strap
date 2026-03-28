@@ -97,6 +97,28 @@ Requires a built site (`bundle exec jekyll build`) and Playwright browsers (`npm
 npm run test:e2e
 ```
 
+#### Visual regression tests
+
+Visual tests are tagged `@visual` and run against 5 browser/device projects (desktop Chrome, Firefox, Safari, mobile Chrome, mobile Safari).
+
+Run only the visual tests:
+
+```bash
+npm run test:e2e -- --grep @visual
+```
+
+Or target a single browser:
+
+```bash
+npm run test:e2e -- --project=visual-chromium
+```
+
+Update the baseline screenshots when visual changes are intentional:
+
+```bash
+npm run test:e2e -- --grep @visual --update-snapshots
+```
+
 ## Git hooks
 
 A pre-commit hook is provided that checks for non-staged assets before committing.
