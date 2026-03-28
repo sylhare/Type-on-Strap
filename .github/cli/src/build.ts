@@ -2,8 +2,6 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { globSync } from 'glob';
 import * as esbuild from 'esbuild';
-import * as less from 'less';
-import CleanCSS from 'clean-css';
 import { logger } from './utils/logger';
 
 export function getJsPartials(dir: string): string[] {
@@ -20,22 +18,8 @@ export async function buildJs(partialFiles: string[], outFile: string): Promise<
   fs.writeFileSync(outFile, result.code);
 }
 
-export async function compileLess(inputPath: string, outputPath: string): Promise<string> {
-  const input = fs.readFileSync(inputPath, 'utf8');
-  const result = await less.render(input, { filename: inputPath, strictMath: true } as Less.Options);
-  let css = result.css.replace(/\.bootstrap-iso (?:html|body)/g, '');
-  fs.writeFileSync(outputPath, css);
-  return css;
-}
-
-export function minifyCSS(css: string, outputPath: string): void {
-  const result = new CleanCSS().minify(css);
-  fs.writeFileSync(outputPath, result.styles);
-}
-
 if (require.main === module) {
   const cwd = process.cwd();
-  const arg = process.argv[2];
 
   async function runJs(): Promise<void> {
     const partialsDir = path.join(cwd, 'assets/js/partials');
@@ -49,28 +33,7 @@ if (require.main === module) {
     ]);
   }
 
-  async function runCss(): Promise<void> {
-    const lessIn = path.join(cwd, 'assets/css/bootstrap-iso.less');
-    const cssOut = path.join(cwd, 'assets/css/vendor/bootstrap-iso.css');
-    const css = await compileLess(lessIn, cssOut);
-    logger.info('Compiled assets/css/vendor/bootstrap-iso.css');
-
-    minifyCSS(css, path.join(cwd, 'assets/css/vendor/bootstrap-iso.min.css'));
-    logger.info('Built assets/css/vendor/bootstrap-iso.min.css');
-  }
-
-  (async () => {
-    switch (arg) {
-      case 'js':
-        await runJs();
-        break;
-      case 'css':
-        await runCss();
-        break;
-      default:
-        await Promise.all([runJs(), runCss()]);
-    }
-  })().catch(err => {
+  runJs().catch(err => {
     logger.error(String(err));
     process.exit(1);
   });
