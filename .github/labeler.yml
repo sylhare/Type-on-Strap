@@ -1,8 +1,39 @@
-question:
-  - '(\?|How|What|Why|When|Where|Who)'
+devops:
+- changed-files:
+  - any-glob-to-any-file:
+    - '.github/workflows/**'
+    - '.github/**/*.yml'
+    - '.github/**/*.yaml'
+    - '**/Dockerfile'
+    - '**/Dockerfile.*'
 
-bug:
-  - '(bug|issue|problem|broken|error|fail|does not work|not working)'
+dependencies:
+- changed-files:
+  - any-glob-to-any-file:
+    - Gemfile
+    - Gemfile.lock
+    - package.json
+    - package-lock.json
+    - yarn.lock
+    - pnpm-lock.yaml
 
-enhancement:
-  - '(enhancement|feature)'
+ruby:
+- changed-files:
+  - any-glob-to-any-file:
+    - Gemfile
+    - Gemfile.lock
+    - '**/*.gemspec'
+    - '**/*.rb'
+
+javascript:
+- changed-files:
+  - any-glob-to-any-file:
+    - package.json
+    - package-lock.json
+    - yarn.lock
+    - pnpm-lock.yaml
+    - '**/*.js'
+    - '**/*.mjs'
+    - '**/*.cjs'
+    - '**/*.ts'
+    - '**/*.tsx'

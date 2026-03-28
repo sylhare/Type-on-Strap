@@ -1,0 +1,8 @@
+question:
+  - '(\?|How|What|Why|When|Where|Who)'
+
+bug:
+  - '(bug|problem|broken|error|fail|does not work|not working)'
+
+enhancement:
+  - '(enhancement|feature)'
