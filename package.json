@@ -18,7 +18,6 @@
     "validate:katex": "tsx .github/cli/src/validators/katex.ts",
     "validate:mermaid": "tsx .github/cli/src/validators/mermaid.ts",
     "validate:fa": "tsx .github/cli/src/validators/font-awesome.ts",
-    "validate:masonry": "tsx .github/cli/src/validators/masonry.ts",
     "validate:search": "tsx .github/cli/src/validators/jekyll-search.ts",
     "test": "jest --config .github/cli/jest.config.ts --selectProjects unit",
     "test:browser": "jest --config .github/cli/jest.config.ts --selectProjects browser",

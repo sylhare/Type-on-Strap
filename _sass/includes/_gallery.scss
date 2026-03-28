@@ -13,32 +13,24 @@
   }
 }
 
-/* ---- .grid-item within masonry ---- */
+/* ---- .grid-col ---- */
 
-.grid-sizer,
-.grid-item {
-  /* state column width */
-  width: $gallery-item-width;
-}
-
-.grid-item {
+.grid-col {
   float: left;
-  border-radius: 5px;
+  width: $gallery-item-width;
+  margin-right: $gallery-gutter;
 
-  img {
-    /* for image formatting in the masonry */
-    display: block;
-    max-width: 100%;
-    min-height: 30%;
+  &:last-of-type {
+    margin-right: 0;
   }
 }
 
-/* --- Masonry gutter size --- */
-
-.gutter-sizer {
-  width: $gallery-gutter;
-}
+/* ---- .grid-item ---- */
 
 .grid-item {
+  border-radius: 5px;
+  display: block;
+  max-width: 100%;
+  min-height: 30%;
   margin-bottom: $gallery-gutter;
 }

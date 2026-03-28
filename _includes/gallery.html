@@ -6,9 +6,10 @@ html { overflow-y: scroll; }
 /* article {padding:2%;} */
 </style>
 
-<div id='masonry' class="grid">
-<div class="grid-sizer"></div>
-<div class="gutter-sizer"></div>
+<div id="gallery-grid" class="grid">
+<div class="grid-col grid-col--1"></div>
+<div class="grid-col grid-col--2"></div>
+<div class="grid-col grid-col--3"></div>
 {% for image in site.static_files %}
   {% if image.path contains include.gallery_path %}
     {% unless image.path contains '.md' %}
@@ -17,6 +18,3 @@ html { overflow-y: scroll; }
   {% endif %}
 {% endfor %}
 </div>
-
-<script defer src="{{ '/assets/js/vendor/imagesloaded.pkgd.min.js' | relative_url }}" type="text/javascript"></script>
-<script defer src="{{ '/assets/js/vendor/masonry.pkgd.min.js' | relative_url }}" type="text/javascript"></script>

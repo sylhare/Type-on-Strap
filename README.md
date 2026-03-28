@@ -516,8 +516,8 @@ This creates the collection for Jekyll, so it can find and display your portfoli
 
 ### Feature: Gallery 🖼
 
-You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures at the optimal position 
-based on available vertical space. 
+You can create a gallery using a column layout which will place the pictures at the optimal position
+based on available vertical space.
 You need to specify the `gallery_path` which will be used to find the pictures to render. 
 It will take all the pictures under that directory. Then use the `include` to add it in your page. 
 
