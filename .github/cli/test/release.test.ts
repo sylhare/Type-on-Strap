@@ -5,7 +5,6 @@ import {
   parseVersion,
   release,
   updateDefaultHtml,
-  updateGemBuildWorkflow,
   updateGemspec,
   updatePackageJson,
   updatePackageLockJson,
@@ -109,22 +108,6 @@ describe('release.ts', () => {
     });
   });
 
-  describe('updateGemBuildWorkflow()', () => {
-    test('replaces version in gem install command', () => {
-      const content = 'gem install type-on-strap --version "2.4.11" --source "https://rubygems.pkg.github.com/sylhare"\n';
-      jest.spyOn(fs, 'readFileSync').mockReturnValue(content as any);
-      const write = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
-      });
-
-      updateGemBuildWorkflow('/fake/.github/workflows/gem-build.yml', '2.6.0');
-
-      expect(write).toHaveBeenCalledWith(
-        '/fake/.github/workflows/gem-build.yml',
-        'gem install type-on-strap --version "2.6.0" --source "https://rubygems.pkg.github.com/sylhare"\n'
-      );
-    });
-  });
-
   describe('release()', () => {
     test('calls all updaters and logs the new version', () => {
       const current = '2.4.11';
@@ -132,7 +115,6 @@ describe('release.ts', () => {
         const p = filePath as string;
         if (p.endsWith('.gemspec')) return `spec.version = "${current}"` as any;
         if (p.endsWith('default.html')) return `Type on Strap jekyll theme v${current}` as any;
-        if (p.endsWith('gem-build.yml')) return `gem install type-on-strap --version "${current}"` as any;
         return `{"version":"${current}","packages":{"":{"version":"${current}"}}}` as any;
       });
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
@@ -146,7 +128,6 @@ describe('release.ts', () => {
       expect(fs.writeFileSync).toHaveBeenCalledWith(expect.stringContaining('default.html'), expect.any(String));
       expect(fs.writeFileSync).toHaveBeenCalledWith(expect.stringContaining('package.json'), expect.any(String));
       expect(fs.writeFileSync).toHaveBeenCalledWith(expect.stringContaining('package-lock.json'), expect.any(String));
-      expect(fs.writeFileSync).toHaveBeenCalledWith(expect.stringContaining('gem-build.yml'), expect.any(String));
     });
   });
 });
