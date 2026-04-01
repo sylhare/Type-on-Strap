@@ -1,6 +1,6 @@
 {
   "name": "type-on-strap-helper",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "CLI utilities for the Type on Strap jekyll theme",
   "scripts": {
     "post": "tsx .github/cli/src/post.ts",
