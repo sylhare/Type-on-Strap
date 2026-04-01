@@ -48,20 +48,11 @@ export function updatePackageLockJson(filePath: string, newVersion: string): voi
   });
 }
 
-export function updateGemBuildWorkflow(filePath: string, newVersion: string): void {
-  updateVersionInFile(
-    filePath,
-    /(gem install type-on-strap --version ")[^"]+(")/,
-    `$1${newVersion}$2`
-  );
-}
-
 export function release(newVersion: string, root: string): void {
   updateGemspec(path.join(root, 'type-on-strap.gemspec'), newVersion);
   updateDefaultHtml(path.join(root, '_layouts/default.html'), newVersion);
   updatePackageJson(path.join(root, 'package.json'), newVersion);
   updatePackageLockJson(path.join(root, 'package-lock.json'), newVersion);
-  updateGemBuildWorkflow(path.join(root, '.github/workflows/gem-build.yml'), newVersion);
   logger.success(`Version bumped to ${newVersion}`);
 }
 
