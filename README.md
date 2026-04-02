@@ -27,6 +27,15 @@ Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) 
 
 ## Usage
 
+### As a remote theme
+
+The easiest way to use Type-on-Strap is as a remote theme with GitHub Pages.
+Add this to your [`_config.yml`](_config.yml):
+
+```yml
+remote_theme: sylhare/Type-on-Strap
+```
+
 ### As a GitHub page 📋
 
 1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/Sylhare/Type-on-Strap.git`
@@ -628,15 +637,6 @@ Then you can start adding content like:
   - Add a [`index.html`](index.html) file
   - Add the feature page you want. (ex: as it is already in `pages`)
   - Add posts in `_posts` and `_portfolio` to be displayed
-
-### Remote Theme
-
-Now you can use any theme gem with GitHub pages with [29/11/2017 GitHub Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages).
-For that remove all `theme:` attributes from [`_config.yml`](_config.yml) and add instead:
-
-```yml
-remote_theme: sylhare/Type-on-Strap 
-```
 
 ## License
 

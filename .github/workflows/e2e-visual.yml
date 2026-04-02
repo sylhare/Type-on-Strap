@@ -63,7 +63,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download snapshots from latest main run
+      - name: Download snapshots from latest master run
         id: snapshots
         continue-on-error: true
         env:
