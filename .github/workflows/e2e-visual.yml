@@ -71,7 +71,7 @@ jobs:
         run: |
           RUN_ID=$(gh run list \
             --repo ${{ github.repository }} \
-            --branch main \
+            --branch master \
             --workflow e2e-visual.yml \
             --status success \
             --limit 1 \
