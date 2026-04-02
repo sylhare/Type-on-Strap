@@ -7,6 +7,7 @@ on:
     branches: [ master, main ]
   workflow_dispatch:
 
+
 jobs:
   visual-update: # Runs on main push or manually: regenerate baselines and upload as artifact
     name: Update Visual Baselines
@@ -16,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -25,7 +26,7 @@ jobs:
           bundler-cache: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
 
@@ -42,7 +43,7 @@ jobs:
           BASE_URL: http://localhost:4000
 
       - name: Upload snapshots artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: visual-snapshots
           path: .github/cli/e2e/screenshots.spec.ts-snapshots/
@@ -61,7 +62,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download snapshots from latest main run
         id: snapshots
@@ -96,7 +97,7 @@ jobs:
           bundler-cache: true
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
 
