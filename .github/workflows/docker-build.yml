@@ -16,7 +16,7 @@ jobs:
         docker-image: [ 'sylhare/jekyll' ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Build
         uses: actions/jekyll-build-pages@v1
         with:
