@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page, type PageAssertionsToHaveScreenshotOptions } from '@playwright/test';
 
 /**
  * Helper to open mobile menu - forces menu visibility for mobile tests
@@ -42,12 +42,12 @@ export async function setTheme(page: Page, theme: 'light' | 'dark'): Promise<voi
  * compared on subsequent runs (visual regression). Run with `--update-snapshots`
  * to create or refresh the baseline.
  */
-export async function takeThemeScreenshots(page: Page, name: string): Promise<void> {
+export async function takeThemeScreenshots(page: Page, name: string, options: PageAssertionsToHaveScreenshotOptions = {}): Promise<void> {
   await setTheme(page, 'light');
-  await expect(page).toHaveScreenshot(`${name}-light.png`, { fullPage: true });
+  await expect(page).toHaveScreenshot(`${name}-light.png`, { fullPage: true, ...options });
 
   await setTheme(page, 'dark');
-  await expect(page).toHaveScreenshot(`${name}-dark.png`, { fullPage: true });
+  await expect(page).toHaveScreenshot(`${name}-dark.png`, { fullPage: true, ...options });
 }
 
 /**
