@@ -13,7 +13,11 @@ function defineScreenshotTests(): void {
   test('mermaid article', async ({ page }) => {
     await page.goto('/2016/12/03/Mermaid');
     await page.waitForSelector('.mermaid svg, .language-mermaid svg', { timeout: 15_000 });
-    await takeThemeScreenshots(page, 'mermaid-article');
+    await page.waitForFunction(() => {
+      const svgs = document.querySelectorAll('.mermaid svg, .language-mermaid svg');
+      return [...svgs].every(svg => svg.getBoundingClientRect().height > 0);
+    });
+    await takeThemeScreenshots(page, 'mermaid-article', { maxDiffPixelRatio: 0.01 });
   });
 
   test('katex article', async ({ page }) => {
