@@ -1,0 +1,23 @@
+title: "[Show] "
+labels: [showcase]
+body:
+  - type: markdown
+    attributes:
+      value: "## Share your site built with Type on Strap 🎉"
+  - type: input
+    id: site-url
+    attributes:
+      label: Site URL
+      placeholder: "https://your-site.github.io"
+    validations:
+      required: true
+  - type: input
+    id: repo-url
+    attributes:
+      label: Repo URL (optional)
+      placeholder: "https://github.com/you/your-site"
+  - type: textarea
+    id: description
+    attributes:
+      label: Tell us about it
+      description: What's your site about? Any customizations you're proud of?
