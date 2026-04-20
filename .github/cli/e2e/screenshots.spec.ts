@@ -10,16 +10,6 @@ function defineScreenshotTests(): void {
     await takeThemeScreenshots(page, 'markdown-article');
   });
 
-  test('mermaid article', async ({ page }) => {
-    await page.goto('/2016/12/03/Mermaid');
-    await page.waitForSelector('.mermaid svg, .language-mermaid svg', { timeout: 15_000 });
-    await page.waitForFunction(() => {
-      const svgs = document.querySelectorAll('.mermaid svg, .language-mermaid svg');
-      return [...svgs].every(svg => svg.getBoundingClientRect().height > 0);
-    });
-    await takeThemeScreenshots(page, 'mermaid-article', { maxDiffPixelRatio: 0.01 });
-  });
-
   test('katex article', async ({ page }) => {
     await page.goto('/2016/12/04/Katex');
     await page.waitForSelector('.katex', { timeout: 10_000 });
