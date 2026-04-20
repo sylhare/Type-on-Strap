@@ -6,24 +6,21 @@
 
 [![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
-A free and open-source [Jekyll](https://jekyllrb.com) theme. 
-Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) packed with extra features and easily customizable:
+A feature-rich [Jekyll](https://jekyllrb.com) theme for writers, developers, and creatives — with portfolio, gallery, dark mode, search, KaTeX, and Mermaid out of the box.
 
 * Responsive design on all devices (🖥, 💻, 📱, ...)
-* Portfolio 🗂, Gallery 🖼 pages for your projects
-* Multi comments 💬 options  
-* Tags compatibility 🏷
-* Handle _Bootstrap_'ed pages: [Get Bootstrap](http://getbootstrap.com/)
-* 🔎 Search feature: [Simple-Jekyll-Search](https://github.com/sylhare/Simple-Jekyll-Search)
-* Math Rendering : [KateX](https://github.com/Khan/KaTeX)
-* Diagram Rendering: [Mermaid-js](https://github.com/mermaid-js/mermaid)
-* 🖋 Nice fonts: [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
-* Seo Tags: [Jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
-* 🛠 Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
-* 💡 Light and dark theme supported
-* Find free of rights images on [pexels](https://www.pexels.com/)
+* Portfolio 🗂 and Gallery 🖼 pages for your projects
+* Auto light and dark theme 💡 with manual toggle
+* Full-text 🔎 search: [Simple-Jekyll-Search](https://github.com/sylhare/Simple-Jekyll-Search)
+* Write equations natively with [KaTeX](https://github.com/Khan/KaTeX)
+* Render diagrams natively with [Mermaid](https://github.com/mermaid-js/mermaid)
+* Multi comments 💬 systems: Disqus, Giscus, Utterances, Cusdis
+* Compatible with [Bootstrap](http://getbootstrap.com/) for responsive, customizable layouts
+* SEO-ready with [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag)
+* Syntax highlighting with easily customizable [Base16](https://github.com/chriskempson/base16) themes
+* Tags 🏷, categories, archive, and pagination built in
 
-> [Demo Site](https://sylhare.github.io/Type-on-Strap/) 
+> [Demo Site](https://sylhare.github.io/Type-on-Strap/)
 
 ## Usage
 
@@ -644,3 +641,5 @@ This theme is licensed under the [MIT License (MIT)](/LICENSE)
 
 - Pictures from [Pexels](https://www.pexels.com/) are under Creative Commons Zero (CC0) license
 - Fonts are licensed under the [SIL Open Font License (OFL)](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
+
+Based on Rohan Chandra's [type-theme](https://github.com/rohanchandra/type-theme), extended with many additional features and actively maintained.
