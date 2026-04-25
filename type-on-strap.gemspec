@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Sylhare", "Rohan Chandra"]
   spec.email         = ["sylhare@outlook.com", "hellorohan@outlook.com"]
 
-  spec.summary       = "A simple and responsive jekyll theme template"
-  spec.description   = %q{A simple and responsive jekyll theme template based on type-theme. Great for blogs, easy to customize and responsive.}
+  spec.summary       = "Feature-rich Jekyll theme with portfolio, gallery, dark mode, search, KaTeX and Mermaid"
+  spec.description   = %q{A free and open-source Jekyll theme for writers, developers, and creatives. Includes portfolio and gallery pages, auto dark/light mode, full-text search, KaTeX math rendering, Mermaid diagrams, multiple comment systems, and Bootstrap support. Works as a Ruby gem or remote theme.}
   spec.homepage      = "https://github.com/sylhare/Type-on-Strap"
   spec.license       = "MIT"
 
