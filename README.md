@@ -3,8 +3,9 @@
 [![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/docker-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/docker-build.yml)
 [![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sylhare/type-on-strap)](https://hub.docker.com/r/sylhare/type-on-strap)
+[![Gem Downloads](https://img.shields.io/gem/dt/type-on-strap?logo=rubygems)](https://rubygems.org/gems/type-on-strap)
 
-[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
+[![Default Type on Strap blog](https://github.com/sylhare/Type-on-Strap/blob/master/assets/img/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
 
 A feature-rich [Jekyll](https://jekyllrb.com) theme for writers, developers, and creatives — with portfolio, gallery, dark mode, search, KaTeX, and Mermaid out of the box.
 
@@ -24,7 +25,7 @@ A feature-rich [Jekyll](https://jekyllrb.com) theme for writers, developers, and
 
 ## Usage
 
-### As a remote theme
+### As a remote theme 🌐
 
 The easiest way to use Type-on-Strap is as a remote theme with GitHub Pages.
 Add this to your [`_config.yml`](_config.yml):
@@ -35,8 +36,8 @@ remote_theme: sylhare/Type-on-Strap
 
 ### As a GitHub page 📋
 
-1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/Sylhare/Type-on-Strap.git`
-2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
+1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/sylhare/Type-on-Strap.git`
+2. Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/) and [Bundler](https://bundler.io/), check [#1](https://github.com/sylhare/Type-on-Strap/issues/1) if you have a problem.
 3. Install the theme's dependencies: `bundle install`
 4. Customize the theme
 	- GitHub Page: [update `_config.yml`](#site-configuration)
