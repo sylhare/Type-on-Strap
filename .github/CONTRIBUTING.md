@@ -1,5 +1,28 @@
 # Contributing
 
+## Quick reference
+
+**Stack:** 
+- Blog: Jekyll (Ruby)
+- CLI scripts to help manage the theme: Node.js (TypeScript + Playwright e2e tests)
+
+### Known gotchas
+
+- **Sass `@import` deprecation**: The theme intentionally uses `@import` (not `@use`). This is blocked by GitHub Pages /
+  jekyll-sass-converter 1.5.2 using Ruby Sass 3.7.4. Do not migrate to `@use` yet. `quiet_deps: true` in `_config.yml`
+  silences Font Awesome's own warnings.
+- **Jest virtual mocks**: External packages not in `.github/cli/node_modules` must be mocked with
+  `jest.mock('pkg', factory, { virtual: true })`.
+- **CSS variables for theming**: Light/dark mode and skin colors are all CSS custom properties defined in
+  `_sass/base/_variables.scss`. The `data-theme` attribute is set by JavaScript in `head.liquid` on page load.
+- **Remote theme vs gem**: `_config.yml` has both `remote_theme` and `theme` (commented). For local dev the gem is used;
+  for GitHub Pages the remote_theme is used.
+- **Jekyll exclude list**: `package.json`, `package-lock.json`, and `.github/` are excluded from Jekyll build. Any new
+  tooling files at root should be added to the `exclude:` list in `_config.yml`.
+- **Gem includes**: The gemspec in `type-on-strap.gemspec` only includes `assets/(js|css|fonts|data)/`,
+  `_(includes|layouts|sass)/`, and `_data/(icons_builder|language).yml`. Content files (`_posts/`, `_portfolio/`,
+  `pages/`) are NOT shipped in the gem.
+
 ## Prerequisites
 
 - **Node.js** >= 18 and **npm** — for the CLI tooling and tests
@@ -17,13 +40,14 @@ Install Ruby dependencies:
 bundle install
 ```
 
-## Running the site locally
+## Blog commands
+
+Using bundler instead of Jekyll directly.
 
 ```bash
-bundle exec jekyll serve
+bundle exec jekyll serve        # Serve locally at http://localhost:4000
+bundle exec jekyll build        # Build to _site/
 ```
-
-The site will be available at `http://localhost:4000`.
 
 ## CLI scripts
 
@@ -99,7 +123,8 @@ npm run test:e2e
 
 #### Visual regression tests
 
-Visual tests are tagged `@visual` and run against 5 browser/device projects (desktop Chrome, Firefox, Safari, mobile Chrome, mobile Safari).
+Visual tests are tagged `@visual` and run against 5 browser/device projects (desktop Chrome, Firefox, Safari, mobile
+Chrome, mobile Safari).
 
 Run only the visual tests:
 
