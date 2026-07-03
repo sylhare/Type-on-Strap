@@ -23,7 +23,9 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Install github-pages gem 2.7.4
         continue-on-error: true
-        run: bundle install
+        run: |
+          rm -f Gemfile.lock
+          bundle install
         working-directory: ./.github/workflows/ruby-2.7.4
         if: matrix.ruby == '2.7.4'
       - name: Install github-pages gem
